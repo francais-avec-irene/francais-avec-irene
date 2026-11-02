@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les pronoms indéfinis · Grammaire avec Irène</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1d2340;--soft:#5a6080;--muted:#8a90a8;--bg:#f6f7fb;--line:#e3e6f0;
+  --teal:#0e9384;--teal-l:#e2f5f2;
+  --coral:#e8574a;--coral-l:#fdebe8;
+  --saff:#d9920b;--saff-l:#fdf3dc;
+  --indigo:#4f46e5;--indigo-l:#ebeafd;
+  --mag:#c2367f;--mag-l:#fbe7f1;
+  --emer:#1f9d6a;--emer-l:#e1f5ec;
+  --navy:#1e2a5a;
+  --ok:#1f9d6a;--ok-l:#e3f6ee;--ko:#d23b4f;--ko-l:#fde8eb;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Source Serif 4",Georgia,serif;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4,button,.tag,.nav a,.pill,.lab,.sub,th{font-family:Outfit,system-ui,sans-serif}
+.en{color:var(--muted);font-style:italic;font-size:.9em;font-weight:400}
+b,strong{font-weight:600}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+
+.hero{position:relative;min-height:330px;display:flex;align-items:flex-end;overflow:hidden;border-radius:0 0 30px 30px;background:var(--navy)}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(14,147,132,.35),rgba(30,42,90,.75) 55%,rgba(79,70,229,.92))}
+.hero .in{position:relative;z-index:1;color:#fff;padding:30px 20px 28px;max-width:900px;width:100%;margin:0 auto}
+.tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;background:#ffd166;color:#5a3d00;border-radius:99px;padding:6px 14px}
+.hero h1{font-size:clamp(34px,7vw,56px);line-height:1.05;margin:14px 0 6px;font-weight:700;letter-spacing:-.01em}
+.hero p{margin:0;font-style:italic;opacity:.92}
+.rainbow{height:5px;border-radius:9px;margin:16px 0 0;background:linear-gradient(90deg,var(--teal),var(--coral),var(--saff),var(--indigo),var(--mag),var(--emer))}
+
+.top{position:sticky;top:0;z-index:20;background:rgba(246,247,251,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;gap:10px;align-items:center;padding-top:8px;padding-bottom:8px}
+.score{font-family:Outfit;font-weight:600;font-size:14px;color:#fff;background:linear-gradient(90deg,var(--teal),var(--indigo));border-radius:99px;padding:6px 12px;white-space:nowrap}
+.nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;font-size:13px;font-weight:500;color:var(--soft);background:#fff;border:1px solid var(--line);border-radius:99px;padding:5px 11px}
+.nav a.done{background:var(--ok-l);border-color:#bfe6d5;color:#17734e}
+
+.intro{background:#fff;border-radius:22px;border:1px solid var(--line);padding:18px 20px;margin:22px 0}
+.intro h2{margin:0 0 6px;font-size:21px}
+.intro p{margin:6px 0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+@media(max-width:640px){.cards{grid-template-columns:repeat(2,1fr)}}
+.cards a{text-decoration:none;color:#fff;border-radius:16px;padding:12px 14px;font-family:Outfit;font-weight:600;font-size:15px;line-height:1.25}
+.cards a span{display:block;font-family:"Source Serif 4";font-style:italic;font-weight:400;font-size:13px;opacity:.9;margin-top:3px}
+
+.point{background:#fff;border-radius:24px;overflow:hidden;margin:30px 0 18px;border:1px solid var(--line);box-shadow:0 6px 24px rgba(30,42,90,.06)}
+.point>.hd{padding:16px 20px;color:#fff;display:flex;gap:14px;align-items:center}
+.point>.hd .no{font-family:Outfit;font-size:15px;font-weight:600;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;flex:none}
+.point>.hd h2{margin:0;font-size:24px;line-height:1.15}
+.point>.hd h2 .en{display:block;color:rgba(255,255,255,.85);font-size:14px;margin-top:2px}
+.point>.bd{padding:18px 20px 20px}
+.p1>.hd{background:linear-gradient(110deg,#0e9384,#22b5a3)}
+.p2>.hd{background:linear-gradient(110deg,#e8574a,#f2846f)}
+.p3>.hd{background:linear-gradient(110deg,#d9920b,#efb43c)}
+.p4>.hd{background:linear-gradient(110deg,#4f46e5,#7a73f0)}
+.p5>.hd{background:linear-gradient(110deg,#c2367f,#e266a4)}
+.p6>.hd{background:linear-gradient(110deg,#1f9d6a,#3fbf8a)}
+.p7>.hd{background:linear-gradient(110deg,#1e2a5a,#4f46e5)}
+.p1{--c:var(--teal);--cl:var(--teal-l)}.p2{--c:var(--coral);--cl:var(--coral-l)}.p3{--c:var(--saff);--cl:var(--saff-l)}
+.p4{--c:var(--indigo);--cl:var(--indigo-l)}.p5{--c:var(--mag);--cl:var(--mag-l)}.p6{--c:var(--emer);--cl:var(--emer-l)}.p7{--c:var(--indigo);--cl:var(--indigo-l)}
+.lead{font-size:18px;margin:0 0 4px}
+.lead .en{display:block;font-size:15px}
+.sub{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin:18px 0 8px}
+.pill{display:inline-block;font-weight:600;font-size:14.5px;border:2px solid var(--c);color:var(--c);border-radius:99px;padding:3px 13px;margin:2px 4px 2px 0;background:#fff}
+.ex{display:flex;gap:10px;align-items:flex-start;border-left:3px solid var(--cl);padding:3px 0 3px 12px;margin:9px 0}
+.ex .t{flex:1}.ex .t .en{display:block}
+.k{color:var(--c);font-weight:600}
+.say{flex:none;width:34px;height:34px;border-radius:50%;border:0;background:var(--cl);color:var(--c);font-size:15px;cursor:pointer;display:inline-grid;place-items:center;padding:0}
+.say.on{background:var(--c);color:#fff}
+table.t{width:100%;border-collapse:separate;border-spacing:0;font-size:15.5px;margin:8px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+table.t th{background:var(--cl);color:var(--ink);font-size:13px;font-weight:600;text-align:left;padding:8px 10px}
+table.t td{padding:8px 10px;border-top:1px solid var(--line);vertical-align:top}
+table.t td .en{display:block;font-size:13.5px}
+.scroll{overflow-x:auto}
+.box{background:var(--cl);border-radius:16px;padding:12px 16px;margin:14px 0;border-left:5px solid var(--c)}
+.box .lab{display:block;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--c);margin-bottom:3px}
+.box .in{background:#fff;border-radius:12px;padding:10px 12px;margin-top:8px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:640px){.duo{grid-template-columns:1fr}}
+.duo>div{border-radius:16px;padding:12px 14px;border:2px solid var(--line);background:#fff}
+.duo h4{margin:0 0 4px;font-size:15px;color:var(--c)}
+.photo{position:relative;margin:16px 0 4px;border-radius:18px;overflow:hidden}
+.photo img{display:block;width:100%;height:200px;object-fit:cover}
+.photo figcaption{position:absolute;left:12px;bottom:12px;right:12px;background:rgba(255,255,255,.93);border-radius:12px;padding:6px 12px;font-size:15px}
+.photo figcaption .en{display:block;font-size:13px}
+
+.exo{border:2px solid var(--cl);border-radius:20px;margin:22px 0 4px;overflow:hidden;background:#fff}
+.exo>.hd{background:var(--cl);padding:12px 16px;display:flex;gap:12px;align-items:flex-start}
+.exo>.hd .num{font-family:Outfit;font-weight:700;font-size:13px;color:#fff;background:var(--c);border-radius:10px;padding:4px 10px;white-space:nowrap}
+.exo>.hd h3{margin:0;font-size:17px;line-height:1.3}
+.exo>.hd .en{display:block;font-size:14px}
+.exo>.bd{padding:14px 16px 16px}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-family:Outfit;font-size:13px;color:var(--soft)}
+.dots{display:flex;gap:5px;flex-wrap:wrap}
+.dots i{display:block;width:11px;height:11px;border-radius:50%;background:#e2e5ef}
+.dots i.ok{background:var(--ok)}.dots i.ko{background:var(--ko)}
+.dots i.cur{outline:2px solid var(--c);outline-offset:2px}
+.qtext{font-size:20px;line-height:1.45;margin:14px 0 6px}
+.gap{display:inline-block;min-width:74px;text-align:center;border-bottom:3px solid var(--c);color:var(--c);font-weight:600;padding:0 6px}
+.gap.ok{border-color:var(--ok);color:var(--ok)}
+.trx{font-family:Outfit;font-size:12.5px;border:1px solid var(--line);background:#fff;color:var(--soft);border-radius:99px;padding:3px 10px;cursor:pointer}
+.qen{margin:6px 0 0}
+.opts{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
+.opt{font-family:Outfit;font-size:16px;font-weight:500;background:#fff;color:var(--ink);border:2px solid var(--line);border-radius:14px;padding:10px 16px;cursor:pointer;text-align:left}
+.opt:hover{border-color:var(--c)}
+.opt.ok{border-color:var(--ok);background:var(--ok-l);color:#17734e}
+.opt.ko{border-color:var(--ko);background:var(--ko-l);color:#a72537;text-decoration:line-through}
+.opt:disabled{cursor:default}
+.opts.col .opt{flex:1 1 100%}
+.inp{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}
+.inp input{flex:1;min-width:160px;font:600 18px Outfit,sans-serif;color:var(--ink);border:2px solid var(--line);border-radius:12px;padding:9px 12px;outline:none}
+.inp input:focus{border-color:var(--c)}
+.inp input.ok{border-color:var(--ok);background:var(--ok-l)}.inp input.ko{border-color:var(--ko);background:var(--ko-l)}
+.fb{border-radius:14px;padding:12px 14px;margin-top:12px;font-size:15.5px}
+.fb.ok{background:var(--ok-l);border:1px solid #bfe6d5}.fb.ko{background:var(--ko-l);border:1px solid #f5c3cb}
+.fb .head{font-family:Outfit;font-weight:600}
+.fb.ok .head{color:#17734e}.fb.ko .head{color:#a72537}
+.fb .full{display:flex;gap:10px;align-items:center;margin:8px 0 4px}
+.fb .full .t{flex:1}.fb .full .en{display:block}
+.row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px}
+.btn{font-family:Outfit;font-weight:600;font-size:15px;border:0;border-radius:99px;padding:10px 20px;color:#fff;background:var(--c,var(--indigo));cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:#fff;color:var(--soft);border:2px solid var(--line)}
+.btn:disabled{opacity:.4}
+
+.synth{background:var(--navy);color:#fff;border-radius:24px;padding:18px 20px;margin:30px 0}
+.synth h2{margin:0 0 4px;font-size:22px}
+.synth .en{color:#b9c0e0}
+.synth table{width:100%;border-collapse:collapse;margin-top:10px;font-size:15px;background:#fff;color:var(--ink);border-radius:14px;overflow:hidden}
+.synth th{background:#eef0fb;font-size:12.5px;text-align:left;padding:8px 10px}
+.synth td{padding:7px 10px;border-top:1px solid var(--line);vertical-align:top}
+.synth td .en{display:block;color:var(--muted);font-size:13.5px}
+.synth td:first-child{font-family:Outfit;font-weight:600;white-space:nowrap}
+
+.oral{background:#fff;border-radius:24px;overflow:hidden;margin:30px 0;border:1px solid var(--line)}
+.oral>.hd{background:linear-gradient(110deg,#c2367f,#e8574a 60%,#d9920b);color:#fff;padding:16px 20px}
+.oral>.hd h2{margin:0;font-size:24px}
+.oral>.hd .en{color:rgba(255,255,255,.88);display:block}
+.oral>.bd{padding:16px 20px 20px;--c:var(--mag);--cl:var(--mag-l)}
+.step{border-radius:18px;border:2px solid var(--line);padding:14px 16px;margin:14px 0}
+.step h3{margin:0 0 4px;font-size:18px}
+.step h3 .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;font-size:14px;margin-right:8px}
+.q{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px dashed var(--line)}
+.q:first-of-type{border-top:0}
+.q .t{flex:1}
+.q .t .en{display:block}
+.q .pills{margin-top:4px}
+.q .pills span{font-family:Outfit;font-size:12.5px;font-weight:600;background:var(--cl);color:var(--c);border-radius:99px;padding:2px 9px;margin-right:4px;display:inline-block}
+details.model{margin-top:6px}
+details.model summary{font-family:Outfit;font-size:13px;color:var(--soft);cursor:pointer}
+details.model p{margin:6px 0 0;background:#f6f7fb;border-radius:10px;padding:8px 10px;font-size:15.5px}
+.role{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+@media(max-width:640px){.role{grid-template-columns:1fr}}
+.role>div{border-radius:16px;padding:12px 14px}
+.role h4{margin:0 0 6px;font-size:15px}
+.role ol{margin:0;padding-left:20px}
+.role li{margin:5px 0}
+.role li .en{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chips label{font-family:Outfit;font-size:14px;border:2px solid var(--line);border-radius:99px;padding:4px 12px;cursor:pointer;background:#fff;user-select:none}
+.chips input{display:none}
+.chips input:checked+span{color:#fff}
+.chips label:has(input:checked){background:var(--c);border-color:var(--c);color:#fff}
+
+.revoir{border:3px solid var(--coral);border-radius:22px;background:#fff;overflow:hidden;margin:30px 0 14px}
+.revoir>.hd{background:var(--coral);color:#fff;padding:12px 18px}
+.revoir>.hd h2{margin:0;font-size:21px}
+.revoir>.hd .en{color:rgba(255,255,255,.9)}
+.revoir>.bd{padding:12px 16px 16px}
+.rgroup h4{margin:12px 0 6px;font-size:15px}
+.rtip{background:var(--saff-l);border-left:4px solid var(--saff);border-radius:10px;padding:8px 12px;font-size:15px;margin:6px 0 10px}
+.rtip b{display:block;font-family:Outfit;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#9a6700}
+.ritem{border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0;font-size:15.5px}
+.ritem .you{color:#a72537}
+.ritem .good{display:flex;gap:10px;align-items:center;margin:4px 0}
+.ritem .good .t{flex:1}
+.ritem .good b{color:#17734e}
+.ritem .en{display:block}
+.empty{font-style:italic;color:var(--soft)}
+.corr{background:#fff;border-radius:24px;border:1px solid var(--line);padding:16px 20px;margin:20px 0}
+.corr h2{margin:0 0 8px;font-size:22px}
+.corr details{border-top:1px solid var(--line);padding:8px 0}
+.corr summary{font-family:Outfit;font-weight:600;cursor:pointer;font-size:16px}
+.corr ol{margin:8px 0 0;padding-left:22px}
+.corr li{margin:6px 0}
+.corr li .en{display:block}
+footer{text-align:center;font-family:Outfit;font-size:12px;letter-spacing:.14em;color:var(--muted);padding:26px 0 40px}
+</style>
+</head>
+<body>
+<header class="hero">
+  <img src="img/ruebac.jpg" alt="">
+  <div class="in">
+    <span class="tag">Grammaire avec Irène</span>
+    <h1>Les pronoms indéfinis</h1>
+    <p>Indefinite pronouns · someone, nothing, none, several, each, the same, another, anyone…</p>
+  </div>
+</header>
+<div class="top"><div class="wrap"><span class="score" id="score">0 / 0</span><nav class="nav" id="nav"></nav></div></div>
+
+<main class="wrap">
+<div class="rainbow"></div>
+
+<section class="intro">
+  <h2>À quoi servent les pronoms indéfinis ?</h2>
+  <p>Ils remplacent une personne, une chose ou une quantité <b>sans les préciser</b>. Ils permettent de dire « une personne », « personne », « certains », « tous », « un autre »… sans répéter le nom.
+  <span class="en">They replace a person, a thing or a quantity without naming it exactly. They let us say "someone", "nobody", "some", "all", "another one"… without repeating the noun.</span></p>
+  <p>Chaque point est suivi d'exercices corrigés immédiatement. Appuyez sur 🔊 pour écouter les exemples. Les erreurs apparaissent dans le cadre « À revoir », et tous les corrigés sont à la fin.
+  <span class="en">Each point is followed by exercises that are corrected straight away. Tap 🔊 to listen to the examples. Mistakes appear in the "À revoir" (to review) box, and all the answers are at the end.</span></p>
+  <div class="cards">
+    <a href="#p1" style="background:var(--teal)">1. Quelqu'un, quelque chose, personne, rien<span>someone, something, nobody, nothing</span></a>
+    <a href="#p2" style="background:var(--coral)">2. Aucun, aucune<span>none, not one</span></a>
+    <a href="#p3" style="background:var(--saff)">3. Certains, plusieurs, quelques-uns, beaucoup<span>some, several, a few, many</span></a>
+    <a href="#p4" style="background:var(--indigo)">4. Tous, toutes, chacun, chacune<span>all, each</span></a>
+    <a href="#p5" style="background:var(--mag)">5. Le même, un autre, les autres<span>the same one, another one, the others</span></a>
+    <a href="#p6" style="background:var(--emer)">6. N'importe qui, n'importe quoi<span>anyone, anything</span></a>
+  </div>
+</section>
+
+<!-- ============ 1 ============ -->
+<section class="point p1" id="p1">
+  <div class="hd"><div class="no">1</div><h2>Quelqu'un, quelque chose, personne, rien<span class="en">Someone, something, nobody, nothing</span></h2></div>
+  <div class="bd">
+    <p class="lead"><b>Quelqu'un</b> désigne une personne, <b>quelque chose</b> désigne une chose. À la forme négative, ils deviennent <b>personne</b> et <b>rien</b>, toujours avec <b>ne</b>.
+    <span class="en">Quelqu'un refers to a person, quelque chose to a thing. In the negative they become personne and rien, always with ne.</span></p>
+    <div class="scroll"><table class="t">
+      <tr><th></th><th>Forme affirmative · Affirmative</th><th>Forme négative · Negative</th></tr>
+      <tr><td><b>Une personne</b><span class="en">a person</span></td><td>quelqu'un</td><td>ne ... personne</td></tr>
+      <tr><td><b>Une chose</b><span class="en">a thing</span></td><td>quelque chose</td><td>ne ... rien</td></tr>
+    </table></div>
+    <div class="sub">Complément · As an object</div>
+    <div class="ex"><div class="t">J&#x27;ai vu <span class="k">quelqu&#x27;un</span> devant la maison.<span class="en">I saw someone in front of the house.</span></div><button type="button" class="say" data-say="J&#x27;ai vu quelqu&#x27;un devant la maison." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Je n&#x27;ai vu <span class="k">personne</span>.<span class="en">I didn&#x27;t see anybody.</span></div><button type="button" class="say" data-say="Je n&#x27;ai vu personne." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Tu veux <span class="k">quelque chose</span> ?<span class="en">Do you want something?</span></div><button type="button" class="say" data-say="Tu veux quelque chose ?" aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Non merci, je ne veux <span class="k">rien</span>.<span class="en">No thank you, I don&#x27;t want anything.</span></div><button type="button" class="say" data-say="Non merci, je ne veux rien." aria-label="Écouter">🔊</button></div>
+    <div class="sub">Sujet · As the subject</div>
+    <p>En position de sujet : <span class="pill">Personne ne + verbe</span> <span class="pill">Rien ne + verbe</span>, sans <b>pas</b>.
+    <span class="en">As the subject: Personne ne / Rien ne + verb, without pas.</span></p>
+    <div class="ex"><div class="t"><span class="k">Quelqu&#x27;un</span> a appelé. → <span class="k">Personne n&#x27;</span>a appelé.<span class="en">Someone called. → Nobody called.</span></div><button type="button" class="say" data-say="Quelqu&#x27;un a appelé. Personne n&#x27;a appelé." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t"><span class="k">Quelque chose</span> a changé. → <span class="k">Rien n&#x27;</span>a changé.<span class="en">Something has changed. → Nothing has changed.</span></div><button type="button" class="say" data-say="Quelque chose a changé. Rien n&#x27;a changé." aria-label="Écouter">🔊</button></div>
+    <div class="box"><span class="lab">Au passé composé · In the perfect tense</span>
+      <b>Rien</b> se place avant le participe ; <b>personne</b> se place après le participe.
+      <span class="en">Rien goes before the past participle; personne goes after it.</span>
+      <div class="in">
+      <div class="ex"><div class="t">Je n&#x27;ai <span class="k">rien</span> compris.<span class="en">I didn&#x27;t understand anything.</span></div><button type="button" class="say" data-say="Je n&#x27;ai rien compris." aria-label="Écouter">🔊</button></div>
+      <div class="ex"><div class="t">Je n&#x27;ai rencontré <span class="k">personne</span>.<span class="en">I didn&#x27;t meet anyone.</span></div><button type="button" class="say" data-say="Je n&#x27;ai rencontré personne." aria-label="Écouter">🔊</button></div>
+      </div></div>
+    <div class="box"><span class="lab">Avec un adjectif · With an adjective</span>
+      <span class="pill">pronom + de + adjectif masculin</span>
+      <span class="en">pronoun + de + masculine adjective</span>
+      <div class="in">
+      <div class="ex"><div class="t">J&#x27;ai rencontré <span class="k">quelqu&#x27;un de</span> très sympathique.<span class="en">I met someone very nice.</span></div><button type="button" class="say" data-say="J&#x27;ai rencontré quelqu&#x27;un de très sympathique." aria-label="Écouter">🔊</button></div>
+      <div class="ex"><div class="t">Il s&#x27;est passé <span class="k">quelque chose d&#x27;</span>étrange.<span class="en">Something strange happened.</span></div><button type="button" class="say" data-say="Il s&#x27;est passé quelque chose d&#x27;étrange." aria-label="Écouter">🔊</button></div>
+      <div class="ex"><div class="t">Ne t&#x27;inquiète pas, ce n&#x27;est <span class="k">rien de</span> grave.<span class="en">Don&#x27;t worry, it&#x27;s nothing serious.</span></div><button type="button" class="say" data-say="Ne t&#x27;inquiète pas, ce n&#x27;est rien de grave." aria-label="Écouter">🔊</button></div>
+      <div class="ex"><div class="t">Je ne connais <span class="k">personne d&#x27;</span>autre ici.<span class="en">I don&#x27;t know anyone else here.</span></div><button type="button" class="say" data-say="Je ne connais personne d&#x27;autre ici." aria-label="Écouter">🔊</button></div>
+      </div></div>
+    <figure class="photo"><img src="img/sacrecoeur.jpg" alt=""><figcaption>Tôt le matin, il n'y a presque personne dans les rues de Montmartre.<span class="en">Early in the morning, there's hardly anyone in the streets of Montmartre.</span></figcaption></figure>
+    <div class="exslot" data-ex="e1"></div>
+    <div class="exslot" data-ex="e2"></div>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="point p2" id="p2">
+  <div class="hd"><div class="no">2</div><h2>Aucun, aucune<span class="en">None, not one</span></h2></div>
+  <div class="bd">
+    <p class="lead"><b>Aucun / aucune</b> signifie « pas un seul, pas une seule ». Il s'accorde en genre avec le nom qu'il remplace, reste au <b>singulier</b> et s'emploie avec <b>ne</b>.
+    <span class="en">Aucun / aucune means "not a single one". It agrees in gender with the noun it replaces, stays singular and is used with ne.</span></p>
+    <div class="sub">Sujet · As the subject</div>
+    <div class="ex"><div class="t"><span class="k">Aucun</span> de mes amis n&#x27;est venu.<span class="en">None of my friends came.</span></div><button type="button" class="say" data-say="Aucun de mes amis n&#x27;est venu." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t"><span class="k">Aucune</span> de ces robes ne me plaît.<span class="en">I don&#x27;t like any of these dresses.</span></div><button type="button" class="say" data-say="Aucune de ces robes ne me plaît." aria-label="Écouter">🔊</button></div>
+    <div class="sub">Complément, avec en · As an object, with en</div>
+    <div class="ex"><div class="t">Des questions ? Non, je n&#x27;<span class="k">en</span> ai <span class="k">aucune</span>.<span class="en">Any questions? No, I haven&#x27;t got any.</span></div><button type="button" class="say" data-say="Des questions ? Non, je n&#x27;en ai aucune." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Des nouvelles de Paul ? Je n&#x27;<span class="k">en</span> ai reçu <span class="k">aucune</span>.<span class="en">Any news from Paul? I haven&#x27;t had any.</span></div><button type="button" class="say" data-say="Des nouvelles de Paul ? Je n&#x27;en ai reçu aucune." aria-label="Écouter">🔊</button></div>
+    <div class="sub">Seul, dans une réponse · On its own, in an answer</div>
+    <div class="ex"><div class="t">Combien de messages as-tu reçus ? <span class="k">Aucun.</span><span class="en">How many messages did you get? None.</span></div><button type="button" class="say" data-say="Combien de messages as-tu reçus ? Aucun." aria-label="Écouter">🔊</button></div>
+    <div class="duo">
+      <div><h4>Adjectif + nom</h4>Je n'ai <b>aucune idée</b>.<span class="en">I have no idea.</span></div>
+      <div><h4>Pronom, sans nom</h4>Des idées ? Je n'en ai <b>aucune</b>.<span class="en">Ideas? I haven't got any.</span></div>
+    </div>
+    <figure class="photo"><img src="img/toits.jpg" alt=""><figcaption>Aucune de ces fenêtres n'est ouverte.<span class="en">None of these windows is open.</span></figcaption></figure>
+    <div class="exslot" data-ex="e3"></div>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="point p3" id="p3">
+  <div class="hd"><div class="no">3</div><h2>Certains, plusieurs, quelques-uns, beaucoup<span class="en">Some, several, a few, many</span></h2></div>
+  <div class="bd">
+    <p class="lead">Ces pronoms désignent <b>une partie</b> d'un groupe. Le verbe est au pluriel.
+    <span class="en">These pronouns refer to part of a group. The verb is plural.</span></p>
+    <div class="scroll"><table class="t">
+      <tr><th>Pronom</th><th>Sens</th><th>Exemple</th></tr>
+      <tr><td><b>certains / certaines</b></td><td>une partie, pas tous<span class="en">some (but not all)</span></td><td>Certaines de mes amies vivent à Lyon.<span class="en">Some of my friends live in Lyon.</span></td></tr>
+      <tr><td><b>quelques-uns / quelques-unes</b></td><td>un petit nombre<span class="en">a few</span></td><td>J'ai acheté des pêches : quelques-unes sont abîmées.<span class="en">I bought some peaches: a few are bruised.</span></td></tr>
+      <tr><td><b>plusieurs</b> (invariable)</td><td>plus de deux<span class="en">several</span></td><td>Des films de Rohmer ? J'en ai vu plusieurs.<span class="en">Rohmer films? I've seen several.</span></td></tr>
+      <tr><td><b>beaucoup</b></td><td>un grand nombre<span class="en">many, a lot</span></td><td>Beaucoup pensent que c'est trop cher.<span class="en">Many people think it's too expensive.</span></td></tr>
+    </table></div>
+    <div class="box"><span class="lab">Avec en · With en</span>
+      Quand ces pronoms sont compléments, on emploie <b>en</b> devant le verbe.
+      <span class="en">When these pronouns are objects, we use en before the verb.</span>
+      <div class="in">
+      <div class="ex"><div class="t">Des livres de Zola ? J&#x27;<span class="k">en</span> ai lu <span class="k">quelques-uns</span>.<span class="en">Zola&#x27;s books? I&#x27;ve read a few.</span></div><button type="button" class="say" data-say="Des livres de Zola ? J&#x27;en ai lu quelques-uns." aria-label="Écouter">🔊</button></div>
+      <div class="ex"><div class="t">Des cartes postales ? J&#x27;<span class="k">en</span> ai écrit <span class="k">plusieurs</span>.<span class="en">Postcards? I&#x27;ve written several.</span></div><button type="button" class="say" data-say="Des cartes postales ? J&#x27;en ai écrit plusieurs." aria-label="Écouter">🔊</button></div>
+      <div class="ex"><div class="t">Des amis à Paris ? J&#x27;<span class="k">en</span> ai <span class="k">beaucoup</span>.<span class="en">Friends in Paris? I&#x27;ve got a lot.</span></div><button type="button" class="say" data-say="Des amis à Paris ? J&#x27;en ai beaucoup." aria-label="Écouter">🔊</button></div>
+      </div></div>
+    <div class="sub">Avec d'entre · With d'entre</div>
+    <div class="ex"><div class="t"><span class="k">Certains d&#x27;entre</span> nous travaillent le dimanche.<span class="en">Some of us work on Sundays.</span></div><button type="button" class="say" data-say="Certains d&#x27;entre nous travaillent le dimanche." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t"><span class="k">Plusieurs d&#x27;entre</span> eux sont partis tôt.<span class="en">Several of them left early.</span></div><button type="button" class="say" data-say="Plusieurs d&#x27;entre eux sont partis tôt." aria-label="Écouter">🔊</button></div>
+    <div class="sub">Adjectif ou pronom ? · Adjective or pronoun?</div>
+    <div class="scroll"><table class="t">
+      <tr><th>Adjectif + nom</th><th>Pronom</th></tr>
+      <tr><td>quelques livres</td><td><b>quelques-uns</b></td></tr>
+      <tr><td>quelques photos</td><td><b>quelques-unes</b></td></tr>
+      <tr><td>certains étudiants</td><td><b>certains</b></td></tr>
+      <tr><td>plusieurs villes</td><td><b>plusieurs</b></td></tr>
+      <tr><td>beaucoup de touristes</td><td><b>beaucoup</b></td></tr>
+    </table></div>
+    <figure class="photo"><img src="img/bouquinistes.jpg" alt=""><figcaption>Des livres anciens chez les bouquinistes ? J'en ai acheté plusieurs.<span class="en">Old books from the riverside booksellers? I bought several.</span></figcaption></figure>
+    <div class="exslot" data-ex="e4"></div>
+    <div class="exslot" data-ex="e5"></div>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="point p4" id="p4">
+  <div class="hd"><div class="no">4</div><h2>Tous, toutes, chacun, chacune<span class="en">All, each</span></h2></div>
+  <div class="bd">
+    <div class="duo">
+      <div><h4>Tous / toutes</h4>L'ensemble du groupe. Verbe au <b>pluriel</b>.<span class="en">The whole group. Plural verb.</span></div>
+      <div><h4>Chacun / chacune</h4>Chaque élément, pris séparément. Verbe au <b>singulier</b>.<span class="en">Each one, taken separately. Singular verb.</span></div>
+    </div>
+    <div class="sub">Tous, toutes</div>
+    <div class="ex"><div class="t">Mes amis sont <span class="k">tous</span> venus.<span class="en">My friends all came.</span></div><button type="button" class="say" data-say="Mes amis sont tous venus." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t"><span class="k">Tous</span> étaient d&#x27;accord.<span class="en">They all agreed.</span></div><button type="button" class="say" data-say="Tous étaient d&#x27;accord." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Ces photos ? Je les ai <span class="k">toutes</span> regardées.<span class="en">These photos? I&#x27;ve looked at all of them.</span></div><button type="button" class="say" data-say="Ces photos ? Je les ai toutes regardées." aria-label="Écouter">🔊</button></div>
+    <div class="box"><span class="lab">Prononciation et place · Pronunciation and position</span>
+      Pronom, <b>tous</b> se prononce avec le <b>s</b> final. Il se place après le verbe conjugué ou l'auxiliaire.
+      <span class="en">As a pronoun, tous is pronounced with its final s. It goes after the conjugated verb or the auxiliary.</span></div>
+    <div class="sub">Chacun, chacune</div>
+    <div class="ex"><div class="t"><span class="k">Chacun</span> a sa propre opinion.<span class="en">Everyone has their own opinion.</span></div><button type="button" class="say" data-say="Chacun a sa propre opinion." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t"><span class="k">Chacune</span> de mes sœurs habite dans une ville différente.<span class="en">Each of my sisters lives in a different town.</span></div><button type="button" class="say" data-say="Chacune de mes sœurs habite dans une ville différente." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Ces livres coûtent dix euros <span class="k">chacun</span>.<span class="en">These books cost ten euros each.</span></div><button type="button" class="say" data-say="Ces livres coûtent dix euros chacun." aria-label="Écouter">🔊</button></div>
+    <div class="sub">Comparez · Compare</div>
+    <div class="duo">
+      <div><h4>Le groupe</h4>Les invités sont <b>tous</b> arrivés à huit heures.<span class="en">The guests all arrived at eight.</span></div>
+      <div><h4>Une personne à la fois</h4><b>Chacun</b> a apporté un cadeau.<span class="en">Each of them brought a present.</span></div>
+    </div>
+    <div class="box"><span class="lab">Chaque ou chacun ? · Chaque or chacun?</span>
+      <b>Chaque</b> est suivi d'un nom : chaque invité. <b>Chacun</b> s'emploie seul : chacun.
+      <span class="en">Chaque is followed by a noun; chacun stands on its own.</span></div>
+    <figure class="photo"><img src="img/terrasse.jpg" alt=""><figcaption>En terrasse, chacun choisit sa table.<span class="en">On a café terrace, everyone chooses their own table.</span></figcaption></figure>
+    <div class="exslot" data-ex="e6"></div>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="point p5" id="p5">
+  <div class="hd"><div class="no">5</div><h2>Le même, un autre, les autres<span class="en">The same one, another one, the others</span></h2></div>
+  <div class="bd">
+    <div class="duo">
+      <div><h4>Identité · Identity</h4><span class="pill">le même</span><span class="pill">la même</span><span class="pill">les mêmes</span><br>une chose identique<span class="en">the same one(s)</span></div>
+      <div><h4>Différence · Difference</h4><span class="pill">un autre</span><span class="pill">une autre</span><span class="pill">d'autres</span><span class="pill">les autres</span><br>une chose différente<span class="en">another one, others, the others</span></div>
+    </div>
+    <div class="sub">Le même, la même, les mêmes</div>
+    <div class="ex"><div class="t">J&#x27;aime beaucoup ta veste : j&#x27;ai <span class="k">la même</span>.<span class="en">I really like your jacket: I&#x27;ve got the same one.</span></div><button type="button" class="say" data-say="J&#x27;aime beaucoup ta veste : j&#x27;ai la même." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Ton téléphone est pratique, je voudrais <span class="k">le même</span>.<span class="en">Your phone is handy, I&#x27;d like the same one.</span></div><button type="button" class="say" data-say="Ton téléphone est pratique, je voudrais le même." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Ce sont toujours <span class="k">les mêmes</span> qui parlent en réunion.<span class="en">It&#x27;s always the same people who talk in meetings.</span></div><button type="button" class="say" data-say="Ce sont toujours les mêmes qui parlent en réunion." aria-label="Écouter">🔊</button></div>
+    <div class="sub">Un autre, une autre, d'autres, les autres</div>
+    <div class="ex"><div class="t">Ce verre est sale. Je peux en avoir <span class="k">un autre</span> ?<span class="en">This glass is dirty. Could I have another one?</span></div><button type="button" class="say" data-say="Ce verre est sale. Je peux en avoir un autre ?" aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Cette chambre est bruyante. Vous en avez <span class="k">une autre</span> ?<span class="en">This room is noisy. Have you got another one?</span></div><button type="button" class="say" data-say="Cette chambre est bruyante. Vous en avez une autre ?" aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t"><span class="k">Certains</span> aiment la mer, <span class="k">d&#x27;autres</span> préfèrent la montagne.<span class="en">Some like the sea, others prefer the mountains.</span></div><button type="button" class="say" data-say="Certains aiment la mer, d&#x27;autres préfèrent la montagne." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Paul est arrivé ; <span class="k">les autres</span> arrivent demain.<span class="en">Paul has arrived; the others are arriving tomorrow.</span></div><button type="button" class="say" data-say="Paul est arrivé ; les autres arrivent demain." aria-label="Écouter">🔊</button></div>
+    <div class="box"><span class="lab">D'autres ou les autres ? · D'autres or les autres?</span>
+      <b>D'autres</b> : des personnes ou des choses différentes, en nombre non précisé. <b>Les autres</b> : le reste d'un groupe connu.
+      <span class="en">D'autres: some other people or things. Les autres: the rest of a known group.</span>
+      <div class="in">
+      <div class="ex"><div class="t">J&#x27;ai fini ces biscuits. Il y en a <span class="k">d&#x27;autres</span> ?<span class="en">I&#x27;ve finished these biscuits. Are there any more?</span></div><button type="button" class="say" data-say="J&#x27;ai fini ces biscuits. Il y en a d&#x27;autres ?" aria-label="Écouter">🔊</button></div>
+      <div class="ex"><div class="t">Deux biscuits sont au chocolat, <span class="k">les autres</span> sont à la vanille.<span class="en">Two biscuits are chocolate, the others are vanilla.</span></div><button type="button" class="say" data-say="Deux biscuits sont au chocolat, les autres sont à la vanille." aria-label="Écouter">🔊</button></div>
+      </div></div>
+    <figure class="photo"><img src="img/colmar.jpg" alt=""><figcaption>À Colmar, aucune maison n'a la même couleur que les autres.<span class="en">In Colmar, no house is the same colour as the others.</span></figcaption></figure>
+    <div class="exslot" data-ex="e7"></div>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="point p6" id="p6">
+  <div class="hd"><div class="no">6</div><h2>N'importe qui, n'importe quoi<span class="en">Anyone, anything</span></h2></div>
+  <div class="bd">
+    <p class="lead"><b>N'importe qui</b> : toute personne, sans choisir. <b>N'importe quoi</b> : toute chose, sans choisir.
+    <span class="en">N'importe qui: any person at all. N'importe quoi: anything at all.</span></p>
+    <div class="ex"><div class="t">Ce jeu est très simple : <span class="k">n&#x27;importe qui</span> peut jouer.<span class="en">This game is very simple: anyone can play.</span></div><button type="button" class="say" data-say="Ce jeu est très simple : n&#x27;importe qui peut jouer." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Ne raconte pas ta vie privée à <span class="k">n&#x27;importe qui</span>.<span class="en">Don&#x27;t tell just anyone about your private life.</span></div><button type="button" class="say" data-say="Ne raconte pas ta vie privée à n&#x27;importe qui." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">J&#x27;ai tellement faim que je mangerais <span class="k">n&#x27;importe quoi</span>.<span class="en">I&#x27;m so hungry I&#x27;d eat anything.</span></div><button type="button" class="say" data-say="J&#x27;ai tellement faim que je mangerais n&#x27;importe quoi." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Ne l&#x27;écoute pas, il dit <span class="k">n&#x27;importe quoi</span> !<span class="en">Don&#x27;t listen to him, he&#x27;s talking nonsense!</span></div><button type="button" class="say" data-say="Ne l&#x27;écoute pas, il dit n&#x27;importe quoi !" aria-label="Écouter">🔊</button></div>
+    <div class="sub">Comparez · Compare</div>
+    <div class="duo">
+      <div><h4>Une personne précise</h4><b>Quelqu'un</b> a laissé un message pour vous.<span class="en">Someone (a particular person) left a message for you.</span></div>
+      <div><h4>Toute personne</h4><b>N'importe qui</b> peut s'inscrire à ce cours.<span class="en">Anyone can sign up for this course.</span></div>
+    </div>
+    <div class="box"><span class="lab">Un sens familier · An informal meaning</span>
+      <b>Dire / faire n'importe quoi</b> : dire des choses absurdes, agir sans réfléchir.
+      <span class="en">Dire / faire n'importe quoi: to talk nonsense, to act without thinking.</span></div>
+    <figure class="photo"><img src="img/marche.jpg" alt=""><figcaption>Au marché, on ne choisit pas n'importe quoi : on prend le temps de regarder.<span class="en">At the market, you don't just pick anything: you take time to look.</span></figcaption></figure>
+    <div class="exslot" data-ex="e8"></div>
+  </div>
+</section>
+
+<!-- ============ SYNTHÈSE ============ -->
+<section class="synth" id="synthese">
+  <h2>Synthèse <span class="en">Summary</span></h2>
+  <div class="scroll"><table>
+    <tr><th>Pronom</th><th>Sens</th><th>Exemple</th></tr>
+    <tr><td>quelqu'un</td><td>une personne<span class="en">someone</span></td><td>Quelqu'un t'attend.</td></tr>
+    <tr><td>quelque chose</td><td>une chose<span class="en">something</span></td><td>J'ai quelque chose pour toi.</td></tr>
+    <tr><td>ne ... personne</td><td>aucune personne<span class="en">nobody</span></td><td>Je ne vois personne.</td></tr>
+    <tr><td>ne ... rien</td><td>aucune chose<span class="en">nothing</span></td><td>Rien n'a changé.</td></tr>
+    <tr><td>aucun, aucune</td><td>pas un seul, pas une seule<span class="en">none</span></td><td>Je n'en ai aucune.</td></tr>
+    <tr><td>certains, certaines</td><td>une partie<span class="en">some</span></td><td>Certains sont partis.</td></tr>
+    <tr><td>quelques-uns, -unes</td><td>un petit nombre<span class="en">a few</span></td><td>J'en ai lu quelques-uns.</td></tr>
+    <tr><td>plusieurs</td><td>plus de deux<span class="en">several</span></td><td>J'en ai vu plusieurs.</td></tr>
+    <tr><td>beaucoup</td><td>un grand nombre<span class="en">many</span></td><td>Beaucoup sont venus.</td></tr>
+    <tr><td>tous, toutes</td><td>l'ensemble<span class="en">all</span></td><td>Ils sont tous là.</td></tr>
+    <tr><td>chacun, chacune</td><td>chaque élément<span class="en">each</span></td><td>Chacun a son avis.</td></tr>
+    <tr><td>le même, la même, les mêmes</td><td>identique<span class="en">the same one(s)</span></td><td>J'ai la même.</td></tr>
+    <tr><td>un autre, une autre</td><td>un élément différent<span class="en">another one</span></td><td>J'en veux un autre.</td></tr>
+    <tr><td>d'autres / les autres</td><td>d'autres éléments / le reste<span class="en">others / the others</span></td><td>Les autres arrivent.</td></tr>
+    <tr><td>n'importe qui</td><td>toute personne<span class="en">anyone</span></td><td>N'importe qui peut venir.</td></tr>
+    <tr><td>n'importe quoi</td><td>toute chose<span class="en">anything</span></td><td>Il dit n'importe quoi.</td></tr>
+  </table></div>
+</section>
+
+<section class="point p7" id="p7">
+  <div class="hd"><div class="no">7</div><h2>Bilan<span class="en">Review</span></h2></div>
+  <div class="bd"><div class="exslot" data-ex="e9"></div></div>
+</section>
+
+<!-- ============ ORAL ============ -->
+<section class="oral" id="oral">
+  <div class="hd"><h2>À l'oral : la fête des voisins</h2><span class="en">Speaking: the neighbours' party</span></div>
+  <div class="bd">
+    <p>Vous organisez la fête des voisins de votre immeuble. Parlez à voix haute. Les pronoms à utiliser sont indiqués sous chaque question. Un exemple de réponse est proposé, à consulter après avoir parlé.
+    <span class="en">You are organising the neighbours' party in your building. Speak out loud. The pronouns to use are shown under each question. A sample answer is given, to look at after you have spoken.</span></p>
+
+    <div class="step"><h3><span class="n">1</span>Répondez aux questions<span class="en"> · Answer the questions</span></h3>
+      <div class="q"><div class="t">1. Est-ce que quelqu&#x27;un vous aide à organiser la fête ?<span class="en">Is anyone helping you organise the party?</span><div class="pills"><span>quelqu&#x27;un</span><span>personne</span></div><details class="model"><summary>Voir un exemple de réponse · See a sample answer</summary><p>Oui, quelqu&#x27;un m&#x27;aide : ma voisine du deuxième étage. Ou : Non, personne ne m&#x27;aide. <button type="button" class="say" data-say="Oui, quelqu&#x27;un m&#x27;aide : ma voisine du deuxième étage. Ou : Non, personne ne m&#x27;aide.">🔊</button><span class="en" style="display:block">Yes, someone is helping me: my neighbour on the second floor. Or: No, nobody is helping me.</span></p></details></div><button type="button" class="say" data-say="Est-ce que quelqu&#x27;un vous aide à organiser la fête ?" aria-label="Écouter">🔊</button></div><div class="q"><div class="t">2. Vous avez déjà préparé quelque chose à manger ?<span class="en">Have you already made something to eat?</span><div class="pills"><span>quelque chose</span><span>rien</span></div><details class="model"><summary>Voir un exemple de réponse · See a sample answer</summary><p>Oui, j&#x27;ai préparé quelque chose de simple : une tarte salée. Ou : Non, je n&#x27;ai encore rien préparé. <button type="button" class="say" data-say="Oui, j&#x27;ai préparé quelque chose de simple : une tarte salée. Ou : Non, je n&#x27;ai encore rien préparé.">🔊</button><span class="en" style="display:block">Yes, I&#x27;ve made something simple: a savoury tart. Or: No, I haven&#x27;t made anything yet.</span></p></details></div><button type="button" class="say" data-say="Vous avez déjà préparé quelque chose à manger ?" aria-label="Écouter">🔊</button></div><div class="q"><div class="t">3. Vous connaissez bien vos voisins ?<span class="en">Do you know your neighbours well?</span><div class="pills"><span>certains</span><span>quelques-uns</span><span>aucun</span></div><details class="model"><summary>Voir un exemple de réponse · See a sample answer</summary><p>J&#x27;en connais bien quelques-uns ; certains habitent ici depuis vingt ans. <button type="button" class="say" data-say="J&#x27;en connais bien quelques-uns ; certains habitent ici depuis vingt ans.">🔊</button><span class="en" style="display:block">I know a few of them well; some have lived here for twenty years.</span></p></details></div><button type="button" class="say" data-say="Vous connaissez bien vos voisins ?" aria-label="Écouter">🔊</button></div><div class="q"><div class="t">4. Vous avez des tables pliantes ?<span class="en">Have you got any folding tables?</span><div class="pills"><span>plusieurs</span><span>aucune</span></div><details class="model"><summary>Voir un exemple de réponse · See a sample answer</summary><p>Oui, j&#x27;en ai plusieurs dans la cave. Ou : Non, je n&#x27;en ai aucune. <button type="button" class="say" data-say="Oui, j&#x27;en ai plusieurs dans la cave. Ou : Non, je n&#x27;en ai aucune.">🔊</button><span class="en" style="display:block">Yes, I&#x27;ve got several in the cellar. Or: No, I haven&#x27;t got any.</span></p></details></div><button type="button" class="say" data-say="Vous avez des tables pliantes ?" aria-label="Écouter">🔊</button></div><div class="q"><div class="t">5. Les voisins vont-ils tous venir ?<span class="en">Are all the neighbours going to come?</span><div class="pills"><span>tous</span><span>beaucoup</span><span>certains</span></div><details class="model"><summary>Voir un exemple de réponse · See a sample answer</summary><p>Pas tous : beaucoup viendront, mais certains sont en vacances. <button type="button" class="say" data-say="Pas tous : beaucoup viendront, mais certains sont en vacances.">🔊</button><span class="en" style="display:block">Not all of them: many will come, but some are on holiday.</span></p></details></div><button type="button" class="say" data-say="Les voisins vont-ils tous venir ?" aria-label="Écouter">🔊</button></div><div class="q"><div class="t">6. Qu&#x27;est-ce que les voisins vont apporter ?<span class="en">What are the neighbours going to bring?</span><div class="pills"><span>chacun</span><span>chacune</span></div><details class="model"><summary>Voir un exemple de réponse · See a sample answer</summary><p>Chacun apportera un plat ou une boisson. <button type="button" class="say" data-say="Chacun apportera un plat ou une boisson.">🔊</button><span class="en" style="display:block">Each of them will bring a dish or a drink.</span></p></details></div><button type="button" class="say" data-say="Qu&#x27;est-ce que les voisins vont apporter ?" aria-label="Écouter">🔊</button></div><div class="q"><div class="t">7. Vous voulez la même décoration que l&#x27;année dernière ?<span class="en">Do you want the same decorations as last year?</span><div class="pills"><span>la même</span><span>une autre</span></div><details class="model"><summary>Voir un exemple de réponse · See a sample answer</summary><p>Non, j&#x27;en voudrais une autre : nous avons la même depuis trois ans ! <button type="button" class="say" data-say="Non, j&#x27;en voudrais une autre : nous avons la même depuis trois ans !">🔊</button><span class="en" style="display:block">No, I&#x27;d like a different one: we&#x27;ve had the same one for three years!</span></p></details></div><button type="button" class="say" data-say="Vous voulez la même décoration que l&#x27;année dernière ?" aria-label="Écouter">🔊</button></div><div class="q"><div class="t">8. Vous pouvez inviter des personnes de la rue ?<span class="en">Can you invite people from the street?</span><div class="pills"><span>d&#x27;autres</span><span>n&#x27;importe qui</span></div><details class="model"><summary>Voir un exemple de réponse · See a sample answer</summary><p>Oui, on peut inviter d&#x27;autres voisins de la rue, mais pas n&#x27;importe qui. <button type="button" class="say" data-say="Oui, on peut inviter d&#x27;autres voisins de la rue, mais pas n&#x27;importe qui.">🔊</button><span class="en" style="display:block">Yes, we can invite other neighbours from the street, but not just anyone.</span></p></details></div><button type="button" class="say" data-say="Vous pouvez inviter des personnes de la rue ?" aria-label="Écouter">🔊</button></div><div class="q"><div class="t">9. Que faut-il éviter pendant la fête ?<span class="en">What should be avoided during the party?</span><div class="pills"><span>n&#x27;importe quoi</span><span>rien</span></div><details class="model"><summary>Voir un exemple de réponse · See a sample answer</summary><p>Il ne faut pas faire n&#x27;importe quoi avec la musique après minuit, et il ne faut rien laisser dans l&#x27;escalier. <button type="button" class="say" data-say="Il ne faut pas faire n&#x27;importe quoi avec la musique après minuit, et il ne faut rien laisser dans l&#x27;escalier.">🔊</button><span class="en" style="display:block">We mustn&#x27;t go overboard with the music after midnight, and nothing should be left on the stairs.</span></p></details></div><button type="button" class="say" data-say="Que faut-il éviter pendant la fête ?" aria-label="Écouter">🔊</button></div>
+    </div>
+
+    <div class="step"><h3><span class="n">2</span>Jeu de rôle<span class="en"> · Role play</span></h3>
+      <p>Vous préparez la fête avec un voisin ou une voisine. Votre partenaire joue l'autre rôle. Utilisez au moins un pronom indéfini dans chaque réplique.
+      <span class="en">You are preparing the party with a neighbour. Your partner plays the other role. Use at least one indefinite pronoun in each line.</span></p>
+      <div class="role">
+        <div style="background:var(--mag-l)"><h4 style="color:var(--mag)">Rôle A · L'organisateur ou l'organisatrice</h4><ol>
+          <li>Dites que certains voisins ont répondu et que d'autres non.<span class="en">Say that some neighbours have replied and others haven't.</span></li>
+          <li>Dites que personne n'a proposé de dessert.<span class="en">Say that nobody has offered to bring a dessert.</span></li>
+          <li>Demandez si quelqu'un a des chaises en plus.<span class="en">Ask whether anyone has spare chairs.</span></li>
+          <li>Proposez que chacun apporte quelque chose à boire.<span class="en">Suggest that everyone brings something to drink.</span></li>
+          <li>Dites que vous voulez les mêmes guirlandes que l'année dernière.<span class="en">Say you want the same fairy lights as last year.</span></li>
+        </ol></div>
+        <div style="background:var(--teal-l)"><h4 style="color:var(--teal)">Rôle B · Le voisin ou la voisine</h4><ol>
+          <li>Dites que vous avez plusieurs chaises, mais aucune table.<span class="en">Say you have several chairs, but no table.</span></li>
+          <li>Proposez de demander à quelques-uns des voisins du troisième.<span class="en">Offer to ask a few of the neighbours on the third floor.</span></li>
+          <li>Dites que les guirlandes sont toutes cassées et qu'il faut en acheter d'autres.<span class="en">Say the fairy lights are all broken and you need to buy some others.</span></li>
+          <li>Dites qu'il ne faut pas inviter n'importe qui.<span class="en">Say you shouldn't invite just anyone.</span></li>
+          <li>Dites que rien n'est encore décidé pour la musique.<span class="en">Say nothing has been decided yet about the music.</span></li>
+        </ol></div>
+      </div>
+    </div>
+
+    <div class="step"><h3><span class="n">3</span>Racontez<span class="en"> · Tell the story</span></h3>
+      <p>La fête a eu lieu. Racontez-la en deux minutes : qui est venu, ce que chacun a apporté, ce qui s'est passé, ce qui a plu ou non.
+      <span class="en">The party has taken place. Describe it in two minutes: who came, what each person brought, what happened, what people liked or didn't.</span></p>
+      <p class="en" style="margin-bottom:4px">Pour commencer · To start:</p>
+      <div class="chips" style="pointer-events:none">
+        <label>Presque tous les voisins sont venus…</label><label>Chacun avait apporté…</label><label>Certains ont dansé, d'autres…</label><label>Personne ne s'attendait à…</label><label>À la fin, il ne restait rien…</label>
+      </div>
+      <p style="margin-top:12px">Cochez les pronoms que vous avez utilisés.
+      <span class="en">Tick the pronouns you used.</span></p>
+      <div class="chips" id="checkchips"></div>
+      <p class="en" id="chipcount"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BILAN ============ -->
+<section class="revoir" id="revoir-box">
+  <div class="hd"><h2>À revoir</h2><span class="en">To review: your answer, the right answer, why, and the rule to remember.</span></div>
+  <div class="bd" id="revoir"></div>
+</section>
+
+<section class="corr" id="corriges">
+  <h2>Corrigés <span class="en" style="font-size:15px">Answers</span></h2>
+  <details><summary>Exercice 1 · Quelqu&#x27;un, quelque chose, personne, rien</summary><ol><li>Il y a quelqu&#x27;un à la porte : j&#x27;entends frapper.<span class="en">There&#x27;s someone at the door: I can hear knocking.</span></li><li>Je n&#x27;ai rien mangé depuis ce matin.<span class="en">I haven&#x27;t eaten anything since this morning.</span></li><li>Personne n&#x27;a répondu à mon message.<span class="en">Nobody replied to my message.</span></li><li>Vous voulez boire quelque chose ?<span class="en">Would you like something to drink?</span></li><li>Je ne connais personne dans cette ville.<span class="en">I don&#x27;t know anyone in this town.</span></li><li>Rien ne s&#x27;est passé pendant la réunion.<span class="en">Nothing happened during the meeting.</span></li><li>J&#x27;ai trouvé quelque chose d&#x27;intéressant dans ce livre.<span class="en">I found something interesting in this book.</span></li><li>Nous cherchons quelqu&#x27;un de sérieux pour garder les enfants.<span class="en">We&#x27;re looking for someone reliable to look after the children.</span></li></ol></details><details><summary>Exercice 2 · Répondre à la forme négative</summary><ol><li>Tu as vu quelqu&#x27;un ? Non, je n&#x27;ai vu personne.<span class="en">Did you see anyone? No, I didn&#x27;t see anyone.</span></li><li>Vous avez entendu quelque chose ? Non, nous n&#x27;avons rien entendu.<span class="en">Did you hear anything? No, we didn&#x27;t hear anything.</span></li><li>Quelqu&#x27;un t&#x27;a appelé ? Non, personne ne m&#x27;a appelé.<span class="en">Did anyone call you? No, nobody called me.</span></li><li>Quelque chose t&#x27;inquiète ? Non, rien ne m&#x27;inquiète.<span class="en">Is something worrying you? No, nothing is worrying me.</span></li><li>Tu as quelque chose de nouveau à me raconter ? Non, je n&#x27;ai rien de nouveau.<span class="en">Have you got anything new to tell me? No, nothing new.</span></li><li>Tu connais quelqu&#x27;un d&#x27;autre ici ? Non, je ne connais personne d&#x27;autre.<span class="en">Do you know anyone else here? No, I don&#x27;t know anyone else.</span></li></ol></details><details><summary>Exercice 3 · Aucun, aucune</summary><ol><li>Tu as des frères ? Non, je n&#x27;en ai aucun.<span class="en">Have you got any brothers? No, I haven&#x27;t got any.</span></li><li>Il reste des places ? Non, il n&#x27;en reste aucune.<span class="en">Are there any seats left? No, there are none left.</span></li><li>Aucun de ses voisins n&#x27;est au courant.<span class="en">None of his neighbours knows about it.</span></li><li>J&#x27;ai essayé trois recettes : aucune n&#x27;a marché.<span class="en">I tried three recipes: none of them worked.</span></li><li>Tu as lu des romans de Proust ? Non, je n&#x27;en ai lu aucun.<span class="en">Have you read any of Proust&#x27;s novels? No, I haven&#x27;t read any.</span></li><li>Aucune de ces solutions ne me convient.<span class="en">None of these solutions suits me.</span></li></ol></details><details><summary>Exercice 4 · Certains, plusieurs, quelques-uns, beaucoup</summary><ol><li>J&#x27;ai invité mes collègues : certains viendront, d&#x27;autres non.<span class="en">I&#x27;ve invited my colleagues: some will come, others won&#x27;t.</span></li><li>J&#x27;ai cueilli des fraises, mais quelques-unes ne sont pas mûres.<span class="en">I picked some strawberries, but a few of them aren&#x27;t ripe.</span></li><li>Tu as vu des films de Truffaut ? Oui, j&#x27;en ai vu plusieurs.<span class="en">Have you seen any Truffaut films? Yes, I&#x27;ve seen several.</span></li><li>Parmi mes amies, certaines parlent italien.<span class="en">Some of my (female) friends speak Italian.</span></li><li>Il y a des touristes en hiver ? Oui, il y en a beaucoup.<span class="en">Are there any tourists in winter? Yes, there are a lot.</span></li><li>Plusieurs d&#x27;entre nous travaillent le samedi.<span class="en">Several of us work on Saturdays.</span></li><li>Ces romans sont très connus : j&#x27;en ai lu quelques-uns.<span class="en">These novels are very well known: I&#x27;ve read a few of them.</span></li><li>Beaucoup pensent que Paris est trop cher.<span class="en">Many people think Paris is too expensive.</span></li></ol></details><details><summary>Exercice 5 · Remplacer le groupe nominal</summary><ol><li>J&#x27;en ai lu quelques-uns.<span class="en">I&#x27;ve read a few of Zola&#x27;s books. → I&#x27;ve read a few of them.</span></li><li>Elle en a plusieurs.<span class="en">She has several red dresses. → She has several.</span></li><li>Nous en avons visité beaucoup.<span class="en">We visited a lot of museums. → We visited a lot of them.</span></li><li>Certaines sont restées dîner.<span class="en">Some friends stayed for dinner. → Some stayed for dinner.</span></li><li>J&#x27;en ai acheté quelques-unes.<span class="en">I bought a few postcards. → I bought a few.</span></li><li>Plusieurs sont absents.<span class="en">Several students are absent. → Several are absent.</span></li></ol></details><details><summary>Exercice 6 · Tous, toutes, chacun, chacune</summary><ol><li>Les enfants sont tous partis en vacances.<span class="en">The children have all gone on holiday.</span></li><li>Chacun de nous doit apporter un plat.<span class="en">Each of us has to bring a dish.</span></li><li>Mes cousines ? Je les ai toutes invitées.<span class="en">My (female) cousins? I invited all of them.</span></li><li>Ces places de concert coûtent cinquante euros chacune.<span class="en">These concert tickets cost fifty euros each.</span></li><li>Tous sont arrivés en retard à cause de la grève.<span class="en">They all arrived late because of the strike.</span></li><li>Chacune des participantes recevra un certificat.<span class="en">Each of the (female) participants will receive a certificate.</span></li><li>Chacun de mes collègues a un bureau individuel.<span class="en">Each of my colleagues has an office of their own.</span></li><li>Mes voisins ont tous un chien.<span class="en">My neighbours all have a dog.</span></li></ol></details><details><summary>Exercice 7 · Le même, un autre, les autres</summary><ol><li>Mon café est froid, je vais en commander un autre.<span class="en">My coffee is cold, I&#x27;m going to order another one.</span></li><li>J&#x27;adore tes chaussures, je vais acheter les mêmes.<span class="en">I love your shoes, I&#x27;m going to buy the same ones.</span></li><li>Ma voisine a une voiture rouge, et moi j&#x27;ai la même.<span class="en">My neighbour has a red car, and I&#x27;ve got the same one.</span></li><li>Certains préfèrent le thé, d&#x27;autres préfèrent le café.<span class="en">Some prefer tea, others prefer coffee.</span></li><li>Seule Julie est restée ; les autres sont rentrés chez eux.<span class="en">Only Julie stayed; the others went home.</span></li><li>Ce stylo ne marche pas. Tu en as un autre ?<span class="en">This pen doesn&#x27;t work. Have you got another one?</span></li><li>Cette robe est trop petite ; vous en avez une autre en 40 ?<span class="en">This dress is too small; have you got another one in a 40?</span></li><li>Ton parfum sent très bon. C&#x27;est le même que le mien !<span class="en">Your perfume smells lovely. It&#x27;s the same as mine!</span></li></ol></details><details><summary>Exercice 8 · N&#x27;importe qui, n&#x27;importe quoi</summary><ol><li>Cette recette est très facile : n&#x27;importe qui peut la réussir.<span class="en">This recipe is very easy: anyone can make it.</span></li><li>Quelqu&#x27;un t&#x27;a appelé pendant ton absence : c&#x27;était ta sœur.<span class="en">Someone called you while you were out: it was your sister.</span></li><li>Ne crois pas ce qu&#x27;il raconte : il dit n&#x27;importe quoi !<span class="en">Don&#x27;t believe what he says: he&#x27;s talking nonsense!</span></li><li>J&#x27;ai oublié quelque chose chez toi : mes lunettes.<span class="en">I left something at your place: my glasses.</span></li><li>Ce club n&#x27;est pas ouvert à n&#x27;importe qui : il faut être invité.<span class="en">This club isn&#x27;t open to just anyone: you have to be invited.</span></li><li>Les enfants ont tellement faim qu&#x27;ils mangeraient n&#x27;importe quoi.<span class="en">The children are so hungry they&#x27;d eat anything.</span></li><li>Tu peux me prêter quelque chose à lire pour le train ?<span class="en">Could you lend me something to read for the train?</span></li><li>Il y a quelqu&#x27;un dans le bureau du directeur ? J&#x27;entends des voix.<span class="en">Is there someone in the manager&#x27;s office? I can hear voices.</span></li></ol></details><details><summary>Exercice 9 · Bilan : une soirée entre amis</summary><ol><li>Samedi, j&#x27;ai invité mes amis : ils sont tous venus.<span class="en">On Saturday I invited my friends: they all came.</span></li><li>Chacun a apporté un plat ou une boisson.<span class="en">Each of them brought a dish or a drink.</span></li><li>Mais personne n&#x27;a pensé au pain !<span class="en">But nobody thought of the bread!</span></li><li>J&#x27;avais acheté des bouteilles de jus ; quelques-unes étaient déjà ouvertes.<span class="en">I had bought some bottles of juice; a few were already open.</span></li><li>Sophie portait une robe magnifique, et Clara avait la même !<span class="en">Sophie was wearing a gorgeous dress, and Clara had the same one!</span></li><li>Il n&#x27;y avait plus de verres propres, alors Marc en a lavé d&#x27;autres.<span class="en">There were no clean glasses left, so Marc washed some more.</span></li><li>Certains ont dansé, d&#x27;autres ont discuté sur le balcon.<span class="en">Some danced, others chatted on the balcony.</span></li><li>Vers minuit, quelqu&#x27;un a sonné à la porte : c&#x27;était le voisin.<span class="en">Around midnight, someone rang the doorbell: it was the neighbour.</span></li><li>Il était un peu fatigué et racontait n&#x27;importe quoi : on ne le comprenait pas !<span class="en">He was a bit tired and talking nonsense: we couldn&#x27;t understand him!</span></li><li>À la fin de la soirée, il ne restait rien : tout était mangé !<span class="en">At the end of the evening, there was nothing left: everything had been eaten!</span></li></ol></details>
+</section>
+<div class="row" style="justify-content:center"><button type="button" class="btn ghost" id="reset">Effacer mes réponses · Clear my answers</button></div>
+</main>
+<footer>GRAMMAIRE AVEC IRÈNE</footer>
+
+<script>
+const DATA={"ex": [{"id": "e1", "type": "qcm", "point": 1, "label": "Quelqu'un, quelque chose, personne, rien", "consigne": "Choisissez le pronom qui convient.", "consigneEn": "Choose the right pronoun.", "tip": "Une personne : quelqu'un / personne. Une chose : quelque chose / rien. Avec ne, on emploie personne ou rien.", "tipEn": "A person: quelqu'un / personne. A thing: quelque chose / rien. With ne, use personne or rien.", "items": [{"q": "Il y a ___ à la porte : j'entends frapper.", "o": ["quelqu'un", "quelque chose", "personne"], "a": 0, "ans": "quelqu'un", "en": "There's someone at the door: I can hear knocking.", "good": "Il y a quelqu'un à la porte : j'entends frapper.", "full": "Il y a quelqu'un à la porte : j'entends frapper.", "r": "On parle d'une personne, dans une phrase affirmative : quelqu'un.", "re": "A person, in an affirmative sentence: quelqu'un."}, {"q": "Je n'ai ___ mangé depuis ce matin.", "o": ["personne", "rien", "quelque chose"], "a": 1, "ans": "rien", "en": "I haven't eaten anything since this morning.", "good": "Je n'ai rien mangé depuis ce matin.", "full": "Je n'ai rien mangé depuis ce matin.", "r": "Une chose, avec ne : ne ... rien. Au passé composé, rien se place avant le participe.", "re": "A thing, with ne: ne ... rien. In the perfect tense, rien comes before the participle."}, {"q": "___ n'a répondu à mon message.", "o": ["Rien", "Quelqu'un", "Personne"], "a": 2, "ans": "Personne", "en": "Nobody replied to my message.", "good": "Personne n'a répondu à mon message.", "full": "Personne n'a répondu à mon message.", "r": "Une personne, sujet négatif : Personne ne (n') + verbe, sans pas.", "re": "A person, negative subject: Personne ne (n') + verb, without pas."}, {"q": "Vous voulez boire ___ ?", "o": ["quelque chose", "rien", "quelqu'un"], "a": 0, "ans": "quelque chose", "en": "Would you like something to drink?", "good": "Vous voulez boire quelque chose ?", "full": "Vous voulez boire quelque chose ?", "r": "Une chose, dans une question affirmative : quelque chose.", "re": "A thing, in an affirmative question: quelque chose."}, {"q": "Je ne connais ___ dans cette ville.", "o": ["rien", "personne", "quelqu'un"], "a": 1, "ans": "personne", "en": "I don't know anyone in this town.", "good": "Je ne connais personne dans cette ville.", "full": "Je ne connais personne dans cette ville.", "r": "Une personne, avec ne : ne ... personne.", "re": "A person, with ne: ne ... personne."}, {"q": "___ ne s'est passé pendant la réunion.", "o": ["Personne", "Rien", "Quelque chose"], "a": 1, "ans": "Rien", "en": "Nothing happened during the meeting.", "good": "Rien ne s'est passé pendant la réunion.", "full": "Rien ne s'est passé pendant la réunion.", "r": "Une chose, sujet négatif : Rien ne + verbe.", "re": "A thing, negative subject: Rien ne + verb."}, {"q": "J'ai trouvé ___ d'intéressant dans ce livre.", "o": ["quelqu'un", "quelque chose", "rien"], "a": 1, "ans": "quelque chose", "en": "I found something interesting in this book.", "good": "J'ai trouvé quelque chose d'intéressant dans ce livre.", "full": "J'ai trouvé quelque chose d'intéressant dans ce livre.", "r": "Quelque chose + de + adjectif masculin : quelque chose d'intéressant.", "re": "Quelque chose + de + masculine adjective: quelque chose d'intéressant."}, {"q": "Nous cherchons ___ de sérieux pour garder les enfants.", "o": ["quelque chose", "quelqu'un", "personne"], "a": 1, "ans": "quelqu'un", "en": "We're looking for someone reliable to look after the children.", "good": "Nous cherchons quelqu'un de sérieux pour garder les enfants.", "full": "Nous cherchons quelqu'un de sérieux pour garder les enfants.", "r": "Une personne : quelqu'un + de + adjectif.", "re": "A person: quelqu'un + de + adjective."}]}, {"id": "e2", "type": "type", "point": 1, "label": "Répondre à la forme négative", "consigne": "Répondez négativement : écrivez le pronom qui manque.", "consigneEn": "Give a negative answer: write the missing pronoun.", "tip": "Quelqu'un devient personne ; quelque chose devient rien. N'oubliez pas ne. Au passé composé : je n'ai rien vu, mais je n'ai vu personne.", "tipEn": "Quelqu'un becomes personne; quelque chose becomes rien. Don't forget ne. Perfect tense: je n'ai rien vu, but je n'ai vu personne.", "items": [{"q": "Tu as vu quelqu'un ? Non, je n'ai vu ___.", "ans": "personne", "en": "Did you see anyone? No, I didn't see anyone.", "good": "Tu as vu quelqu'un ? Non, je n'ai vu personne.", "full": "Tu as vu quelqu'un ? Non, je n'ai vu personne.", "r": "Quelqu'un devient personne. Personne se place après le participe : je n'ai vu personne.", "re": "Quelqu'un becomes personne, placed after the participle."}, {"q": "Vous avez entendu quelque chose ? Non, nous n'avons ___ entendu.", "ans": "rien", "en": "Did you hear anything? No, we didn't hear anything.", "good": "Vous avez entendu quelque chose ? Non, nous n'avons rien entendu.", "full": "Vous avez entendu quelque chose ? Non, nous n'avons rien entendu.", "r": "Quelque chose devient rien. Rien se place entre l'auxiliaire et le participe.", "re": "Quelque chose becomes rien, placed between the auxiliary and the participle."}, {"q": "Quelqu'un t'a appelé ? Non, ___ ne m'a appelé.", "ans": "personne", "en": "Did anyone call you? No, nobody called me.", "good": "Quelqu'un t'a appelé ? Non, personne ne m'a appelé.", "full": "Quelqu'un t'a appelé ? Non, personne ne m'a appelé.", "r": "Sujet de la phrase : personne ne + verbe.", "re": "As the subject: personne ne + verb."}, {"q": "Quelque chose t'inquiète ? Non, ___ ne m'inquiète.", "ans": "rien", "en": "Is something worrying you? No, nothing is worrying me.", "good": "Quelque chose t'inquiète ? Non, rien ne m'inquiète.", "full": "Quelque chose t'inquiète ? Non, rien ne m'inquiète.", "r": "Sujet de la phrase : rien ne + verbe.", "re": "As the subject: rien ne + verb."}, {"q": "Tu as quelque chose de nouveau à me raconter ? Non, je n'ai ___ de nouveau.", "ans": "rien", "en": "Have you got anything new to tell me? No, nothing new.", "good": "Tu as quelque chose de nouveau à me raconter ? Non, je n'ai rien de nouveau.", "full": "Tu as quelque chose de nouveau à me raconter ? Non, je n'ai rien de nouveau.", "r": "Quelque chose de nouveau devient rien de nouveau.", "re": "Quelque chose de nouveau becomes rien de nouveau."}, {"q": "Tu connais quelqu'un d'autre ici ? Non, je ne connais ___ d'autre.", "ans": "personne", "en": "Do you know anyone else here? No, I don't know anyone else.", "good": "Tu connais quelqu'un d'autre ici ? Non, je ne connais personne d'autre.", "full": "Tu connais quelqu'un d'autre ici ? Non, je ne connais personne d'autre.", "r": "Quelqu'un d'autre devient personne d'autre.", "re": "Quelqu'un d'autre becomes personne d'autre."}]}, {"id": "e3", "type": "qcm", "point": 2, "label": "Aucun, aucune", "consigne": "Choisissez la forme qui convient.", "consigneEn": "Choose the right form.", "tip": "Aucun s'accorde avec le nom qu'il remplace (aucun / aucune) et reste au singulier. Il s'emploie avec ne, souvent avec en.", "tipEn": "Aucun agrees with the noun it replaces (aucun / aucune) and stays singular. It is used with ne, often with en.", "items": [{"q": "Tu as des frères ? Non, je n'en ai ___.", "o": ["aucune", "aucun", "aucuns"], "a": 1, "ans": "aucun", "en": "Have you got any brothers? No, I haven't got any.", "good": "Tu as des frères ? Non, je n'en ai aucun.", "full": "Tu as des frères ? Non, je n'en ai aucun.", "r": "Frères est masculin ; aucun reste au singulier : je n'en ai aucun.", "re": "Frères is masculine; aucun stays singular."}, {"q": "Il reste des places ? Non, il n'en reste ___.", "o": ["aucune", "aucun", "aucunes"], "a": 0, "ans": "aucune", "en": "Are there any seats left? No, there are none left.", "good": "Il reste des places ? Non, il n'en reste aucune.", "full": "Il reste des places ? Non, il n'en reste aucune.", "r": "Places est féminin : aucune, au singulier.", "re": "Places is feminine: aucune, singular."}, {"q": "___ de ses voisins n'est au courant.", "o": ["Aucune", "Aucuns", "Aucun"], "a": 2, "ans": "Aucun", "en": "None of his neighbours knows about it.", "good": "Aucun de ses voisins n'est au courant.", "full": "Aucun de ses voisins n'est au courant.", "r": "Voisins est masculin : aucun. Le verbe est au singulier : n'est.", "re": "Voisins is masculine: aucun. The verb is singular."}, {"q": "J'ai essayé trois recettes : ___ n'a marché.", "o": ["aucune", "aucun", "personne"], "a": 0, "ans": "aucune", "en": "I tried three recipes: none of them worked.", "good": "J'ai essayé trois recettes : aucune n'a marché.", "full": "J'ai essayé trois recettes : aucune n'a marché.", "r": "Il s'agit des recettes (féminin) : aucune.", "re": "It refers to the recipes (feminine): aucune."}, {"q": "Tu as lu des romans de Proust ? Non, je n'en ai lu ___.", "o": ["aucune", "rien", "aucun"], "a": 2, "ans": "aucun", "en": "Have you read any of Proust's novels? No, I haven't read any.", "good": "Tu as lu des romans de Proust ? Non, je n'en ai lu aucun.", "full": "Tu as lu des romans de Proust ? Non, je n'en ai lu aucun.", "r": "Romans est masculin : je n'en ai lu aucun.", "re": "Romans is masculine: je n'en ai lu aucun."}, {"q": "___ de ces solutions ne me convient.", "o": ["Aucune", "Aucun", "Rien"], "a": 0, "ans": "Aucune", "en": "None of these solutions suits me.", "good": "Aucune de ces solutions ne me convient.", "full": "Aucune de ces solutions ne me convient.", "r": "Solutions est féminin : aucune ; verbe au singulier : convient.", "re": "Solutions is feminine: aucune; singular verb."}]}, {"id": "e4", "type": "qcm", "point": 3, "label": "Certains, plusieurs, quelques-uns, beaucoup", "consigne": "Choisissez le pronom qui convient.", "consigneEn": "Choose the right pronoun.", "tip": "Quelques devient quelques-uns / quelques-unes quand il n'y a pas de nom. Plusieurs ne change jamais. Comme complément, ces pronoms s'emploient avec en : j'en ai vu plusieurs.", "tipEn": "Quelques becomes quelques-uns / quelques-unes when there is no noun. Plusieurs never changes. As an object, use en: j'en ai vu plusieurs.", "items": [{"q": "J'ai invité mes collègues : ___ viendront, d'autres non.", "o": ["certains", "aucun", "chacun"], "a": 0, "ans": "certains", "en": "I've invited my colleagues: some will come, others won't.", "good": "J'ai invité mes collègues : certains viendront, d'autres non.", "full": "J'ai invité mes collègues : certains viendront, d'autres non.", "r": "Une partie du groupe : certains. Le verbe est au pluriel.", "re": "Part of the group: certains. Plural verb."}, {"q": "J'ai cueilli des fraises, mais ___ ne sont pas mûres.", "o": ["quelques", "quelques-uns", "quelques-unes"], "a": 2, "ans": "quelques-unes", "en": "I picked some strawberries, but a few of them aren't ripe.", "good": "J'ai cueilli des fraises, mais quelques-unes ne sont pas mûres.", "full": "J'ai cueilli des fraises, mais quelques-unes ne sont pas mûres.", "r": "Fraises est féminin, et il n'y a pas de nom après : quelques-unes.", "re": "Fraises is feminine and no noun follows: quelques-unes."}, {"q": "Tu as vu des films de Truffaut ? Oui, j'en ai vu ___.", "o": ["plusieurs", "quelques", "aucuns"], "a": 0, "ans": "plusieurs", "en": "Have you seen any Truffaut films? Yes, I've seen several.", "good": "Tu as vu des films de Truffaut ? Oui, j'en ai vu plusieurs.", "full": "Tu as vu des films de Truffaut ? Oui, j'en ai vu plusieurs.", "r": "Plusieurs est invariable et s'emploie avec en : j'en ai vu plusieurs.", "re": "Plusieurs is invariable and used with en."}, {"q": "Parmi mes amies, ___ parlent italien.", "o": ["certains", "certaines", "quelques"], "a": 1, "ans": "certaines", "en": "Some of my (female) friends speak Italian.", "good": "Parmi mes amies, certaines parlent italien.", "full": "Parmi mes amies, certaines parlent italien.", "r": "Amies est féminin : certaines.", "re": "Amies is feminine: certaines."}, {"q": "Il y a des touristes en hiver ? Oui, il y en a ___.", "o": ["beaucoup de", "beaucoup", "plusieurs de"], "a": 1, "ans": "beaucoup", "en": "Are there any tourists in winter? Yes, there are a lot.", "good": "Il y a des touristes en hiver ? Oui, il y en a beaucoup.", "full": "Il y a des touristes en hiver ? Oui, il y en a beaucoup.", "r": "Sans nom après, beaucoup s'emploie seul, avec en : il y en a beaucoup.", "re": "With no noun after it, beaucoup stands alone, with en."}, {"q": "___ d'entre nous travaillent le samedi.", "o": ["Plusieurs", "Quelque", "Chacune"], "a": 0, "ans": "Plusieurs", "en": "Several of us work on Saturdays.", "good": "Plusieurs d'entre nous travaillent le samedi.", "full": "Plusieurs d'entre nous travaillent le samedi.", "r": "Plusieurs d'entre nous + verbe au pluriel.", "re": "Plusieurs d'entre nous + plural verb."}, {"q": "Ces romans sont très connus : j'en ai lu ___.", "o": ["quelques", "quelques-unes", "quelques-uns"], "a": 2, "ans": "quelques-uns", "en": "These novels are very well known: I've read a few of them.", "good": "Ces romans sont très connus : j'en ai lu quelques-uns.", "full": "Ces romans sont très connus : j'en ai lu quelques-uns.", "r": "Romans est masculin : quelques-uns.", "re": "Romans is masculine: quelques-uns."}, {"q": "___ pensent que Paris est trop cher.", "o": ["Beaucoup de", "Beaucoup", "Aucun"], "a": 1, "ans": "Beaucoup", "en": "Many people think Paris is too expensive.", "good": "Beaucoup pensent que Paris est trop cher.", "full": "Beaucoup pensent que Paris est trop cher.", "r": "Beaucoup, seul et sujet, signifie « beaucoup de personnes » ; verbe au pluriel.", "re": "Beaucoup on its own as a subject means “many people”; plural verb."}]}, {"id": "e5", "type": "qcm", "point": 3, "label": "Remplacer le groupe nominal", "consigne": "Remplacez les mots en gras. Choisissez la bonne phrase.", "consigneEn": "Replace the words in bold. Choose the correct sentence.", "tip": "Pour remplacer un complément introduit par une quantité, on emploie en + le pronom : j'en ai lu quelques-uns, elle en a plusieurs.", "tipEn": "To replace an object introduced by a quantity, use en + the pronoun.", "items": [{"q": "J'ai lu **quelques livres** de Zola.", "o": ["J'en ai lu quelques.", "J'en ai lu quelques-uns.", "Je les ai lu quelques-uns."], "a": 1, "ans": "J'en ai lu quelques-uns.", "en": "I've read a few of Zola's books. → I've read a few of them.", "good": "J'en ai lu quelques-uns.", "full": "J'en ai lu quelques-uns.", "r": "Quelques + nom devient en ... quelques-uns.", "re": "Quelques + noun becomes en ... quelques-uns."}, {"q": "Elle a **plusieurs robes** rouges.", "o": ["Elle en a plusieurs.", "Elle en a plusieures.", "Elle les a plusieurs."], "a": 0, "ans": "Elle en a plusieurs.", "en": "She has several red dresses. → She has several.", "good": "Elle en a plusieurs.", "full": "Elle en a plusieurs.", "r": "Plusieurs est invariable, même au féminin.", "re": "Plusieurs is invariable, even in the feminine."}, {"q": "Nous avons visité **beaucoup de musées**.", "o": ["Nous avons visité beaucoup.", "Nous les avons visité beaucoup.", "Nous en avons visité beaucoup."], "a": 2, "ans": "Nous en avons visité beaucoup.", "en": "We visited a lot of museums. → We visited a lot of them.", "good": "Nous en avons visité beaucoup.", "full": "Nous en avons visité beaucoup.", "r": "Beaucoup de + nom devient en ... beaucoup.", "re": "Beaucoup de + noun becomes en ... beaucoup."}, {"q": "**Certaines amies** sont restées dîner.", "o": ["Certaines sont restées dîner.", "Quelques sont restées dîner.", "Certaines d'elles sont restées dîner."], "a": 0, "ans": "Certaines sont restées dîner.", "en": "Some friends stayed for dinner. → Some stayed for dinner.", "good": "Certaines sont restées dîner.", "full": "Certaines sont restées dîner.", "r": "Certaines (adjectif) devient certaines (pronom) : la forme ne change pas.", "re": "Certaines (adjective) becomes certaines (pronoun): same form."}, {"q": "J'ai acheté **quelques cartes postales**.", "o": ["J'en ai acheté quelques-uns.", "J'en ai acheté quelques-unes.", "J'ai acheté quelques-unes."], "a": 1, "ans": "J'en ai acheté quelques-unes.", "en": "I bought a few postcards. → I bought a few.", "good": "J'en ai acheté quelques-unes.", "full": "J'en ai acheté quelques-unes.", "r": "Cartes est féminin : en ... quelques-unes.", "re": "Cartes is feminine: en ... quelques-unes."}, {"q": "**Plusieurs étudiants** sont absents.", "o": ["Plusieurs sont absents.", "Plusieurs-uns sont absents.", "Quelques sont absents."], "a": 0, "ans": "Plusieurs sont absents.", "en": "Several students are absent. → Several are absent.", "good": "Plusieurs sont absents.", "full": "Plusieurs sont absents.", "r": "Plusieurs garde la même forme quand il devient pronom.", "re": "Plusieurs keeps the same form as a pronoun."}]}, {"id": "e6", "type": "qcm", "point": 4, "label": "Tous, toutes, chacun, chacune", "consigne": "Choisissez le pronom ou le verbe qui convient.", "consigneEn": "Choose the right pronoun or verb.", "tip": "Tous / toutes : l'ensemble du groupe, verbe au pluriel. Chacun / chacune : une personne ou une chose à la fois, verbe au singulier.", "tipEn": "Tous / toutes: the whole group, plural verb. Chacun / chacune: one person or thing at a time, singular verb.", "items": [{"q": "Les enfants sont ___ partis en vacances.", "o": ["tous", "toutes", "chacun"], "a": 0, "ans": "tous", "en": "The children have all gone on holiday.", "good": "Les enfants sont tous partis en vacances.", "full": "Les enfants sont tous partis en vacances.", "r": "Tout le groupe, masculin pluriel : tous, placé après l'auxiliaire.", "re": "The whole group, masculine plural: tous, placed after the auxiliary."}, {"q": "___ de nous doit apporter un plat.", "o": ["Tous", "Chacun", "Chaque"], "a": 1, "ans": "Chacun", "en": "Each of us has to bring a dish.", "good": "Chacun de nous doit apporter un plat.", "full": "Chacun de nous doit apporter un plat.", "r": "Chaque personne séparément : chacun de nous + verbe au singulier. Chaque est toujours suivi d'un nom.", "re": "Each person separately: chacun de nous + singular verb. Chaque always needs a noun."}, {"q": "Mes cousines ? Je les ai ___ invitées.", "o": ["tous", "chacune", "toutes"], "a": 2, "ans": "toutes", "en": "My (female) cousins? I invited all of them.", "good": "Mes cousines ? Je les ai toutes invitées.", "full": "Mes cousines ? Je les ai toutes invitées.", "r": "Cousines est féminin pluriel : toutes.", "re": "Cousines is feminine plural: toutes."}, {"q": "Ces places de concert coûtent cinquante euros ___.", "o": ["chacun", "chacune", "toutes"], "a": 1, "ans": "chacune", "en": "These concert tickets cost fifty euros each.", "good": "Ces places de concert coûtent cinquante euros chacune.", "full": "Ces places de concert coûtent cinquante euros chacune.", "r": "Une place à la fois, féminin : chacune.", "re": "One ticket at a time, feminine: chacune."}, {"q": "___ sont arrivés en retard à cause de la grève.", "o": ["Chacun", "Chaque", "Tous"], "a": 2, "ans": "Tous", "en": "They all arrived late because of the strike.", "good": "Tous sont arrivés en retard à cause de la grève.", "full": "Tous sont arrivés en retard à cause de la grève.", "r": "Verbe au pluriel, l'ensemble du groupe : tous.", "re": "Plural verb, the whole group: tous."}, {"q": "___ des participantes recevra un certificat.", "o": ["Chacune", "Toutes", "Chacun"], "a": 0, "ans": "Chacune", "en": "Each of the (female) participants will receive a certificate.", "good": "Chacune des participantes recevra un certificat.", "full": "Chacune des participantes recevra un certificat.", "r": "Verbe au singulier, participantes au féminin : chacune.", "re": "Singular verb, feminine noun: chacune."}, {"q": "Chacun de mes collègues ___ un bureau individuel.", "o": ["ont", "a", "avons"], "a": 1, "ans": "a", "en": "Each of my colleagues has an office of their own.", "good": "Chacun de mes collègues a un bureau individuel.", "full": "Chacun de mes collègues a un bureau individuel.", "r": "Après chacun, le verbe est toujours au singulier : chacun a.", "re": "After chacun, the verb is always singular."}, {"q": "Mes voisins ___ tous un chien.", "o": ["a", "ont", "est"], "a": 1, "ans": "ont", "en": "My neighbours all have a dog.", "good": "Mes voisins ont tous un chien.", "full": "Mes voisins ont tous un chien.", "r": "Avec tous, le verbe est au pluriel : ils ont tous.", "re": "With tous, the verb is plural."}]}, {"id": "e7", "type": "qcm", "point": 5, "label": "Le même, un autre, les autres", "consigne": "Choisissez le pronom qui convient.", "consigneEn": "Choose the right pronoun.", "tip": "Le même / la même / les mêmes : une chose identique, accord avec le nom. Un autre / une autre : une chose différente ; au pluriel, d'autres. Les autres : le reste d'un groupe connu.", "tipEn": "Le même: the same one, agreeing with the noun. Un autre: another one; plural d'autres. Les autres: the rest of a known group.", "items": [{"q": "Mon café est froid, je vais en commander ___.", "o": ["une autre", "un autre", "d'autres"], "a": 1, "ans": "un autre", "en": "My coffee is cold, I'm going to order another one.", "good": "Mon café est froid, je vais en commander un autre.", "full": "Mon café est froid, je vais en commander un autre.", "r": "Un café (masculin), un seul : un autre.", "re": "One coffee (masculine): un autre."}, {"q": "J'adore tes chaussures, je vais acheter ___.", "o": ["les mêmes", "le même", "la même"], "a": 0, "ans": "les mêmes", "en": "I love your shoes, I'm going to buy the same ones.", "good": "J'adore tes chaussures, je vais acheter les mêmes.", "full": "J'adore tes chaussures, je vais acheter les mêmes.", "r": "Chaussures est féminin pluriel : les mêmes.", "re": "Chaussures is plural: les mêmes."}, {"q": "Ma voisine a une voiture rouge, et moi j'ai ___.", "o": ["le même", "la même", "les mêmes"], "a": 1, "ans": "la même", "en": "My neighbour has a red car, and I've got the same one.", "good": "Ma voisine a une voiture rouge, et moi j'ai la même.", "full": "Ma voisine a une voiture rouge, et moi j'ai la même.", "r": "Voiture est féminin singulier : la même.", "re": "Voiture is feminine singular: la même."}, {"q": "Certains préfèrent le thé, ___ préfèrent le café.", "o": ["des autres", "autres", "d'autres"], "a": 2, "ans": "d'autres", "en": "Some prefer tea, others prefer coffee.", "good": "Certains préfèrent le thé, d'autres préfèrent le café.", "full": "Certains préfèrent le thé, d'autres préfèrent le café.", "r": "Pluriel de un autre, sans article défini : d'autres.", "re": "The plural of un autre: d'autres."}, {"q": "Seule Julie est restée ; ___ sont rentrés chez eux.", "o": ["d'autres", "les autres", "des autres"], "a": 1, "ans": "les autres", "en": "Only Julie stayed; the others went home.", "good": "Seule Julie est restée ; les autres sont rentrés chez eux.", "full": "Seule Julie est restée ; les autres sont rentrés chez eux.", "r": "Le reste d'un groupe connu : les autres.", "re": "The rest of a known group: les autres."}, {"q": "Ce stylo ne marche pas. Tu en as ___ ?", "o": ["un autre", "le même", "autre"], "a": 0, "ans": "un autre", "en": "This pen doesn't work. Have you got another one?", "good": "Ce stylo ne marche pas. Tu en as un autre ?", "full": "Ce stylo ne marche pas. Tu en as un autre ?", "r": "On veut un stylo différent : un autre, avec en.", "re": "We want a different pen: un autre, with en."}, {"q": "Cette robe est trop petite ; vous en avez ___ en 40 ?", "o": ["un autre", "autre", "une autre"], "a": 2, "ans": "une autre", "en": "This dress is too small; have you got another one in a 40?", "good": "Cette robe est trop petite ; vous en avez une autre en 40 ?", "full": "Cette robe est trop petite ; vous en avez une autre en 40 ?", "r": "Robe est féminin : une autre.", "re": "Robe is feminine: une autre."}, {"q": "Ton parfum sent très bon. C'est ___ que le mien !", "o": ["la même", "le même", "les mêmes"], "a": 1, "ans": "le même", "en": "Your perfume smells lovely. It's the same as mine!", "good": "Ton parfum sent très bon. C'est le même que le mien !", "full": "Ton parfum sent très bon. C'est le même que le mien !", "r": "Parfum est masculin singulier : le même.", "re": "Parfum is masculine singular: le même."}]}, {"id": "e8", "type": "qcm", "point": 6, "label": "N'importe qui, n'importe quoi", "consigne": "Choisissez le pronom qui convient.", "consigneEn": "Choose the right pronoun.", "tip": "Quelqu'un / quelque chose : une personne ou une chose précise, même si on ne la nomme pas. N'importe qui / n'importe quoi : toute personne ou toute chose, sans choix.", "tipEn": "Quelqu'un / quelque chose: a particular person or thing, even if unnamed. N'importe qui / n'importe quoi: any person or thing at all.", "items": [{"q": "Cette recette est très facile : ___ peut la réussir.", "o": ["quelqu'un", "n'importe qui", "n'importe quoi"], "a": 1, "ans": "n'importe qui", "en": "This recipe is very easy: anyone can make it.", "good": "Cette recette est très facile : n'importe qui peut la réussir.", "full": "Cette recette est très facile : n'importe qui peut la réussir.", "r": "Toute personne, sans exception : n'importe qui.", "re": "Any person at all: n'importe qui."}, {"q": "___ t'a appelé pendant ton absence : c'était ta sœur.", "o": ["N'importe qui", "Personne", "Quelqu'un"], "a": 2, "ans": "Quelqu'un", "en": "Someone called you while you were out: it was your sister.", "good": "Quelqu'un t'a appelé pendant ton absence : c'était ta sœur.", "full": "Quelqu'un t'a appelé pendant ton absence : c'était ta sœur.", "r": "Une personne précise (ta sœur) : quelqu'un.", "re": "A particular person (your sister): quelqu'un."}, {"q": "Ne crois pas ce qu'il raconte : il dit ___ !", "o": ["n'importe quoi", "quelque chose", "n'importe qui"], "a": 0, "ans": "n'importe quoi", "en": "Don't believe what he says: he's talking nonsense!", "good": "Ne crois pas ce qu'il raconte : il dit n'importe quoi !", "full": "Ne crois pas ce qu'il raconte : il dit n'importe quoi !", "r": "Dire n'importe quoi : dire des choses absurdes.", "re": "Dire n'importe quoi: to talk nonsense."}, {"q": "J'ai oublié ___ chez toi : mes lunettes.", "o": ["n'importe quoi", "quelque chose", "rien"], "a": 1, "ans": "quelque chose", "en": "I left something at your place: my glasses.", "good": "J'ai oublié quelque chose chez toi : mes lunettes.", "full": "J'ai oublié quelque chose chez toi : mes lunettes.", "r": "Une chose précise (mes lunettes) : quelque chose.", "re": "A particular thing (my glasses): quelque chose."}, {"q": "Ce club n'est pas ouvert à ___ : il faut être invité.", "o": ["quelqu'un", "n'importe qui", "personne"], "a": 1, "ans": "n'importe qui", "en": "This club isn't open to just anyone: you have to be invited.", "good": "Ce club n'est pas ouvert à n'importe qui : il faut être invité.", "full": "Ce club n'est pas ouvert à n'importe qui : il faut être invité.", "r": "Ouvert à toute personne, sans choix : n'importe qui.", "re": "Open to any person at all: n'importe qui."}, {"q": "Les enfants ont tellement faim qu'ils mangeraient ___.", "o": ["n'importe quoi", "n'importe qui", "quelque chose"], "a": 0, "ans": "n'importe quoi", "en": "The children are so hungry they'd eat anything.", "good": "Les enfants ont tellement faim qu'ils mangeraient n'importe quoi.", "full": "Les enfants ont tellement faim qu'ils mangeraient n'importe quoi.", "r": "N'importe quelle chose : n'importe quoi.", "re": "Any thing at all: n'importe quoi."}, {"q": "Tu peux me prêter ___ à lire pour le train ?", "o": ["n'importe qui", "quelque chose", "personne"], "a": 1, "ans": "quelque chose", "en": "Could you lend me something to read for the train?", "good": "Tu peux me prêter quelque chose à lire pour le train ?", "full": "Tu peux me prêter quelque chose à lire pour le train ?", "r": "Une chose, dans une demande : quelque chose.", "re": "A thing, in a request: quelque chose."}, {"q": "Il y a ___ dans le bureau du directeur ? J'entends des voix.", "o": ["n'importe qui", "rien", "quelqu'un"], "a": 2, "ans": "quelqu'un", "en": "Is there someone in the manager's office? I can hear voices.", "good": "Il y a quelqu'un dans le bureau du directeur ? J'entends des voix.", "full": "Il y a quelqu'un dans le bureau du directeur ? J'entends des voix.", "r": "Une ou plusieurs personnes précises dans le bureau : quelqu'un.", "re": "A particular person in the office: quelqu'un."}]}, {"id": "e9", "type": "qcm", "point": 7, "label": "Bilan : une soirée entre amis", "consigne": "Lisez le récit phrase par phrase et choisissez le pronom qui convient.", "consigneEn": "Read the story sentence by sentence and choose the right pronoun.", "tip": "Demandez-vous à chaque fois : une personne ou une chose ? phrase positive ou négative ? tout le groupe, une partie, ou chaque élément ?", "tipEn": "Ask yourself each time: a person or a thing? positive or negative? the whole group, part of it, or each one?", "items": [{"q": "Samedi, j'ai invité mes amis : ils sont ___ venus.", "o": ["chacun", "tous", "aucun"], "a": 1, "ans": "tous", "en": "On Saturday I invited my friends: they all came.", "good": "Samedi, j'ai invité mes amis : ils sont tous venus.", "full": "Samedi, j'ai invité mes amis : ils sont tous venus.", "r": "L'ensemble du groupe : ils sont tous venus.", "re": "The whole group: ils sont tous venus."}, {"q": "___ a apporté un plat ou une boisson.", "o": ["Tous", "Personne", "Chacun"], "a": 2, "ans": "Chacun", "en": "Each of them brought a dish or a drink.", "good": "Chacun a apporté un plat ou une boisson.", "full": "Chacun a apporté un plat ou une boisson.", "r": "Une personne à la fois, verbe au singulier : chacun a apporté.", "re": "One person at a time, singular verb: chacun."}, {"q": "Mais ___ n'a pensé au pain !", "o": ["rien", "personne", "aucune"], "a": 1, "ans": "personne", "en": "But nobody thought of the bread!", "good": "Mais personne n'a pensé au pain !", "full": "Mais personne n'a pensé au pain !", "r": "Une personne, sujet négatif : personne n'a pensé.", "re": "A person, negative subject: personne n'a pensé."}, {"q": "J'avais acheté des bouteilles de jus ; ___ étaient déjà ouvertes.", "o": ["quelques-unes", "quelques-uns", "quelques"], "a": 0, "ans": "quelques-unes", "en": "I had bought some bottles of juice; a few were already open.", "good": "J'avais acheté des bouteilles de jus ; quelques-unes étaient déjà ouvertes.", "full": "J'avais acheté des bouteilles de jus ; quelques-unes étaient déjà ouvertes.", "r": "Bouteilles est féminin, sans nom après : quelques-unes.", "re": "Bouteilles is feminine, no noun after: quelques-unes."}, {"q": "Sophie portait une robe magnifique, et Clara avait ___ !", "o": ["le même", "les mêmes", "la même"], "a": 2, "ans": "la même", "en": "Sophie was wearing a gorgeous dress, and Clara had the same one!", "good": "Sophie portait une robe magnifique, et Clara avait la même !", "full": "Sophie portait une robe magnifique, et Clara avait la même !", "r": "Une robe identique : la même.", "re": "An identical dress: la même."}, {"q": "Il n'y avait plus de verres propres, alors Marc en a lavé ___.", "o": ["d'autres", "les autres", "des autres"], "a": 0, "ans": "d'autres", "en": "There were no clean glasses left, so Marc washed some more.", "good": "Il n'y avait plus de verres propres, alors Marc en a lavé d'autres.", "full": "Il n'y avait plus de verres propres, alors Marc en a lavé d'autres.", "r": "D'autres verres, sans préciser lesquels : en ... d'autres.", "re": "Some more glasses: en ... d'autres."}, {"q": "___ ont dansé, d'autres ont discuté sur le balcon.", "o": ["Chacun", "Aucun", "Certains"], "a": 2, "ans": "Certains", "en": "Some danced, others chatted on the balcony.", "good": "Certains ont dansé, d'autres ont discuté sur le balcon.", "full": "Certains ont dansé, d'autres ont discuté sur le balcon.", "r": "Une partie du groupe : certains ..., d'autres ...", "re": "Part of the group: certains ..., d'autres ..."}, {"q": "Vers minuit, ___ a sonné à la porte : c'était le voisin.", "o": ["n'importe qui", "quelqu'un", "personne"], "a": 1, "ans": "quelqu'un", "en": "Around midnight, someone rang the doorbell: it was the neighbour.", "good": "Vers minuit, quelqu'un a sonné à la porte : c'était le voisin.", "full": "Vers minuit, quelqu'un a sonné à la porte : c'était le voisin.", "r": "Une personne précise (le voisin) : quelqu'un.", "re": "A particular person (the neighbour): quelqu'un."}, {"q": "Il était un peu fatigué et racontait ___ : on ne le comprenait pas !", "o": ["n'importe qui", "aucun", "n'importe quoi"], "a": 2, "ans": "n'importe quoi", "en": "He was a bit tired and talking nonsense: we couldn't understand him!", "good": "Il était un peu fatigué et racontait n'importe quoi : on ne le comprenait pas !", "full": "Il était un peu fatigué et racontait n'importe quoi : on ne le comprenait pas !", "r": "Raconter n'importe quoi : dire des choses absurdes.", "re": "Raconter n'importe quoi: to talk nonsense."}, {"q": "À la fin de la soirée, il ne restait ___ : tout était mangé !", "o": ["rien", "personne", "aucun"], "a": 0, "ans": "rien", "en": "At the end of the evening, there was nothing left: everything had been eaten!", "good": "À la fin de la soirée, il ne restait rien : tout était mangé !", "full": "À la fin de la soirée, il ne restait rien : tout était mangé !", "r": "Une chose, avec ne : il ne restait rien.", "re": "A thing, with ne: il ne restait rien."}]}]};
+const AUDIO={"Il y a quelqu'un à la porte : j'entends frapper.": "audio/83533acccc.mp3", "Je n'ai rien mangé depuis ce matin.": "audio/3e50ab4782.mp3", "Personne n'a répondu à mon message.": "audio/28d5ac29fc.mp3", "Vous voulez boire quelque chose ?": "audio/bdab8be67a.mp3", "Je ne connais personne dans cette ville.": "audio/1097b924ab.mp3", "Rien ne s'est passé pendant la réunion.": "audio/832748244d.mp3", "J'ai trouvé quelque chose d'intéressant dans ce livre.": "audio/870beaa615.mp3", "Nous cherchons quelqu'un de sérieux pour garder les enfants.": "audio/7278ea0cad.mp3", "Tu as vu quelqu'un ? Non, je n'ai vu personne.": "audio/8f0098c6c8.mp3", "Vous avez entendu quelque chose ? Non, nous n'avons rien entendu.": "audio/0179643514.mp3", "Quelqu'un t'a appelé ? Non, personne ne m'a appelé.": "audio/ee27556c12.mp3", "Quelque chose t'inquiète ? Non, rien ne m'inquiète.": "audio/1a1d53d257.mp3", "Tu as quelque chose de nouveau à me raconter ? Non, je n'ai rien de nouveau.": "audio/395a40f498.mp3", "Tu connais quelqu'un d'autre ici ? Non, je ne connais personne d'autre.": "audio/478272d14d.mp3", "Tu as des frères ? Non, je n'en ai aucun.": "audio/605c4e40e5.mp3", "Il reste des places ? Non, il n'en reste aucune.": "audio/903b5ac6b0.mp3", "Aucun de ses voisins n'est au courant.": "audio/4700e64233.mp3", "J'ai essayé trois recettes : aucune n'a marché.": "audio/d65499d855.mp3", "Tu as lu des romans de Proust ? Non, je n'en ai lu aucun.": "audio/20f4e9ac7f.mp3", "Aucune de ces solutions ne me convient.": "audio/d38a7c30cc.mp3", "J'ai invité mes collègues : certains viendront, d'autres non.": "audio/08f3ff89fe.mp3", "J'ai cueilli des fraises, mais quelques-unes ne sont pas mûres.": "audio/2ba459ed5b.mp3", "Tu as vu des films de Truffaut ? Oui, j'en ai vu plusieurs.": "audio/2e8d39f67d.mp3", "Parmi mes amies, certaines parlent italien.": "audio/ec663c211b.mp3", "Il y a des touristes en hiver ? Oui, il y en a beaucoup.": "audio/9635ba9ddd.mp3", "Plusieurs d'entre nous travaillent le samedi.": "audio/b7033b9476.mp3", "Ces romans sont très connus : j'en ai lu quelques-uns.": "audio/74c30ada22.mp3", "Beaucoup pensent que Paris est trop cher.": "audio/575b6f1857.mp3", "J'en ai lu quelques-uns.": "audio/8b39c1ad53.mp3", "Elle en a plusieurs.": "audio/5566dc9ef2.mp3", "Nous en avons visité beaucoup.": "audio/76051903c4.mp3", "Certaines sont restées dîner.": "audio/96929ddc2f.mp3", "J'en ai acheté quelques-unes.": "audio/b7eb627ef9.mp3", "Plusieurs sont absents.": "audio/8d6bc95f19.mp3", "Les enfants sont tous partis en vacances.": "audio/6d941dcf28.mp3", "Chacun de nous doit apporter un plat.": "audio/4bcf23c42f.mp3", "Mes cousines ? Je les ai toutes invitées.": "audio/e8125a2c71.mp3", "Ces places de concert coûtent cinquante euros chacune.": "audio/be1b67e0d7.mp3", "Tous sont arrivés en retard à cause de la grève.": "audio/99075eaba5.mp3", "Chacune des participantes recevra un certificat.": "audio/cfb3be5719.mp3", "Chacun de mes collègues a un bureau individuel.": "audio/77b0a5f3ee.mp3", "Mes voisins ont tous un chien.": "audio/e2c8eee091.mp3", "Mon café est froid, je vais en commander un autre.": "audio/68f134cdd4.mp3", "J'adore tes chaussures, je vais acheter les mêmes.": "audio/e70d7204b0.mp3", "Ma voisine a une voiture rouge, et moi j'ai la même.": "audio/8c5f48ca7c.mp3", "Certains préfèrent le thé, d'autres préfèrent le café.": "audio/01bfa82666.mp3", "Seule Julie est restée ; les autres sont rentrés chez eux.": "audio/4aa4e8310e.mp3", "Ce stylo ne marche pas. Tu en as un autre ?": "audio/16065cc9d6.mp3", "Cette robe est trop petite ; vous en avez une autre en 40 ?": "audio/d5c313ad3f.mp3", "Ton parfum sent très bon. C'est le même que le mien !": "audio/9c5d877a15.mp3", "Cette recette est très facile : n'importe qui peut la réussir.": "audio/14d1a738c8.mp3", "Quelqu'un t'a appelé pendant ton absence : c'était ta sœur.": "audio/3efb137c79.mp3", "Ne crois pas ce qu'il raconte : il dit n'importe quoi !": "audio/740025cbc3.mp3", "J'ai oublié quelque chose chez toi : mes lunettes.": "audio/dfea1f3217.mp3", "Ce club n'est pas ouvert à n'importe qui : il faut être invité.": "audio/8a4a4d4fc7.mp3", "Les enfants ont tellement faim qu'ils mangeraient n'importe quoi.": "audio/fb671aefe2.mp3", "Tu peux me prêter quelque chose à lire pour le train ?": "audio/6b6f430aa8.mp3", "Il y a quelqu'un dans le bureau du directeur ? J'entends des voix.": "audio/167336d48e.mp3", "Samedi, j'ai invité mes amis : ils sont tous venus.": "audio/907e0149f5.mp3", "Chacun a apporté un plat ou une boisson.": "audio/311ea1086f.mp3", "Mais personne n'a pensé au pain !": "audio/4e5d1ad9da.mp3", "J'avais acheté des bouteilles de jus ; quelques-unes étaient déjà ouvertes.": "audio/bd8161f501.mp3", "Sophie portait une robe magnifique, et Clara avait la même !": "audio/86977f497e.mp3", "Il n'y avait plus de verres propres, alors Marc en a lavé d'autres.": "audio/3a8ba97393.mp3", "Certains ont dansé, d'autres ont discuté sur le balcon.": "audio/3cd444b584.mp3", "Vers minuit, quelqu'un a sonné à la porte : c'était le voisin.": "audio/4edbd6b5d6.mp3", "Il était un peu fatigué et racontait n'importe quoi : on ne le comprenait pas !": "audio/7ab57fdf31.mp3", "À la fin de la soirée, il ne restait rien : tout était mangé !": "audio/50034c0e6f.mp3", "J'ai vu quelqu'un devant la maison.": "audio/a856f286c2.mp3", "Je n'ai vu personne.": "audio/7eb99ded87.mp3", "Tu veux quelque chose ?": "audio/e47baf0a7e.mp3", "Non merci, je ne veux rien.": "audio/0f04a89e12.mp3", "Quelqu'un a appelé. Personne n'a appelé.": "audio/35dfb7246d.mp3", "Quelque chose a changé. Rien n'a changé.": "audio/fadb7e3514.mp3", "Je n'ai rien compris.": "audio/efb05ba883.mp3", "Je n'ai rencontré personne.": "audio/04ad2ece2f.mp3", "J'ai rencontré quelqu'un de très sympathique.": "audio/c883d7d676.mp3", "Il s'est passé quelque chose d'étrange.": "audio/38e85aba2b.mp3", "Ne t'inquiète pas, ce n'est rien de grave.": "audio/99eeaea3af.mp3", "Je ne connais personne d'autre ici.": "audio/d9a15f3f0f.mp3", "Aucun de mes amis n'est venu.": "audio/1f0bf7b3b9.mp3", "Aucune de ces robes ne me plaît.": "audio/04e6198a09.mp3", "Des questions ? Non, je n'en ai aucune.": "audio/34ac1c84bb.mp3", "Des nouvelles de Paul ? Je n'en ai reçu aucune.": "audio/e5f1010ecc.mp3", "Combien de messages as-tu reçus ? Aucun.": "audio/b47c2e005b.mp3", "Des livres de Zola ? J'en ai lu quelques-uns.": "audio/8850c1cbab.mp3", "Des cartes postales ? J'en ai écrit plusieurs.": "audio/6a77eda9c9.mp3", "Des amis à Paris ? J'en ai beaucoup.": "audio/0650d2305b.mp3", "Certains d'entre nous travaillent le dimanche.": "audio/35e7a6fa0f.mp3", "Plusieurs d'entre eux sont partis tôt.": "audio/11e6c5b7f3.mp3", "Mes amis sont tous venus.": "audio/db9a0008de.mp3", "Tous étaient d'accord.": "audio/bd56b135ba.mp3", "Ces photos ? Je les ai toutes regardées.": "audio/5b4d276651.mp3", "Chacun a sa propre opinion.": "audio/7b282d7cdf.mp3", "Chacune de mes sœurs habite dans une ville différente.": "audio/c91ea11690.mp3", "Ces livres coûtent dix euros chacun.": "audio/2eabd624b7.mp3", "J'aime beaucoup ta veste : j'ai la même.": "audio/6bf345fb05.mp3", "Ton téléphone est pratique, je voudrais le même.": "audio/c6550f36ca.mp3", "Ce sont toujours les mêmes qui parlent en réunion.": "audio/38a7cf5094.mp3", "Ce verre est sale. Je peux en avoir un autre ?": "audio/52dfccd9b2.mp3", "Cette chambre est bruyante. Vous en avez une autre ?": "audio/f0bc8fe912.mp3", "Certains aiment la mer, d'autres préfèrent la montagne.": "audio/e27d2cf783.mp3", "Paul est arrivé ; les autres arrivent demain.": "audio/a0a3f34fa9.mp3", "J'ai fini ces biscuits. Il y en a d'autres ?": "audio/d2db82d3eb.mp3", "Deux biscuits sont au chocolat, les autres sont à la vanille.": "audio/653a674651.mp3", "Ce jeu est très simple : n'importe qui peut jouer.": "audio/ad63a0bd07.mp3", "Ne raconte pas ta vie privée à n'importe qui.": "audio/beb0ad0089.mp3", "J'ai tellement faim que je mangerais n'importe quoi.": "audio/68fe655fd2.mp3", "Ne l'écoute pas, il dit n'importe quoi !": "audio/a5a7e7b1f8.mp3", "Est-ce que quelqu'un vous aide à organiser la fête ?": "audio/d8913b545a.mp3", "Oui, quelqu'un m'aide : ma voisine du deuxième étage. Ou : Non, personne ne m'aide.": "audio/02c29f5969.mp3", "Vous avez déjà préparé quelque chose à manger ?": "audio/cfb20df46a.mp3", "Oui, j'ai préparé quelque chose de simple : une tarte salée. Ou : Non, je n'ai encore rien préparé.": "audio/c3fe1e3b20.mp3", "Vous connaissez bien vos voisins ?": "audio/fe6e5b90e0.mp3", "J'en connais bien quelques-uns ; certains habitent ici depuis vingt ans.": "audio/d40695b951.mp3", "Vous avez des tables pliantes ?": "audio/9863ff97d4.mp3", "Oui, j'en ai plusieurs dans la cave. Ou : Non, je n'en ai aucune.": "audio/515fce3c52.mp3", "Les voisins vont-ils tous venir ?": "audio/576b311954.mp3", "Pas tous : beaucoup viendront, mais certains sont en vacances.": "audio/b7259fafbe.mp3", "Qu'est-ce que les voisins vont apporter ?": "audio/b2b603d8f3.mp3", "Chacun apportera un plat ou une boisson.": "audio/512558299f.mp3", "Vous voulez la même décoration que l'année dernière ?": "audio/38a76208a1.mp3", "Non, j'en voudrais une autre : nous avons la même depuis trois ans !": "audio/c30281f76a.mp3", "Vous pouvez inviter des personnes de la rue ?": "audio/6a1e28c352.mp3", "Oui, on peut inviter d'autres voisins de la rue, mais pas n'importe qui.": "audio/988f7c5b85.mp3", "Que faut-il éviter pendant la fête ?": "audio/9fc3207c77.mp3", "Il ne faut pas faire n'importe quoi avec la musique après minuit, et il ne faut rien laisser dans l'escalier.": "audio/747de75a78.mp3"};
+const PRONOUNS=["quelqu'un","quelque chose","personne","rien","aucun / aucune","certains / certaines","plusieurs","quelques-uns / quelques-unes","beaucoup","tous / toutes","chacun / chacune","le même / la même / les mêmes","un autre / une autre","d'autres / les autres","n'importe qui","n'importe quoi"];
+(function(){
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const md=s=>esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+let cur=null;
+function play(t,btn){const f=AUDIO[t];if(!f)return;if(cur){cur.a.pause();if(cur.b)cur.b.classList.remove("on")}
+  const a=new Audio(f);cur={a,b:btn};if(btn)btn.classList.add("on");a.onended=()=>{if(btn)btn.classList.remove("on")};a.play().catch(()=>{if(btn)btn.classList.remove("on")})}
+const sayBtn=t=>t&&AUDIO[t]?`<button type="button" class="say" data-say="${esc(t)}" aria-label="Écouter">🔊</button>`:"";
+document.addEventListener("click",e=>{const b=e.target.closest(".say");if(b)play(b.dataset.say,b)});
+
+const KEY="pronoms-indefinis-v1";
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const TOTAL=DATA.ex.reduce((n,x)=>n+x.items.length,0);
+
+$("#nav").innerHTML=[["p1","1"],["p2","2"],["p3","3"],["p4","4"],["p5","5"],["p6","6"],["synthese","Synthèse"],["p7","Bilan"],["oral","Oral"],["revoir-box","À revoir"],["corriges","Corrigés"]].map(([h,t])=>`<a href="#${h}" data-p="${h}">${t}</a>`).join("");
+
+function refresh(){
+  let pts=0,html="";
+  const doneP={};
+  DATA.ex.forEach((x,k)=>{
+    let ko=[],done=0;
+    x.items.forEach((it,i)=>{const r=S[x.id+"_"+i];if(!r)return;done++;if(r.ok)pts++;else ko.push([it,r,i])});
+    doneP["p"+x.point]=(doneP["p"+x.point]??true)&&done===x.items.length;
+    if(ko.length)html+=`<div class="rgroup"><h4>Exercice ${k+1} · ${esc(x.label)}</h4><div class="rtip"><b>La règle</b>${esc(x.tip)}<span class="en">${esc(x.tipEn)}</span></div>`+
+      ko.map(([it,r,i])=>`<div class="ritem"><div class="you">Phrase ${i+1} · Votre réponse : <s>${esc(r.pick)}</s></div>
+      <div class="good"><div class="t">Bonne réponse : <b>${esc(it.good)}</b><span class="en">${esc(it.en)}</span></div>${sayBtn(it.full)}</div>
+      <div><b>Pourquoi ?</b> ${esc(it.r)}<span class="en">${esc(it.re)}</span></div></div>`).join("")+`</div>`;
+  });
+  document.querySelectorAll(".nav a").forEach(a=>{const p=a.dataset.p;if(p in doneP)a.classList.toggle("done",doneP[p])});
+  $("#score").textContent=`${pts} / ${TOTAL}`;
+  $("#revoir").innerHTML=html||`<p class="empty">Aucune erreur pour l'instant. Les erreurs apparaîtront ici. <span class="en">No mistakes so far. They will appear here.</span></p>`;
+}
+function record(x,i,ok,pick){S[x.id+"_"+i]={ok,pick};save();refresh()}
+const norm=s=>String(s).toLowerCase().replace(/[’`´]/g,"'").replace(/\s+/g," ").trim();
+
+DATA.ex.forEach((x,k)=>{
+  const slot=document.querySelector(`.exslot[data-ex="${x.id}"]`);
+  slot.innerHTML=`<div class="exo" id="${x.id}"><div class="hd"><span class="num">Exercice ${k+1}</span><div><h3>${esc(x.consigne)}<span class="en">${esc(x.consigneEn)}</span></h3></div></div><div class="bd"></div></div>`;
+  engine(x,slot.querySelector(".bd"));
+});
+
+function engine(x,el){
+  const firstUndone=()=>{const j=x.items.findIndex((_,j)=>!S[x.id+"_"+j]);return j<0?x.items.length:j};
+  let i=firstUndone();
+  const dots=c=>`<div class="dots">${x.items.map((_,j)=>{const r=S[x.id+"_"+j];return `<i class="${r?(r.ok?"ok":"ko"):""} ${j===c?"cur":""}"></i>`}).join("")}</div>`;
+  function draw(){
+    if(i>=x.items.length){
+      const ok=x.items.filter((_,j)=>S[x.id+"_"+j]&&S[x.id+"_"+j].ok).length;
+      el.innerHTML=`<div class="qhead"><span>Résultat : ${ok} / ${x.items.length} <span class="en">Score: ${ok} out of ${x.items.length}</span></span>${dots(-1)}</div><div class="row"><button type="button" class="btn ghost re">Revoir les phrases</button></div>`;
+      el.querySelector(".re").onclick=()=>{i=0;draw()};return;
+    }
+    const it=x.items[i],st=S[x.id+"_"+i];
+    let q=md(it.q).replace("___",'<span class="gap">?</span>');
+    let body=`<div class="qhead"><span>Phrase ${i+1} sur ${x.items.length}</span>${dots(i)}</div>
+      <p class="qtext">${q}</p><button type="button" class="trx">Traduction</button><p class="qen en" hidden>${esc(it.en)}</p>`;
+    if(x.type==="qcm")body+=`<div class="opts ${it.o.some(o=>o.length>18)?"col":""}">${it.o.map((o,j)=>`<button type="button" class="opt" data-j="${j}">${esc(o)}</button>`).join("")}</div>`;
+    else body+=`<div class="inp"><input type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Écrivez le pronom…"><button type="button" class="btn chk">Vérifier</button></div>`;
+    el.innerHTML=body+`<div class="fbz"></div>`;
+    el.querySelector(".trx").onclick=e=>{el.querySelector(".qen").hidden=false;e.target.remove()};
+    const finish=(ok,pick,first)=>{
+      if(first)record(x,i,ok,pick);
+      const g=el.querySelector(".gap");if(g&&x.id!=="e5"){g.textContent=it.ans;g.classList.add("ok")}
+      const tr=el.querySelector(".trx");if(tr)tr.remove();el.querySelector(".qen").hidden=true;
+      el.querySelector(".fbz").innerHTML=`<div class="fb ${ok?"ok":"ko"}"><div class="head">${ok?"Juste.":"Ce n'est pas la bonne réponse."} <span class="en">${ok?"Correct.":"Not the right answer."}</span></div>
+        <div class="full"><div class="t"><b>${esc(it.good)}</b><span class="en">${esc(it.en)}</span></div>${sayBtn(it.full)}</div>
+        <div>${esc(it.r)}<span class="en"> ${esc(it.re)}</span></div></div>
+        <div class="row">${i>0?'<button type="button" class="btn ghost prev">Précédente</button>':"<span></span>"}<button type="button" class="btn next">${i===x.items.length-1?"Résultat":"Suivante"}</button></div>`;
+      el.querySelector(".next").onclick=()=>{i++;draw()};
+      const p=el.querySelector(".prev");if(p)p.onclick=()=>{i--;draw()};
+    };
+    if(x.type==="qcm"){
+      const pick=(j,first)=>{el.querySelectorAll(".opt").forEach(b=>{b.disabled=true;const bj=+b.dataset.j;if(bj===it.a)b.classList.add("ok");else if(bj===j)b.classList.add("ko")});finish(j===it.a,it.o[j],first)};
+      el.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pick(+b.dataset.j,true));
+      if(st)pick(st.ok?it.a:Math.max(0,it.o.indexOf(st.pick)),false);
+    }else{
+      const inp=el.querySelector("input"),chk=el.querySelector(".chk");
+      const check=(v,first)=>{if(!norm(v))return;const ok=norm(v)===norm(it.ans);inp.value=v;inp.disabled=true;chk.disabled=true;inp.classList.add(ok?"ok":"ko");finish(ok,v,first)};
+      chk.onclick=()=>check(inp.value,true);inp.onkeydown=e=>{if(e.key==="Enter")check(inp.value,true)};
+      if(st)check(st.pick,false);
+    }
+  }
+  draw();
+}
+
+/* Oral : pronoms utilisés */
+S.chips=S.chips||[];
+$("#checkchips").innerHTML=PRONOUNS.map((p,j)=>`<label><input type="checkbox" data-j="${j}" ${S.chips.includes(j)?"checked":""}><span>${esc(p)}</span></label>`).join("");
+const cc=()=>{$("#chipcount").textContent=`${S.chips.length} / ${PRONOUNS.length}`};cc();
+$("#checkchips").addEventListener("change",e=>{const j=+e.target.dataset.j;S.chips=e.target.checked?[...S.chips,j]:S.chips.filter(v=>v!==j);save();cc()});
+$("#reset").onclick=()=>{if(confirm("Effacer toutes les réponses ?")){S={};save();location.reload()}};
+refresh();
+})();
+</script>
+</body>
+</html>
