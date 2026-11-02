@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Révision · Les vacances en ville</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#3d2340;--soft:#7b6280;--muted:#9a8aa0;
+  --bg:#fff6f8;--card:#ffffff;--line:#f1dfe7;
+  --rose:#e2568c;--rose-l:#fde4ee;--rose-d:#b83a6c;
+  --lilac:#9b7bd6;--lilac-l:#efe8fb;
+  --peach:#f29a6b;--peach-l:#fff0e6;
+  --mint:#3fae92;--mint-l:#e3f6f0;
+  --sky:#5b9bd5;--sky-l:#e7f1fb;
+  --berry:#c2477d;--plum:#6b3a7a;
+  --past:#9b7bd6;--pres:#e2568c;--fut:#f29a6b;
+  --ok:#2f9e7a;--ok-l:#e2f5ee;--ko:#d6455d;--ko-l:#fde8ec;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Lora,Georgia,serif;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4,.pop,button,.pill,.tag,.nav a{font-family:Poppins,system-ui,sans-serif}
+.en{color:var(--muted);font-style:italic;font-size:.88em;font-family:Lora,Georgia,serif;font-weight:400}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+b,strong{font-weight:600}
+
+/* Hero */
+.hero{position:relative;border-radius:0 0 28px 28px;overflow:hidden;min-height:300px;display:flex;align-items:flex-end;background:#3d2340}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(61,35,64,.15) 0%,rgba(107,58,122,.55) 45%,rgba(184,58,108,.92) 100%)}
+.hero .in{position:relative;z-index:1;padding:28px 20px 26px;color:#fff;max-width:860px;margin:0 auto;width:100%}
+.tag{display:inline-block;background:#ffd3e3;color:var(--rose-d);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:99px}
+.hero h1{font-size:clamp(28px,6vw,44px);line-height:1.08;margin:12px 0 6px;font-weight:700}
+.hero h1 span{color:#ffd9b8}
+.hero p{margin:0;font-style:italic;opacity:.95}
+.rainbow{height:5px;border-radius:9px;background:linear-gradient(90deg,var(--peach),var(--rose),var(--lilac),var(--sky),var(--mint));margin:16px 0 0}
+
+/* Barre du haut */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,246,248,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;padding-top:8px;padding-bottom:8px}
+.score{font-family:Poppins;font-weight:600;font-size:14px;white-space:nowrap;background:linear-gradient(90deg,var(--rose),var(--lilac));color:#fff;padding:6px 12px;border-radius:99px}
+.nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;color:var(--soft);font-size:12.5px;font-weight:500;padding:5px 10px;border-radius:99px;border:1px solid var(--line);background:#fff}
+.nav a.done{background:var(--mint-l);border-color:#bfe7da;color:#1f7a60}
+
+/* Cartes et sections */
+.intro{background:#fff;border:2px solid var(--rose-l);border-radius:22px;padding:18px 18px;margin:22px 0}
+.intro h2{margin:0 0 6px;font-size:20px;color:var(--rose-d)}
+.intro ul{margin:8px 0 0;padding-left:20px}
+.intro li{margin:4px 0}
+.plan{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.plan span{font-family:Poppins;font-size:12px;background:var(--lilac-l);color:var(--plum);padding:4px 10px;border-radius:99px}
+.part{margin:34px 0 10px;display:flex;align-items:center;gap:12px}
+.part .n{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-family:Poppins;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--rose),var(--lilac))}
+.part h2{margin:0;font-size:24px;line-height:1.2}
+.part h2 .en{display:block;font-size:14px}
+.box{background:var(--card);border-radius:20px;border:1px solid var(--line);margin:16px 0;overflow:hidden;box-shadow:0 4px 18px rgba(194,71,125,.06)}
+.box>.hd{padding:12px 18px;color:#fff;font-family:Poppins}
+.box>.hd h3{margin:0;font-size:18px;font-weight:600}
+.box>.hd h3 .en{color:rgba(255,255,255,.85);font-size:13px;margin-left:6px}
+.box>.bd{padding:16px 18px}
+.c-past>.hd{background:linear-gradient(90deg,#8a6bd0,#b39be6)}
+.c-pres>.hd{background:linear-gradient(90deg,#d8457f,#f17aa8)}
+.c-fut>.hd{background:linear-gradient(90deg,#ee8a57,#f6b48b)}
+.c-mint>.hd{background:linear-gradient(90deg,#33a184,#6cc9ad)}
+.c-sky>.hd{background:linear-gradient(90deg,#4b8cc8,#82b8e6)}
+.c-plum>.hd{background:linear-gradient(90deg,#6b3a7a,#a35aa6)}
+.sub{font-family:Poppins;font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--berry);margin:14px 0 6px}
+.formula{display:inline-block;font-family:Poppins;font-weight:600;font-size:14px;border:2px solid currentColor;border-radius:99px;padding:3px 12px;margin:2px 0}
+.ex{display:flex;gap:10px;align-items:flex-start;border-left:3px solid var(--line);padding:4px 0 4px 12px;margin:8px 0}
+.ex .t{flex:1}
+.ex .t .en{display:block}
+.k{font-weight:600;color:var(--berry)}
+.say{flex:none;border:0;background:var(--rose-l);color:var(--rose-d);width:34px;height:34px;border-radius:50%;font-size:15px;cursor:pointer;display:inline-grid;place-items:center;padding:0}
+.say:active,.say.on{background:var(--rose);color:#fff}
+.inner{background:var(--lilac-l);border-left:4px solid var(--lilac);border-radius:12px;padding:10px 14px;margin:12px 0}
+.inner.peach{background:var(--peach-l);border-left-color:var(--peach)}
+.inner.mint{background:var(--mint-l);border-left-color:var(--mint)}
+.inner.rose{background:var(--rose-l);border-left-color:var(--rose)}
+.inner b.t{font-family:Poppins;font-size:12px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:620px){.grid3,.grid2{grid-template-columns:1fr}}
+.col{border-radius:14px;padding:10px 12px}
+.col h4{margin:0 0 6px;font-size:14px}
+.col ul{list-style:none;margin:0;padding:0}
+.col li{padding:3px 0;border-bottom:1px dashed rgba(0,0,0,.08)}
+.col li:last-child{border:0}
+.col.p{background:var(--lilac-l)}.col.p h4{color:#6c4fb3}
+.col.r{background:var(--rose-l)}.col.r h4{color:var(--rose-d)}
+.col.f{background:var(--peach-l)}.col.f h4{color:#c4632f}
+table.conj{width:100%;border-collapse:collapse;font-size:15px;margin:6px 0}
+table.conj td,table.conj th{padding:5px 8px;text-align:left;border-bottom:1px solid var(--line)}
+table.conj th{font-family:Poppins;font-size:12.5px;font-weight:600;color:var(--soft);background:#fbf3f7}
+.end{color:var(--rose-d);font-weight:600}
+.photo{border-radius:16px;overflow:hidden;margin:12px 0;position:relative}
+.photo img{display:block;width:100%;height:180px;object-fit:cover}
+.photo figcaption{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.92);border-radius:99px;padding:3px 12px;font-size:13px;font-style:italic;color:var(--ink)}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.strip figure{margin:0;border-radius:14px;overflow:hidden;background:#fff;border:3px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.strip img{display:block;width:100%;height:110px;object-fit:cover}
+.strip figcaption{font-size:12.5px;font-style:italic;padding:4px 8px;color:var(--soft)}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.steps span{font-family:Poppins;font-size:13px;font-weight:500;background:#fff;border:2px solid var(--rose-l);border-radius:99px;padding:4px 12px}
+.steps span b{color:var(--rose)}
+
+/* Exercices */
+.exo{background:#fff;border-radius:22px;margin:22px 0;overflow:hidden;border:1px solid var(--line);box-shadow:0 4px 18px rgba(107,58,122,.07)}
+.exo>.hd{padding:14px 18px;color:#fff;display:flex;gap:14px;align-items:flex-start}
+.exo>.hd .num{font-family:Poppins;font-size:34px;font-weight:700;line-height:1;opacity:.9}
+.exo>.hd .lab{font-family:Poppins;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.9}
+.exo>.hd h3{margin:2px 0 2px;font-size:18px;line-height:1.3}
+.exo>.hd .en{color:rgba(255,255,255,.88)}
+.exo>.hd .min{margin-left:auto;flex:none;font-family:Poppins;font-size:12px;background:rgba(255,255,255,.25);border-radius:99px;padding:3px 10px;white-space:nowrap}
+.exo>.bd{padding:16px 18px 18px}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-family:Poppins;font-size:13px;color:var(--soft)}
+.dots{display:flex;gap:5px;flex-wrap:wrap}
+.dots i{width:11px;height:11px;border-radius:50%;background:#eadfe6;display:block}
+.dots i.ok{background:var(--ok)}.dots i.ko{background:var(--ko)}
+.dots i.cur{outline:2px solid var(--rose);outline-offset:2px}
+.qtext{font-size:20px;line-height:1.45;margin:14px 0 2px}
+.qen{margin:0 0 12px}
+.note{font-family:Poppins;font-size:12px;background:var(--lilac-l);color:var(--plum);border-radius:99px;padding:2px 10px;margin-left:6px;white-space:nowrap}
+.gap{display:inline-block;min-width:70px;border-bottom:3px solid var(--rose);text-align:center;color:var(--rose-d);font-weight:600;padding:0 6px}
+.gap.ok{border-color:var(--ok);color:var(--ok)}
+.opts{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
+.opt{font-family:Poppins;font-size:16px;font-weight:500;border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;padding:10px 16px;cursor:pointer;text-align:left}
+.opt:hover{border-color:var(--rose)}
+.opt.ok{border-color:var(--ok);background:var(--ok-l);color:#1d6e55}
+.opt.ko{border-color:var(--ko);background:var(--ko-l);color:#a3283e;text-decoration:line-through}
+.opt:disabled{cursor:default}
+.opt small{display:block;font-family:Lora;font-style:italic;font-weight:400;font-size:13px;color:var(--muted)}
+.tri .opt{flex:1;min-width:90px;text-align:center;color:#fff;border:0;font-weight:600}
+.tri .opt[data-j="0"]{background:var(--past)}.tri .opt[data-j="1"]{background:var(--pres)}.tri .opt[data-j="2"]{background:var(--fut)}
+.tri .opt.dim{opacity:.35}
+.tri .opt.ok{outline:4px solid var(--ok);outline-offset:2px;color:#fff;text-decoration:none}
+.tri .opt.ko{outline:4px solid var(--ko);outline-offset:2px;color:#fff}
+.word{font-family:Poppins;font-size:28px;font-weight:600;text-align:center;margin:18px 0 4px;color:var(--plum)}
+.word+.en{text-align:center;display:block}
+.fb{border-radius:14px;padding:12px 14px;margin-top:12px;font-size:15px}
+.fb.ok{background:var(--ok-l);border:1px solid #bfe6d7}
+.fb.ko{background:var(--ko-l);border:1px solid #f6c6d0}
+.fb .head{font-family:Poppins;font-weight:600}
+.fb.ok .head{color:#1d6e55}.fb.ko .head{color:#a3283e}
+.fb .full{display:flex;gap:10px;align-items:center;margin:8px 0 4px}
+.fb .full .t{flex:1}
+.fb .full .t b{font-weight:600}
+.fb .full .en{display:block}
+.row{display:flex;justify-content:space-between;gap:10px;margin-top:12px;flex-wrap:wrap}
+.btn{font-family:Poppins;font-weight:600;font-size:15px;border:0;border-radius:99px;padding:10px 20px;cursor:pointer;background:linear-gradient(90deg,var(--rose),var(--lilac));color:#fff}
+.btn.ghost{background:#fff;color:var(--soft);border:2px solid var(--line)}
+.btn:disabled{opacity:.4;cursor:default}
+.inp{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0 4px}
+.inp input{font:600 18px Poppins,sans-serif;color:var(--ink);border:2px solid var(--line);border-radius:12px;padding:9px 12px;flex:1;min-width:160px;outline:none}
+.inp input:focus{border-color:var(--rose)}
+.inp input.ok{border-color:var(--ok);background:var(--ok-l)}
+.inp input.ko{border-color:var(--ko);background:var(--ko-l)}
+.acc{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.acc button{font:600 16px Poppins;width:40px;height:38px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--plum);cursor:pointer}
+.inf{font-family:Poppins;font-size:13px;font-weight:600;color:#fff;background:var(--lilac);border-radius:99px;padding:2px 10px;margin-left:6px;white-space:nowrap}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;padding:10px;border-radius:14px;margin:10px 0}
+.tiles.ans{background:#fff;border:2px dashed #e7c3d4}
+.tiles.pool{background:#fbf3f7}
+.tile{font-family:Poppins;font-size:16px;font-weight:500;border:0;border-radius:10px;padding:8px 12px;background:#fff;color:var(--ink);box-shadow:0 2px 0 #e6cfdb;cursor:pointer}
+.tiles.ans .tile{background:var(--rose-l);color:var(--rose-d);box-shadow:0 2px 0 #f0b6cd}
+.tiles.ans.ok{border-color:var(--ok);background:var(--ok-l)}
+.tiles.ans.ko{border-color:var(--ko);background:var(--ko-l)}
+.text{background:#fffaf5;border:1px solid #f4dcc8;border-radius:16px;padding:12px 14px;margin:6px 0 14px}
+.text p{margin:6px 0;display:flex;gap:8px;align-items:flex-start}
+.text p .t{flex:1}
+.text .en{display:none}
+.text.tr .en{display:block}
+.mini{font-family:Poppins;font-size:13px;font-weight:500;border:1px solid var(--line);background:#fff;color:var(--soft);border-radius:99px;padding:5px 12px;cursor:pointer}
+.wb{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.wb button{font-family:Poppins;font-size:13.5px;border:1px solid #f0c9d9;background:var(--rose-l);color:var(--rose-d);border-radius:99px;padding:4px 11px;cursor:pointer}
+.wb button small{font-family:Lora;font-style:italic;color:var(--muted);margin-left:4px}
+textarea{width:100%;min-height:120px;font:16px/1.7 Lora,serif;color:var(--ink);border:2px solid var(--line);border-radius:14px;padding:10px 12px;outline:none;background:repeating-linear-gradient(transparent,transparent 26px,#f6e6ee 27px);resize:vertical}
+textarea:focus{border-color:var(--lilac)}
+.para{border-radius:16px;padding:12px 14px;margin:12px 0}
+.para h4{margin:0 0 4px;font-size:15px}
+.para .starts{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}
+.para .starts span{font-family:Poppins;font-size:13px;background:#fff;border-radius:99px;padding:3px 10px;border:1px solid rgba(0,0,0,.06)}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer}
+.check input{width:20px;height:20px;accent-color:var(--rose);margin-top:3px;flex:none}
+
+/* Bilan et À revoir */
+.bilan{background:linear-gradient(135deg,#6b3a7a,#c2477d 60%,#f29a6b);color:#fff;border-radius:24px;padding:20px;margin:22px 0}
+.bilan .big{font-family:Poppins;font-size:48px;font-weight:700;line-height:1}
+.bilan .bars{margin-top:14px;background:rgba(255,255,255,.95);border-radius:16px;padding:10px 14px;color:var(--ink)}
+.barrow{display:grid;grid-template-columns:1.6fr 2fr auto;gap:10px;align-items:center;font-family:Poppins;font-size:13px;padding:4px 0}
+.track{height:10px;border-radius:9px;background:#f1e4ea;overflow:hidden}
+.track span{display:block;height:100%;background:linear-gradient(90deg,var(--rose),var(--lilac));border-radius:9px}
+.revoir{border:3px solid var(--rose);border-radius:22px;background:#fff;margin:22px 0 10px;overflow:hidden}
+.revoir>.hd{background:var(--rose);color:#fff;padding:12px 18px}
+.revoir>.hd h3{margin:0;font-size:20px}
+.revoir>.hd .en{color:rgba(255,255,255,.88)}
+.revoir>.bd{padding:12px 16px 16px}
+.rgroup{margin:10px 0 18px}
+.rgroup h4{margin:0 0 6px;font-size:15px;color:var(--plum)}
+.rtip{background:var(--peach-l);border-left:4px solid var(--peach);border-radius:10px;padding:8px 12px;font-size:14.5px;margin:6px 0 10px}
+.rtip b{font-family:Poppins;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#c4632f;display:block}
+.ritem{border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0;font-size:15px}
+.ritem .you{color:#a3283e}
+.ritem .you s{font-weight:600}
+.ritem .good{display:flex;gap:10px;align-items:center;margin:4px 0}
+.ritem .good .t{flex:1}
+.ritem .good b{color:#1d6e55}
+.ritem .why{margin-top:4px;color:var(--ink)}
+.ritem .why .en,.ritem .good .en{display:block}
+.empty{font-style:italic;color:var(--soft)}
+footer{text-align:center;font-family:Poppins;font-size:12px;color:var(--muted);padding:26px 0 40px;letter-spacing:.08em}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="img/lyonnuit.jpg" alt="Les quais de Saône à Lyon, la nuit">
+  <div class="in">
+    <span class="tag">Révision · Les vacances en ville</span>
+    <h1>Trois temps pour raconter <span>tes vacances</span></h1>
+    <p>Three tenses to talk about your holidays · Past, present and future</p>
+  </div>
+</header>
+
+<div class="top"><div class="wrap">
+  <span class="score" id="score">0 / 90</span>
+  <nav class="nav" id="nav"></nav>
+</div></div>
+
+<main class="wrap">
+<div class="rainbow"></div>
+
+<section class="intro">
+  <h2>Bonjour Emilly !</h2>
+  <p>Aujourd'hui, tu révises les trois moments pour parler de voyages : le passé, le présent et le futur. Tu travailles seule, pendant environ une heure.
+  <span class="en">Today you are revising the three time frames for talking about travel: past, present and future. You are working on your own, for about an hour.</span></p>
+  <ul>
+    <li>Lis d'abord le petit rappel de grammaire. <span class="en">First read the short grammar reminder.</span></li>
+    <li>Appuie sur 🔊 pour écouter les phrases. <span class="en">Tap 🔊 to listen to the sentences.</span></li>
+    <li>Chaque réponse est corrigée tout de suite, avec une explication. <span class="en">Each answer is corrected straight away, with an explanation.</span></li>
+    <li>Tes erreurs arrivent dans le cadre « À revoir », à la fin de la page. <span class="en">Your mistakes appear in the "À revoir" (to review) box at the end of the page.</span></li>
+  </ul>
+  <div class="plan">
+    <span>Rappel · 8 min</span><span>Exercices 1 à 10 · 46 min</span><span>Écriture · 8 min</span>
+  </div>
+</section>
+
+<!-- ===================== RAPPEL ===================== -->
+<div class="part" id="rappel"><div class="n">A</div><h2>Le rappel de grammaire<span class="en">Grammar reminder</span></h2></div>
+
+<div class="box c-plum">
+  <div class="hd"><h3>1. Quel moment ? <span class="en">Which time frame?</span></h3></div>
+  <div class="bd">
+    <p>Quand on parle de voyages, on raconte ce qu'on a fait, on dit ce qu'on aime faire et on présente ce qu'on va faire. Avant de conjuguer, cherche le mot qui indique le moment : il te dit quel temps utiliser.
+    <span class="en">When we talk about travel, we say what we did, what we like doing and what we are going to do. Before you conjugate, look for the word that tells you when: it tells you which tense to use.</span></p>
+    <div class="grid3">
+      <div class="col p"><h4>Passé · <span class="en">Past</span></h4><ul>
+        <li>hier <span class="en">yesterday</span></li><li>le weekend dernier <span class="en">last weekend</span></li><li>la semaine dernière <span class="en">last week</span></li><li>l'année dernière <span class="en">last year</span></li><li>quand j'étais petite <span class="en">when I was little</span></li></ul></div>
+      <div class="col r"><h4>Présent · <span class="en">Present</span></h4><ul>
+        <li>aujourd'hui <span class="en">today</span></li><li>tous les weekends <span class="en">every weekend</span></li><li>souvent <span class="en">often</span></li><li>en ce moment <span class="en">at the moment</span></li></ul></div>
+      <div class="col f"><h4>Futur · <span class="en">Future</span></h4><ul>
+        <li>demain <span class="en">tomorrow</span></li><li>le weekend prochain <span class="en">next weekend</span></li><li>la semaine prochaine <span class="en">next week</span></li><li>l'année prochaine <span class="en">next year</span></li><li>dans dix ans <span class="en">in ten years' time</span></li></ul></div>
+    </div>
+    <div class="inner"><b class="t">À retenir · Remember</b>« dernier » et « prochain » se placent après le nom, avec un article : <b>le</b> mois <b>dernier</b>, <b>la</b> semaine <b>prochaine</b>.
+      <span class="en">"Dernier" (last) and "prochain" (next) come after the noun, with an article: le mois dernier, la semaine prochaine.</span></div>
+    <div class="ex"><div class="t">L&#x27;été dernier, <span class="k">j&#x27;ai visité</span> Bordeaux.<span class="en">Last summer I visited Bordeaux.</span></div><button type="button" class="say" data-say="L&#x27;été dernier, j&#x27;ai visité Bordeaux." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t"><span class="k">J&#x27;adore</span> les petites villes.<span class="en">I love small towns.</span></div><button type="button" class="say" data-say="J&#x27;adore les petites villes." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">L&#x27;été prochain, <span class="k">je visiterai</span> Nantes.<span class="en">Next summer I&#x27;ll visit Nantes.</span></div><button type="button" class="say" data-say="L&#x27;été prochain, je visiterai Nantes." aria-label="Écouter">🔊</button></div>
+  </div>
+</div>
+
+<div class="box c-pres">
+  <div class="hd"><h3>2. Le présent <span class="en">The present tense</span></h3></div>
+  <div class="bd">
+    <p>On l'utilise pour parler de ses goûts, de ses habitudes et de ce qui se passe maintenant.
+    <span class="en">We use it to talk about what we like, our habits and what is happening now.</span></p>
+    <div class="grid3">
+      <table class="conj"><tr><th colspan="2">visiter (-ER)</th></tr>
+        <tr><td>je visit<span class="end">e</span></td><td>nous visit<span class="end">ons</span></td></tr>
+        <tr><td>tu visit<span class="end">es</span></td><td>vous visit<span class="end">ez</span></td></tr>
+        <tr><td>il, elle visit<span class="end">e</span></td><td>ils visit<span class="end">ent</span></td></tr></table>
+      <table class="conj"><tr><th colspan="2">aller</th></tr>
+        <tr><td>je vais</td><td>nous allons</td></tr><tr><td>tu vas</td><td>vous allez</td></tr><tr><td>il va</td><td>ils vont</td></tr></table>
+      <table class="conj"><tr><th colspan="2">faire</th></tr>
+        <tr><td>je fais</td><td>nous faisons</td></tr><tr><td>tu fais</td><td>vous faites</td></tr><tr><td>il fait</td><td>ils font</td></tr></table>
+    </div>
+    <div class="inner rose"><b class="t">Aimer, adorer, préférer + infinitif</b>Après ces verbes, le deuxième verbe reste à l'infinitif : j'aime <b>visiter</b>, j'adore <b>déguster</b>.
+      <span class="en">After these verbs, the second verb stays in the infinitive: j'aime visiter = I like visiting.</span></div>
+    <div class="ex"><div class="t">Tous les dimanches, nous <span class="k">faisons</span> une balade le long du fleuve.<span class="en">Every Sunday we go for a walk along the river.</span></div><button type="button" class="say" data-say="Tous les dimanches, nous faisons une balade le long du fleuve." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t"><span class="k">J&#x27;aime</span> beaucoup <span class="k">visiter</span> les musées quand il pleut.<span class="en">I really like visiting museums when it rains.</span></div><button type="button" class="say" data-say="J&#x27;aime beaucoup visiter les musées quand il pleut." aria-label="Écouter">🔊</button></div>
+  </div>
+</div>
+
+<div class="box c-past">
+  <div class="hd"><h3>3. Le passé composé <span class="en">The perfect tense</span></h3></div>
+  <div class="bd">
+    <p>Pour une action <b>terminée</b>, à un moment <b>précis</b> du passé : ce qu'on a fait hier, le weekend dernier, pendant les vacances.
+    <span class="en">For a completed action at a specific moment in the past: what we did yesterday, last weekend, during the holidays.</span></p>
+    <p><span class="formula" style="color:#7a5cc4">avoir ou être au présent + participe passé</span><br><span class="en">avoir or être in the present + past participle</span></p>
+    <div class="sub">Le participe passé · The past participle</div>
+    <table class="conj">
+      <tr><th>Infinitif</th><th>Participe</th><th>Exemples</th></tr>
+      <tr><td>-ER</td><td class="end">-é</td><td>visiter → visité · manger → mangé</td></tr>
+      <tr><td>-IR</td><td class="end">-i</td><td>choisir → choisi · partir → parti</td></tr>
+      <tr><td>-RE</td><td class="end">-u</td><td>attendre → attendu · vendre → vendu</td></tr>
+      <tr><td>irréguliers</td><td></td><td>faire → fait · prendre → pris · voir → vu · être → été · avoir → eu · boire → bu</td></tr>
+    </table>
+    <div class="grid2" style="margin-top:10px">
+      <div class="inner" style="margin:0"><b class="t">Avec avoir · la plupart des verbes</b>j'ai visité · tu as visité · il a visité<br>nous avons visité · vous avez visité · ils ont visité
+        <span class="en">With avoir: most verbs. No agreement with the subject.</span></div>
+      <div class="inner peach" style="margin:0"><b class="t">Avec être · mouvement et verbes avec « se »</b>aller, partir, venir, arriver, rester, rentrer, se promener…<br>je suis allé(e) · elle est allée · nous sommes allé(e)s
+        <span class="en">With être: verbs of movement and reflexive verbs.</span></div>
+    </div>
+    <div class="inner rose"><b class="t">L'accord avec être · Agreement with être</b>Avec être, le participe s'accorde avec le sujet, comme un adjectif : <b>-e</b> pour le féminin, <b>-s</b> pour le pluriel.<br>il est allé · elle est allé<b>e</b> · ils sont allé<b>s</b> · elles sont allé<b>es</b>
+      <span class="en">With être, the past participle agrees with the subject: add -e for a feminine subject and -s for a plural one.</span></div>
+    <div class="ex"><div class="t">Hier, <span class="k">j&#x27;ai pris</span> le funiculaire pour monter à Fourvière.<span class="en">Yesterday I took the funicular up to Fourvière.</span></div><button type="button" class="say" data-say="Hier, j&#x27;ai pris le funiculaire pour monter à Fourvière." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Le weekend dernier, nous <span class="k">avons dégusté</span> des spécialités lyonnaises.<span class="en">Last weekend we tasted some Lyon specialities.</span></div><button type="button" class="say" data-say="Le weekend dernier, nous avons dégusté des spécialités lyonnaises." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Elle <span class="k">est allée</span> à Saint-Malo.<span class="en">She went to Saint-Malo.</span></div><button type="button" class="say" data-say="Elle est allée à Saint-Malo." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Nous <span class="k">sommes partis</span> à huit heures.<span class="en">We left at eight o&#x27;clock.</span></div><button type="button" class="say" data-say="Nous sommes partis à huit heures." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Elles <span class="k">sont rentrées</span> très tard.<span class="en">They (girls) came home very late.</span></div><button type="button" class="say" data-say="Elles sont rentrées très tard." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Je <span class="k">me suis promenée</span> le long des quais.<span class="en">I went for a walk along the riverside. (a girl speaking)</span></div><button type="button" class="say" data-say="Je me suis promenée le long des quais." aria-label="Écouter">🔊</button></div>
+  </div>
+</div>
+
+<figure class="photo"><img src="img/stmalo.jpg" alt="La plage et les remparts de Saint-Malo"><figcaption>La plage et les remparts de Saint-Malo</figcaption></figure>
+
+<div class="box c-sky">
+  <div class="hd"><h3>4. L'imparfait <span class="en">The imperfect tense</span></h3></div>
+  <div class="bd">
+    <div class="sub">Quand l'utiliser ? · When do we use it?</div>
+    <div class="grid3">
+      <div class="col p"><h4>1. Une habitude passée</h4>Quand j'étais petite, nous <b>allions</b> à la mer chaque été.<span class="en">A past habit: we used to go…</span></div>
+      <div class="col r"><h4>2. Une description</h4>Il <b>faisait</b> beau et la plage <b>était</b> calme.<span class="en">A description: the weather was lovely…</span></div>
+      <div class="col f"><h4>3. Une action en cours</h4>Je <b>marchais</b> sur la plage quand j'ai vu un phoque.<span class="en">An action in progress: I was walking…</span></div>
+    </div>
+    <div class="sub">La formation · How to form it</div>
+    <p>On prend le verbe au présent avec <b>nous</b>, on enlève <b>-ons</b> et on ajoute les terminaisons. Un seul verbe est irrégulier : être → <b>ét-</b>.
+    <span class="en">Take the "nous" form of the present, remove "-ons" and add the endings. Only "être" is irregular: its stem is "ét-".</span></p>
+    <div class="steps"><span>nous all<b>ons</b> → all-</span><span>nous fais<b>ons</b> → fais-</span><span>être → ét-</span></div>
+    <div class="grid2">
+      <table class="conj"><tr><th colspan="2">aller</th></tr>
+        <tr><td>j'all<span class="end">ais</span></td><td>nous all<span class="end">ions</span></td></tr>
+        <tr><td>tu all<span class="end">ais</span></td><td>vous all<span class="end">iez</span></td></tr>
+        <tr><td>il, elle all<span class="end">ait</span></td><td>ils, elles all<span class="end">aient</span></td></tr></table>
+      <table class="conj"><tr><th colspan="2">être</th></tr>
+        <tr><td>j'ét<span class="end">ais</span></td><td>nous ét<span class="end">ions</span></td></tr>
+        <tr><td>tu ét<span class="end">ais</span></td><td>vous ét<span class="end">iez</span></td></tr>
+        <tr><td>il, elle ét<span class="end">ait</span></td><td>ils, elles ét<span class="end">aient</span></td></tr></table>
+    </div>
+    <div class="sub">Passé composé ou imparfait ? · Perfect or imperfect?</div>
+    <div class="grid2">
+      <div class="inner" style="margin:0"><b class="t">L'imparfait · le décor</b>ce qui dure, ce qui se répète, la description<span class="en">the background: what lasts, what is repeated, the description</span></div>
+      <div class="inner peach" style="margin:0"><b class="t">Le passé composé · l'événement</b>ce qui arrive une fois, à un moment précis<span class="en">the event: what happens once, at a specific moment</span></div>
+    </div>
+    <div class="ex"><div class="t">Quand j&#x27;étais petite, nous <span class="k">allions</span> à la mer chaque été.<span class="en">When I was little, we used to go to the seaside every summer.</span></div><button type="button" class="say" data-say="Quand j&#x27;étais petite, nous allions à la mer chaque été." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Il <span class="k">faisait</span> beau et la plage <span class="k">était</span> calme.<span class="en">The weather was lovely and the beach was quiet.</span></div><button type="button" class="say" data-say="Il faisait beau et la plage était calme." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Je <span class="k">marchais</span> sur la plage quand <span class="k">j&#x27;ai vu</span> un phoque.<span class="en">I was walking on the beach when I saw a seal.</span></div><button type="button" class="say" data-say="Je marchais sur la plage quand j&#x27;ai vu un phoque." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Il <span class="k">pleuvait</span> quand nous <span class="k">sommes arrivés</span> à Lyon.<span class="en">It was raining when we arrived in Lyon.</span></div><button type="button" class="say" data-say="Il pleuvait quand nous sommes arrivés à Lyon." aria-label="Écouter">🔊</button></div>
+  </div>
+</div>
+
+<div class="box c-fut">
+  <div class="hd"><h3>5. Le futur : deux façons d'en parler <span class="en">The future: two ways</span></h3></div>
+  <div class="bd">
+    <div class="grid2">
+      <div class="inner peach" style="margin:0"><b class="t">Le futur proche</b><span class="formula" style="color:#d9733e">aller au présent + infinitif</span><br>Un projet décidé, proche, très courant à l'oral.<span class="en">A plan that is decided or close; very common in speech.</span></div>
+      <div class="inner" style="margin:0"><b class="t">Le futur simple</b><span class="formula" style="color:#7a5cc4">infinitif + -ai, -as, -a, -ons, -ez, -ont</span><br>Un projet plus lointain, une prévision.<span class="en">A plan further ahead, a prediction.</span></div>
+    </div>
+    <div class="ex"><div class="t">Ce soir, on <span class="k">va dîner</span> dans un bouchon lyonnais.<span class="en">Tonight we&#x27;re going to have dinner in a traditional Lyon bistro.</span></div><button type="button" class="say" data-say="Ce soir, on va dîner dans un bouchon lyonnais." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Je <span class="k">vais réserver</span> l&#x27;hôtel demain matin.<span class="en">I&#x27;m going to book the hotel tomorrow morning.</span></div><button type="button" class="say" data-say="Je vais réserver l&#x27;hôtel demain matin." aria-label="Écouter">🔊</button></div>
+    <div class="grid2" style="margin-top:10px">
+      <table class="conj"><tr><th colspan="2">visiter au futur simple</th></tr>
+        <tr><td>je visiter<span class="end">ai</span></td><td>nous visiter<span class="end">ons</span></td></tr>
+        <tr><td>tu visiter<span class="end">as</span></td><td>vous visiter<span class="end">ez</span></td></tr>
+        <tr><td>il, elle visiter<span class="end">a</span></td><td>ils, elles visiter<span class="end">ont</span></td></tr></table>
+      <div><div class="sub" style="margin-top:4px">Radicaux irréguliers · Irregular stems</div>
+        <div class="steps"><span>aller → <b>ir</b>ai</span><span>faire → <b>fer</b>ai</span><span>être → <b>ser</b>ai</span><span>avoir → <b>aur</b>ai</span><span>voir → <b>verr</b>ai</span><span>venir → <b>viendr</b>ai</span><span>pouvoir → <b>pourr</b>ai</span></div>
+        <p style="margin:4px 0"><span class="en">-RE verbs drop the final e: prendre → je prendrai.</span></p></div>
+    </div>
+    <div class="ex"><div class="t">L&#x27;année prochaine, nous <span class="k">irons</span> en Provence avec nos voisins.<span class="en">Next year we&#x27;ll go to Provence with our neighbours.</span></div><button type="button" class="say" data-say="L&#x27;année prochaine, nous irons en Provence avec nos voisins." aria-label="Écouter">🔊</button></div>
+    <div class="ex"><div class="t">Demain, il <span class="k">fera</span> beau sur toute la région.<span class="en">Tomorrow it will be sunny across the whole region.</span></div><button type="button" class="say" data-say="Demain, il fera beau sur toute la région." aria-label="Écouter">🔊</button></div>
+    <div class="inner mint"><b class="t">Pour exprimer un souhait · Expressing a wish</b><b>Je voudrais</b> + infinitif est la forme polie de vouloir.<span class="en">"Je voudrais" + infinitive is the polite form of "vouloir": I would like…</span></div>
+    <div class="ex"><div class="t"><span class="k">Je voudrais</span> <span class="k">passer</span> une semaine à la montagne.<span class="en">I would like to spend a week in the mountains.</span></div><button type="button" class="say" data-say="Je voudrais passer une semaine à la montagne." aria-label="Écouter">🔊</button></div>
+  </div>
+</div>
+
+<div class="box c-mint">
+  <div class="hd"><h3>6. Un même verbe, trois moments <span class="en">One verb, three time frames</span></h3></div>
+  <div class="bd" style="overflow-x:auto">
+    <table class="conj" style="min-width:560px">
+      <tr><th>Verbe</th><th>Passé composé</th><th>Imparfait</th><th>Présent</th><th>Futur proche</th><th>Futur simple</th></tr>
+      <tr><td><b>visiter</b></td><td>j'ai visité</td><td>je visitais</td><td>je visite</td><td>je vais visiter</td><td>je visiterai</td></tr>
+      <tr><td><b>aller</b></td><td>je suis allé(e)</td><td>j'allais</td><td>je vais</td><td>je vais aller</td><td>j'irai</td></tr>
+      <tr><td><b>faire</b></td><td>j'ai fait</td><td>je faisais</td><td>je fais</td><td>je vais faire</td><td>je ferai</td></tr>
+      <tr><td><b>partir</b></td><td>je suis parti(e)</td><td>je partais</td><td>je pars</td><td>je vais partir</td><td>je partirai</td></tr>
+    </table>
+    <div class="steps"><span><b>1</b> Je cherche le mot de temps</span><span><b>2</b> Je choisis le temps</span><span><b>3</b> Je conjugue et je vérifie l'accord</span></div>
+    <span class="en">1. Find the time word. 2. Choose the tense. 3. Conjugate the verb and check the agreement.</span>
+  </div>
+</div>
+
+<!-- ===================== EXERCICES ===================== -->
+<div class="part" id="exos"><div class="n">B</div><h2>Les exercices<span class="en">The exercises</span></h2></div>
+<div id="exercises"></div>
+
+<!-- ===================== ÉCRITURE ===================== -->
+<section class="exo" id="e11">
+  <div class="hd" style="background:linear-gradient(90deg,#6b3a7a,#c2477d)">
+    <div class="num">11</div>
+    <div><div class="lab">Exercice · Production écrite</div><h3>À toi d'écrire : ma ville en trois temps</h3><div class="en">Your turn to write: my town in three time frames</div></div>
+    <span class="min">8 min</span>
+  </div>
+  <div class="bd">
+    <p>Emilly, parle d'une ville que tu aimes : ce que tu as fait là-bas, ce que tu aimes aujourd'hui et ce que tu feras la prochaine fois. Écris 3 petits paragraphes de 2 ou 3 phrases.
+    <span class="en">Emilly, write about a town you like: what you did there, what you like today and what you will do next time. Write 3 short paragraphs of 2 or 3 sentences.</span></p>
+    <figure class="strip">
+      <figure><img src="img/fourviere.jpg" alt=""><figcaption>Lyon vue de Fourvière</figcaption></figure>
+      <figure><img src="img/bouchon.jpg" alt=""><figcaption>Un bouchon lyonnais</figcaption></figure>
+      <figure><img src="img/lavande.jpg" alt=""><figcaption>La lavande en Provence</figcaption></figure>
+    </figure>
+    <div class="sub">Mots utiles · Useful words <span class="en" style="text-transform:none;letter-spacing:0">(appuie pour ajouter · tap to add)</span></div>
+    <div class="wb" id="wb"></div>
+    <div class="para" style="background:var(--lilac-l)">
+      <h4 style="color:#6c4fb3">1. Le passé · Une fois, je suis allée à… <span class="en">The past</span></h4>
+      <div class="starts"><span>L'été dernier, je suis allée à…</span><span>J'ai visité…</span><span>Il faisait…</span><span>La ville était…</span></div>
+      <span class="en">Use the perfect tense for what you did, and the imperfect for the description (weather, atmosphere).</span>
+      <textarea id="w1" placeholder="Écris ici…"></textarea>
+    </div>
+    <div class="para" style="background:var(--rose-l)">
+      <h4 style="color:var(--rose-d)">2. Le présent · Aujourd'hui… <span class="en">The present</span></h4>
+      <div class="starts"><span>Aujourd'hui, j'aime…</span><span>Tous les weekends, je…</span><span>J'adore + infinitif</span></div>
+      <span class="en">Say what you like and what you usually do.</span>
+      <textarea id="w2" placeholder="Écris ici…"></textarea>
+    </div>
+    <div class="para" style="background:var(--peach-l)">
+      <h4 style="color:#c4632f">3. Le futur · La prochaine fois… <span class="en">The future</span></h4>
+      <div class="starts"><span>L'année prochaine, j'irai…</span><span>Je vais visiter…</span><span>Je voudrais…</span></div>
+      <span class="en">Say what you are going to do or will do, and what you would like to do.</span>
+      <textarea id="w3" placeholder="Écris ici…"></textarea>
+    </div>
+    <div class="sub">Je relis mon texte · I check my text</div>
+    <div class="check">
+      <label><input type="checkbox"> <span>J'ai utilisé des mots de temps (hier, l'été dernier, demain…). <span class="en">I used time words.</span></span></label>
+      <label><input type="checkbox"> <span>J'ai utilisé le passé composé et l'imparfait. <span class="en">I used the perfect and the imperfect.</span></span></label>
+      <label><input type="checkbox"> <span>Avec être, j'ai accordé le participe : je suis allé<b>e</b>. <span class="en">With être, I made the participle agree.</span></span></label>
+      <label><input type="checkbox"> <span>J'ai utilisé le présent et le futur (proche ou simple). <span class="en">I used the present and the future.</span></span></label>
+      <label><input type="checkbox"> <span>J'ai utilisé au moins 3 mots du chapitre. <span class="en">I used at least 3 words from the chapter.</span></span></label>
+    </div>
+    <div class="row"><span class="en" id="wcount">0 mot</span><button class="btn" id="copy" type="button">Copier mon texte</button></div>
+    <p class="en" style="margin-top:8px">Copie ton texte et envoie-le à Irène pour la correction. · Copy your text and send it to Irène for correction.</p>
+  </div>
+</section>
+
+<!-- ===================== BILAN ===================== -->
+<div class="part" id="bilan"><div class="n">C</div><h2>Mon bilan<span class="en">My results</span></h2></div>
+<div class="bilan">
+  <div class="big" id="bigPts">0</div>
+  <div id="bigTxt" class="pop">points sur 90</div>
+  <div class="bars" id="bars"></div>
+</div>
+
+<section class="revoir">
+  <div class="hd"><h3>À revoir <span class="en">To review</span></h3>
+    <div class="en">Pour chaque erreur : ta réponse, la bonne réponse, pourquoi, et comment ne plus te tromper. · For each mistake: your answer, the right answer, why, and how not to get it wrong again.</div></div>
+  <div class="bd" id="revoir"></div>
+</section>
+<div class="row" style="justify-content:center"><button class="btn ghost" id="reset" type="button">Tout recommencer · Start again</button></div>
+
+</main>
+<footer>LE FRANÇAIS AVEC IRÈNE</footer>
+
+<script>
+const DATA={"ex": [{"id": "e1", "type": "sort", "short": "Le mot du temps", "title": "Le mot du temps", "label": "Le mot du temps", "consigne": "Lis le mot de temps et choisis : passé, présent ou futur ?", "consigneEn": "Read the time word and choose: past, present or future?", "min": 3, "items": [{"q": "hier", "o": ["Passé", "Présent", "Futur"], "a": 0, "en": "yesterday", "good": "« hier » → Passé", "full": "hier", "r": "« hier » parle d'un moment qui est fini : c'est le passé.", "re": "“yesterday” refers to a time that is over: it is the past."}, {"q": "l'été dernier", "o": ["Passé", "Présent", "Futur"], "a": 0, "en": "last summer", "good": "« l'été dernier » → Passé", "full": "l'été dernier", "r": "« l'été dernier » parle d'un moment qui est fini : c'est le passé.", "re": "“last summer” refers to a time that is over: it is the past."}, {"q": "en ce moment", "o": ["Passé", "Présent", "Futur"], "a": 1, "en": "at the moment", "good": "« en ce moment » → Présent", "full": "en ce moment", "r": "« en ce moment » parle de maintenant ou d'une habitude : c'est le présent.", "re": "“at the moment” refers to now or to a habit: it is the present."}, {"q": "demain", "o": ["Passé", "Présent", "Futur"], "a": 2, "en": "tomorrow", "good": "« demain » → Futur", "full": "demain", "r": "« demain » parle d'un moment qui n'est pas encore arrivé : c'est le futur.", "re": "“tomorrow” refers to a time that has not come yet: it is the future."}, {"q": "tous les weekends", "o": ["Passé", "Présent", "Futur"], "a": 1, "en": "every weekend", "good": "« tous les weekends » → Présent", "full": "tous les weekends", "r": "« tous les weekends » parle de maintenant ou d'une habitude : c'est le présent.", "re": "“every weekend” refers to now or to a habit: it is the present."}, {"q": "l'année prochaine", "o": ["Passé", "Présent", "Futur"], "a": 2, "en": "next year", "good": "« l'année prochaine » → Futur", "full": "l'année prochaine", "r": "« l'année prochaine » parle d'un moment qui n'est pas encore arrivé : c'est le futur.", "re": "“next year” refers to a time that has not come yet: it is the future."}, {"q": "la semaine dernière", "o": ["Passé", "Présent", "Futur"], "a": 0, "en": "last week", "good": "« la semaine dernière » → Passé", "full": "la semaine dernière", "r": "« la semaine dernière » parle d'un moment qui est fini : c'est le passé.", "re": "“last week” refers to a time that is over: it is the past."}, {"q": "aujourd'hui", "o": ["Passé", "Présent", "Futur"], "a": 1, "en": "today", "good": "« aujourd'hui » → Présent", "full": "aujourd'hui", "r": "« aujourd'hui » parle de maintenant ou d'une habitude : c'est le présent.", "re": "“today” refers to now or to a habit: it is the present."}, {"q": "dans dix ans", "o": ["Passé", "Présent", "Futur"], "a": 2, "en": "in ten years' time", "good": "« dans dix ans » → Futur", "full": "dans dix ans", "r": "« dans dix ans » parle d'un moment qui n'est pas encore arrivé : c'est le futur.", "re": "“in ten years' time” refers to a time that has not come yet: it is the future."}, {"q": "quand j'étais petite", "o": ["Passé", "Présent", "Futur"], "a": 0, "en": "when I was little", "good": "« quand j'étais petite » → Passé", "full": "quand j'étais petite", "r": "« quand j'étais petite » parle d'un moment qui est fini : c'est le passé.", "re": "“when I was little” refers to a time that is over: it is the past."}, {"q": "souvent", "o": ["Passé", "Présent", "Futur"], "a": 1, "en": "often", "good": "« souvent » → Présent", "full": "souvent", "r": "« souvent » parle de maintenant ou d'une habitude : c'est le présent.", "re": "“often” refers to now or to a habit: it is the present."}, {"q": "le mois prochain", "o": ["Passé", "Présent", "Futur"], "a": 2, "en": "next month", "good": "« le mois prochain » → Futur", "full": "le mois prochain", "r": "« le mois prochain » parle d'un moment qui n'est pas encore arrivé : c'est le futur.", "re": "“next month” refers to a time that has not come yet: it is the future."}], "tip": "Les mots avec « dernier » ou « dernière » indiquent le passé, les mots avec « prochain » ou « prochaine » indiquent le futur.", "tipEn": "Words with “dernier” point to the past; words with “prochain” point to the future.", "grad": "linear-gradient(90deg,#9b7bd6,#e2568c)"}, {"id": "e2", "type": "qcm", "enBefore": true, "short": "Le présent", "title": "Le présent", "label": "Le présent", "consigne": "Choisis la bonne forme du verbe au présent.", "consigneEn": "Choose the correct form of the verb in the present.", "min": 4, "items": [{"q": "Tous les dimanches, nous ___ une balade à vélo le long du fleuve.", "note": null, "o": ["faisons", "faites", "font"], "a": 0, "ans": "faisons", "en": "Every Sunday we go for a bike ride along the river.", "good": "Tous les dimanches, nous faisons une balade à vélo le long du fleuve.", "full": "Tous les dimanches, nous faisons une balade à vélo le long du fleuve.", "r": "Le sujet est « nous » : faire → nous faisons.", "re": "The subject is “nous”: faire → nous faisons."}, {"q": "Mes parents ___ souvent à Lyon.", "note": null, "o": ["va", "vont", "allons"], "a": 1, "ans": "vont", "en": "My parents often go to Lyon.", "good": "Mes parents vont souvent à Lyon.", "full": "Mes parents vont souvent à Lyon.", "r": "« Mes parents » = ils : aller → ils vont.", "re": "“Mes parents” = they: aller → ils vont."}, {"q": "Vous ___ la ville avec un guide ?", "note": null, "o": ["visitez", "visitent", "visites"], "a": 0, "ans": "visitez", "en": "Are you visiting the town with a guide?", "good": "Vous visitez la ville avec un guide ?", "full": "Vous visitez la ville avec un guide ?", "r": "Avec « vous », la terminaison est -ez : vous visitez.", "re": "With “vous”, the ending is -ez: vous visitez."}, {"q": "J'adore ___ les endroits cachés.", "note": null, "o": ["visite", "visiter", "visité"], "a": 1, "ans": "visiter", "en": "I love visiting hidden places.", "good": "J'adore visiter les endroits cachés.", "full": "J'adore visiter les endroits cachés.", "r": "Après « adorer », « aimer » ou « préférer », le deuxième verbe est à l'infinitif : j'adore visiter.", "re": "After “adorer”, “aimer” or “préférer”, the second verb is in the infinitive: j'adore visiter."}, {"q": "En ce moment, tu ___ du shopping au centre commercial.", "note": null, "o": ["fais", "fait", "faites"], "a": 0, "ans": "fais", "en": "At the moment you are shopping at the shopping centre.", "good": "En ce moment, tu fais du shopping au centre commercial.", "full": "En ce moment, tu fais du shopping au centre commercial.", "r": "Avec « tu », faire → tu fais (avec un -s).", "re": "With “tu”, faire → tu fais (with an -s)."}, {"q": "Ma sœur est une noctambule : elle ___ danser tous les samedis soir.", "note": null, "o": ["vais", "vas", "va"], "a": 2, "ans": "va", "en": "My sister is a night owl: she goes dancing every Saturday night.", "good": "Ma sœur est une noctambule : elle va danser tous les samedis soir.", "full": "Ma sœur est une noctambule : elle va danser tous les samedis soir.", "r": "Avec « elle », aller → elle va.", "re": "With “elle”, aller → elle va."}, {"q": "Vous ___ une croisière promenade sur la Saône ?", "note": null, "o": ["faites", "faisez", "fais"], "a": 0, "ans": "faites", "en": "Are you going on a sightseeing cruise on the Saône?", "good": "Vous faites une croisière promenade sur la Saône ?", "full": "Vous faites une croisière promenade sur la Saône ?", "r": "Faire est irrégulier : vous faites (et jamais « vous faisez »).", "re": "Faire is irregular: vous faites (never “vous faisez”)."}, {"q": "Nous ___ beaucoup de touristes dans notre ville.", "note": null, "o": ["accueillez", "accueillons", "accueillent"], "a": 1, "ans": "accueillons", "en": "We welcome a lot of tourists in our town.", "good": "Nous accueillons beaucoup de touristes dans notre ville.", "full": "Nous accueillons beaucoup de touristes dans notre ville.", "r": "Avec « nous », la terminaison est -ons : nous accueillons.", "re": "With “nous”, the ending is -ons: nous accueillons."}], "tip": "Regarde d'abord le sujet (je, tu, il, nous, vous, ils), puis choisis la terminaison qui va avec. Après aimer, adorer, préférer : infinitif.", "tipEn": "First look at the subject, then choose the ending that goes with it. After aimer, adorer, préférer: infinitive.", "photo": ["img/galets.jpg", "Des galets sur la plage"], "grad": "linear-gradient(90deg,#e2568c,#f29a6b)"}, {"id": "e3", "type": "type", "short": "Le participe passé", "title": "Le participe passé", "label": "Le participe passé", "consigne": "Écris le participe passé du verbe. Utilise les boutons pour les accents.", "consigneEn": "Write the past participle of the verb. Use the buttons for the accents.", "min": 5, "items": [{"q": "Hier, j'ai ___ le musée.", "inf": "visiter", "ans": "visité", "en": "Yesterday I visited the museum.", "good": "Hier, j'ai visité le musée.", "full": "Hier, j'ai visité le musée.", "r": "Verbe en -ER → participe en -é : visiter → visité.", "re": "-ER verb → past participle in -é: visiter → visité."}, {"q": "Nous avons ___ un petit hôtel près de la plage.", "inf": "choisir", "ans": "choisi", "en": "We chose a small hotel near the beach.", "good": "Nous avons choisi un petit hôtel près de la plage.", "full": "Nous avons choisi un petit hôtel près de la plage.", "r": "Verbe en -IR → participe en -i : choisir → choisi.", "re": "-IR verb → past participle in -i: choisir → choisi."}, {"q": "J'ai ___ le bus pendant vingt minutes.", "inf": "attendre", "ans": "attendu", "en": "I waited for the bus for twenty minutes.", "good": "J'ai attendu le bus pendant vingt minutes.", "full": "J'ai attendu le bus pendant vingt minutes.", "r": "Verbe en -RE → participe en -u : attendre → attendu.", "re": "-RE verb → past participle in -u: attendre → attendu."}, {"q": "Tu as ___ une balade à vélo ?", "inf": "faire", "ans": "fait", "en": "Did you go for a bike ride?", "good": "Tu as fait une balade à vélo ?", "full": "Tu as fait une balade à vélo ?", "r": "Faire est irrégulier : faire → fait.", "re": "Faire is irregular: faire → fait."}, {"q": "Ils ont ___ le funiculaire.", "inf": "prendre", "ans": "pris", "en": "They took the funicular.", "good": "Ils ont pris le funiculaire.", "full": "Ils ont pris le funiculaire.", "r": "Prendre est irrégulier : prendre → pris.", "re": "Prendre is irregular: prendre → pris."}, {"q": "Elle a ___ un phoque sur la plage.", "inf": "voir", "ans": "vu", "en": "She saw a seal on the beach.", "good": "Elle a vu un phoque sur la plage.", "full": "Elle a vu un phoque sur la plage.", "r": "Voir est irrégulier : voir → vu.", "re": "Voir is irregular: voir → vu."}, {"q": "Nous avons ___ un bon cru de la région.", "inf": "boire", "ans": "bu", "en": "We drank a good local wine.", "good": "Nous avons bu un bon cru de la région.", "full": "Nous avons bu un bon cru de la région.", "r": "Boire est irrégulier : boire → bu.", "re": "Boire is irregular: boire → bu."}, {"q": "Le voyage a ___ fantastique.", "inf": "être", "ans": "été", "en": "The trip was fantastic.", "good": "Le voyage a été fantastique.", "full": "Le voyage a été fantastique.", "r": "Être est irrégulier : être → été (avec deux accents).", "re": "Être is irregular: être → été (with two accents)."}, {"q": "J'ai ___ l'embarras du choix.", "inf": "avoir", "ans": "eu", "en": "I was spoilt for choice.", "good": "J'ai eu l'embarras du choix.", "full": "J'ai eu l'embarras du choix.", "r": "Avoir est irrégulier : avoir → eu.", "re": "Avoir is irregular: avoir → eu."}, {"q": "Vous avez ___ les spécialités lyonnaises ?", "inf": "déguster", "ans": "dégusté", "en": "Did you taste the Lyon specialities?", "good": "Vous avez dégusté les spécialités lyonnaises ?", "full": "Vous avez dégusté les spécialités lyonnaises ?", "r": "Verbe en -ER → participe en -é : déguster → dégusté.", "re": "-ER verb → past participle in -é: déguster → dégusté."}], "tip": "Regarde la fin de l'infinitif : -ER → -é, -IR → -i, -RE → -u. Apprends par cœur les irréguliers : fait, pris, vu, bu, été, eu.", "tipEn": "Look at the end of the infinitive: -ER → -é, -IR → -i, -RE → -u. Learn the irregular ones by heart: fait, pris, vu, bu, été, eu.", "photo": ["img/bouchon2.jpg", "Un restaurant dans le vieux Lyon"], "grad": "linear-gradient(90deg,#c2477d,#9b7bd6)"}, {"id": "e4", "type": "qcm", "enBefore": true, "short": "Avoir ou être ?", "title": "Avoir ou être ?", "label": "Le passé composé", "consigne": "Choisis la bonne forme du passé composé. Attention à l'auxiliaire et à l'accord !", "consigneEn": "Choose the correct perfect tense form. Watch the auxiliary and the agreement!", "min": 6, "items": [{"q": "Hier, Emma ___ au musée.", "note": null, "o": ["est allée", "a allé", "est allé"], "a": 0, "ans": "est allée", "en": "Yesterday Emma went to the museum.", "good": "Hier, Emma est allée au musée.", "full": "Hier, Emma est allée au musée.", "r": "Aller se conjugue avec être. Emma est une fille : on ajoute -e → elle est allée.", "re": "Aller takes être. Emma is a girl, so add -e: elle est allée."}, {"q": "Le weekend dernier, nous ___ des spécialités lyonnaises.", "note": null, "o": ["sommes dégustés", "avons dégusté", "avons dégustés"], "a": 1, "ans": "avons dégusté", "en": "Last weekend we tasted some Lyon specialities.", "good": "Le weekend dernier, nous avons dégusté des spécialités lyonnaises.", "full": "Le weekend dernier, nous avons dégusté des spécialités lyonnaises.", "r": "Déguster se conjugue avec avoir. Avec avoir, pas d'accord avec le sujet : nous avons dégusté.", "re": "Déguster takes avoir. With avoir, no agreement with the subject: nous avons dégusté."}, {"q": "Mes amies ___ à Saint-Malo en train.", "note": null, "o": ["ont parti", "sont partis", "sont parties"], "a": 2, "ans": "sont parties", "en": "My friends went to Saint-Malo by train.", "good": "Mes amies sont parties à Saint-Malo en train.", "full": "Mes amies sont parties à Saint-Malo en train.", "r": "Partir se conjugue avec être. « Mes amies » = féminin pluriel : on ajoute -es → elles sont parties.", "re": "Partir takes être. “Mes amies” is feminine plural, so add -es: elles sont parties."}, {"q": "Tu ___ une balade à vélo hier ?", "note": null, "o": ["as fait", "es fait", "as faite"], "a": 0, "ans": "as fait", "en": "Did you go for a bike ride yesterday?", "good": "Tu as fait une balade à vélo hier ?", "full": "Tu as fait une balade à vélo hier ?", "r": "Faire se conjugue avec avoir : tu as fait. Avec avoir, le participe ne change pas.", "re": "Faire takes avoir: tu as fait. With avoir, the participle does not change."}, {"q": "Paul et Léa ___ à la maison très tard.", "note": null, "o": ["ont rentré", "sont rentrés", "sont rentrées"], "a": 1, "ans": "sont rentrés", "en": "Paul and Léa came home very late.", "good": "Paul et Léa sont rentrés à la maison très tard.", "full": "Paul et Léa sont rentrés à la maison très tard.", "r": "Rentrer se conjugue avec être. Un garçon + une fille = masculin pluriel : sont rentrés.", "re": "Rentrer takes être. A boy + a girl = masculine plural: sont rentrés."}, {"q": "Pendant les vacances, ___ chez ma tante.", "note": "Emilly parle", "o": ["je suis resté", "j'ai resté", "je suis restée"], "a": 2, "ans": "je suis restée", "en": "During the holidays I stayed at my aunt's.", "good": "Pendant les vacances, je suis restée chez ma tante.", "full": "Pendant les vacances, je suis restée chez ma tante.", "r": "Rester se conjugue avec être. Emilly est une fille : je suis restée.", "re": "Rester takes être. Emilly is a girl: je suis restée."}, {"q": "Mon frère ___ un prix au concours de cuisine.", "note": null, "o": ["a remporté", "est remporté", "a remportée"], "a": 0, "ans": "a remporté", "en": "My brother won a prize at the cooking competition.", "good": "Mon frère a remporté un prix au concours de cuisine.", "full": "Mon frère a remporté un prix au concours de cuisine.", "r": "Remporter se conjugue avec avoir : il a remporté. Pas d'accord avec le sujet.", "re": "Remporter takes avoir: il a remporté. No agreement with the subject."}, {"q": "Elle ___ le long des quais.", "note": null, "o": ["a promené", "s'est promenée", "s'est promené"], "a": 1, "ans": "s'est promenée", "en": "She went for a walk along the riverside.", "good": "Elle s'est promenée le long des quais.", "full": "Elle s'est promenée le long des quais.", "r": "Se promener est un verbe pronominal (se) : il se conjugue avec être et s'accorde → elle s'est promenée.", "re": "Se promener is a reflexive verb: it takes être and agrees → elle s'est promenée."}, {"q": "Nous ___ le funiculaire pour monter à Fourvière.", "note": null, "o": ["avons pris", "sommes pris", "avons prendu"], "a": 0, "ans": "avons pris", "en": "We took the funicular up to Fourvière.", "good": "Nous avons pris le funiculaire pour monter à Fourvière.", "full": "Nous avons pris le funiculaire pour monter à Fourvière.", "r": "Prendre se conjugue avec avoir, et son participe est irrégulier : nous avons pris.", "re": "Prendre takes avoir, and its participle is irregular: nous avons pris."}, {"q": "Les touristes ___ les bras chargés.", "note": null, "o": ["ont arrivé", "sont arrivé", "sont arrivés"], "a": 2, "ans": "sont arrivés", "en": "The tourists arrived with their arms full.", "good": "Les touristes sont arrivés les bras chargés.", "full": "Les touristes sont arrivés les bras chargés.", "r": "Arriver se conjugue avec être. « Les touristes » = pluriel : on ajoute -s → ils sont arrivés.", "re": "Arriver takes être. “Les touristes” is plural, so add -s: ils sont arrivés."}], "tip": "Demande-toi : est-ce un verbe de mouvement (aller, partir, venir, arriver, rester, rentrer) ou un verbe avec « se » ? Si oui → être + accord avec le sujet (-e, -s, -es). Sinon → avoir, sans accord.", "tipEn": "Ask yourself: is it a verb of movement or a verb with “se”? If so → être + agreement with the subject. If not → avoir, no agreement.", "grad": "linear-gradient(90deg,#8a6bd0,#5b9bd5)"}, {"id": "e5", "type": "type", "short": "L'imparfait", "title": "L'imparfait", "label": "L'imparfait", "consigne": "Écris le verbe à l'imparfait.", "consigneEn": "Write the verb in the imperfect.", "min": 5, "items": [{"q": "Quand j'étais petite, nous ___ à la mer chaque été.", "inf": "aller", "ans": "allions", "en": "When I was little, we used to go to the seaside every summer.", "good": "Quand j'étais petite, nous allions à la mer chaque été.", "full": "Quand j'étais petite, nous allions à la mer chaque été.", "r": "nous allons → radical all- + -ions → nous allions. C'est une habitude passée.", "re": "nous allons → stem all- + -ions → nous allions. It is a past habit."}, {"q": "Il ___ beau et le ciel était bleu.", "inf": "faire", "ans": "faisait", "en": "The weather was lovely and the sky was blue.", "good": "Il faisait beau et le ciel était bleu.", "full": "Il faisait beau et le ciel était bleu.", "r": "nous faisons → radical fais- + -ait → il faisait. C'est une description.", "re": "nous faisons → stem fais- + -ait → il faisait. It is a description."}, {"q": "La plage ___ calme.", "inf": "être", "ans": "était", "en": "The beach was quiet.", "good": "La plage était calme.", "full": "La plage était calme.", "r": "Être est le seul verbe irrégulier : radical ét- + -ait → elle était.", "re": "Être is the only irregular verb: stem ét- + -ait → elle était."}, {"q": "Mes grands-parents ___ près de la côte.", "inf": "habiter", "ans": "habitaient", "en": "My grandparents lived near the coast.", "good": "Mes grands-parents habitaient près de la côte.", "full": "Mes grands-parents habitaient près de la côte.", "r": "nous habitons → habit- + -aient → ils habitaient (avec ils, la terminaison est -aient).", "re": "nous habitons → habit- + -aient → ils habitaient (with ils, the ending is -aient)."}, {"q": "Tous les soirs, je ___ des ricochets avec mon père.", "inf": "faire", "ans": "faisais", "en": "Every evening I would skim stones with my dad.", "good": "Tous les soirs, je faisais des ricochets avec mon père.", "full": "Tous les soirs, je faisais des ricochets avec mon père.", "r": "nous faisons → fais- + -ais → je faisais. « Tous les soirs » = une habitude.", "re": "nous faisons → fais- + -ais → je faisais. “Tous les soirs” = a habit."}, {"q": "Tu ___ peur des vagues ?", "inf": "avoir", "ans": "avais", "en": "Were you afraid of the waves?", "good": "Tu avais peur des vagues ?", "full": "Tu avais peur des vagues ?", "r": "nous avons → av- + -ais → tu avais.", "re": "nous avons → av- + -ais → tu avais."}, {"q": "Vous ___ souvent le bateau ?", "inf": "prendre", "ans": "preniez", "en": "Did you often take the boat?", "good": "Vous preniez souvent le bateau ?", "full": "Vous preniez souvent le bateau ?", "r": "nous prenons → pren- + -iez → vous preniez.", "re": "nous prenons → pren- + -iez → vous preniez."}, {"q": "Les canards ___ sur le lac.", "inf": "flotter", "ans": "flottaient", "en": "The ducks were floating on the lake.", "good": "Les canards flottaient sur le lac.", "full": "Les canards flottaient sur le lac.", "r": "nous flottons → flott- + -aient → ils flottaient. C'est une action en cours dans le passé.", "re": "nous flottons → flott- + -aient → ils flottaient. It is an action in progress in the past."}], "tip": "Pars toujours de « nous » au présent : nous faisons → fais-. Enlève -ons et ajoute -ais, -ais, -ait, -ions, -iez, -aient. Seule exception : être → ét-.", "tipEn": "Always start from “nous” in the present: remove -ons and add the endings. Only exception: être → ét-.", "photo": ["img/phoque.jpg", "Un phoque sur un rocher"], "grad": "linear-gradient(90deg,#5b9bd5,#3fae92)"}, {"id": "e6", "type": "qcm", "enBefore": false, "short": "Imparfait ou passé composé", "title": "Une journée à Saint-Malo", "label": "Imparfait ou passé composé", "consigne": "Lis l'histoire phrase par phrase : imparfait (le décor) ou passé composé (l'événement) ?", "consigneEn": "Read the story sentence by sentence: imperfect (the background) or perfect (the event)?", "min": 6, "items": [{"q": "___ un samedi de juillet.", "note": null, "o": ["C'était", "Ça a été"], "a": 0, "ans": "C'était", "en": "It was a Saturday in July.", "good": "C'était un samedi de juillet.", "full": "C'était un samedi de juillet.", "r": "C'est le décor de l'histoire (une description) : imparfait.", "re": "It is the background of the story (a description): imperfect."}, {"q": "Il ___ beaucoup de vent sur la plage.", "note": null, "o": ["a fait", "faisait"], "a": 1, "ans": "faisait", "en": "It was very windy on the beach.", "good": "Il faisait beaucoup de vent sur la plage.", "full": "Il faisait beaucoup de vent sur la plage.", "r": "La météo est une description : imparfait.", "re": "The weather is a description: imperfect."}, {"q": "___ sur les galets…", "note": null, "o": ["Je marchais", "J'ai marché"], "a": 0, "ans": "Je marchais", "en": "I was walking on the pebbles…", "good": "Je marchais sur les galets…", "full": "Je marchais sur les galets", "r": "Une action en cours (« I was walking ») : imparfait.", "re": "An action in progress (“I was walking”): imperfect."}, {"q": "… quand ___ un phoque.", "note": null, "o": ["je voyais", "j'ai vu"], "a": 1, "ans": "j'ai vu", "en": "… when I saw a seal.", "good": "… quand j'ai vu un phoque.", "full": "quand j'ai vu un phoque.", "r": "Un événement qui arrive à un moment précis et interrompt l'action : passé composé.", "re": "An event that happens at a specific moment and interrupts the action: perfect tense."}, {"q": "Il ___ tranquillement sur un rocher.", "note": null, "o": ["dormait", "a dormi"], "a": 0, "ans": "dormait", "en": "It was sleeping peacefully on a rock.", "good": "Il dormait tranquillement sur un rocher.", "full": "Il dormait tranquillement sur un rocher.", "r": "On décrit la scène, l'action dure : imparfait.", "re": "We are describing the scene, the action lasts: imperfect."}, {"q": "Tout à coup, une grosse vague ___.", "note": null, "o": ["arrivait", "est arrivée"], "a": 1, "ans": "est arrivée", "en": "Suddenly, a big wave came.", "good": "Tout à coup, une grosse vague est arrivée.", "full": "Tout à coup, une grosse vague est arrivée.", "r": "« Tout à coup » annonce un événement soudain : passé composé.", "re": "“Tout à coup” introduces a sudden event: perfect tense."}, {"q": "Le phoque ___ dans l'eau.", "note": null, "o": ["a plongé", "plongeait"], "a": 0, "ans": "a plongé", "en": "The seal dived into the water.", "good": "Le phoque a plongé dans l'eau.", "full": "Le phoque a plongé dans l'eau.", "r": "Une action qui arrive une fois : passé composé.", "re": "An action that happens once: perfect tense."}, {"q": "Le soir, nous ___ dans une crêperie près des remparts.", "note": null, "o": ["dînions", "avons dîné"], "a": 1, "ans": "avons dîné", "en": "In the evening we had dinner in a crêperie near the ramparts.", "good": "Le soir, nous avons dîné dans une crêperie près des remparts.", "full": "Le soir, nous avons dîné dans une crêperie près des remparts.", "r": "Une action unique, terminée, ce soir-là : passé composé.", "re": "A single completed action, that evening: perfect tense."}, {"q": "Les crêpes ___ délicieuses !", "note": null, "o": ["étaient", "ont été"], "a": 0, "ans": "étaient", "en": "The crêpes were delicious!", "good": "Les crêpes étaient délicieuses !", "full": "Les crêpes étaient délicieuses !", "r": "On donne une description : imparfait.", "re": "We are giving a description: imperfect."}, {"q": "Quand j'étais petite, ___ des ricochets tous les étés.", "note": null, "o": ["j'ai fait", "je faisais"], "a": 1, "ans": "je faisais", "en": "When I was little, I used to skim stones every summer.", "good": "Quand j'étais petite, je faisais des ricochets tous les étés.", "full": "Quand j'étais petite, je faisais des ricochets tous les étés.", "r": "« Tous les étés » : une habitude passée → imparfait.", "re": "“Tous les étés”: a past habit → imperfect."}], "tip": "Imparfait = le décor (description, météo, habitude, action en cours). Passé composé = l'événement (une fois, à un moment précis, « tout à coup »).", "tipEn": "Imperfect = the background (description, weather, habit, action in progress). Perfect = the event (once, at a specific moment).", "pre": "<figure class=\"photo\" style=\"margin-top:0\"><img src=\"img/stmalo2.jpg\" alt=\"\"><figcaption>Les remparts de Saint-Malo</figcaption></figure>", "grad": "linear-gradient(90deg,#3fae92,#9b7bd6)"}, {"id": "e7", "type": "qcm", "enBefore": true, "short": "Le futur", "title": "Le futur", "label": "Le futur", "consigne": "Choisis la bonne forme du futur proche ou du futur simple.", "consigneEn": "Choose the correct form of the near future or the simple future.", "min": 5, "items": [{"q": "L'année prochaine, nous ___ en Provence.", "note": null, "o": ["irons", "allerons", "irez"], "a": 0, "ans": "irons", "en": "Next year we'll go to Provence.", "good": "L'année prochaine, nous irons en Provence.", "full": "L'année prochaine, nous irons en Provence.", "r": "Aller a un radical irrégulier au futur : ir- + -ons → nous irons.", "re": "Aller has an irregular future stem: ir- + -ons → nous irons."}, {"q": "Demain, il ___ beau sur toute la région.", "note": null, "o": ["faira", "fera", "ferons"], "a": 1, "ans": "fera", "en": "Tomorrow it will be sunny across the whole region.", "good": "Demain, il fera beau sur toute la région.", "full": "Demain, il fera beau sur toute la région.", "r": "Faire → radical fer- : il fera.", "re": "Faire → stem fer-: il fera."}, {"q": "Ce soir, on ___ dans un bouchon lyonnais.", "note": null, "o": ["va dîner", "vas dîner", "va dîné"], "a": 0, "ans": "va dîner", "en": "Tonight we're going to have dinner in a traditional Lyon bistro.", "good": "Ce soir, on va dîner dans un bouchon lyonnais.", "full": "Ce soir, on va dîner dans un bouchon lyonnais.", "r": "Futur proche : aller au présent + infinitif. On → va, puis l'infinitif dîner (avec -er).", "re": "Near future: aller in the present + infinitive. On → va, then the infinitive dîner."}, {"q": "Dans dix ans, je ___ à la retraite.", "note": null, "o": ["êtrai", "serai", "serons"], "a": 1, "ans": "serai", "en": "In ten years' time I'll be retired.", "good": "Dans dix ans, je serai à la retraite.", "full": "Dans dix ans, je serai à la retraite.", "r": "Être → radical ser- : je serai.", "re": "Être → stem ser-: je serai."}, {"q": "L'été prochain, tu ___ les remparts de Saint-Malo.", "note": null, "o": ["voiras", "verra", "verras"], "a": 2, "ans": "verras", "en": "Next summer you'll see the ramparts of Saint-Malo.", "good": "L'été prochain, tu verras les remparts de Saint-Malo.", "full": "L'été prochain, tu verras les remparts de Saint-Malo.", "r": "Voir → radical verr- : tu verras (avec -as pour « tu »).", "re": "Voir → stem verr-: tu verras (-as for “tu”)."}, {"q": "Je ___ réserver l'hôtel demain matin.", "note": null, "o": ["vais", "va", "vas"], "a": 0, "ans": "vais", "en": "I'm going to book the hotel tomorrow morning.", "good": "Je vais réserver l'hôtel demain matin.", "full": "Je vais réserver l'hôtel demain matin.", "r": "Futur proche avec « je » : je vais + infinitif.", "re": "Near future with “je”: je vais + infinitive."}, {"q": "Mes cousins ___ chez nous la semaine prochaine.", "note": null, "o": ["venont", "viendrons", "viendront"], "a": 2, "ans": "viendront", "en": "My cousins will come and stay with us next week.", "good": "Mes cousins viendront chez nous la semaine prochaine.", "full": "Mes cousins viendront chez nous la semaine prochaine.", "r": "Venir → radical viendr- ; avec « ils », terminaison -ont : ils viendront.", "re": "Venir → stem viendr-; with “ils”, ending -ont: ils viendront."}, {"q": "La semaine prochaine, vous ___ le train pour Nantes.", "note": null, "o": ["prendrez", "prenderez", "prendez"], "a": 0, "ans": "prendrez", "en": "Next week you'll take the train to Nantes.", "good": "La semaine prochaine, vous prendrez le train pour Nantes.", "full": "La semaine prochaine, vous prendrez le train pour Nantes.", "r": "Verbe en -RE : on enlève le -e final → prendr- + -ez → vous prendrez.", "re": "-RE verb: drop the final -e → prendr- + -ez → vous prendrez."}, {"q": "Nous ___ une semaine de vacances en février.", "note": null, "o": ["averons", "aurons", "aurez"], "a": 1, "ans": "aurons", "en": "We'll have a week's holiday in February.", "good": "Nous aurons une semaine de vacances en février.", "full": "Nous aurons une semaine de vacances en février.", "r": "Avoir → radical aur- : nous aurons.", "re": "Avoir → stem aur-: nous aurons."}, {"q": "Je ___ passer une semaine à la montagne.", "note": "un souhait poli", "o": ["voudrai", "voulais", "voudrais"], "a": 2, "ans": "voudrais", "en": "I would like to spend a week in the mountains.", "good": "Je voudrais passer une semaine à la montagne.", "full": "Je voudrais passer une semaine à la montagne.", "r": "Pour un souhait poli, on dit « je voudrais » (avec -s) + infinitif.", "re": "For a polite wish we say “je voudrais” (with -s) + infinitive."}], "tip": "Futur proche = aller au présent + infinitif (je vais visiter). Futur simple = infinitif + -ai, -as, -a, -ons, -ez, -ont. Apprends les radicaux : ir-, fer-, ser-, aur-, verr-, viendr-, pourr-.", "tipEn": "Near future = aller in the present + infinitive. Simple future = infinitive + endings. Learn the irregular stems.", "photo": ["img/alpes.jpg", "Les Alpes, autour du mont Blanc"], "grad": "linear-gradient(90deg,#f29a6b,#e2568c)"}, {"id": "e8", "type": "qcm", "enBefore": false, "short": "Trois moments", "title": "Un même verbe, trois moments", "label": "Trois moments", "consigne": "Cherche le mot de temps, puis choisis le bon temps.", "consigneEn": "Find the time word, then choose the right tense.", "min": 5, "items": [{"q": "Hier, ___ le musée des Confluences.", "note": null, "o": ["je visite", "j'ai visité", "je visiterai"], "a": 1, "ans": "j'ai visité", "en": "Yesterday I visited the Confluences museum.", "good": "Hier, j'ai visité le musée des Confluences.", "full": "Hier, j'ai visité le musée des Confluences.", "r": "« Hier » → passé. Une action terminée : passé composé → j'ai visité.", "re": "“Hier” → past. A completed action: perfect → j'ai visité."}, {"q": "Tous les weekends, ma mère ___ au marché.", "note": null, "o": ["va", "est allée", "ira"], "a": 0, "ans": "va", "en": "Every weekend my mum goes to the market.", "good": "Tous les weekends, ma mère va au marché.", "full": "Tous les weekends, ma mère va au marché.", "r": "« Tous les weekends » → une habitude d'aujourd'hui : présent → elle va.", "re": "“Tous les weekends” → a present habit: present → elle va."}, {"q": "Le weekend prochain, nous ___ du shopping.", "note": null, "o": ["avons fait", "faisions", "ferons"], "a": 2, "ans": "ferons", "en": "Next weekend we'll go shopping.", "good": "Le weekend prochain, nous ferons du shopping.", "full": "Le weekend prochain, nous ferons du shopping.", "r": "« Le weekend prochain » → futur : nous ferons.", "re": "“Le weekend prochain” → future: nous ferons."}, {"q": "L'été dernier, mes amies ___ à Bordeaux.", "note": null, "o": ["partent", "sont parties", "partiront"], "a": 1, "ans": "sont parties", "en": "Last summer my friends went to Bordeaux.", "good": "L'été dernier, mes amies sont parties à Bordeaux.", "full": "L'été dernier, mes amies sont parties à Bordeaux.", "r": "« L'été dernier » → passé composé, avec être et accord : elles sont parties.", "re": "“L'été dernier” → perfect, with être and agreement: elles sont parties."}, {"q": "En ce moment, ___ chez ma tante à Nantes.", "note": null, "o": ["je loge", "j'ai logé", "je logerai"], "a": 0, "ans": "je loge", "en": "At the moment I'm staying at my aunt's in Nantes.", "good": "En ce moment, je loge chez ma tante à Nantes.", "full": "En ce moment, je loge chez ma tante à Nantes.", "r": "« En ce moment » → présent : je loge.", "re": "“En ce moment” → present: je loge."}, {"q": "L'année prochaine, tu ___ Lyon sous un angle différent.", "note": null, "o": ["as découvert", "découvrais", "découvriras"], "a": 2, "ans": "découvriras", "en": "Next year you'll discover Lyon from a different angle.", "good": "L'année prochaine, tu découvriras Lyon sous un angle différent.", "full": "L'année prochaine, tu découvriras Lyon sous un angle différent.", "r": "« L'année prochaine » → futur simple : tu découvriras.", "re": "“L'année prochaine” → simple future: tu découvriras."}, {"q": "Quand j'étais petite, ___ souvent à la plage.", "note": null, "o": ["j'allais", "je suis allée", "j'irai"], "a": 0, "ans": "j'allais", "en": "When I was little, I often used to go to the beach.", "good": "Quand j'étais petite, j'allais souvent à la plage.", "full": "Quand j'étais petite, j'allais souvent à la plage.", "r": "« Quand j'étais petite » + « souvent » → une habitude passée : imparfait → j'allais.", "re": "A past habit: imperfect → j'allais."}, {"q": "Demain, on ___ une croisière promenade.", "note": null, "o": ["a fait", "va faire", "faisait"], "a": 1, "ans": "va faire", "en": "Tomorrow we're going on a sightseeing cruise.", "good": "Demain, on va faire une croisière promenade.", "full": "Demain, on va faire une croisière promenade.", "r": "« Demain » → futur. Futur proche : on va faire.", "re": "“Demain” → future. Near future: on va faire."}, {"q": "La semaine dernière, mes parents ___ un prix pour leur recette.", "note": null, "o": ["ont remporté", "remportent", "remporteront"], "a": 0, "ans": "ont remporté", "en": "Last week my parents won a prize for their recipe.", "good": "La semaine dernière, mes parents ont remporté un prix pour leur recette.", "full": "La semaine dernière, mes parents ont remporté un prix pour leur recette.", "r": "« La semaine dernière » → passé composé : ils ont remporté.", "re": "“La semaine dernière” → perfect: ils ont remporté."}, {"q": "Tous les étés, nous ___ des amis à la maison.", "note": null, "o": ["avons accueilli", "accueillons", "accueillerons"], "a": 1, "ans": "accueillons", "en": "Every summer we welcome friends at home.", "good": "Tous les étés, nous accueillons des amis à la maison.", "full": "Tous les étés, nous accueillons des amis à la maison.", "r": "« Tous les étés » → une habitude d'aujourd'hui : présent → nous accueillons.", "re": "“Tous les étés” → a present habit: present → nous accueillons."}], "tip": "Toujours en trois étapes : 1. je cherche le mot de temps, 2. je choisis le temps, 3. je conjugue et je vérifie l'accord.", "tipEn": "Always in three steps: find the time word, choose the tense, conjugate and check the agreement.", "grad": "linear-gradient(90deg,#6b3a7a,#e2568c)"}, {"id": "e9", "type": "order", "short": "Les mots dans l'ordre", "title": "Les mots dans l'ordre", "label": "Construire la phrase", "consigne": "Appuie sur les mots dans le bon ordre pour faire la phrase.", "consigneEn": "Tap the words in the right order to make the sentence.", "min": 4, "items": [{"tiles": ["L'été dernier,", "je", "suis", "allée", "à", "Saint-Malo."], "en": "Last summer I went to Saint-Malo.", "good": "L'été dernier, je suis allée à Saint-Malo.", "full": "L'été dernier, je suis allée à Saint-Malo.", "r": "Au passé composé, l'auxiliaire (suis) vient juste avant le participe (allée).", "re": "In the perfect tense, the auxiliary comes just before the participle."}, {"tiles": ["Demain,", "nous", "allons", "visiter", "les", "remparts."], "en": "Tomorrow we're going to visit the ramparts.", "good": "Demain, nous allons visiter les remparts.", "full": "Demain, nous allons visiter les remparts.", "r": "Futur proche : aller (allons) + infinitif (visiter).", "re": "Near future: aller + infinitive."}, {"tiles": ["Quand", "j'étais", "petite,", "je", "faisais", "des", "ricochets."], "en": "When I was little, I used to skim stones.", "good": "Quand j'étais petite, je faisais des ricochets.", "full": "Quand j'étais petite, je faisais des ricochets.", "r": "Le sujet vient avant le verbe : je faisais.", "re": "The subject comes before the verb: je faisais."}, {"tiles": ["L'année prochaine,", "nous", "irons", "à", "Lyon."], "en": "Next year we'll go to Lyon.", "good": "L'année prochaine, nous irons à Lyon.", "full": "L'année prochaine, nous irons à Lyon.", "r": "Le mot de temps au début, puis sujet + verbe au futur : nous irons.", "re": "Time word first, then subject + verb in the future."}, {"tiles": ["J'adore", "déguster", "les", "spécialités", "de", "la", "région."], "en": "I love tasting the local specialities.", "good": "J'adore déguster les spécialités de la région.", "full": "J'adore déguster les spécialités de la région.", "r": "Après « j'adore », le verbe est à l'infinitif : déguster.", "re": "After “j'adore”, the verb is in the infinitive."}, {"tiles": ["Il", "pleuvait", "quand", "nous", "sommes", "arrivés."], "en": "It was raining when we arrived.", "good": "Il pleuvait quand nous sommes arrivés.", "full": "Il pleuvait quand nous sommes arrivés.", "r": "Le décor (il pleuvait) puis l'événement (nous sommes arrivés).", "re": "The background first, then the event."}], "tip": "Cherche d'abord le sujet et le verbe. Au passé composé et au futur proche, les deux parties du verbe restent ensemble : suis allée, allons visiter.", "tipEn": "Find the subject and the verb first. The two parts of the verb stay together.", "grad": "linear-gradient(90deg,#e2568c,#9b7bd6)"}, {"id": "e10", "type": "read", "short": "Lire l'essentiel", "title": "Lire l'essentiel", "label": "Lire l'essentiel", "consigne": "Lis le message de Chloé, puis réponds aux questions.", "consigneEn": "Read Chloé's message, then answer the questions.", "min": 5, "items": [{"q": "Le texte parle surtout…", "qen": "The text is mainly about…", "o": ["des voyages et des sorties de Chloé", "du travail de Chloé", "de l'école de Chloé"], "oen": ["Chloé's trips and outings", "Chloé's job", "Chloé's school"], "a": 0, "good": "des voyages et des sorties de Chloé", "en": "Chloé's trips and outings", "r": "Les mots-clés (balade, croisière, partirai, Saint-Malo) parlent de voyages et de sorties.", "re": "The key words (balade, croisière, partirai, Saint-Malo) are about trips and outings."}, {"q": "Qu'est-ce que Chloé fait tous les weekends ?", "qen": "What does Chloé do every weekend?", "o": ["une croisière", "une balade à vélo", "du shopping"], "oen": ["a cruise", "a bike ride", "shopping"], "a": 1, "good": "une balade à vélo", "en": "a bike ride", "r": "« Tous les weekends, je fais une balade à vélo » : présent, une habitude.", "re": "“Tous les weekends, je fais une balade à vélo”: present, a habit."}, {"q": "Qu'est-ce qu'elle a fait le weekend dernier ?", "qen": "What did she do last weekend?", "o": ["Elle est partie à la mer.", "Elle a dansé toute la nuit.", "Elle a fait une croisière promenade."], "oen": ["She went to the seaside.", "She danced all night.", "She went on a sightseeing cruise."], "a": 2, "good": "Elle a fait une croisière promenade.", "en": "She went on a sightseeing cruise.", "r": "« Le weekend dernier, j'ai fait une croisière promenade » : passé composé.", "re": "“Le weekend dernier, j'ai fait une croisière promenade”: perfect tense."}, {"q": "Quand elle était petite, Chloé préférait…", "qen": "When she was little, Chloé preferred…", "o": ["la côte", "les grandes villes", "les centres commerciaux"], "oen": ["the coast", "big cities", "shopping centres"], "a": 0, "good": "la côte", "en": "the coast", "r": "« Je préférais la côte » : imparfait, une habitude ou un goût du passé.", "re": "“Je préférais la côte”: imperfect, a past habit or taste."}, {"q": "Le mois prochain, Chloé…", "qen": "Next month, Chloé…", "o": ["restera à Lyon", "partira à Saint-Malo", "ira à la montagne"], "oen": ["will stay in Lyon", "will go to Saint-Malo", "will go to the mountains"], "a": 1, "good": "partira à Saint-Malo", "en": "will go to Saint-Malo", "r": "« Le mois prochain, je partirai à Saint-Malo » : futur simple.", "re": "“Le mois prochain, je partirai à Saint-Malo”: simple future."}, {"q": "Dans « nous logerons chez une amie », le verbe est…", "qen": "In “nous logerons chez une amie”, the verb is…", "o": ["au présent", "à l'imparfait", "au futur simple"], "oen": ["in the present", "in the imperfect", "in the simple future"], "a": 2, "good": "au futur simple", "en": "in the simple future", "r": "loger + -ons → nous logerons : c'est le futur simple (infinitif + terminaison).", "re": "loger + -ons → nous logerons: simple future (infinitive + ending)."}], "tip": "Ne t'arrête pas sur chaque mot : cherche les mots de temps (le weekend dernier, le mois prochain) et les verbes.", "tipEn": "Don't stop at every word: look for the time words and the verbs.", "pre": "<div class=\"row\" style=\"margin:0 0 6px\"><span class=\"sub\" style=\"margin:0\">Le message de Chloé</span><button type=\"button\" class=\"mini trbtn\">Voir la traduction</button></div><div class=\"text\"><p><span class=\"t\">Bonjour ! Je m&#x27;appelle Chloé et j&#x27;habite à Lyon.<span class=\"en\">Hello! My name is Chloé and I live in Lyon.</span></span><button type=\"button\" class=\"say\" data-say=\"Bonjour ! Je m&#x27;appelle Chloé et j&#x27;habite à Lyon.\">🔊</button></p><p><span class=\"t\">Tous les weekends, je fais une balade à vélo le long de la Saône.<span class=\"en\">Every weekend I go for a bike ride along the Saône.</span></span><button type=\"button\" class=\"say\" data-say=\"Tous les weekends, je fais une balade à vélo le long de la Saône.\">🔊</button></p><p><span class=\"t\">Le weekend dernier, j&#x27;ai fait une croisière promenade avec ma cousine : nous avons vu la ville sous un angle différent !<span class=\"en\">Last weekend I went on a sightseeing cruise with my cousin: we saw the city from a different angle!</span></span><button type=\"button\" class=\"say\" data-say=\"Le weekend dernier, j&#x27;ai fait une croisière promenade avec ma cousine : nous avons vu la ville sous un angle différent !\">🔊</button></p><p><span class=\"t\">Le soir, nous avons dîné dans un bouchon lyonnais. Quel bonheur !<span class=\"en\">In the evening we had dinner in a traditional Lyon bistro. What a joy!</span></span><button type=\"button\" class=\"say\" data-say=\"Le soir, nous avons dîné dans un bouchon lyonnais. Quel bonheur !\">🔊</button></p><p><span class=\"t\">Quand j&#x27;étais petite, je n&#x27;aimais pas les grandes villes : je préférais la côte, les galets et les vagues.<span class=\"en\">When I was little, I didn&#x27;t like big cities: I preferred the coast, the pebbles and the waves.</span></span><button type=\"button\" class=\"say\" data-say=\"Quand j&#x27;étais petite, je n&#x27;aimais pas les grandes villes : je préférais la côte, les galets et les vagues.\">🔊</button></p><p><span class=\"t\">Aujourd&#x27;hui, j&#x27;adore Lyon !<span class=\"en\">Today I love Lyon!</span></span><button type=\"button\" class=\"say\" data-say=\"Aujourd&#x27;hui, j&#x27;adore Lyon !\">🔊</button></p><p><span class=\"t\">Le mois prochain, je partirai à Saint-Malo avec mes parents.<span class=\"en\">Next month I&#x27;ll go to Saint-Malo with my parents.</span></span><button type=\"button\" class=\"say\" data-say=\"Le mois prochain, je partirai à Saint-Malo avec mes parents.\">🔊</button></p><p><span class=\"t\">Nous logerons chez une amie et nous irons voir les phoques.<span class=\"en\">We&#x27;ll stay with a friend and we&#x27;ll go and see the seals.</span></span><button type=\"button\" class=\"say\" data-say=\"Nous logerons chez une amie et nous irons voir les phoques.\">🔊</button></p><p><span class=\"t\">Je voudrais aussi faire du shopping, mais je ne veux pas rentrer les bras chargés !<span class=\"en\">I&#x27;d also like to go shopping, but I don&#x27;t want to come home with my arms full!</span></span><button type=\"button\" class=\"say\" data-say=\"Je voudrais aussi faire du shopping, mais je ne veux pas rentrer les bras chargés !\">🔊</button></p></div>", "grad": "linear-gradient(90deg,#d9733e,#c2477d)"}], "words": [["un endroit caché", "a hidden place"], ["une balade à vélo", "a bike ride"], ["une croisière promenade", "a sightseeing cruise"], ["sous un angle différent", "from a different angle"], ["un guide", "a guide"], ["se défouler", "to let off steam"], ["une piste de danse", "a dance floor"], ["le bonheur", "happiness"], ["avoir l'embarras du choix", "to be spoilt for choice"], ["un centre commercial", "a shopping centre"], ["les bras chargés", "with your arms full"], ["déguster", "to taste"], ["une spécialité", "a speciality"], ["loger chez", "to stay with"], ["accueillir", "to welcome"], ["un logement", "accommodation"], ["la côte", "the coast"], ["un galet", "a pebble"], ["faire des ricochets", "to skim stones"], ["une vague", "a wave"], ["l'air est pur", "the air is clean"]]};
+const AUDIO={"hier": "audio/24072372ac.mp3", "l'été dernier": "audio/cc9c981e69.mp3", "en ce moment": "audio/4df5006560.mp3", "demain": "audio/2fdb30a5f6.mp3", "tous les weekends": "audio/54f7f7142a.mp3", "l'année prochaine": "audio/0bb4bcf88b.mp3", "la semaine dernière": "audio/8c2e34972d.mp3", "aujourd'hui": "audio/874cedf40b.mp3", "dans dix ans": "audio/3eb4c967ef.mp3", "quand j'étais petite": "audio/5c8bbf1a36.mp3", "souvent": "audio/b468a3fa51.mp3", "le mois prochain": "audio/34c1b6902b.mp3", "Tous les dimanches, nous faisons une balade à vélo le long du fleuve.": "audio/789ff7eb89.mp3", "Mes parents vont souvent à Lyon.": "audio/73e50e3ee4.mp3", "Vous visitez la ville avec un guide ?": "audio/730e46df39.mp3", "J'adore visiter les endroits cachés.": "audio/cee6b77b09.mp3", "En ce moment, tu fais du shopping au centre commercial.": "audio/fdc6cb70a8.mp3", "Ma sœur est une noctambule : elle va danser tous les samedis soir.": "audio/ca251fca32.mp3", "Vous faites une croisière promenade sur la Saône ?": "audio/0cff398631.mp3", "Nous accueillons beaucoup de touristes dans notre ville.": "audio/1abc19d3d8.mp3", "Hier, j'ai visité le musée.": "audio/50b3347df0.mp3", "Nous avons choisi un petit hôtel près de la plage.": "audio/2e29863ef6.mp3", "J'ai attendu le bus pendant vingt minutes.": "audio/cce2d708ba.mp3", "Tu as fait une balade à vélo ?": "audio/a0c0380c64.mp3", "Ils ont pris le funiculaire.": "audio/899afa7ad4.mp3", "Elle a vu un phoque sur la plage.": "audio/e9cebc367c.mp3", "Nous avons bu un bon cru de la région.": "audio/312cbe8e5b.mp3", "Le voyage a été fantastique.": "audio/6ffecdee62.mp3", "J'ai eu l'embarras du choix.": "audio/7e5bc28a9f.mp3", "Vous avez dégusté les spécialités lyonnaises ?": "audio/867528080f.mp3", "Hier, Emma est allée au musée.": "audio/304346c8be.mp3", "Le weekend dernier, nous avons dégusté des spécialités lyonnaises.": "audio/d8d7724331.mp3", "Mes amies sont parties à Saint-Malo en train.": "audio/d207c43cdd.mp3", "Tu as fait une balade à vélo hier ?": "audio/42d7e09e1e.mp3", "Paul et Léa sont rentrés à la maison très tard.": "audio/0950ae47ce.mp3", "Pendant les vacances, je suis restée chez ma tante.": "audio/e62428de93.mp3", "Mon frère a remporté un prix au concours de cuisine.": "audio/1507ed8de4.mp3", "Elle s'est promenée le long des quais.": "audio/31f2042658.mp3", "Nous avons pris le funiculaire pour monter à Fourvière.": "audio/1b66dea22a.mp3", "Les touristes sont arrivés les bras chargés.": "audio/859323b8b9.mp3", "Quand j'étais petite, nous allions à la mer chaque été.": "audio/6d5a147230.mp3", "Il faisait beau et le ciel était bleu.": "audio/30fa3c0329.mp3", "La plage était calme.": "audio/54ba9532eb.mp3", "Mes grands-parents habitaient près de la côte.": "audio/764dab90a9.mp3", "Tous les soirs, je faisais des ricochets avec mon père.": "audio/2d35c80e29.mp3", "Tu avais peur des vagues ?": "audio/6a1f46186f.mp3", "Vous preniez souvent le bateau ?": "audio/1c023fbfcc.mp3", "Les canards flottaient sur le lac.": "audio/0810649ede.mp3", "C'était un samedi de juillet.": "audio/084e4f59ee.mp3", "Il faisait beaucoup de vent sur la plage.": "audio/68dacb9a3d.mp3", "Je marchais sur les galets": "audio/1f8b1cc4a4.mp3", "quand j'ai vu un phoque.": "audio/499b4726f6.mp3", "Il dormait tranquillement sur un rocher.": "audio/97046ea5b4.mp3", "Tout à coup, une grosse vague est arrivée.": "audio/989b40d042.mp3", "Le phoque a plongé dans l'eau.": "audio/f60a92eb2e.mp3", "Le soir, nous avons dîné dans une crêperie près des remparts.": "audio/2ce3bd233d.mp3", "Les crêpes étaient délicieuses !": "audio/0c7eee1df1.mp3", "Quand j'étais petite, je faisais des ricochets tous les étés.": "audio/6ce4a720f4.mp3", "L'année prochaine, nous irons en Provence.": "audio/fe58dfa3ca.mp3", "Demain, il fera beau sur toute la région.": "audio/cec861986a.mp3", "Ce soir, on va dîner dans un bouchon lyonnais.": "audio/a33de3b610.mp3", "Dans dix ans, je serai à la retraite.": "audio/56615d820b.mp3", "L'été prochain, tu verras les remparts de Saint-Malo.": "audio/647e1981d3.mp3", "Je vais réserver l'hôtel demain matin.": "audio/c69bad04da.mp3", "Mes cousins viendront chez nous la semaine prochaine.": "audio/34147dc790.mp3", "La semaine prochaine, vous prendrez le train pour Nantes.": "audio/ad582edfd2.mp3", "Nous aurons une semaine de vacances en février.": "audio/0f39ca3c9b.mp3", "Je voudrais passer une semaine à la montagne.": "audio/a6c6b91c16.mp3", "Hier, j'ai visité le musée des Confluences.": "audio/85968baae0.mp3", "Tous les weekends, ma mère va au marché.": "audio/90dd4fa704.mp3", "Le weekend prochain, nous ferons du shopping.": "audio/33ff76e6dc.mp3", "L'été dernier, mes amies sont parties à Bordeaux.": "audio/e3bef13c10.mp3", "En ce moment, je loge chez ma tante à Nantes.": "audio/71d4b8723e.mp3", "L'année prochaine, tu découvriras Lyon sous un angle différent.": "audio/23584d6122.mp3", "Quand j'étais petite, j'allais souvent à la plage.": "audio/5288827e24.mp3", "Demain, on va faire une croisière promenade.": "audio/665a36cd9b.mp3", "La semaine dernière, mes parents ont remporté un prix pour leur recette.": "audio/e312572744.mp3", "Tous les étés, nous accueillons des amis à la maison.": "audio/879d122c1f.mp3", "L'été dernier, je suis allée à Saint-Malo.": "audio/9d3fd4c67e.mp3", "Demain, nous allons visiter les remparts.": "audio/bffe015c6f.mp3", "Quand j'étais petite, je faisais des ricochets.": "audio/a63f7b20fb.mp3", "L'année prochaine, nous irons à Lyon.": "audio/8e0f77195e.mp3", "J'adore déguster les spécialités de la région.": "audio/4d74c411f1.mp3", "Il pleuvait quand nous sommes arrivés.": "audio/d18392dcd2.mp3", "Bonjour ! Je m'appelle Chloé et j'habite à Lyon.": "audio/68a2c7c7dd.mp3", "Tous les weekends, je fais une balade à vélo le long de la Saône.": "audio/ff821c9147.mp3", "Le weekend dernier, j'ai fait une croisière promenade avec ma cousine : nous avons vu la ville sous un angle différent !": "audio/209a700d70.mp3", "Le soir, nous avons dîné dans un bouchon lyonnais. Quel bonheur !": "audio/f209618431.mp3", "Quand j'étais petite, je n'aimais pas les grandes villes : je préférais la côte, les galets et les vagues.": "audio/2c20a4d37f.mp3", "Aujourd'hui, j'adore Lyon !": "audio/6e7ea0bfaf.mp3", "Le mois prochain, je partirai à Saint-Malo avec mes parents.": "audio/789fd6749f.mp3", "Nous logerons chez une amie et nous irons voir les phoques.": "audio/72b80e7cea.mp3", "Je voudrais aussi faire du shopping, mais je ne veux pas rentrer les bras chargés !": "audio/3d3a642792.mp3", "L'été dernier, j'ai visité Bordeaux.": "audio/55cf8d9424.mp3", "J'adore les petites villes.": "audio/84a7f00e39.mp3", "L'été prochain, je visiterai Nantes.": "audio/a592837d47.mp3", "Tous les dimanches, nous faisons une balade le long du fleuve.": "audio/0d8a538219.mp3", "J'aime beaucoup visiter les musées quand il pleut.": "audio/3c15dd4892.mp3", "Hier, j'ai pris le funiculaire pour monter à Fourvière.": "audio/7530f773ba.mp3", "Elle est allée à Saint-Malo.": "audio/ccfc49f119.mp3", "Nous sommes partis à huit heures.": "audio/71145bcb7c.mp3", "Elles sont rentrées très tard.": "audio/bffe8a74ca.mp3", "Je me suis promenée le long des quais.": "audio/82e524ab38.mp3", "Il faisait beau et la plage était calme.": "audio/36eb1ed375.mp3", "Je marchais sur la plage quand j'ai vu un phoque.": "audio/c6b5d5b533.mp3", "Il pleuvait quand nous sommes arrivés à Lyon.": "audio/ba51099fbe.mp3", "L'année prochaine, nous irons en Provence avec nos voisins.": "audio/62c9a0dfcb.mp3"};
+(function(){
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ----- Audio ----- */
+let cur=null,curBtn=null;
+function play(text,btn){
+  const f=AUDIO[text];if(!f)return;
+  if(cur){cur.pause();if(curBtn)curBtn.classList.remove("on")}
+  cur=new Audio(f);curBtn=btn||null;if(btn)btn.classList.add("on");
+  cur.onended=()=>{if(btn)btn.classList.remove("on")};
+  cur.play().catch(()=>{if(btn)btn.classList.remove("on")});
+}
+const sayBtn=t=>AUDIO[t]?`<button type="button" class="say" data-say="${esc(t)}" aria-label="Écouter">🔊</button>`:"";
+document.addEventListener("click",e=>{const b=e.target.closest(".say");if(b)play(b.dataset.say,b)});
+
+/* ----- Sauvegarde ----- */
+const KEY="emilly-vacances-v1";
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+/* ----- Score ----- */
+const TOTAL=DATA.ex.reduce((n,x)=>n+x.items.length,0);
+function refresh(){
+  let pts=0,html="",bars="";
+  DATA.ex.forEach((x,k)=>{
+    let p=0,ko=[],done=0;
+    x.items.forEach((it,i)=>{const r=S[x.id+"_"+i];if(!r)return;done++;if(r.ok)p++;else ko.push([it,r,i])});
+    pts+=p;
+    bars+=`<div class="barrow"><span>${k+1}. ${esc(x.short)}</span><div class="track"><span style="width:${p/x.items.length*100}%"></span></div><em>${p} / ${x.items.length}</em></div>`;
+    const a=document.querySelector(`.nav a[href="#${x.id}"]`);if(a)a.classList.toggle("done",done===x.items.length);
+    if(ko.length){
+      html+=`<div class="rgroup"><h4>Exercice ${k+1} · ${esc(x.title)}</h4>
+        <div class="rtip"><b>Pour ne pas te tromper</b>${esc(x.tip)}<span class="en"> ${esc(x.tipEn)}</span></div>`+
+        ko.map(([it,r,i])=>`<div class="ritem">
+          <div class="you">${x.type==="read"?"Question":"Phrase"} ${i+1} · Ta réponse : <s>${esc(r.pick)}</s></div>
+          <div class="good"><div class="t">Bonne réponse : <b>${esc(it.good)}</b>${it.en?`<span class="en">${esc(it.en)}</span>`:""}</div>${sayBtn(it.full||"")}</div>
+          <div class="why"><b>Pourquoi ?</b> ${esc(it.r)}<span class="en">${esc(it.re)}</span></div></div>`).join("")+`</div>`;
+    }
+  });
+  $("#score").textContent=`${pts} / ${TOTAL}`;
+  $("#bigPts").textContent=pts;
+  $("#bigTxt").textContent=`points sur ${TOTAL} · points out of ${TOTAL}`;
+  $("#bars").innerHTML=bars;
+  $("#revoir").innerHTML=html||`<p class="empty">Pour l'instant, rien à revoir. Les erreurs s'afficheront ici. <span class="en">Nothing to review yet. Mistakes will appear here.</span></p>`;
+}
+function record(x,i,ok,pick){S[x.id+"_"+i]={ok,pick};save();refresh()}
+
+/* ----- Navigation ----- */
+$("#nav").innerHTML=`<a href="#rappel">Rappel</a>`+DATA.ex.map((x,k)=>`<a href="#${x.id}">${k+1}</a>`).join("")+`<a href="#e11">11</a><a href="#bilan">Bilan</a>`;
+
+/* ----- Construction des exercices ----- */
+const host=$("#exercises");
+DATA.ex.forEach((x,k)=>{
+  const sec=document.createElement("section");sec.className="exo";sec.id=x.id;
+  sec.innerHTML=`<div class="hd" style="background:${x.grad}"><div class="num">${k+1}</div><div><div class="lab">Exercice · ${esc(x.label)}</div><h3>${esc(x.consigne)}</h3><div class="en">${esc(x.consigneEn)}</div></div><span class="min">${x.min} min</span></div><div class="bd">${x.pre||""}<div class="engine"></div></div>`;
+  host.appendChild(sec);
+  if(x.photo){const f=document.createElement("figure");f.className="photo";f.innerHTML=`<img src="${x.photo[0]}" alt=""><figcaption>${esc(x.photo[1])}</figcaption>`;host.appendChild(f)}
+  engine(x,sec.querySelector(".engine"),sec);
+});
+
+function dotsHTML(x,i){return `<div class="dots">${x.items.map((_,j)=>{const r=S[x.id+"_"+j];return `<i class="${r?(r.ok?"ok":"ko"):""} ${j===i?"cur":""}"></i>`}).join("")}</div>`}
+const norm=s=>String(s).toLowerCase().replace(/[’`´]/g,"'").replace(/\s+/g," ").trim();
+
+function engine(x,el,sec){
+  let i=0;
+  if(x.type==="read"){
+    const t=sec.querySelector(".text");
+    sec.querySelector(".trbtn").onclick=e=>{t.classList.toggle("tr");e.target.textContent=t.classList.contains("tr")?"Cacher la traduction":"Voir la traduction"};
+  }
+  function first(){const j=x.items.findIndex((_,j)=>!S[x.id+"_"+j]);return j<0?x.items.length:j}
+  i=first();
+  function draw(){
+    if(i>=x.items.length){
+      const ok=x.items.filter((_,j)=>S[x.id+"_"+j]&&S[x.id+"_"+j].ok).length;
+      el.innerHTML=`<div class="qhead"><span>Résultat : ${ok} sur ${x.items.length} · <span class="en">Score: ${ok} out of ${x.items.length}</span></span>${dotsHTML(x,-1)}</div>
+        <div class="row"><button type="button" class="btn ghost re">Revoir les phrases</button><a class="btn" href="#${DATA.ex[DATA.ex.indexOf(x)+1]?DATA.ex[DATA.ex.indexOf(x)+1].id:"e11"}" style="text-decoration:none">Exercice suivant</a></div>`;
+      el.querySelector(".re").onclick=()=>{i=0;draw()};return;
+    }
+    const it=x.items[i],st=S[x.id+"_"+i];
+    const head=`<div class="qhead"><span>${x.type==="read"?"Question":"Phrase"} ${i+1} sur ${x.items.length}</span>${dotsHTML(x,i)}</div>`;
+    let body="";
+    if(x.type==="sort"){
+      body=`<div class="word">${esc(it.q)}</div><span class="en">${esc(it.en)}</span><div class="opts tri">${["Passé","Présent","Futur"].map((o,j)=>`<button type="button" class="opt" data-j="${j}">${o}</button>`).join("")}</div>`;
+    }else if(x.type==="qcm"||x.type==="read"){
+      const q=x.type==="read"?esc(it.q):esc(it.q).replace("___",'<span class="gap">?</span>');
+      body=`<p class="qtext">${q}${it.note?`<span class="note">${esc(it.note)}</span>`:""}</p>${(x.enBefore||x.type==="read")&&(it.qen||it.en)?`<p class="qen en">${esc(it.qen||it.en)}</p>`:""}
+        <div class="opts">${it.o.map((o,j)=>`<button type="button" class="opt" data-j="${j}">${esc(o)}${it.oen?`<small>${esc(it.oen[j])}</small>`:""}</button>`).join("")}</div>`;
+    }else if(x.type==="type"){
+      body=`<p class="qtext">${esc(it.q).replace("___",'<span class="gap">?</span>')}<span class="inf">${esc(it.inf)}</span></p><p class="qen en">${esc(it.en)}</p>
+        <div class="inp"><input type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Écris le verbe…"><button type="button" class="btn chk">Vérifier</button></div>
+        <div class="acc">${["é","è","ê","à","â","ç","î","ô"].map(c=>`<button type="button">${c}</button>`).join("")}</div>`;
+    }else if(x.type==="order"){
+      body=`<p class="qen en" style="margin-top:12px">${esc(it.en)}</p><div class="tiles ans"></div><div class="tiles pool"></div><div class="row" style="margin-top:4px"><button type="button" class="btn ghost clr">Effacer</button><button type="button" class="btn chk" disabled>Vérifier</button></div>`;
+    }
+    el.innerHTML=head+body+`<div class="fbz"></div>`;
+
+    const finish=(ok,pick,save1)=>{
+      if(save1)record(x,i,ok,pick);
+      const g=el.querySelector(".gap");if(g){g.textContent=it.ans;g.classList.add("ok")}
+      el.querySelector(".fbz").innerHTML=`<div class="fb ${ok?"ok":"ko"}"><div class="head">${ok?"Bravo !":"Pas tout à fait."} <span class="en">${ok?"Well done!":"Not quite."}</span></div>
+        <div class="full"><div class="t"><b>${esc(it.good)}</b>${it.en&&(x.type!=="read")?`<span class="en">${esc(it.en)}</span>`:""}</div>${sayBtn(it.full||"")}</div>
+        <div>${esc(it.r)}<span class="en"> ${esc(it.re)}</span></div></div>
+        <div class="row">${i>0?'<button type="button" class="btn ghost prev">Précédente</button>':"<span></span>"}<button type="button" class="btn next">${i===x.items.length-1?"Voir le résultat":"Suivante"}</button></div>`;
+      el.querySelector(".next").onclick=()=>{i++;draw()};
+      const p=el.querySelector(".prev");if(p)p.onclick=()=>{i--;draw()};
+      if(save1&&it.full)play(it.full,el.querySelector(".fb .say"));
+    };
+
+    if(x.type==="sort"||x.type==="qcm"||x.type==="read"){
+      const pickBtn=(j,first)=>{
+        const ok=j===it.a;
+        el.querySelectorAll(".opt").forEach(b=>{b.disabled=true;const bj=+b.dataset.j;if(bj===it.a)b.classList.add("ok");else if(bj===j)b.classList.add("ko");else if(x.type==="sort")b.classList.add("dim")});
+        finish(ok,x.type==="sort"?["Passé","Présent","Futur"][j]:it.o[j],first);
+      };
+      el.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pickBtn(+b.dataset.j,true));
+      if(st)pickBtn(st.ok?it.a:it.o.indexOf(st.pick)>=0?it.o.indexOf(st.pick):["Passé","Présent","Futur"].indexOf(st.pick),false);
+    }
+    if(x.type==="type"){
+      const inp=el.querySelector("input"),chk=el.querySelector(".chk");
+      el.querySelectorAll(".acc button").forEach(b=>b.onclick=()=>{const s=inp.selectionStart??inp.value.length;inp.value=inp.value.slice(0,s)+b.textContent+inp.value.slice(inp.selectionEnd??s);inp.focus();inp.setSelectionRange(s+1,s+1)});
+      const check=(val,first)=>{
+        if(!norm(val))return;
+        const ok=norm(val)===norm(it.ans);
+        inp.value=val;inp.disabled=true;chk.disabled=true;inp.classList.add(ok?"ok":"ko");
+        el.querySelectorAll(".acc button").forEach(b=>b.disabled=true);
+        finish(ok,val,first);
+      };
+      chk.onclick=()=>check(inp.value,true);
+      inp.onkeydown=e=>{if(e.key==="Enter")check(inp.value,true)};
+      if(st)check(st.pick,false);
+    }
+    if(x.type==="order"){
+      const ans=el.querySelector(".ans"),pool=el.querySelector(".pool"),chk=el.querySelector(".chk");
+      let order=[];
+      const shuffled=it.tiles.map((t,j)=>j);
+      let seed=(i+3)*7;for(let a=shuffled.length-1;a>0;a--){seed=(seed*9301+49297)%233280;const b=Math.floor(seed/233280*(a+1));[shuffled[a],shuffled[b]]=[shuffled[b],shuffled[a]]}
+      if(shuffled.every((v,j)=>v===j))shuffled.reverse();
+      const render=(lock)=>{
+        ans.innerHTML=order.map(j=>`<button type="button" class="tile" data-j="${j}">${esc(it.tiles[j])}</button>`).join("");
+        pool.innerHTML=shuffled.filter(j=>!order.includes(j)).map(j=>`<button type="button" class="tile" data-j="${j}">${esc(it.tiles[j])}</button>`).join("");
+        chk.disabled=lock||order.length!==it.tiles.length;
+        if(lock)return;
+        ans.querySelectorAll(".tile").forEach(b=>b.onclick=()=>{order=order.filter(j=>j!==+b.dataset.j);render()});
+        pool.querySelectorAll(".tile").forEach(b=>b.onclick=()=>{order.push(+b.dataset.j);render()});
+      };
+      const check=(pick,first)=>{
+        const ok=norm(pick)===norm(it.good);
+        ans.classList.add(ok?"ok":"ko");render(true);el.querySelector(".clr").disabled=true;
+        finish(ok,pick,first);
+      };
+      el.querySelector(".clr").onclick=()=>{order=[];render()};
+      chk.onclick=()=>check(order.map(j=>it.tiles[j]).join(" "),true);
+      if(st){const words=st.pick.split(" ");order=[];let used=new Set();
+        // reconstitue l'ordre à partir du texte enregistré
+        let rest=st.pick;for(let n=0;n<it.tiles.length;n++){const j=it.tiles.findIndex((t,jj)=>!used.has(jj)&&rest.startsWith(t));if(j<0)break;used.add(j);order.push(j);rest=rest.slice(it.tiles[j].length).trimStart()}
+        check(st.pick,false)}
+      else render();
+    }
+  }
+  draw();
+}
+
+/* ----- Écriture ----- */
+$("#wb").innerHTML=DATA.words.map(([w,e])=>`<button type="button" data-w="${esc(w)}">${esc(w)}<small>${esc(e)}</small></button>`).join("");
+let lastTa=$("#w1");
+["w1","w2","w3"].forEach(id=>{const t=$("#"+id);t.value=S[id]||"";t.onfocus=()=>{lastTa=t};t.oninput=()=>{S[id]=t.value;save();count()}});
+$("#wb").onclick=e=>{const b=e.target.closest("button");if(!b)return;const t=lastTa;const s=t.selectionStart??t.value.length;const w=b.dataset.w;const pre=t.value.slice(0,s),add=(pre&&!/\s$/.test(pre)?" ":"")+w+" ";t.value=pre+add+t.value.slice(s);S[t.id]=t.value;save();count();t.focus();t.setSelectionRange(s+add.length,s+add.length)};
+function count(){const n=["w1","w2","w3"].map(id=>$("#"+id).value.trim()).join(" ").split(/\s+/).filter(Boolean).length;$("#wcount").textContent=n+(n>1?" mots":" mot")}
+count();
+$("#copy").onclick=()=>{const txt=["w1","w2","w3"].map(id=>$("#"+id).value.trim()).filter(Boolean).join("\n\n");
+  const done=()=>{$("#copy").textContent="Texte copié !";setTimeout(()=>$("#copy").textContent="Copier mon texte",2000)};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done,()=>fallback(txt));else fallback(txt);
+  function fallback(t){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");done()}catch(e){}a.remove()}};
+
+$("#reset").onclick=()=>{if(confirm("Effacer toutes tes réponses et recommencer ?")){S={};save();location.reload()}};
+refresh();
+})();
+</script>
+</body>
+</html>
