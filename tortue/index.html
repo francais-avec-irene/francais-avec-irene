@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comment est ta tortue ?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rasp:#E2457E;--rasp-l:#FFE6F0;--rasp-d:#B8296093;
+  --lav:#8E6FE0;--lav-l:#F1EBFF;
+  --mint:#18A992;--mint-l:#DFF7F1;
+  --peach:#FF7F57;--peach-l:#FFEDE5;
+  --sun:#F4A916;--sun-l:#FFF5DA;--sun-d:#B87700;
+  --sky:#3696E0;--sky-l:#E3F1FD;
+  --ink:#3A2748;--soft:#7B6888;--line:#F0E2EC;--bg:#FFF7FA;
+  --ok:#159A78;--ok-l:#E0F6EE;--ko:#D93A5C;--ko-l:#FDE6EC;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 Nunito,system-ui,sans-serif;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4,button,.f{font-family:Fredoka,Nunito,sans-serif}
+.it{color:var(--soft);font-style:italic;font-weight:400;font-size:.9em}
+.wrap{max-width:880px;margin:0 auto;padding:0 16px}
+b{font-weight:800}
+img{max-width:100%}
+
+/* hero */
+.hero{position:relative;min-height:290px;display:flex;align-items:flex-end;overflow:hidden;border-radius:0 0 30px 30px;background:#5a2a5e}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(226,69,126,.92) 0%,rgba(190,90,200,.72) 48%,rgba(142,111,224,.18) 100%)}
+.hero .in{position:relative;z-index:1;width:100%;max-width:880px;margin:0 auto;padding:30px 20px 28px;color:#fff}
+.tag{display:inline-block;background:#FFD43B;color:var(--ink);font-family:Fredoka;font-weight:600;font-size:15px;padding:4px 14px;border-radius:99px;border:3px solid #fff}
+.hero h1{font-size:clamp(32px,7vw,50px);line-height:1.05;margin:12px 0 6px;text-shadow:0 2px 8px rgba(80,20,80,.3)}
+.hero p{margin:0;font-style:italic;font-size:18px;opacity:.96}
+.rainbow{height:6px;border-radius:6px;margin:16px 30px 0;background:linear-gradient(90deg,#E2457E,#FF7F57,#F4A916,#18A992,#3696E0,#8E6FE0)}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,247,250,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;padding-top:8px;padding-bottom:8px}
+.score{flex:none;font-family:Fredoka;font-weight:600;color:#fff;background:linear-gradient(90deg,var(--rasp),var(--lav));padding:6px 14px;border-radius:99px;font-size:16px}
+.nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;font-family:Fredoka;font-weight:500;font-size:14px;color:var(--ink);background:#fff;border:2px solid var(--line);padding:4px 11px;border-radius:99px}
+.nav a.done{background:var(--ok-l);border-color:#9fdcc8;color:#0f6e55}
+
+/* intro */
+.intro{background:#fff;border:2px solid var(--line);border-radius:24px;padding:18px 20px;margin:22px 0}
+.intro h2{margin:0 0 6px;color:var(--rasp);font-size:26px}
+.intro p{margin:0 0 8px}
+.intro ul{margin:6px 0 0;padding-left:20px}
+.intro li{margin:5px 0}
+.intro .it{display:block}
+
+/* bands */
+.band{display:flex;align-items:center;gap:12px;color:#fff;border-radius:20px;padding:10px 18px 10px 10px;margin:34px 0 16px}
+.band .n{flex:none;width:42px;height:42px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-family:Fredoka;font-weight:700;font-size:21px}
+.band h2{margin:0;font-size:24px;line-height:1.1}
+.band .it{color:#fff;opacity:.92;display:block;font-size:15px}
+.b-rasp{background:linear-gradient(90deg,#E2457E,#F27AA8)}.b-rasp .n{color:var(--rasp)}
+.b-mint{background:linear-gradient(90deg,#18A992,#4CCDB4)}.b-mint .n{color:var(--mint)}
+.b-lav{background:linear-gradient(90deg,#8E6FE0,#B49BF0)}.b-lav .n{color:var(--lav)}
+.b-sky{background:linear-gradient(90deg,#3696E0,#6DB8F0)}.b-sky .n{color:var(--sky)}
+.b-peach{background:linear-gradient(90deg,#FF7F57,#FFA97F)}.b-peach .n{color:var(--peach)}
+.b-sun{background:linear-gradient(90deg,#F4A916,#F8C552)}.b-sun .n{color:var(--sun-d)}
+.b-plum{background:linear-gradient(90deg,#7A3E8E,#B05FA8)}.b-plum .n{color:#7A3E8E}
+.sub{font-family:Fredoka;font-weight:600;font-size:20px;margin:22px 0 10px}
+.sub .it{font-family:Nunito;font-size:15px;margin-left:6px}
+
+/* audio button */
+.say{flex:none;width:38px;height:38px;border-radius:50%;border:none;background:var(--sky-l);color:var(--sky);font-size:17px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;padding:0}
+.say:active,.say.playing{background:var(--sky);color:#fff}
+.say.sm{width:32px;height:32px;font-size:14px}
+
+/* vocab cards */
+.cards{display:flex;flex-wrap:wrap;gap:14px}
+.card{flex:1 1 240px;max-width:100%;background:#fff;border:2.5px solid;border-top-width:8px;border-radius:20px;padding:10px 10px 12px;overflow:hidden}
+.card .ph{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:#eee}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.card .pl{position:absolute;right:8px;bottom:8px;background:#fff;border-radius:99px;padding:2px 10px;font-family:Fredoka;font-weight:600;font-size:13px}
+.card .w{display:flex;align-items:center;gap:8px;margin:10px 2px 0}
+.card .w .t{font-family:Fredoka;font-weight:600;font-size:22px;line-height:1.1}
+.art{display:inline-block;color:#fff;font-family:Fredoka;font-weight:600;font-size:14px;border-radius:8px;padding:0 7px;margin-right:4px;vertical-align:3px}
+.a-la,.a-une{background:var(--rasp)}.a-le,.a-un{background:var(--sky)}.a-les{background:var(--lav)}
+.card .tr{margin:0 2px 8px;font-style:italic;color:var(--soft)}
+.card .ex{display:flex;gap:8px;align-items:flex-start;border-radius:12px;padding:8px 10px}
+.card .ex .it{display:block}
+.c1{border-color:var(--rasp)}.c1 .ex{background:var(--rasp-l)}.c1 .pl{color:var(--rasp)}
+.c2{border-color:var(--lav)}.c2 .ex{background:var(--lav-l)}.c2 .pl{color:var(--lav)}
+.c3{border-color:var(--sky)}.c3 .ex{background:var(--sky-l)}.c3 .pl{color:var(--sky)}
+.c4{border-color:var(--mint)}.c4 .ex{background:var(--mint-l)}.c4 .pl{color:var(--mint)}
+.c5{border-color:var(--peach)}.c5 .ex{background:var(--peach-l)}.c5 .pl{color:var(--peach)}
+.c6{border-color:var(--sun)}.c6 .ex{background:var(--sun-l)}.c6 .pl{color:var(--sun-d)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{flex:1 1 250px;background:#fff;border:2.5px solid var(--lav);border-radius:16px;padding:9px 12px}
+.chip .t{font-family:Fredoka;font-weight:600;font-size:19px}
+.chip .row{display:flex;gap:8px;align-items:center;margin-top:6px}
+
+/* grammar */
+.g{background:#fff;border:3px solid;border-radius:22px;overflow:hidden;margin:16px 0}
+.g .hd{color:#fff;padding:12px 18px;display:flex;gap:12px;align-items:center}
+.g .hd .n{flex:none;width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-family:Fredoka;font-weight:700;font-size:18px}
+.g .hd h3{margin:0;font-size:21px;line-height:1.15}
+.g .hd .it{color:#fff;opacity:.92;display:block;font-size:15px}
+.g .bd{padding:14px 18px 16px}
+.lbl{display:inline-block;font-family:Fredoka;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;border-radius:8px;padding:2px 10px;margin:6px 0 6px}
+.g p{margin:0 0 10px}.g p .it{display:block}
+.conj{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
+.conj span{flex:1 1 30%;background:var(--rasp-l);border-radius:10px;padding:6px 10px}
+.formula{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:8px 0 12px}
+.pill{font-family:Fredoka;font-weight:600;font-size:18px;border:2.5px solid;border-radius:99px;padding:4px 16px;background:#fff}
+.arrow{font-family:Fredoka;font-size:22px;color:var(--rasp)}
+.pairs{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 12px}
+.pairs .pp{flex:1 1 280px;display:flex;gap:8px;align-items:center;border-radius:12px;padding:8px 10px}
+.pairs .pp .it{display:block}
+.inner{border-left:6px solid;border-radius:12px;padding:10px 14px;margin:10px 0}
+.inner .it{display:block}
+.no{color:var(--ko);text-decoration:line-through;font-weight:800}
+table.poss{width:100%;border-collapse:collapse;margin:6px 0 12px;font-size:16px}
+table.poss th{font-family:Fredoka;font-weight:600;text-align:left;padding:6px 8px;background:var(--lav-l);font-size:15px}
+table.poss td{padding:6px 8px;border-bottom:1px solid var(--line)}
+.key{border:2.5px dashed var(--rasp);background:var(--rasp-l);border-radius:16px;padding:10px 14px;display:flex;gap:10px;align-items:center}
+.key .t{font-family:Fredoka;font-weight:500;font-size:19px}
+.key .it{display:block}
+.qrow{display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:8px 0}
+.qrow .w{flex:0 0 125px;font-family:Fredoka;font-weight:600;color:var(--mint);font-size:17px}
+.qrow .w .it{display:block;font-family:Nunito;font-size:14px}
+.qrow .q{flex:1}
+.qrow .q .it{display:block}
+
+/* transcriptions */
+.tb{background:#F6FBFF;border:2.5px solid var(--sky);border-radius:20px;padding:14px 16px;margin:14px 0}
+.tb .hd{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.piste{font-family:Fredoka;font-weight:600;background:var(--sky);color:#fff;border-radius:99px;padding:3px 12px;font-size:15px}
+.tb .hd .c{font-family:Fredoka;font-weight:500;font-size:17px}
+.tb .hd .c .it{font-family:Nunito;font-size:15px;display:block}
+.playall{margin-left:auto;border:none;background:var(--sky);color:#fff;font-weight:600;font-size:15px;border-radius:99px;padding:7px 14px;cursor:pointer}
+.tl{display:flex;gap:10px;align-items:flex-start;border-left:5px solid var(--rasp);padding:4px 0 4px 10px;margin:8px 0;border-radius:3px}
+.tl .it{display:block}
+.tl.on{background:#FFF0F6}
+.who{font-family:Fredoka;font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;margin:12px 0 2px}
+.p10{display:flex;flex-wrap:wrap;gap:8px}
+.p10 div{flex:1 1 150px;display:flex;gap:8px;align-items:center;background:#fff;border:2px solid #CFE6F8;border-radius:12px;padding:6px 10px}
+.p10 .it{display:block}
+
+/* exercises */
+.ex{background:#fff;border:3px solid;border-radius:24px;overflow:hidden;margin:16px 0 8px}
+.ex>.cons{padding:12px 18px;font-weight:700;font-size:18px}
+.ex>.cons .it{display:block;font-weight:400;font-size:16px}
+.ex>.bd{padding:6px 16px 16px}
+.e1{border-color:var(--rasp)}.e1>.cons{background:var(--rasp-l)}
+.e2{border-color:var(--mint)}.e2>.cons{background:var(--mint-l)}
+.e3{border-color:var(--lav)}.e3>.cons{background:var(--lav-l)}
+.e4{border-color:var(--peach)}.e4>.cons{background:var(--peach-l)}
+.e5{border-color:var(--sky)}.e5>.cons{background:var(--sky-l)}
+.e6{border-color:var(--sun)}.e6>.cons{background:var(--sun-l)}
+.e7{border-color:#B05FA8}.e7>.cons{background:#F8EAF6}
+.item{border:2px solid var(--line);border-radius:18px;padding:12px;margin:12px 0}
+.item.ok{border-color:#9fdcc8;background:#F5FCF9}
+.item.ko{border-color:#F3B2C1;background:#FFF8FA}
+.inum{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;color:#fff;font-family:Fredoka;font-weight:600;font-size:14px;margin-right:6px;flex:none}
+.e1 .inum{background:var(--rasp)}.e2 .inum{background:var(--mint)}.e3 .inum{background:var(--lav)}.e4 .inum{background:var(--peach)}.e5 .inum{background:var(--sky)}.e6 .inum{background:var(--sun)}
+.line1{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sent{font-size:19px;line-height:1.5}
+.gap{display:inline-block;min-width:74px;border-bottom:3px dotted var(--soft);text-align:center;font-weight:800;color:var(--ink);padding:0 4px}
+.gap.ok{color:var(--ok);border-color:var(--ok)}
+.gap.ko{color:var(--ko);border-color:var(--ko)}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.opt{font-family:Fredoka;font-weight:500;font-size:18px;background:#fff;border:2.5px solid var(--line);border-radius:14px;padding:8px 16px;cursor:pointer;color:var(--ink)}
+.opt:hover{border-color:var(--lav)}
+.opt.sel-ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.sel-ko{background:var(--ko);border-color:var(--ko);color:#fff}
+.opt.right{border-color:var(--ok);color:var(--ok)}
+.opt:disabled{cursor:default}
+.photos{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.pho{flex:1 1 130px;max-width:calc(50% - 5px);border:3.5px solid transparent;border-radius:16px;overflow:hidden;padding:0;background:#eee;cursor:pointer;position:relative;aspect-ratio:4/3}
+.pho img{width:100%;height:100%;object-fit:cover;display:block}
+.pho .cap{position:absolute;left:0;right:0;bottom:0;background:rgba(255,255,255,.9);font-family:Fredoka;font-weight:600;font-size:14px;padding:2px 6px;text-align:center}
+.pho.sel-ok{border-color:var(--ok)}
+.pho.sel-ko{border-color:var(--ko);opacity:.75}
+.pho.right{border-color:var(--ok)}
+@media(min-width:620px){.pho{max-width:calc(25% - 8px)}}
+.fb{margin-top:10px;border-radius:12px;padding:8px 12px;font-size:16px;display:flex;gap:8px;align-items:flex-start}
+.fb.ok{background:var(--ok-l)}
+.fb.ko{background:var(--ko-l)}
+.fb .it{display:block}
+.fb b.h{font-family:Fredoka;font-weight:600}
+.e4 .row4{display:flex;gap:12px;align-items:center}
+.e4 .row4 img{flex:none;width:96px;height:72px;object-fit:cover;border-radius:12px}
+.vf{display:flex;gap:10px;margin-top:10px}
+.vf .opt{flex:1;text-align:center}
+.clues{margin:6px 0 0;padding:0;list-style:none}
+.clues li{display:flex;gap:8px;align-items:flex-start;background:var(--sun-l);border-radius:12px;padding:7px 10px;margin:6px 0;font-size:18px}
+.clues li .it{display:block;font-size:15px}
+.reset{margin:4px 0 0;background:none;border:2px solid var(--line);border-radius:99px;padding:5px 14px;font-size:14px;color:var(--soft);cursor:pointer}
+.exscore{font-family:Fredoka;font-weight:600;float:right;background:#fff;border-radius:99px;padding:2px 12px;font-size:15px;margin-left:8px}
+.newword{display:inline-block;background:var(--sun-l);border-radius:8px;padding:0 6px;font-size:15px}
+
+/* ex7 */
+.builder .bl{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:18px;margin:10px 0;line-height:2}
+.builder select,.builder input{font:inherit;font-size:17px;border:2.5px solid #E6C8E2;border-radius:12px;padding:5px 8px;background:#fff;color:var(--ink);max-width:100%}
+.builder .it{display:block;font-size:14px;line-height:1.3;width:100%}
+.preview{background:#F8EAF6;border-radius:16px;padding:12px 16px;font-size:19px;margin:12px 0}
+.preview p{margin:0 0 4px}
+textarea{width:100%;min-height:190px;font:inherit;font-size:18px;line-height:1.6;border:2.5px solid #E6C8E2;border-radius:16px;padding:12px;background:#fff;color:var(--ink)}
+.bank{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.bank span{background:#fff;border:2px solid #E6C8E2;border-radius:99px;padding:2px 10px;font-size:15px}
+.bank span i{color:var(--soft)}
+.btn{font-family:Fredoka;font-weight:600;font-size:17px;border:none;border-radius:99px;padding:10px 18px;cursor:pointer;color:#fff;background:linear-gradient(90deg,#B05FA8,var(--rasp))}
+.btn.alt{background:#fff;color:#7A3E8E;border:2.5px solid #E6C8E2}
+.check{list-style:none;padding:0;margin:8px 0}
+.check li{margin:5px 0}
+.check label{display:flex;gap:8px;align-items:flex-start}
+.check input{width:20px;height:20px;margin-top:3px;flex:none}
+.check .it{display:block}
+
+/* bilan */
+.bilan{background:linear-gradient(120deg,var(--rasp),var(--lav));color:#fff;border-radius:24px;padding:20px;margin:16px 0}
+.bilan .big{font-family:Fredoka;font-weight:700;font-size:48px;line-height:1}
+.bars{background:#fff;color:var(--ink);border-radius:16px;padding:10px 14px;margin-top:14px}
+.bar{display:flex;align-items:center;gap:10px;padding:5px 0;font-family:Fredoka;font-size:15px}
+.bar .l{flex:0 0 46%}
+.bar .tr{flex:1;height:10px;background:#F3E5EE;border-radius:9px;overflow:hidden}
+.bar .tr span{display:block;height:100%;background:linear-gradient(90deg,var(--rasp),var(--lav));border-radius:9px}
+.bar .v{flex:none;width:52px;text-align:right}
+.revoir{border:3px solid var(--rasp);border-radius:22px;background:#fff;overflow:hidden;margin:18px 0}
+.revoir .hd{background:var(--rasp);color:#fff;padding:12px 18px}
+.revoir .hd h3{margin:0;font-size:22px}
+.revoir .hd .it{color:#fff;opacity:.9;display:block}
+.revoir .bd{padding:10px 16px 16px}
+.rg h4{margin:14px 0 6px;color:#7A3E8E;font-size:17px}
+.ri{border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;margin:8px 0}
+.ri .you{color:var(--ko)}
+.ri .good{display:flex;gap:8px;align-items:center;margin:4px 0}
+.ri .good b{color:var(--ok)}
+.ri .good .it,.ri .why .it{display:block}
+.empty{font-style:italic;color:var(--soft)}
+footer{text-align:center;font-family:Fredoka;font-size:14px;color:#B39BC6;padding:30px 0 46px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="img/hero.jpg" alt="">
+  <div class="in">
+    <span class="tag">Leçon 3</span>
+    <h1>Comment est ta tortue ?</h1>
+    <p>Com'è la tua tartaruga?</p>
+  </div>
+</header>
+
+<div class="top"><div class="wrap">
+  <span class="score" id="score">0 / 0</span>
+  <nav class="nav" id="nav">
+    <a href="#lecon">Leçon</a><a href="#ex1" data-e="1">1</a><a href="#ex2" data-e="2">2</a><a href="#ex3" data-e="3">3</a><a href="#ex4" data-e="4">4</a><a href="#ex5" data-e="5">5</a><a href="#ex6" data-e="6">6</a><a href="#ex7" data-e="7">7</a><a href="#bilan">Bilan</a>
+  </nav>
+</div></div>
+
+<main class="wrap">
+<div class="rainbow"></div>
+
+<section class="intro">
+  <h2>Bonjour !</h2>
+  <p>Aujourd'hui, tu découvres Célestine, la tortue de Léo. D'abord, tu lis et tu écoutes la leçon. Ensuite, tu fais les sept exercices.
+    <span class="it">Oggi scopri Célestine, la tartaruga di Léo. Prima leggi e ascolti la lezione. Poi fai i sette esercizi.</span></p>
+  <ul>
+    <li>Appuie sur 🔊 pour écouter. <span class="it">Tocca 🔊 per ascoltare.</span></li>
+    <li>Chaque réponse est corrigée tout de suite. <span class="it">Ogni risposta viene corretta subito.</span></li>
+    <li>À la fin, regarde le cadre « À revoir ». <span class="it">Alla fine, guarda il riquadro « Da ripassare ».</span></li>
+  </ul>
+</section>
+
+<!-- ================= LEÇON ================= -->
+<div id="lecon"></div>
+<div class="band b-rasp"><span class="n">1</span><div><h2>Découvre la tortue !</h2><span class="it">Scopri la tartaruga!</span></div></div>
+<div class="cards" id="v1"></div>
+
+<div class="band b-mint"><span class="n">2</span><div><h2>La vie de Célestine</h2><span class="it">La vita di Célestine</span></div></div>
+<div class="cards" id="v2"></div>
+<div class="sub" style="color:var(--lav)">Pour parler de Célestine <span class="it">Per parlare di Célestine</span></div>
+<div class="chips" id="v3"></div>
+
+<div class="band b-lav"><span class="n">3</span><div><h2>Grammaire</h2><span class="it">Grammatica</span></div></div>
+
+<div class="g" style="border-color:var(--rasp)">
+  <div class="hd" style="background:linear-gradient(90deg,#E2457E,#F27AA8)"><span class="n" style="color:var(--rasp)">1</span><div><h3>Elle a… / Elle n'a pas de…</h3><span class="it">Ha… / Non ha…</span></div></div>
+  <div class="bd">
+    <span class="lbl" style="background:var(--rasp-l);color:var(--rasp)">L'idée · L'idea</span>
+    <p>Pour décrire un animal, on dit <b>ce qu'il a</b> avec le verbe <b style="color:var(--rasp)">avoir</b>.
+      <span class="it">Per descrivere un animale, diciamo <b>che cosa ha</b> con il verbo <b>avere</b>.</span></p>
+    <div class="conj"><span><b>j'ai</b> <i class="it">ho</i></span><span><b>tu as</b> <i class="it">hai</i></span><span><b>il, elle a</b> <i class="it">ha</i></span><span><b>nous avons</b> <i class="it">abbiamo</i></span><span><b>vous avez</b> <i class="it">avete</i></span><span><b>ils, elles ont</b> <i class="it">hanno</i></span></div>
+    <span class="lbl" style="background:var(--rasp-l);color:var(--rasp)">Dire non · Dire di no</span>
+    <p>On met <b>ne… pas</b> autour du verbe, et après <b>pas</b>, <b>un, une, des</b> deviennent <b style="color:var(--rasp)">de</b> (<b style="color:var(--rasp)">d'</b> devant une voyelle).
+      <span class="it">Mettiamo <b>ne… pas</b> intorno al verbo, e dopo <b>pas</b>, <b>un, une, des</b> diventano <b>de</b> (<b>d'</b> davanti a vocale).</span></p>
+    <div class="formula"><span class="pill" style="border-color:var(--sky);color:var(--sky)">un · une · des</span><span class="arrow">→</span><span class="pill" style="border-color:var(--rasp);color:var(--rasp)">pas de · pas d'</span></div>
+    <div class="pairs" id="g1"></div>
+    <div class="inner" style="border-color:var(--mint);background:var(--mint-l)"><b style="color:var(--mint)">Comme en italien !</b> <b>Elle a 4 ans</b>, <b>elle a peur</b>, <b>elle a froid</b>.<span class="it">Come in italiano! <b>Ha 4 anni</b>, <b>ha paura</b>, <b>ha freddo</b>.</span></div>
+  </div>
+</div>
+
+<div class="g" style="border-color:var(--lav)">
+  <div class="hd" style="background:linear-gradient(90deg,#8E6FE0,#B49BF0)"><span class="n" style="color:var(--lav)">2</span><div><h3>Mon, ma, mes · son, sa, ses</h3><span class="it">Mio, mia, miei… suo, sua, suoi…</span></div></div>
+  <div class="bd">
+    <span class="lbl" style="background:var(--lav-l);color:var(--lav)">L'idée · L'idea</span>
+    <p>Le possessif dit <b>à qui est</b> une chose. On le choisit selon <b style="color:var(--lav)">le mot qui suit</b> : masculin, féminin ou pluriel.
+      <span class="it">Il possessivo dice <b>di chi è</b> una cosa. Si sceglie secondo <b>la parola che segue</b>: maschile, femminile o plurale.</span></p>
+    <div style="overflow-x:auto"><table class="poss">
+      <tr><th>c'est à…</th><th style="color:var(--sky)">le… (masculin)</th><th style="color:var(--rasp)">la… (féminin)</th><th style="color:var(--lav)">les… (pluriel)</th></tr>
+      <tr><td><b>moi</b> <i class="it">me</i></td><td><b style="color:var(--sky)">mon</b> grand-père</td><td><b style="color:var(--rasp)">ma</b> petite sœur</td><td><b style="color:var(--lav)">mes</b> amis</td></tr>
+      <tr><td><b>toi</b> <i class="it">te</i></td><td><b style="color:var(--sky)">ton</b> chat</td><td><b style="color:var(--rasp)">ta</b> tortue</td><td><b style="color:var(--lav)">tes</b> livres</td></tr>
+      <tr><td><b>lui, elle</b> <i class="it">lui, lei</i></td><td><b style="color:var(--sky)">son</b> bec</td><td><b style="color:var(--rasp)">sa</b> carapace</td><td><b style="color:var(--lav)">ses</b> pattes</td></tr>
+    </table></div>
+    <div class="inner" style="border-color:var(--sun);background:var(--sun-l)"><b style="color:var(--sun-d)">ses</b> = <i>i suoi</i> et aussi <i>le sue</i> : <b>ses</b> griffes, <b>ses</b> écailles.<span class="it"><b>ses</b> vale per <i>i suoi</i> e per <i>le sue</i>: i suoi artigli, le sue scaglie.</span></div>
+    <div class="inner" style="border-color:var(--lav);background:var(--lav-l)"><b style="color:var(--lav)">Pas d'article devant !</b> On dit <b style="color:var(--rasp)">sa tête</b>, jamais <span class="no">la sa tête</span>.<span class="it">Niente articolo davanti! In italiano diciamo <i>la sua testa</i>, in francese solo <b>sa tête</b>.</span></div>
+    <div class="key" id="g2"></div>
+  </div>
+</div>
+
+<div class="g" style="border-color:var(--mint)">
+  <div class="hd" style="background:linear-gradient(90deg,#18A992,#4CCDB4)"><span class="n" style="color:var(--mint)">3</span><div><h3>Poser des questions</h3><span class="it">Fare domande</span></div></div>
+  <div class="bd">
+    <span class="lbl" style="background:var(--mint-l);color:var(--mint)">L'idée · L'idea</span>
+    <p>On choisit <b>le bon petit mot</b>. À l'oral, on <b style="color:var(--mint)">monte la voix</b> à la fin, comme en italien.
+      <span class="it">Scegliamo <b>la parolina giusta</b>. Parlando, <b>alziamo la voce</b> alla fine, come in italiano.</span></p>
+    <div id="g3"></div>
+  </div>
+</div>
+
+<div class="band b-sky"><span class="n">4</span><div><h2>Transcriptions</h2><span class="it">Trascrizioni</span></div></div>
+<div class="tb"><div class="hd"><span class="piste">Piste 10</span><span class="c">Tu connais Célestine ? Écoute, montre et répète.<span class="it">Conosci Célestine? Ascolta, indica e ripeti.</span></span><button class="playall" data-list="p10">▶ Tout écouter</button></div><div class="p10" id="p10"></div></div>
+<div class="tb"><div class="hd"><span class="piste">Piste 11</span><span class="c">Écoute la présentation de Léo.<span class="it">Ascolta la presentazione di Léo.</span></span><button class="playall" data-list="p11">▶ Tout écouter</button></div><div id="p11"></div></div>
+<div class="tb"><div class="hd"><span class="piste">Piste 12</span><span class="c">Écoute et réponds aux questions.<span class="it">Ascolta e rispondi alle domande.</span></span><button class="playall" data-list="p12">▶ Tout écouter</button></div><div id="p12"></div></div>
+<div class="tb" style="border-color:var(--peach);background:var(--peach-l)"><div class="hd"><span class="piste" style="background:var(--peach)">Devinette</span><span class="c">Lis et trouve le nom d'un animal.<span class="it">Leggi e trova il nome di un animale.</span></span></div><div id="dev"></div></div>
+
+<!-- ================= EXERCICES ================= -->
+<div id="ex1"></div>
+<div class="band b-rasp"><span class="n">1</span><div><h2>Écoute et touche</h2><span class="it">Ascolta e tocca</span></div></div>
+<div class="ex e1"><div class="cons"><span class="exscore" data-s="1"></span>Écoute le mot et touche la bonne photo.<span class="it">Ascolta la parola e tocca la foto giusta.</span></div><div class="bd" id="e1"></div></div>
+
+<div id="ex2"></div>
+<div class="band b-mint"><span class="n">2</span><div><h2>Vrai ou faux ?</h2><span class="it">Vero o falso?</span></div></div>
+<div class="ex e2"><div class="cons"><span class="exscore" data-s="2"></span>Pense à Célestine. La phrase est vraie ou fausse ?<span class="it">Pensa a Célestine. La frase è vera o falsa?</span></div><div class="bd" id="e2"></div></div>
+
+<div id="ex3"></div>
+<div class="band b-lav"><span class="n">3</span><div><h2>Mon, ma, mes · son, sa, ses</h2><span class="it">Mio, mia, miei… suo, sua, suoi…</span></div></div>
+<div class="ex e3"><div class="cons"><span class="exscore" data-s="3"></span>Regarde le mot après le trou et choisis le bon possessif.<span class="it">Guarda la parola dopo lo spazio e scegli il possessivo giusto.</span></div><div class="bd" id="e3"></div></div>
+
+<div id="ex4"></div>
+<div class="band b-peach"><span class="n">4</span><div><h2>Il a… ou il n'a pas de… ?</h2><span class="it">Ha… o non ha…?</span></div></div>
+<div class="ex e4"><div class="cons"><span class="exscore" data-s="4"></span>Regarde la photo et complète la phrase.<span class="it">Guarda la foto e completa la frase.</span></div><div class="bd" id="e4"></div></div>
+
+<div id="ex5"></div>
+<div class="band b-sky"><span class="n">5</span><div><h2>La bonne question</h2><span class="it">La domanda giusta</span></div></div>
+<div class="ex e5"><div class="cons"><span class="exscore" data-s="5"></span>Lis la réponse. Puis choisis le mot qui manque dans la question.<span class="it">Leggi la risposta. Poi scegli la parola che manca nella domanda.</span></div><div class="bd" id="e5"></div></div>
+
+<div id="ex6"></div>
+<div class="band b-sun"><span class="n">6</span><div><h2>Qui suis-je ?</h2><span class="it">Chi sono?</span></div></div>
+<div class="ex e6"><div class="cons"><span class="exscore" data-s="6"></span>Lis les trois indices et trouve l'animal.<span class="it">Leggi i tre indizi e trova l'animale.</span></div><div class="bd" id="e6"></div></div>
+
+<div id="ex7"></div>
+<div class="band b-plum"><span class="n">7</span><div><h2>Présente ton animal</h2><span class="it">Presenta il tuo animale</span></div></div>
+<div class="ex e7"><div class="cons">Invente un animal. Choisis les mots et construis ta présentation, puis écris-la toute seule.<span class="it">Inventa un animale. Scegli le parole e costruisci la tua presentazione, poi scrivila da sola.</span></div>
+<div class="bd builder">
+  <div class="sub" style="color:#7A3E8E;margin-top:10px">Étape 1 · Je construis <span class="it">Passo 1 · Costruisco</span></div>
+  <div class="bl">C'est un garçon ou une fille ? <select id="b-g"><option value="m">Il (un garçon)</option><option value="f">Elle (une fille)</option></select><span class="it">È un maschio o una femmina?</span></div>
+  <div class="bl">Mon animal s'appelle <input id="b-name" size="10" placeholder="Pistache"> .<span class="it">Il mio animale si chiama…</span></div>
+  <div class="bl">C'est <select id="b-an"></select> .<span class="it">È…</span></div>
+  <div class="bl"><span class="pr">Il</span> a <select id="b-age"></select> .<span class="it">Ha … anni.</span></div>
+  <div class="bl"><span class="pr">Il</span> a <select id="b-has"></select> .<span class="it">Ha…</span></div>
+  <div class="bl"><span class="pr">Il</span> n'a pas <select id="b-hasnot"></select> .<span class="it">Non ha…</span></div>
+  <div class="bl"><span class="pr">Il</span> mange <select id="b-eat"></select> .<span class="it">Mangia…</span></div>
+  <div class="bl"><span class="pr">Il</span> est <select id="b-diet"><option>herbivore</option><option>carnivore</option><option>omnivore</option></select> .<span class="it">È erbivoro / carnivoro / onnivoro.</span></div>
+  <div class="bl"><span class="pr">Il</span> marche très <select id="b-speed"><option>lentement</option><option>vite</option></select> .<span class="it">Cammina molto lentamente / velocemente.</span></div>
+  <div class="bl">C'est un cadeau de <select id="b-gift"><option>mon grand-père</option><option>ma grand-mère</option><option>mes parents</option><option>mon oncle</option><option>ma tante</option></select> .<span class="it">È un regalo di mio nonno / mia nonna / dei miei genitori / mio zio / mia zia.</span></div>
+  <div class="preview" id="b-prev"></div>
+
+  <div class="sub" style="color:#7A3E8E">Étape 2 · J'écris toute seule <span class="it">Passo 2 · Scrivo da sola</span></div>
+  <p style="margin:0 0 6px">Recopie ta présentation et ajoute deux phrases à toi : quand ton animal a peur, et ce que tu fais avec lui.
+    <span class="it" style="display:block">Ricopia la tua presentazione e aggiungi due frasi tue: quando il tuo animale ha paura, e che cosa fai con lui.</span></p>
+  <div class="bank">
+    <span>quand il a peur… <i>quando ha paura…</i></span><span>il se cache <i>si nasconde</i></span><span>il rentre sa tête <i>ritira la testa</i></span>
+    <span>je joue avec lui <i>gioco con lui</i></span><span>je lui donne… <i>gli do…</i></span><span>j'adore… <i>adoro…</i></span><span>il dort <i>dorme</i></span>
+  </div>
+  <textarea id="b-text" placeholder="Mon animal s'appelle…"></textarea>
+  <ul class="check">
+    <li><label><input type="checkbox"> <span>J'ai écrit au moins six phrases. <span class="it">Ho scritto almeno sei frasi.</span></span></label></li>
+    <li><label><input type="checkbox"> <span>J'ai utilisé <b>a</b> et <b>n'a pas de</b>. <span class="it">Ho usato <b>a</b> e <b>n'a pas de</b>.</span></span></label></li>
+    <li><label><input type="checkbox"> <span>J'ai utilisé <b>son</b>, <b>sa</b> ou <b>ses</b>. <span class="it">Ho usato <b>son</b>, <b>sa</b> o <b>ses</b>.</span></span></label></li>
+    <li><label><input type="checkbox"> <span>J'ai relu les accents et les points. <span class="it">Ho riletto gli accenti e i punti.</span></span></label></li>
+  </ul>
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="b-copy">📋 Copier mon texte</button><button class="btn alt" id="b-fill">↓ Mettre l'étape 1 dans le cadre</button></div>
+  <p class="it" id="b-msg" style="margin:8px 0 0"></p>
+  <p class="it" style="margin:6px 0 0">Copie ton texte et envoie-le à ta prof. <span style="display:block">Copia il tuo testo e mandalo alla tua prof.</span></p>
+</div></div>
+
+<!-- ================= BILAN ================= -->
+<div id="bilan"></div>
+<div class="band b-rasp"><span class="n">★</span><div><h2>Bilan</h2><span class="it">Bilancio</span></div></div>
+<div class="bilan"><div class="big" id="bigscore">0 / 0</div><div class="f" style="margin-top:6px;font-size:17px">Ton score <span class="it" style="color:#fff">Il tuo punteggio</span></div><div class="bars" id="bars"></div></div>
+<div class="revoir"><div class="hd"><h3>À revoir</h3><span class="it">Da ripassare</span></div><div class="bd" id="revoir"></div></div>
+<div style="text-align:center;margin:10px 0"><button class="reset" id="resetall">↺ Tout recommencer · Ricomincia tutto</button></div>
+</main>
+<footer>Le français avec Irène</footer>
+
+<script>
+const D={"v1": [{"img": "carapace", "art": "la", "w": "carapace", "it": "il guscio", "ex": "Sa maison s'appelle une carapace.", "exit": "La sua casa si chiama guscio.", "pl": null, "aw": "a3702413d2d.mp3", "ae": "a87cf84f3d1.mp3"}, {"img": "ecailles", "art": "les", "w": "écailles", "it": "le scaglie", "ex": "Sur sa carapace, il y a des écailles.", "exit": "Sul suo guscio ci sono delle scaglie.", "pl": "une écaille, des écailles", "aw": "aa2d7707ccf.mp3", "ae": "aa5a8f7e561.mp3"}, {"img": "bec", "art": "le", "w": "bec", "it": "il becco", "ex": "Elle n'a pas de dents. Elle a un bec.", "exit": "Non ha denti. Ha un becco.", "pl": null, "aw": "afa0297d713.mp3", "ae": "a1c198ebc90.mp3"}, {"img": "queue", "art": "la", "w": "queue", "it": "la coda", "ex": "Elle a une petite queue.", "exit": "Ha una piccola coda.", "pl": null, "aw": "ab929d46819.mp3", "ae": "adda73c340b.mp3"}, {"img": "pattes", "art": "les", "w": "pattes", "it": "le zampe", "ex": "La tortue a quatre pattes.", "exit": "La tartaruga ha quattro zampe.", "pl": "une patte, des pattes", "aw": "aa2706e12b3.mp3", "ae": "a94ea0d1678.mp3"}, {"img": "griffes", "art": "les", "w": "griffes", "it": "gli artigli", "ex": "Ses pattes ont des griffes.", "exit": "Le sue zampe hanno gli artigli.", "pl": "une griffe, des griffes", "aw": "ada1a6584ba.mp3", "ae": "a94ff6f5171.mp3"}], "v2": [{"img": "terrestre", "art": "une", "w": "tortue terrestre", "it": "una tartaruga di terra", "ex": "Elle vit sur la terre, pas dans l'eau.", "exit": "Vive sulla terra, non nell'acqua.", "pl": null, "aw": "a5e0f325ad3.mp3", "ae": "a58322201bf.mp3"}, {"img": "oeufs", "art": "", "w": "pondre des œufs", "it": "deporre le uova", "ex": "La tortue pond des œufs.", "exit": "La tartaruga depone le uova.", "pl": "un œuf, des œufs", "aw": "a93034c6b3b.mp3", "ae": "a7d1e0aa6fb.mp3"}, {"img": "bebes", "art": "les", "w": "bébés tortues", "it": "le tartarughine", "ex": "Voici quatre bébés tortues !", "exit": "Ecco quattro tartarughine!", "pl": null, "aw": "a29e1b6c8e2.mp3", "ae": "a712986aeea.mp3"}, {"img": "herbe", "art": "", "w": "herbivore", "it": "erbivoro", "ex": "La tortue mange de l'herbe et de la salade.", "exit": "La tartaruga mangia l'erba e l'insalata.", "pl": null, "aw": "a04ce36d525.mp3", "ae": "a71ebeeee9b.mp3"}, {"img": "croco", "art": "", "w": "carnivore", "it": "carnivoro", "ex": "Le crocodile a des dents. Il mange de la viande.", "exit": "Il coccodrillo ha i denti. Mangia la carne.", "pl": null, "aw": "aad731488b5.mp3", "ae": "a83c76f623a.mp3"}, {"img": "ours", "art": "", "w": "omnivore", "it": "onnivoro", "ex": "L'ours mange de tout : des fruits, du poisson…", "exit": "L'orso mangia di tutto: frutta, pesce…", "pl": null, "aw": "a0960f3afc1.mp3", "ae": "ae2bf65db28.mp3"}], "v3": [{"w": "avoir 4 ans", "it": "avere 4 anni", "ex": "Célestine a 4 ans.", "exit": "Célestine ha 4 anni.", "aw": "a281580cd4c.mp3", "ae": "a34dd76eb1e.mp3"}, {"w": "peser", "it": "pesare", "ex": "Elle pèse 12 kilos.", "exit": "Pesa 12 chili.", "aw": "a69892422ea.mp3", "ae": "a38e9e65807.mp3"}, {"w": "un cadeau", "it": "un regalo", "ex": "C'est un cadeau !", "exit": "È un regalo!", "aw": "a96e0bb546c.mp3", "ae": "af29ace6813.mp3"}, {"w": "avoir peur", "it": "avere paura", "ex": "Elle a peur.", "exit": "Ha paura.", "aw": "a29750a552c.mp3", "ae": "a9aa6c6b817.mp3"}, {"w": "avoir froid", "it": "avere freddo", "ex": "Elle a froid.", "exit": "Ha freddo.", "aw": "a9e87728f58.mp3", "ae": "a7e8f486afc.mp3"}, {"w": "rentrer sa tête", "it": "ritirare la testa", "ex": "Elle rentre sa tête.", "exit": "Ritira la testa.", "aw": "a6a1f8424df.mp3", "ae": "a5c7257706f.mp3"}, {"w": "lentement ≠ vite", "it": "lentamente ≠ velocemente", "ex": "Elle marche très lentement.", "exit": "Cammina molto lentamente.", "aw": "a226fc39202.mp3", "ae": "a808110f7dd.mp3"}, {"w": "le grand-père", "it": "il nonno", "ex": "C'est mon grand-père.", "exit": "È mio nonno.", "aw": "a73790d621f.mp3", "ae": "a484df5c697.mp3"}, {"w": "la petite sœur", "it": "la sorellina", "ex": "C'est ma petite sœur.", "exit": "È la mia sorellina.", "aw": "ac7cf31c953.mp3", "ae": "ae01fe94fe4.mp3"}], "p10": [{"fr": "la carapace", "it": "il guscio", "a": "a3702413d2d.mp3"}, {"fr": "les écailles", "it": "le scaglie", "a": "aa2d7707ccf.mp3"}, {"fr": "le bec", "it": "il becco", "a": "afa0297d713.mp3"}, {"fr": "la queue", "it": "la coda", "a": "ab929d46819.mp3"}, {"fr": "les pattes", "it": "le zampe", "a": "aa2706e12b3.mp3"}, {"fr": "les griffes", "it": "gli artigli", "a": "ada1a6584ba.mp3"}], "p11": [{"who": "Léo", "fr": "Célestine est une tortue terrestre.", "it": "Célestine è una tartaruga di terra.", "a": "a64b9725a7f.mp3"}, {"who": "Léo", "fr": "Elle vit sur la terre, pas dans l'eau.", "it": "Vive sulla terra, non nell'acqua.", "a": "a58322201bf.mp3"}, {"who": "Léo", "fr": "Elle a 4 ans. Elle pèse 12 kilos.", "it": "Ha 4 anni. Pesa 12 chili.", "a": "a6385e1e364.mp3"}, {"who": "Léo", "fr": "C'est un cadeau de mon grand-père à ma petite sœur.", "it": "È un regalo di mio nonno alla mia sorellina.", "a": "aeabc896f48.mp3"}, {"who": "Léo", "fr": "Sa maison s'appelle une carapace.", "it": "La sua casa si chiama guscio.", "a": "a87cf84f3d1.mp3"}, {"who": "Léo", "fr": "Quand elle a peur, quand elle a froid, elle rentre sa tête et ses quatre pattes avec ses griffes dans sa carapace.", "it": "Quando ha paura, quando ha freddo, ritira la testa e le sue quattro zampe con gli artigli nel suo guscio.", "a": "afc438172de.mp3"}, {"who": "Léo", "fr": "Sur sa carapace, il y a des écailles.", "it": "Sul suo guscio ci sono delle scaglie.", "a": "aa5a8f7e561.mp3"}, {"who": "Léo", "fr": "Elle a une queue. Elle n'a pas de dents. Elle a un bec.", "it": "Ha una coda. Non ha denti. Ha un becco.", "a": "a60a48f82e9.mp3"}, {"who": "Léo", "fr": "Elle marche très lentement.", "it": "Cammina molto lentamente.", "a": "a808110f7dd.mp3"}, {"who": "Léo", "fr": "Elle mange de l'herbe. Elle est herbivore.", "it": "Mangia l'erba. È erbivora.", "a": "af6afb4e7dd.mp3"}, {"who": "Léo", "fr": "Elle pond des œufs pour avoir des bébés tortues.", "it": "Depone le uova per avere delle tartarughine.", "a": "a1125b6b9c3.mp3"}, {"who": "La prof de Léo", "fr": "Bravo Léo et maintenant, si on chantait une chanson à Célestine, une chanson qui parle de tortues.", "it": "Bravo Léo! E adesso, se cantassimo una canzone a Célestine, una canzone che parla di tartarughe?", "a": "a5861a4dc82.mp3"}, {"who": "La prof de Léo", "fr": "Vous vous rappelez ?", "it": "Ve la ricordate?", "a": "acf03c6a9cf.mp3"}], "p12": [{"fr": "Célestine a quel âge ?", "it": "Quanti anni ha Célestine?", "a": "af31acd97d4.mp3"}, {"fr": "Célestine est un cadeau de qui ?", "it": "Chi ha regalato Célestine?", "a": "a92451d9fa8.mp3"}, {"fr": "Qu'est-ce que le crocodile a que la tortue n'a pas ?", "it": "Che cosa ha il coccodrillo che la tartaruga non ha?", "a": "aca90d95759.mp3"}, {"fr": "Elle marche très vite ou très lentement ?", "it": "Cammina molto velocemente o molto lentamente?", "a": "a74729f1471.mp3"}, {"fr": "Qu'est-ce que la carapace pour la tortue ?", "it": "Che cos'è il guscio per la tartaruga?", "a": "a32a46f7817.mp3"}, {"fr": "Elle est herbivore. Qu'est-ce qu'elle mange ?", "it": "È erbivora. Che cosa mangia?", "a": "a698d8d6f44.mp3"}], "dev": [{"fr": "Il pond des œufs.", "it": "Depone le uova.", "a": "a17f121a1f8.mp3"}, {"fr": "Il n'est pas herbivore : il mange de la viande.", "it": "Non è erbivoro: mangia la carne.", "a": "af8810c6d55.mp3"}, {"fr": "Il n'a pas de pattes.", "it": "Non ha zampe.", "a": "a4eb823c162.mp3"}], "g1": [{"fr": "Le crocodile a des dents.", "it": "Il coccodrillo ha i denti.", "a": "a2ad910bd15.mp3"}, {"fr": "La tortue n'a pas de dents.", "it": "La tartaruga non ha denti.", "a": "aaeb1401325.mp3"}, {"fr": "Le chat a une queue.", "it": "Il gatto ha una coda.", "a": "ad6307b0e23.mp3"}, {"fr": "Le poisson n'a pas de pattes.", "it": "Il pesce non ha zampe.", "a": "a60e6229670.mp3"}, {"fr": "La tortue a des écailles.", "it": "La tartaruga ha le scaglie.", "a": "a8556a986ea.mp3"}, {"fr": "Le lapin n'a pas d'écailles.", "it": "Il coniglio non ha scaglie.", "a": "ab364055eff.mp3"}], "g2": {"fr": "Elle rentre sa tête et ses quatre pattes dans sa carapace.", "it": "Ritira la testa e le sue quattro zampe nel suo guscio.", "a": "a88c9bc880f.mp3"}, "g3": [{"w": "Comment", "wit": "Come…?", "q": "Comment est ton chat ?", "qit": "Com'è il tuo gatto?", "r": "Il est petit et noir.", "rit": "È piccolo e nero.", "a": "aadde2631af.mp3"}, {"w": "Quel âge", "wit": "Quanti anni…?", "q": "Ton frère a quel âge ?", "qit": "Quanti anni ha tuo fratello?", "r": "Il a 8 ans.", "rit": "Ha 8 anni.", "a": "a32bd4d5115.mp3"}, {"w": "Qu'est-ce que", "wit": "Che cosa…?", "q": "Qu'est-ce que tu manges ?", "qit": "Che cosa mangi?", "r": "Je mange une pomme.", "rit": "Mangio una mela.", "a": "abd5327981e.mp3"}, {"w": "de qui", "wit": "di chi?", "q": "C'est le cahier de qui ?", "qit": "Di chi è il quaderno?", "r": "C'est le cahier de Léo.", "rit": "È il quaderno di Léo.", "a": "ab844f92b38.mp3"}, {"w": "ou", "wit": "o…?", "q": "Tu préfères le chat ou le chien ?", "qit": "Preferisci il gatto o il cane?", "r": "Je préfère le chien.", "rit": "Preferisco il cane.", "a": "af10518140b.mp3"}, {"w": "Est-ce que", "wit": "domanda sì / no", "q": "Est-ce que tu as un animal ?", "qit": "Hai un animale?", "r": "Oui, j'ai un lapin.", "rit": "Sì, ho un coniglio.", "a": "a95b511c4e7.mp3"}], "ex1": [{"w": "la carapace", "it": "il guscio", "ok": "carapace", "opts": ["carapace", "chat", "poisson", "oiseau"], "a": "a3702413d2d.mp3"}, {"w": "le bec", "it": "il becco", "ok": "bec", "opts": ["bec", "lapin", "chien", "serpent"], "a": "afa0297d713.mp3"}, {"w": "les griffes", "it": "gli artigli", "ok": "griffes", "opts": ["griffes", "poisson", "serpent", "croco"], "a": "ada1a6584ba.mp3"}, {"w": "les œufs", "it": "le uova", "ok": "oeufs", "opts": ["oeufs", "bebes", "chat", "croco"], "a": "a93179c6b8f.mp3"}, {"w": "les dents", "it": "i denti", "ok": "croco", "opts": ["croco", "bebes", "lapin", "oiseau"], "a": "aeae9ed1596.mp3"}, {"w": "les écailles", "it": "le scaglie", "ok": "ecailles", "opts": ["ecailles", "lapin", "chat", "chien"], "a": "aa2d7707ccf.mp3"}, {"w": "les bébés tortues", "it": "le tartarughine", "ok": "bebes", "opts": ["bebes", "tortue", "lapin", "chat"], "a": "a29e1b6c8e2.mp3"}, {"w": "les pattes", "it": "le zampe", "ok": "pattes", "opts": ["pattes", "poisson", "serpent", "bec"], "a": "aa2706e12b3.mp3"}], "ex2": [{"fr": "Célestine est une tortue terrestre.", "it": "Célestine è una tartaruga di terra.", "v": true, "cfr": "Célestine est une tortue terrestre.", "cit": "Célestine è una tartaruga di terra.", "a": "a64b9725a7f.mp3", "ac": "a64b9725a7f.mp3"}, {"fr": "Célestine vit dans l'eau.", "it": "Célestine vive nell'acqua.", "v": false, "cfr": "Célestine vit sur la terre, pas dans l'eau.", "cit": "Célestine vive sulla terra, non nell'acqua.", "a": "ad7db982db9.mp3", "ac": "ad72ff0c7cb.mp3"}, {"fr": "Célestine a dix ans.", "it": "Célestine ha dieci anni.", "v": false, "cfr": "Célestine a quatre ans.", "cit": "Célestine ha quattro anni.", "a": "a9003931f57.mp3", "ac": "ad9eae96fb9.mp3"}, {"fr": "Célestine pèse douze kilos.", "it": "Célestine pesa dodici chili.", "v": true, "cfr": "Célestine pèse douze kilos.", "cit": "Célestine pesa dodici chili.", "a": "af5abfcb81e.mp3", "ac": "af5abfcb81e.mp3"}, {"fr": "Célestine a des dents.", "it": "Célestine ha i denti.", "v": false, "cfr": "Célestine n'a pas de dents. Elle a un bec.", "cit": "Célestine non ha denti. Ha un becco.", "a": "ade3e24d758.mp3", "ac": "a8f0f896a61.mp3"}, {"fr": "Célestine a des griffes.", "it": "Célestine ha gli artigli.", "v": true, "cfr": "Célestine a des griffes.", "cit": "Célestine ha gli artigli.", "a": "a60e276c5a3.mp3", "ac": "a60e276c5a3.mp3"}, {"fr": "Célestine marche très vite.", "it": "Célestine cammina molto velocemente.", "v": false, "cfr": "Célestine marche très lentement.", "cit": "Célestine cammina molto lentamente.", "a": "a24874fb1ee.mp3", "ac": "ad28c721220.mp3"}, {"fr": "Célestine mange de la viande.", "it": "Célestine mangia la carne.", "v": false, "cfr": "Célestine mange de l'herbe. Elle est herbivore.", "cit": "Célestine mangia l'erba. È erbivora.", "a": "a2c0f0d4560.mp3", "ac": "a87b850b4a1.mp3"}, {"fr": "Célestine pond des œufs.", "it": "Célestine depone le uova.", "v": true, "cfr": "Célestine pond des œufs.", "cit": "Célestine depone le uova.", "a": "a60c058b37a.mp3", "ac": "a60c058b37a.mp3"}, {"fr": "Célestine est un cadeau du grand-père de Léo.", "it": "Célestine è un regalo del nonno di Léo.", "v": true, "cfr": "Célestine est un cadeau du grand-père de Léo.", "cit": "Célestine è un regalo del nonno di Léo.", "a": "aa361349255.mp3", "ac": "aa361349255.mp3"}], "ex3": [{"b": "La tortue rentre", "e": "tête.", "opts": ["son", "sa", "ses"], "k": 1, "full": "La tortue rentre sa tête.", "it": "La tartaruga ritira la testa.", "why": "« tête » est féminin : on dit « sa ».", "whyit": "« tête » è femminile: si dice « sa ».", "a": "aaef7c9ec8a.mp3"}, {"b": "La tortue rentre", "e": "pattes.", "opts": ["son", "sa", "ses"], "k": 2, "full": "La tortue rentre ses pattes.", "it": "La tartaruga ritira le zampe.", "why": "« pattes » est au pluriel : on dit « ses ».", "whyit": "« pattes » è plurale: si dice « ses ».", "a": "a6dcc45843b.mp3"}, {"b": "La tortue mange avec", "e": "bec.", "opts": ["son", "sa", "ses"], "k": 0, "full": "La tortue mange avec son bec.", "it": "La tartaruga mangia con il becco.", "why": "« bec » est masculin : on dit « son ».", "whyit": "« bec » è maschile: si dice « son ».", "a": "ab59f711a1c.mp3"}, {"b": "Sur", "e": "carapace, il y a des écailles.", "opts": ["son", "sa", "ses"], "k": 1, "full": "Sur sa carapace, il y a des écailles.", "it": "Sul suo guscio ci sono delle scaglie.", "why": "« carapace » est féminin : on dit « sa ».", "whyit": "« carapace » è femminile: si dice « sa ».", "a": "aa5a8f7e561.mp3"}, {"b": "Le chat a des griffes. Il cache", "e": "griffes.", "opts": ["son", "sa", "ses"], "k": 2, "full": "Le chat a des griffes. Il cache ses griffes.", "it": "Il gatto ha gli artigli. Nasconde i suoi artigli.", "why": "« griffes » est au pluriel : on dit « ses ».", "whyit": "« griffes » è plurale: si dice « ses ».", "a": "a88f9037d37.mp3"}, {"b": "Le chien remue", "e": "queue.", "opts": ["son", "sa", "ses"], "k": 1, "full": "Le chien remue sa queue.", "it": "Il cane muove la coda.", "why": "« queue » est féminin : on dit « sa ».", "whyit": "« queue » è femminile: si dice « sa ».", "a": "a6f8495ae15.mp3"}, {"b": "J'adore", "e": "grand-père !", "opts": ["mon", "ma", "mes"], "k": 0, "full": "J'adore mon grand-père !", "it": "Adoro mio nonno!", "why": "« grand-père » est masculin : on dit « mon ».", "whyit": "« grand-père » è maschile: si dice « mon ».", "a": "a8c11595e3e.mp3"}, {"b": "C'est", "e": "petite sœur, Maggie.", "opts": ["mon", "ma", "mes"], "k": 1, "full": "C'est ma petite sœur, Maggie.", "it": "È la mia sorellina, Maggie.", "why": "« petite sœur » est féminin : on dit « ma ».", "whyit": "« petite sœur » è femminile: si dice « ma ».", "a": "a29f79bb5bc.mp3"}, {"b": "Voici", "e": "poissons rouges.", "opts": ["mon", "ma", "mes"], "k": 2, "full": "Voici mes poissons rouges.", "it": "Ecco i miei pesci rossi.", "why": "« poissons » est au pluriel : on dit « mes ».", "whyit": "« poissons » è plurale: si dice « mes ».", "a": "a6ef7d39d76.mp3"}, {"b": "Léo présente", "e": "tortue à la classe.", "opts": ["son", "sa", "ses"], "k": 1, "full": "Léo présente sa tortue à la classe.", "it": "Léo presenta la sua tartaruga alla classe.", "why": "« tortue » est féminin : on dit « sa ».", "whyit": "« tortue » è femminile: si dice « sa ».", "a": "ae44d1f75bc.mp3"}], "ex4": [{"img": "poisson", "s": "Le poisson", "n": "pattes.", "k": 3, "full": "Le poisson n'a pas de pattes.", "it": "Il pesce non ha zampe.", "nw": null, "why": "Il n'en a pas : après « pas », on écrit « de ».", "whyit": "Non ne ha: dopo « pas » si scrive « de ».", "a": "a60e6229670.mp3"}, {"img": "oiseau", "s": "L'oiseau", "n": "bec.", "k": 0, "full": "L'oiseau a un bec.", "it": "L'uccello ha un becco.", "nw": null, "why": "Un seul, masculin : « un ».", "whyit": "Uno solo, maschile: « un ».", "a": "a4c700967cc.mp3"}, {"img": "serpent", "s": "Le serpent", "n": "pattes.", "k": 3, "full": "Le serpent n'a pas de pattes.", "it": "Il serpente non ha zampe.", "nw": null, "why": "Il n'en a pas : après « pas », on écrit « de ».", "whyit": "Non ne ha: dopo « pas » si scrive « de ».", "a": "aece29f8aaf.mp3"}, {"img": "chat", "s": "Le chat", "n": "queue.", "k": 1, "full": "Le chat a une queue.", "it": "Il gatto ha una coda.", "nw": null, "why": "Un seul, féminin : « une ».", "whyit": "Uno solo, femminile: « une ».", "a": "ad6307b0e23.mp3"}, {"img": "bec", "s": "La tortue", "n": "dents.", "k": 3, "full": "La tortue n'a pas de dents.", "it": "La tartaruga non ha denti.", "nw": null, "why": "Il n'en a pas : après « pas », on écrit « de ».", "whyit": "Non ne ha: dopo « pas » si scrive « de ».", "a": "aaeb1401325.mp3"}, {"img": "croco", "s": "Le crocodile", "n": "dents.", "k": 2, "full": "Le crocodile a des dents.", "it": "Il coccodrillo ha i denti.", "nw": null, "why": "Plusieurs : « des ».", "whyit": "Più di uno: « des ».", "a": "a2ad910bd15.mp3"}, {"img": "carapace", "s": "La tortue", "n": "carapace.", "k": 1, "full": "La tortue a une carapace.", "it": "La tartaruga ha un guscio.", "nw": null, "why": "Un seul, féminin : « une ».", "whyit": "Uno solo, femminile: « une ».", "a": "a06b665456f.mp3"}, {"img": "lapin", "s": "Le lapin", "n": "carapace.", "k": 3, "full": "Le lapin n'a pas de carapace.", "it": "Il coniglio non ha il guscio.", "nw": null, "why": "Il n'en a pas : après « pas », on écrit « de ».", "whyit": "Non ne ha: dopo « pas » si scrive « de ».", "a": "abdb6e3a13b.mp3"}, {"img": "chien", "s": "Le chien", "n": "griffes.", "k": 2, "full": "Le chien a des griffes.", "it": "Il cane ha gli artigli.", "nw": null, "why": "Plusieurs : « des ».", "whyit": "Più di uno: « des ».", "a": "aa0f37b49f0.mp3"}, {"img": "oiseau", "s": "L'oiseau", "n": "plumes.", "k": 2, "full": "L'oiseau a des plumes.", "it": "L'uccello ha le piume.", "nw": ["des plumes", "🪶", "le piume"], "why": "Plusieurs : « des ».", "whyit": "Più di uno: « des ».", "a": "a531d3b93aa.mp3"}], "opt4": ["a un", "a une", "a des", "n'a pas de"], "ex5": [{"b": "", "e": "est ton chat ?", "opts": ["Comment", "Quel âge", "De qui"], "k": 0, "r": "Il est gris et très mignon.", "q": "Comment est ton chat ?", "qit": "Com'è il tuo gatto?", "rit": "È grigio e molto carino.", "why": "On demande comment il est, pour une description.", "whyit": "Si chiede com'è: per una descrizione.", "a": "ab915287fdf.mp3"}, {"b": "Ta sœur a", "e": "?", "opts": ["comment", "quel âge", "de qui"], "k": 1, "r": "Elle a six ans.", "q": "Ta sœur a quel âge ?", "qit": "Quanti anni ha tua sorella?", "rit": "Ha sei anni.", "why": "La réponse donne un âge : « six ans ».", "whyit": "La risposta dà un'età: « sei anni ».", "a": "a859e74eec8.mp3"}, {"b": "", "e": "tu manges ?", "opts": ["Qu'est-ce que", "Comment", "Quel âge"], "k": 0, "r": "Je mange une pomme.", "q": "Qu'est-ce que tu manges ?", "qit": "Che cosa mangi?", "rit": "Mangio una mela.", "why": "La réponse dit une chose : ce qu'on mange.", "whyit": "La risposta dice una cosa: che cosa si mangia.", "a": "abd5327981e.mp3"}, {"b": "C'est le cadeau", "e": "?", "opts": ["de qui", "ou", "quel âge"], "k": 0, "r": "C'est le cadeau de ma grand-mère.", "q": "C'est le cadeau de qui ?", "qit": "Di chi è il regalo?", "rit": "È il regalo di mia nonna.", "why": "La réponse dit qui a fait le cadeau.", "whyit": "La risposta dice chi ha fatto il regalo.", "a": "aa36bc1f502.mp3"}, {"b": "Tu préfères le lapin", "e": "le chat ?", "opts": ["ou", "de qui", "comment"], "k": 0, "r": "Je préfère le lapin.", "q": "Tu préfères le lapin ou le chat ?", "qit": "Preferisci il coniglio o il gatto?", "rit": "Preferisco il coniglio.", "why": "On choisit entre deux animaux.", "whyit": "Si sceglie tra due animali.", "a": "a2035eba2f3.mp3"}, {"b": "", "e": "tu as un animal ?", "opts": ["Est-ce que", "Comment", "Qu'est-ce que"], "k": 0, "r": "Oui, j'ai un poisson rouge.", "q": "Est-ce que tu as un animal ?", "qit": "Hai un animale?", "rit": "Sì, ho un pesce rosso.", "why": "La réponse commence par « oui » : c'est une question oui / non.", "whyit": "La risposta comincia con « sì »: è una domanda sì / no.", "a": "a4d2865bb1a.mp3"}, {"b": "", "e": "est ta maison ?", "opts": ["Qu'est-ce que", "Comment", "Est-ce que"], "k": 1, "r": "Elle est grande et jaune.", "q": "Comment est ta maison ?", "qit": "Com'è la tua casa?", "rit": "È grande e gialla.", "why": "On demande comment il est, pour une description.", "whyit": "Si chiede com'è: per una descrizione.", "a": "aaf872f6d38.mp3"}, {"b": "", "e": "ta tortue mange ?", "opts": ["Est-ce que", "Qu'est-ce que", "De qui"], "k": 1, "r": "Elle mange de la salade.", "q": "Qu'est-ce que ta tortue mange ?", "qit": "Che cosa mangia la tua tartaruga?", "rit": "Mangia l'insalata.", "why": "La réponse dit une chose : ce qu'on mange.", "whyit": "La risposta dice una cosa: che cosa si mangia.", "a": "a1c5dcdff69.mp3"}], "ex6": [{"cl": [{"fr": "J'ai une carapace.", "it": "Ho un guscio."}, {"fr": "Je n'ai pas de dents.", "it": "Non ho denti."}, {"fr": "Je mange de la salade.", "it": "Mangio l'insalata."}], "opts": ["serpent", "tortue", "croco", "lapin"], "k": 1, "name": "la tortue", "a": "ad09e352a70.mp3"}, {"cl": [{"fr": "J'ai quatre pattes et une grande queue.", "it": "Ho quattro zampe e una grande coda."}, {"fr": "J'ai beaucoup de dents.", "it": "Ho tanti denti."}, {"fr": "Je mange de la viande.", "it": "Mangio la carne."}], "opts": ["lapin", "croco", "tortue", "oiseau"], "k": 1, "name": "le crocodile", "a": "af6063aa383.mp3"}, {"cl": [{"fr": "Je n'ai pas de pattes.", "it": "Non ho zampe."}, {"fr": "Je ne vis pas dans l'eau.", "it": "Non vivo nell'acqua."}, {"fr": "Je mange de la viande.", "it": "Mangio la carne."}], "opts": ["poisson", "oiseau", "serpent", "tortue"], "k": 2, "name": "le serpent", "a": "acbb1c50773.mp3"}, {"cl": [{"fr": "Je vis dans l'eau.", "it": "Vivo nell'acqua."}, {"fr": "Je n'ai pas de pattes.", "it": "Non ho zampe."}, {"fr": "J'ai des écailles.", "it": "Ho le scaglie."}], "opts": ["serpent", "poisson", "croco", "oiseau"], "k": 1, "name": "le poisson", "a": "aefffc3cbf2.mp3"}, {"cl": [{"fr": "J'ai un bec.", "it": "Ho un becco."}, {"fr": "J'ai deux pattes et des plumes 🪶.", "it": "Ho due zampe e le piume."}, {"fr": "Je vole.", "it": "Volo."}], "opts": ["tortue", "oiseau", "chat", "poisson"], "k": 1, "name": "l'oiseau", "a": "add26a94f7a.mp3"}, {"cl": [{"fr": "Je mange de l'herbe et des carottes 🥕.", "it": "Mangio l'erba e le carote."}, {"fr": "J'ai des grandes oreilles 👂.", "it": "Ho delle grandi orecchie."}, {"fr": "Je n'ai pas de carapace.", "it": "Non ho il guscio."}], "opts": ["tortue", "chien", "lapin", "ours"], "k": 2, "name": "le lapin", "a": "a8e8951e4c7.mp3"}, {"cl": [{"fr": "Je suis grand et marron.", "it": "Sono grande e marrone."}, {"fr": "Je mange de tout : des fruits, du poisson, du miel 🍯.", "it": "Mangio di tutto: frutta, pesce, miele."}, {"fr": "Je suis omnivore.", "it": "Sono onnivoro."}], "opts": ["ours", "lapin", "tortue", "serpent"], "k": 0, "name": "l'ours", "a": "ad1692fd199.mp3"}, {"cl": [{"fr": "J'ai des griffes et une queue.", "it": "Ho gli artigli e una coda."}, {"fr": "Je mange de la viande et des croquettes.", "it": "Mangio la carne e i croccantini."}, {"fr": "Je dis « miaou ».", "it": "Faccio « miao »."}], "opts": ["chien", "lapin", "chat", "serpent"], "k": 2, "name": "le chat", "a": "a9e9faa9bbd.mp3"}], "names": {"tortue": "la tortue", "croco": "le crocodile", "serpent": "le serpent", "poisson": "le poisson", "oiseau": "l'oiseau", "lapin": "le lapin", "ours": "l'ours", "chat": "le chat", "chien": "le chien"}, "namesit": {"tortue": "la tartaruga", "croco": "il coccodrillo", "serpent": "il serpente", "poisson": "il pesce", "oiseau": "l'uccello", "lapin": "il coniglio", "ours": "l'orso", "chat": "il gatto", "chien": "il cane"}, "nameaud": {"tortue": "aceffb78675.mp3", "croco": "aa867fa8ccf.mp3", "serpent": "a5016964fe3.mp3", "poisson": "a17b18e8877.mp3", "oiseau": "a7d76fdd886.mp3", "lapin": "ae7006f5040.mp3", "ours": "a2eac2ea9ee.mp3", "chat": "a297d33dafb.mp3", "chien": "a3b1d2a2c79.mp3"}};
+const KEY="tortue-l3-v1";
+let S={};try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){S={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+
+/* ---------- audio ---------- */
+const player=new Audio();let curBtn=null,queue=[],qCb=null;
+function play(f,btn){stopQ();_play(f,btn)}
+function _play(f,btn){
+  if(curBtn)curBtn.classList.remove("playing");
+  curBtn=btn||null;if(btn)btn.classList.add("playing");
+  player.src="audio/"+f;player.play().catch(()=>{});
+}
+player.addEventListener("ended",()=>{if(curBtn)curBtn.classList.remove("playing");curBtn=null;if(queue.length){const n=queue.shift();n()}else if(qCb){qCb();qCb=null}});
+function stopQ(){queue=[];if(qCb){qCb();qCb=null}document.querySelectorAll(".tl.on").forEach(e=>e.classList.remove("on"))}
+function sayBtn(f,sm){return `<button class="say${sm?" sm":""}" data-a="${f}" aria-label="écouter">🔊</button>`}
+document.addEventListener("click",e=>{const b=e.target.closest(".say");if(b){play(b.dataset.a,b)}});
+function playList(items,rows,btn){
+  stopQ();btn.textContent="■ Stop";
+  queue=items.map((it,i)=>()=>{rows.forEach(r=>r.classList.remove("on"));if(rows[i]){rows[i].classList.add("on");rows[i].scrollIntoView({block:"nearest",behavior:"smooth"})}_play(it.a)});
+  qCb=()=>{btn.textContent="▶ Tout écouter";rows.forEach(r=>r.classList.remove("on"))};
+  queue.shift()();
+}
+document.querySelectorAll(".playall").forEach(b=>b.addEventListener("click",()=>{
+  if(b.textContent.startsWith("■")){player.pause();stopQ();return}
+  const k=b.dataset.list;playList(D[k],[...document.querySelectorAll("#"+k+" .row")],b)}));
+
+/* ---------- leçon ---------- */
+const CC=["c1","c2","c3","c4","c5","c6"];
+function vcard(v,i){return `<div class="card ${CC[i%6]}"><div class="ph"><img src="img/${v.img}.jpg" alt="${esc(v.w)}" loading="lazy">${v.pl?`<span class="pl">${esc(v.pl)}</span>`:""}</div>
+ <div class="w">${sayBtn(v.aw)}<span class="t">${v.art?`<span class="art a-${v.art}">${v.art}</span>`:""}${esc(v.w)}</span></div><div class="tr">${esc(v.it)}</div>
+ <div class="ex">${sayBtn(v.ae,1)}<div>${esc(v.ex)}<span class="it">${esc(v.exit)}</span></div></div></div>`}
+$("#v1").innerHTML=D.v1.map(vcard).join("");
+$("#v2").innerHTML=D.v2.map((v,i)=>vcard(v,i+3)).join("");
+$("#v3").innerHTML=D.v3.map(v=>`<div class="chip"><div class="row" style="margin:0">${sayBtn(v.aw,1)}<span class="t">${esc(v.w)}</span> <span class="it">${esc(v.it)}</span></div><div class="row">${sayBtn(v.ae,1)}<div>${esc(v.ex)} <span class="it" style="display:block">${esc(v.exit)}</span></div></div></div>`).join("");
+$("#g1").innerHTML=D.g1.map((g,i)=>`<div class="pp" style="background:${i%2?"var(--rasp-l)":"var(--sky-l)"}">${sayBtn(g.a,1)}<div>${esc(g.fr).replace(/(n'a pas d'|n'a pas de|a des|a une)/,"<b>$1</b>")}<span class="it">${esc(g.it)}</span></div></div>`).join("");
+$("#g2").innerHTML=`${sayBtn(D.g2.a)}<div><span class="t">Elle rentre <b style="color:var(--rasp)">sa</b> tête et <b style="color:var(--lav)">ses</b> quatre pattes dans <b style="color:var(--rasp)">sa</b> carapace.</span><span class="it">${esc(D.g2.it)}</span></div>`;
+$("#g3").innerHTML=D.g3.map(g=>`<div class="qrow"><div class="w">${esc(g.w)}<span class="it">${esc(g.wit)}</span></div>${sayBtn(g.a,1)}<div class="q">${esc(g.q)} <b style="color:var(--soft)">·</b> ${esc(g.r)}<span class="it">${esc(g.qit)} ${esc(g.rit)}</span></div></div>`).join("");
+$("#p10").innerHTML=D.p10.map((p,i)=>`<div class="row">${sayBtn(p.a,1)}<span>${i+1}. ${esc(p.fr)}<span class="it">${esc(p.it)}</span></span></div>`).join("");
+let lastWho="";
+$("#p11").innerHTML=D.p11.map(p=>{let h="";if(p.who!==lastWho){h=`<div class="who" style="color:${p.who==="Léo"?"var(--rasp)":"var(--lav)"}">${esc(p.who)}</div>`;lastWho=p.who}
+  return h+`<div class="tl row" style="border-color:${p.who==="Léo"?"var(--rasp)":"var(--lav)"}">${sayBtn(p.a,1)}<div>${esc(p.fr)}<span class="it">${esc(p.it)}</span></div></div>`}).join("");
+$("#p12").innerHTML=D.p12.map((p,i)=>`<div class="tl row" style="border-color:var(--sky)">${sayBtn(p.a,1)}<div><b>${i+1}.</b> ${esc(p.fr)}<span class="it">${esc(p.it)}</span></div></div>`).join("");
+$("#dev").innerHTML=D.dev.map(p=>`<div class="tl" style="border-color:var(--peach)">${sayBtn(p.a,1)}<div>${esc(p.fr)}<span class="it">${esc(p.it)}</span></div></div>`).join("")+
+ `<div style="margin-top:10px"><button class="opt" id="devbtn">Voir la réponse · Vedi la risposta</button> <span id="devans" style="display:none;font-family:Fredoka;font-weight:600;font-size:19px;color:var(--peach)">C'est le serpent ! <span class="it">È il serpente!</span> 🐍</span></div>`;
+$("#devbtn").onclick=()=>{$("#devans").style.display="inline";play(D.nameaud.serpent)};
+
+/* ---------- exercices ---------- */
+const TOT={1:D.ex1.length,2:D.ex2.length,3:D.ex3.length,4:D.ex4.length,5:D.ex5.length,6:D.ex6.length};
+const REVOIR=[];
+function ans(e,i){return (S["e"+e]||{})[i]}
+function setAns(e,i,v){S["e"+e]=S["e"+e]||{};S["e"+e][i]=v;save();update()}
+function shuffleSeed(arr,seed){const a=arr.slice();let s=seed*9301+49297;for(let i=a.length-1;i>0;i--){s=(s*9301+49297)%233280;const j=Math.floor(s/233280*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fb(ok,html){return `<div class="fb ${ok?"ok":"ko"}">${html}</div>`}
+const BRAVO=["Bravo !","Exact !","Super !","Oui !","Très bien !","Parfait !"];
+const BRAVOIT=["Brava!","Esatto!","Super!","Sì!","Molto bene!","Perfetto!"];
+const OUPS=["Pas tout à fait…","Presque…","Oups !"];
+const OUPSIT=["Non proprio…","Quasi…","Ops!"];
+const hOk=i=>`<b class="h">${BRAVO[i%6]}</b> <span class="it" style="display:inline">${BRAVOIT[i%6]}</span>`;
+const hKo=i=>`<b class="h">${OUPS[i%3]}</b> <span class="it" style="display:inline">${OUPSIT[i%3]}</span>`;
+function resetBtn(e){return `<button class="reset" data-reset="${e}">↺ Recommencer l'exercice · Ricomincia l'esercizio</button>`}
+document.addEventListener("click",ev=>{const b=ev.target.closest("[data-reset]");if(b){delete S["e"+b.dataset.reset];save();renderAll()}});
+
+function r1(){ $("#e1").innerHTML=D.ex1.map((it,i)=>{const v=ans(1,i);const done=v!==undefined;const opts=shuffleSeed(it.opts,i+3);
+  return `<div class="item ${done?(v===it.ok?"ok":"ko"):""}"><div class="line1"><span class="inum">${i+1}</span>${sayBtn(it.a)}<span class="sent">${done?`<b>${esc(it.w)}</b> <span class="it">${esc(it.it)}</span>`:"<span class='it'>Écoute… · Ascolta…</span>"}</span></div>
+  <div class="photos">${opts.map(o=>`<button class="pho ${done?(o===v?(o===it.ok?"sel-ok":"sel-ko"):(o===it.ok?"right":"")):""}" data-e="1" data-i="${i}" data-v="${o}" ${done?"disabled":""}><img src="img/${o}.jpg" alt="" loading="lazy"></button>`).join("")}</div>
+  ${done?(v===it.ok?fb(1,hOk(i)):fb(0,`<div>${hKo(i)}<br>C'est <b>${esc(it.w)}</b>.<span class="it">È ${esc(it.it)}.</span></div>`)):""}</div>`}).join("")+resetBtn(1)}
+
+function r2(){ $("#e2").innerHTML=D.ex2.map((it,i)=>{const v=ans(2,i);const done=v!==undefined;const ok=done&&v===it.v;
+  const b=(val,lab)=>`<button class="opt ${done?(v===val?(ok?"sel-ok":"sel-ko"):(val===it.v?"right":"")):""}" data-e="2" data-i="${i}" data-v="${val}" ${done?"disabled":""}>${lab}</button>`;
+  return `<div class="item ${done?(ok?"ok":"ko"):""}"><div class="line1"><span class="inum">${i+1}</span>${sayBtn(it.a)}<span class="sent">${esc(it.fr)}<span class="it" style="display:block">${esc(it.it)}</span></span></div>
+  <div class="vf">${b(true,"✔ Vrai · Vero")}${b(false,"✘ Faux · Falso")}</div>
+  ${done?fb(ok,`${sayBtn(it.ac,1)}<div>${ok?hOk(i):hKo(i)}<br>${esc(it.cfr)}<span class="it">${esc(it.cit)}</span></div>`):""}</div>`}).join("")+resetBtn(2)}
+
+function gapSent(b,e,word,cls){return `${esc(b)} <span class="gap ${cls}">${word?esc(word):"&nbsp;"}</span> ${esc(e)}`}
+function r3(){ $("#e3").innerHTML=D.ex3.map((it,i)=>{const v=ans(3,i);const done=v!==undefined;const ok=done&&v===it.k;
+  return `<div class="item ${done?(ok?"ok":"ko"):""}"><div class="line1"><span class="inum">${i+1}</span><span class="sent">${gapSent(it.b,it.e,done?it.opts[it.k]:"",done?"ok":"")}</span></div>
+  <div class="opts">${it.opts.map((o,j)=>`<button class="opt ${done?(j===v?(ok?"sel-ok":"sel-ko"):(j===it.k?"right":"")):""}" data-e="3" data-i="${i}" data-v="${j}" ${done?"disabled":""}>${o}</button>`).join("")}</div>
+  ${done?fb(ok,`${sayBtn(it.a,1)}<div>${ok?hOk(i):hKo(i)} ${esc(it.why)}<span class="it">${esc(it.whyit)}</span><span class="it">${esc(it.it)}</span></div>`):""}</div>`}).join("")+resetBtn(3)}
+
+function r4(){ $("#e4").innerHTML=D.ex4.map((it,i)=>{const v=ans(4,i);const done=v!==undefined;const ok=done&&v===it.k;
+  return `<div class="item ${done?(ok?"ok":"ko"):""}"><div class="row4"><img src="img/${it.img}.jpg" alt="" loading="lazy"><div class="line1"><span class="inum">${i+1}</span><span class="sent">${gapSent(it.s,it.n,done?D.opt4[it.k]:"",done?"ok":"")}</span></div></div>
+  ${it.nw?`<div style="margin-top:6px"><span class="newword">${it.nw[1]} ${esc(it.nw[0])} = <i>${esc(it.nw[2])}</i></span></div>`:""}
+  <div class="opts">${D.opt4.map((o,j)=>`<button class="opt ${done?(j===v?(ok?"sel-ok":"sel-ko"):(j===it.k?"right":"")):""}" data-e="4" data-i="${i}" data-v="${j}" ${done?"disabled":""}>${esc(o)}</button>`).join("")}</div>
+  ${done?fb(ok,`${sayBtn(it.a,1)}<div>${ok?hOk(i):hKo(i)} ${esc(it.why)}<span class="it">${esc(it.whyit)}</span><span class="it">${esc(it.it)}</span></div>`):""}</div>`}).join("")+resetBtn(4)}
+
+function r5(){ $("#e5").innerHTML=D.ex5.map((it,i)=>{const v=ans(5,i);const done=v!==undefined;const ok=done&&v===it.k;
+  return `<div class="item ${done?(ok?"ok":"ko"):""}"><div class="line1"><span class="inum">${i+1}</span><span class="sent">— ${gapSent(it.b,it.e,done?it.opts[it.k]:"",done?"ok":"")}<br>— <i>${esc(it.r)}</i></span></div>
+  <div class="opts">${it.opts.map((o,j)=>`<button class="opt ${done?(j===v?(ok?"sel-ok":"sel-ko"):(j===it.k?"right":"")):""}" data-e="5" data-i="${i}" data-v="${j}" ${done?"disabled":""}>${esc(o)}</button>`).join("")}</div>
+  ${done?fb(ok,`${sayBtn(it.a,1)}<div>${ok?hOk(i):hKo(i)} ${esc(it.why)}<span class="it">${esc(it.whyit)}</span><span class="it">${esc(it.qit)} ${esc(it.rit)}</span></div>`):""}</div>`}).join("")+resetBtn(5)}
+
+function r6(){ $("#e6").innerHTML=D.ex6.map((it,i)=>{const v=ans(6,i);const done=v!==undefined;const ok=done&&v===it.k;
+  return `<div class="item ${done?(ok?"ok":"ko"):""}"><div class="line1"><span class="inum">${i+1}</span>${sayBtn(it.a)}<span class="f" style="font-size:18px">Qui suis-je ? <span class="it">Chi sono?</span></span></div>
+  <ul class="clues">${it.cl.map(c=>`<li><span>🔎</span><div>${esc(c.fr)}<span class="it">${esc(c.it)}</span></div></li>`).join("")}</ul>
+  <div class="photos">${it.opts.map((o,j)=>`<button class="pho ${done?(j===v?(ok?"sel-ok":"sel-ko"):(j===it.k?"right":"")):""}" data-e="6" data-i="${i}" data-v="${j}" ${done?"disabled":""}><img src="img/${o}.jpg" alt="" loading="lazy">${done?`<span class="cap">${esc(D.names[o])}</span>`:""}</button>`).join("")}</div>
+  ${done?fb(ok,`${sayBtn(D.nameaud[it.opts[it.k]],1)}<div>${ok?hOk(i):hKo(i)} Je suis <b>${esc(it.name)}</b>.<span class="it">Sono ${esc(D.namesit[it.opts[it.k]])}.</span></div>`):""}</div>`}).join("")+resetBtn(6)}
+
+document.addEventListener("click",ev=>{const b=ev.target.closest("[data-e]");if(!b||b.disabled||b.tagName==="A")return;
+  const e=+b.dataset.e,i=+b.dataset.i;let v=b.dataset.v;
+  if(e===2)v=(v==="true");else if(e!==1)v=+v;
+  setAns(e,i,v);R[e]();
+  const it=document.querySelectorAll("#e"+e+" .item")[i];
+  const right=(e===1?v===D.ex1[i].ok:e===2?v===D.ex2[i].v:v===D["ex"+e][i].k);
+  const X=D["ex"+e][i];const f=e===1?X.a:e===2?X.ac:e===6?D.nameaud[X.opts[X.k]]:X.a;
+  if(right&&f)play(f);
+});
+
+const R={1:r1,2:r2,3:r3,4:r4,5:r5,6:r6};
+function score(e){const a=S["e"+e]||{};let n=0;for(const i in a){const v=a[i];
+  if(e===1&&v===D.ex1[i].ok)n++;else if(e===2&&v===D.ex2[i].v)n++;else if(e>2&&v===D["ex"+e][i].k)n++}return n}
+const TITLES={1:["Écoute et touche","Ascolta e tocca"],2:["Vrai ou faux ?","Vero o falso?"],3:["Mon, ma, mes · son, sa, ses","Possessivi"],4:["Il a… / il n'a pas de…","Ha… / non ha…"],5:["La bonne question","La domanda giusta"],6:["Qui suis-je ?","Chi sono?"]};
+const TIPS={1:["Réécoute les mots de la leçon avec leur photo.","Riascolta le parole della lezione con la loro foto."],
+ 2:["Relis la présentation de Léo (piste 11).","Rileggi la presentazione di Léo (traccia 11)."],
+ 3:["Regarde toujours le mot qui suit : masculin, féminin ou pluriel ?","Guarda sempre la parola che segue: maschile, femminile o plurale?"],
+ 4:["Il n'a pas ? Alors c'est toujours « pas de ».","Non ce l'ha? Allora è sempre « pas de »."],
+ 5:["Lis d'abord la réponse : elle te dit quel mot choisir.","Leggi prima la risposta: ti dice quale parola scegliere."],
+ 6:["Lis bien les trois indices avant de choisir.","Leggi bene i tre indizi prima di scegliere."]};
+function revoir(){let h="";
+  for(let e=1;e<=6;e++){const a=S["e"+e]||{};let items="";
+    for(const i in a){const v=a[i];let it,ok,you,good,gfr,git,why="",whyit="",au;
+      if(e===1){it=D.ex1[i];ok=v===it.ok;you="";gfr=it.w;git=it.it;au=it.a}
+      else if(e===2){it=D.ex2[i];ok=v===it.v;you=`${esc(it.fr)} → ${v?"vrai":"faux"}`;gfr=it.cfr;git=it.cit;au=it.ac}
+      else if(e===3||e===4){it=D["ex"+e][i];ok=v===it.k;const opts=e===3?it.opts:D.opt4;you=`${esc(it.b||it.s)} <s>${esc(opts[v])}</s> ${esc(it.e||it.n)}`;gfr=it.full;git=it.it;why=it.why;whyit=it.whyit;au=it.a}
+      else if(e===5){it=D.ex5[i];ok=v===it.k;you=`${esc(it.b)} <s>${esc(it.opts[v])}</s> ${esc(it.e)}`;gfr=it.q+" "+it.r;git=it.qit+" "+it.rit;why=it.why;whyit=it.whyit;au=it.a}
+      else {it=D.ex6[i];ok=v===it.k;you=`<s>${esc(D.names[it.opts[v]])}</s>`;gfr="Je suis "+it.name+".";git="Sono "+D.namesit[it.opts[it.k]]+".";au=D.nameaud[it.opts[it.k]]}
+      if(ok)continue;
+      items+=`<div class="ri">${you?`<div class="you">Ta réponse · La tua risposta : ${you}</div>`:""}<div class="good">${sayBtn(au,1)}<div><b>${esc(gfr)}</b><span class="it">${esc(git)}</span></div></div>${why?`<div class="why">${esc(why)}<span class="it">${esc(whyit)}</span></div>`:""}</div>`}
+    if(items)h+=`<div class="rg"><h4>Exercice ${e} · ${TITLES[e][0]}</h4><div class="inner" style="border-color:var(--peach);background:var(--peach-l);margin-top:0">💡 ${TIPS[e][0]}<span class="it">${TIPS[e][1]}</span></div>${items}</div>`}
+  $("#revoir").innerHTML=h||`<p class="empty">Rien à revoir pour le moment. <span class="it" style="display:block">Per ora non c'è niente da ripassare.</span></p>`}
+function update(){let t=0,n=0,tot=0;let bars="";
+  for(let e=1;e<=6;e++){const s=score(e),T=TOT[e],done=Object.keys(S["e"+e]||{}).length;t+=s;tot+=T;
+    const el=document.querySelector(`.exscore[data-s="${e}"]`);if(el)el.textContent=done?`${s} / ${T}`:"";
+    const nv=document.querySelector(`.nav a[data-e="${e}"]`);if(nv)nv.classList.toggle("done",done===T);
+    bars+=`<div class="bar"><span class="l">${e}. ${TITLES[e][0]}</span><span class="tr"><span style="width:${Math.round(s/T*100)}%"></span></span><span class="v">${s}/${T}</span></div>`}
+  const t7=(S.b7text||"").trim().length>40;const nv7=document.querySelector('.nav a[data-e="7"]');if(nv7)nv7.classList.toggle("done",t7);
+  bars+=`<div class="bar"><span class="l">7. Présente ton animal</span><span class="tr"><span style="width:${t7?100:0}%"></span></span><span class="v">${t7?"✔":"…"}</span></div>`;
+  $("#score").textContent=`${t} / ${tot}`;$("#bigscore").textContent=`${t} / ${tot}`;$("#bars").innerHTML=bars;revoir()}
+function renderAll(){for(let e=1;e<=6;e++)R[e]();update()}
+
+/* ---------- ex7 ---------- */
+const AN=[["un chat","un gatto"],["un chien","un cane"],["un lapin","un coniglio"],["une tortue","una tartaruga"],["un poisson","un pesce"],["un oiseau","un uccello"],["un serpent","un serpente"]];
+const HAS=["une carapace","une queue","un bec","des griffes","des écailles","des plumes","quatre pattes","deux pattes","des grandes oreilles"];
+const HASNOT=["dents","pattes","carapace","griffes","queue","bec","plumes","écailles"];
+const EAT=["de l'herbe","de la salade","de la viande","des carottes","des croquettes","des graines","de tout"];
+const opt=(arr)=>arr.map(x=>`<option>${esc(Array.isArray(x)?x[0]:x)}</option>`).join("");
+$("#b-an").innerHTML=opt(AN);$("#b-has").innerHTML=opt(HAS);$("#b-hasnot").innerHTML=opt(HASNOT);$("#b-eat").innerHTML=opt(EAT);
+$("#b-age").innerHTML=Array.from({length:15},(_,i)=>`<option value="${i+1}">${i+1} ${i?"ans":"an"}</option>`).join("");
+const B=["b-g","b-name","b-an","b-age","b-has","b-hasnot","b-eat","b-diet","b-speed","b-gift"];
+const elision=w=>/^[aeiouéèêh]/i.test(w)?"d'"+w:"de "+w;
+function build(){const g=$("#b-g").value,P=g==="f"?"Elle":"Il";document.querySelectorAll(".builder .pr").forEach(e=>e.textContent=P);
+  const nm=$("#b-name").value.trim()||"…";const age=+$("#b-age").value;
+  const L=[`Mon animal s'appelle ${nm}.`,`C'est ${$("#b-an").value}.`,`${P} a ${age} ${age>1?"ans":"an"}.`,`${P} a ${$("#b-has").value}.`,
+   `${P} n'a pas ${elision($("#b-hasnot").value)}.`,`${P} mange ${$("#b-eat").value}.`,`${P} est ${$("#b-diet").value}.`,`${P} marche très ${$("#b-speed").value}.`,`C'est un cadeau de ${$("#b-gift").value}.`];
+  $("#b-prev").innerHTML=L.map(l=>`<p>${esc(l)}</p>`).join("");
+  S.b7=Object.fromEntries(B.map(k=>[k,$("#"+k).value]));save();return L}
+B.forEach(k=>{const el=$("#"+k);if(S.b7&&S.b7[k]!==undefined)el.value=S.b7[k];el.addEventListener("input",build);el.addEventListener("change",build)});
+// le menu « n'a pas de » : remplacer le texte affiché par la forme élidée
+$("#b-hasnot").innerHTML=HASNOT.map(x=>`<option value="${esc(x)}">${esc(elision(x))}</option>`).join("");
+if(S.b7)$("#b-hasnot").value=S.b7["b-hasnot"]||HASNOT[0];
+build();
+const ta=$("#b-text");ta.value=S.b7text||"";ta.addEventListener("input",()=>{S.b7text=ta.value;save();update()});
+$("#b-fill").onclick=()=>{const L=build();ta.value=(ta.value.trim()?ta.value.trim()+"\n":"")+L.join(" ");S.b7text=ta.value;save();update();ta.focus()};
+$("#b-copy").onclick=async()=>{const t=ta.value.trim();if(!t){$("#b-msg").textContent="Écris d'abord ton texte. · Scrivi prima il tuo testo.";return}
+  try{await navigator.clipboard.writeText(t);$("#b-msg").textContent="Texte copié ! · Testo copiato!"}catch(e){ta.select();document.execCommand("copy");$("#b-msg").textContent="Texte copié ! · Testo copiato!"}};
+let armed=false;$("#resetall").onclick=()=>{const b=$("#resetall");if(!armed){armed=true;b.textContent="Touche encore pour confirmer · Tocca ancora per confermare";setTimeout(()=>{armed=false;b.textContent="↺ Tout recommencer · Ricomincia tutto"},4000);return}
+  armed=false;b.textContent="↺ Tout recommencer · Ricomincia tutto";S={};save();ta.value="";renderAll()};
+renderAll();
+</script>
+</body>
+</html>
