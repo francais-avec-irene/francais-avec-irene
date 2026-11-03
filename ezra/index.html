@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ezra · Le futur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1b2a41;--soft:#55657e;--muted:#8693a6;
+  --bg:#f3f7f4;--card:#ffffff;--line:#dce6e0;
+  --rose:#1f8a5b;--rose-l:#e0f2e8;--rose-d:#16683f;
+  --lilac:#2f5fb3;--lilac-l:#e6eefb;
+  --peach:#f2a922;--peach-l:#fff4da;
+  --mint:#3fae92;--mint-l:#e3f6f0;
+  --sky:#5b9bd5;--sky-l:#e7f1fb;
+  --berry:#c8323f;--plum:#1d2b53;
+  --past:#2f5fb3;--pres:#1f8a5b;--fut:#f2a922;
+  --ok:#2f9e7a;--ok-l:#e2f5ee;--ko:#d6455d;--ko-l:#fde8ec;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Lora,Georgia,serif;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4,.pop,button,.pill,.tag,.nav a{font-family:Poppins,system-ui,sans-serif}
+.en{color:var(--muted);font-style:italic;font-size:.88em;font-family:Lora,Georgia,serif;font-weight:400}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+b,strong{font-weight:600}
+
+/* Hero */
+.hero{position:relative;border-radius:0 0 28px 28px;overflow:hidden;min-height:300px;display:flex;align-items:flex-end;background:#1b2a41}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(29,43,83,.10) 0%,rgba(29,43,83,.55) 48%,rgba(22,104,63,.93) 100%)}
+.hero .in{position:relative;z-index:1;padding:28px 20px 26px;color:#fff;max-width:860px;margin:0 auto;width:100%}
+.tag{display:inline-block;background:#ffd166;color:var(--rose-d);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:99px}
+.hero h1{font-size:clamp(28px,6vw,44px);line-height:1.08;margin:12px 0 6px;font-weight:700}
+.hero h1 span{color:#ffd166}
+.hero p{margin:0;font-style:italic;opacity:.95}
+.rainbow{height:5px;border-radius:9px;background:linear-gradient(90deg,var(--peach),var(--rose),var(--lilac),var(--sky),var(--mint));margin:16px 0 0}
+
+/* Barre du haut */
+.top{position:sticky;top:0;z-index:20;background:rgba(243,247,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;padding-top:8px;padding-bottom:8px}
+.score{font-family:Poppins;font-weight:600;font-size:14px;white-space:nowrap;background:linear-gradient(90deg,var(--rose),var(--lilac));color:#fff;padding:6px 12px;border-radius:99px}
+.nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;color:var(--soft);font-size:12.5px;font-weight:500;padding:5px 10px;border-radius:99px;border:1px solid var(--line);background:#fff}
+.nav a.done{background:var(--mint-l);border-color:#bfe7da;color:#1f7a60}
+
+/* Cartes et sections */
+.intro{background:#fff;border:2px solid var(--rose-l);border-radius:22px;padding:18px 18px;margin:22px 0}
+.intro h2{margin:0 0 6px;font-size:20px;color:var(--rose-d)}
+.intro ul{margin:8px 0 0;padding-left:20px}
+.intro li{margin:4px 0}
+.plan{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.plan span{font-family:Poppins;font-size:12px;background:var(--lilac-l);color:var(--plum);padding:4px 10px;border-radius:99px}
+.part{margin:34px 0 10px;display:flex;align-items:center;gap:12px}
+.part .n{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-family:Poppins;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--rose),var(--lilac))}
+.part h2{margin:0;font-size:24px;line-height:1.2}
+.part h2 .en{display:block;font-size:14px}
+.box{background:var(--card);border-radius:20px;border:1px solid var(--line);margin:16px 0;overflow:hidden;box-shadow:0 4px 18px rgba(29,43,83,.07)}
+.box>.hd{padding:12px 18px;color:#fff;font-family:Poppins}
+.box>.hd h3{margin:0;font-size:18px;font-weight:600}
+.box>.hd h3 .en{color:rgba(255,255,255,.85);font-size:13px;margin-left:6px}
+.box>.bd{padding:16px 18px}
+.c-past>.hd{background:linear-gradient(90deg,#2f5fb3,#6f97dc)}
+.c-pres>.hd{background:linear-gradient(90deg,#16683f,#3fb07c)}
+.c-fut>.hd{background:linear-gradient(90deg,#e09612,#f5c45a)}
+.c-mint>.hd{background:linear-gradient(90deg,#33a184,#6cc9ad)}
+.c-sky>.hd{background:linear-gradient(90deg,#4b8cc8,#82b8e6)}
+.c-plum>.hd{background:linear-gradient(90deg,#1d2b53,#2f5fb3)}
+.sub{font-family:Poppins;font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--berry);margin:14px 0 6px}
+.formula{display:inline-block;font-family:Poppins;font-weight:600;font-size:14px;border:2px solid currentColor;border-radius:99px;padding:3px 12px;margin:2px 0}
+.ex{display:flex;gap:10px;align-items:flex-start;border-left:3px solid var(--line);padding:4px 0 4px 12px;margin:8px 0}
+.ex .t{flex:1}
+.ex .t .en{display:block}
+.k{font-weight:600;color:var(--berry)}
+.say{flex:none;border:0;background:var(--rose-l);color:var(--rose-d);width:34px;height:34px;border-radius:50%;font-size:15px;cursor:pointer;display:inline-grid;place-items:center;padding:0}
+.say:active,.say.on{background:var(--rose);color:#fff}
+.inner{background:var(--lilac-l);border-left:4px solid var(--lilac);border-radius:12px;padding:10px 14px;margin:12px 0}
+.inner.peach{background:var(--peach-l);border-left-color:var(--peach)}
+.inner.mint{background:var(--mint-l);border-left-color:var(--mint)}
+.inner.rose{background:var(--rose-l);border-left-color:var(--rose)}
+.inner b.t{font-family:Poppins;font-size:12px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:620px){.grid3,.grid2{grid-template-columns:1fr}}
+.col{border-radius:14px;padding:10px 12px}
+.col h4{margin:0 0 6px;font-size:14px}
+.col ul{list-style:none;margin:0;padding:0}
+.col li{padding:3px 0;border-bottom:1px dashed rgba(0,0,0,.08)}
+.col li:last-child{border:0}
+.col.p{background:var(--lilac-l)}.col.p h4{color:#2f5fb3}
+.col.r{background:var(--rose-l)}.col.r h4{color:var(--rose-d)}
+.col.f{background:var(--peach-l)}.col.f h4{color:#b07400}
+table.conj{width:100%;border-collapse:collapse;font-size:15px;margin:6px 0}
+table.conj td,table.conj th{padding:5px 8px;text-align:left;border-bottom:1px solid var(--line)}
+table.conj th{font-family:Poppins;font-size:12.5px;font-weight:600;color:var(--soft);background:#f1f6f3}
+.end{color:var(--rose-d);font-weight:600}
+.photo{border-radius:16px;overflow:hidden;margin:12px 0;position:relative}
+.photo img{display:block;width:100%;height:180px;object-fit:cover}
+.photo figcaption{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.92);border-radius:99px;padding:3px 12px;font-size:13px;font-style:italic;color:var(--ink)}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.strip figure{margin:0;border-radius:14px;overflow:hidden;background:#fff;border:3px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.strip img{display:block;width:100%;height:110px;object-fit:cover}
+.strip figcaption{font-size:12.5px;font-style:italic;padding:4px 8px;color:var(--soft)}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.steps span{font-family:Poppins;font-size:13px;font-weight:500;background:#fff;border:2px solid var(--rose-l);border-radius:99px;padding:4px 12px}
+.steps span b{color:var(--rose)}
+
+/* Exercices */
+.exo{background:#fff;border-radius:22px;margin:22px 0;overflow:hidden;border:1px solid var(--line);box-shadow:0 4px 18px rgba(29,43,83,.08)}
+.exo>.hd{padding:14px 18px;color:#fff;display:flex;gap:14px;align-items:flex-start}
+.exo>.hd .num{font-family:Poppins;font-size:34px;font-weight:700;line-height:1;opacity:.9}
+.exo>.hd .lab{font-family:Poppins;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.9}
+.exo>.hd h3{margin:2px 0 2px;font-size:18px;line-height:1.3}
+.exo>.hd .en{color:rgba(255,255,255,.88)}
+.exo>.hd .min{margin-left:auto;flex:none;font-family:Poppins;font-size:12px;background:rgba(255,255,255,.25);border-radius:99px;padding:3px 10px;white-space:nowrap}
+.exo>.bd{padding:16px 18px 18px}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-family:Poppins;font-size:13px;color:var(--soft)}
+.dots{display:flex;gap:5px;flex-wrap:wrap}
+.dots i{width:11px;height:11px;border-radius:50%;background:#d9e4dd;display:block}
+.dots i.ok{background:var(--ok)}.dots i.ko{background:var(--ko)}
+.dots i.cur{outline:2px solid var(--rose);outline-offset:2px}
+.qtext{font-size:20px;line-height:1.45;margin:14px 0 2px}
+.qen{margin:0 0 12px}
+.note{font-family:Poppins;font-size:12px;background:var(--lilac-l);color:var(--plum);border-radius:99px;padding:2px 10px;margin-left:6px;white-space:nowrap}
+.gap{display:inline-block;min-width:70px;border-bottom:3px solid var(--rose);text-align:center;color:var(--rose-d);font-weight:600;padding:0 6px}
+.gap.ok{border-color:var(--ok);color:var(--ok)}
+.opts{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
+.opt{font-family:Poppins;font-size:16px;font-weight:500;border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;padding:10px 16px;cursor:pointer;text-align:left}
+.opt:hover{border-color:var(--rose)}
+.opt.ok{border-color:var(--ok);background:var(--ok-l);color:#1d6e55}
+.opt.ko{border-color:var(--ko);background:var(--ko-l);color:#a3283e;text-decoration:line-through}
+.opt:disabled{cursor:default}
+.opt small{display:block;font-family:Lora;font-style:italic;font-weight:400;font-size:13px;color:var(--muted)}
+.tri .opt{flex:1;min-width:90px;text-align:center;color:#fff;border:0;font-weight:600}
+.tri .opt[data-j="0"]{background:var(--past)}.tri .opt[data-j="1"]{background:var(--pres)}.tri .opt[data-j="2"]{background:var(--fut)}
+.tri .opt.dim{opacity:.35}
+.tri .opt.ok{outline:4px solid var(--ok);outline-offset:2px;color:#fff;text-decoration:none}
+.tri .opt.ko{outline:4px solid var(--ko);outline-offset:2px;color:#fff}
+.word{font-family:Poppins;font-size:28px;font-weight:600;text-align:center;margin:18px 0 4px;color:var(--plum)}
+.word+.en{text-align:center;display:block}
+.fb{border-radius:14px;padding:12px 14px;margin-top:12px;font-size:15px}
+.fb.ok{background:var(--ok-l);border:1px solid #bfe6d7}
+.fb.ko{background:var(--ko-l);border:1px solid #f6c6d0}
+.fb .head{font-family:Poppins;font-weight:600}
+.fb.ok .head{color:#1d6e55}.fb.ko .head{color:#a3283e}
+.fb .full{display:flex;gap:10px;align-items:center;margin:8px 0 4px}
+.fb .full .t{flex:1}
+.fb .full .t b{font-weight:600}
+.fb .full .en{display:block}
+.row{display:flex;justify-content:space-between;gap:10px;margin-top:12px;flex-wrap:wrap}
+.btn{font-family:Poppins;font-weight:600;font-size:15px;border:0;border-radius:99px;padding:10px 20px;cursor:pointer;background:linear-gradient(90deg,var(--rose),var(--lilac));color:#fff}
+.btn.ghost{background:#fff;color:var(--soft);border:2px solid var(--line)}
+.btn:disabled{opacity:.4;cursor:default}
+.inp{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0 4px}
+.inp input{font:600 18px Poppins,sans-serif;color:var(--ink);border:2px solid var(--line);border-radius:12px;padding:9px 12px;flex:1;min-width:160px;outline:none}
+.inp input:focus{border-color:var(--rose)}
+.inp input.ok{border-color:var(--ok);background:var(--ok-l)}
+.inp input.ko{border-color:var(--ko);background:var(--ko-l)}
+.acc{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.acc button{font:600 16px Poppins;width:40px;height:38px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--plum);cursor:pointer}
+.inf{font-family:Poppins;font-size:13px;font-weight:600;color:#fff;background:var(--lilac);border-radius:99px;padding:2px 10px;margin-left:6px;white-space:nowrap}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;padding:10px;border-radius:14px;margin:10px 0}
+.tiles.ans{background:#fff;border:2px dashed #a9d4bb}
+.tiles.pool{background:#f1f6f3}
+.tile{font-family:Poppins;font-size:16px;font-weight:500;border:0;border-radius:10px;padding:8px 12px;background:#fff;color:var(--ink);box-shadow:0 2px 0 #c5dccf;cursor:pointer}
+.tiles.ans .tile{background:var(--rose-l);color:var(--rose-d);box-shadow:0 2px 0 #9fd0b3}
+.tiles.ans.ok{border-color:var(--ok);background:var(--ok-l)}
+.tiles.ans.ko{border-color:var(--ko);background:var(--ko-l)}
+.text{background:#fffaf0;border:1px solid #f0d9a6;border-radius:16px;padding:12px 14px;margin:6px 0 14px}
+.text p{margin:6px 0;display:flex;gap:8px;align-items:flex-start}
+.text p .t{flex:1}
+.text .en{display:none}
+.text.tr .en{display:block}
+.mini{font-family:Poppins;font-size:13px;font-weight:500;border:1px solid var(--line);background:#fff;color:var(--soft);border-radius:99px;padding:5px 12px;cursor:pointer}
+.wb{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.wb button{font-family:Poppins;font-size:13.5px;border:1px solid #b9dfc8;background:var(--rose-l);color:var(--rose-d);border-radius:99px;padding:4px 11px;cursor:pointer}
+.wb button small{font-family:Lora;font-style:italic;color:var(--muted);margin-left:4px}
+textarea{width:100%;min-height:120px;font:16px/1.7 Lora,serif;color:var(--ink);border:2px solid var(--line);border-radius:14px;padding:10px 12px;outline:none;background:repeating-linear-gradient(transparent,transparent 26px,#e3eee8 27px);resize:vertical}
+textarea:focus{border-color:var(--lilac)}
+.para{border-radius:16px;padding:12px 14px;margin:12px 0}
+.para h4{margin:0 0 4px;font-size:15px}
+.para .starts{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}
+.para .starts span{font-family:Poppins;font-size:13px;background:#fff;border-radius:99px;padding:3px 10px;border:1px solid rgba(0,0,0,.06)}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer}
+.check input{width:20px;height:20px;accent-color:var(--rose);margin-top:3px;flex:none}
+
+/* Bilan et À revoir */
+.bilan{background:linear-gradient(135deg,#1d2b53,#c8323f 60%,#f2a922);color:#fff;border-radius:24px;padding:20px;margin:22px 0}
+.bilan .big{font-family:Poppins;font-size:48px;font-weight:700;line-height:1}
+.bilan .bars{margin-top:14px;background:rgba(255,255,255,.95);border-radius:16px;padding:10px 14px;color:var(--ink)}
+.barrow{display:grid;grid-template-columns:1.6fr 2fr auto;gap:10px;align-items:center;font-family:Poppins;font-size:13px;padding:4px 0}
+.track{height:10px;border-radius:9px;background:#e1ebe5;overflow:hidden}
+.track span{display:block;height:100%;background:linear-gradient(90deg,var(--rose),var(--lilac));border-radius:9px}
+.revoir{border:3px solid var(--rose);border-radius:22px;background:#fff;margin:22px 0 10px;overflow:hidden}
+.revoir>.hd{background:var(--rose);color:#fff;padding:12px 18px}
+.revoir>.hd h3{margin:0;font-size:20px}
+.revoir>.hd .en{color:rgba(255,255,255,.88)}
+.revoir>.bd{padding:12px 16px 16px}
+.rgroup{margin:10px 0 18px}
+.rgroup h4{margin:0 0 6px;font-size:15px;color:var(--plum)}
+.rtip{background:var(--peach-l);border-left:4px solid var(--peach);border-radius:10px;padding:8px 12px;font-size:14.5px;margin:6px 0 10px}
+.rtip b{font-family:Poppins;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#b07400;display:block}
+.ritem{border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0;font-size:15px}
+.ritem .you{color:#a3283e}
+.ritem .you s{font-weight:600}
+.ritem .good{display:flex;gap:10px;align-items:center;margin:4px 0}
+.ritem .good .t{flex:1}
+.ritem .good b{color:#1d6e55}
+.ritem .why{margin-top:4px;color:var(--ink)}
+.ritem .why .en,.ritem .good .en{display:block}
+.empty{font-style:italic;color:var(--soft)}
+footer{text-align:center;font-family:Poppins;font-size:12px;color:var(--muted);padding:26px 0 40px;letter-spacing:.08em}
+
+.rainbow{background:linear-gradient(90deg,#c8323f,#f2a922,#1f8a5b,#2f5fb3,#1d2b53)}
+.k{color:#c8323f}
+.end,e{color:#c8323f;font-weight:600;font-style:normal}
+r{color:#2f5fb3;font-weight:700;background:#e6eefb;border-radius:4px;padding:0 1px}
+.timew{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.timew span{font-family:Poppins;font-size:13.5px;background:#fff;border:2px solid #e0f2e8;border-radius:99px;padding:4px 12px;color:#16683f;font-weight:500}
+.timew span i{font-family:Lora;font-weight:400;color:#8693a6;margin-left:4px}
+.ends{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.ends span{font-family:Poppins;font-weight:700;font-size:17px;color:#fff;background:#c8323f;border-radius:10px;padding:4px 12px}
+.ctab{background:#fff;border:2px solid #dce6e0;border-radius:16px;padding:10px 14px;margin:10px 0}
+.ctab .th{display:flex;align-items:center;justify-content:space-between;font-family:Poppins;font-weight:600;font-size:14px;color:#55657e;margin-bottom:4px}
+.ctab ul{list-style:none;margin:0;padding:0;columns:2;column-gap:18px;font-size:16.5px}
+.ctab li{padding:3px 0}
+@media(max-width:420px){.ctab ul{columns:1}}
+.shirts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0}
+@media(max-width:620px){.shirts{grid-template-columns:1fr}}
+.shirt{border-radius:18px;overflow:hidden;background:#fff;border:2px solid var(--sc);box-shadow:0 3px 12px rgba(29,43,83,.08)}
+.shirt .top2{background:var(--sc);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:12px}
+.shirt .no{flex:none;width:44px;height:44px;border-radius:50%;background:#fff;color:var(--sc);display:grid;place-items:center;font:700 22px Poppins}
+.shirt .vb{font:700 20px Poppins;line-height:1.1}
+.shirt .vb small{display:block;font:italic 400 13px Lora;opacity:.9}
+.shirt .stem{margin-left:auto;font:700 18px Poppins;background:rgba(255,255,255,.22);border-radius:10px;padding:4px 10px;white-space:nowrap}
+.shirt .in2{padding:8px 14px 10px}
+.shirt ul{list-style:none;margin:0;padding:0;columns:2;column-gap:14px;font-size:16px}
+.shirt li{padding:2px 0}
+.shirt .ex{border-left-color:var(--sc)}
+.pack{background:linear-gradient(135deg,#1d2b53,#16683f);color:#fff;border-radius:18px;padding:14px 16px;margin:14px 0;text-align:center}
+.pack .cry{font:700 clamp(20px,5vw,28px) Poppins;letter-spacing:.06em;margin:4px 0}
+.pack .cry b{color:#ffd166}
+.pack .en{color:rgba(255,255,255,.85)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
+@media(max-width:520px){.duo{grid-template-columns:1fr}}
+.duo>div{border-radius:14px;padding:10px 12px}
+.duo h4{margin:0 0 4px;font-size:15px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="img/hero.jpg" alt="Un match de rugby">
+  <div class="in">
+    <span class="tag">Révision · Le futur</span>
+    <h1>Ezra, ton futur <span>de champion</span></h1>
+    <p>Ezra, your champion future · The future tense of ‑ER verbs, être, avoir, aller, faire</p>
+  </div>
+</header>
+
+<div class="top"><div class="wrap">
+  <span class="score" id="score">0 / 43</span>
+  <nav class="nav" id="nav"></nav>
+</div></div>
+
+<main class="wrap">
+<div class="rainbow"></div>
+
+<section class="intro">
+  <h2>Bonjour Ezra !</h2>
+  <p>Aujourd'hui, tu révises le futur : pour parler de ton prochain match, de tes vacances ou de quand tu seras grand.
+  <span class="en">Today you are revising the future tense: to talk about your next match, your holidays or what you will do when you're older.</span></p>
+  <ul>
+    <li>Lis d'abord le rappel de grammaire. <span class="en">First read the grammar reminder.</span></li>
+    <li>Appuie sur 🔊 pour écouter les phrases. <span class="en">Tap 🔊 to listen to the sentences.</span></li>
+    <li>Chaque réponse est corrigée tout de suite, avec une explication. <span class="en">Each answer is corrected straight away, with an explanation.</span></li>
+    <li>Tes erreurs arrivent dans le cadre « À revoir », à la fin de la page. <span class="en">Your mistakes appear in the “À revoir” (to review) box at the end of the page.</span></li>
+  </ul>
+  <div class="plan"><span>Rappel · 8 min</span><span>Exercices 1 à 6 · 26 min</span><span>À toi · 6 min</span></div>
+</section>
+
+<!-- RAPPEL -->
+<div class="part" id="rappel"><div class="n">A</div><h2>Le rappel de grammaire<span class="en">Grammar reminder</span></h2></div>
+
+<div class="box c-mint">
+  <div class="hd"><h3>1. Le futur des verbes en ‑ER <span class="en">The future tense of ‑ER verbs</span></h3></div>
+  <div class="bd">
+    <p>On utilise le futur pour parler de ce qui arrivera plus tard : demain, samedi prochain, l'été prochain, quand tu seras grand.
+    <span class="en">We use the future tense to talk about what will happen later: tomorrow, next Saturday, next summer, when you're older.</span></p>
+    <div class="timew"><span>demain<i>tomorrow</i></span><span>samedi prochain<i>next Saturday</i></span><span>la semaine prochaine<i>next week</i></span><span>l'été prochain<i>next summer</i></span><span>plus tard<i>later</i></span><span>un jour<i>one day</i></span></div>
+    <div class="sub">La recette · The recipe</div>
+    <p><span class="formula" style="color:#16683f">l'infinitif entier + la terminaison</span><br><span class="en">the whole infinitive + the ending</span></p>
+    <div class="ends"><span>-ai</span><span>-as</span><span>-a</span><span>-ons</span><span>-ez</span><span>-ont</span></div>
+    <div class="ctab"><div class="th"><span>jouer · to play</span><button type="button" class="say" data-say="je jouerai, tu joueras, il, elle jouera, nous jouerons, vous jouerez, ils, elles joueront." aria-label="Écouter">🔊</button></div><ul><li>je jouer<e>ai</e></li><li>tu jouer<e>as</e></li><li>il, elle jouer<e>a</e></li><li>nous jouer<e>ons</e></li><li>vous jouer<e>ez</e></li><li>ils, elles jouer<e>ont</e></li></ul></div>
+    <div class="inner mint"><b class="t">Astuce · Handy trick</b>Les terminaisons ressemblent au verbe avoir au présent : j'<b>ai</b>, tu <b>as</b>, il <b>a</b>, ils <b>ont</b>.
+      <span class="en">The endings look like avoir in the present: j'ai, tu as, il a, ils ont.</span></div>
+    <div class="ex"><div class="t">Samedi prochain, <span class="k">je jouerai</span> au rugby avec mon équipe.<span class="en">Next Saturday I will play rugby with my team.</span></div><button type="button" class="say" data-say="Samedi prochain, je jouerai au rugby avec mon équipe." aria-label="Écouter">🔊</button></div><div class="ex"><div class="t">Ce soir, <span class="k">je regarderai</span> le match à la télé.<span class="en">Tonight I will watch the match on TV.</span></div><button type="button" class="say" data-say="Ce soir, je regarderai le match à la télé." aria-label="Écouter">🔊</button></div><div class="ex"><div class="t">Pendant les vacances, <span class="k">nous visiterons</span> Paris.<span class="en">During the holidays we will visit Paris.</span></div><button type="button" class="say" data-say="Pendant les vacances, nous visiterons Paris." aria-label="Écouter">🔊</button></div><div class="ex"><div class="t">Les joueurs <span class="k">gagneront</span> le match !<span class="en">The players will win the match!</span></div><button type="button" class="say" data-say="Les joueurs gagneront le match !" aria-label="Écouter">🔊</button></div>
+    <div class="sub">Jouer au rugby, jouer de la guitare · Playing a sport, playing an instrument</div>
+    <div class="duo">
+      <div style="background:#e0f2e8"><h4 style="color:#16683f">un sport → jouer au, à la</h4><div class="ex"><div class="t"><span class="k">Je jouerai au</span> rugby.<span class="en">I will play rugby.</span></div><button type="button" class="say" data-say="Je jouerai au rugby." aria-label="Écouter">🔊</button></div></div>
+      <div style="background:#fff4da"><h4 style="color:#b07400">un instrument → jouer du, de la</h4><div class="ex"><div class="t"><span class="k">Je jouerai de la</span> guitare.<span class="en">I will play the guitar.</span></div><button type="button" class="say" data-say="Je jouerai de la guitare." aria-label="Écouter">🔊</button></div></div>
+    </div>
+  </div>
+</div>
+
+<figure class="photo"><img src="img/ballon.jpg" alt="Un ballon de rugby"><figcaption>Le ballon de rugby · the rugby ball</figcaption></figure>
+
+<div class="box c-plum">
+  <div class="hd"><h3>2. Les quatre champions : être, avoir, aller, faire <span class="en">The four champions</span></h3></div>
+  <div class="bd">
+    <p>Ces quatre verbes ne gardent pas l'infinitif : leur début change. Bonne nouvelle : les terminaisons sont toujours les mêmes, -ai, -as, -a, -ons, -ez, -ont.
+    <span class="en">These four verbs don't keep the infinitive: their beginning changes. Good news: the endings are always the same.</span></p>
+    <div class="shirts">
+      <div class="shirt" style="--sc:#1d2b53"><div class="top2"><div class="no">1</div><div class="vb">être<small>to be</small></div><span class="stem">ser-</span></div>
+        <div class="in2"><div class="ctab" style="border:0;padding:0;margin:4px 0"><div class="th"><span>je serai · I will be</span><button type="button" class="say" data-say="je serai, tu seras, il, elle sera, nous serons, vous serez, ils, elles seront." aria-label="Écouter">🔊</button></div></div><ul><li>je <r>ser</r>ai</li><li>tu <r>ser</r>as</li><li>il, elle <r>ser</r>a</li><li>nous <r>ser</r>ons</li><li>vous <r>ser</r>ez</li><li>ils, elles <r>ser</r>ont</li></ul><div class="ex"><div class="t">Un jour, <span class="k">je serai</span> un grand joueur de rugby.<span class="en">One day I will be a great rugby player.</span></div><button type="button" class="say" data-say="Un jour, je serai un grand joueur de rugby." aria-label="Écouter">🔊</button></div></div></div>
+      <div class="shirt" style="--sc:#c8323f"><div class="top2"><div class="no">2</div><div class="vb">avoir<small>to have</small></div><span class="stem">aur-</span></div>
+        <div class="in2"><div class="ctab" style="border:0;padding:0;margin:4px 0"><div class="th"><span>j'aurai · I will have</span><button type="button" class="say" data-say="j&#x27;aurai, tu auras, il, elle aura, nous aurons, vous aurez, ils, elles auront." aria-label="Écouter">🔊</button></div></div><ul><li>j'<r>aur</r>ai</li><li>tu <r>aur</r>as</li><li>il, elle <r>aur</r>a</li><li>nous <r>aur</r>ons</li><li>vous <r>aur</r>ez</li><li>ils, elles <r>aur</r>ont</li></ul><div class="ex"><div class="t">Samedi, <span class="k">nous aurons</span> un match important.<span class="en">On Saturday we will have an important match.</span></div><button type="button" class="say" data-say="Samedi, nous aurons un match important." aria-label="Écouter">🔊</button></div></div></div>
+      <div class="shirt" style="--sc:#1f8a5b"><div class="top2"><div class="no">3</div><div class="vb">aller<small>to go</small></div><span class="stem">ir-</span></div>
+        <div class="in2"><div class="ctab" style="border:0;padding:0;margin:4px 0"><div class="th"><span>j'irai · I will go</span><button type="button" class="say" data-say="j&#x27;irai, tu iras, il, elle ira, nous irons, vous irez, ils, elles iront." aria-label="Écouter">🔊</button></div></div><ul><li>j'<r>ir</r>ai</li><li>tu <r>ir</r>as</li><li>il, elle <r>ir</r>a</li><li>nous <r>ir</r>ons</li><li>vous <r>ir</r>ez</li><li>ils, elles <r>ir</r>ont</li></ul><div class="ex"><div class="t">L'été prochain, <span class="k">j'irai</span> en France avec ma famille.<span class="en">Next summer I will go to France with my family.</span></div><button type="button" class="say" data-say="L&#x27;été prochain, j&#x27;irai en France avec ma famille." aria-label="Écouter">🔊</button></div></div></div>
+      <div class="shirt" style="--sc:#d38b00"><div class="top2"><div class="no">4</div><div class="vb">faire<small>to do, to make</small></div><span class="stem">fer-</span></div>
+        <div class="in2"><div class="ctab" style="border:0;padding:0;margin:4px 0"><div class="th"><span>je ferai · I will do</span><button type="button" class="say" data-say="je ferai, tu feras, il, elle fera, nous ferons, vous ferez, ils, elles feront." aria-label="Écouter">🔊</button></div></div><ul><li>je <r>fer</r>ai</li><li>tu <r>fer</r>as</li><li>il, elle <r>fer</r>a</li><li>nous <r>fer</r>ons</li><li>vous <r>fer</r>ez</li><li>ils, elles <r>fer</r>ont</li></ul><div class="ex"><div class="t">Demain, <span class="k">je ferai</span> de la guitare après l'école.<span class="en">Tomorrow I will play the guitar after school.</span></div><button type="button" class="say" data-say="Demain, je ferai de la guitare après l&#x27;école." aria-label="Écouter">🔊</button></div></div></div>
+    </div>
+    <div class="pack">
+      <div class="pop" style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.85">Le cri de l'équipe · The team chant</div>
+      <div class="cry"><b>SER</b> · <b>AUR</b> · <b>IR</b> · <b>FER</b></div>
+      <div>Dis-le trois fois, comme avant un match !<span class="en"> Say it three times, like before a match!</span></div>
+    </div>
+    <div class="inner rose"><b class="t">À retenir · Remember</b>Avec j'aurai et j'irai, « je » devient « j' », car le verbe commence par une voyelle.
+      <span class="en">With j'aurai and j'irai, “je” becomes “j'” because the verb starts with a vowel.</span></div>
+    <div class="inner peach"><b class="t">Petit bonus · Little bonus</b>Il y a → il y <b>aura</b> (there will be). Il fait beau → il <b>fera</b> beau (the weather will be nice).
+      <span class="en">These two expressions are very useful for talking about a match day!</span></div>
+  </div>
+</div>
+
+<!-- EXERCICES -->
+<div class="part" id="exos"><div class="n">B</div><h2>Les exercices<span class="en">The exercises</span></h2></div>
+<div id="exercises"></div>
+
+<!-- À TOI -->
+<section class="exo" id="e7">
+  <div class="hd" style="background:linear-gradient(90deg,#1d2b53,#16683f)">
+    <div class="num">7</div>
+    <div><div class="lab">À toi · Production écrite</div><h3>Mon samedi de rêve</h3><div class="en">My dream Saturday</div></div>
+    <span class="min">6 min</span>
+  </div>
+  <div class="bd">
+    <p>Ezra, imagine ton samedi de rêve ! Écris 5 ou 6 phrases au futur. Utilise être, avoir, aller, faire et au moins un verbe en ‑ER.
+    <span class="en">Ezra, imagine your dream Saturday! Write 5 or 6 sentences in the future tense. Use être, avoir, aller, faire and at least one ‑ER verb.</span></p>
+    <figure class="strip">
+      <figure><img src="img/scrum.jpg" alt=""><figcaption>un match</figcaption></figure>
+      <figure><img src="img/guitares.jpg" alt=""><figcaption>la guitare</figcaption></figure>
+      <figure><img src="img/dover.jpg" alt=""><figcaption>la mer à Douvres</figcaption></figure>
+    </figure>
+    <div class="sub">Mots utiles · Useful words <span class="en" style="text-transform:none;letter-spacing:0">(appuie pour ajouter · tap to add)</span></div>
+    <div class="wb" id="wb"></div>
+    <div class="para" style="background:#e6eefb">
+      <h4 style="color:#2f5fb3">Pour commencer tes phrases <span class="en">To start your sentences</span></h4>
+      <div class="starts"><span>Samedi matin, je serai…</span><span>J'irai…</span><span>Je ferai…</span><span>L'après-midi, je jouerai…</span><span>Le soir, il y aura…</span><span>J'aurai…</span></div>
+      <textarea id="w1" placeholder="Écris ici… · Write here…" style="min-height:190px"></textarea>
+    </div>
+    <div class="sub">Je relis mon texte · I check my text</div>
+    <div class="check">
+      <label><input type="checkbox"> <span>J'ai utilisé être, avoir, aller et faire au futur. <span class="en">I used être, avoir, aller and faire in the future.</span></span></label>
+      <label><input type="checkbox"> <span>J'ai utilisé un verbe en ‑ER (jouer, regarder, marquer…). <span class="en">I used an ‑ER verb.</span></span></label>
+      <label><input type="checkbox"> <span>J'ai vérifié les terminaisons : -ai, -as, -a, -ons, -ez, -ont. <span class="en">I checked the endings.</span></span></label>
+    </div>
+    <div class="row"><span class="en" id="wcount">0 mot</span><button class="btn" id="copy" type="button">Copier mon texte</button></div>
+    <p class="en" style="margin-top:8px">Copie ton texte et envoie-le à Irène pour la correction. · Copy your text and send it to Irène for correction.</p>
+  </div>
+</section>
+
+<!-- BILAN -->
+<div class="part" id="bilan"><div class="n">C</div><h2>Mon bilan<span class="en">My results</span></h2></div>
+<div class="bilan">
+  <div class="big" id="bigPts">0</div>
+  <div id="bigTxt" class="pop">points sur 43</div>
+  <div class="bars" id="bars"></div>
+</div>
+<section class="revoir">
+  <div class="hd"><h3>À revoir <span class="en">To review</span></h3>
+    <div class="en">Pour chaque erreur : ta réponse, la bonne réponse, pourquoi, et comment ne plus te tromper. · For each mistake: your answer, the right answer, why, and how not to get it wrong again.</div></div>
+  <div class="bd" id="revoir"></div>
+</section>
+<div class="row" style="justify-content:center"><button class="btn ghost" id="reset" type="button">Tout recommencer · Start again</button></div>
+</main>
+<footer>LE FRANÇAIS AVEC IRÈNE</footer>
+
+<script>
+const DATA={"ex": [{"id": "e1", "type": "qcm", "enBefore": true, "short": "Le bon début", "title": "Le bon début du verbe", "label": "Le radical du futur", "consigne": "Choisis la bonne forme du verbe au futur.", "consigneEn": "Choose the correct form of the verb in the future tense.", "min": 3, "tip": "Verbes en ‑ER : tu gardes tout l'infinitif (jouer → jouer-). Les quatre champions changent de début : être → ser-, avoir → aur-, aller → ir-, faire → fer-.", "tipEn": "-ER verbs keep the whole infinitive. The four champions change their beginning: ser-, aur-, ir-, fer-.", "grad": "linear-gradient(90deg,#1f8a5b,#2f5fb3)", "items": [{"q": "être · je ___", "o": ["serai", "êtrai", "étais"], "a": 0, "en": "I will be", "full": "je serai", "r": "Au futur, être commence par ser- : je serai.", "re": "In the future, être starts with ser-: je serai.", "ans": "serai", "good": "être · je serai"}, {"q": "avoir · tu ___", "o": ["avoiras", "auras", "as"], "a": 1, "en": "you will have", "full": "tu auras", "r": "Au futur, avoir commence par aur- : tu auras.", "re": "In the future, avoir starts with aur-: tu auras.", "ans": "auras", "good": "avoir · tu auras"}, {"q": "aller · il ___", "o": ["allera", "va", "ira"], "a": 2, "en": "he will go", "full": "il ira", "r": "Au futur, aller commence par ir- : il ira. Le verbe devient tout petit !", "re": "In the future, aller starts with ir-: il ira. The verb becomes really short!", "ans": "ira", "good": "aller · il ira"}, {"q": "faire · nous ___", "o": ["ferons", "fairons", "faisons"], "a": 0, "en": "we will do", "full": "nous ferons", "r": "Au futur, faire commence par fer- : nous ferons. « Nous faisons », c'est le présent.", "re": "In the future, faire starts with fer-: nous ferons. “Nous faisons” is the present tense.", "ans": "ferons", "good": "faire · nous ferons"}, {"q": "jouer · je ___", "o": ["joue", "jouerai", "jourai"], "a": 1, "en": "I will play", "full": "je jouerai", "r": "Jouer est un verbe en ‑ER : on garde tout l'infinitif et on ajoute -ai : je jouerai.", "re": "Jouer is an ‑ER verb: keep the whole infinitive and add -ai: je jouerai.", "ans": "jouerai", "good": "jouer · je jouerai"}, {"q": "aller · vous ___", "o": ["allez", "allerez", "irez"], "a": 2, "en": "you will go", "full": "vous irez", "r": "Aller au futur : ir- + -ez → vous irez. « Vous allez », c'est le présent.", "re": "Aller in the future: ir- + -ez → vous irez. “Vous allez” is the present tense.", "ans": "irez", "good": "aller · vous irez"}, {"q": "être · ils ___", "o": ["seront", "sont", "êtront"], "a": 0, "en": "they will be", "full": "ils seront", "r": "Être au futur : ser- + -ont → ils seront.", "re": "Être in the future: ser- + -ont → ils seront.", "ans": "seront", "good": "être · ils seront"}, {"q": "faire · tu ___", "o": ["fais", "feras", "fairas"], "a": 1, "en": "you will do", "full": "tu feras", "r": "Faire au futur : fer- + -as → tu feras.", "re": "Faire in the future: fer- + -as → tu feras.", "ans": "feras", "good": "faire · tu feras"}]}, {"id": "e2", "type": "type", "short": "Les verbes en ‑ER", "title": "Les verbes en ‑ER", "label": "Écrire le verbe", "consigne": "Écris le verbe au futur.", "consigneEn": "Write the verb in the future tense.", "min": 5, "tip": "Écris tout l'infinitif, puis ajoute la terminaison du sujet : je -ai, tu -as, il -a, nous -ons, vous -ez, ils -ont.", "tipEn": "Write the whole infinitive, then add the ending that goes with the subject.", "grad": "linear-gradient(90deg,#16683f,#1f8a5b)", "photo": ["img/scrum.jpg", "Une mêlée pendant un match de rugby"], "items": [{"q": "Samedi prochain, je ___ au rugby avec mon équipe.", "inf": "jouer", "ans": "jouerai", "en": "Next Saturday I will play rugby with my team.", "r": "jouer + -ai → je jouerai.", "re": "jouer + -ai → je jouerai.", "good": "Samedi prochain, je jouerai au rugby avec mon équipe.", "full": "Samedi prochain, je jouerai au rugby avec mon équipe."}, {"q": "Demain soir, tu ___ le match avec ton papa ?", "inf": "regarder", "ans": "regarderas", "en": "Tomorrow evening, will you watch the match with your dad?", "r": "Avec « tu », la terminaison est -as : tu regarderas.", "re": "With “tu”, the ending is -as: tu regarderas.", "good": "Demain soir, tu regarderas le match avec ton papa ?", "full": "Demain soir, tu regarderas le match avec ton papa ?"}, {"q": "Ce soir, Ezra ___ de la guitare dans sa chambre.", "inf": "jouer", "ans": "jouera", "en": "Tonight Ezra will play the guitar in his bedroom.", "r": "Ezra = il : jouer + -a → il jouera.", "re": "Ezra = he: jouer + -a → il jouera.", "good": "Ce soir, Ezra jouera de la guitare dans sa chambre.", "full": "Ce soir, Ezra jouera de la guitare dans sa chambre."}, {"q": "Nous ___ le match, c'est sûr !", "inf": "gagner", "ans": "gagnerons", "en": "We will win the match, that's for sure!", "r": "Avec « nous », la terminaison est -ons : nous gagnerons.", "re": "With “nous”, the ending is -ons: nous gagnerons.", "good": "Nous gagnerons le match, c'est sûr !", "full": "Nous gagnerons le match, c'est sûr !"}, {"q": "Vous ___ notre équipe dimanche ?", "inf": "encourager", "ans": "encouragerez", "en": "Will you cheer our team on on Sunday?", "r": "Avec « vous », la terminaison est -ez : vous encouragerez.", "re": "With “vous”, the ending is -ez: vous encouragerez.", "good": "Vous encouragerez notre équipe dimanche ?", "full": "Vous encouragerez notre équipe dimanche ?"}, {"q": "Mes copains ___ chez moi à huit heures.", "inf": "arriver", "ans": "arriveront", "en": "My friends will arrive at my house at eight o'clock.", "r": "« Mes copains » = ils : arriver + -ont → ils arriveront.", "re": "“Mes copains” = they: arriver + -ont → ils arriveront.", "good": "Mes copains arriveront chez moi à huit heures.", "full": "Mes copains arriveront chez moi à huit heures."}, {"q": "Après le match, l'entraîneur nous ___.", "inf": "féliciter", "ans": "félicitera", "en": "After the match, the coach will congratulate us.", "r": "L'entraîneur = il : féliciter + -a → il félicitera.", "re": "The coach = he: féliciter + -a → il félicitera.", "good": "Après le match, l'entraîneur nous félicitera.", "full": "Après le match, l'entraîneur nous félicitera."}, {"q": "Plus tard, j'___ en France.", "inf": "habiter", "ans": "habiterai", "en": "Later on, I will live in France.", "r": "habiter + -ai → j'habiterai. Devant une voyelle ou un h, « je » devient « j' ».", "re": "habiter + -ai → j'habiterai. Before a vowel or an h, “je” becomes “j'”.", "good": "Plus tard, j'habiterai en France.", "full": "Plus tard, j'habiterai en France."}]}, {"id": "e3", "type": "qcm", "enBefore": true, "short": "Être, avoir, aller, faire", "title": "Les quatre champions", "label": "Choisir le bon verbe", "consigne": "Lis la phrase et sa traduction, puis choisis le bon verbe.", "consigneEn": "Read the sentence and its translation, then choose the right verb.", "min": 4, "tip": "Pense au sens : aller = bouger vers un lieu, avoir = posséder, l'âge, la faim, faire = une activité ou la météo, être = comment on est.", "tipEn": "Think about the meaning: aller = going somewhere, avoir = having, age, hunger, faire = an activity or the weather, être = how you are.", "grad": "linear-gradient(90deg,#1d2b53,#2f5fb3)", "items": [{"q": "L'été prochain, nous ___ en France.", "o": ["aurons", "irons", "serons"], "a": 1, "en": "Next summer we will go to France.", "r": "On va vers un lieu (en France) : c'est aller → nous irons.", "re": "We are going to a place: that's aller → nous irons.", "ans": "irons", "good": "L'été prochain, nous irons en France.", "full": "L'été prochain, nous irons en France."}, {"q": "Demain, il ___ beau pour le match.", "o": ["fera", "sera", "aura"], "a": 0, "en": "Tomorrow the weather will be nice for the match.", "r": "Pour la météo, on utilise faire : il fait beau → il fera beau.", "re": "For the weather we use faire: il fait beau → il fera beau.", "ans": "fera", "good": "Demain, il fera beau pour le match.", "full": "Demain, il fera beau pour le match."}, {"q": "L'année prochaine, j'___ douze ans.", "o": ["serai", "irai", "aurai"], "a": 2, "en": "Next year I will be twelve.", "r": "En français, l'âge se dit avec avoir : j'ai onze ans → j'aurai douze ans.", "re": "In French, age uses avoir: j'ai onze ans → j'aurai douze ans.", "ans": "aurai", "good": "L'année prochaine, j'aurai douze ans.", "full": "L'année prochaine, j'aurai douze ans."}, {"q": "Samedi, tu ___ le capitaine de l'équipe !", "o": ["seras", "auras", "feras"], "a": 0, "en": "On Saturday you will be the team captain!", "r": "Tu es le capitaine → tu seras le capitaine (être).", "re": "You are the captain → you will be the captain (être).", "ans": "seras", "good": "Samedi, tu seras le capitaine de l'équipe !", "full": "Samedi, tu seras le capitaine de l'équipe !"}, {"q": "Mes parents ___ au stade avec moi.", "o": ["feront", "iront", "auront"], "a": 1, "en": "My parents will go to the stadium with me.", "r": "On va vers un lieu (au stade) : aller → ils iront.", "re": "Going to a place: aller → ils iront.", "ans": "iront", "good": "Mes parents iront au stade avec moi.", "full": "Mes parents iront au stade avec moi."}, {"q": "Ce soir, nous ___ un barbecue après l'entraînement.", "o": ["ferons", "serons", "irons"], "a": 0, "en": "Tonight we will have a barbecue after training.", "r": "En français, on « fait » un barbecue : nous ferons.", "re": "In French you “make” a barbecue: nous ferons.", "ans": "ferons", "good": "Ce soir, nous ferons un barbecue après l'entraînement.", "full": "Ce soir, nous ferons un barbecue après l'entraînement."}, {"q": "Vous ___ faim après le match !", "o": ["serez", "aurez", "ferez"], "a": 1, "en": "You will be hungry after the match!", "r": "En français, la faim se dit avec avoir : avoir faim → vous aurez faim.", "re": "In French, hunger uses avoir: avoir faim → vous aurez faim.", "ans": "aurez", "good": "Vous aurez faim après le match !", "full": "Vous aurez faim après le match !"}, {"q": "Les joueurs anglais ___ très contents s'ils gagnent.", "o": ["auront", "iront", "seront"], "a": 2, "en": "The English players will be very happy if they win.", "r": "Ils sont contents → ils seront contents (être).", "re": "They are happy → they will be happy (être).", "ans": "seront", "good": "Les joueurs anglais seront très contents s'ils gagnent.", "full": "Les joueurs anglais seront très contents s'ils gagnent."}]}, {"id": "e4", "type": "type", "short": "J'écris les champions", "title": "J'écris les champions", "label": "Écrire le verbe", "consigne": "Écris le verbe au futur.", "consigneEn": "Write the verb in the future tense.", "min": 5, "tip": "Le début change (ser-, aur-, ir-, fer-), la fin ne change jamais : -ai, -as, -a, -ons, -ez, -ont.", "tipEn": "The beginning changes (ser-, aur-, ir-, fer-), the ending never changes.", "grad": "linear-gradient(90deg,#c8323f,#f2a922)", "photo": ["img/guitares.jpg", "Des guitares dans un magasin de musique"], "items": [{"q": "Un jour, je ___ un grand joueur de rugby.", "inf": "être", "ans": "serai", "en": "One day I will be a great rugby player.", "r": "être → ser- + -ai → je serai.", "re": "être → ser- + -ai → je serai.", "good": "Un jour, je serai un grand joueur de rugby.", "full": "Un jour, je serai un grand joueur de rugby."}, {"q": "Demain, nous ___ un entraînement à cinq heures.", "inf": "avoir", "ans": "aurons", "en": "Tomorrow we will have training at five o'clock.", "r": "avoir → aur- + -ons → nous aurons.", "re": "avoir → aur- + -ons → nous aurons.", "good": "Demain, nous aurons un entraînement à cinq heures.", "full": "Demain, nous aurons un entraînement à cinq heures."}, {"q": "Pendant les vacances, tu ___ à Londres ?", "inf": "aller", "ans": "iras", "en": "Will you go to London during the holidays?", "r": "aller → ir- + -as → tu iras.", "re": "aller → ir- + -as → tu iras.", "good": "Pendant les vacances, tu iras à Londres ?", "full": "Pendant les vacances, tu iras à Londres ?"}, {"q": "Après l'école, Ezra ___ de la guitare.", "inf": "faire", "ans": "fera", "en": "After school, Ezra will play the guitar.", "r": "faire → fer- + -a → il fera. Faire de la guitare = jouer de la guitare.", "re": "faire → fer- + -a → il fera. Faire de la guitare = to play the guitar.", "good": "Après l'école, Ezra fera de la guitare.", "full": "Après l'école, Ezra fera de la guitare."}, {"q": "Vous ___ fatigués après le match.", "inf": "être", "ans": "serez", "en": "You will be tired after the match.", "r": "être → ser- + -ez → vous serez.", "re": "être → ser- + -ez → vous serez.", "good": "Vous serez fatigués après le match.", "full": "Vous serez fatigués après le match."}, {"q": "Mes grands-parents ___ une surprise pour moi.", "inf": "avoir", "ans": "auront", "en": "My grandparents will have a surprise for me.", "r": "« Mes grands-parents » = ils : aur- + -ont → ils auront.", "re": "“Mes grands-parents” = they: aur- + -ont → ils auront.", "good": "Mes grands-parents auront une surprise pour moi.", "full": "Mes grands-parents auront une surprise pour moi."}, {"q": "Ce weekend, mon équipe et moi, nous ___ à un tournoi.", "inf": "aller", "ans": "irons", "en": "This weekend my team and I will go to a tournament.", "r": "« Mon équipe et moi » = nous : ir- + -ons → nous irons.", "re": "“My team and I” = we: ir- + -ons → nous irons.", "good": "Ce weekend, mon équipe et moi, nous irons à un tournoi.", "full": "Ce weekend, mon équipe et moi, nous irons à un tournoi."}, {"q": "Dimanche, mes copains ___ du vélo.", "inf": "faire", "ans": "feront", "en": "On Sunday my friends will go cycling.", "r": "faire → fer- + -ont → ils feront.", "re": "faire → fer- + -ont → ils feront.", "good": "Dimanche, mes copains feront du vélo.", "full": "Dimanche, mes copains feront du vélo."}]}, {"id": "e5", "type": "order", "short": "Les mots dans l'ordre", "title": "Les mots dans l'ordre", "label": "Construire la phrase", "consigne": "Appuie sur les mots dans le bon ordre pour faire la phrase.", "consigneEn": "Tap the words in the right order to make the sentence.", "min": 4, "tip": "Commence par le mot de temps (Demain, L'été prochain…), puis le sujet, puis le verbe au futur.", "tipEn": "Start with the time word, then the subject, then the verb in the future.", "grad": "linear-gradient(90deg,#2f5fb3,#1f8a5b)", "items": [{"tiles": ["Samedi,", "je", "jouerai", "au", "rugby."], "en": "On Saturday I will play rugby.", "good": "Samedi, je jouerai au rugby.", "full": "Samedi, je jouerai au rugby.", "r": "Le mot de temps, puis le sujet (je) et le verbe (jouerai).", "re": "The time word, then the subject (je) and the verb (jouerai)."}, {"tiles": ["L'été", "prochain,", "nous", "irons", "en", "France."], "en": "Next summer we will go to France.", "good": "L'été prochain, nous irons en France.", "full": "L'été prochain, nous irons en France.", "r": "« prochain » vient après « l'été ». Le sujet « nous » va avec « irons ».", "re": "“prochain” comes after “l'été”. The subject “nous” goes with “irons”."}, {"tiles": ["Demain,", "je", "ferai", "de", "la", "guitare."], "en": "Tomorrow I will play the guitar.", "good": "Demain, je ferai de la guitare.", "full": "Demain, je ferai de la guitare.", "r": "On dit « faire de la guitare » : de la vient après le verbe.", "re": "We say “faire de la guitare”: “de la” comes after the verb."}, {"tiles": ["Un", "jour,", "je", "serai", "champion", "de", "rugby."], "en": "One day I will be a rugby champion.", "good": "Un jour, je serai champion de rugby.", "full": "Un jour, je serai champion de rugby.", "r": "« Un jour » ouvre la phrase, puis « je serai ».", "re": "“Un jour” starts the sentence, then “je serai”."}, {"tiles": ["Mes", "copains", "regarderont", "le", "match", "avec", "moi."], "en": "My friends will watch the match with me.", "good": "Mes copains regarderont le match avec moi.", "full": "Mes copains regarderont le match avec moi.", "r": "Le sujet (mes copains), le verbe (regarderont), puis le reste.", "re": "The subject, the verb, then the rest."}]}, {"id": "e6", "type": "read", "short": "Le message de Lucas", "title": "Le message de Lucas", "label": "Lire et comprendre", "consigne": "Lis le message de Lucas, ton copain français, puis réponds aux questions.", "consigneEn": "Read the message from Lucas, your French friend, then answer the questions.", "min": 5, "tip": "Cherche dans le texte le verbe de la question : « ira », « jouerons », « aura »… La réponse est tout près.", "tipEn": "Look for the verb from the question in the text: the answer is right next to it.", "grad": "linear-gradient(90deg,#f2a922,#c8323f)", "items": [{"q": "Où ira l'équipe de Lucas en avril ?", "qen": "Where will Lucas's team go in April?", "o": ["en Angleterre", "en Espagne", "à Paris"], "oen": ["to England", "to Spain", "to Paris"], "a": 0, "good": "en Angleterre", "full": "J'ai une super nouvelle : en avril, mon équipe de rugby ira en Angleterre !", "r": "Lucas écrit : « mon équipe de rugby ira en Angleterre ».", "re": "Lucas writes that his rugby team will go to England."}, {"q": "Comment voyageront-ils ?", "qen": "How will they travel?", "o": ["en avion", "en bus", "en train"], "oen": ["by plane", "by coach", "by train"], "a": 1, "good": "en bus", "full": "Nous partirons de Toulouse en bus le vendredi soir et nous arriverons le samedi matin.", "r": "« Nous partirons de Toulouse en bus. »", "re": "They will leave Toulouse by coach."}, {"q": "Combien de matchs joueront-ils le samedi ?", "qen": "How many matches will they play on Saturday?", "o": ["deux", "trois", "quatre"], "oen": ["two", "three", "four"], "a": 1, "good": "trois", "full": "Le samedi, nous jouerons trois matchs. Je serai un peu stressé, mais j'aurai mon nouveau maillot !", "r": "« Le samedi, nous jouerons trois matchs. »", "re": "On Saturday they will play three matches."}, {"q": "Qu'est-ce que Lucas aura ?", "qen": "What will Lucas have?", "o": ["un nouveau ballon", "une nouvelle guitare", "un nouveau maillot"], "oen": ["a new ball", "a new guitar", "a new shirt"], "a": 2, "good": "un nouveau maillot", "full": "Le samedi, nous jouerons trois matchs. Je serai un peu stressé, mais j'aurai mon nouveau maillot !", "r": "« J'aurai mon nouveau maillot. » J'aurai = avoir au futur.", "re": "“J'aurai mon nouveau maillot.” J'aurai = avoir in the future."}, {"q": "Qu'est-ce qu'il y aura le samedi soir ?", "qen": "What will there be on Saturday evening?", "o": ["une fête avec de la musique", "un autre match", "un film au cinéma"], "oen": ["a party with music", "another match", "a film at the cinema"], "a": 0, "good": "une fête avec de la musique", "full": "Le soir, il y aura une grande fête avec de la musique. Tu apporteras ta guitare ?", "r": "« Il y aura une grande fête avec de la musique. » Il y a → il y aura.", "re": "“Il y aura” = there will be. Il y a → il y aura."}, {"q": "Qu'est-ce que Lucas demande à Ezra ?", "qen": "What does Lucas ask Ezra?", "o": ["de visiter Toulouse", "d'apporter sa guitare", "de jouer au football"], "oen": ["to visit Toulouse", "to bring his guitar", "to play football"], "a": 1, "good": "d'apporter sa guitare", "full": "Le soir, il y aura une grande fête avec de la musique. Tu apporteras ta guitare ?", "r": "« Tu apporteras ta guitare ? » Lucas aimerait écouter Ezra jouer.", "re": "“Will you bring your guitar?” Lucas would like to hear Ezra play."}], "pre": "<div class=\"row\" style=\"margin:0 0 6px\"><span class=\"sub\" style=\"margin:0\">Le message de Lucas · <span class=\"en\" style=\"text-transform:none;letter-spacing:0\">a message from Lucas</span></span><button type=\"button\" class=\"mini trbtn\">Voir la traduction</button></div><div class=\"text\"><p><span class=\"t\">Salut Ezra !<span class=\"en\">Hi Ezra!</span></span><button type=\"button\" class=\"say\" data-say=\"Salut Ezra !\" aria-label=\"Écouter\">🔊</button></p><p><span class=\"t\">J&#x27;ai une super nouvelle : en avril, mon équipe de rugby ira en Angleterre !<span class=\"en\">I&#x27;ve got great news: in April, my rugby team will go to England!</span></span><button type=\"button\" class=\"say\" data-say=\"J&#x27;ai une super nouvelle : en avril, mon équipe de rugby ira en Angleterre !\" aria-label=\"Écouter\">🔊</button></p><p><span class=\"t\">Nous partirons de Toulouse en bus le vendredi soir et nous arriverons le samedi matin.<span class=\"en\">We will leave Toulouse by coach on Friday evening and we will arrive on Saturday morning.</span></span><button type=\"button\" class=\"say\" data-say=\"Nous partirons de Toulouse en bus le vendredi soir et nous arriverons le samedi matin.\" aria-label=\"Écouter\">🔊</button></p><p><span class=\"t\">Le samedi, nous jouerons trois matchs. Je serai un peu stressé, mais j&#x27;aurai mon nouveau maillot !<span class=\"en\">On Saturday we will play three matches. I will be a bit nervous, but I will have my new shirt!</span></span><button type=\"button\" class=\"say\" data-say=\"Le samedi, nous jouerons trois matchs. Je serai un peu stressé, mais j&#x27;aurai mon nouveau maillot !\" aria-label=\"Écouter\">🔊</button></p><p><span class=\"t\">Le soir, il y aura une grande fête avec de la musique. Tu apporteras ta guitare ?<span class=\"en\">In the evening there will be a big party with music. Will you bring your guitar?</span></span><button type=\"button\" class=\"say\" data-say=\"Le soir, il y aura une grande fête avec de la musique. Tu apporteras ta guitare ?\" aria-label=\"Écouter\">🔊</button></p><p><span class=\"t\">Le dimanche, nous visiterons Londres et nous mangerons du fish and chips.<span class=\"en\">On Sunday we will visit London and we will eat fish and chips.</span></span><button type=\"button\" class=\"say\" data-say=\"Le dimanche, nous visiterons Londres et nous mangerons du fish and chips.\" aria-label=\"Écouter\">🔊</button></p><p><span class=\"t\">J&#x27;ai hâte de te voir ! Lucas<span class=\"en\">I can&#x27;t wait to see you! Lucas</span></span><button type=\"button\" class=\"say\" data-say=\"J&#x27;ai hâte de te voir ! Lucas\" aria-label=\"Écouter\">🔊</button></p></div>"}], "words": [["jouer au rugby", "to play rugby"], ["jouer de la guitare", "to play the guitar"], ["faire de la guitare", "to play the guitar"], ["marquer un essai", "to score a try"], ["gagner le match", "to win the match"], ["mon équipe", "my team"], ["mes copains", "my friends"], ["le stade", "the stadium"], ["un tournoi", "a tournament"], ["une chanson", "a song"], ["la plage", "the beach"], ["content", "happy"], ["fatigué", "tired"]]};
+const AUDIO={"je serai": "audio/aff38c6827.mp3", "tu auras": "audio/e9b73e5cdf.mp3", "il ira": "audio/c4f4d5dfa9.mp3", "nous ferons": "audio/ef37b0a08a.mp3", "je jouerai": "audio/a07d55dbf2.mp3", "vous irez": "audio/f565381151.mp3", "ils seront": "audio/47d85b4052.mp3", "tu feras": "audio/62f2873515.mp3", "Samedi prochain, je jouerai au rugby avec mon équipe.": "audio/f897fa6640.mp3", "Demain soir, tu regarderas le match avec ton papa ?": "audio/04096ff634.mp3", "Ce soir, Ezra jouera de la guitare dans sa chambre.": "audio/999a7a561b.mp3", "Nous gagnerons le match, c'est sûr !": "audio/405e33b3b4.mp3", "Vous encouragerez notre équipe dimanche ?": "audio/268686d0ea.mp3", "Mes copains arriveront chez moi à huit heures.": "audio/ee1c8f1a79.mp3", "Après le match, l'entraîneur nous félicitera.": "audio/cf36394725.mp3", "Plus tard, j'habiterai en France.": "audio/d4b6fc91c0.mp3", "L'été prochain, nous irons en France.": "audio/76cb28c332.mp3", "Demain, il fera beau pour le match.": "audio/1c6177494d.mp3", "L'année prochaine, j'aurai douze ans.": "audio/a5bfa2ccd4.mp3", "Samedi, tu seras le capitaine de l'équipe !": "audio/6a0e7111f0.mp3", "Mes parents iront au stade avec moi.": "audio/7467c9101e.mp3", "Ce soir, nous ferons un barbecue après l'entraînement.": "audio/3828d29035.mp3", "Vous aurez faim après le match !": "audio/2ff72c5c98.mp3", "Les joueurs anglais seront très contents s'ils gagnent.": "audio/79a38560ba.mp3", "Un jour, je serai un grand joueur de rugby.": "audio/db0a13dea4.mp3", "Demain, nous aurons un entraînement à cinq heures.": "audio/5209b5a832.mp3", "Pendant les vacances, tu iras à Londres ?": "audio/e0466d9e1d.mp3", "Après l'école, Ezra fera de la guitare.": "audio/8f1330690d.mp3", "Vous serez fatigués après le match.": "audio/561cede8d2.mp3", "Mes grands-parents auront une surprise pour moi.": "audio/d8070f49d1.mp3", "Ce weekend, mon équipe et moi, nous irons à un tournoi.": "audio/1da1a38c5c.mp3", "Dimanche, mes copains feront du vélo.": "audio/f6f0f76060.mp3", "Samedi, je jouerai au rugby.": "audio/c295182e80.mp3", "Demain, je ferai de la guitare.": "audio/b74b6633d7.mp3", "Un jour, je serai champion de rugby.": "audio/bd9a265b82.mp3", "Mes copains regarderont le match avec moi.": "audio/264f3e6e2e.mp3", "J'ai une super nouvelle : en avril, mon équipe de rugby ira en Angleterre !": "audio/554b700426.mp3", "Nous partirons de Toulouse en bus le vendredi soir et nous arriverons le samedi matin.": "audio/44ffbfc66c.mp3", "Le samedi, nous jouerons trois matchs. Je serai un peu stressé, mais j'aurai mon nouveau maillot !": "audio/6682af45e5.mp3", "Le soir, il y aura une grande fête avec de la musique. Tu apporteras ta guitare ?": "audio/cc7d7fe596.mp3", "Salut Ezra !": "audio/84db3a56ec.mp3", "Le dimanche, nous visiterons Londres et nous mangerons du fish and chips.": "audio/87c8b72b63.mp3", "J'ai hâte de te voir ! Lucas": "audio/bdff6abb45.mp3", "je jouerai, tu joueras, il, elle jouera, nous jouerons, vous jouerez, ils, elles joueront.": "audio/514fadad06.mp3", "Ce soir, je regarderai le match à la télé.": "audio/1035e58c27.mp3", "Pendant les vacances, nous visiterons Paris.": "audio/155f516c87.mp3", "Les joueurs gagneront le match !": "audio/bc7b7a5f8a.mp3", "Je jouerai au rugby.": "audio/6a95201626.mp3", "Je jouerai de la guitare.": "audio/9bfe770168.mp3", "je serai, tu seras, il, elle sera, nous serons, vous serez, ils, elles seront.": "audio/74f002c3eb.mp3", "j'aurai, tu auras, il, elle aura, nous aurons, vous aurez, ils, elles auront.": "audio/ce038f9db6.mp3", "Samedi, nous aurons un match important.": "audio/193a67db70.mp3", "j'irai, tu iras, il, elle ira, nous irons, vous irez, ils, elles iront.": "audio/7bb44d298a.mp3", "L'été prochain, j'irai en France avec ma famille.": "audio/f6c7998c77.mp3", "je ferai, tu feras, il, elle fera, nous ferons, vous ferez, ils, elles feront.": "audio/dbe33dc64f.mp3", "Demain, je ferai de la guitare après l'école.": "audio/0cc944a705.mp3"};
+(function(){
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ----- Audio ----- */
+let cur=null,curBtn=null;
+function play(text,btn){
+  const f=AUDIO[text];if(!f)return;
+  if(cur){cur.pause();if(curBtn)curBtn.classList.remove("on")}
+  cur=new Audio(f);curBtn=btn||null;if(btn)btn.classList.add("on");
+  cur.onended=()=>{if(btn)btn.classList.remove("on")};
+  cur.play().catch(()=>{if(btn)btn.classList.remove("on")});
+}
+const sayBtn=t=>AUDIO[t]?`<button type="button" class="say" data-say="${esc(t)}" aria-label="Écouter">🔊</button>`:"";
+document.addEventListener("click",e=>{const b=e.target.closest(".say");if(b)play(b.dataset.say,b)});
+
+/* ----- Sauvegarde ----- */
+const KEY="ezra-futur-v1";
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+/* ----- Score ----- */
+const TOTAL=DATA.ex.reduce((n,x)=>n+x.items.length,0);
+function refresh(){
+  let pts=0,html="",bars="";
+  DATA.ex.forEach((x,k)=>{
+    let p=0,ko=[],done=0;
+    x.items.forEach((it,i)=>{const r=S[x.id+"_"+i];if(!r)return;done++;if(r.ok)p++;else ko.push([it,r,i])});
+    pts+=p;
+    bars+=`<div class="barrow"><span>${k+1}. ${esc(x.short)}</span><div class="track"><span style="width:${p/x.items.length*100}%"></span></div><em>${p} / ${x.items.length}</em></div>`;
+    const a=document.querySelector(`.nav a[href="#${x.id}"]`);if(a)a.classList.toggle("done",done===x.items.length);
+    if(ko.length){
+      html+=`<div class="rgroup"><h4>Exercice ${k+1} · ${esc(x.title)}</h4>
+        <div class="rtip"><b>Pour ne pas te tromper</b>${esc(x.tip)}<span class="en"> ${esc(x.tipEn)}</span></div>`+
+        ko.map(([it,r,i])=>`<div class="ritem">
+          <div class="you">${x.type==="read"?"Question":"Phrase"} ${i+1} · Ta réponse : <s>${esc(r.pick)}</s></div>
+          <div class="good"><div class="t">Bonne réponse : <b>${esc(it.good)}</b>${it.en?`<span class="en">${esc(it.en)}</span>`:""}</div>${sayBtn(it.full||"")}</div>
+          <div class="why"><b>Pourquoi ?</b> ${esc(it.r)}<span class="en">${esc(it.re)}</span></div></div>`).join("")+`</div>`;
+    }
+  });
+  $("#score").textContent=`${pts} / ${TOTAL}`;
+  $("#bigPts").textContent=pts;
+  $("#bigTxt").textContent=`points sur ${TOTAL} · points out of ${TOTAL}`;
+  $("#bars").innerHTML=bars;
+  $("#revoir").innerHTML=html||`<p class="empty">Pour l'instant, rien à revoir. Les erreurs s'afficheront ici. <span class="en">Nothing to review yet. Mistakes will appear here.</span></p>`;
+}
+function record(x,i,ok,pick){S[x.id+"_"+i]={ok,pick};save();refresh()}
+
+/* ----- Navigation ----- */
+$("#nav").innerHTML=`<a href="#rappel">Rappel</a>`+DATA.ex.map((x,k)=>`<a href="#${x.id}">${k+1}</a>`).join("")+`<a href="#e7">7</a><a href="#bilan">Bilan</a>`;
+
+/* ----- Construction des exercices ----- */
+const host=$("#exercises");
+DATA.ex.forEach((x,k)=>{
+  const sec=document.createElement("section");sec.className="exo";sec.id=x.id;
+  sec.innerHTML=`<div class="hd" style="background:${x.grad}"><div class="num">${k+1}</div><div><div class="lab">Exercice · ${esc(x.label)}</div><h3>${esc(x.consigne)}</h3><div class="en">${esc(x.consigneEn)}</div></div><span class="min">${x.min} min</span></div><div class="bd">${x.pre||""}<div class="engine"></div></div>`;
+  host.appendChild(sec);
+  if(x.photo){const f=document.createElement("figure");f.className="photo";f.innerHTML=`<img src="${x.photo[0]}" alt=""><figcaption>${esc(x.photo[1])}</figcaption>`;host.appendChild(f)}
+  engine(x,sec.querySelector(".engine"),sec);
+});
+
+function dotsHTML(x,i){return `<div class="dots">${x.items.map((_,j)=>{const r=S[x.id+"_"+j];return `<i class="${r?(r.ok?"ok":"ko"):""} ${j===i?"cur":""}"></i>`}).join("")}</div>`}
+const norm=s=>String(s).toLowerCase().replace(/[’`´]/g,"'").replace(/\s+/g," ").trim();
+
+function engine(x,el,sec){
+  let i=0;
+  if(x.type==="read"){
+    const t=sec.querySelector(".text");
+    sec.querySelector(".trbtn").onclick=e=>{t.classList.toggle("tr");e.target.textContent=t.classList.contains("tr")?"Cacher la traduction":"Voir la traduction"};
+  }
+  function first(){const j=x.items.findIndex((_,j)=>!S[x.id+"_"+j]);return j<0?x.items.length:j}
+  i=first();
+  function draw(){
+    if(i>=x.items.length){
+      const ok=x.items.filter((_,j)=>S[x.id+"_"+j]&&S[x.id+"_"+j].ok).length;
+      el.innerHTML=`<div class="qhead"><span>Résultat : ${ok} sur ${x.items.length} · <span class="en">Score: ${ok} out of ${x.items.length}</span></span>${dotsHTML(x,-1)}</div>
+        <div class="row"><button type="button" class="btn ghost re">Revoir les phrases</button><a class="btn" href="#${DATA.ex[DATA.ex.indexOf(x)+1]?DATA.ex[DATA.ex.indexOf(x)+1].id:"e7"}" style="text-decoration:none">Exercice suivant</a></div>`;
+      el.querySelector(".re").onclick=()=>{i=0;draw()};return;
+    }
+    const it=x.items[i],st=S[x.id+"_"+i];
+    const head=`<div class="qhead"><span>${x.type==="read"?"Question":"Phrase"} ${i+1} sur ${x.items.length}</span>${dotsHTML(x,i)}</div>`;
+    let body="";
+    if(x.type==="sort"){
+      body=`<div class="word">${esc(it.q)}</div><span class="en">${esc(it.en)}</span><div class="opts tri">${["Passé","Présent","Futur"].map((o,j)=>`<button type="button" class="opt" data-j="${j}">${o}</button>`).join("")}</div>`;
+    }else if(x.type==="qcm"||x.type==="read"){
+      const q=x.type==="read"?esc(it.q):esc(it.q).replace("___",'<span class="gap">?</span>');
+      body=`<p class="qtext">${q}${it.note?`<span class="note">${esc(it.note)}</span>`:""}</p>${(x.enBefore||x.type==="read")&&(it.qen||it.en)?`<p class="qen en">${esc(it.qen||it.en)}</p>`:""}
+        <div class="opts">${it.o.map((o,j)=>`<button type="button" class="opt" data-j="${j}">${esc(o)}${it.oen?`<small>${esc(it.oen[j])}</small>`:""}</button>`).join("")}</div>`;
+    }else if(x.type==="type"){
+      body=`<p class="qtext">${esc(it.q).replace("___",'<span class="gap">?</span>')}<span class="inf">${esc(it.inf)}</span></p><p class="qen en">${esc(it.en)}</p>
+        <div class="inp"><input type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Écris le verbe…"><button type="button" class="btn chk">Vérifier</button></div>
+        <div class="acc">${["é","è","ê","à","â","ç","î","ô"].map(c=>`<button type="button">${c}</button>`).join("")}</div>`;
+    }else if(x.type==="order"){
+      body=`<p class="qen en" style="margin-top:12px">${esc(it.en)}</p><div class="tiles ans"></div><div class="tiles pool"></div><div class="row" style="margin-top:4px"><button type="button" class="btn ghost clr">Effacer</button><button type="button" class="btn chk" disabled>Vérifier</button></div>`;
+    }
+    el.innerHTML=head+body+`<div class="fbz"></div>`;
+
+    const finish=(ok,pick,save1)=>{
+      if(save1)record(x,i,ok,pick);
+      const g=el.querySelector(".gap");if(g){g.textContent=it.ans;g.classList.add("ok")}
+      el.querySelector(".fbz").innerHTML=`<div class="fb ${ok?"ok":"ko"}"><div class="head">${ok?"Bravo !":"Pas tout à fait."} <span class="en">${ok?"Well done!":"Not quite."}</span></div>
+        <div class="full"><div class="t"><b>${esc(it.good)}</b>${it.en&&(x.type!=="read")?`<span class="en">${esc(it.en)}</span>`:""}</div>${sayBtn(it.full||"")}</div>
+        <div>${esc(it.r)}<span class="en"> ${esc(it.re)}</span></div></div>
+        <div class="row">${i>0?'<button type="button" class="btn ghost prev">Précédente</button>':"<span></span>"}<button type="button" class="btn next">${i===x.items.length-1?"Voir le résultat":"Suivante"}</button></div>`;
+      el.querySelector(".next").onclick=()=>{i++;draw()};
+      const p=el.querySelector(".prev");if(p)p.onclick=()=>{i--;draw()};
+      if(save1&&it.full)play(it.full,el.querySelector(".fb .say"));
+    };
+
+    if(x.type==="sort"||x.type==="qcm"||x.type==="read"){
+      const pickBtn=(j,first)=>{
+        const ok=j===it.a;
+        el.querySelectorAll(".opt").forEach(b=>{b.disabled=true;const bj=+b.dataset.j;if(bj===it.a)b.classList.add("ok");else if(bj===j)b.classList.add("ko");else if(x.type==="sort")b.classList.add("dim")});
+        finish(ok,x.type==="sort"?["Passé","Présent","Futur"][j]:it.o[j],first);
+      };
+      el.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pickBtn(+b.dataset.j,true));
+      if(st)pickBtn(st.ok?it.a:it.o.indexOf(st.pick)>=0?it.o.indexOf(st.pick):["Passé","Présent","Futur"].indexOf(st.pick),false);
+    }
+    if(x.type==="type"){
+      const inp=el.querySelector("input"),chk=el.querySelector(".chk");
+      el.querySelectorAll(".acc button").forEach(b=>b.onclick=()=>{const s=inp.selectionStart??inp.value.length;inp.value=inp.value.slice(0,s)+b.textContent+inp.value.slice(inp.selectionEnd??s);inp.focus();inp.setSelectionRange(s+1,s+1)});
+      const check=(val,first)=>{
+        if(!norm(val))return;
+        const ok=norm(val)===norm(it.ans);
+        inp.value=val;inp.disabled=true;chk.disabled=true;inp.classList.add(ok?"ok":"ko");
+        el.querySelectorAll(".acc button").forEach(b=>b.disabled=true);
+        finish(ok,val,first);
+      };
+      chk.onclick=()=>check(inp.value,true);
+      inp.onkeydown=e=>{if(e.key==="Enter")check(inp.value,true)};
+      if(st)check(st.pick,false);
+    }
+    if(x.type==="order"){
+      const ans=el.querySelector(".ans"),pool=el.querySelector(".pool"),chk=el.querySelector(".chk");
+      let order=[];
+      const shuffled=it.tiles.map((t,j)=>j);
+      let seed=(i+3)*7;for(let a=shuffled.length-1;a>0;a--){seed=(seed*9301+49297)%233280;const b=Math.floor(seed/233280*(a+1));[shuffled[a],shuffled[b]]=[shuffled[b],shuffled[a]]}
+      if(shuffled.every((v,j)=>v===j))shuffled.reverse();
+      const render=(lock)=>{
+        ans.innerHTML=order.map(j=>`<button type="button" class="tile" data-j="${j}">${esc(it.tiles[j])}</button>`).join("");
+        pool.innerHTML=shuffled.filter(j=>!order.includes(j)).map(j=>`<button type="button" class="tile" data-j="${j}">${esc(it.tiles[j])}</button>`).join("");
+        chk.disabled=lock||order.length!==it.tiles.length;
+        if(lock)return;
+        ans.querySelectorAll(".tile").forEach(b=>b.onclick=()=>{order=order.filter(j=>j!==+b.dataset.j);render()});
+        pool.querySelectorAll(".tile").forEach(b=>b.onclick=()=>{order.push(+b.dataset.j);render()});
+      };
+      const check=(pick,first)=>{
+        const ok=norm(pick)===norm(it.good);
+        ans.classList.add(ok?"ok":"ko");render(true);el.querySelector(".clr").disabled=true;
+        finish(ok,pick,first);
+      };
+      el.querySelector(".clr").onclick=()=>{order=[];render()};
+      chk.onclick=()=>check(order.map(j=>it.tiles[j]).join(" "),true);
+      if(st){const words=st.pick.split(" ");order=[];let used=new Set();
+        // reconstitue l'ordre à partir du texte enregistré
+        let rest=st.pick;for(let n=0;n<it.tiles.length;n++){const j=it.tiles.findIndex((t,jj)=>!used.has(jj)&&rest.startsWith(t));if(j<0)break;used.add(j);order.push(j);rest=rest.slice(it.tiles[j].length).trimStart()}
+        check(st.pick,false)}
+      else render();
+    }
+  }
+  draw();
+}
+
+/* ----- Écriture ----- */
+$("#wb").innerHTML=DATA.words.map(([w,e])=>`<button type="button" data-w="${esc(w)}">${esc(w)}<small>${esc(e)}</small></button>`).join("");
+let lastTa=$("#w1");
+["w1"].forEach(id=>{const t=$("#"+id);t.value=S[id]||"";t.onfocus=()=>{lastTa=t};t.oninput=()=>{S[id]=t.value;save();count()}});
+$("#wb").onclick=e=>{const b=e.target.closest("button");if(!b)return;const t=lastTa;const s=t.selectionStart??t.value.length;const w=b.dataset.w;const pre=t.value.slice(0,s),add=(pre&&!/\s$/.test(pre)?" ":"")+w+" ";t.value=pre+add+t.value.slice(s);S[t.id]=t.value;save();count();t.focus();t.setSelectionRange(s+add.length,s+add.length)};
+function count(){const n=["w1"].map(id=>$("#"+id).value.trim()).join(" ").split(/\s+/).filter(Boolean).length;$("#wcount").textContent=n+(n>1?" mots":" mot")}
+count();
+$("#copy").onclick=()=>{const txt=["w1"].map(id=>$("#"+id).value.trim()).filter(Boolean).join("\n\n");
+  const done=()=>{$("#copy").textContent="Texte copié !";setTimeout(()=>$("#copy").textContent="Copier mon texte",2000)};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done,()=>fallback(txt));else fallback(txt);
+  function fallback(t){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");done()}catch(e){}a.remove()}};
+
+$("#reset").onclick=()=>{if(confirm("Effacer toutes tes réponses et recommencer ?")){S={};save();location.reload()}};
+refresh();
+})();
+</script>
+</body>
+</html>
