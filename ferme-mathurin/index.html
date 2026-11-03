@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La ferme de Mathurin · Exercices</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1f3324;--soft:#5b6e60;--muted:#8a9a8c;
+  --bg:#f6faf2;--card:#ffffff;--line:#dfeadb;
+  --rose:#2f7d32;--rose-l:#e3f2df;--rose-d:#1f5e22;
+  --lilac:#f2a516;--lilac-l:#fff3d6;
+  --peach:#ef6c00;--peach-l:#fff0e0;
+  --mint:#3fae92;--mint-l:#e3f6f0;
+  --sky:#5b9bd5;--sky-l:#e7f1fb;
+  --berry:#c25e00;--plum:#1f5e22;
+  --past:#f2a516;--pres:#2f7d32;--fut:#ef6c00;
+  --ok:#2f9e7a;--ok-l:#e2f5ee;--ko:#d6455d;--ko-l:#fde8ec;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Lora,Georgia,serif;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4,.pop,button,.pill,.tag,.nav a{font-family:Poppins,system-ui,sans-serif}
+.en{color:var(--muted);font-style:italic;font-size:.88em;font-family:Lora,Georgia,serif;font-weight:400}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+b,strong{font-weight:600}
+
+/* Hero */
+.hero{position:relative;border-radius:0 0 28px 28px;overflow:hidden;min-height:300px;display:flex;align-items:flex-end;background:#1f3324}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,94,34,.05) 0%,rgba(31,94,34,.55) 50%,rgba(22,78,99,.93) 100%)}
+.hero .in{position:relative;z-index:1;padding:28px 20px 26px;color:#fff;max-width:860px;margin:0 auto;width:100%}
+.tag{display:inline-block;background:#ffd23f;color:var(--rose-d);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:99px}
+.hero h1{font-size:clamp(28px,6vw,44px);line-height:1.08;margin:12px 0 6px;font-weight:700}
+.hero h1 span{color:#ffe27a}
+.hero p{margin:0;font-style:italic;opacity:.95}
+.rainbow{height:5px;border-radius:9px;background:linear-gradient(90deg,var(--peach),var(--rose),var(--lilac),var(--sky),var(--mint));margin:16px 0 0}
+
+/* Barre du haut */
+.top{position:sticky;top:0;z-index:20;background:rgba(246,250,242,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;padding-top:8px;padding-bottom:8px}
+.score{font-family:Poppins;font-weight:600;font-size:14px;white-space:nowrap;background:linear-gradient(90deg,var(--rose),var(--lilac));color:#fff;padding:6px 12px;border-radius:99px}
+.nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;color:var(--soft);font-size:12.5px;font-weight:500;padding:5px 10px;border-radius:99px;border:1px solid var(--line);background:#fff}
+.nav a.done{background:var(--mint-l);border-color:#bfe7da;color:#1f7a60}
+
+/* Cartes et sections */
+.intro{background:#fff;border:2px solid var(--rose-l);border-radius:22px;padding:18px 18px;margin:22px 0}
+.intro h2{margin:0 0 6px;font-size:20px;color:var(--rose-d)}
+.intro ul{margin:8px 0 0;padding-left:20px}
+.intro li{margin:4px 0}
+.plan{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.plan span{font-family:Poppins;font-size:12px;background:var(--lilac-l);color:var(--plum);padding:4px 10px;border-radius:99px}
+.part{margin:34px 0 10px;display:flex;align-items:center;gap:12px}
+.part .n{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-family:Poppins;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--rose),var(--lilac))}
+.part h2{margin:0;font-size:24px;line-height:1.2}
+.part h2 .en{display:block;font-size:14px}
+.box{background:var(--card);border-radius:20px;border:1px solid var(--line);margin:16px 0;overflow:hidden;box-shadow:0 4px 18px rgba(31,94,34,.07)}
+.box>.hd{padding:12px 18px;color:#fff;font-family:Poppins}
+.box>.hd h3{margin:0;font-size:18px;font-weight:600}
+.box>.hd h3 .en{color:rgba(255,255,255,.85);font-size:13px;margin-left:6px}
+.box>.bd{padding:16px 18px}
+.c-past>.hd{background:linear-gradient(90deg,#2f7d32,#7cb342)}
+.c-pres>.hd{background:linear-gradient(90deg,#2f7d32,#7cb342)}
+.c-fut>.hd{background:linear-gradient(90deg,#ef6c00,#ffb74d)}
+.c-mint>.hd{background:linear-gradient(90deg,#33a184,#6cc9ad)}
+.c-sky>.hd{background:linear-gradient(90deg,#4b8cc8,#82b8e6)}
+.c-plum>.hd{background:linear-gradient(90deg,#1f5e22,#f2a516)}
+.sub{font-family:Poppins;font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--berry);margin:14px 0 6px}
+.formula{display:inline-block;font-family:Poppins;font-weight:600;font-size:14px;border:2px solid currentColor;border-radius:99px;padding:3px 12px;margin:2px 0}
+.ex{display:flex;gap:10px;align-items:flex-start;border-left:3px solid var(--line);padding:4px 0 4px 12px;margin:8px 0}
+.ex .t{flex:1}
+.ex .t .en{display:block}
+.k{font-weight:600;color:var(--berry)}
+.say{flex:none;border:0;background:var(--rose-l);color:var(--rose-d);width:34px;height:34px;border-radius:50%;font-size:15px;cursor:pointer;display:inline-grid;place-items:center;padding:0}
+.say:active,.say.on{background:var(--rose);color:#fff}
+.inner{background:var(--lilac-l);border-left:4px solid var(--lilac);border-radius:12px;padding:10px 14px;margin:12px 0}
+.inner.peach{background:var(--peach-l);border-left-color:var(--peach)}
+.inner.mint{background:var(--mint-l);border-left-color:var(--mint)}
+.inner.rose{background:var(--rose-l);border-left-color:var(--rose)}
+.inner b.t{font-family:Poppins;font-size:12px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:620px){.grid3,.grid2{grid-template-columns:1fr}}
+.col{border-radius:14px;padding:10px 12px}
+.col h4{margin:0 0 6px;font-size:14px}
+.col ul{list-style:none;margin:0;padding:0}
+.col li{padding:3px 0;border-bottom:1px dashed rgba(0,0,0,.08)}
+.col li:last-child{border:0}
+.col.p{background:var(--lilac-l)}.col.p h4{color:#b37400}
+.col.r{background:var(--rose-l)}.col.r h4{color:var(--rose-d)}
+.col.f{background:var(--peach-l)}.col.f h4{color:#b45000}
+table.conj{width:100%;border-collapse:collapse;font-size:15px;margin:6px 0}
+table.conj td,table.conj th{padding:5px 8px;text-align:left;border-bottom:1px solid var(--line)}
+table.conj th{font-family:Poppins;font-size:12.5px;font-weight:600;color:var(--soft);background:#f2f7ee}
+.end{color:var(--rose-d);font-weight:600}
+.photo{border-radius:16px;overflow:hidden;margin:12px 0;position:relative}
+.photo img{display:block;width:100%;height:180px;object-fit:cover}
+.photo figcaption{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.92);border-radius:99px;padding:3px 12px;font-size:13px;font-style:italic;color:var(--ink)}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.strip figure{margin:0;border-radius:14px;overflow:hidden;background:#fff;border:3px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.strip img{display:block;width:100%;height:110px;object-fit:cover}
+.strip figcaption{font-size:12.5px;font-style:italic;padding:4px 8px;color:var(--soft)}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.steps span{font-family:Poppins;font-size:13px;font-weight:500;background:#fff;border:2px solid var(--rose-l);border-radius:99px;padding:4px 12px}
+.steps span b{color:var(--rose)}
+
+/* Exercices */
+.exo{background:#fff;border-radius:22px;margin:22px 0;overflow:hidden;border:1px solid var(--line);box-shadow:0 4px 18px rgba(31,94,34,.08)}
+.exo>.hd{padding:14px 18px;color:#fff;display:flex;gap:14px;align-items:flex-start}
+.exo>.hd .num{font-family:Poppins;font-size:34px;font-weight:700;line-height:1;opacity:.9}
+.exo>.hd .lab{font-family:Poppins;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.9}
+.exo>.hd h3{margin:2px 0 2px;font-size:18px;line-height:1.3}
+.exo>.hd .en{color:rgba(255,255,255,.88)}
+.exo>.hd .min{margin-left:auto;flex:none;font-family:Poppins;font-size:12px;background:rgba(255,255,255,.25);border-radius:99px;padding:3px 10px;white-space:nowrap}
+.exo>.bd{padding:16px 18px 18px}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-family:Poppins;font-size:13px;color:var(--soft)}
+.dots{display:flex;gap:5px;flex-wrap:wrap}
+.dots i{width:11px;height:11px;border-radius:50%;background:#dbe6d6;display:block}
+.dots i.ok{background:var(--ok)}.dots i.ko{background:var(--ko)}
+.dots i.cur{outline:2px solid var(--rose);outline-offset:2px}
+.qtext{font-size:20px;line-height:1.45;margin:14px 0 2px}
+.qen{margin:0 0 12px}
+.note{font-family:Poppins;font-size:12px;background:var(--lilac-l);color:var(--plum);border-radius:99px;padding:2px 10px;margin-left:6px;white-space:nowrap}
+.gap{display:inline-block;min-width:70px;border-bottom:3px solid var(--rose);text-align:center;color:var(--rose-d);font-weight:600;padding:0 6px}
+.gap.ok{border-color:var(--ok);color:var(--ok)}
+.opts{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
+.opt{font-family:Poppins;font-size:16px;font-weight:500;border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;padding:10px 16px;cursor:pointer;text-align:left}
+.opt:hover{border-color:var(--rose)}
+.opt.ok{border-color:var(--ok);background:var(--ok-l);color:#1d6e55}
+.opt.ko{border-color:var(--ko);background:var(--ko-l);color:#a3283e;text-decoration:line-through}
+.opt:disabled{cursor:default}
+.opt small{display:block;font-family:Lora;font-style:italic;font-weight:400;font-size:13px;color:var(--muted)}
+.tri .opt{flex:1;min-width:90px;text-align:center;color:#fff;border:0;font-weight:600}
+.tri .opt[data-j="0"]{background:var(--past)}.tri .opt[data-j="1"]{background:var(--pres)}.tri .opt[data-j="2"]{background:var(--fut)}
+.tri .opt.dim{opacity:.35}
+.tri .opt.ok{outline:4px solid var(--ok);outline-offset:2px;color:#fff;text-decoration:none}
+.tri .opt.ko{outline:4px solid var(--ko);outline-offset:2px;color:#fff}
+.word{font-family:Poppins;font-size:28px;font-weight:600;text-align:center;margin:18px 0 4px;color:var(--plum)}
+.word+.en{text-align:center;display:block}
+.fb{border-radius:14px;padding:12px 14px;margin-top:12px;font-size:15px}
+.fb.ok{background:var(--ok-l);border:1px solid #bfe6d7}
+.fb.ko{background:var(--ko-l);border:1px solid #f6c6d0}
+.fb .head{font-family:Poppins;font-weight:600}
+.fb.ok .head{color:#1d6e55}.fb.ko .head{color:#a3283e}
+.fb .full{display:flex;gap:10px;align-items:center;margin:8px 0 4px}
+.fb .full .t{flex:1}
+.fb .full .t b{font-weight:600}
+.fb .full .en{display:block}
+.row{display:flex;justify-content:space-between;gap:10px;margin-top:12px;flex-wrap:wrap}
+.btn{font-family:Poppins;font-weight:600;font-size:15px;border:0;border-radius:99px;padding:10px 20px;cursor:pointer;background:linear-gradient(90deg,var(--rose),var(--lilac));color:#fff}
+.btn.ghost{background:#fff;color:var(--soft);border:2px solid var(--line)}
+.btn:disabled{opacity:.4;cursor:default}
+.inp{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0 4px}
+.inp input{font:600 18px Poppins,sans-serif;color:var(--ink);border:2px solid var(--line);border-radius:12px;padding:9px 12px;flex:1;min-width:160px;outline:none}
+.inp input:focus{border-color:var(--rose)}
+.inp input.ok{border-color:var(--ok);background:var(--ok-l)}
+.inp input.ko{border-color:var(--ko);background:var(--ko-l)}
+.acc{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.acc button{font:600 16px Poppins;width:40px;height:38px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--plum);cursor:pointer}
+.inf{font-family:Poppins;font-size:13px;font-weight:600;color:#fff;background:var(--lilac);border-radius:99px;padding:2px 10px;margin-left:6px;white-space:nowrap}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;padding:10px;border-radius:14px;margin:10px 0}
+.tiles.ans{background:#fff;border:2px dashed #b5d6ae}
+.tiles.pool{background:#f2f7ee}
+.tile{font-family:Poppins;font-size:16px;font-weight:500;border:0;border-radius:10px;padding:8px 12px;background:#fff;color:var(--ink);box-shadow:0 2px 0 #c9dcc4;cursor:pointer}
+.tiles.ans .tile{background:var(--rose-l);color:var(--rose-d);box-shadow:0 2px 0 #a8d3a0}
+.tiles.ans.ok{border-color:var(--ok);background:var(--ok-l)}
+.tiles.ans.ko{border-color:var(--ko);background:var(--ko-l)}
+.text{background:#fffbf0;border:1px solid #f0dcb0;border-radius:16px;padding:12px 14px;margin:6px 0 14px}
+.text p{margin:6px 0;display:flex;gap:8px;align-items:flex-start}
+.text p .t{flex:1}
+.text .en{display:none}
+.text.tr .en{display:block}
+.mini{font-family:Poppins;font-size:13px;font-weight:500;border:1px solid var(--line);background:#fff;color:var(--soft);border-radius:99px;padding:5px 12px;cursor:pointer}
+.wb{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.wb button{font-family:Poppins;font-size:13.5px;border:1px solid #bfe0b8;background:var(--rose-l);color:var(--rose-d);border-radius:99px;padding:4px 11px;cursor:pointer}
+.wb button small{font-family:Lora;font-style:italic;color:var(--muted);margin-left:4px}
+textarea{width:100%;min-height:120px;font:16px/1.7 Lora,serif;color:var(--ink);border:2px solid var(--line);border-radius:14px;padding:10px 12px;outline:none;background:repeating-linear-gradient(transparent,transparent 26px,#e6efe2 27px);resize:vertical}
+textarea:focus{border-color:var(--lilac)}
+.para{border-radius:16px;padding:12px 14px;margin:12px 0}
+.para h4{margin:0 0 4px;font-size:15px}
+.para .starts{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}
+.para .starts span{font-family:Poppins;font-size:13px;background:#fff;border-radius:99px;padding:3px 10px;border:1px solid rgba(0,0,0,.06)}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer}
+.check input{width:20px;height:20px;accent-color:var(--rose);margin-top:3px;flex:none}
+
+/* Bilan et À revoir */
+.bilan{background:linear-gradient(135deg,#1f5e22,#c25e00 60%,#ef6c00);color:#fff;border-radius:24px;padding:20px;margin:22px 0}
+.bilan .big{font-family:Poppins;font-size:48px;font-weight:700;line-height:1}
+.bilan .bars{margin-top:14px;background:rgba(255,255,255,.95);border-radius:16px;padding:10px 14px;color:var(--ink)}
+.barrow{display:grid;grid-template-columns:1.6fr 2fr auto;gap:10px;align-items:center;font-family:Poppins;font-size:13px;padding:4px 0}
+.track{height:10px;border-radius:9px;background:#e3ece0;overflow:hidden}
+.track span{display:block;height:100%;background:linear-gradient(90deg,var(--rose),var(--lilac));border-radius:9px}
+.revoir{border:3px solid var(--rose);border-radius:22px;background:#fff;margin:22px 0 10px;overflow:hidden}
+.revoir>.hd{background:var(--rose);color:#fff;padding:12px 18px}
+.revoir>.hd h3{margin:0;font-size:20px}
+.revoir>.hd .en{color:rgba(255,255,255,.88)}
+.revoir>.bd{padding:12px 16px 16px}
+.rgroup{margin:10px 0 18px}
+.rgroup h4{margin:0 0 6px;font-size:15px;color:var(--plum)}
+.rtip{background:var(--peach-l);border-left:4px solid var(--peach);border-radius:10px;padding:8px 12px;font-size:14.5px;margin:6px 0 10px}
+.rtip b{font-family:Poppins;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#b45000;display:block}
+.ritem{border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0;font-size:15px}
+.ritem .you{color:#a3283e}
+.ritem .you s{font-weight:600}
+.ritem .good{display:flex;gap:10px;align-items:center;margin:4px 0}
+.ritem .good .t{flex:1}
+.ritem .good b{color:#1d6e55}
+.ritem .why{margin-top:4px;color:var(--ink)}
+.ritem .why .en,.ritem .good .en{display:block}
+.empty{font-style:italic;color:var(--soft)}
+footer{text-align:center;font-family:Poppins;font-size:12px;color:var(--muted);padding:26px 0 40px;letter-spacing:.08em}
+
+.rainbow{background:linear-gradient(90deg,#e53935,#fb8c00,#fdd835,#43a047,#1e88e5,#8e24aa)}
+.qimg{display:block;width:100%;height:230px;object-fit:cover;border-radius:18px;margin:14px 0 4px;border:4px solid #fff;box-shadow:0 3px 14px rgba(0,0,0,.12)}
+.qtext:empty{display:none}
+.opts{margin-top:14px}
+.tnote{display:inline-block;font-family:Poppins;font-size:12.5px;background:#fff3d6;color:#8a5a00;border-radius:99px;padding:2px 10px;margin-left:6px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="img/hero.jpg" alt="Des vaches à la ferme">
+  <div class="in">
+    <span class="tag">Unité 4 · Leçon 4 · Exercices</span>
+    <h1>Tu connais les animaux <span>de cette ferme ?</span></h1>
+    <p>Conosci gli animali di questa fattoria? · 7 esercizi</p>
+  </div>
+</header>
+<div class="top"><div class="wrap">
+  <span class="score" id="score">0 / 60</span>
+  <nav class="nav" id="nav"></nav>
+</div></div>
+<main class="wrap">
+<div class="rainbow"></div>
+<section class="intro">
+  <h2>Bonjour !</h2>
+  <p>Aujourd'hui, tu t'entraînes avec les animaux de la ferme Mathurin : leurs noms, leurs cris, ce qu'ils nous donnent, et ce, cet, cette, ces.
+  <span class="en">Oggi ti eserciti con gli animali della fattoria Mathurin: i loro nomi, i loro versi, che cosa ci danno, e ce, cet, cette, ces.</span></p>
+  <ul>
+    <li>Appuie sur 🔊 pour écouter la bonne phrase. <span class="en">Tocca 🔊 per ascoltare la frase giusta.</span></li>
+    <li>Chaque réponse est corrigée tout de suite, avec une explication. <span class="en">Ogni risposta viene corretta subito, con una spiegazione.</span></li>
+    <li>Tes erreurs arrivent dans le cadre « À revoir », à la fin de la page. <span class="en">I tuoi errori compaiono nel riquadro «À revoir» (da ripassare), alla fine della pagina.</span></li>
+  </ul>
+</section>
+<div class="part" id="exos"><div class="n">A</div><h2>Les exercices<span class="en">Gli esercizi</span></h2></div>
+<div id="exercises"></div>
+<div class="part" id="bilan"><div class="n">B</div><h2>Mon bilan<span class="en">Il mio risultato</span></h2></div>
+<div class="bilan">
+  <div class="big" id="bigPts">0</div>
+  <div id="bigTxt" class="pop">points sur 60</div>
+  <div class="bars" id="bars"></div>
+</div>
+<section class="revoir">
+  <div class="hd"><h3>À revoir <span class="en">Da ripassare</span></h3>
+    <div class="en">Pour chaque erreur : ta réponse, la bonne réponse et pourquoi. · Per ogni errore: la tua risposta, la risposta giusta e il perché.</div></div>
+  <div class="bd" id="revoir"></div>
+</section>
+<div class="row" style="justify-content:center"><button class="btn ghost" id="reset" type="button">Tout recommencer · Ricomincia</button></div>
+</main>
+<footer>LE FRANÇAIS AVEC IRÈNE</footer>
+
+<script>
+const DATA={"ex": [{"id": "e1", "type": "qcm", "short": "Les photos", "title": "Qui est sur la photo ?", "label": "Reconnaître · Riconoscere", "consigne": "Regarde la photo et choisis le bon mot.", "consigneEn": "Guarda la foto e scegli la parola giusta.", "min": 3, "tip": "Regarde bien l'animal ou l'aliment, puis lis les trois mots avec leur article.", "tipEn": "Guarda bene l'animale o il cibo, poi leggi le tre parole con il loro articolo.", "grad": "linear-gradient(90deg,#2f7d32,#7cb342)", "items": [{"img": "img/vache.jpg", "q": "", "o": ["la poule", "la vache", "l'âne"], "a": 1, "ans": "la vache", "en": "È la mucca.", "good": "C'est la vache.", "full": "C'est la vache.", "r": "La vache donne du lait et fait meuh.", "re": "La mucca ci dà il latte e fa muuu."}, {"img": "img/ane.jpg", "q": "", "o": ["l'âne", "le coq", "le poussin"], "a": 0, "ans": "l'âne", "en": "È l'asino.", "good": "C'est l'âne.", "full": "C'est l'âne.", "r": "L'âne a de grandes oreilles et fait hi han.", "re": "L'asino ha le orecchie grandi e fa i-ho."}, {"img": "img/poussin.jpg", "q": "", "o": ["la vache", "le mouton", "le poussin"], "a": 2, "ans": "le poussin", "en": "È il pulcino.", "good": "C'est le poussin.", "full": "C'est le poussin.", "r": "Le poussin est le petit de la poule. Il fait piou piou.", "re": "Il pulcino è il piccolo della gallina. Fa pio pio."}, {"img": "img/coq.jpg", "q": "", "o": ["le coq", "l'agneau", "la brebis"], "a": 0, "ans": "le coq", "en": "È il gallo.", "good": "C'est le coq.", "full": "C'est le coq.", "r": "Le coq chante cocorico.", "re": "Il gallo canta chicchirichì."}, {"img": "img/agneau.jpg", "q": "", "o": ["le poussin", "l'agneau", "la poule"], "a": 1, "ans": "l'agneau", "en": "È l'agnellino.", "good": "C'est l'agneau.", "full": "C'est l'agneau.", "r": "L'agneau est le petit du mouton et de la brebis.", "re": "L'agnellino è il piccolo del montone e della pecora."}, {"img": "img/poule.jpg", "q": "", "o": ["l'âne", "la vache", "la poule"], "a": 2, "ans": "la poule", "en": "È la gallina.", "good": "C'est la poule.", "full": "C'est la poule.", "r": "La poule pond des œufs et fait cot cot codette.", "re": "La gallina fa le uova e fa coccodè."}, {"img": "img/lait.jpg", "q": "", "o": ["le lait", "le fromage", "la laine"], "a": 0, "ans": "le lait", "en": "È il latte.", "good": "C'est le lait.", "full": "C'est le lait.", "r": "Le lait vient de la vache.", "re": "Il latte viene dalla mucca."}, {"img": "img/fromage.jpg", "q": "", "o": ["les carottes", "le fromage", "les œufs"], "a": 1, "ans": "le fromage", "en": "È il formaggio.", "good": "C'est le fromage.", "full": "C'est le fromage.", "r": "Le fromage est fait avec du lait.", "re": "Il formaggio si fa con il latte."}, {"img": "img/carottes.jpg", "q": "", "o": ["le beurre", "la laine", "les carottes"], "a": 2, "ans": "les carottes", "en": "Sono le carote.", "good": "Ce sont les carottes.", "full": "Ce sont les carottes.", "r": "Lucius, l'âne, adore les carottes.", "re": "Lucius, l'asino, adora le carote."}, {"img": "img/laine.jpg", "q": "", "o": ["la laine", "le lait", "les œufs"], "a": 0, "ans": "la laine", "en": "È la lana.", "good": "C'est la laine.", "full": "C'est la laine.", "r": "La laine vient du mouton. Avec la laine, on fait des pulls.", "re": "La lana viene dalla pecora. Con la lana si fanno i maglioni."}]}, {"id": "e2", "type": "qcm", "enBefore": true, "short": "Les cris", "title": "Qui fait ce bruit ?", "label": "Comprendre · Capire", "consigne": "Lis le cri ou la question, puis choisis la bonne réponse.", "consigneEn": "Leggi il verso o la domanda, poi scegli la risposta giusta.", "min": 3, "tip": "Revois le tableau des cris : meuh, bêh, cocorico, cot cot codette, piou piou, hi han.", "tipEn": "Ripassa la tabella dei versi degli animali.", "grad": "linear-gradient(90deg,#ef6c00,#ffb300)", "items": [{"q": "« Meuh ! » Qui fait ce bruit ?", "qen": "«Muuu!» Chi fa questo verso?", "o": ["la poule", "la vache", "le coq"], "oen": ["la gallina", "la mucca", "il gallo"], "a": 1, "ans": "la vache", "en": "La mucca fa muuu.", "good": "La vache fait meuh.", "full": "La vache fait meuh.", "r": "Meuh, c'est le cri de la vache.", "re": "Muuu è il verso della mucca."}, {"q": "« Cocorico ! » Qui fait ce bruit ?", "qen": "«Chicchirichì!» Chi fa questo verso?", "o": ["le coq", "l'âne", "le mouton"], "oen": ["il gallo", "l'asino", "la pecora"], "a": 0, "ans": "le coq", "en": "Il gallo fa chicchirichì.", "good": "Le coq fait cocorico.", "full": "Le coq fait cocorico.", "r": "Cocorico, c'est le chant du coq.", "re": "Chicchirichì è il canto del gallo."}, {"q": "« Hi han ! » Qui fait ce bruit ?", "qen": "«I-ho!» Chi fa questo verso?", "o": ["le poussin", "la brebis", "l'âne"], "oen": ["il pulcino", "la pecora", "l'asino"], "a": 2, "ans": "l'âne", "en": "L'asino fa i-ho.", "good": "L'âne fait hi han.", "full": "L'âne fait hi han.", "r": "Hi han, c'est le cri de l'âne.", "re": "I-ho è il verso dell'asino."}, {"q": "« Bêh ! » Qui fait ce bruit ?", "qen": "«Beee!» Chi fa questo verso?", "o": ["l'agneau", "la vache", "la poule"], "oen": ["l'agnellino", "la mucca", "la gallina"], "a": 0, "ans": "l'agneau", "en": "L'agnellino fa beee.", "good": "L'agneau fait bêh.", "full": "L'agneau fait bêh.", "r": "Le mouton, la brebis et l'agneau font bêh.", "re": "Il montone, la pecora e l'agnellino fanno beee."}, {"q": "« Piou piou ! » Qui fait ce bruit ?", "qen": "«Pio pio!» Chi fa questo verso?", "o": ["le coq", "le poussin", "l'âne"], "oen": ["il gallo", "il pulcino", "l'asino"], "a": 1, "ans": "le poussin", "en": "Il pulcino fa pio pio.", "good": "Le poussin fait piou piou.", "full": "Le poussin fait piou piou.", "r": "Piou piou, c'est le cri du poussin.", "re": "Pio pio è il verso del pulcino."}, {"q": "« Cot cot codette ! » Qui fait ce bruit ?", "qen": "«Coccodè!» Chi fa questo verso?", "o": ["la brebis", "le mouton", "la poule"], "oen": ["la pecora", "il montone", "la gallina"], "a": 2, "ans": "la poule", "en": "La gallina fa coccodè.", "good": "La poule fait cot cot codette.", "full": "La poule fait cot cot codette.", "r": "Cot cot codette, c'est le cri de la poule.", "re": "Coccodè è il verso della gallina."}, {"q": "Quel bruit font les moutons ?", "qen": "Che verso fanno le pecore?", "o": ["cocorico", "bêh", "meuh"], "oen": ["chicchirichì", "beee", "muuu"], "a": 1, "ans": "bêh", "en": "Le pecore fanno beee.", "good": "Les moutons font bêh.", "full": "Les moutons font bêh.", "r": "Les moutons font bêh, comme les agneaux.", "re": "Le pecore fanno beee, come gli agnellini."}, {"q": "Quel bruit fait l'âne Lucius ?", "qen": "Che verso fa l'asino Lucius?", "o": ["hi han", "piou piou", "cot cot codette"], "oen": ["i-ho", "pio pio", "coccodè"], "a": 0, "ans": "hi han", "en": "L'asino Lucius fa i-ho.", "good": "L'âne Lucius fait hi han.", "full": "L'âne Lucius fait hi han.", "r": "Lucius est un âne : il fait hi han.", "re": "Lucius è un asino: fa i-ho."}]}, {"id": "e3", "type": "qcm", "enBefore": true, "short": "Ce, cet, cette, ces", "title": "Ce, cet, cette ou ces ?", "label": "Manipuler · Usare", "consigne": "Choisis ce, cet, cette ou ces.", "consigneEn": "Scegli ce, cet, cette o ces.", "min": 4, "tip": "Regarde le nom : masculin → ce, masculin avec une voyelle → cet, féminin → cette, pluriel → ces.", "tipEn": "Guarda il nome: maschile → ce, maschile con vocale → cet, femminile → cette, plurale → ces.", "grad": "linear-gradient(90deg,#c62828,#ef5350)", "items": [{"q": "Regarde ___ vache : elle est noire et blanche.", "o": ["ce", "cet", "cette", "ces"], "oen": ["masc.", "masc. + vocale", "femm.", "plurale"], "a": 2, "ans": "cette", "en": "Guarda questa mucca: è bianca e nera.", "good": "Regarde cette vache : elle est noire et blanche.", "full": "Regarde cette vache : elle est noire et blanche.", "r": "Vache est féminin : cette vache.", "re": "Vache è femminile: cette vache."}, {"q": "___ âne mange une carotte.", "o": ["Ce", "Cet", "Cette", "Ces"], "oen": ["masc.", "masc. + vocale", "femm.", "plurale"], "a": 1, "ans": "Cet", "en": "Questo asino mangia una carota.", "good": "Cet âne mange une carotte.", "full": "Cet âne mange une carotte.", "r": "Âne est masculin et commence par une voyelle : cet âne.", "re": "Âne è maschile e comincia con una vocale: cet âne."}, {"q": "___ coq chante très fort.", "o": ["Ce", "Cet", "Cette", "Ces"], "oen": ["masc.", "masc. + vocale", "femm.", "plurale"], "a": 0, "ans": "Ce", "en": "Questo gallo canta fortissimo.", "good": "Ce coq chante très fort.", "full": "Ce coq chante très fort.", "r": "Coq est masculin et commence par une consonne : ce coq.", "re": "Coq è maschile e comincia con una consonante: ce coq."}, {"q": "___ poules pondent beaucoup d'œufs.", "o": ["Ce", "Cet", "Cette", "Ces"], "oen": ["masc.", "masc. + vocale", "femm.", "plurale"], "a": 3, "ans": "Ces", "en": "Queste galline fanno tante uova.", "good": "Ces poules pondent beaucoup d'œufs.", "full": "Ces poules pondent beaucoup d'œufs.", "r": "Poules est au pluriel : ces poules.", "re": "Poules è plurale: ces poules."}, {"q": "Il est doux, ___ agneau !", "o": ["ce", "cet", "cette", "ces"], "oen": ["masc.", "masc. + vocale", "femm.", "plurale"], "a": 1, "ans": "cet", "en": "È morbido, questo agnellino!", "good": "Il est doux, cet agneau !", "full": "Il est doux, cet agneau !", "r": "Agneau est masculin et commence par une voyelle : cet agneau.", "re": "Agneau è maschile e comincia con una vocale: cet agneau."}, {"q": "___ ferme est très grande.", "o": ["Ce", "Cet", "Cette", "Ces"], "oen": ["masc.", "masc. + vocale", "femm.", "plurale"], "a": 2, "ans": "Cette", "en": "Questa fattoria è molto grande.", "good": "Cette ferme est très grande.", "full": "Cette ferme est très grande.", "r": "Ferme est féminin : cette ferme.", "re": "Ferme è femminile: cette ferme."}, {"q": "___ fermier s'appelle Mathurin.", "o": ["Ce", "Cet", "Cette", "Ces"], "oen": ["masc.", "masc. + vocale", "femm.", "plurale"], "a": 0, "ans": "Ce", "en": "Questo contadino si chiama Mathurin.", "good": "Ce fermier s'appelle Mathurin.", "full": "Ce fermier s'appelle Mathurin.", "r": "Fermier est masculin : ce fermier.", "re": "Fermier è maschile: ce fermier."}, {"q": "Tu veux ___ œufs ?", "o": ["ce", "cet", "cette", "ces"], "oen": ["masc.", "masc. + vocale", "femm.", "plurale"], "a": 3, "ans": "ces", "en": "Vuoi queste uova?", "good": "Tu veux ces œufs ?", "full": "Tu veux ces œufs ?", "r": "Œufs est au pluriel : ces œufs.", "re": "Œufs è plurale: ces œufs."}, {"q": "___ brebis donne du lait.", "o": ["Ce", "Cet", "Cette", "Ces"], "oen": ["masc.", "masc. + vocale", "femm.", "plurale"], "a": 2, "ans": "Cette", "en": "Questa pecora dà il latte.", "good": "Cette brebis donne du lait.", "full": "Cette brebis donne du lait.", "r": "Brebis est féminin : cette brebis.", "re": "Brebis è femminile: cette brebis."}, {"q": "Il est petit, ___ poussin !", "o": ["ce", "cet", "cette", "ces"], "oen": ["masc.", "masc. + vocale", "femm.", "plurale"], "a": 0, "ans": "ce", "en": "È piccolo, questo pulcino!", "good": "Il est petit, ce poussin !", "full": "Il est petit, ce poussin !", "r": "Poussin est masculin et commence par une consonne : ce poussin.", "re": "Poussin è maschile e comincia con una consonante: ce poussin."}]}, {"id": "e4", "type": "qcm", "enBefore": true, "short": "Que donnent les animaux ?", "title": "Que donnent les animaux ?", "label": "Appliquer · Applicare", "consigne": "Lis la phrase et choisis la bonne fin.", "consigneEn": "Leggi la frase e scegli la fine giusta.", "min": 4, "tip": "Pense à la ferme Mathurin : la vache donne du lait, la poule pond des œufs, le mouton donne de la laine.", "tipEn": "Pensa alla fattoria Mathurin: la mucca dà il latte, la gallina fa le uova, la pecora dà la lana.", "grad": "linear-gradient(90deg,#00897b,#4db6ac)", "items": [{"q": "La vache donne ___.", "qen": "La mucca dà…", "o": ["des œufs", "du lait", "de la laine"], "oen": ["le uova", "il latte", "la lana"], "a": 1, "ans": "du lait", "en": "La mucca dà il latte.", "good": "La vache donne du lait.", "full": "La vache donne du lait.", "r": "La vache donne du lait : lait est masculin, donc du lait.", "re": "La mucca dà il latte: lait è maschile, quindi du lait."}, {"q": "La poule pond ___.", "qen": "La gallina fa…", "o": ["des œufs", "du fromage", "des carottes"], "oen": ["le uova", "il formaggio", "le carote"], "a": 0, "ans": "des œufs", "en": "La gallina fa le uova.", "good": "La poule pond des œufs.", "full": "La poule pond des œufs.", "r": "La poule pond des œufs : œufs est au pluriel, donc des.", "re": "La gallina fa le uova: œufs è plurale, quindi des."}, {"q": "Le mouton donne ___.", "qen": "La pecora dà…", "o": ["du beurre", "de la laine", "des œufs"], "oen": ["il burro", "la lana", "le uova"], "a": 1, "ans": "de la laine", "en": "La pecora dà la lana.", "good": "Le mouton donne de la laine.", "full": "Le mouton donne de la laine.", "r": "Le mouton donne de la laine : laine est féminin, donc de la.", "re": "La pecora dà la lana: laine è femminile, quindi de la."}, {"q": "Avec le lait, on fait ___.", "qen": "Con il latte si fa…", "o": ["du fromage", "de la laine", "des carottes"], "oen": ["il formaggio", "la lana", "le carote"], "a": 0, "ans": "du fromage", "en": "Con il latte si fa il formaggio.", "good": "Avec le lait, on fait du fromage.", "full": "Avec le lait, on fait du fromage.", "r": "Le fromage est fait avec du lait.", "re": "Il formaggio si fa con il latte."}, {"q": "Avec la laine, on fait ___.", "qen": "Con la lana si fanno…", "o": ["du beurre", "des œufs", "des pulls"], "oen": ["il burro", "le uova", "i maglioni"], "a": 2, "ans": "des pulls", "en": "Con la lana si fanno i maglioni.", "good": "Avec la laine, on fait des pulls.", "full": "Avec la laine, on fait des pulls.", "r": "La laine sert à faire des pulls.", "re": "La lana serve a fare i maglioni."}, {"q": "L'âne Lucius mange ___.", "qen": "L'asino Lucius mangia…", "o": ["du fromage", "des carottes", "des œufs"], "oen": ["il formaggio", "le carote", "le uova"], "a": 1, "ans": "des carottes", "en": "L'asino Lucius mangia le carote.", "good": "L'âne Lucius mange des carottes.", "full": "L'âne Lucius mange des carottes.", "r": "Lucius adore les carottes.", "re": "Lucius adora le carote."}, {"q": "Avec le lait, on fait aussi ___.", "qen": "Con il latte si fa anche…", "o": ["du beurre", "de la laine", "des pulls"], "oen": ["il burro", "la lana", "i maglioni"], "a": 0, "ans": "du beurre", "en": "Con il latte si fa anche il burro.", "good": "Avec le lait, on fait aussi du beurre.", "full": "Avec le lait, on fait aussi du beurre.", "r": "Le beurre est fait avec du lait.", "re": "Il burro si fa con il latte."}, {"q": "Les agneaux boivent ___.", "qen": "Gli agnellini bevono…", "o": ["des carottes", "de la laine", "du lait"], "oen": ["le carote", "la lana", "il latte"], "a": 2, "ans": "du lait", "en": "Gli agnellini bevono il latte.", "good": "Les agneaux boivent du lait.", "full": "Les agneaux boivent du lait.", "r": "Les petits agneaux boivent le lait de leur maman, la brebis.", "re": "Gli agnellini bevono il latte della loro mamma, la pecora."}]}, {"id": "e5", "type": "type", "short": "Au pluriel", "title": "Un animal, plusieurs animaux", "label": "Transformer · Trasformare", "consigne": "Écris au pluriel avec ces.", "consigneEn": "Scrivi al plurale con ces.", "min": 5, "tip": "Au pluriel, ce, cet et cette deviennent toujours ces, et on ajoute un -s au nom.", "tipEn": "Al plurale ce, cet e cette diventano sempre ces, e si aggiunge una -s al nome.", "grad": "linear-gradient(90deg,#1e78c8,#64b5f6)", "items": [{"q": "ce coq → ___", "inf": "pluriel · plurale", "ans": "ces coqs", "en": "questi galli", "good": "ce coq → ces coqs", "full": "ces coqs", "note": null, "r": "ce → ces, et coq prend un -s.", "re": "ce → ces, e coq prende una -s."}, {"q": "cette poule → ___", "inf": "pluriel · plurale", "ans": "ces poules", "en": "queste galline", "good": "cette poule → ces poules", "full": "ces poules", "note": null, "r": "cette → ces, et poule prend un -s.", "re": "cette → ces, e poule prende una -s."}, {"q": "cet âne → ___", "inf": "pluriel · plurale", "ans": "ces ânes", "en": "questi asini", "good": "cet âne → ces ânes", "full": "ces ânes", "note": null, "r": "cet → ces, et âne prend un -s.", "re": "cet → ces, e âne prende una -s."}, {"q": "ce poussin → ___", "inf": "pluriel · plurale", "ans": "ces poussins", "en": "questi pulcini", "good": "ce poussin → ces poussins", "full": "ces poussins", "note": null, "r": "ce → ces, et poussin prend un -s.", "re": "ce → ces, e poussin prende una -s."}, {"q": "cette vache → ___", "inf": "pluriel · plurale", "ans": "ces vaches", "en": "queste mucche", "good": "cette vache → ces vaches", "full": "ces vaches", "note": null, "r": "cette → ces, et vache prend un -s.", "re": "cette → ces, e vache prende una -s."}, {"q": "ce mouton → ___", "inf": "pluriel · plurale", "ans": "ces moutons", "en": "queste pecore", "good": "ce mouton → ces moutons", "full": "ces moutons", "note": null, "r": "ce → ces, et mouton prend un -s.", "re": "ce → ces, e mouton prende una -s."}, {"q": "cet agneau → ___", "inf": "pluriel · plurale", "ans": "ces agneaux", "en": "questi agnellini", "good": "cet agneau → ces agneaux", "full": "ces agneaux", "note": "-eau → -eaux", "r": "Les mots en -eau prennent un -x : un agneau, des agneaux.", "re": "Le parole in -eau prendono una -x: un agneau, des agneaux."}, {"q": "cette brebis → ___", "inf": "pluriel · plurale", "ans": "ces brebis", "en": "queste pecore", "good": "cette brebis → ces brebis", "full": "ces brebis", "note": "déjà un -s · ha già una -s", "r": "Brebis finit déjà par -s : il ne change pas.", "re": "Brebis finisce già con -s: non cambia."}]}, {"id": "e6", "type": "qcm", "short": "L'intrus", "title": "Trouve l'intrus", "label": "Réfléchir · Ragionare", "consigne": "Un mot n'est pas comme les autres. Lequel ?", "consigneEn": "Una parola non è come le altre. Quale?", "min": 4, "tip": "Cherche ce que les trois autres mots ont en commun : des animaux, des cris, des choses faites avec le lait…", "tipEn": "Cerca che cosa hanno in comune le altre tre parole: animali, versi, cose fatte con il latte…", "grad": "linear-gradient(90deg,#8e44ad,#ba68c8)", "items": [{"q": "", "o": ["la vache", "le mouton", "la carotte", "la poule"], "oen": ["la mucca", "la pecora", "la carota", "la gallina"], "a": 2, "ans": "la carotte", "en": "", "good": "la carotte", "full": "", "r": "La carotte n'est pas un animal.", "re": "La carota non è un animale."}, {"q": "", "o": ["le lait", "la laine", "le fromage", "le beurre"], "oen": ["il latte", "la lana", "il formaggio", "il burro"], "a": 1, "ans": "la laine", "en": "", "good": "la laine", "full": "", "r": "On ne mange pas la laine : elle vient du mouton.", "re": "La lana non si mangia: viene dalla pecora."}, {"q": "", "o": ["le coq", "la poule", "l'âne", "le poussin"], "oen": ["il gallo", "la gallina", "l'asino", "il pulcino"], "a": 2, "ans": "l'âne", "en": "", "good": "l'âne", "full": "", "r": "Le coq, la poule et le poussin sont une famille. L'âne, non.", "re": "Il gallo, la gallina e il pulcino sono una famiglia. L'asino no."}, {"q": "", "o": ["le mouton", "la vache", "la brebis", "l'agneau"], "oen": ["il montone", "la mucca", "la pecora", "l'agnellino"], "a": 1, "ans": "la vache", "en": "", "good": "la vache", "full": "", "r": "Le mouton, la brebis et l'agneau sont une famille. La vache, non.", "re": "Il montone, la pecora e l'agnellino sono una famiglia. La mucca no."}, {"q": "", "o": ["meuh", "bêh", "bonjour", "cocorico"], "oen": ["muuu", "beee", "buongiorno", "chicchirichì"], "a": 2, "ans": "bonjour", "en": "", "good": "bonjour", "full": "", "r": "Bonjour n'est pas un cri d'animal.", "re": "Bonjour non è il verso di un animale."}, {"q": "", "o": ["piou piou", "hi han", "cocorico", "cot cot codette"], "oen": ["pio pio", "i-ho", "chicchirichì", "coccodè"], "a": 1, "ans": "hi han", "en": "", "good": "hi han", "full": "", "r": "Hi han est le cri de l'âne. Les trois autres cris sont de la famille de la poule.", "re": "I-ho è il verso dell'asino. Gli altri tre versi sono della famiglia della gallina."}, {"q": "", "o": ["ces poules", "ces vaches", "cette ferme", "ces œufs"], "oen": ["queste galline", "queste mucche", "questa fattoria", "queste uova"], "a": 2, "ans": "cette ferme", "en": "", "good": "cette ferme", "full": "", "r": "Cette ferme est au singulier. Les trois autres sont au pluriel.", "re": "Cette ferme è singolare. Le altre tre sono plurali."}, {"q": "", "o": ["cet agneau", "cet âne", "ce coq", "cet œuf"], "oen": ["questo agnellino", "questo asino", "questo gallo", "questo uovo"], "a": 2, "ans": "ce coq", "en": "", "good": "ce coq", "full": "", "r": "Coq commence par une consonne : ce coq. Les autres mots commencent par une voyelle : cet.", "re": "Coq comincia con una consonante: ce coq. Le altre parole cominciano con una vocale: cet."}]}, {"id": "e7", "type": "order", "short": "Mes phrases", "title": "Je construis mes phrases", "label": "Produire · Produrre", "consigne": "Appuie sur les mots dans le bon ordre pour faire la phrase.", "consigneEn": "Tocca le parole nell'ordine giusto per formare la frase.", "min": 5, "tip": "Commence par le mot avec une majuscule et finis par le mot avec le point.", "tipEn": "Comincia dalla parola con la maiuscola e finisci con la parola con il punto.", "grad": "linear-gradient(90deg,#2f7d32,#1e78c8)", "items": [{"tiles": ["Cette", "vache", "donne", "du", "lait."], "en": "Questa mucca dà il latte.", "good": "Cette vache donne du lait.", "full": "Cette vache donne du lait.", "r": "Le sujet (cette vache), le verbe (donne), puis du lait.", "re": "Il soggetto (cette vache), il verbo (donne), poi du lait."}, {"tiles": ["Cet", "âne", "adore", "les", "carottes."], "en": "Questo asino adora le carote.", "good": "Cet âne adore les carottes.", "full": "Cet âne adore les carottes.", "r": "Cet âne, puis le verbe adore.", "re": "Cet âne, poi il verbo adore."}, {"tiles": ["Ces", "poussins", "font", "piou", "piou."], "en": "Questi pulcini fanno pio pio.", "good": "Ces poussins font piou piou.", "full": "Ces poussins font piou piou.", "r": "Ces poussins font : pluriel, donc font.", "re": "Ces poussins font: plurale, quindi font."}, {"tiles": ["Le", "coq", "chante", "cocorico."], "en": "Il gallo canta chicchirichì.", "good": "Le coq chante cocorico.", "full": "Le coq chante cocorico.", "r": "Le coq chante, puis le cri.", "re": "Le coq chante, poi il verso."}, {"tiles": ["Les", "moutons", "donnent", "de", "la", "laine."], "en": "Le pecore ci danno la lana.", "good": "Les moutons donnent de la laine.", "full": "Les moutons donnent de la laine.", "r": "Les moutons donnent de la laine.", "re": "Les moutons donnent de la laine."}, {"tiles": ["Quel", "bruit", "fait", "la", "poule", "?"], "en": "Che verso fa la gallina?", "good": "Quel bruit fait la poule ?", "full": "Quel bruit fait la poule ?", "r": "La question commence par Quel bruit.", "re": "La domanda comincia con Quel bruit."}, {"tiles": ["Comme", "il", "est", "beau", "cet", "agneau", "!"], "en": "Com'è bello questo agnellino!", "good": "Comme il est beau cet agneau !", "full": "Comme il est beau cet agneau !", "r": "Comme il est beau, puis cet agneau.", "re": "Comme il est beau, poi cet agneau."}, {"tiles": ["Dans", "la", "ferme,", "il", "y", "a", "un", "âne."], "en": "Nella fattoria c'è un asino.", "good": "Dans la ferme, il y a un âne.", "full": "Dans la ferme, il y a un âne.", "r": "Dans la ferme, puis il y a un âne.", "re": "Dans la ferme, poi il y a un âne."}]}], "words": []};
+const AUDIO={"C'est la vache.": "audio/6f98ee2b89.mp3", "C'est l'âne.": "audio/f651d79a70.mp3", "C'est le poussin.": "audio/aa9540bcff.mp3", "C'est le coq.": "audio/8a555fdeeb.mp3", "C'est l'agneau.": "audio/1b5d48f285.mp3", "C'est la poule.": "audio/a5ab65a176.mp3", "C'est le lait.": "audio/10319e52c5.mp3", "C'est le fromage.": "audio/ae5f3f8410.mp3", "Ce sont les carottes.": "audio/27e19507f5.mp3", "C'est la laine.": "audio/cfee3885a0.mp3", "La vache fait meuh.": "audio/38efe28316.mp3", "Le coq fait cocorico.": "audio/294f94e1cd.mp3", "L'âne fait hi han.": "audio/e48b491cb6.mp3", "L'agneau fait bêh.": "audio/06683f1177.mp3", "Le poussin fait piou piou.": "audio/3aef630217.mp3", "La poule fait cot cot codette.": "audio/1d2663c118.mp3", "Les moutons font bêh.": "audio/8b98d32860.mp3", "L'âne Lucius fait hi han.": "audio/af279a86f5.mp3", "Regarde cette vache : elle est noire et blanche.": "audio/df1c7ac0f2.mp3", "Cet âne mange une carotte.": "audio/cc46b5335e.mp3", "Ce coq chante très fort.": "audio/f4a20f58db.mp3", "Ces poules pondent beaucoup d'œufs.": "audio/3fb56429c8.mp3", "Il est doux, cet agneau !": "audio/7e44c652f6.mp3", "Cette ferme est très grande.": "audio/5970e2851e.mp3", "Ce fermier s'appelle Mathurin.": "audio/e65feb21b1.mp3", "Tu veux ces œufs ?": "audio/875da4e616.mp3", "Cette brebis donne du lait.": "audio/7aa0fb5460.mp3", "Il est petit, ce poussin !": "audio/7ec6bf4386.mp3", "La vache donne du lait.": "audio/177ebc1a12.mp3", "La poule pond des œufs.": "audio/fecfa5dbd9.mp3", "Le mouton donne de la laine.": "audio/ecc88ac5ed.mp3", "Avec le lait, on fait du fromage.": "audio/10db2bf0ae.mp3", "Avec la laine, on fait des pulls.": "audio/d870999026.mp3", "L'âne Lucius mange des carottes.": "audio/ba7c1dd174.mp3", "Avec le lait, on fait aussi du beurre.": "audio/8b614efe05.mp3", "Les agneaux boivent du lait.": "audio/bff7e2e458.mp3", "ces coqs": "audio/80b65d1475.mp3", "ces poules": "audio/c11f068dfb.mp3", "ces ânes": "audio/d0182bd537.mp3", "ces poussins": "audio/f3b8342385.mp3", "ces vaches": "audio/3a4632f2f5.mp3", "ces moutons": "audio/897ba1e391.mp3", "ces agneaux": "audio/8b81bb6020.mp3", "ces brebis": "audio/e08583e0a2.mp3", "Cette vache donne du lait.": "audio/536be72206.mp3", "Cet âne adore les carottes.": "audio/2eff8c126d.mp3", "Ces poussins font piou piou.": "audio/316b2cf18b.mp3", "Le coq chante cocorico.": "audio/5fe0c2aa8c.mp3", "Les moutons donnent de la laine.": "audio/c5c053221b.mp3", "Quel bruit fait la poule ?": "audio/e6357aadad.mp3", "Comme il est beau cet agneau !": "audio/bc1b20f58a.mp3", "Dans la ferme, il y a un âne.": "audio/a5c5819bf5.mp3"};
+(function(){
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ----- Audio ----- */
+let cur=null,curBtn=null;
+function play(text,btn){
+  const f=AUDIO[text];if(!f)return;
+  if(cur){cur.pause();if(curBtn)curBtn.classList.remove("on")}
+  cur=new Audio(f);curBtn=btn||null;if(btn)btn.classList.add("on");
+  cur.onended=()=>{if(btn)btn.classList.remove("on")};
+  cur.play().catch(()=>{if(btn)btn.classList.remove("on")});
+}
+const sayBtn=t=>AUDIO[t]?`<button type="button" class="say" data-say="${esc(t)}" aria-label="Écouter">🔊</button>`:"";
+document.addEventListener("click",e=>{const b=e.target.closest(".say");if(b)play(b.dataset.say,b)});
+
+/* ----- Sauvegarde ----- */
+const KEY="ferme-mathurin-v1";
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+/* ----- Score ----- */
+const TOTAL=DATA.ex.reduce((n,x)=>n+x.items.length,0);
+function refresh(){
+  let pts=0,html="",bars="";
+  DATA.ex.forEach((x,k)=>{
+    let p=0,ko=[],done=0;
+    x.items.forEach((it,i)=>{const r=S[x.id+"_"+i];if(!r)return;done++;if(r.ok)p++;else ko.push([it,r,i])});
+    pts+=p;
+    bars+=`<div class="barrow"><span>${k+1}. ${esc(x.short)}</span><div class="track"><span style="width:${p/x.items.length*100}%"></span></div><em>${p} / ${x.items.length}</em></div>`;
+    const a=document.querySelector(`.nav a[href="#${x.id}"]`);if(a)a.classList.toggle("done",done===x.items.length);
+    if(ko.length){
+      html+=`<div class="rgroup"><h4>Exercice ${k+1} · ${esc(x.title)}</h4>
+        <div class="rtip"><b>Pour ne pas te tromper · Per non sbagliare</b>${esc(x.tip)}<span class="en"> ${esc(x.tipEn)}</span></div>`+
+        ko.map(([it,r,i])=>`<div class="ritem">
+          <div class="you">${x.type==="read"?"Question":"Phrase"} ${i+1} · Ta réponse · La tua risposta : <s>${esc(r.pick)}</s></div>
+          <div class="good"><div class="t">Bonne réponse · Risposta giusta : <b>${esc(it.good)}</b>${it.en?`<span class="en">${esc(it.en)}</span>`:""}</div>${sayBtn(it.full||"")}</div>
+          <div class="why"><b>Pourquoi ? · Perché?</b> ${esc(it.r)}<span class="en">${esc(it.re)}</span></div></div>`).join("")+`</div>`;
+    }
+  });
+  $("#score").textContent=`${pts} / ${TOTAL}`;
+  $("#bigPts").textContent=pts;
+  $("#bigTxt").textContent=`points sur ${TOTAL} · punti su ${TOTAL}`;
+  $("#bars").innerHTML=bars;
+  $("#revoir").innerHTML=html||`<p class="empty">Pour l'instant, rien à revoir. Les erreurs s'afficheront ici. <span class="en">Per ora non c'è niente da ripassare. Gli errori appariranno qui.</span></p>`;
+}
+function record(x,i,ok,pick){S[x.id+"_"+i]={ok,pick};save();refresh()}
+
+/* ----- Navigation ----- */
+$("#nav").innerHTML=DATA.ex.map((x,k)=>`<a href="#${x.id}">${k+1}</a>`).join("")+`<a href="#bilan">Bilan</a>`;
+
+/* ----- Construction des exercices ----- */
+const host=$("#exercises");
+DATA.ex.forEach((x,k)=>{
+  const sec=document.createElement("section");sec.className="exo";sec.id=x.id;
+  sec.innerHTML=`<div class="hd" style="background:${x.grad}"><div class="num">${k+1}</div><div><div class="lab">Exercice · ${esc(x.label)}</div><h3>${esc(x.consigne)}</h3><div class="en">${esc(x.consigneEn)}</div></div><span class="min">${x.min} min</span></div><div class="bd">${x.pre||""}<div class="engine"></div></div>`;
+  host.appendChild(sec);
+  if(x.photo){const f=document.createElement("figure");f.className="photo";f.innerHTML=`<img src="${x.photo[0]}" alt=""><figcaption>${esc(x.photo[1])}</figcaption>`;host.appendChild(f)}
+  engine(x,sec.querySelector(".engine"),sec);
+});
+
+function dotsHTML(x,i){return `<div class="dots">${x.items.map((_,j)=>{const r=S[x.id+"_"+j];return `<i class="${r?(r.ok?"ok":"ko"):""} ${j===i?"cur":""}"></i>`}).join("")}</div>`}
+const norm=s=>String(s).toLowerCase().replace(/[’`´]/g,"'").replace(/\s+/g," ").trim();
+
+function engine(x,el,sec){
+  let i=0;
+  if(x.type==="read"){
+    const t=sec.querySelector(".text");
+    sec.querySelector(".trbtn").onclick=e=>{t.classList.toggle("tr");e.target.textContent=t.classList.contains("tr")?"Cacher la traduction":"Voir la traduction"};
+  }
+  function first(){const j=x.items.findIndex((_,j)=>!S[x.id+"_"+j]);return j<0?x.items.length:j}
+  i=first();
+  function draw(){
+    if(i>=x.items.length){
+      const ok=x.items.filter((_,j)=>S[x.id+"_"+j]&&S[x.id+"_"+j].ok).length;
+      el.innerHTML=`<div class="qhead"><span>Résultat : ${ok} sur ${x.items.length} · <span class="en">Punteggio: ${ok} su ${x.items.length}</span></span>${dotsHTML(x,-1)}</div>
+        <div class="row"><button type="button" class="btn ghost re">Revoir · Rivedi</button><a class="btn" href="#${DATA.ex[DATA.ex.indexOf(x)+1]?DATA.ex[DATA.ex.indexOf(x)+1].id:"bilan"}" style="text-decoration:none">Exercice suivant · Avanti</a></div>`;
+      el.querySelector(".re").onclick=()=>{i=0;draw()};return;
+    }
+    const it=x.items[i],st=S[x.id+"_"+i];
+    const head=`<div class="qhead"><span>${x.type==="read"?"Question":"Phrase"} ${i+1} sur ${x.items.length}</span>${dotsHTML(x,i)}</div>`;
+    let body="";
+    if(x.type==="sort"){
+      body=`<div class="word">${esc(it.q)}</div><span class="en">${esc(it.en)}</span><div class="opts tri">${["Passé","Présent","Futur"].map((o,j)=>`<button type="button" class="opt" data-j="${j}">${o}</button>`).join("")}</div>`;
+    }else if(x.type==="qcm"||x.type==="read"){
+      const q=x.type==="read"?esc(it.q):esc(it.q).replace("___",'<span class="gap">?</span>');
+      body=`${it.img?`<img class="qimg" src="${it.img}" alt="">`:""}<p class="qtext">${q}${it.note?`<span class="note">${esc(it.note)}</span>`:""}</p>${(x.enBefore||x.type==="read")&&(it.qen||it.en)?`<p class="qen en">${esc(it.qen||it.en)}</p>`:""}
+        <div class="opts">${it.o.map((o,j)=>`<button type="button" class="opt" data-j="${j}">${esc(o)}${it.oen?`<small>${esc(it.oen[j])}</small>`:""}</button>`).join("")}</div>`;
+    }else if(x.type==="type"){
+      body=`<p class="qtext">${esc(it.q).replace("___",'<span class="gap">?</span>')}<span class="inf">${esc(it.inf)}</span>${it.note?`<span class="tnote">${esc(it.note)}</span>`:""}</p><p class="qen en">${esc(it.en)}</p>
+        <div class="inp"><input type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Écris ici… · Scrivi qui…"><button type="button" class="btn chk">Vérifier · Verifica</button></div>
+        <div class="acc">${["é","è","ê","à","â","ç","î","ô"].map(c=>`<button type="button">${c}</button>`).join("")}</div>`;
+    }else if(x.type==="order"){
+      body=`<p class="qen en" style="margin-top:12px">${esc(it.en)}</p><div class="tiles ans"></div><div class="tiles pool"></div><div class="row" style="margin-top:4px"><button type="button" class="btn ghost clr">Effacer · Cancella</button><button type="button" class="btn chk" disabled>Vérifier · Verifica</button></div>`;
+    }
+    el.innerHTML=head+body+`<div class="fbz"></div>`;
+
+    const finish=(ok,pick,save1)=>{
+      if(save1)record(x,i,ok,pick);
+      const g=el.querySelector(".gap");if(g){g.textContent=it.ans;g.classList.add("ok")}
+      el.querySelector(".fbz").innerHTML=`<div class="fb ${ok?"ok":"ko"}"><div class="head">${ok?"Bravo !":"Pas tout à fait."} <span class="en">${ok?"Brava!":"Non proprio."}</span></div>
+        <div class="full"><div class="t"><b>${esc(it.good)}</b>${it.en&&(x.type!=="read")?`<span class="en">${esc(it.en)}</span>`:""}</div>${sayBtn(it.full||"")}</div>
+        <div>${esc(it.r)}<span class="en"> ${esc(it.re)}</span></div></div>
+        <div class="row">${i>0?'<button type="button" class="btn ghost prev">Précédente · Indietro</button>':"<span></span>"}<button type="button" class="btn next">${i===x.items.length-1?"Résultat · Risultato":"Suivante · Avanti"}</button></div>`;
+      el.querySelector(".next").onclick=()=>{i++;draw()};
+      const p=el.querySelector(".prev");if(p)p.onclick=()=>{i--;draw()};
+      if(save1&&it.full)play(it.full,el.querySelector(".fb .say"));
+    };
+
+    if(x.type==="sort"||x.type==="qcm"||x.type==="read"){
+      const pickBtn=(j,first)=>{
+        const ok=j===it.a;
+        el.querySelectorAll(".opt").forEach(b=>{b.disabled=true;const bj=+b.dataset.j;if(bj===it.a)b.classList.add("ok");else if(bj===j)b.classList.add("ko");else if(x.type==="sort")b.classList.add("dim")});
+        finish(ok,x.type==="sort"?["Passé","Présent","Futur"][j]:it.o[j],first);
+      };
+      el.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pickBtn(+b.dataset.j,true));
+      if(st)pickBtn(st.ok?it.a:it.o.indexOf(st.pick)>=0?it.o.indexOf(st.pick):["Passé","Présent","Futur"].indexOf(st.pick),false);
+    }
+    if(x.type==="type"){
+      const inp=el.querySelector("input"),chk=el.querySelector(".chk");
+      el.querySelectorAll(".acc button").forEach(b=>b.onclick=()=>{const s=inp.selectionStart??inp.value.length;inp.value=inp.value.slice(0,s)+b.textContent+inp.value.slice(inp.selectionEnd??s);inp.focus();inp.setSelectionRange(s+1,s+1)});
+      const check=(val,first)=>{
+        if(!norm(val))return;
+        const ok=norm(val)===norm(it.ans);
+        inp.value=val;inp.disabled=true;chk.disabled=true;inp.classList.add(ok?"ok":"ko");
+        el.querySelectorAll(".acc button").forEach(b=>b.disabled=true);
+        finish(ok,val,first);
+      };
+      chk.onclick=()=>check(inp.value,true);
+      inp.onkeydown=e=>{if(e.key==="Enter")check(inp.value,true)};
+      if(st)check(st.pick,false);
+    }
+    if(x.type==="order"){
+      const ans=el.querySelector(".ans"),pool=el.querySelector(".pool"),chk=el.querySelector(".chk");
+      let order=[];
+      const shuffled=it.tiles.map((t,j)=>j);
+      let seed=(i+3)*7;for(let a=shuffled.length-1;a>0;a--){seed=(seed*9301+49297)%233280;const b=Math.floor(seed/233280*(a+1));[shuffled[a],shuffled[b]]=[shuffled[b],shuffled[a]]}
+      if(shuffled.every((v,j)=>v===j))shuffled.reverse();
+      const render=(lock)=>{
+        ans.innerHTML=order.map(j=>`<button type="button" class="tile" data-j="${j}">${esc(it.tiles[j])}</button>`).join("");
+        pool.innerHTML=shuffled.filter(j=>!order.includes(j)).map(j=>`<button type="button" class="tile" data-j="${j}">${esc(it.tiles[j])}</button>`).join("");
+        chk.disabled=lock||order.length!==it.tiles.length;
+        if(lock)return;
+        ans.querySelectorAll(".tile").forEach(b=>b.onclick=()=>{order=order.filter(j=>j!==+b.dataset.j);render()});
+        pool.querySelectorAll(".tile").forEach(b=>b.onclick=()=>{order.push(+b.dataset.j);render()});
+      };
+      const check=(pick,first)=>{
+        const ok=norm(pick)===norm(it.good);
+        ans.classList.add(ok?"ok":"ko");render(true);el.querySelector(".clr").disabled=true;
+        finish(ok,pick,first);
+      };
+      el.querySelector(".clr").onclick=()=>{order=[];render()};
+      chk.onclick=()=>check(order.map(j=>it.tiles[j]).join(" "),true);
+      if(st){const words=st.pick.split(" ");order=[];let used=new Set();
+        // reconstitue l'ordre à partir du texte enregistré
+        let rest=st.pick;for(let n=0;n<it.tiles.length;n++){const j=it.tiles.findIndex((t,jj)=>!used.has(jj)&&rest.startsWith(t));if(j<0)break;used.add(j);order.push(j);rest=rest.slice(it.tiles[j].length).trimStart()}
+        check(st.pick,false)}
+      else render();
+    }
+  }
+  draw();
+}
+
+$("#reset").onclick=()=>{if(confirm("Effacer toutes tes réponses et recommencer ? · Cancellare tutte le risposte e ricominciare?")){S={};save();location.reload()}};
+refresh();
+})();
+</script>
+</body>
+</html>
