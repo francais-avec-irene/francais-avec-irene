@@ -100,7 +100,7 @@ figure.ph figcaption{font-size:13px;color:var(--muted);font-style:italic;margin-
 .rads{display:flex;gap:6px;margin:6px 0 8px;flex-wrap:wrap}
 .rad{font-family:var(--display);font-size:13px;font-weight:600;padding:2px 10px;border-radius:99px}
 .rad.s{background:var(--teal-soft);color:var(--short)} .rad.l{background:var(--rose-soft);color:var(--long)}
-.forms{display:grid;grid-template-columns:1fr 1fr;gap:2px 12px;font-size:15.5px}
+.forms{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,auto);grid-auto-flow:column;gap:2px 12px;font-size:15.5px}
 .forms .r1 b{color:var(--short)} .forms .r2 b{color:var(--long)}
 .forms div{white-space:nowrap}
 .also{margin-top:8px;font-size:13.5px;color:var(--muted)}
@@ -223,9 +223,27 @@ select.sel.ko{border-color:var(--ko);background:var(--ko-soft)}
 @media (max-width:520px){
   body{font-size:16px}
   .hero-text{margin-left:8px;margin-right:8px;padding:16px}
-  .forms{grid-template-columns:1fr}
+  .forms{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}
   .band{padding:14px 16px}
 }
+
+.say-btn{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);background:var(--paper);color:var(--teal);display:inline-flex;align-items:center;justify-content:center;padding:0;vertical-align:middle;flex:none;transition:background .2s,color .2s}
+.say-btn:hover{border-color:var(--teal)}
+.say-btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.say-btn.playing{background:var(--teal);color:var(--paper);border-color:var(--teal);animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 5px rgba(14,111,120,.18)}}
+.has-say > .say-btn{float:left;margin:1px 9px 4px 0}
+.principle .say-btn{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.35);color:#fff}
+.vcard .top .say-btn{width:28px;height:28px;margin-left:auto}
+.vcard .top .tr{flex-basis:100%}
+.choices .say-btn,.inrow .say-btn,.tiles .say-btn{margin-left:4px}
+.dl .who .say-btn{width:26px;height:26px;margin-left:8px}
+.q .say-btn{margin-right:8px}
+.mt .say-btn{float:left;margin:0 9px 2px 0}
+.autoread{display:flex;gap:10px;align-items:flex-start;margin-top:40px;padding:12px 16px;border-radius:12px;background:var(--teal-soft);color:var(--ink);font-family:var(--display);font-size:14px;cursor:pointer}
+.autoread input{width:18px;height:18px;margin-top:2px;accent-color:var(--teal)}
+.autoread .en{font-family:var(--body)}
+@media (prefers-reduced-motion:reduce){.say-btn.playing{animation:none}}
 </style>
 </head>
 <body>
@@ -269,7 +287,7 @@ select.sel.ko{border-color:var(--ko);background:var(--ko-soft)}
       <p>Ces verbes expriment souvent un <b>processus</b> ou une <b>transformation</b>. Beaucoup sont formés sur un adjectif.<span class="en">These verbs often express a process or a change. Many come from an adjective.</span></p>
       <div class="inner">
         <h4>Adjectif → verbe</h4>
-        <p><b>grand</b> → grandir · <b>gros</b> → grossir · <b>maigre</b> → maigrir · <b>rouge</b> → rougir · <b>vieux</b> → vieillir · <b>lent</b> → ralentir<span class="en">big → to grow · fat → to put on weight · thin → to lose weight · red → to blush · old → to grow old · slow → to slow down</span></p>
+        <p data-say="grand, grandir. gros, grossir. maigre, maigrir. rouge, rougir. vieux, vieillir. lent, ralentir."><b>grand</b> → grandir · <b>gros</b> → grossir · <b>maigre</b> → maigrir · <b>rouge</b> → rougir · <b>vieux</b> → vieillir · <b>lent</b> → ralentir<span class="en">big → to grow · fat → to put on weight · thin → to lose weight · red → to blush · old → to grow old · slow → to slow down</span></p>
         <p>Aussi : <b>remplir</b>, <b>réfléchir</b>, <b>réussir</b>, <b>agir</b>, <b>applaudir</b>, <b>guérir</b><span class="en">Also: to fill (in), to think, to succeed, to act, to applaud, to heal</span></p>
       </div>
       <div class="exs">
@@ -280,8 +298,8 @@ select.sel.ko{border-color:var(--ko);background:var(--ko-soft)}
       </div>
       <div class="inner gold">
         <h4>Même modèle · Same pattern</h4>
-        <p><b>connaître</b>, <b>naître</b>, <b>paraître</b> : je <b>connais</b> / vous <b>connaissez</b> · il <b>naît</b> / ils <b>naissent</b><span class="en">to know, to be born, to seem: the plural also takes -ss-</span></p>
-        <p>Je <b>connais</b> bien ce dossier. Nous <b>connaissons</b> nos voisins.<span class="en">I know this file well. We know our neighbours.</span></p>
+        <p data-say="Je connais, vous connaissez. Il naît, ils naissent."><b>connaître</b>, <b>naître</b>, <b>paraître</b> : je <b>connais</b> / vous <b>connaissez</b> · il <b>naît</b> / ils <b>naissent</b><span class="en">to know, to be born, to seem: the plural also takes -ss-</span></p>
+        <p class="say">Je <b>connais</b> bien ce dossier. Nous <b>connaissons</b> nos voisins.<span class="en">I know this file well. We know our neighbours.</span></p>
       </div>
     </div>
   </div>
@@ -301,12 +319,12 @@ select.sel.ko{border-color:var(--ko);background:var(--ko-soft)}
       </div>
       <div class="inner sound">
         <h4>♪ À l'oral · Pronunciation</h4>
-        <p>Au singulier, on n'entend pas la consonne : je <b>par</b>s [paʁ] · je <b>dor</b>s [dɔʁ]. Au pluriel, on l'entend : ils <b>part</b>ent [paʁt] · ils <b>dorm</b>ent [dɔʁm].<span class="en">In the singular you don't hear the consonant; in the plural you do.</span></p>
+        <p data-say="Je pars. Ils partent. Je dors. Ils dorment.">Au singulier, on n'entend pas la consonne : je <b>par</b>s [paʁ] · je <b>dor</b>s [dɔʁ]. Au pluriel, on l'entend : ils <b>part</b>ent [paʁt] · ils <b>dorm</b>ent [dɔʁm].<span class="en">In the singular you don't hear the consonant; in the plural you do.</span></p>
         <p>Dites : je pars, je sors, je dors, je vis, je suis · Ne dites pas : je <span class="strike">part</span>, je <span class="strike">dorm</span>, je <span class="strike">viv</span><span class="en">Say "je pars", never "je part".</span></p>
       </div>
       <div class="inner">
         <h4>Je suis = être… ou suivre !</h4>
-        <p>Je <b>suis</b> au bureau (être). Je <b>suis</b> un cours de français (suivre). Le contexte donne le sens.<span class="en">"Je suis" is both "I am" and "I follow"; the context tells you which.</span></p>
+        <p data-say="Je suis au bureau. Je suis un cours de français.">Je <b>suis</b> au bureau (être). Je <b>suis</b> un cours de français (suivre). Le contexte donne le sens.<span class="en">"Je suis" is both "I am" and "I follow"; the context tells you which.</span></p>
       </div>
     </div>
   </div>
@@ -336,7 +354,7 @@ select.sel.ko{border-color:var(--ko);background:var(--ko-soft)}
       <p class="sm">Comme <b>entendre</b> : attendre, répondre, vendre, perdre, descendre, rendre.<span class="en">Like "entendre": to wait, to answer, to sell, to lose, to go down, to give back.</span></p>
       <div class="inner warn">
         <h4>Attention à la 3<sup>e</sup> personne</h4>
-        <p>Il <b>met</b> · il <b>entend</b> · il <b>répond</b> · il <b>attend</b> : pas de <b>-t</b> ajouté. Le radical se termine déjà par <b>t</b> ou <b>d</b>.<span class="en">No extra -t in the third person: the stem already ends in t or d.</span></p>
+        <p data-say="Il met. Il entend. Il répond. Il attend.">Il <b>met</b> · il <b>entend</b> · il <b>répond</b> · il <b>attend</b> : pas de <b>-t</b> ajouté. Le radical se termine déjà par <b>t</b> ou <b>d</b>.<span class="en">No extra -t in the third person: the stem already ends in t or d.</span></p>
         <p>Il <span class="ok-t">répond</span> · <span class="strike">il répont</span> · <span class="strike">il réponds</span></p>
       </div>
       <div class="exs">
@@ -349,7 +367,7 @@ select.sel.ko{border-color:var(--ko);background:var(--ko-soft)}
       </div>
       <div class="inner sound">
         <h4>♪ À l'oral</h4>
-        <p>Je <b>mets</b> [mɛ] · J'<b>entends</b> [ɑ̃tɑ̃] · Je <b>réponds</b> [ʁepɔ̃] : le <b>t</b> et le <b>d</b> ne se prononcent pas.<span class="en">The t and d are not pronounced in the singular.</span></p>
+        <p data-say="Je mets. J'entends. Je réponds.">Je <b>mets</b> [mɛ] · J'<b>entends</b> [ɑ̃tɑ̃] · Je <b>réponds</b> [ʁepɔ̃] : le <b>t</b> et le <b>d</b> ne se prononcent pas.<span class="en">The t and d are not pronounced in the singular.</span></p>
       </div>
     </div>
   </div>
@@ -372,7 +390,7 @@ select.sel.ko{border-color:var(--ko);background:var(--ko-soft)}
       </div>
       <div class="inner">
         <h4>Dire : une exception</h4>
-        <p>Nous <b>disons</b>, mais vous <b>dites</b> (jamais <span class="strike">vous disez</span>). Pourtant : vous <b>interdisez</b>, vous <b>contredisez</b>.<span class="en">"Dire" is irregular with "vous": vous dites. But: vous interdisez, vous contredisez.</span></p>
+        <p data-say="Nous disons. Vous dites. Vous interdisez.">Nous <b>disons</b>, mais vous <b>dites</b> (jamais <span class="strike">vous disez</span>). Pourtant : vous <b>interdisez</b>, vous <b>contredisez</b>.<span class="en">"Dire" is irregular with "vous": vous dites. But: vous interdisez, vous contredisez.</span></p>
       </div>
     </div>
   </div>
@@ -389,8 +407,8 @@ select.sel.ko{border-color:var(--ko);background:var(--ko-soft)}
       <div class="vgrid" data-verbs="savoir,voir,croire,valoir"></div>
       <div class="inner warn">
         <h4>Le « y » seulement avec nous et vous</h4>
-        <p>Nous <b>voyons</b>, vous <b>voyez</b> · nous <b>croyons</b>, vous <b>croyez</b><span class="en">The "y" appears only with "nous" and "vous".</span></p>
-        <p>Dites : ils <span class="ok-t">voient</span>, ils <span class="ok-t">croient</span> · Ne dites pas : ils <span class="strike">voyent</span>, ils <span class="strike">croyent</span><span class="en">"Ils voient" and "ils croient" are pronounced like "il voit" and "il croit".</span></p>
+        <p data-say="Nous voyons, vous voyez. Nous croyons, vous croyez.">Nous <b>voyons</b>, vous <b>voyez</b> · nous <b>croyons</b>, vous <b>croyez</b><span class="en">The "y" appears only with "nous" and "vous".</span></p>
+        <p data-say="Ils voient. Ils croient.">Dites : ils <span class="ok-t">voient</span>, ils <span class="ok-t">croient</span> · Ne dites pas : ils <span class="strike">voyent</span>, ils <span class="strike">croyent</span><span class="en">"Ils voient" and "ils croient" are pronounced like "il voit" and "il croit".</span></p>
       </div>
       <div class="exs">
         <p>Je <b>sais</b> où est le dossier.<span class="en">I know where the file is.</span></p>
@@ -402,7 +420,7 @@ select.sel.ko{border-color:var(--ko);background:var(--ko-soft)}
       </div>
       <div class="inner gold">
         <h4>Valoir : surtout « il vaut »</h4>
-        <p><b>Il vaut mieux</b> + infinitif = c'est préférable · <b>Ça vaut</b> combien ? · <b>Ça vaut la peine</b>.<span class="en">It's better to… · How much is it worth? · It's worth it.</span></p>
+        <p data-say="Il vaut mieux partir tôt. Ça vaut combien ? Ça vaut la peine."><b>Il vaut mieux</b> + infinitif = c'est préférable · <b>Ça vaut</b> combien ? · <b>Ça vaut la peine</b>.<span class="en">It's better to… · How much is it worth? · It's worth it.</span></p>
       </div>
     </div>
   </div>
@@ -446,42 +464,67 @@ select.sel.ko{border-color:var(--ko);background:var(--ko-soft)}
 <p class="foot">Le français avec Irène</p>
 </div>
 
+<script type="application/json" id="lesson-data">{"V": {"finir": {"t": "to finish", "r": ["fini", "finiss"], "f": ["je [fini]s", "tu [fini]s", "il [fini]t", "nous [finiss]ons", "vous [finiss]ez", "ils [finiss]ent"]}, "choisir": {"t": "to choose", "r": ["choisi", "choisiss"], "f": ["je [choisi]s", "tu [choisi]s", "il [choisi]t", "nous [choisiss]ons", "vous [choisiss]ez", "ils [choisiss]ent"]}, "dormir": {"t": "to sleep", "r": ["dor", "dorm"], "f": ["je [dor]s", "tu [dor]s", "il [dor]t", "nous [dorm]ons", "vous [dorm]ez", "ils [dorm]ent"]}, "partir": {"t": "to leave", "r": ["par", "part"], "f": ["je [par]s", "tu [par]s", "il [par]t", "nous [part]ons", "vous [part]ez", "ils [part]ent"]}, "servir": {"t": "to serve", "r": ["ser", "serv"], "f": ["je [ser]s", "tu [ser]s", "il [ser]t", "nous [serv]ons", "vous [serv]ez", "ils [serv]ent"]}, "vivre": {"t": "to live", "r": ["vi", "viv"], "f": ["je [vi]s", "tu [vi]s", "il [vi]t", "nous [viv]ons", "vous [viv]ez", "ils [viv]ent"]}, "ouvrir": {"t": "to open", "r": ["ouvr"], "f": ["j'[ouvr]e", "tu [ouvr]es", "il [ouvr]e", "nous [ouvr]ons", "vous [ouvr]ez", "ils [ouvr]ent"]}, "offrir": {"t": "to offer, to give", "r": ["offr"], "f": ["j'[offr]e", "tu [offr]es", "il [offr]e", "nous [offr]ons", "vous [offr]ez", "ils [offr]ent"]}, "mettre": {"t": "to put", "r": ["met", "mett"], "f": ["je [met]s", "tu [met]s", "il [met]", "nous [mett]ons", "vous [mett]ez", "ils [mett]ent"]}, "entendre": {"t": "to hear", "r": ["entend", "entend"], "f": ["j'[entend]s", "tu [entend]s", "il [entend]", "nous [entend]ons", "vous [entend]ez", "ils [entend]ent"]}, "ecrire": {"n": "écrire", "t": "to write", "r": ["écri", "écriv"], "f": ["j'[écri]s", "tu [écri]s", "il [écri]t", "nous [écriv]ons", "vous [écriv]ez", "ils [écriv]ent"]}, "lire": {"t": "to read", "r": ["li", "lis"], "f": ["je [li]s", "tu [li]s", "il [li]t", "nous [lis]ons", "vous [lis]ez", "ils [lis]ent"]}, "conduire": {"t": "to drive", "r": ["condui", "conduis"], "f": ["je [condui]s", "tu [condui]s", "il [condui]t", "nous [conduis]ons", "vous [conduis]ez", "ils [conduis]ent"]}, "peindre": {"t": "to paint", "r": ["pein", "peign"], "f": ["je [pein]s", "tu [pein]s", "il [pein]t", "nous [peign]ons", "vous [peign]ez", "ils [peign]ent"]}, "savoir": {"t": "to know", "r": ["sai", "sav"], "f": ["je [sai]s", "tu [sai]s", "il [sai]t", "nous [sav]ons", "vous [sav]ez", "ils [sav]ent"]}, "voir": {"t": "to see", "r": ["voi", "voy"], "f": ["je [voi]s", "tu [voi]s", "il [voi]t", "nous [voy]ons", "vous [voy]ez", "ils {voi}ent"]}, "croire": {"t": "to believe, to think", "r": ["croi", "croy"], "f": ["je [croi]s", "tu [croi]s", "il [croi]t", "nous [croy]ons", "vous [croy]ez", "ils {croi}ent"]}, "valoir": {"t": "to be worth", "r": ["vau", "val"], "f": ["je [vau]x", "tu [vau]x", "il [vau]t", "nous [val]ons", "vous [val]ez", "ils [val]ent"]}, "courir": {"t": "to run", "r": ["cour"], "f": ["je [cour]s", "tu [cour]s", "il [cour]t", "nous [cour]ons", "vous [cour]ez", "ils [cour]ent"]}, "rire": {"t": "to laugh", "r": ["ri"], "f": ["je [ri]s", "tu [ri]s", "il [ri]t", "nous [ri]ons", "vous [ri]ez", "ils [ri]ent"]}}, "ex1": [{"q": "Le réveil sonne, mais les enfants ___ encore.", "en": "The alarm goes off, but the children are still sleeping.", "c": ["dorment", "dorms", "dormissent"]}, {"q": "J'___ les volets de la cuisine.", "en": "I open the kitchen shutters.", "c": ["ouvre", "ouvris", "ouvrs"]}, {"q": "Mon mari ___ le café.", "en": "My husband serves the coffee.", "c": ["sert", "serv", "servit"]}, {"q": "Les enfants ___ leurs vêtements.", "en": "The children choose their clothes.", "c": ["choisissent", "choisent", "choisissont"]}, {"q": "Tu ___ ton manteau ? Il fait froid !", "en": "Are you putting your coat on? It's cold!", "c": ["mets", "met", "mettes"]}, {"q": "Je ___ les messages du bureau sur mon portable.", "en": "I read the office messages on my phone.", "c": ["lis", "lit", "lisent"]}, {"q": "À huit heures, nous ___ tous ensemble.", "en": "At eight o'clock, we all leave together.", "c": ["partons", "partissons", "pars"]}, {"q": "Mon mari ___ les enfants à l'école.", "en": "My husband drives the children to school.", "c": ["conduit", "conduisit", "conduise"]}, {"q": "J'___ le bus de huit heures dix.", "en": "I wait for the 8:10 bus.", "c": ["attends", "attend", "attendes"]}, {"q": "Il pleut : je ___ jusqu'à l'arrêt.", "en": "It's raining: I run to the stop.", "c": ["cours", "coure", "courre"]}], "ex2": [{"q": "Le matin, j'___ d'abord mes e-mails.", "v": "ouvrir", "en": "In the morning, I open my emails first.", "a": ["ouvre"]}, {"q": "Je ___ les messages des clients bulgares.", "v": "lire", "en": "I read the messages from Bulgarian clients.", "a": ["lis"]}, {"q": "Mes collègues et moi, nous ___ des contrats du bulgare au français.", "v": "traduire", "en": "My colleagues and I translate contracts from Bulgarian into French.", "a": ["traduisons"]}, {"q": "Est-ce que vous ___ ce formulaire en ligne ?", "v": "remplir", "en": "Do you fill in this form online?", "a": ["remplissez"]}, {"q": "Les clients ___ une réponse rapide.", "v": "attendre", "en": "The clients are waiting for a quick reply.", "a": ["attendent"]}, {"q": "Je ___ au téléphone en trois langues.", "v": "répondre", "en": "I answer the phone in three languages.", "a": ["réponds"]}, {"q": "Ma collègue ___ une lettre officielle.", "v": "écrire", "en": "My colleague is writing an official letter.", "a": ["écrit"]}, {"q": "Je ___ les documents à mon e-mail.", "v": "joindre", "en": "I attach the documents to my email.", "a": ["joins"]}, {"q": "Nous ___ la réunion à midi.", "v": "finir", "en": "We finish the meeting at noon.", "a": ["finissons"]}, {"q": "Tu ___ où est le dossier de monsieur Petrov ?", "v": "savoir", "en": "Do you know where Mr Petrov's file is?", "a": ["sais"]}, {"q": "Vous ___ votre signature ici, s'il vous plaît.", "v": "mettre", "en": "Please put your signature here.", "a": ["mettez"]}, {"q": "En réunion, les juristes ___ leur portable.", "v": "éteindre", "en": "In meetings, the lawyers switch off their phones.", "a": ["éteignent"]}], "ex3": [{"q": "Je finis tard le jeudi. → Nous ___ tard le jeudi.", "en": "I finish late on Thursdays. → We finish late on Thursdays.", "a": ["finissons"]}, {"q": "Je sors du bureau à dix-sept heures. → Mes collègues ___ du bureau à dix-sept heures.", "en": "I leave the office at 5 pm. → My colleagues leave the office at 5 pm.", "a": ["sortent"]}, {"q": "Tu lis ce rapport ? → Vous ___ ce rapport ?", "en": "Are you reading this report?", "a": ["lisez"]}, {"q": "Il écrit au client. → Ils ___ au client.", "en": "He writes to the client. → They write to the client.", "a": ["écrivent"]}, {"q": "Je crois que c'est urgent. → Nous ___ que c'est urgent.", "en": "I think it's urgent. → We think it's urgent.", "a": ["croyons"]}, {"q": "Elle voit le client demain. → Elles ___ le client demain.", "en": "She is seeing the client tomorrow. → They are seeing the client tomorrow.", "a": ["voient"]}, {"q": "Je conduis prudemment. → Nous ___ prudemment.", "en": "I drive carefully. → We drive carefully.", "a": ["conduisons"]}, {"q": "Tu peins la chambre des enfants ? → Vous ___ la chambre des enfants ?", "en": "Are you painting the children's bedroom?", "a": ["peignez"]}, {"q": "Il sert le dessert. → Ils ___ le dessert.", "en": "He serves dessert. → They serve dessert.", "a": ["servent"]}, {"q": "Je connais ce quartier. → Nous ___ ce quartier.", "en": "I know this neighbourhood. → We know this neighbourhood.", "a": ["connaissons"]}], "ex4": [{"me": false, "fr": "Tu {finis|finit|finissez} tard ce soir ?", "en": "Are you finishing late tonight?"}, {"me": true, "fr": "Non, je {pars|part|partent} du bureau à six heures.", "en": "No, I'm leaving the office at six."}, {"me": false, "fr": "Super ! Les enfants {choisissent|choisent|choisit} un film pour ce soir.", "en": "Great! The children are choosing a film for tonight."}, {"me": true, "fr": "D'accord, mais d'abord ils {finissent|finent|finit} leurs devoirs !", "en": "OK, but first they finish their homework!"}, {"me": false, "fr": "Luka {écrit|écrive|écris} sa rédaction. Il ne {sait|sais|savent} pas comment conclure.", "en": "Luka is writing his essay. He doesn't know how to finish it."}, {"me": true, "fr": "Je {lis|lit|lise} son texte après le dîner.", "en": "I'll read his text after dinner."}, {"me": false, "fr": "Et toi, tu {mets|met|mettes} la table ?", "en": "And you, are you setting the table?"}, {"me": true, "fr": "Oui, et vous {servez|serrez|sertez} le repas, toi et les enfants !", "en": "Yes, and you serve the meal, you and the children!"}, {"me": false, "fr": "Après, on {éteint|éteind|éteignent} les écrans et tout le monde au lit.", "en": "Afterwards, we switch off the screens and everyone goes to bed."}], "ex5": [["grandir", "a"], ["réfléchir", "a"], ["remplir", "a"], ["sortir", "b"], ["servir", "b"], ["suivre", "b"], ["attendre", "c"], ["promettre", "c"], ["perdre", "c"], ["traduire", "d"], ["décrire", "d"], ["rejoindre", "d"], ["offrir", "e"], ["souffrir", "e"], ["sourire", "e"]], "ex6": [{"q": "Ils ___ les clients cet après-midi.", "en": "They are seeing the clients this afternoon.", "c": ["voient", "voyent", "voyont"]}, {"q": "Les enfants ___ encore à saint Nicolas.", "en": "The children still believe in Saint Nicholas.", "c": ["croient", "croyent", "croit"]}, {"q": "Il ___ son manteau et il sort.", "en": "He puts on his coat and goes out.", "c": ["met", "mett", "mets"]}, {"q": "Elle ___ à la lettre du ministère.", "en": "She replies to the ministry's letter.", "c": ["répond", "répont", "réponds"]}, {"q": "Vous ___ le contrat avant la réunion ?", "en": "Are you reading the contract before the meeting?", "c": ["lisez", "lissez", "lises"]}, {"q": "Ça ___ la peine d'essayer.", "en": "It's worth trying.", "c": ["vaut", "vaux", "valt"]}, {"q": "Nous ___ nos amis bulgares le dimanche.", "en": "We see our Bulgarian friends on Sundays.", "c": ["voyons", "voions", "voyez"]}, {"q": "Je ___ un cours de français le mardi.", "en": "I take a French course on Tuesdays.", "c": ["suis", "suit", "suive"]}, {"q": "Vous ___ toujours la vérité !", "en": "You always tell the truth!", "c": ["dites", "disez", "disent"]}, {"q": "En famille, on ___ beaucoup.", "en": "We laugh a lot as a family.", "c": ["rit", "rie", "ris"]}], "ex7": [["Mon mari conduit les enfants à l'école", "My husband drives the children to school."], ["Nous attendons les documents de Bulgarie", "We are waiting for the documents from Bulgaria."], ["Je traduis le contrat pour le client", "I translate the contract for the client."], ["Le soir je lis une histoire aux enfants", "In the evening I read the children a story."], ["Vous éteignez votre portable en réunion", "You switch off your phone in meetings."], ["Mes collègues sortent du bureau à six heures", "My colleagues leave the office at six."]], "ex8": [["À quelle heure est-ce que tu pars de chez toi le matin ?", "What time do you leave home in the morning?", "partir", "Je pars de chez moi à huit heures moins le quart.", "I leave home at a quarter to eight."], ["Qu'est-ce que tu mets dans ton sac pour aller au bureau ?", "What do you put in your bag to go to the office?", "mettre", "Je mets mon ordinateur, mes clés et une bouteille d'eau.", "I put in my laptop, my keys and a bottle of water."], ["Quels documents est-ce que tu traduis au travail ?", "Which documents do you translate at work?", "traduire", "Je traduis surtout des contrats et des actes officiels.", "I mainly translate contracts and official documents."], ["Quand un client écrit, est-ce que tu réponds vite ?", "When a client writes, do you answer quickly?", "écrire · répondre", "Oui, quand un client écrit, je réponds dans la journée.", "Yes, when a client writes, I answer the same day."], ["À quelle heure est-ce que tu finis le vendredi ?", "What time do you finish on Fridays?", "finir", "Le vendredi, je finis plus tôt, vers quatre heures.", "On Fridays I finish earlier, around four."], ["Qui conduit les enfants à l'école chez vous ?", "Who drives the children to school in your family?", "conduire", "C'est mon mari qui conduit les enfants, et moi, je les attends à la sortie.", "My husband drives the children, and I wait for them when school finishes."], ["À quelle heure est-ce que tes enfants dorment le soir ?", "What time do your children go to sleep in the evening?", "dormir", "Ils dorment vers neuf heures, après une histoire.", "They go to sleep around nine, after a story."], ["Qu'est-ce que tu lis en ce moment ?", "What are you reading at the moment?", "lire", "Je lis un roman policier en français, c'est un bon exercice.", "I'm reading a detective novel in French; it's good practice."], ["Le week-end, qu'est-ce que vous choisissez de faire en famille ?", "At the weekend, what do you choose to do as a family?", "choisir", "Nous choisissons souvent une promenade dans le Grund ou au parc.", "We often choose a walk in the Grund or in the park."], ["Est-ce que vous sortez souvent le soir, ton mari et toi ?", "Do you and your husband often go out in the evening?", "sortir", "Nous sortons parfois le vendredi soir, au restaurant.", "We sometimes go out on Friday evenings, to a restaurant."], ["Qu'est-ce que tu offres à tes enfants pour leur anniversaire ?", "What do you give your children for their birthday?", "offrir", "Je leur offre souvent un livre et un jeu de société.", "I often give them a book and a board game."], ["Est-ce que tu crois que les verbes français sont difficiles ?", "Do you think French verbs are difficult?", "croire", "Je crois qu'ils sont logiques : il faut connaître les deux radicaux.", "I think they are logical: you need to know the two stems."]]}</script>
+<script type="application/json" id="audio-map">{"– Tu finis à quelle heure, le vendredi ?": "audio/2560d25901.mp3", "– Je finis à cinq heures, puis je pars chercher les enfants. Nous sortons souvent au parc.": "audio/74c8c5bbdb.mp3", "grand, grandir. gros, grossir. maigre, maigrir. rouge, rougir. vieux, vieillir. lent, ralentir.": "audio/c94ee9f4fb.mp3", "Je remplis le formulaire pour le client.": "audio/d5bd55571e.mp3", "Mes enfants grandissent vite !": "audio/5d4531f7ff.mp3", "Nous réfléchissons avant de répondre.": "audio/f68817f484.mp3", "Vous choisissez le menu du jour ?": "audio/7a4696b840.mp3", "Je connais, vous connaissez. Il naît, ils naissent.": "audio/7baac84b9b.mp3", "Je connais bien ce dossier. Nous connaissons nos voisins.": "audio/40ff791c33.mp3", "Je pars au bureau à huit heures.": "audio/671665e798.mp3", "Les enfants dorment encore.": "audio/7d04219b6f.mp3", "Nous vivons à Luxembourg depuis plusieurs années.": "audio/4121df7484.mp3", "Mon mari sert le dîner.": "audio/7c0df8ca0a.mp3", "Je sens que ce dossier est urgent.": "audio/819b8d9dee.mp3", "Ils sortent du bureau à six heures.": "audio/2fb4ea91dd.mp3", "Je pars. Ils partent. Je dors. Ils dorment.": "audio/5b51fbc016.mp3", "Je suis au bureau. Je suis un cours de français.": "audio/70b6b5d060.mp3", "J'ouvre mes e-mails en arrivant.": "audio/77ccc134de.mp3", "Nous offrons un livre aux enfants.": "audio/97566d6b0b.mp3", "Il met. Il entend. Il répond. Il attend.": "audio/580159d57e.mp3", "Je mets le dossier sur ton bureau.": "audio/d3e5594e8d.mp3", "Nous attendons les documents de Bulgarie.": "audio/7f6b75d884.mp3", "Elle répond au téléphone en bulgare et en français.": "audio/ff5ae6c85b.mp3", "Tu entends ? Les enfants rentrent.": "audio/404eaf22e9.mp3", "Je perds toujours mes clés !": "audio/9e1e1fc8a8.mp3", "Vous permettez ? Je promets, c'est rapide.": "audio/54dc781381.mp3", "Je mets. J'entends. Je réponds.": "audio/7710e48761.mp3", "Je traduis des documents du bulgare au français.": "audio/2dfcb79b37.mp3", "Nous écrivons au client cet après-midi.": "audio/98f79b0022.mp3", "Le soir, je lis une histoire aux enfants.": "audio/b9dc328434.mp3", "Mon mari conduit les enfants à l'école.": "audio/c6901a689e.mp3", "Vous éteignez votre portable en réunion ?": "audio/0b9c7a7a93.mp3", "Je joins le contrat à mon e-mail.": "audio/c66c64db30.mp3", "Nous disons. Vous dites. Vous interdisez.": "audio/fb6aeb39c8.mp3", "Nous voyons, vous voyez. Nous croyons, vous croyez.": "audio/242d0c0502.mp3", "Ils voient. Ils croient.": "audio/2e6a32b258.mp3", "Je sais où est le dossier.": "audio/aaabfd051c.mp3", "Nous voyons nos amis le dimanche.": "audio/ed62dcaa00.mp3", "Je crois que la réunion est à dix heures.": "audio/dc65bd10a0.mp3", "Il vaut mieux envoyer le document aujourd'hui.": "audio/e2d6cf3fdf.mp3", "Les enfants croient encore à saint Nicolas.": "audio/077efdcd98.mp3", "Vous savez remplir ce formulaire ?": "audio/f6211a4bf8.mp3", "Il vaut mieux partir tôt. Ça vaut combien ? Ça vaut la peine.": "audio/f9417d7b8f.mp3", "Le matin, je cours pour attraper le bus.": "audio/01371a50fc.mp3", "En famille, on rit beaucoup.": "audio/33c3e73a5c.mp3", "je finis, tu finis, il finit, nous finissons, vous finissez, ils finissent": "audio/8ce0926ab7.mp3", "je choisis, tu choisis, il choisit, nous choisissons, vous choisissez, ils choisissent": "audio/95b0d2d458.mp3", "je dors, tu dors, il dort, nous dormons, vous dormez, ils dorment": "audio/beac35468b.mp3", "je pars, tu pars, il part, nous partons, vous partez, ils partent": "audio/3e6b3a0734.mp3", "je sers, tu sers, il sert, nous servons, vous servez, ils servent": "audio/598f7e4d69.mp3", "je vis, tu vis, il vit, nous vivons, vous vivez, ils vivent": "audio/94fdec0ded.mp3", "j'ouvre, tu ouvres, il ouvre, nous ouvrons, vous ouvrez, ils ouvrent": "audio/d6ea931e30.mp3", "j'offre, tu offres, il offre, nous offrons, vous offrez, ils offrent": "audio/f29d3a14ae.mp3", "je mets, tu mets, il met, nous mettons, vous mettez, ils mettent": "audio/34eb796bab.mp3", "j'entends, tu entends, il entend, nous entendons, vous entendez, ils entendent": "audio/b2f0a2ba45.mp3", "j'écris, tu écris, il écrit, nous écrivons, vous écrivez, ils écrivent": "audio/2b1588ba52.mp3", "je lis, tu lis, il lit, nous lisons, vous lisez, ils lisent": "audio/d911963f76.mp3", "je conduis, tu conduis, il conduit, nous conduisons, vous conduisez, ils conduisent": "audio/98eb993305.mp3", "je peins, tu peins, il peint, nous peignons, vous peignez, ils peignent": "audio/06152c5be7.mp3", "je sais, tu sais, il sait, nous savons, vous savez, ils savent": "audio/9f0d2b2464.mp3", "je vois, tu vois, il voit, nous voyons, vous voyez, ils voient": "audio/030c3ecb0b.mp3", "je crois, tu crois, il croit, nous croyons, vous croyez, ils croient": "audio/aca6424d7e.mp3", "je vaux, tu vaux, il vaut, nous valons, vous valez, ils valent": "audio/22386e6c3c.mp3", "je cours, tu cours, il court, nous courons, vous courez, ils courent": "audio/5861b00fc6.mp3", "je ris, tu ris, il rit, nous rions, vous riez, ils rient": "audio/f5d4a089c5.mp3", "Le réveil sonne, mais les enfants dorment encore.": "audio/2a538802c3.mp3", "J'ouvre les volets de la cuisine.": "audio/12469b590e.mp3", "Mon mari sert le café.": "audio/fde5783f37.mp3", "Les enfants choisissent leurs vêtements.": "audio/1c572153ab.mp3", "Tu mets ton manteau ? Il fait froid !": "audio/21246ecc74.mp3", "Je lis les messages du bureau sur mon portable.": "audio/a69b111f7e.mp3", "À huit heures, nous partons tous ensemble.": "audio/a4fc768f44.mp3", "J'attends le bus de huit heures dix.": "audio/456b2623e8.mp3", "Il pleut : je cours jusqu'à l'arrêt.": "audio/624ebbf3f5.mp3", "Ils voient les clients cet après-midi.": "audio/8c2623f9fc.mp3", "Il met son manteau et il sort.": "audio/83657fb453.mp3", "Elle répond à la lettre du ministère.": "audio/9fba52630e.mp3", "Vous lisez le contrat avant la réunion ?": "audio/7308661ad4.mp3", "Ça vaut la peine d'essayer.": "audio/5d5dd8552e.mp3", "Nous voyons nos amis bulgares le dimanche.": "audio/fed33ae8bd.mp3", "Je suis un cours de français le mardi.": "audio/effe0805d7.mp3", "Vous dites toujours la vérité !": "audio/c27cc251f7.mp3", "Le matin, j'ouvre d'abord mes e-mails.": "audio/a7b6b34f8d.mp3", "Je lis les messages des clients bulgares.": "audio/1355579b00.mp3", "Mes collègues et moi, nous traduisons des contrats du bulgare au français.": "audio/709f563fd2.mp3", "Est-ce que vous remplissez ce formulaire en ligne ?": "audio/58d24c13a2.mp3", "Les clients attendent une réponse rapide.": "audio/30ea33e632.mp3", "Je réponds au téléphone en trois langues.": "audio/2cd5aced5f.mp3", "Ma collègue écrit une lettre officielle.": "audio/60ad3539af.mp3", "Je joins les documents à mon e-mail.": "audio/1b47c7ffdc.mp3", "Nous finissons la réunion à midi.": "audio/2f9137a258.mp3", "Tu sais où est le dossier de monsieur Petrov ?": "audio/370a0a4f18.mp3", "Vous mettez votre signature ici, s'il vous plaît.": "audio/5effce8a67.mp3", "En réunion, les juristes éteignent leur portable.": "audio/1e96dee833.mp3", "Nous finissons tard le jeudi.": "audio/a1683178f5.mp3", "Mes collègues sortent du bureau à dix-sept heures.": "audio/e9fb3518e4.mp3", "Vous lisez ce rapport ?": "audio/e0814dc1db.mp3", "Ils écrivent au client.": "audio/af9389ef9f.mp3", "Nous croyons que c'est urgent.": "audio/92f9946d9c.mp3", "Elles voient le client demain.": "audio/dc389bba68.mp3", "Nous conduisons prudemment.": "audio/5bf2f0449b.mp3", "Vous peignez la chambre des enfants ?": "audio/0f316a7d6b.mp3", "Ils servent le dessert.": "audio/a95946945f.mp3", "Nous connaissons ce quartier.": "audio/07f7b313ab.mp3", "Tu finis tard ce soir ?": "audio/937b1892d5.mp3", "Non, je pars du bureau à six heures.": "audio/82988bf248.mp3", "Super ! Les enfants choisissent un film pour ce soir.": "audio/abe7ea93a3.mp3", "D'accord, mais d'abord ils finissent leurs devoirs !": "audio/0c59db0cb2.mp3", "Luka écrit sa rédaction. Il ne sait pas comment conclure.": "audio/220803f02b.mp3", "Je lis son texte après le dîner.": "audio/e867ed3ff5.mp3", "Et toi, tu mets la table ?": "audio/4faa55911e.mp3", "Oui, et vous servez le repas, toi et les enfants !": "audio/9f6df3028d.mp3", "Après, on éteint les écrans et tout le monde au lit.": "audio/6e03cd532c.mp3", "grandir": "audio/c5a1594e87.mp3", "réfléchir": "audio/9b4e57f9e5.mp3", "remplir": "audio/8235c8ef1e.mp3", "sortir": "audio/6683739d39.mp3", "servir": "audio/629fe602c9.mp3", "suivre": "audio/dd9ec05ee6.mp3", "attendre": "audio/c5ce859b01.mp3", "promettre": "audio/8d047e091c.mp3", "perdre": "audio/a5aeec3a71.mp3", "traduire": "audio/5578e62b46.mp3", "décrire": "audio/985d917c7b.mp3", "rejoindre": "audio/ab199de4b4.mp3", "offrir": "audio/59a870de4e.mp3", "souffrir": "audio/90315a699b.mp3", "sourire": "audio/92d25012cb.mp3", "Je traduis le contrat pour le client.": "audio/c87828ff97.mp3", "Le soir je lis une histoire aux enfants.": "audio/756f26b2c2.mp3", "Vous éteignez votre portable en réunion.": "audio/a5af9beca7.mp3", "Mes collègues sortent du bureau à six heures.": "audio/e31bf0cdf5.mp3", "À quelle heure est-ce que tu pars de chez toi le matin ?": "audio/26bafa8e8a.mp3", "Je pars de chez moi à huit heures moins le quart.": "audio/81940fab66.mp3", "Qu'est-ce que tu mets dans ton sac pour aller au bureau ?": "audio/e37295876f.mp3", "Je mets mon ordinateur, mes clés et une bouteille d'eau.": "audio/05e0871f0e.mp3", "Quels documents est-ce que tu traduis au travail ?": "audio/08f5bbd13c.mp3", "Je traduis surtout des contrats et des actes officiels.": "audio/b12239a249.mp3", "Quand un client écrit, est-ce que tu réponds vite ?": "audio/2ca3c22a64.mp3", "Oui, quand un client écrit, je réponds dans la journée.": "audio/071b7b5f13.mp3", "À quelle heure est-ce que tu finis le vendredi ?": "audio/d36cf53903.mp3", "Le vendredi, je finis plus tôt, vers quatre heures.": "audio/42dd58159f.mp3", "Qui conduit les enfants à l'école chez vous ?": "audio/4d4c304a75.mp3", "C'est mon mari qui conduit les enfants, et moi, je les attends à la sortie.": "audio/bf815f8b34.mp3", "À quelle heure est-ce que tes enfants dorment le soir ?": "audio/0a515b6817.mp3", "Ils dorment vers neuf heures, après une histoire.": "audio/1624c3292d.mp3", "Qu'est-ce que tu lis en ce moment ?": "audio/d7d83abcda.mp3", "Je lis un roman policier en français, c'est un bon exercice.": "audio/cd59c8e40f.mp3", "Le week-end, qu'est-ce que vous choisissez de faire en famille ?": "audio/33b2424d9b.mp3", "Nous choisissons souvent une promenade dans le Grund ou au parc.": "audio/d52d185490.mp3", "Est-ce que vous sortez souvent le soir, ton mari et toi ?": "audio/dc4c1ce84b.mp3", "Nous sortons parfois le vendredi soir, au restaurant.": "audio/1f45530333.mp3", "Qu'est-ce que tu offres à tes enfants pour leur anniversaire ?": "audio/53ab53fdbd.mp3", "Je leur offre souvent un livre et un jeu de société.": "audio/8ccb610f0f.mp3", "Est-ce que tu crois que les verbes français sont difficiles ?": "audio/bad7e6e82a.mp3", "Je crois qu'ils sont logiques : il faut connaître les deux radicaux.": "audio/f64a28d3d7.mp3", "Mon mari conduit les enfants à l'école": "audio/c6901a689e.mp3", "Nous attendons les documents de Bulgarie": "audio/7f6b75d884.mp3", "Je traduis le contrat pour le client": "audio/c87828ff97.mp3", "Le soir je lis une histoire aux enfants": "audio/756f26b2c2.mp3", "Vous éteignez votre portable en réunion": "audio/a5af9beca7.mp3", "Mes collègues sortent du bureau à six heures": "audio/e31bf0cdf5.mp3"}</script>
 <script>
 (function(){
 "use strict";
+var D=JSON.parse(document.getElementById('lesson-data').textContent);
+var AUDIO=JSON.parse(document.getElementById('audio-map').textContent);
+var V=D.V;
+
+/* ---------- audio ---------- */
+function key(s){return (s||'').replace(/[’`´]/g,"'").replace(/\s+/g,' ').trim();}
+var player=new Audio(),curBtn=null;
+player.preload='none';
+player.addEventListener('ended',function(){if(curBtn)curBtn.classList.remove('playing');curBtn=null;});
+player.addEventListener('pause',function(){if(curBtn)curBtn.classList.remove('playing');});
+function play(text,btn){
+  var f=AUDIO[key(text)];if(!f)return;
+  if(curBtn===btn&&!player.paused){player.pause();curBtn=null;return;}
+  if(curBtn)curBtn.classList.remove('playing');
+  player.pause();player.src=f;player.currentTime=0;
+  curBtn=btn||null;if(btn)btn.classList.add('playing');
+  var p=player.play();if(p&&p.catch)p.catch(function(){if(btn)btn.classList.remove('playing');});
+}
+var ICON='<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+function sayBtn(text,label){
+  if(!AUDIO[key(text)])return null;
+  var b=document.createElement('button');b.type='button';b.className='say-btn';b.innerHTML=ICON;
+  b.setAttribute('aria-label',label||'Écouter');b.title='Écouter · Listen';
+  b.addEventListener('click',function(e){e.stopPropagation();play(text,b);});
+  return b;
+}
+var autoRead=true;
+function reward(text,el,btnHost){
+  var b=sayBtn(text);
+  if(b&&btnHost)btnHost.appendChild(b);
+  if(autoRead&&b)play(text,b);
+}
+
 /* ---------- verb cards ---------- */
-var V={
- finir:{t:'to finish',r:['fini','finiss'],f:['je [fini]s','tu [fini]s','il [fini]t','nous [finiss]ons','vous [finiss]ez','ils [finiss]ent']},
- choisir:{t:'to choose',r:['choisi','choisiss'],f:['je [choisi]s','tu [choisi]s','il [choisi]t','nous [choisiss]ons','vous [choisiss]ez','ils [choisiss]ent']},
- dormir:{t:'to sleep',r:['dor','dorm'],f:['je [dor]s','tu [dor]s','il [dor]t','nous [dorm]ons','vous [dorm]ez','ils [dorm]ent']},
- partir:{t:'to leave',r:['par','part'],f:['je [par]s','tu [par]s','il [par]t','nous [part]ons','vous [part]ez','ils [part]ent']},
- servir:{t:'to serve',r:['ser','serv'],f:['je [ser]s','tu [ser]s','il [ser]t','nous [serv]ons','vous [serv]ez','ils [serv]ent']},
- vivre:{t:'to live',r:['vi','viv'],f:['je [vi]s','tu [vi]s','il [vi]t','nous [viv]ons','vous [viv]ez','ils [viv]ent']},
- ouvrir:{t:'to open',r:['ouvr'],f:["j'[ouvr]e",'tu [ouvr]es','il [ouvr]e','nous [ouvr]ons','vous [ouvr]ez','ils [ouvr]ent']},
- offrir:{t:'to offer, to give',r:['offr'],f:["j'[offr]e",'tu [offr]es','il [offr]e','nous [offr]ons','vous [offr]ez','ils [offr]ent']},
- mettre:{t:'to put',r:['met','mett'],f:['je [met]s','tu [met]s','il [met]','nous [mett]ons','vous [mett]ez','ils [mett]ent']},
- entendre:{t:'to hear',r:['entend','entend'],f:["j'[entend]s",'tu [entend]s','il [entend]','nous [entend]ons','vous [entend]ez','ils [entend]ent']},
- ecrire:{n:'écrire',t:'to write',r:['écri','écriv'],f:["j'[écri]s",'tu [écri]s','il [écri]t','nous [écriv]ons','vous [écriv]ez','ils [écriv]ent']},
- lire:{t:'to read',r:['li','lis'],f:['je [li]s','tu [li]s','il [li]t','nous [lis]ons','vous [lis]ez','ils [lis]ent']},
- conduire:{t:'to drive',r:['condui','conduis'],f:['je [condui]s','tu [condui]s','il [condui]t','nous [conduis]ons','vous [conduis]ez','ils [conduis]ent']},
- peindre:{t:'to paint',r:['pein','peign'],f:['je [pein]s','tu [pein]s','il [pein]t','nous [peign]ons','vous [peign]ez','ils [peign]ent']},
- savoir:{t:'to know',r:['sai','sav'],f:['je [sai]s','tu [sai]s','il [sai]t','nous [sav]ons','vous [sav]ez','ils [sav]ent']},
- voir:{t:'to see',r:['voi','voy','voi'],f:['je [voi]s','tu [voi]s','il [voi]t','nous [voy]ons','vous [voy]ez','ils {voi}ent']},
- croire:{t:'to believe, to think',r:['croi','croy','croi'],f:['je [croi]s','tu [croi]s','il [croi]t','nous [croy]ons','vous [croy]ez','ils {croi}ent']},
- valoir:{t:'to be worth',r:['vau','val'],f:['je [vau]x','tu [vau]x','il [vau]t','nous [val]ons','vous [val]ez','ils [val]ent']},
- courir:{t:'to run',r:['cour'],f:['je [cour]s','tu [cour]s','il [cour]t','nous [cour]ons','vous [cour]ez','ils [cour]ent']},
- rire:{t:'to laugh',r:['ri'],f:['je [ri]s','tu [ri]s','il [ri]t','nous [ri]ons','vous [ri]ez','ils [ri]ent']}
-};
 function mark(s){return s.replace(/\[(.+?)\]/g,'<b>$1</b>').replace(/\{(.+?)\}/g,'<b style="color:var(--short)">$1</b>');}
+function plain(s){return s.replace(/[\[\]{}]/g,'');}
 document.querySelectorAll('.vgrid').forEach(function(g){
-  g.innerHTML=g.dataset.verbs.split(',').map(function(k){
-    var v=V[k], one=v.r.length===1;
+  g.dataset.verbs.split(',').forEach(function(k){
+    var v=V[k], one=v.r.length===1||v.r[0]===v.r[1]&&false;
+    one=v.r.length===1;
     var rads=one?'<span class="rad s">'+v.r[0]+'</span>':'<span class="rad s">'+v.r[0]+'</span><span class="rad l">'+v.r[1]+'</span>';
-    var s=v.f.slice(0,3).map(function(x){return '<div class="r1">'+mark(x)+'</div>';});
-    var p=v.f.slice(3).map(function(x){return '<div class="'+(one?'r1':'r2')+'">'+mark(x)+'</div>';});
-    var rows='';for(var i=0;i<3;i++)rows+=s[i]+p[i];
-    return '<div class="vcard"><div class="top"><span class="inf">'+(v.n||k).toUpperCase()+'</span><span class="tr">'+v.t+'</span></div><div class="rads">'+rads+'</div><div class="forms">'+rows+'</div></div>';
-  }).join('');
+    var rows='';for(var i=0;i<6;i++)rows+='<div class="'+(i<3||one?'r1':'r2')+'">'+mark(v.f[i])+'</div>';
+    var card=document.createElement('div');card.className='vcard';
+    card.innerHTML='<div class="top"><span class="inf">'+(v.n||k).toUpperCase()+'</span><span class="tr">'+v.t+'</span></div><div class="rads">'+rads+'</div><div class="forms">'+rows+'</div>';
+    var b=sayBtn(v.f.map(plain).join(', '),'Écouter la conjugaison');
+    if(b)card.querySelector('.top').insertBefore(b,card.querySelector('.tr'));
+    g.appendChild(card);
+  });
+});
+
+/* ---------- lesson sentences ---------- */
+document.querySelectorAll('.exs p, .dialogue p, p.say, [data-say]').forEach(function(p){
+  var txt=p.dataset.say;
+  if(!txt){var c=p.cloneNode(true);c.querySelectorAll('.en').forEach(function(x){x.remove();});txt=c.textContent;}
+  var b=sayBtn(txt);if(!b)return;
+  p.classList.add('has-say');p.insertBefore(b,p.firstChild);
 });
 
 /* ---------- helpers ---------- */
@@ -505,6 +548,13 @@ function shake(el){el.classList.remove('shake');void el.offsetWidth;el.classList
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
 var EX=document.getElementById('exercises');
+
+/* audio toggle */
+var tg=document.createElement('label');tg.className='autoread';
+tg.innerHTML='<input type="checkbox" id="autoread" checked> <span>Écouter la phrase après chaque bonne réponse<span class="en">Hear the sentence after each correct answer</span></span>';
+tg.querySelector('input').addEventListener('change',function(e){autoRead=e.target.checked;});
+EX.appendChild(tg);
+
 function block(cls,num,type,title,titleEn,consFr,consEn,total){
   var d=document.createElement('section');d.className='ex '+cls;
   d.innerHTML='<div class="ex-band"><div><div class="lbl">Exercice '+num+' · '+type+'</div><h3>'+title+'<span class="en">'+titleEn+'</span></h3></div>'+(total?'<span class="score"><span class="sc">0</span> / '+total+'</span>':'')+'</div><div class="ex-body"><p class="consigne"><b>'+consFr+'</b><span class="en">'+consEn+'</span></p><div class="inner-ex"></div></div>';
@@ -512,11 +562,12 @@ function block(cls,num,type,title,titleEn,consFr,consEn,total){
   var sc=d.querySelector('.sc'),c=0;
   return {el:d,body:d.querySelector('.inner-ex'),point:function(){c++;if(sc)sc.textContent=c;}};
 }
-function blankify(q,ans){return esc(q).replace('___','<span class="gap">'+(ans?esc(ans):'&nbsp;')+'</span>');}
+function blankify(q){return esc(q).replace('___','<span class="gap">&nbsp;</span>');}
 
-/* ---------- QCM builder ---------- */
+/* ---------- QCM ---------- */
 function qcm(B,items){
   items.forEach(function(it,i){
+    var full=it.q.replace('___',it.c[0]);
     var w=document.createElement('div');w.className='item';
     w.innerHTML='<p class="q"><span class="num">'+(i+1)+'</span>'+blankify(it.q)+'<span class="en">'+it.en+'</span></p><div class="choices"></div>';
     var box=w.querySelector('.choices'),gap=w.querySelector('.gap'),done=false;
@@ -525,7 +576,8 @@ function qcm(B,items){
       b.addEventListener('click',function(){
         if(done)return;
         if(opt===it.c[0]){done=true;b.classList.add('ok');gap.textContent=opt;gap.classList.add('done');sparkle(b);B.point();
-          box.querySelectorAll('.ch').forEach(function(x){x.disabled=true;});}
+          box.querySelectorAll('.ch').forEach(function(x){x.disabled=true;});
+          reward(full,b,box);}
         else{b.classList.add('ko');shake(b);b.disabled=true;}
       });
       box.appendChild(b);
@@ -534,7 +586,7 @@ function qcm(B,items){
   });
 }
 
-/* ---------- typed answers builder ---------- */
+/* ---------- typed answers ---------- */
 var lastInput=null;
 function accentBar(B){
   var bar=document.createElement('div');bar.className='accents';
@@ -547,115 +599,73 @@ function accentBar(B){
   });
   B.body.appendChild(bar);
 }
-function typed(B,items,idp){
+function typed(B,items,idp,fullFn){
   accentBar(B);
   items.forEach(function(it,i){
+    var full=fullFn(it);
     var w=document.createElement('div');w.className='item';
     var id=idp+i;
     w.innerHTML='<p class="q"><span class="num">'+(i+1)+'</span>'+blankify(it.q)+'<span class="en">'+it.en+'</span></p><div class="inrow"><input class="ans" id="'+id+'" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="'+(it.v?it.v:'…')+'" aria-label="Réponse '+(i+1)+'"><button type="button" class="btn">Vérifier</button></div><div class="fb"></div>';
-    var inp=w.querySelector('input'),btn=w.querySelector('.btn'),fb=w.querySelector('.fb'),gap=w.querySelector('.gap'),tries=0,done=false;
+    var inp=w.querySelector('input'),btn=w.querySelector('.btn'),fb=w.querySelector('.fb'),gap=w.querySelector('.gap'),row=w.querySelector('.inrow'),tries=0,done=false;
     inp.addEventListener('focus',function(){lastInput=inp;});
+    function finish(good){
+      done=true;inp.value=it.a[0];inp.classList.remove('ko');inp.disabled=true;btn.remove();
+      gap.textContent=it.a[0];gap.classList.add('done');
+      if(good){inp.classList.add('ok');fb.className='fb ok';fb.textContent='✓';sparkle(inp);B.point();reward(full,inp,row);}
+      else{fb.className='fb';fb.textContent='';var b=sayBtn(full);if(b){row.appendChild(b);play(full,b);}}
+    }
     function check(){
       if(done)return;var v=norm(inp.value);if(!v)return;
-      var ok=it.a.some(function(a){return norm(a)===v;});
-      if(ok){done=true;inp.classList.remove('ko');inp.classList.add('ok');inp.disabled=true;btn.remove();gap.textContent=it.a[0];gap.classList.add('done');fb.className='fb ok';fb.textContent='✓';sparkle(inp);B.point();}
-      else{tries++;inp.classList.add('ko');shake(inp);fb.className='fb ko';
-        var accents=it.a.some(function(a){return strip(a)===strip(v);});
-        fb.innerHTML=accents?'Presque ! Vérifie les accents. <span class="en inl">Almost! Check the accents.</span>':'Pas encore. Pense au radical : court ou long ? <span class="en inl">Not yet. Short or long stem?</span>';
-        if(tries>=2&&!w.querySelector('.reveal')){var r=document.createElement('button');r.type='button';r.className='reveal';r.textContent='Voir la réponse · Show answer';
-          r.addEventListener('click',function(){done=true;inp.value=it.a[0];inp.classList.remove('ko');inp.disabled=true;btn.remove();gap.textContent=it.a[0];gap.classList.add('done');fb.className='fb';fb.textContent='';r.remove();});
-          w.appendChild(r);}
-      }
+      if(it.a.some(function(a){return norm(a)===v;})){finish(true);return;}
+      tries++;inp.classList.add('ko');shake(inp);fb.className='fb ko';
+      var accents=it.a.some(function(a){return strip(a)===strip(v);});
+      fb.innerHTML=accents?'Presque ! Vérifie les accents. <span class="en inl">Almost! Check the accents.</span>':'Pas encore. Pense au radical : court ou long ? <span class="en inl">Not yet. Short or long stem?</span>';
+      if(tries>=2&&!w.querySelector('.reveal')){var r=document.createElement('button');r.type='button';r.className='reveal';r.textContent='Voir la réponse · Show answer';
+        r.addEventListener('click',function(){r.remove();finish(false);});w.appendChild(r);}
     }
     btn.addEventListener('click',check);
     inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();check();}});
     B.body.appendChild(w);
   });
 }
+function fill(it){return it.q.replace('___',it.a[0]);}
+function fill3(it){var q=it.q.split('→ ');return q[q.length-1].replace('___',it.a[0]);}
 
-/* ===== Exercice 1 ===== */
-var b1=block('e1',1,'Choix','Ta matinée à la maison','Your morning at home','Penka, c\'est le matin chez toi. Choisis la bonne forme du verbe.','Penka, it\'s morning at your home. Choose the correct form of the verb.',10);
-qcm(b1,[
- {q:'Le réveil sonne, mais les enfants ___ encore.',en:'The alarm goes off, but the children are still sleeping.',c:['dorment','dorms','dormissent']},
- {q:'J\'___ les volets de la cuisine.',en:'I open the kitchen shutters.',c:['ouvre','ouvris','ouvrs']},
- {q:'Mon mari ___ le café.',en:'My husband serves the coffee.',c:['sert','serv','servit']},
- {q:'Les enfants ___ leurs vêtements.',en:'The children choose their clothes.',c:['choisissent','choisent','choisissont']},
- {q:'Tu ___ ton manteau ? Il fait froid !',en:'Are you putting your coat on? It\'s cold!',c:['mets','met','mettes']},
- {q:'Je ___ les messages du bureau sur mon portable.',en:'I read the office messages on my phone.',c:['lis','lit','lisent']},
- {q:'À huit heures, nous ___ tous ensemble.',en:'At eight o\'clock, we all leave together.',c:['partons','partissons','pars']},
- {q:'Mon mari ___ les enfants à l\'école.',en:'My husband drives the children to school.',c:['conduit','conduisit','conduise']},
- {q:'J\'___ le bus de huit heures dix.',en:'I wait for the 8:10 bus.',c:['attends','attend','attendes']},
- {q:'Il pleut : je ___ jusqu\'à l\'arrêt.',en:'It\'s raining: I run to the stop.',c:['cours','coure','courre']}
-]);
+/* ===== 1 ===== */
+qcm(block('e1',1,'Choix','Ta matinée à la maison','Your morning at home','Penka, c\'est le matin chez toi. Choisis la bonne forme du verbe.','Penka, it\'s morning at your home. Choose the correct form of the verb.',D.ex1.length),D.ex1);
+/* ===== 2 ===== */
+typed(block('e2',2,'Conjugaison','Une journée au bureau','A day at the office','Écris le verbe au présent. Tape sur « Vérifier » ou sur Entrée.','Write the verb in the present tense. Tap "Vérifier" or press Enter.',D.ex2.length),D.ex2,'x2_',fill);
+/* ===== 3 ===== */
+typed(block('e3',3,'Transformation','Du singulier au pluriel','From singular to plural','Transforme la phrase : écris le verbe avec le radical long.','Transform the sentence: write the verb with the long stem.',D.ex3.length),D.ex3,'x3_',fill3);
 
-/* ===== Exercice 2 ===== */
-var b2=block('e2',2,'Conjugaison','Une journée au bureau','A day at the office','Écris le verbe au présent. Tape sur « Vérifier » ou sur Entrée.','Write the verb in the present tense. Tap "Vérifier" or press Enter.',12);
-typed(b2,[
- {q:'Le matin, j\'___ d\'abord mes e-mails.',v:'ouvrir',en:'In the morning, I open my emails first.',a:['ouvre']},
- {q:'Je ___ les messages des clients bulgares.',v:'lire',en:'I read the messages from Bulgarian clients.',a:['lis']},
- {q:'Mes collègues et moi, nous ___ des contrats du bulgare au français.',v:'traduire',en:'My colleagues and I translate contracts from Bulgarian into French.',a:['traduisons']},
- {q:'Est-ce que vous ___ ce formulaire en ligne ?',v:'remplir',en:'Do you fill in this form online?',a:['remplissez']},
- {q:'Les clients ___ une réponse rapide.',v:'attendre',en:'The clients are waiting for a quick reply.',a:['attendent']},
- {q:'Je ___ au téléphone en trois langues.',v:'répondre',en:'I answer the phone in three languages.',a:['réponds']},
- {q:'Ma collègue ___ une lettre officielle.',v:'écrire',en:'My colleague is writing an official letter.',a:['écrit']},
- {q:'Je ___ les documents à mon e-mail.',v:'joindre',en:'I attach the documents to my email.',a:['joins']},
- {q:'Nous ___ la réunion à midi.',v:'finir',en:'We finish the meeting at noon.',a:['finissons']},
- {q:'Tu ___ où est le dossier de M. Petrov ?',v:'savoir',en:'Do you know where Mr Petrov\'s file is?',a:['sais']},
- {q:'Vous ___ votre signature ici, s\'il vous plaît.',v:'mettre',en:'Please put your signature here.',a:['mettez']},
- {q:'En réunion, les juristes ___ leur portable.',v:'éteindre',en:'In meetings, the lawyers switch off their phones.',a:['éteignent']}
-],'x2_');
-
-/* ===== Exercice 3 ===== */
-var b3=block('e3',3,'Transformation','Du singulier au pluriel','From singular to plural','Transforme la phrase : écris le verbe avec le radical long.','Transform the sentence: write the verb with the long stem.',10);
-typed(b3,[
- {q:'Je finis tard le jeudi. → Nous ___ tard le jeudi.',en:'I finish late on Thursdays. → We finish late on Thursdays.',a:['finissons']},
- {q:'Je sors du bureau à 17 h. → Mes collègues ___ du bureau à 17 h.',en:'I leave the office at 5 pm. → My colleagues leave the office at 5 pm.',a:['sortent']},
- {q:'Tu lis ce rapport ? → Vous ___ ce rapport ?',en:'Are you reading this report?',a:['lisez']},
- {q:'Il écrit au client. → Ils ___ au client.',en:'He writes to the client. → They write to the client.',a:['écrivent']},
- {q:'Je crois que c\'est urgent. → Nous ___ que c\'est urgent.',en:'I think it\'s urgent. → We think it\'s urgent.',a:['croyons']},
- {q:'Elle voit le client demain. → Elles ___ le client demain.',en:'She is seeing the client tomorrow. → They are seeing the client tomorrow.',a:['voient']},
- {q:'Je conduis prudemment. → Nous ___ prudemment.',en:'I drive carefully. → We drive carefully.',a:['conduisons']},
- {q:'Tu peins la chambre des enfants ? → Vous ___ la chambre des enfants ?',en:'Are you painting the children\'s bedroom?',a:['peignez']},
- {q:'Il sert le dessert. → Ils ___ le dessert.',en:'He serves dessert. → They serve dessert.',a:['servent']},
- {q:'Je connais ce quartier. → Nous ___ ce quartier.',en:'I know this neighbourhood. → We know this neighbourhood.',a:['connaissons']}
-],'x3_');
-
-/* ===== Exercice 4 : dialogue ===== */
+/* ===== 4 dialogue ===== */
 var b4=block('e4',4,'Dialogue','Le soir, à la maison','In the evening, at home','Complète la conversation entre toi et ton mari : choisis la bonne forme dans chaque menu.','Complete the conversation between you and your husband: choose the right form in each menu.',10);
 (function(){
-  var lines=[
-   {me:false,fr:'Tu {finis|finit|finissez} tard ce soir ?',en:'Are you finishing late tonight?'},
-   {me:true,fr:'Non, je {pars|part|partent} du bureau à six heures.',en:'No, I\'m leaving the office at six.'},
-   {me:false,fr:'Super ! Les enfants {choisissent|choisent|choisit} un film pour ce soir.',en:'Great! The children are choosing a film for tonight.'},
-   {me:true,fr:'D\'accord, mais d\'abord ils {finissent|finent|finit} leurs devoirs !',en:'OK, but first they finish their homework!'},
-   {me:false,fr:'Luka {écrit|écrive|écris} sa rédaction. Il ne {sait|sais|savent} pas comment conclure.',en:'Luka is writing his essay. He doesn\'t know how to finish it.'},
-   {me:true,fr:'Je {lis|lit|lise} son texte après le dîner.',en:'I\'ll read his text after dinner.'},
-   {me:false,fr:'Et toi, tu {mets|met|mettes} la table ?',en:'And you, are you setting the table?'},
-   {me:true,fr:'Oui, et vous {servez|serrez|sertez} le repas, toi et les enfants !',en:'Yes, and you serve the meal, you and the children!'},
-   {me:false,fr:'Après, on {éteint|éteind|éteignent} les écrans et tout le monde au lit.',en:'Afterwards, we switch off the screens and everyone goes to bed.'}
-  ];
   var dl=document.createElement('div');dl.className='dl';var k=0;
-  lines.forEach(function(L){
+  D.ex4.forEach(function(L){
+    var full=L.fr.replace(/\{(.+?)\}/g,function(m,g){return g.split('|')[0];});
     var html=esc(L.fr).replace(/\{(.+?)\}/g,function(m,g){
       var opts=g.split('|'),id='x4_'+(k++);
       return '<select class="sel" id="'+id+'" data-a="'+opts[0]+'" aria-label="Choix"><option value="">…</option>'+shuffle(opts).map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
     });
     var d=document.createElement('div');d.className='line'+(L.me?' me':'');
-    d.innerHTML='<span class="who">'+(L.me?'Toi':'Ton mari')+'</span>'+html+'<span class="en">'+L.en+'</span>';
-    dl.appendChild(d);
-  });
-  dl.querySelectorAll('select').forEach(function(s){
-    s.addEventListener('change',function(){
-      if(!s.value)return;
-      if(s.value===s.dataset.a){s.classList.remove('ko');s.classList.add('ok');s.disabled=true;sparkle(s);b4.point();}
-      else{s.classList.add('ko');shake(s);}
+    d.innerHTML='<span class="who">'+(L.me?'Toi':'Ton mari')+'</span><span class="ln">'+html+'</span><span class="en">'+L.en+'</span>';
+    var sels=d.querySelectorAll('select');
+    sels.forEach(function(s){
+      s.addEventListener('change',function(){
+        if(!s.value)return;
+        if(s.value===s.dataset.a){s.classList.remove('ko');s.classList.add('ok');s.disabled=true;sparkle(s);b4.point();
+          if([].every.call(sels,function(x){return x.disabled;}))reward(full,d,d.querySelector('.who'));}
+        else{s.classList.add('ko');shake(s);}
+      });
     });
+    dl.appendChild(d);
   });
   b4.body.appendChild(dl);
 })();
 
-/* ===== Exercice 5 : classement ===== */
-var b5=block('e5',5,'Classement','Range les verbes dans la bonne famille','Sort the verbs into the right family','Tape sur un verbe, puis sur sa famille.','Tap a verb, then tap its family.',15);
+/* ===== 5 classement ===== */
+var b5=block('e5',5,'Classement','Range les verbes dans la bonne famille','Sort the verbs into the right family','Tape sur un verbe pour l\'écouter et le choisir, puis tape sur sa famille.','Tap a verb to hear it and select it, then tap its family.',D.ex5.length);
 (function(){
   var cats=[
    {id:'a',t:'Comme finir',x:'fini / finiss'},
@@ -664,16 +674,17 @@ var b5=block('e5',5,'Classement','Range les verbes dans la bonne famille','Sort 
    {id:'d',t:'Radical + v, s ou gn',x:'écrire, lire, conduire, peindre'},
    {id:'e',t:'Un seul radical',x:'ouvrir, courir'}
   ];
-  var verbs=[['grandir','a'],['réfléchir','a'],['remplir','a'],['sortir','b'],['servir','b'],['suivre','b'],['attendre','c'],['promettre','c'],['perdre','c'],['traduire','d'],['décrire','d'],['rejoindre','d'],['offrir','e'],['souffrir','e'],['sourire','e']];
   var pool=document.createElement('div');pool.className='pool';
   var grid=document.createElement('div');grid.className='cats';
   var selected=null;
-  shuffle(verbs).forEach(function(v){
+  function disarm(){grid.querySelectorAll('.cat').forEach(function(x){x.classList.remove('armed');});}
+  shuffle(D.ex5).forEach(function(v){
     var c=document.createElement('button');c.type='button';c.className='chip';c.textContent=v[0];c.dataset.c=v[1];
     c.addEventListener('click',function(){
       if(selected)selected.classList.remove('sel');
-      if(selected===c){selected=null;grid.querySelectorAll('.cat').forEach(function(x){x.classList.remove('armed');});return;}
-      selected=c;c.classList.add('sel');grid.querySelectorAll('.cat').forEach(function(x){x.classList.add('armed');});
+      if(selected===c){selected=null;disarm();return;}
+      selected=c;c.classList.add('sel');play(v[0],null);
+      grid.querySelectorAll('.cat').forEach(function(x){x.classList.add('armed');});
     });
     pool.appendChild(c);
   });
@@ -684,8 +695,7 @@ var b5=block('e5',5,'Classement','Range les verbes dans la bonne famille','Sort 
       if(!selected)return;
       if(selected.dataset.c===ct.id){
         var s=document.createElement('span');s.textContent=selected.textContent;b.querySelector('.got').appendChild(s);
-        selected.remove();selected=null;sparkle(b);b5.point();
-        grid.querySelectorAll('.cat').forEach(function(x){x.classList.remove('armed');});
+        selected.remove();selected=null;sparkle(b);b5.point();disarm();
       } else {shake(selected);shake(b);}
     });
     grid.appendChild(b);
@@ -693,79 +703,43 @@ var b5=block('e5',5,'Classement','Range les verbes dans la bonne famille','Sort 
   b5.body.appendChild(pool);b5.body.appendChild(grid);
 })();
 
-/* ===== Exercice 6 : pièges ===== */
-var b6=block('e6',6,'Attention','Les pièges à éviter','Traps to avoid','Choisis la seule forme correcte.','Choose the only correct form.',10);
-qcm(b6,[
- {q:'Ils ___ les clients cet après-midi.',en:'They are seeing the clients this afternoon.',c:['voient','voyent','voyont']},
- {q:'Les enfants ___ encore à saint Nicolas.',en:'The children still believe in Saint Nicholas.',c:['croient','croyent','croit']},
- {q:'Il ___ son manteau et il sort.',en:'He puts on his coat and goes out.',c:['met','mett','mets']},
- {q:'Elle ___ à la lettre du ministère.',en:'She replies to the ministry\'s letter.',c:['répond','répont','réponds']},
- {q:'Vous ___ le contrat avant la réunion ?',en:'Are you reading the contract before the meeting?',c:['lisez','lissez','lises']},
- {q:'Ça ___ la peine d\'essayer.',en:'It\'s worth trying.',c:['vaut','vaux','valt']},
- {q:'Nous ___ nos amis bulgares le dimanche.',en:'We see our Bulgarian friends on Sundays.',c:['voyons','voions','voyez']},
- {q:'Je ___ un cours de français le mardi.',en:'I take a French course on Tuesdays.',c:['suis','suit','suive']},
- {q:'Vous ___ toujours la vérité !',en:'You always tell the truth!',c:['dites','disez','disent']},
- {q:'En famille, on ___ beaucoup.',en:'We laugh a lot as a family.',c:['rit','rie','ris']}
-]);
+/* ===== 6 ===== */
+qcm(block('e6',6,'Attention','Les pièges à éviter','Traps to avoid','Choisis la seule forme correcte.','Choose the only correct form.',D.ex6.length),D.ex6);
 
-/* ===== Exercice 7 : ordre ===== */
-var b7=block('e7',7,'Construction','Remets les mots dans l\'ordre','Put the words in order','Tape sur les mots dans le bon ordre pour faire la phrase. Tape sur un mot de ta phrase pour l\'enlever.','Tap the words in the right order to build the sentence. Tap a word in your sentence to remove it.',6);
-(function(){
-  var S=[
-   ['Mon mari conduit les enfants à l\'école','My husband drives the children to school.'],
-   ['Nous attendons les documents de Bulgarie','We are waiting for the documents from Bulgaria.'],
-   ['Je traduis le contrat pour le client','I translate the contract for the client.'],
-   ['Le soir je lis une histoire aux enfants','In the evening I read the children a story.'],
-   ['Vous éteignez votre portable en réunion','You switch off your phone in meetings.'],
-   ['Mes collègues sortent du bureau à six heures','My colleagues leave the office at six.']
-  ];
-  S.forEach(function(s,i){
-    var w=document.createElement('div');w.className='item';
-    w.innerHTML='<p class="q"><span class="num">'+(i+1)+'</span><span class="en" style="display:inline">'+s[1]+'</span></p><div class="built"></div><div class="tiles"></div>';
-    var built=w.querySelector('.built'),tiles=w.querySelector('.tiles'),target=s[0].split(' '),done=false;
-    function check(){
-      var got=[].map.call(built.children,function(t){return t.textContent;});
-      if(got.length!==target.length)return;
-      if(got.join(' ')===target.join(' ')){done=true;built.classList.add('ok');sparkle(built);b7.point();}
-      else shake(built);
-    }
-    shuffle(target).forEach(function(word){
-      var t=document.createElement('button');t.type='button';t.className='tile';t.textContent=word;
-      t.addEventListener('click',function(){
-        if(done)return;
-        if(t.parentNode===tiles){built.appendChild(t);check();}else{tiles.appendChild(t);}
-      });
-      tiles.appendChild(t);
+/* ===== 7 ordre ===== */
+var b7=block('e7',7,'Construction','Remets les mots dans l\'ordre','Put the words in order','Tape sur les mots dans le bon ordre pour faire la phrase. Tape sur un mot de ta phrase pour l\'enlever.','Tap the words in the right order to build the sentence. Tap a word in your sentence to remove it.',D.ex7.length);
+D.ex7.forEach(function(s,i){
+  var w=document.createElement('div');w.className='item';
+  w.innerHTML='<p class="q"><span class="num">'+(i+1)+'</span><span class="en" style="display:inline">'+s[1]+'</span></p><div class="built"></div><div class="tiles"></div>';
+  var built=w.querySelector('.built'),tiles=w.querySelector('.tiles'),target=s[0].split(' '),done=false;
+  function check(){
+    var got=[].map.call(built.children,function(t){return t.textContent;});
+    if(got.length!==target.length)return;
+    if(got.join(' ')===target.join(' ')){done=true;built.classList.add('ok');sparkle(built);b7.point();reward(s[0],built,tiles);}
+    else shake(built);
+  }
+  shuffle(target).forEach(function(word){
+    var t=document.createElement('button');t.type='button';t.className='tile';t.textContent=word;
+    t.addEventListener('click',function(){
+      if(done)return;
+      if(t.parentNode===tiles){built.appendChild(t);check();}else{tiles.appendChild(t);}
     });
-    b7.body.appendChild(w);
+    tiles.appendChild(t);
   });
-})();
+  b7.body.appendChild(w);
+});
 
-/* ===== Exercice 8 : production ===== */
-var b8=block('e8',8,'À toi !','Parle de ta vie','Talk about your life','Réponds à chaque question par une phrase complète, à l\'oral puis à l\'écrit. Ensuite, compare avec l\'exemple.','Answer each question with a full sentence, aloud and then in writing. Then compare with the example.',0);
-(function(){
-  var Q=[
-   ['À quelle heure est-ce que tu pars de chez toi le matin ?','What time do you leave home in the morning?','partir','Je pars de chez moi à huit heures moins le quart.','I leave home at a quarter to eight.'],
-   ['Qu\'est-ce que tu mets dans ton sac pour aller au bureau ?','What do you put in your bag to go to the office?','mettre','Je mets mon ordinateur, mes clés et une bouteille d\'eau.','I put in my laptop, my keys and a bottle of water.'],
-   ['Quels documents est-ce que tu traduis au travail ?','Which documents do you translate at work?','traduire','Je traduis surtout des contrats et des actes officiels.','I mainly translate contracts and official documents.'],
-   ['Quand un client écrit, est-ce que tu réponds vite ?','When a client writes, do you answer quickly?','écrire · répondre','Oui, quand un client écrit, je réponds dans la journée.','Yes, when a client writes, I answer the same day.'],
-   ['À quelle heure est-ce que tu finis le vendredi ?','What time do you finish on Fridays?','finir','Le vendredi, je finis plus tôt, vers quatre heures.','On Fridays I finish earlier, around four.'],
-   ['Qui conduit les enfants à l\'école chez vous ?','Who drives the children to school in your family?','conduire','C\'est mon mari qui conduit les enfants, et moi, je les attends à la sortie.','My husband drives the children, and I wait for them when school finishes.'],
-   ['À quelle heure est-ce que tes enfants dorment le soir ?','What time do your children go to sleep in the evening?','dormir','Ils dorment vers neuf heures, après une histoire.','They go to sleep around nine, after a story.'],
-   ['Qu\'est-ce que tu lis en ce moment ?','What are you reading at the moment?','lire','Je lis un roman policier en français, c\'est un bon exercice.','I\'m reading a detective novel in French; it\'s good practice.'],
-   ['Le week-end, qu\'est-ce que vous choisissez de faire en famille ?','At the weekend, what do you choose to do as a family?','choisir','Nous choisissons souvent une promenade dans le Grund ou au parc.','We often choose a walk in the Grund or in the park.'],
-   ['Est-ce que vous sortez souvent le soir, ton mari et toi ?','Do you and your husband often go out in the evening?','sortir','Nous sortons parfois le vendredi soir, au restaurant.','We sometimes go out on Friday evenings, to a restaurant.'],
-   ['Qu\'est-ce que tu offres à tes enfants pour leur anniversaire ?','What do you give your children for their birthday?','offrir','Je leur offre souvent un livre et un jeu de société.','I often give them a book and a board game.'],
-   ['Est-ce que tu crois que les verbes français sont difficiles ?','Do you think French verbs are difficult?','croire','Je crois qu\'ils sont logiques : il faut connaître les deux radicaux.','I think they are logical: you need to know the two stems.']
-  ];
-  Q.forEach(function(q,i){
-    var w=document.createElement('div');w.className='item prod';
-    w.innerHTML='<p class="q"><span class="num">'+(i+1)+'</span>'+esc(q[0])+'<span class="hint">'+q[2]+'</span><span class="en">'+q[1]+'</span></p><textarea id="x8_'+i+'" aria-label="Ta réponse '+(i+1)+'" placeholder="Ta réponse…"></textarea><button type="button" class="btn ghost" style="margin-top:6px">Voir un exemple · Show an example</button><div class="model" hidden><span class="lb">Exemple</span><div>'+esc(q[3])+'<span class="en">'+q[4]+'</span></div></div>';
-    var btn=w.querySelector('.btn'),m=w.querySelector('.model');
-    btn.addEventListener('click',function(){m.hidden=!m.hidden;btn.textContent=m.hidden?'Voir un exemple · Show an example':'Cacher l\'exemple · Hide the example';});
-    b8.body.appendChild(w);
-  });
-})();
+/* ===== 8 production ===== */
+var b8=block('e8',8,'À toi !','Parle de ta vie','Talk about your life','Écoute la question. Réponds par une phrase complète, à l\'oral puis à l\'écrit. Ensuite, compare avec l\'exemple.','Listen to the question. Answer with a full sentence, aloud and then in writing. Then compare with the example.',0);
+D.ex8.forEach(function(q,i){
+  var w=document.createElement('div');w.className='item prod';
+  w.innerHTML='<p class="q"><span class="num">'+(i+1)+'</span><span class="qt">'+esc(q[0])+'</span><span class="hint">'+q[2]+'</span><span class="en">'+q[1]+'</span></p><textarea id="x8_'+i+'" aria-label="Ta réponse '+(i+1)+'" placeholder="Ta réponse…"></textarea><button type="button" class="btn ghost" style="margin-top:6px">Voir un exemple · Show an example</button><div class="model" hidden><span class="lb">Exemple</span><div class="mt">'+esc(q[3])+'<span class="en">'+q[4]+'</span></div></div>';
+  var qb=sayBtn(q[0],'Écouter la question');if(qb)w.querySelector('.qt').before(qb);
+  var mb=sayBtn(q[3],'Écouter l\'exemple');if(mb)w.querySelector('.mt').prepend(mb);
+  var btn=w.querySelector('.btn'),m=w.querySelector('.model');
+  btn.addEventListener('click',function(){m.hidden=!m.hidden;btn.textContent=m.hidden?'Voir un exemple · Show an example':'Cacher l\'exemple · Hide the example';});
+  b8.body.appendChild(w);
+});
 
 })();
 </script>
