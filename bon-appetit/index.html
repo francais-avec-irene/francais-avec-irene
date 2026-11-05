@@ -258,7 +258,7 @@ footer{margin-top:40px; text-align:center; color:var(--muted); font-size:14px}
 
 <!-- ================= HERO ================= -->
 <header class="hero">
-  <img class="hero-photo" src="img/picnic.jpg?v=3" alt="Un pique-nique dans l’herbe">
+  <img class="hero-photo" src="img/picnic.jpg?v=4" alt="Un pique-nique dans l’herbe">
   <div class="hero-card">
     <span class="tag">Unité 5 · Leçon 1</span>
     <h1>Bon appétit !</h1>
@@ -522,12 +522,12 @@ footer{margin-top:40px; text-align:center; color:var(--muted); font-size:14px}
 
 <div class="part"><span class="num" style="background:var(--sky)">★</span><h3>La famille Legrand</h3><span class="en">The Legrand family</span></div>
 <div class="family">
-  <div class="fam" style="--fc:var(--girl)"><img src="img/jeanne.jpg?v=3" alt=""><b>Jeanne</b><span class="en">Mum</span></div>
-  <div class="fam" style="--fc:var(--sky)"><img src="img/luc.jpg?v=3" alt=""><b>Luc</b><span class="en">Dad</span></div>
-  <div class="fam" style="--fc:var(--grape)"><img src="img/alice.jpg?v=3" alt=""><b>Alice</b></div>
-  <div class="fam" style="--fc:#13a99b"><img src="img/leo.jpg?v=3" alt=""><b>Léo</b></div>
-  <div class="fam" style="--fc:var(--carrot)"><img src="img/maggie.jpg?v=3" alt=""><b>Maggie</b></div>
-  <div class="fam" style="--fc:var(--leaf)"><img src="img/tortue_bd.jpg?v=3" alt=""><b>la tortue</b><span class="en">the tortoise</span></div>
+  <div class="fam" style="--fc:var(--girl)"><img src="img/jeanne.jpg?v=4" alt=""><b>Jeanne</b><span class="en">Mum</span></div>
+  <div class="fam" style="--fc:var(--sky)"><img src="img/luc.jpg?v=4" alt=""><b>Luc</b><span class="en">Dad</span></div>
+  <div class="fam" style="--fc:var(--grape)"><img src="img/alice.jpg?v=4" alt=""><b>Alice</b></div>
+  <div class="fam" style="--fc:#13a99b"><img src="img/leo.jpg?v=4" alt=""><b>Léo</b></div>
+  <div class="fam" style="--fc:var(--carrot)"><img src="img/maggie.jpg?v=4" alt=""><b>Maggie</b></div>
+  <div class="fam" style="--fc:var(--leaf)"><img src="img/tortue_bd.jpg?v=4" alt=""><b>la tortue</b><span class="en">the tortoise</span></div>
 </div>
 
 <div id="tracks"></div>
@@ -574,7 +574,7 @@ const OBJ = {
   cuillere:{a:"une",le:"la",g:"f",w:"cuillère",en:"a spoon",s:"La cuillère est grande.",se:"The spoon is big."},
   assiette:{a:"une",le:"l’",g:"f",w:"assiette",en:"a plate",s:"L’assiette est ronde.",se:"The plate is round."},
   verre:{a:"un",le:"le",g:"m",w:"verre",en:"a glass",s:"Maggie est écrit sur le verre.",se:"Maggie’s name is on the glass."},
-  nappe:{a:"une",le:"la",g:"f",w:"nappe",en:"a tablecloth",s:"La nappe est jaune.",se:"The tablecloth is yellow."}
+  nappe:{a:"une",le:"la",g:"f",w:"nappe",en:"a tablecloth",s:"La nappe est sur la table.",se:"The tablecloth is on the table."}
 };
 const FOOD = {
   pain:{a:"le",g:"m",w:"pain",en:"bread",some:"du"},
@@ -589,7 +589,7 @@ const FOOD = {
 const RULES = {v1:"Vocabulaire · Pour pique-niquer",v2:"Vocabulaire · À manger",v3:"Vocabulaire · Pour décrire",v4:"Petites phrases utiles",
   r1:"Règle 1 · un, une, le, la, l’, les",r2:"Règle 2 · il est rond, elle est ronde",r3:"Règle 3 · du, de la, des",r4:"Règle 4 · je veux, il veut",r5:"Règle 5 · ne … pas",ecoute:"Écoute · la famille Legrand"};
 const gcls = g => g==="m"?"m":g==="f"?"f":"p";
-const img = k => `img/${k}.jpg?v=3`;
+const img = k => `img/${k}.jpg?v=4`;
 
 /* ================= AUDIO ================= */
 function h(t){t=t.normalize("NFC");let x=5381;for(let i=0;i<t.length;i++){x=((x*33)^t.charCodeAt(i))>>>0}return x.toString(16)}
@@ -768,8 +768,8 @@ listenGame(document.querySelector('#g1 .listen-game'), Object.keys(OBJ), k=>`Mon
 
 /* GAME 2: riddles (piste 24) */
 mcq(document.getElementById("riddles"),[
- {q:"C’est rond, c’est bleu.",qen:"It’s round, it’s blue.",say:"C’est rond, c’est bleu.",photos:1,opts:["assiette","verre","nappe","fourchette"],a:0,rule:"v1",after:"Montre l’assiette."},
- {q:"C’est un grand rectangle jaune.",qen:"It’s a big yellow rectangle.",say:"C’est un grand rectangle jaune.",photos:1,opts:["cuillere","nappe","couteau","verre"],a:1,rule:"v1",after:"Montre la nappe."},
+ {q:"C’est rond et c’est grand.",qen:"It’s round and it’s big.",say:"C’est rond et c’est grand.",photos:1,opts:["assiette","verre","nappe","fourchette"],a:0,rule:"v1",after:"Montre l’assiette."},
+ {q:"C’est grand. C’est sur la table.",qen:"It’s big. It’s on the table.",say:"C’est grand. C’est sur la table.",photos:1,opts:["cuillere","nappe","couteau","verre"],a:1,rule:"v1",after:"Montre la nappe."},
  {q:"Attention, ça pique.",qen:"Careful, it’s sharp.",say:"Attention, ça pique.",photos:1,opts:["verre","assiette","fourchette","nappe"],a:2,rule:"v1",after:"Montre la fourchette."},
  {q:"Tu peux lire Maggie dessus.",qen:"You can read “Maggie” on it.",say:"Tu peux lire Maggie dessus.",photos:1,opts:["nappe","couteau","cuillere","verre"],a:3,rule:"v1",after:"Montre le verre."},
  {q:"Attention, ça coupe.",qen:"Careful, it cuts.",say:"Attention, ça coupe.",photos:1,opts:["couteau","assiette","verre","cuillere"],a:0,rule:"v1",after:"Montre le couteau."}
