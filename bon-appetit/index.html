@@ -1,0 +1,1071 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bon appétit ! Unité 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,500;0,700;0,800;1,500&display=swap">
+<style>
+/* Layout: a single scrolling picnic "blanket" — gingham bands open each part, photo cards, then a mini-game right after every part. Deliberately single light theme (bright, child-friendly). */
+:root{
+  --bg:#fffaf3; --paper:#ffffff; --ink:#2b2340; --muted:#7b7192;
+  --tomato:#ef4b4b; --melon:#ff6f91; --sun:#ffc93c; --leaf:#2bb673; --sky:#3d8bfd; --grape:#8b5cf6; --carrot:#ff8a3d;
+  --boy:#2f7cf6; --girl:#ec4899; --plural:#10a96a; --elide:#8b5cf6;
+  --line:#efe6da; --soft:#f6f1ff;
+  --display:"Fredoka", "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Nunito", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.5;
+  padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); padding-block:0 60px}
+.wrap{max-width:880px; margin:0 auto}
+h1,h2,h3,.disp{font-family:var(--display); text-wrap:balance; margin:0}
+button{font-family:inherit; cursor:pointer}
+button:focus-visible{outline:3px solid var(--sky); outline-offset:2px}
+
+/* ---------- top bar ---------- */
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:60; background:var(--bg)}
+.topbar{position:sticky; top:env(safe-area-inset-top,0px); z-index:50; display:flex; justify-content:flex-end; gap:8px; padding:10px 0; pointer-events:none}
+.topbar > *{pointer-events:auto}
+.pill{display:inline-flex; align-items:center; gap:6px; border:0; border-radius:999px; padding:8px 14px; font-weight:800; font-size:15px; box-shadow:0 4px 14px rgba(43,35,64,.14)}
+.score{background:var(--sun); color:var(--ink); font-family:var(--display); font-size:19px}
+.score.bump{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.35) rotate(-6deg)}}
+.entoggle{background:var(--paper); color:var(--ink)}
+.entoggle[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+
+/* ---------- hero ---------- */
+.hero{position:relative; margin-top:4px}
+.hero-photo{width:100%; aspect-ratio:16/8; max-height:420px; object-fit:cover; border-radius:28px; display:block; max-width:100%}
+.hero-card{position:relative; margin:-56px 18px 0; background:var(--paper); border-radius:24px; padding:18px 22px 20px; box-shadow:0 10px 30px rgba(43,35,64,.12)}
+.tag{display:inline-block; background:var(--sun); color:var(--ink); font-family:var(--display); font-weight:600; letter-spacing:.12em; text-transform:uppercase; font-size:12px; padding:4px 12px; border-radius:999px}
+.hero h1{font-size:clamp(34px,7vw,52px); color:var(--tomato); line-height:1.05; margin:8px 0 4px}
+.hero .sub{font-family:var(--display); font-size:21px; font-weight:600}
+.gingham{height:14px; border-radius:7px; margin:22px 0 6px;
+  background:
+   repeating-linear-gradient(90deg, rgba(239,75,75,.55) 0 14px, transparent 14px 28px),
+   repeating-linear-gradient(0deg, rgba(239,75,75,.55) 0 7px, transparent 7px 14px), #fff}
+
+/* ---------- translations ---------- */
+.en{display:inline-block; font-style:italic; color:var(--muted); font-size:.88em}
+.en .b{font-style:normal; border:1.5px dashed #cfc4e6; background:transparent; color:var(--muted); border-radius:999px; padding:0 9px; font-size:12px; font-weight:800; line-height:20px}
+.en .t{display:none}
+.en.on .t{display:inline} .en.on .b{display:none}
+.block-en{display:block; margin-top:2px}
+
+/* ---------- section bands ---------- */
+.band{margin:44px 0 18px; border-radius:22px; padding:16px 20px; color:#fff; display:flex; align-items:center; gap:14px}
+.band .kicker{font-size:11px; letter-spacing:.2em; text-transform:uppercase; font-weight:800; opacity:.9}
+.band h2{font-size:26px; line-height:1.1}
+.band .big{font-size:38px; line-height:1}
+.band.voc{background:linear-gradient(120deg,#16b3a3,#2bb673)}
+.band.gram{background:linear-gradient(120deg,#8b5cf6,#ec4899)}
+.band.trans{background:linear-gradient(120deg,#3d8bfd,#16b3a3)}
+.band.final{background:linear-gradient(120deg,#ff8a3d,#ef4b4b)}
+.band.revoir{background:linear-gradient(120deg,#2b2340,#8b5cf6)}
+.band .en{color:rgba(255,255,255,.9)} .band .en .b{border-color:rgba(255,255,255,.7); color:#fff}
+
+.part{display:flex; align-items:baseline; gap:10px; margin:28px 0 12px; flex-wrap:wrap}
+.part .num{width:30px; height:30px; border-radius:50%; display:inline-grid; place-items:center; color:#fff; font-family:var(--display); font-weight:700; flex:none; transform:translateY(4px)}
+.part h3{font-size:23px}
+.intro{margin:0 0 14px}
+
+/* ---------- vocab cards ---------- */
+.cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr)); gap:14px}
+@media (max-width:560px){.cards,.cards.small{grid-template-columns:1fr 1fr; gap:10px} .word{font-size:20px} .vcard .txt{padding:10px} .ex{flex-direction:column}}
+.cards.small{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.vcard{background:var(--paper); border-radius:22px; overflow:hidden; border:2px solid var(--line); display:flex; flex-direction:column; transition:transform .2s}
+.vcard:hover{transform:translateY(-3px) rotate(-.5deg)}
+.vcard .ph{position:relative; aspect-ratio:4/3; background:#f4efe8}
+.vcard img{width:100%; height:100%; object-fit:cover; display:block}
+.say{position:absolute; right:10px; bottom:10px; width:44px; height:44px; border-radius:50%; border:0; background:var(--paper); box-shadow:0 4px 12px rgba(0,0,0,.18); font-size:20px; display:grid; place-items:center}
+.say.playing{animation:pulse .8s infinite}
+@keyframes pulse{50%{transform:scale(1.15)}}
+.vcard .txt{padding:12px 14px 14px; display:flex; flex-direction:column; gap:6px; flex:1}
+.art{font-family:var(--display); font-weight:700; font-size:17px}
+.m{color:var(--boy)} .f{color:var(--girl)} .p{color:var(--plural)} .el{color:var(--elide)}
+.word{font-family:var(--display); font-weight:700; font-size:25px; line-height:1.1}
+.ex{background:var(--soft); border-radius:14px; padding:8px 10px; display:flex; gap:8px; align-items:flex-start}
+.mini-say{flex:none; width:32px; height:32px; border-radius:50%; border:0; background:var(--paper); box-shadow:0 2px 6px rgba(0,0,0,.12); font-size:15px}
+.mini-say.playing{animation:pulse .8s infinite}
+
+.chips{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,165px),1fr)); gap:10px}
+.chip{background:var(--paper); border:2px solid var(--line); border-left:8px solid var(--c,var(--leaf)); border-radius:16px; padding:10px 12px; display:flex; gap:10px; align-items:center}
+.chip .w{font-family:var(--display); font-weight:700; font-size:20px; color:var(--c)}
+.dot{width:20px; height:20px; border-radius:50%; display:inline-block; vertical-align:-3px; margin-right:4px; border:2px solid rgba(0,0,0,.08)}
+
+/* ---------- grammar ---------- */
+.rule{background:var(--paper); border-radius:24px; border:3px solid var(--rc); overflow:hidden; margin:22px 0}
+.rule-head{background:var(--rc); color:#fff; padding:14px 20px}
+.rule-head .k{font-size:11px; letter-spacing:.2em; font-weight:800; opacity:.9}
+.rule-head h3{font-size:25px}
+.rule-body{padding:16px 20px 20px; display:flex; flex-direction:column; gap:12px}
+.lbl{display:inline-block; background:var(--rc); color:#fff; font-size:11px; letter-spacing:.16em; font-weight:800; padding:3px 11px; border-radius:999px; text-transform:uppercase}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse; width:100%; min-width:320px; font-size:16px}
+th{font-family:var(--display); font-weight:600; text-align:left; color:var(--muted); font-size:14px; padding:6px 10px; border-bottom:2px solid var(--line)}
+td{padding:8px 10px; border-bottom:1px solid var(--line); font-weight:700}
+.formula{display:inline-block; border:2.5px solid var(--rc); border-radius:999px; padding:5px 16px; font-family:var(--display); font-weight:600; font-size:19px; margin:2px 6px 2px 0}
+.exs{display:flex; flex-direction:column; gap:8px}
+.exl{background:#faf8fd; border-left:5px solid var(--rc); border-radius:12px; padding:9px 12px; display:flex; gap:10px; align-items:flex-start}
+.exl b.hl{color:var(--rc)}
+.trick{background:#fff6d6; border:2.5px solid var(--sun); border-radius:18px; padding:12px 16px}
+.trick .k{font-weight:800; color:#a87400; letter-spacing:.14em; font-size:12px}
+.spell{border:2.5px dashed var(--rc); border-radius:16px; padding:10px 14px}
+
+/* ---------- games ---------- */
+.game{background:linear-gradient(180deg,#fff, #fff7ef); border:3px solid var(--sun); border-radius:26px; padding:18px 18px 20px; margin:22px 0; position:relative}
+.game-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px}
+.game-badge{background:var(--sun); font-family:var(--display); font-weight:700; font-size:14px; border-radius:999px; padding:4px 12px}
+.game-head h4{font-family:var(--display); font-size:21px; margin:0}
+.consigne{margin:0 0 12px}
+.q{background:var(--paper); border-radius:18px; border:2px solid var(--line); padding:12px 14px; margin-top:10px}
+.q.done{border-color:#bfe9d3; background:#f3fcf7}
+.qtext{font-weight:800; font-size:18px; display:flex; gap:8px; align-items:flex-start; flex-wrap:wrap}
+.opts{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+.opt{border:2.5px solid var(--line); background:var(--paper); border-radius:16px; padding:9px 16px; font-weight:800; font-size:17px; color:var(--ink); transition:transform .15s}
+.opt:hover{transform:translateY(-2px); border-color:#d9cdf4}
+.opt.ok{background:var(--leaf); border-color:var(--leaf); color:#fff; animation:pop .45s}
+.opt.no{background:#ffe3e3; border-color:var(--tomato); animation:shake .4s}
+.opt[disabled]{cursor:default}
+@keyframes pop{40%{transform:scale(1.15)}}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.photo-opts{display:grid; grid-template-columns:repeat(auto-fill,minmax(88px,1fr)); gap:10px; margin-top:10px}
+.popt{border:3px solid var(--line); border-radius:18px; padding:0; overflow:hidden; background:var(--paper); aspect-ratio:1; position:relative}
+.popt img{width:100%; height:100%; object-fit:cover; display:block}
+.popt.ok{border-color:var(--leaf); box-shadow:0 0 0 4px #bff0d6; animation:pop .45s}
+.popt.no{border-color:var(--tomato); animation:shake .4s}
+.popt.face{aspect-ratio:auto}
+.popt.face img{aspect-ratio:1}
+.popt .cap{display:block; font-family:var(--display); font-weight:600; padding:4px; font-size:16px}
+.bigplay{display:inline-flex; align-items:center; gap:10px; border:0; background:var(--sky); color:#fff; font-family:var(--display); font-weight:600; font-size:19px; border-radius:999px; padding:10px 20px; box-shadow:0 6px 0 #2563c9}
+.bigplay:active{transform:translateY(4px); box-shadow:0 2px 0 #2563c9}
+.progress{font-weight:800; color:var(--muted); font-size:14px}
+.next{border:0; background:var(--ink); color:#fff; border-radius:999px; padding:9px 18px; font-weight:800; margin-top:12px}
+.feedback{min-height:24px; font-weight:800; margin-top:8px}
+.feedback.good{color:var(--leaf)} .feedback.bad{color:var(--tomato)}
+.correction{margin-top:8px; background:#eefaf3; border-radius:12px; padding:8px 12px; font-weight:700}
+
+/* shapes game */
+.shape-opts{display:grid; grid-template-columns:repeat(auto-fill,minmax(88px,1fr)); gap:10px; margin-top:10px}
+.sbtn{aspect-ratio:1; border:3px solid var(--line); border-radius:18px; background:var(--paper); display:grid; place-items:center}
+.sbtn.ok{border-color:var(--leaf); box-shadow:0 0 0 4px #bff0d6; animation:pop .45s}
+.sbtn.no{border-color:var(--tomato); animation:shake .4s}
+.shp{display:block}
+
+/* memory */
+.mem{display:grid; grid-template-columns:repeat(4,1fr); gap:10px}
+@media (max-width:520px){.mem{grid-template-columns:repeat(3,1fr)}}
+.mcard{aspect-ratio:1; perspective:600px; border:0; background:none; padding:0}
+.mcard .in{position:relative; width:100%; height:100%; transition:transform .45s; transform-style:preserve-3d}
+.mcard.open .in,.mcard.found .in{transform:rotateY(180deg)}
+.mcard .fr,.mcard .bk{position:absolute; inset:0; border-radius:16px; backface-visibility:hidden; display:grid; place-items:center; overflow:hidden}
+.mcard .fr{background:
+   repeating-linear-gradient(90deg, rgba(239,75,75,.5) 0 12px, transparent 12px 24px),
+   repeating-linear-gradient(0deg, rgba(239,75,75,.5) 0 12px, transparent 12px 24px), #fff; font-size:30px}
+.mcard .bk{transform:rotateY(180deg); background:var(--paper); border:3px solid var(--line)}
+.mcard .bk img{width:100%; height:100%; object-fit:cover}
+.mcard .bk span{font-family:var(--display); font-weight:700; font-size:clamp(14px,3.6vw,20px); padding:4px; text-align:center}
+.mcard.found .bk{border-color:var(--leaf); box-shadow:0 0 0 3px #bff0d6}
+
+/* sort un/une */
+.sortgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(135px,1fr)); gap:10px}
+.sitem{background:var(--paper); border:2.5px solid var(--line); border-radius:18px; overflow:hidden; text-align:center}
+.sitem img{width:100%; aspect-ratio:4/3; object-fit:cover; display:block}
+.sitem .nm{font-family:var(--display); font-weight:700; font-size:19px; padding:6px 4px 2px}
+.sitem .row{display:flex; gap:6px; justify-content:center; padding:4px 6px 10px}
+.sitem .row .opt{padding:6px 14px}
+.sitem.done-m{border-color:var(--boy); background:#eef4ff}
+.sitem.done-f{border-color:var(--girl); background:#fff0f7}
+.ob-m{color:var(--boy)} .ob-f{color:var(--girl)}
+
+/* sandwich */
+.sw{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start}
+@media (max-width:620px){.sw{grid-template-columns:1fr}}
+.stack{background:var(--soft); border-radius:22px; min-height:260px; padding:14px; display:flex; flex-direction:column-reverse; align-items:center; gap:4px; justify-content:flex-start}
+.layer{width:86%; height:46px; border-radius:24px; overflow:hidden; box-shadow:0 3px 8px rgba(0,0,0,.15); animation:drop .5s cubic-bezier(.3,1.6,.6,1)}
+.layer img{width:100%; height:100%; object-fit:cover}
+@keyframes drop{from{transform:translateY(-80px); opacity:0}}
+.swlist{display:flex; flex-direction:column; gap:8px}
+.swrow{background:var(--paper); border:2px solid var(--line); border-radius:16px; padding:6px; display:flex; gap:10px; align-items:center}
+.swrow img{width:56px; height:56px; object-fit:cover; border-radius:12px}
+.swrow .nm{font-family:var(--display); font-weight:700; font-size:18px; flex:1; min-width:0}
+.swrow .opt{padding:6px 10px; font-size:15px}
+.swrow.done{border-color:var(--leaf); background:#f3fcf7}
+.sentence{margin-top:12px; background:var(--paper); border:2.5px dashed var(--carrot); border-radius:16px; padding:10px 14px; font-weight:800; font-size:18px}
+
+/* word order */
+.tiles,.answer{display:flex; flex-wrap:wrap; gap:8px; min-height:52px; padding:8px; border-radius:16px}
+.answer{background:var(--soft); border:2.5px dashed #cfc4e6; margin-top:8px}
+.tile{border:0; border-radius:14px; padding:9px 14px; font-weight:800; font-size:18px; color:#fff; box-shadow:0 4px 0 rgba(0,0,0,.15)}
+.tile.ne{background:var(--girl)} .tile.v{background:var(--grape)} .tile.n{background:var(--sky)} .tile.o{background:var(--leaf)}
+.orow{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+
+/* oral */
+.oral{display:grid; grid-template-columns:repeat(auto-fill,minmax(135px,1fr)); gap:10px}
+.oitem{background:var(--paper); border:2.5px solid var(--line); border-radius:18px; overflow:hidden; text-align:center}
+.oitem img{width:100%; aspect-ratio:4/3; object-fit:cover; display:block}
+.oitem .row{display:flex; gap:6px; justify-content:center; padding:8px}
+.oitem .row button{border:0; border-radius:12px; padding:6px 10px; font-size:22px; background:var(--soft)}
+.oitem.liked{border-color:var(--leaf)} .oitem.disliked{border-color:var(--tomato)}
+.oitem .said{font-weight:800; font-size:14px; padding:0 6px 8px; min-height:20px}
+
+/* basket */
+.basket-sel .popt.sel{border-color:var(--carrot); box-shadow:0 0 0 4px #ffd9bf}
+.basket-sel .popt.sel::after{content:"🧺"; position:absolute; top:4px; right:6px; font-size:22px}
+
+/* transcriptions */
+.family{display:grid; grid-template-columns:repeat(6,1fr); gap:10px}
+@media (max-width:600px){.family{grid-template-columns:repeat(3,1fr)}}
+.fam{text-align:center}
+.fam img{width:100%; aspect-ratio:1; object-fit:cover; border-radius:18px; border:3px solid var(--fc)}
+.fam b{display:block; font-family:var(--display); font-size:17px}
+.track{background:#f2f7ff; border:2px solid #cfe0ff; border-radius:22px; padding:14px 16px; margin:16px 0}
+.track h4{font-family:var(--display); font-size:19px; margin:0 0 8px; display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.piste{background:var(--sky); color:#fff; border-radius:999px; padding:3px 12px; font-size:14px}
+.tl{display:flex; gap:10px; align-items:flex-start; border-left:4px solid #9cc0ff; padding:5px 0 5px 10px; margin:6px 0}
+.tl .who{font-weight:800; color:var(--wc,var(--sky))}
+.tl.d{border-left-color:var(--wc)}
+
+/* à revoir */
+.recap{background:var(--paper); border:3px solid var(--grape); border-radius:24px; padding:18px 20px}
+.recap .total{font-family:var(--display); font-size:24px}
+.miss{list-style:none; padding:0; margin:12px 0 0; display:flex; flex-direction:column; gap:8px}
+.miss li{background:var(--soft); border-radius:14px; padding:10px 14px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:center}
+.miss a{background:var(--grape); color:#fff; text-decoration:none; font-weight:800; border-radius:999px; padding:5px 12px; font-size:14px; white-space:nowrap}
+.empty{color:var(--muted)}
+
+/* celebration layer */
+#fx{position:fixed; inset:0; pointer-events:none; z-index:100}
+.bigemoji{position:fixed; left:50%; top:42%; transform:translate(-50%,-50%) scale(.2); font-size:110px; z-index:101; pointer-events:none; animation:bigpop 1.1s ease-out forwards}
+@keyframes bigpop{30%{transform:translate(-50%,-50%) scale(1.2) rotate(-8deg); opacity:1} 70%{transform:translate(-50%,-50%) scale(1) rotate(6deg); opacity:1} 100%{transform:translate(-50%,-80%) scale(.8); opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important; transition:none!important}}
+footer{margin-top:40px; text-align:center; color:var(--muted); font-size:14px}
+</style>
+</head>
+<body>
+
+
+<canvas id="fx"></canvas>
+
+<div class="wrap">
+<div class="topbar">
+  <button class="pill entoggle" id="enAll" aria-pressed="false">👀 English</button>
+  <div class="pill score" id="score" aria-live="polite">⭐ <span id="scoreN">0</span></div>
+</div>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <img class="hero-photo" src="img/picnic.jpg" alt="Un pique-nique dans l’herbe">
+  <div class="hero-card">
+    <span class="tag">Unité 5 · Leçon 1</span>
+    <h1>Bon appétit !</h1>
+    <div class="sub">Tu as tout pour pique-niquer ? <button class="mini-say" data-say="Tu as tout pour pique-niquer ?" aria-label="Écouter">🔊</button>
+      <span class="en block-en">Have you got everything for a picnic?</span></div>
+    <p style="margin:10px 0 0"><b>🧺 J’ai tout : un couteau, une fourchette, une cuillère, une assiette et un verre.</b>
+      <button class="mini-say" data-say="J’ai tout : un couteau, une fourchette, une cuillère, une assiette et un verre." aria-label="Écouter">🔊</button>
+      <span class="en block-en">I’ve got everything: a knife, a fork, a spoon, a plate and a glass.</span></p>
+  </div>
+</header>
+<div class="gingham"></div>
+
+<!-- ================= VOCABULAIRE ================= -->
+<section id="vocab">
+<div class="band voc"><span class="big">🧺</span><div><div class="kicker">Vocabulaire</div><h2>Les mots du pique-nique</h2><span class="en">The picnic words</span></div></div>
+
+<div class="part" id="v1"><span class="num" style="background:var(--tomato)">1</span><h3>Pour pique-niquer</h3><span class="en">Picnic things</span></div>
+<p class="intro">Touche 🔊 : écoute et répète ! <span class="en">Tap 🔊: listen and repeat!</span></p>
+<div class="cards" id="cards1"></div>
+
+<div class="game" id="g1">
+  <div class="game-head"><span class="game-badge">Jeu 1</span><h4>Écoute et touche !</h4></div>
+  <p class="consigne">Écoute bien et touche la bonne photo. <span class="en">Listen carefully and tap the right photo.</span></p>
+  <div class="listen-game" data-set="obj1"></div>
+</div>
+
+<div class="game" id="g2">
+  <div class="game-head"><span class="game-badge">Jeu 2</span><h4>Devinettes !</h4></div>
+  <p class="consigne">Écoute la devinette. C’est quoi ? Touche la photo. <span class="en">Listen to the riddle. What is it? Tap the photo.</span></p>
+  <div id="riddles"></div>
+</div>
+
+<div class="part" id="v2"><span class="num" style="background:var(--carrot)">2</span><h3>À manger… et la tortue !</h3><span class="en">Food… and the tortoise!</span></div>
+<div class="cards small" id="cards2"></div>
+
+<div class="game" id="g3">
+  <div class="game-head"><span class="game-badge">Jeu 3</span><h4>Le memory du pique-nique</h4></div>
+  <p class="consigne">Retourne deux cartes : trouve la photo et son mot ! <span class="en">Turn over two cards: find the photo and its word!</span></p>
+  <div class="mem" id="memory"></div>
+  <div class="feedback" id="memfb"></div>
+</div>
+
+<div class="part" id="v3"><span class="num" style="background:var(--grape)">3</span><h3>Pour décrire</h3><span class="en">Describing words</span></div>
+<div class="chips" id="chips3"></div>
+
+<div class="game" id="g4">
+  <div class="game-head"><span class="game-badge">Jeu 4</span><h4>Formes et couleurs</h4></div>
+  <p class="consigne">Écoute et touche la bonne forme. <span class="en">Listen and tap the right shape.</span></p>
+  <div id="shapes"></div>
+</div>
+
+<div class="part" id="v4"><span class="num" style="background:var(--melon)">4</span><h3>Petites phrases utiles</h3><span class="en">Useful little phrases</span></div>
+<div class="chips" id="chips4"></div>
+
+<div class="game" id="g5">
+  <div class="game-head"><span class="game-badge">Jeu 5</span><h4>Qu’est-ce que tu dis ?</h4></div>
+  <p class="consigne">Lis la situation et choisis la bonne phrase. <span class="en">Read the situation and choose the right phrase.</span></p>
+  <div id="situations"></div>
+</div>
+</section>
+
+<!-- ================= GRAMMAIRE ================= -->
+<section id="grammaire">
+<div class="band gram"><span class="big">🧩</span><div><div class="kicker">Grammaire</div><h2>Comment ça marche ?</h2><span class="en">How does it work?</span></div></div>
+
+<!-- RULE 1 -->
+<article class="rule" id="r1" style="--rc:var(--sky)">
+  <div class="rule-head"><div class="k">RÈGLE 1</div><h3>un, une · le, la, l’, les</h3><span class="en" style="color:#fff">little words before nouns</span></div>
+  <div class="rule-body">
+    <div><span class="lbl">Idée</span></div>
+    <p style="margin:0">En français, chaque mot est <b class="m">masculin</b> 💙 ou <b class="f">féminin</b> 💗. Le petit mot devant te le dit !
+      <span class="en block-en">In French, every noun is a boy word or a girl word. The little word in front tells you which one.</span></p>
+    <div><span class="lbl">Forme</span></div>
+    <div class="tablewrap"><table>
+      <tr><th></th><th>un / une <span class="en">a / an</span></th><th>le / la / l’ / les <span class="en">the</span></th></tr>
+      <tr><td class="m">💙 masculin</td><td class="m">un couteau</td><td class="m">le couteau</td></tr>
+      <tr><td class="f">💗 féminin</td><td class="f">une fourchette</td><td class="f">la fourchette</td></tr>
+      <tr><td class="el">devant a, e, i, o, u</td><td class="f">une assiette</td><td class="el">l’assiette</td></tr>
+      <tr><td class="p">deux ou plus</td><td class="p">des cuillères</td><td class="p">les cuillères</td></tr>
+    </table></div>
+    <div><span class="lbl">Quand ?</span></div>
+    <p style="margin:0"><b>un / une</b> = une chose, n’importe laquelle. <b>le / la / l’ / les</b> = la chose qu’on connaît.
+      <span class="en block-en">un / une = a, for any one thing. le / la / l’ / les = the, for a thing we already know.</span></p>
+    <div><span class="lbl">Exemples</span></div>
+    <div class="exs">
+      <div class="exl"><button class="mini-say" data-say="J’ai tout : un couteau, une fourchette, une cuillère, une assiette et un verre.">🔊</button><div>J’ai tout : <b class="m">un</b> couteau, <b class="f">une</b> fourchette, <b class="f">une</b> cuillère, <b class="f">une</b> assiette et <b class="m">un</b> verre.<span class="en block-en">I’ve got everything: a knife, a fork, a spoon, a plate and a glass.</span></div></div>
+      <div class="exl"><button class="mini-say" data-say="Montre le couteau. Montre les cuillères.">🔊</button><div>Montre <b class="m">le</b> couteau. Montre <b class="p">les</b> cuillères.<span class="en block-en">Point to the knife. Point to the spoons.</span></div></div>
+    </div>
+    <div class="trick"><div class="k">⭐ ASTUCE</div>Apprends toujours le mot avec son petit mot : pas « couteau », mais <b class="m">un couteau</b> ! Les mots masculins en <b class="m">bleu</b>, les mots féminins en <b class="f">rose</b>.
+      <span class="en block-en">Always learn a new word with its little word: not “couteau”, but “un couteau”. Boy words in blue, girl words in pink!</span></div>
+  </div>
+</article>
+
+<div class="game" id="g6">
+  <div class="game-head"><span class="game-badge">Jeu 6</span><h4>Un 💙 ou une 💗 ?</h4></div>
+  <p class="consigne">Touche <b class="m">un</b> ou <b class="f">une</b> pour chaque photo. <span class="en">Tap un or une for each photo.</span></p>
+  <div class="sortgrid" id="sortUn"></div>
+</div>
+
+<div class="game" id="g7">
+  <div class="game-head"><span class="game-badge">Jeu 7</span><h4>le, la, l’ ou les ?</h4></div>
+  <p class="consigne">Choisis le bon petit mot. <span class="en">Choose the right little word.</span></p>
+  <div id="leLa"></div>
+</div>
+
+<!-- RULE 2 -->
+<article class="rule" id="r2" style="--rc:#13a99b">
+  <div class="rule-head"><div class="k">RÈGLE 2</div><h3>Il est rond · Elle est ronde</h3><span class="en" style="color:#fff">describing things</span></div>
+  <div class="rule-body">
+    <div><span class="lbl">Idée</span></div>
+    <p style="margin:0">Pour décrire une chose, dis <b class="m">il</b> pour un mot masculin et <b class="f">elle</b> pour un mot féminin. Le mot qui décrit change aussi !
+      <span class="en block-en">To describe a thing, use il (it) for a boy word and elle (it) for a girl word. The describing word changes too!</span></p>
+    <div><span class="formula m">il est + mot</span><span class="formula f">elle est + mot + e</span></div>
+    <div><span class="lbl">Forme</span></div>
+    <div class="tablewrap"><table>
+      <tr><th>le couteau → il</th><th>la nappe → elle</th><th><span class="en">English</span></th></tr>
+      <tr><td class="m">rond</td><td class="f">ronde</td><td><span class="en">round</span></td></tr>
+      <tr><td class="m">grand</td><td class="f">grande</td><td><span class="en">big</span></td></tr>
+      <tr><td class="m">petit</td><td class="f">petite</td><td><span class="en">small</span></td></tr>
+      <tr><td class="m">jaune</td><td class="f">jaune</td><td><span class="en">yellow</span></td></tr>
+      <tr><td class="m">orange</td><td class="f">orange</td><td><span class="en">orange</span></td></tr>
+    </table></div>
+    <div class="spell"><b>Orthographe :</b> féminin → on ajoute <b class="f">-e</b> : grand → grand<b class="f">e</b>. Le mot finit déjà par <b>-e</b> (jaune) ? Il ne change pas. <b>orange</b> ne change jamais. Deux ou plus → on ajoute <b class="p">-s</b> : elles sont petite<b class="p">s</b>.
+      <span class="en block-en">Girl word → add -e: grand → grande. If it already ends in -e (jaune), it stays the same. “orange” never changes. Two or more → add -s: elles sont petites.</span></div>
+    <div><span class="lbl">Quand ?</span></div>
+    <p style="margin:0">Pour dire comment est une chose : sa taille, sa forme, sa couleur. Avec <b>c’est</b>, on garde la forme courte : <b>C’est rond.</b>
+      <span class="en block-en">When you say what a thing looks like: its size, its shape, its colour. With “c’est” (it’s), keep the short form: C’est rond.</span></p>
+    <div><span class="lbl">Exemples</span></div>
+    <div class="exs">
+      <div class="exl"><button class="mini-say" data-say="C’est rond, c’est bleu. Montre l’assiette.">🔊</button><div><b class="hl">C’est rond</b>, c’est bleu. Montre l’assiette.<span class="en block-en">It’s round, it’s blue. Point to the plate.</span></div></div>
+      <div class="exl"><button class="mini-say" data-say="L’assiette est ronde. La cuillère est grande.">🔊</button><div>L’assiette <b class="hl">est ronde</b>. La cuillère <b class="hl">est grande</b>.<span class="en block-en">The plate is round. The spoon is big.</span></div></div>
+      <div class="exl"><button class="mini-say" data-say="Il est orange et carré. C’est le fromage.">🔊</button><div><b class="hl">Il est</b> orange et <b class="hl">carré</b>. C’est le fromage.<span class="en block-en">It’s orange and square. It’s the cheese.</span></div></div>
+      <div class="exl"><button class="mini-say" data-say="Elles sont petites ou grandes. Montre les cuillères.">🔊</button><div><b class="hl">Elles sont petites</b> ou <b class="hl">grandes</b>. Montre les cuillères.<span class="en block-en">They’re small or big. Point to the spoons.</span></div></div>
+    </div>
+    <div class="trick"><div class="k">⭐ ASTUCE</div>Le <b class="f">e</b> est comme un nœud 🎀 sur un mot féminin : grand 🎀 grand<b class="f">e</b>. Écoute : on entend le <b>d</b> dans grande !
+      <span class="en block-en">The e is like a bow on a girl word: grand 🎀 grande. Listen: you can hear the d in grande!</span></div>
+  </div>
+</article>
+
+<div class="game" id="g8">
+  <div class="game-head"><span class="game-badge">Jeu 8</span><h4>Il ou elle ? Rond ou ronde ?</h4></div>
+  <p class="consigne">Complète la phrase avec le bon mot. <span class="en">Complete the sentence with the right word.</span></p>
+  <div id="rondRonde"></div>
+</div>
+
+<!-- RULE 3 -->
+<article class="rule" id="r3" style="--rc:var(--carrot)">
+  <div class="rule-head"><div class="k">RÈGLE 3</div><h3>du, de la, des</h3><span class="en" style="color:#fff">some food</span></div>
+  <div class="rule-body">
+    <div><span class="lbl">Idée</span></div>
+    <p style="margin:0">Quand tu manges ou demandes <b>un peu</b> de quelque chose, utilise un petit mot spécial.
+      <span class="en block-en">When you eat or ask for some food, use a little “some” word.</span></p>
+    <div><span class="lbl">Forme</span></div>
+    <div class="tablewrap"><table>
+      <tr><th></th><th>petit mot <span class="en">some</span></th><th>exemples</th></tr>
+      <tr><td class="m">💙 masculin</td><td class="m">du</td><td>du pain, du fromage, du poulet</td></tr>
+      <tr><td class="f">💗 féminin</td><td class="f">de la</td><td>de la salade</td></tr>
+      <tr><td class="p">deux ou plus</td><td class="p">des</td><td>des œufs, des tomates</td></tr>
+    </table></div>
+    <div><span class="lbl">Quand ?</span></div>
+    <p style="margin:0">Pour la nourriture qu’on ne compte pas : un peu de fromage, du poulet, des œufs. En français, le petit mot est <b>toujours</b> là !
+      <span class="en block-en">For food when you don’t count it: a bit of cheese, some chicken, some eggs. In English we often say nothing at all, but in French the little word is always there!</span></p>
+    <div><span class="lbl">Exemples</span></div>
+    <div class="exs">
+      <div class="exl"><button class="mini-say" data-say="Des œufs et du fromage, s’il te plaît !">🔊</button><div><b class="hl">Des</b> œufs et <b class="hl">du</b> fromage, s’il te plaît !<span class="en block-en">Eggs and cheese, please!</span></div></div>
+      <div class="exl"><button class="mini-say" data-say="Alice, tu me donnes du poulet, s’il te plaît.">🔊</button><div>Alice, tu me donnes <b class="hl">du</b> poulet, s’il te plaît.<span class="en block-en">Alice, can you give me some chicken, please?</span></div></div>
+      <div class="exl"><button class="mini-say" data-say="Léo veut de la salade.">🔊</button><div>Léo veut <b class="hl">de la</b> salade.<span class="en block-en">Léo wants some lettuce.</span></div></div>
+    </div>
+    <div class="trick"><div class="k">⭐ ASTUCE</div><b>de + le</b> se collent et deviennent <b class="m">du</b>. On ne dit jamais « de le » : <b>du fromage</b> ✔
+      <span class="en block-en">de + le join together and become du. We never say “de le”: du fromage ✔</span></div>
+  </div>
+</article>
+
+<div class="game" id="g9">
+  <div class="game-head"><span class="game-badge">Jeu 9</span><h4>Fais ton sandwich ! 🥪</h4></div>
+  <p class="consigne">Choisis <b class="m">du</b>, <b class="f">de la</b> ou <b class="p">des</b> pour chaque ingrédient : il va dans ton sandwich ! <span class="en">Choose du, de la or des for each ingredient: it goes into your sandwich!</span></p>
+  <div class="sw">
+    <div class="swlist" id="swlist"></div>
+    <div><div class="stack" id="stack"></div><div class="sentence" id="swsent">Je veux un sandwich avec…</div></div>
+  </div>
+</div>
+
+<!-- RULE 4 -->
+<article class="rule" id="r4" style="--rc:var(--grape)">
+  <div class="rule-head"><div class="k">RÈGLE 4</div><h3>je veux, tu veux, il veut</h3><span class="en" style="color:#fff">the verb vouloir (to want)</span></div>
+  <div class="rule-body">
+    <div><span class="lbl">Idée</span></div>
+    <p style="margin:0"><b>Vouloir</b>, c’est dire ce que tu as envie de manger.
+      <span class="en block-en">Vouloir means to want. Use it to say what you would like to eat.</span></p>
+    <div><span class="lbl">Forme</span></div>
+    <div class="tablewrap"><table>
+      <tr><th>Français</th><th></th><th><span class="en">English</span></th></tr>
+      <tr><td>je <b class="el">veux</b></td><td><button class="mini-say" data-say="je veux">🔊</button></td><td><span class="en">I want</span></td></tr>
+      <tr><td>tu <b class="el">veux</b></td><td><button class="mini-say" data-say="tu veux">🔊</button></td><td><span class="en">you want</span></td></tr>
+      <tr><td>il / elle <b class="el">veut</b></td><td><button class="mini-say" data-say="il veut, elle veut">🔊</button></td><td><span class="en">he / she wants</span></td></tr>
+    </table></div>
+    <div class="spell"><b>je</b> et <b>tu</b> → veu<b class="el">x</b> · <b>il</b> et <b>elle</b> → veu<b class="el">t</b>. Les trois se prononcent pareil !
+      <span class="en block-en">je and tu → veux · il and elle → veut. All three sound exactly the same!</span></div>
+    <div><span class="lbl">Quand ?</span></div>
+    <p style="margin:0">Pour demander : <span class="formula">Tu veux + nourriture ?</span> Pour répondre : <span class="formula">Je veux + nourriture.</span> Ajoute <b>s’il te plaît</b> pour être poli !
+      <span class="en block-en">To ask: Tu veux + food? To answer: Je veux + food. Add “s’il te plaît” to be polite.</span></p>
+    <div><span class="lbl">Exemples</span></div>
+    <div class="exs">
+      <div class="exl"><button class="mini-say" data-say="Maggie, qu’est-ce que tu veux sur ton pain ?">🔊</button><div>Maggie, qu’est-ce que tu <b class="hl">veux</b> sur ton pain ?<span class="en block-en">Maggie, what do you want on your bread?</span></div></div>
+      <div class="exl"><button class="mini-say" data-say="Tu veux des tomates ?">🔊</button><div>Tu <b class="hl">veux</b> des tomates ?<span class="en block-en">Do you want some tomatoes?</span></div></div>
+      <div class="exl"><button class="mini-say" data-say="Moi, je veux un sandwich avec du poulet et des tomates.">🔊</button><div>Moi, je <b class="hl">veux</b> un sandwich avec du poulet et des tomates.<span class="en block-en">I want a sandwich with chicken and tomatoes.</span></div></div>
+      <div class="exl"><button class="mini-say" data-say="Maggie veut des œufs et du fromage sur son pain.">🔊</button><div>Maggie <b class="hl">veut</b> des œufs et du fromage sur son pain.<span class="en block-en">Maggie wants eggs and cheese on her bread.</span></div></div>
+    </div>
+    <div class="trick"><div class="k">⭐ ASTUCE</div><b>veux</b> et <b>veut</b> font le même son. Seule la dernière lettre change sur le papier : <b class="el">x</b> pour je et tu, <b class="el">t</b> pour il et elle.
+      <span class="en block-en">veux and veut sound the same. Only the last letter changes on paper: x for je and tu, t for il and elle.</span></div>
+  </div>
+</article>
+
+<div class="game" id="g10">
+  <div class="game-head"><span class="game-badge">Jeu 10</span><h4>veux ou veut ?</h4></div>
+  <p class="consigne">Choisis la bonne forme, puis écoute la phrase. <span class="en">Choose the right form, then listen to the sentence.</span></p>
+  <div id="veux"></div>
+</div>
+
+<!-- RULE 5 -->
+<article class="rule" id="r5" style="--rc:var(--girl)">
+  <div class="rule-head"><div class="k">RÈGLE 5</div><h3>J’aime · Je n’aime pas</h3><span class="en" style="color:#fff">saying yes and no</span></div>
+  <div class="rule-body">
+    <div><span class="lbl">Idée</span></div>
+    <p style="margin:0">Pour dire <b>non</b>, mets <b class="f">ne</b> avant le verbe et <b class="f">pas</b> après.
+      <span class="en block-en">To say no in French, put ne before the verb and pas after it.</span></p>
+    <div><span class="lbl">Forme</span></div>
+    <div><span class="formula">je <b class="f">ne</b> + verbe + <b class="f">pas</b></span><span class="formula">je <b class="f">n’</b>aime <b class="f">pas</b></span></div>
+    <div class="spell"><b class="f">ne</b> devient <b class="f">n’</b> devant a, e, i, o, u : je <b class="f">n’</b>aime pas. Pareil pour <b>je</b>, qui devient <b>j’</b> : <b>j’aime</b>.
+      <span class="en block-en">ne becomes n’ before a, e, i, o, u: je n’aime pas. In the same way, je becomes j’: j’aime.</span></div>
+    <div><span class="lbl">Quand ?</span></div>
+    <p style="margin:0">Pour dire que tu n’aimes pas une chose, ou que tu ne la veux pas.
+      <span class="en block-en">To say you don’t like something, or don’t want it.</span></p>
+    <div><span class="lbl">Exemples</span></div>
+    <div class="exs">
+      <div class="exl"><button class="mini-say" data-say="J’aime pique-niquer.">🔊</button><div><b class="hl">J’aime</b> pique-niquer.<span class="en block-en">I love having picnics.</span></div></div>
+      <div class="exl"><button class="mini-say" data-say="Non, je n’aime pas les tomates.">🔊</button><div>Non, je <b class="hl">n’</b>aime <b class="hl">pas</b> les tomates.<span class="en block-en">No, I don’t like tomatoes.</span></div></div>
+      <div class="exl"><button class="mini-say" data-say="Maggie ne veut pas les tomates.">🔊</button><div>Maggie <b class="hl">ne</b> veut <b class="hl">pas</b> les tomates.<span class="en block-en">Maggie doesn’t want the tomatoes.</span></div></div>
+    </div>
+    <div class="trick"><div class="k">⭐ ASTUCE</div><b>ne … pas</b>, c’est un sandwich 🥪 : <b class="f">ne</b> et <b class="f">pas</b> sont le pain, et le verbe est au milieu !
+      <span class="en block-en">ne … pas is a sandwich: ne and pas are the bread, and the verb is the filling in the middle!</span></div>
+  </div>
+</article>
+
+<div class="game" id="g11">
+  <div class="game-head"><span class="game-badge">Jeu 11</span><h4>Le sandwich ne … pas 🥪</h4></div>
+  <p class="consigne">Touche les étiquettes dans le bon ordre pour faire la phrase. <span class="en">Tap the labels in the right order to build the sentence.</span></p>
+  <div id="order"></div>
+</div>
+
+<div class="game" id="g12">
+  <div class="game-head"><span class="game-badge">Jeu 12</span><h4>Et toi ? À l’oral ! 🎤</h4></div>
+  <p class="consigne">Pour chaque photo, dis à voix haute <b>J’aime…</b> 😋 ou <b>Je n’aime pas…</b> 😝, puis touche ton choix. <span class="en">For each photo, say out loud “J’aime…” or “Je n’aime pas…”, then tap your choice.</span></p>
+  <div class="oral" id="oral"></div>
+</div>
+</section>
+
+<!-- ================= TRANSCRIPTIONS ================= -->
+<section id="ecoute">
+<div class="band trans"><span class="big">🎧</span><div><div class="kicker">Transcriptions</div><h2>Écoute !</h2><span class="en">Listen!</span></div></div>
+
+<div class="part"><span class="num" style="background:var(--sky)">★</span><h3>La famille Legrand</h3><span class="en">The Legrand family</span></div>
+<div class="family">
+  <div class="fam" style="--fc:var(--girl)"><img src="img/jeanne.jpg" alt=""><b>Jeanne</b><span class="en">Mum</span></div>
+  <div class="fam" style="--fc:var(--sky)"><img src="img/luc.jpg" alt=""><b>Luc</b><span class="en">Dad</span></div>
+  <div class="fam" style="--fc:var(--grape)"><img src="img/alice.jpg" alt=""><b>Alice</b></div>
+  <div class="fam" style="--fc:#13a99b"><img src="img/leo.jpg" alt=""><b>Léo</b></div>
+  <div class="fam" style="--fc:var(--carrot)"><img src="img/maggie.jpg" alt=""><b>Maggie</b></div>
+  <div class="fam" style="--fc:var(--leaf)"><img src="img/tortue_bd.jpg" alt=""><b>la tortue</b><span class="en">the tortoise</span></div>
+</div>
+
+<div id="tracks"></div>
+
+<div class="game" id="g13">
+  <div class="game-head"><span class="game-badge">Jeu 13</span><h4>Qui veut manger quoi ?</h4></div>
+  <p class="consigne">Écoute la piste 27, puis touche la bonne personne. <span class="en">Listen to track 27, then tap the right person.</span></p>
+  <div id="qui"></div>
+</div>
+
+<div class="game" id="g14">
+  <div class="game-head"><span class="game-badge">Jeu 14</span><h4>Vrai ou faux ?</h4></div>
+  <p class="consigne">Écoute la phrase. Vrai ou faux ? Si c’est faux, dis la bonne phrase à voix haute ! <span class="en">Listen to the sentence. True or false? If it’s false, say the right sentence out loud!</span></p>
+  <div id="vf"></div>
+</div>
+</section>
+
+<!-- ================= FINAL ================= -->
+<section id="final">
+<div class="band final"><span class="big">🏆</span><div><div class="kicker">Le grand défi</div><h2>Prépare le panier !</h2><span class="en">The big challenge: pack the basket!</span></div></div>
+<div class="game" id="g15" style="border-color:var(--carrot)">
+  <p class="consigne">Écoute Jeanne. Touche toutes les choses pour le panier 🧺, puis touche « C’est prêt ! ». <span class="en">Listen to Jeanne. Tap everything for the basket, then tap “C’est prêt !”.</span></p>
+  <div id="basket"></div>
+</div>
+</section>
+
+<!-- ================= À REVOIR ================= -->
+<section id="revoir">
+<div class="band revoir"><span class="big">📌</span><div><div class="kicker">À revoir</div><h2>Mes petits points à revoir</h2><span class="en">My little things to review</span></div></div>
+<div class="recap">
+  <div class="total">⭐ <span id="recapN">0</span> étoiles !</div>
+  <ul class="miss" id="missList"></ul>
+</div>
+</section>
+
+<footer>Le français avec Irène</footer>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const OBJ = {
+  couteau:{a:"un",le:"le",g:"m",w:"couteau",en:"a knife",s:"Attention, ça coupe.",se:"Careful, it cuts."},
+  fourchette:{a:"une",le:"la",g:"f",w:"fourchette",en:"a fork",s:"Attention, ça pique.",se:"Careful, it’s sharp."},
+  cuillere:{a:"une",le:"la",g:"f",w:"cuillère",en:"a spoon",s:"La cuillère est grande.",se:"The spoon is big."},
+  assiette:{a:"une",le:"l’",g:"f",w:"assiette",en:"a plate",s:"L’assiette est ronde.",se:"The plate is round."},
+  verre:{a:"un",le:"le",g:"m",w:"verre",en:"a glass",s:"Maggie est écrit sur le verre.",se:"Maggie’s name is on the glass."},
+  nappe:{a:"une",le:"la",g:"f",w:"nappe",en:"a tablecloth",s:"La nappe est jaune.",se:"The tablecloth is yellow."}
+};
+const FOOD = {
+  pain:{a:"le",g:"m",w:"pain",en:"bread",some:"du"},
+  fromage:{a:"le",g:"m",w:"fromage",en:"cheese",some:"du"},
+  poulet:{a:"le",g:"m",w:"poulet",en:"chicken",some:"du"},
+  oeufs:{a:"les",g:"p",w:"œufs",en:"eggs",some:"des"},
+  tomates:{a:"les",g:"p",w:"tomates",en:"tomatoes",some:"des"},
+  salade:{a:"la",g:"f",w:"salade",en:"lettuce",some:"de la"},
+  sandwich:{a:"un",g:"m",w:"sandwich",en:"a sandwich"},
+  tortue:{a:"la",g:"f",w:"tortue",en:"the tortoise"}
+};
+const RULES = {v1:"Vocabulaire · Pour pique-niquer",v2:"Vocabulaire · À manger",v3:"Vocabulaire · Pour décrire",v4:"Petites phrases utiles",
+  r1:"Règle 1 · un, une, le, la, l’, les",r2:"Règle 2 · il est rond, elle est ronde",r3:"Règle 3 · du, de la, des",r4:"Règle 4 · je veux, il veut",r5:"Règle 5 · ne … pas",ecoute:"Écoute · la famille Legrand"};
+const gcls = g => g==="m"?"m":g==="f"?"f":"p";
+const img = k => `img/${k}.jpg`;
+
+/* ================= AUDIO ================= */
+function h(t){t=t.normalize("NFC");let x=5381;for(let i=0;i<t.length;i++){x=((x*33)^t.charCodeAt(i))>>>0}return x.toString(16)}
+const player = new Audio(); let playingBtn=null;
+function say(text, btn){
+  try{player.pause()}catch(e){}
+  if(playingBtn) playingBtn.classList.remove("playing");
+  player.src = "audio/"+h(text)+".mp3";
+  playingBtn = btn||null; if(btn) btn.classList.add("playing");
+  player.play().catch(()=>{ if(btn) btn.classList.remove("playing") });
+}
+player.addEventListener("ended",()=>{ if(playingBtn) playingBtn.classList.remove("playing"); playingBtn=null });
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-say]"); if(b){ e.preventDefault(); say(b.dataset.say,b) }
+});
+let actx=null;
+function chime(good){
+  try{
+    actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+    const notes = good?[784,988,1175,1568]:[330,262];
+    notes.forEach((f,i)=>{const o=actx.createOscillator(),g=actx.createGain();o.type=good?"triangle":"sine";o.frequency.value=f;
+      const t=actx.currentTime+i*(good?.08:.14);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+.35);
+      o.connect(g).connect(actx.destination);o.start(t);o.stop(t+.4)});
+  }catch(e){}
+}
+const PRAISE=["Bravo !","Super !","Génial !","Oui, c’est ça !","Excellent !","Très bien !"];
+
+/* ================= TRANSLATIONS ================= */
+function initEN(root=document){
+  root.querySelectorAll(".en:not([data-ready])").forEach(el=>{
+    el.dataset.ready=1; const t=el.innerHTML;
+    el.innerHTML=`<button class="b" type="button" aria-label="Show English">EN</button><span class="t">${t}</span>`;
+    if(allEN) el.classList.add("on");
+  });
+}
+let allEN=false;
+document.addEventListener("click",e=>{ const b=e.target.closest(".en .b"); if(b){ e.stopPropagation(); b.parentElement.classList.add("on") } }, true);
+document.getElementById("enAll").onclick=function(){
+  allEN=!allEN; this.setAttribute("aria-pressed",allEN);
+  document.querySelectorAll(".en").forEach(el=>el.classList.toggle("on",allEN));
+};
+
+/* ================= FX ================= */
+const cv=document.getElementById("fx"), cx=cv.getContext("2d"); let parts=[], running=false;
+function resize(){cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio}
+addEventListener("resize",resize); resize();
+const COLS=["#ef4b4b","#ffc93c","#2bb673","#3d8bfd","#8b5cf6","#ff6f91","#ff8a3d"];
+const EMO=["❤️","⭐","💖","✨","🌟","💗","🎉"];
+function burst(x,y,n=70){
+  const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches; if(reduce) n=12;
+  const d=devicePixelRatio;
+  for(let i=0;i<n;i++){
+    const a=Math.random()*Math.PI*2, v=4+Math.random()*9;
+    const emo=Math.random()<.32;
+    parts.push({x:x*d,y:y*d,vx:Math.cos(a)*v*d,vy:(Math.sin(a)*v-6)*d,r:Math.random()*6.28,vr:(Math.random()-.5)*.3,
+      c:COLS[i%COLS.length],e:emo?EMO[(Math.random()*EMO.length)|0]:null,s:(emo?22+Math.random()*16:7+Math.random()*7)*d,life:1});
+  }
+  if(!running){running=true;requestAnimationFrame(tick)}
+}
+function rain(){ // confetti from the top
+  const d=devicePixelRatio;
+  for(let i=0;i<110;i++) parts.push({x:Math.random()*cv.width,y:-20*d-Math.random()*200*d,vx:(Math.random()-.5)*3*d,vy:(2+Math.random()*4)*d,r:0,vr:(Math.random()-.5)*.3,
+    c:COLS[i%COLS.length],e:Math.random()<.3?EMO[(Math.random()*EMO.length)|0]:null,s:(10+Math.random()*14)*d,life:1.6});
+  if(!running){running=true;requestAnimationFrame(tick)}
+}
+function tick(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  parts.forEach(p=>{p.vy+=.25*devicePixelRatio;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.life-=.009;
+    cx.save();cx.globalAlpha=Math.max(0,Math.min(1,p.life));cx.translate(p.x,p.y);cx.rotate(p.r);
+    if(p.e){cx.font=`${p.s}px serif`;cx.textAlign="center";cx.fillText(p.e,0,0)}else{cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2)}
+    cx.restore()});
+  parts=parts.filter(p=>p.life>0&&p.y<cv.height+60);
+  if(parts.length) requestAnimationFrame(tick); else {running=false;cx.clearRect(0,0,cv.width,cv.height)}
+}
+function bigEmoji(){
+  const e=document.createElement("div"); e.className="bigemoji"; e.textContent=["🌟","💖","🎉","🥳","🏅","🍓"][(Math.random()*6)|0];
+  document.body.appendChild(e); setTimeout(()=>e.remove(),1200);
+}
+
+/* ================= SCORE & REVIEW ================= */
+let score=0; const missed=new Map(); // key -> {rule,label}
+function win(el,big){
+  score++; document.getElementById("scoreN").textContent=score; document.getElementById("recapN").textContent=score;
+  const s=document.getElementById("score"); s.classList.remove("bump"); void s.offsetWidth; s.classList.add("bump");
+  const r=el?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};
+  burst(r.left+r.width/2, r.top+r.height/2, big?110:70);
+  if(big){rain(); bigEmoji()}
+  chime(true);
+  setTimeout(()=>say(PRAISE[(Math.random()*PRAISE.length)|0]), 380);
+}
+function lose(el,rule,label){
+  chime(false);
+  setTimeout(()=>say("Essaie encore !"),250);
+  if(rule&&label&&!missed.has(label)){missed.set(label,rule);renderMiss()}
+}
+function renderMiss(){
+  const ul=document.getElementById("missList");
+  if(!missed.size){ul.innerHTML=`<li class="empty">Rien à revoir pour l’instant… continue ! <span class="en">Nothing to review yet… keep going!</span></li>`;initEN(ul);return}
+  ul.innerHTML=[...missed].map(([lab,rule])=>`<li><span>✏️ ${lab}</span><a href="#${rule}">Revoir : ${RULES[rule]} ↑</a></li>`).join("");
+}
+
+/* ================= GENERIC MCQ ================= */
+/* item: {q, qen, say, opts:[...], a:index, rule, after (sentence to say when right), photo, correct} */
+function mcq(box, items, opts={}){
+  items.forEach((it,i)=>{
+    const d=document.createElement("div"); d.className="q";
+    const sayBtn = it.say?`<button class="mini-say" data-say="${it.say}" aria-label="Écouter">🔊</button>`:"";
+    d.innerHTML=`<div class="qtext"><span>${i+1}.</span>${sayBtn}<span>${it.q||""}</span>${it.qen?`<span class="en">${it.qen}</span>`:""}</div>`+
+      (it.photo?`<img src="${img(it.photo)}" alt="" style="width:120px;border-radius:14px;margin-top:8px;display:block">`:"")+
+      `<div class="${it.photos?'photo-opts':'opts'}"></div><div class="extra"></div>`;
+    const o=d.querySelector(it.photos?".photo-opts":".opts"); let first=true;
+    it.opts.forEach((t,j)=>{
+      const b=document.createElement("button");
+      if(it.photos){b.className="popt"+(it.faces?" face":"");b.innerHTML=`<img src="${img(t)}" alt="">`+(it.labels?`<span class="cap">${it.labels[j]}</span>`:"")}
+      else{b.className="opt";b.innerHTML=t}
+      b.onclick=()=>{
+        if(d.classList.contains("done")) return;
+        if(j===it.a){
+          b.classList.add("ok"); d.classList.add("done"); o.querySelectorAll("button").forEach(x=>x.disabled=true);
+          win(b);
+          if(it.after) setTimeout(()=>say(it.after),1300);
+          if(it.correct){const c=document.createElement("div");c.className="correction";c.innerHTML="✅ "+it.correct+(it.correctEn?` <span class="en">${it.correctEn}</span>`:"");d.querySelector(".extra").appendChild(c);initEN(c)}
+        }else{
+          b.classList.add("no"); setTimeout(()=>b.classList.remove("no"),500);
+          if(first) lose(b,it.rule,it.label||it.q.replace(/<[^>]+>/g,"")); else chime(false);
+          first=false;
+        }
+      };
+      o.appendChild(b);
+    });
+    box.appendChild(d);
+  });
+  initEN(box);
+}
+
+/* ================= BUILD: vocab cards ================= */
+const c1=document.getElementById("cards1");
+Object.entries(OBJ).forEach(([k,o])=>{
+  c1.insertAdjacentHTML("beforeend",`<div class="vcard"><div class="ph"><img src="${img(k)}" alt="${o.a} ${o.w}"><button class="say" data-say="${o.a} ${o.w}" aria-label="Écouter">🔊</button></div>
+   <div class="txt"><span class="art ${gcls(o.g)}">${o.a}</span><span class="word">${o.w.toUpperCase()}</span><span class="en">${o.en}</span>
+   <div class="ex"><button class="mini-say" data-say="${o.s}">🔊</button><div>${o.s}<span class="en block-en">${o.se}</span></div></div></div></div>`);
+});
+const c2=document.getElementById("cards2");
+Object.entries(FOOD).forEach(([k,o])=>{
+  c2.insertAdjacentHTML("beforeend",`<div class="vcard"><div class="ph"><img src="${img(k)}" alt="${o.a} ${o.w}"><button class="say" data-say="${o.a} ${o.w}" aria-label="Écouter">🔊</button></div>
+   <div class="txt"><span class="art ${gcls(o.g)}">${o.a}</span><span class="word">${o.w.toUpperCase()}</span><span class="en">${o.en}</span></div></div>`);
+});
+const DESC=[["rond · ronde","round","#13a99b"],["carré","square","#ff8a3d"],["grand · grande","big","#8b5cf6"],["petit · petite","small","#ec4899"],["un rectangle","a rectangle","#3d8bfd"],
+ ["jaune","yellow","#d39b00",'#ffc93c'],["bleu","blue","#2f7cf6",'#3d8bfd'],["vert · verte","green","#1e9e5f",'#2bb673'],["orange","orange","#f07020",'#ff8a3d'],
+ ["ça coupe","it cuts","#ef4b4b"],["ça pique","it’s sharp (it pricks)","#ec4899"],["pique-niquer","to have a picnic","#2bb673"]];
+document.getElementById("chips3").innerHTML=DESC.map(([w,e,c,dot])=>`<div class="chip" style="--c:${c}"><button class="mini-say" data-say="${w.replace(' · ',', ')}">🔊</button><div><div class="w">${dot?`<span class="dot" style="background:${dot}"></span>`:""}${w}</div><span class="en">${e}</span></div></div>`).join("");
+const PHR=[["Bon appétit !","Enjoy your meal!","#ef4b4b"],["S’il te plaît","Please","#8b5cf6"],["Attention !","Careful!","#ff8a3d"],["Montre…","Point to… / Show…","#3d8bfd"],
+ ["Tu veux… ?","Do you want…?","#13a99b"],["Je veux…","I want…","#2bb673"],["Il y a…","There is… / There are…","#ff6f91"],["Mmm… c’est bon !","Mmm… it’s good!","#d39b00"]];
+document.getElementById("chips4").innerHTML=PHR.map(([w,e,c])=>`<div class="chip" style="--c:${c}"><button class="mini-say" data-say="${w}">🔊</button><div><div class="w">${w}</div><span class="en">${e}</span></div></div>`).join("");
+
+/* ================= GAME 1: listen & tap ================= */
+function listenGame(box, keys, prompts, rule){
+  let order=[...keys].sort(()=>Math.random()-.5), i=0, first=true;
+  box.innerHTML=`<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="bigplay">🔊 Écoute</button><span class="progress"></span></div><div class="photo-opts"></div><div class="feedback"></div>`;
+  const grid=box.querySelector(".photo-opts"), prog=box.querySelector(".progress"), play=box.querySelector(".bigplay");
+  keys.forEach(k=>{const b=document.createElement("button");b.className="popt";b.dataset.k=k;b.innerHTML=`<img src="${img(k)}" alt="">`;grid.appendChild(b)});
+  const cur=()=>prompts(order[i]);
+  play.onclick=()=>say(cur(),play);
+  const upd=()=>prog.textContent=i<order.length?`${i+1} / ${order.length}`:"Fini ! 🎉";
+  upd();
+  grid.onclick=e=>{
+    const b=e.target.closest(".popt"); if(!b||i>=order.length) return;
+    if(b.dataset.k===order[i]){
+      b.classList.add("ok"); win(b); i++; first=true; upd();
+      setTimeout(()=>{b.classList.remove("ok"); if(i<order.length) say(cur(),play)},1500);
+      if(i>=order.length){play.disabled=true; setTimeout(()=>win(play,true),700)}
+    } else { b.classList.add("no"); setTimeout(()=>b.classList.remove("no"),500); if(first) lose(b,rule,cur()); first=false }
+  };
+}
+listenGame(document.querySelector('#g1 .listen-game'), Object.keys(OBJ), k=>`Montre ${OBJ[k].le==="l’"?"l’":OBJ[k].le+" "}${OBJ[k].w}.`.replace("l’ ","l’"), "v1");
+
+/* GAME 2: riddles (piste 24) */
+mcq(document.getElementById("riddles"),[
+ {q:"C’est rond, c’est bleu.",qen:"It’s round, it’s blue.",say:"C’est rond, c’est bleu.",photos:1,opts:["assiette","verre","nappe","fourchette"],a:0,rule:"v1",after:"Montre l’assiette."},
+ {q:"C’est un grand rectangle jaune.",qen:"It’s a big yellow rectangle.",say:"C’est un grand rectangle jaune.",photos:1,opts:["cuillere","nappe","couteau","verre"],a:1,rule:"v1",after:"Montre la nappe."},
+ {q:"Attention, ça pique.",qen:"Careful, it’s sharp.",say:"Attention, ça pique.",photos:1,opts:["verre","assiette","fourchette","nappe"],a:2,rule:"v1",after:"Montre la fourchette."},
+ {q:"Tu peux lire Maggie dessus.",qen:"You can read “Maggie” on it.",say:"Tu peux lire Maggie dessus.",photos:1,opts:["nappe","couteau","cuillere","verre"],a:3,rule:"v1",after:"Montre le verre."},
+ {q:"Attention, ça coupe.",qen:"Careful, it cuts.",say:"Attention, ça coupe.",photos:1,opts:["couteau","assiette","verre","cuillere"],a:0,rule:"v1",after:"Montre le couteau."}
+]);
+
+/* GAME 3: memory */
+(function(){
+  const keys=["pain","fromage","poulet","oeufs","tomates","salade"];
+  let cards=[]; keys.forEach(k=>{cards.push({k,t:"img"});cards.push({k,t:"word"})});
+  cards.sort(()=>Math.random()-.5);
+  const box=document.getElementById("memory"); let open=[], found=0, lock=false;
+  cards.forEach(c=>{
+    const b=document.createElement("button"); b.className="mcard"; b.dataset.k=c.k;
+    const f=FOOD[c.k];
+    b.innerHTML=`<div class="in"><div class="fr">🧺</div><div class="bk">${c.t==="img"?`<img src="${img(c.k)}" alt="">`:`<span class="${gcls(f.g)}">${f.a} ${f.w}</span>`}</div></div>`;
+    b.onclick=()=>{
+      if(lock||b.classList.contains("open")||b.classList.contains("found")) return;
+      b.classList.add("open"); open.push(b);
+      if(c.t==="word") say(`${f.a} ${f.w}`);
+      if(open.length===2){
+        lock=true; const [x,y]=open;
+        if(x.dataset.k===y.dataset.k){ setTimeout(()=>{x.classList.add("found");y.classList.add("found");open=[];lock=false;found++;win(y,found===keys.length);
+          if(found===keys.length) document.getElementById("memfb").innerHTML="🎉 Bravo, tu as tout trouvé !"},500) }
+        else setTimeout(()=>{x.classList.remove("open");y.classList.remove("open");open=[];lock=false},1100);
+      }
+    };
+    box.appendChild(b);
+  });
+})();
+
+/* GAME 4: shapes & colours */
+(function(){
+  const S={ // svg shapes
+    rondBleuPetit:`<svg class="shp" width="54" height="54"><circle cx="27" cy="27" r="22" fill="#3d8bfd"/></svg>`,
+    rondBleuGrand:`<svg class="shp" width="90" height="90"><circle cx="45" cy="45" r="42" fill="#3d8bfd"/></svg>`,
+    rectJauneGrand:`<svg class="shp" width="96" height="62"><rect x="2" y="2" width="92" height="58" rx="4" fill="#ffc93c"/></svg>`,
+    rectJaunePetit:`<svg class="shp" width="54" height="34"><rect x="2" y="2" width="50" height="30" rx="3" fill="#ffc93c"/></svg>`,
+    carreOrange:`<svg class="shp" width="76" height="76"><rect x="3" y="3" width="70" height="70" rx="4" fill="#ff8a3d"/></svg>`,
+    carreVertPetit:`<svg class="shp" width="44" height="44"><rect x="2" y="2" width="40" height="40" rx="3" fill="#2bb673"/></svg>`,
+    rondVertGrand:`<svg class="shp" width="90" height="90"><circle cx="45" cy="45" r="42" fill="#2bb673"/></svg>`,
+    rondOrangePetit:`<svg class="shp" width="50" height="50"><circle cx="25" cy="25" r="22" fill="#ff8a3d"/></svg>`
+  };
+  const R=[
+    {t:"C’est rond, c’est bleu et c’est petit.",en:"It’s round, blue and small.",o:["rondBleuGrand","rondBleuPetit","carreVertPetit","rectJaunePetit"],a:1},
+    {t:"C’est un grand rectangle jaune.",en:"It’s a big yellow rectangle.",o:["rectJaunePetit","carreOrange","rectJauneGrand","rondBleuGrand"],a:2},
+    {t:"C’est orange et carré.",en:"It’s orange and square.",o:["rondOrangePetit","carreOrange","carreVertPetit","rectJauneGrand"],a:1},
+    {t:"C’est rond, c’est vert et c’est grand.",en:"It’s round, green and big.",o:["carreVertPetit","rondBleuGrand","rondVertGrand","rondOrangePetit"],a:2},
+    {t:"C’est un petit carré vert.",en:"It’s a small green square.",o:["carreOrange","carreVertPetit","rondVertGrand","rectJaunePetit"],a:1},
+    {t:"C’est petit, rond et orange.",en:"It’s small, round and orange.",o:["rondOrangePetit","carreOrange","rondBleuPetit","rectJaunePetit"],a:0}
+  ];
+  const box=document.getElementById("shapes");
+  R.forEach((r,i)=>{
+    const d=document.createElement("div"); d.className="q";
+    d.innerHTML=`<div class="qtext"><span>${i+1}.</span><button class="mini-say" data-say="${r.t}">🔊</button><span>${r.t}</span><span class="en">${r.en}</span></div><div class="shape-opts"></div>`;
+    const g=d.querySelector(".shape-opts"); let first=true;
+    r.o.forEach((k,j)=>{const b=document.createElement("button");b.className="sbtn";b.innerHTML=S[k];
+      b.onclick=()=>{ if(d.classList.contains("done"))return;
+        if(j===r.a){b.classList.add("ok");d.classList.add("done");win(b)}
+        else{b.classList.add("no");setTimeout(()=>b.classList.remove("no"),500);if(first)lose(b,"v3",r.t);first=false}};
+      g.appendChild(b)});
+    box.appendChild(d);
+  });
+  initEN(box);
+})();
+
+/* GAME 5: situations */
+mcq(document.getElementById("situations"),[
+ {q:"Toute la famille commence à manger. Tu dis :",qen:"The whole family starts eating. You say:",opts:["Attention !","Bon appétit !","Montre…"],a:1,rule:"v4",after:"Bon appétit !"},
+ {q:"Léo prend le couteau. Tu dis :",qen:"Léo picks up the knife. You say:",opts:["Attention, ça coupe !","Mmm… c’est bon !","Je veux…"],a:0,rule:"v4",after:"Attention, ça coupe !"},
+ {q:"Tu demandes du pain gentiment : « Du pain, … »",qen:"You ask nicely for some bread:",opts:["il y a","s’il te plaît","bon appétit"],a:1,rule:"v4",after:"Du pain, s’il te plaît."},
+ {q:"Le poulet est délicieux ! Tu dis :",qen:"The chicken is delicious! You say:",opts:["Tu veux… ?","Attention !","Mmm… c’est bon !"],a:2,rule:"v4",after:"Mmm… c’est bon !"},
+ {q:"Tu proposes des tomates à Maggie : « … des tomates ? »",qen:"You offer Maggie some tomatoes:",opts:["Tu veux","Je veux","Il y a"],a:0,rule:"v4",after:"Tu veux des tomates ?"},
+ {q:"Dans le panier : six œufs ! « … six œufs. »",qen:"In the basket: six eggs!",opts:["Montre","Il y a","S’il te plaît"],a:1,rule:"v4",after:"Il y a six œufs."}
+]);
+
+/* GAME 6: un/une sort */
+(function(){
+  const box=document.getElementById("sortUn");
+  const items=[["couteau","m","couteau"],["fourchette","f","fourchette"],["cuillere","f","cuillère"],["assiette","f","assiette"],["verre","m","verre"],["nappe","f","nappe"],
+    ["pain","m","pain"],["fromage","m","fromage"],["poulet","m","poulet"],["salade","f","salade"],["sandwich","m","sandwich"],["tortue","f","tortue"]].sort(()=>Math.random()-.5);
+  items.forEach(([k,g,w])=>{
+    const d=document.createElement("div"); d.className="sitem"; let first=true;
+    d.innerHTML=`<img src="${img(k)}" alt=""><div class="nm">… ${w}</div><div class="row"><button class="opt ob-m">un</button><button class="opt ob-f">une</button></div>`;
+    d.querySelectorAll(".opt").forEach((b,j)=>b.onclick=()=>{
+      if(d.dataset.done) return;
+      const ok=(j===0&&g==="m")||(j===1&&g==="f");
+      if(ok){d.dataset.done=1;d.classList.add(g==="m"?"done-m":"done-f");b.classList.add("ok");d.querySelector(".nm").innerHTML=`<span class="${g}">${g==="m"?"un":"une"}</span> ${w}`;win(b);setTimeout(()=>say(`${g==="m"?"un":"une"} ${w}`),1300)}
+      else{b.classList.add("no");setTimeout(()=>b.classList.remove("no"),500);if(first)lose(b,"r1",`un ou une ${w} ?`);first=false}
+    });
+    box.appendChild(d);
+  });
+})();
+
+/* GAME 7: le/la/l'/les */
+mcq(document.getElementById("leLa"),[
+ {q:"Montre … couteau.",opts:["le","la","l’","les"],a:0,rule:"r1",after:"Montre le couteau.",photo:"couteau",label:"Montre le couteau."},
+ {q:"Montre … assiette.",opts:["le","la","l’","les"],a:2,rule:"r1",after:"Montre l’assiette.",photo:"assiette",label:"Montre l’assiette."},
+ {q:"Montre … nappe.",opts:["le","la","l’","les"],a:1,rule:"r1",after:"Montre la nappe.",photo:"nappe",label:"Montre la nappe."},
+ {q:"Montre … œufs.",opts:["le","la","l’","les"],a:3,rule:"r1",after:"Montre les œufs.",photo:"oeufs",label:"Montre les œufs."},
+ {q:"Montre … verre.",opts:["le","la","l’","les"],a:0,rule:"r1",after:"Montre le verre.",photo:"verre",label:"Montre le verre."},
+ {q:"Montre … tomates.",opts:["le","la","l’","les"],a:3,rule:"r1",after:"Montre les tomates.",photo:"tomates",label:"Montre les tomates."}
+]);
+
+/* GAME 8: rond/ronde, il/elle */
+mcq(document.getElementById("rondRonde"),[
+ {q:"L’assiette est …",opts:["rond","ronde"],a:1,rule:"r2",after:"L’assiette est ronde.",label:"L’assiette est ronde."},
+ {q:"La cuillère est …",opts:["grand","grande"],a:1,rule:"r2",after:"La cuillère est grande.",label:"La cuillère est grande."},
+ {q:"Le verre est …",opts:["petit","petite"],a:0,rule:"r2",after:"Le verre est petit.",label:"Le verre est petit."},
+ {q:"La nappe est …",opts:["jaune","jaunes"],a:0,rule:"r2",after:"La nappe est jaune.",label:"La nappe est jaune."},
+ {q:"Le fromage ? … est orange et carré.",opts:["Il","Elle"],a:0,rule:"r2",after:"Il est orange et carré.",label:"Le fromage : il est orange et carré."},
+ {q:"La tortue ? … est petite.",opts:["Il","Elle"],a:1,rule:"r2",after:"Elle est petite.",label:"La tortue : elle est petite."},
+ {q:"Les cuillères ? Elles sont …",opts:["petite","petites"],a:1,rule:"r2",after:"Elles sont petites.",label:"Elles sont petites."}
+]);
+
+/* GAME 9: sandwich builder */
+(function(){
+  const ing=["pain","salade","tomates","poulet","fromage","oeufs"];
+  const list=document.getElementById("swlist"), stack=document.getElementById("stack"), sent=document.getElementById("swsent");
+  const chosen=[];
+  ing.forEach(k=>{
+    const f=FOOD[k]; const r=document.createElement("div"); r.className="swrow"; let first=true;
+    r.innerHTML=`<img src="${img(k)}" alt=""><span class="nm">${f.w}</span><button class="opt m">du</button><button class="opt f">de la</button><button class="opt p">des</button>`;
+    r.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      if(r.classList.contains("done")) return;
+      if(b.textContent===f.some){
+        r.classList.add("done"); b.classList.add("ok"); r.querySelector(".nm").innerHTML=`<span class="${gcls(f.g)}">${f.some}</span> ${f.w}`;
+        stack.insertAdjacentHTML("beforeend",`<div class="layer"><img src="${img(k)}" alt=""></div>`);
+        chosen.push(`${f.some} ${f.w}`);
+        sent.innerHTML="Je veux un sandwich avec "+(chosen.length>1?chosen.slice(0,-1).join(", ")+" et "+chosen.at(-1):chosen[0])+(chosen.length===ing.length?". 😋":"…");
+        const done=chosen.length===ing.length; win(b,done);
+        setTimeout(()=>say(`${f.some} ${f.w}`),1300);
+        if(done) setTimeout(()=>say("Mmm… c’est bon !"),2600);
+      } else {b.classList.add("no");setTimeout(()=>b.classList.remove("no"),500);if(first)lose(b,"r3",`${f.some} ${f.w}`);first=false}
+    });
+    list.appendChild(r);
+  });
+})();
+
+/* GAME 10: veux / veut */
+mcq(document.getElementById("veux"),[
+ {q:"Je … du pain.",opts:["veux","veut"],a:0,rule:"r4",after:"Je veux du pain.",label:"Je veux du pain."},
+ {q:"Tu … des tomates ?",opts:["veux","veut"],a:0,rule:"r4",after:"Tu veux des tomates ?",label:"Tu veux des tomates ?"},
+ {q:"Maggie … des œufs et du fromage.",opts:["veux","veut"],a:1,rule:"r4",after:"Maggie veut des œufs et du fromage.",label:"Maggie veut des œufs et du fromage."},
+ {q:"Léo … du poulet.",opts:["veux","veut"],a:1,rule:"r4",after:"Léo veut du poulet.",label:"Léo veut du poulet."},
+ {q:"Moi, je … un sandwich.",opts:["veux","veut"],a:0,rule:"r4",after:"Moi, je veux un sandwich.",label:"Moi, je veux un sandwich."},
+ {q:"La tortue … de la salade.",opts:["veux","veut"],a:1,rule:"r4",after:"La tortue veut de la salade.",label:"La tortue veut de la salade."}
+]);
+
+/* GAME 11: word order */
+(function(){
+  const S=[
+    {w:[["Je","n"],["n’","ne"],["aime","v"],["pas","ne"],["les tomates.","o"]],t:"Je n’aime pas les tomates.",en:"I don’t like tomatoes."},
+    {w:[["Maggie","n"],["ne","ne"],["veut","v"],["pas","ne"],["les tomates.","o"]],t:"Maggie ne veut pas les tomates.",en:"Maggie doesn’t want the tomatoes."},
+    {w:[["La tortue","n"],["n’","ne"],["aime","v"],["pas","ne"],["le fromage.","o"]],t:"La tortue n’aime pas le fromage.",en:"The tortoise doesn’t like cheese."},
+    {w:[["Léo","n"],["ne","ne"],["veut","v"],["pas","ne"],["les œufs.","o"]],t:"Léo ne veut pas les œufs.",en:"Léo doesn’t want the eggs."}
+  ];
+  const box=document.getElementById("order");
+  S.forEach((s,i)=>{
+    const d=document.createElement("div"); d.className="q"; let first=true, pos=0;
+    d.innerHTML=`<div class="qtext"><span>${i+1}.</span><span class="en">${s.en}</span></div><div class="tiles"></div><div class="answer"></div><div class="orow"><button class="next" style="margin:0;background:var(--muted)">↺ Recommencer</button></div>`;
+    const tiles=d.querySelector(".tiles"), ans=d.querySelector(".answer");
+    const shuffled=s.w.map((x,j)=>[...x,j]).sort(()=>Math.random()-.5);
+    const build=()=>{tiles.innerHTML="";ans.innerHTML="";pos=0;shuffled.forEach(([t,c,j])=>{const b=document.createElement("button");b.className="tile "+c;b.textContent=t;b.dataset.j=j;
+      b.onclick=()=>{ if(d.classList.contains("done"))return;
+        if(+b.dataset.j===pos){ans.appendChild(b);b.onclick=null;pos++;chime(true);
+          if(pos===s.w.length){d.classList.add("done");win(ans);setTimeout(()=>say(s.t),1300)}}
+        else{b.classList.add("no");b.style.animation="shake .4s";setTimeout(()=>b.style.animation="",450);if(first)lose(b,"r5",s.t);first=false;chime(false)}};
+      tiles.appendChild(b)})};
+    build(); d.querySelector(".next").onclick=()=>{if(!d.classList.contains("done"))build()};
+    box.appendChild(d);
+  });
+  initEN(box);
+})();
+
+/* GAME 12: oral j'aime / je n'aime pas */
+(function(){
+  const box=document.getElementById("oral");
+  ["pain","fromage","poulet","oeufs","tomates","salade"].forEach(k=>{
+    const f=FOOD[k]; const d=document.createElement("div"); d.className="oitem";
+    const art=f.a==="les"?"les":f.a;
+    const yes=`J’aime ${art} ${f.w}.`, no=`Je n’aime pas ${art} ${f.w}.`;
+    d.innerHTML=`<img src="${img(k)}" alt=""><div class="row"><button data-v="1" aria-label="J’aime">😋</button><button data-v="0" aria-label="Je n’aime pas">😝</button></div><div class="said"></div>`;
+    d.querySelectorAll("button").forEach(b=>b.onclick=()=>{
+      const t=b.dataset.v==="1"?yes:no; d.className="oitem "+(b.dataset.v==="1"?"liked":"disliked");
+      d.querySelector(".said").textContent=t; say(t); burst(b.getBoundingClientRect().left+20,b.getBoundingClientRect().top,30);
+    });
+    box.appendChild(d);
+  });
+})();
+
+/* ================= TRANSCRIPTIONS ================= */
+const WHO={"Jeanne Legrand":"#ec4899","Maggie":"#ff8a3d","Léo":"#13a99b","Luc Legrand":"#3d8bfd","Alice":"#8b5cf6","Tous":"#2bb673","Adulte":"#ef4b4b","Enfant":"#2bb673"};
+const TRACKS=[
+ {n:24,t:"1. Écoute et montre.",en:"Listen and point.",l:[
+  ["Tu peux lire Maggie sur le verre. Montre le verre.","You can read “Maggie” on the glass. Point to the glass."],
+  ["C’est rond, c’est bleu. Montre l’assiette.","It’s round, it’s blue. Point to the plate."],
+  ["C’est un grand rectangle jaune. Montre la nappe.","It’s a big yellow rectangle. Point to the tablecloth."],
+  ["Attention, ça pique. Montre la fourchette.","Careful, it’s sharp. Point to the fork."],
+  ["Elles sont petites ou grandes. Montre les cuillères.","They’re small or big. Point to the spoons."],
+  ["Attention, ça coupe. Montre le couteau.","Careful, it cuts. Point to the knife."]]},
+ {n:25,t:"2. Écoute, répète et montre.",en:"Listen, repeat and point.",l:[
+  ["coupe / couteau coupe / le couteau coupe.","The knife cuts."],
+  ["jaune / est jaune / nappe est jaune / la nappe est jaune.","The tablecloth is yellow."],
+  ["grande / est grande / cuillère est grande / la cuillère est grande.","The spoon is big."],
+  ["ronde / est ronde / assiette est ronde / l’assiette est ronde.","The plate is round."],
+  ["pique / fourchette pique / la fourchette pique / attention, la fourchette pique.","Careful, the fork is sharp."],
+  ["verre / le verre / sur le verre / Maggie sur le verre / écrit Maggie sur le verre / il y a écrit Maggie sur le verre.","“Maggie” is written on the glass."]]},
+ {n:26,t:"3. Écoute et montre sur la grande image.",en:"Listen and point to it in the big picture.",l:[
+  ["Exemple : La famille Legrand pique-nique à la campagne.","Example: The Legrand family is having a picnic in the countryside."],
+  ["Il est orange et carré. C’est le fromage. Montre le fromage.","It’s orange and square. It’s the cheese. Point to the cheese."],
+  ["Il y a six œufs. Montre les œufs.","There are six eggs. Point to the eggs."],
+  ["Madame Legrand coupe les tomates avec le couteau. Montre les tomates.","Mrs Legrand is cutting the tomatoes with the knife. Point to the tomatoes."],
+  ["Monsieur Legrand a le pain sous le bras. Montre le pain.","Mr Legrand has got the bread under his arm. Point to the bread."],
+  ["Le poulet est entre les œufs et le fromage. Montre le poulet.","The chicken is between the eggs and the cheese. Point to the chicken."],
+  ["La tortue de Maggie aime la salade verte. Montre la salade.","Maggie’s tortoise loves green lettuce. Point to the lettuce."]]},
+ {n:27,t:"4. Qui veut manger quoi ? a. Regarde la grande image et écoute.",en:"Who wants to eat what? a. Look at the big picture and listen.",d:1,l:[
+  ["Jeanne Legrand","Alice, mets les fourchettes. Léo, les verres, s’il te plaît ! Maggie, qu’est-ce que tu veux sur ton pain ?","Alice, put the forks out. Léo, the glasses, please! Maggie, what do you want on your bread?"],
+  ["Maggie","Des œufs et du fromage, s’il te plaît !","Eggs and cheese, please!"],
+  ["Jeanne Legrand","Tu veux des tomates ?","Do you want some tomatoes?"],
+  ["Maggie","Non, je n’aime pas les tomates.","No, I don’t like tomatoes."],
+  ["Léo","Alice, tu me donnes du poulet, s’il te plaît.","Alice, can you give me some chicken, please?"],
+  ["Luc Legrand","Moi, je veux un sandwich avec du poulet et des tomates. Et toi, Alice ?","I want a sandwich with chicken and tomatoes. What about you, Alice?"],
+  ["Alice","Moi, je veux un sandwich avec du poulet, des tomates et des œufs.","I want a sandwich with chicken, tomatoes and eggs."],
+  ["Jeanne Legrand","Bon appétit, tout le monde !","Enjoy your meal, everyone!"],
+  ["Tous","Bon appétit !","Enjoy your meal!"],
+  ["Alice","Mmm… c’est bon ! J’aime pique-niquer.","Mmm… it’s good! I love having picnics."]]},
+ {n:28,t:"b. Écoute, réponds vrai ou faux et corrige si nécessaire.",en:"Listen, answer true or false and correct it if you need to.",d:1,l:[
+  ["Adulte","Maggie veut des tomates.","Grown-up: Maggie wants some tomatoes."],
+  ["Enfant","Faux. Maggie ne veut pas les tomates.","Child: False. Maggie doesn’t want the tomatoes."],
+  ["","1. Maggie veut des œufs et du fromage sur son pain.","Maggie wants eggs and cheese on her bread."],
+  ["","2. Monsieur Legrand veut du fromage et des tomates dans son sandwich.","Mr Legrand wants cheese and tomatoes in his sandwich."],
+  ["","3. Alice veut du poulet, des tomates et des œufs dans son sandwich.","Alice wants chicken, tomatoes and eggs in her sandwich."],
+  ["","4. Léo veut de la salade.","Léo wants some lettuce."]]}
+];
+const strip=s=>s.replace(/^\d\.\s/,"").replace(/^Exemple : /,"");
+const tb=document.getElementById("tracks");
+TRACKS.forEach(tr=>{
+  let html=`<div class="track" id="piste${tr.n}"><h4><span class="piste">🔊 Piste ${tr.n}</span>${tr.t} <span class="en">${tr.en}</span></h4>`;
+  tr.l.forEach((x,i)=>{
+    if(tr.d){const [w,fr,en]=x; html+=`<div class="tl d" style="--wc:${WHO[w]||'#9cc0ff'}"><button class="mini-say" data-say="${strip(fr)}">🔊</button><div>${w?`<span class="who">${w} : </span>`:""}${fr}<span class="en block-en">${en}</span></div></div>`}
+    else{const [fr,en]=x; html+=`<div class="tl"><button class="mini-say" data-say="${strip(fr)}">🔊</button><div>${/^Exemple/.test(fr)?"":`<b style="color:var(--sky)">${i+(tr.n===26?0:1)}.</b> `}${fr}<span class="en block-en">${en}</span></div></div>`}
+  });
+  tb.insertAdjacentHTML("beforeend",html+"</div>");
+});
+
+/* GAME 13: qui veut manger quoi */
+const FAM=["maggie","leo","luc","alice","jeanne"], FAMN=["Maggie","Léo","Luc","Alice","Jeanne"];
+mcq(document.getElementById("qui"),[
+ {q:"Qui veut des œufs et du fromage sur son pain ?",qen:"Who wants eggs and cheese on their bread?",photos:1,faces:1,opts:FAM,labels:FAMN,a:0,rule:"ecoute",after:"Maggie veut des œufs et du fromage."},
+ {q:"Qui n’aime pas les tomates ?",qen:"Who doesn’t like tomatoes?",photos:1,faces:1,opts:FAM,labels:FAMN,a:0,rule:"ecoute",after:"Maggie n’aime pas les tomates."},
+ {q:"Qui demande du poulet à Alice ?",qen:"Who asks Alice for some chicken?",photos:1,faces:1,opts:FAM,labels:FAMN,a:1,rule:"ecoute",after:"Léo veut du poulet."},
+ {q:"Qui veut un sandwich avec du poulet et des tomates, sans œufs ?",qen:"Who wants a sandwich with chicken and tomatoes, without eggs?",photos:1,faces:1,opts:FAM,labels:FAMN,a:2,rule:"ecoute",after:"Luc veut un sandwich avec du poulet et des tomates."},
+ {q:"Qui veut des œufs dans son sandwich ?",qen:"Who wants eggs in their sandwich?",photos:1,faces:1,opts:FAM,labels:FAMN,a:3,rule:"ecoute",after:"Alice veut un sandwich avec du poulet, des tomates et des œufs."},
+ {q:"Qui dit « Bon appétit, tout le monde ! » ?",qen:"Who says “Enjoy your meal, everyone!”?",photos:1,faces:1,opts:FAM,labels:FAMN,a:4,rule:"ecoute",after:"Bon appétit, tout le monde !"}
+]);
+
+/* GAME 14: vrai/faux */
+mcq(document.getElementById("vf"),[
+ {q:"Maggie veut des œufs et du fromage sur son pain.",say:"Maggie veut des œufs et du fromage sur son pain.",opts:["Vrai ✅","Faux ❌"],a:0,rule:"ecoute",correct:"Vrai ! Maggie veut des œufs et du fromage.",correctEn:"True! Maggie wants eggs and cheese."},
+ {q:"Monsieur Legrand veut du fromage et des tomates dans son sandwich.",say:"Monsieur Legrand veut du fromage et des tomates dans son sandwich.",opts:["Vrai ✅","Faux ❌"],a:1,rule:"ecoute",correct:"Faux ! Monsieur Legrand veut du poulet et des tomates.",correctEn:"False! Mr Legrand wants chicken and tomatoes.",after:"Faux. Monsieur Legrand veut du poulet et des tomates."},
+ {q:"Alice veut du poulet, des tomates et des œufs dans son sandwich.",say:"Alice veut du poulet, des tomates et des œufs dans son sandwich.",opts:["Vrai ✅","Faux ❌"],a:0,rule:"ecoute",correct:"Vrai ! Alice veut du poulet, des tomates et des œufs.",correctEn:"True!"},
+ {q:"Léo veut de la salade.",say:"Léo veut de la salade.",opts:["Vrai ✅","Faux ❌"],a:1,rule:"ecoute",correct:"Faux ! Léo veut du poulet.",correctEn:"False! Léo wants some chicken.",after:"Faux. Léo veut du poulet."}
+]);
+
+/* GAME 15: basket */
+(function(){
+  const rounds=[
+    {say:"Dans le panier, il faut du pain, du fromage, des tomates et une nappe.",en:"In the basket we need bread, cheese, tomatoes and a tablecloth.",need:["pain","fromage","tomates","nappe"]},
+    {say:"Maintenant, il faut un couteau, des assiettes, des œufs et du poulet.",en:"Now we need a knife, plates, eggs and chicken.",need:["couteau","assiette","oeufs","poulet"]},
+    {say:"Et pour la tortue ? De la salade, bien sûr ! Et un verre pour Maggie.",en:"And for the tortoise? Some lettuce, of course! And a glass for Maggie.",need:["salade","verre"]}
+  ];
+  const pool=["pain","fromage","tomates","nappe","couteau","assiette","oeufs","poulet","salade","verre","fourchette","cuillere"];
+  const box=document.getElementById("basket"); let r=0;
+  function show(){
+    const R=rounds[r]; let first=true;
+    box.innerHTML=`<div class="q"><div class="qtext"><span>Panier ${r+1} / ${rounds.length}</span><span class="en">${R.en}</span></div>
+      <div style="margin-top:10px"><button class="bigplay" data-say="${R.say}">🔊 Écoute Jeanne</button></div>
+      <div class="photo-opts basket-sel"></div><button class="next">C’est prêt ! 🧺</button><div class="feedback"></div></div>`;
+    initEN(box);
+    const g=box.querySelector(".photo-opts");
+    [...pool].sort(()=>Math.random()-.5).forEach(k=>{const b=document.createElement("button");b.className="popt";b.dataset.k=k;b.innerHTML=`<img src="${img(k)}" alt="">`;b.onclick=()=>b.classList.toggle("sel");g.appendChild(b)});
+    box.querySelector(".next").onclick=function(){
+      const sel=[...g.querySelectorAll(".sel")].map(b=>b.dataset.k), fb=box.querySelector(".feedback");
+      const ok=sel.length===R.need.length&&R.need.every(k=>sel.includes(k));
+      if(ok){fb.className="feedback good";fb.textContent="Parfait ! Le panier est prêt ! 🎉";win(this,true);r++;
+        setTimeout(()=>{ if(r<rounds.length) show(); else box.innerHTML=`<div class="q done" style="text-align:center;font-family:var(--display);font-size:26px">🧺 Tout est prêt ! Bon appétit ! 🥳</div>`},2600)}
+      else{const miss=R.need.filter(k=>!sel.includes(k)).length, extra=sel.filter(k=>!R.need.includes(k)).length;
+        fb.className="feedback bad";fb.textContent=(miss?`Il manque ${miss} chose${miss>1?"s":""}. `:"")+(extra?`Il y a ${extra} chose${extra>1?"s":""} en trop. `:"")+"Écoute encore !";
+        if(first) lose(this,"v1",R.say); else chime(false); first=false}
+    };
+  }
+  show();
+})();
+
+initEN(); renderMiss();
+</script>
+
+</body>
+</html>
