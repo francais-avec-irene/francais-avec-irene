@@ -589,7 +589,8 @@ const FOOD = {
 const RULES = {v1:"Vocabulaire · Pour pique-niquer",v2:"Vocabulaire · À manger",v3:"Vocabulaire · Pour décrire",v4:"Petites phrases utiles",
   r1:"Règle 1 · un, une, le, la, l’, les",r2:"Règle 2 · il est rond, elle est ronde",r3:"Règle 3 · du, de la, des",r4:"Règle 4 · je veux, il veut",r5:"Règle 5 · ne … pas",ecoute:"Écoute · la famille Legrand"};
 const gcls = g => g==="m"?"m":g==="f"?"f":"p";
-const img = k => `img/${k}.jpg?v=4`;
+const NEWIMG={nappe:"nappe-photo",assiette:"assiette-photo",fromage:"fromage-photo"};
+const img = k => `img/${NEWIMG[k]||k}.jpg?v=4`;
 
 /* ================= AUDIO ================= */
 function h(t){t=t.normalize("NFC");let x=5381;for(let i=0;i<t.length;i++){x=((x*33)^t.charCodeAt(i))>>>0}return x.toString(16)}
