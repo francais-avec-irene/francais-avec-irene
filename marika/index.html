@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vocabulaire, expressions et grammaire · 5 novembre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rose:#b5677a; --rose2:#e7b9c2; --rose3:#f8e7ea; --brun:#6b4433; --caramel:#8a5a44; --taupe:#a7826a;
+  --beige:#eadccb; --sable:#f7f1ea; --ink:#3b2a23; --soft:#7d6a60; --line:#ecdfd3; --ok:#5f8f5a; --ko:#c0505f;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--sable);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;font-size:17px;line-height:1.55}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;line-height:1.1;margin:0}
+.it{display:block;color:#9a877c;font-style:italic;font-size:.86em;line-height:1.4;margin-top:2px;font-family:"DM Sans",sans-serif;font-weight:400}
+body.noit .it{display:none}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+b{color:var(--brun)}
+
+/* barre */
+.top{position:sticky;top:0;z-index:50;background:rgba(255,251,247,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;height:58px}
+.brand{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:600;color:var(--rose);font-size:18px;white-space:nowrap}
+.nav{display:flex;gap:6px;overflow-x:auto;flex:1;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{font-size:13px;font-weight:700;text-decoration:none;color:var(--brun);background:var(--rose3);border-radius:99px;padding:5px 12px;white-space:nowrap}
+.itbtn{border:1px solid var(--line);background:#fff;border-radius:99px;font:700 12px "DM Sans";color:var(--soft);padding:6px 10px;cursor:pointer}
+body.noit .itbtn{background:var(--beige)}
+.score{font-weight:700;font-size:14px;color:#fff;background:linear-gradient(90deg,var(--brun),var(--rose));border-radius:99px;padding:7px 14px;white-space:nowrap}
+.score b{color:#ffe3c2}
+@media(max-width:640px){.brand{display:none}}
+
+/* hero */
+.hero{position:relative;height:min(64vh,460px);overflow:hidden}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.hero .cap{position:absolute;left:16px;bottom:22px;right:16px;max-width:640px;background:rgba(74,46,36,.48);backdrop-filter:blur(3px);border-radius:22px;padding:16px 20px}
+.hero .tag{display:inline-block;background:var(--rose2);color:var(--brun);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;border-radius:99px;padding:5px 13px;margin-bottom:10px}
+.hero h1{color:#fff;font-size:clamp(32px,6.4vw,54px)}
+.hero .sub{color:#fbeee4;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:22px;margin-top:4px}
+.hero .sub .it{color:#f3dcd0;font-size:15px}
+.ribbon{height:6px;background:linear-gradient(90deg,var(--brun),var(--caramel),var(--taupe),var(--beige),var(--rose2),var(--rose))}
+.wave{display:block;width:100%;height:36px;margin:30px 0 -10px}
+
+.intro{background:#fff;border-radius:22px;padding:16px 20px;margin:24px 0 4px;box-shadow:0 3px 14px rgba(107,68,51,.08);display:flex;gap:14px;align-items:center;border:1px solid var(--line)}
+.intro .ic{width:44px;height:44px;border-radius:50%;background:var(--rose3);color:var(--rose);display:flex;align-items:center;justify-content:center;font-size:20px;flex:none}
+
+/* bandeaux */
+.band{position:relative;height:210px;border-radius:26px 26px 26px 6px;overflow:hidden;margin:40px 0 18px}
+.band img{width:100%;height:100%;object-fit:cover;display:block}
+.band .lbl{position:absolute;left:14px;bottom:14px;background:rgba(74,46,36,.66);color:#fff;border-radius:18px 18px 18px 4px;padding:10px 18px;max-width:calc(100% - 28px)}
+.band .num{font-size:12px;letter-spacing:.2em;opacity:.85;font-weight:700}
+.band h2{font-size:28px}
+.band .lbl .it{color:#f1dcd2;font-size:14px;margin:0}
+
+/* audio */
+.say{cursor:pointer;border-radius:12px;transition:background .2s}
+.ex{display:flex;align-items:flex-start;padding:7px 8px;margin:3px -8px}
+.ex:hover{background:var(--rose3)}
+.spk{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--rose3);color:var(--rose);font-size:11px;margin-right:10px;flex:none;margin-top:2px}
+.say.on{background:#f3dde1}
+.say.on .spk,.mini.on{background:var(--rose);color:#fff}
+.fr{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:20px;line-height:1.3}
+.fr b{color:var(--rose)}
+.mini{border:0;width:30px;height:30px;border-radius:50%;background:var(--rose3);color:var(--rose);cursor:pointer;font-size:12px;flex:none}
+
+/* cartes vocabulaire */
+.grid{column-count:2;column-gap:18px}
+@media(max-width:720px){.grid{column-count:1}}
+.card{break-inside:avoid;background:#fff;border-radius:24px 24px 24px 8px;border-top:6px solid var(--c);padding:14px 16px 14px;margin:0 0 18px;box-shadow:0 3px 14px rgba(107,68,51,.07)}
+.card figure{margin:0 0 10px;position:relative}
+.card .pic{width:100%;height:150px;object-fit:cover;border-radius:16px;display:block;border:3px solid color-mix(in srgb,var(--c) 30%,#fff)}
+.card figcaption{position:absolute;right:10px;bottom:8px;background:rgba(255,255,255,.9);color:var(--soft);font-style:italic;font-size:12.5px;border-radius:99px;padding:2px 10px}
+.word{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.word .w{font-family:"Cormorant Garamond",serif;font-weight:700;font-size:25px;color:var(--brun)}
+.pill{font-size:11.5px;font-weight:700;border-radius:99px;padding:2px 10px;background:color-mix(in srgb,var(--c) 14%,#fff);color:var(--c)}
+.eq{font-size:15px;color:var(--ink);margin:6px 0 2px}
+.eq b{color:#fff;font-size:10.5px;letter-spacing:.08em;background:var(--taupe);border-radius:6px;padding:1px 6px;margin-right:7px}
+.sens{font-size:14px;color:var(--soft);font-style:italic;margin-bottom:4px}
+.note{background:color-mix(in srgb,var(--c) 8%,#fff);border-left:3px solid var(--c);border-radius:4px 12px 12px 4px;padding:8px 12px;font-size:14.5px;margin-top:8px}
+.note i{color:var(--soft)}
+
+/* connecteurs */
+.lead{background:#fff;border-radius:22px;padding:14px 18px;margin-bottom:16px;border:1px dashed var(--rose2)}
+.conns{column-count:2;column-gap:16px}
+@media(max-width:720px){.conns{column-count:1}}
+.conn{break-inside:avoid;background:#fff;border-radius:22px;padding:12px 16px;margin-bottom:16px;box-shadow:0 3px 14px rgba(107,68,51,.07);border-left:6px solid var(--c)}
+.ch{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.cw{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:700;color:var(--c)}
+.cit{font-size:13px;background:var(--sable);border-radius:99px;padding:2px 10px;color:var(--soft);font-style:italic}
+body.noit .cit{display:none}
+.cs{font-size:14.5px;margin:6px 0}
+.duo{background:linear-gradient(160deg,#fff,var(--rose3));border-radius:28px 28px 28px 8px;padding:16px 18px;margin:8px 0 18px;border:1px solid var(--line)}
+.duo-hd h3{font-size:26px;color:var(--brun)}
+.line{display:flex;align-items:flex-start;gap:6px;padding:8px 10px;margin:8px 0;border-radius:16px;background:#fff;max-width:92%}
+.line.a{margin-left:auto;background:#fbf6f0;border-right:4px solid var(--caramel)}
+.line.m{border-left:4px solid var(--rose)}
+.line .who{font-weight:700;font-size:12.5px;min-width:56px;padding-top:4px}
+.line.m .who{color:var(--rose)} .line.a .who{color:var(--caramel)}
+
+/* encadrés */
+.nuance,.retenir,.plus,.recit,.box{background:#fff;border-radius:26px 26px 26px 8px;padding:16px 18px;margin:16px 0;box-shadow:0 3px 14px rgba(107,68,51,.06)}
+.nuance{border:2px solid var(--rose2)}
+.nuance h3,.retenir h3,.plus h3,.recit h3,.box h3{font-size:25px;color:var(--brun)}
+.inbox{background:var(--sable);border-radius:18px;padding:12px 14px;margin-top:12px;border:1px solid var(--line)}
+.inbox .ttl{font-weight:700;color:var(--rose);font-size:14px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.inbox p{margin:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:720px){.two{grid-template-columns:1fr}}
+.tw{background:#fff;border-radius:16px;padding:10px 12px;border:1px solid var(--line)}
+.tw small{color:var(--soft)}
+
+.gintro{background:linear-gradient(125deg,var(--brun),var(--caramel) 55%,var(--rose));color:#fff;border-radius:28px 28px 28px 8px;padding:18px 20px;margin-bottom:16px}
+.gintro b{color:#ffe3c2}
+.gintro p{margin:0 0 6px}
+.gintro .it{color:#f6e0d6}
+.formula{display:inline-block;background:#fff;color:var(--brun);font-weight:700;border-radius:99px;padding:5px 16px;margin:8px 8px 0 0;font-size:15.5px}
+.formula.soft{background:rgba(255,255,255,.2);color:#fff;font-style:italic}
+body.noit .formula.soft{display:none}
+.vb{background:#fff;border-radius:24px 24px 24px 8px;overflow:hidden;box-shadow:0 3px 14px rgba(107,68,51,.07)}
+.vb .hd{background:var(--c);color:#fff;padding:12px 16px}
+.vb .hd h3{font-size:24px}
+.vb .hd .it{color:#ffffffd0}
+.vb .bd{padding:10px 16px 14px}
+.vb .bd p{font-size:15px;margin:4px 0 6px}
+.inner{background:var(--sable);border-left:4px solid var(--taupe);border-radius:4px 14px 14px 4px;padding:10px 12px;margin:10px 0 0;font-size:15px}
+.inner.rose{background:var(--rose3);border-color:var(--rose)}
+table.conj{width:100%;border-collapse:separate;border-spacing:0 6px;margin:10px 0 4px}
+table.conj th{text-align:left;font-size:13.5px;color:var(--soft);font-weight:500;padding:0 10px}
+table.conj td{padding:8px 10px;font-family:"Cormorant Garamond",serif;font-weight:700;font-size:19px;background:var(--sable)}
+table.conj td:first-child{color:var(--rose);border-radius:12px 0 0 12px}
+table.conj td:last-child{color:var(--caramel);border-radius:0 12px 12px 0}
+table.conj td:hover{background:var(--rose3)}
+.retenir{background:linear-gradient(160deg,#fff7ef,#fff);border:2px solid var(--taupe)}
+.plus{border:2px dashed var(--caramel)}
+.recit{background:linear-gradient(160deg,#fff,var(--sable))}
+
+/* exercices */
+.exo{background:#fff;border-radius:26px 26px 26px 8px;overflow:hidden;margin:22px 0;box-shadow:0 4px 18px rgba(107,68,51,.09)}
+.exo>.hd{background:var(--c);color:#fff;padding:13px 18px;display:flex;gap:14px;align-items:flex-start}
+.exo>.hd .n{font-family:"Cormorant Garamond",serif;font-size:42px;line-height:.9;font-weight:700;opacity:.92}
+.exo>.hd .kind{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;opacity:.85}
+.exo>.hd .cons{font-weight:700;font-size:16.5px}
+.exo>.hd .it{color:#ffffffd6}
+.exo .bd{padding:4px 18px 16px}
+.solbtn{border:0;background:transparent;color:#fff;font:700 12px "DM Sans";text-decoration:underline;cursor:pointer;margin-left:auto;white-space:nowrap;padding:0}
+.q{padding:13px 0;border-top:1px dashed var(--line)}
+.q:first-child{border-top:0}
+.qt{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:20px}
+.qi{display:flex;gap:12px;align-items:center}
+.qi img{width:86px;height:68px;object-fit:cover;border-radius:14px 14px 14px 4px;flex:none;border:2px solid var(--rose3)}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+.opt{border:2px solid var(--line);background:#fff;border-radius:99px;padding:7px 15px;font:500 15.5px "DM Sans";color:var(--ink);cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--rose2);background:var(--rose3)}
+.opt.ok{border-color:var(--ok);background:#eaf4e7;color:#2f5a2b;font-weight:700}
+.opt.ko{border-color:var(--ko);background:#fbe9ec;color:#8d2b3a;text-decoration:line-through}
+select.gap,select.mt{font:600 15.5px "DM Sans";border:2px solid var(--rose2);border-radius:12px;padding:4px 8px;background:#fff;color:var(--ink);max-width:100%}
+select.ok,input.ok{border-color:var(--ok)!important;background:#eaf4e7!important}
+select.ko,input.ko{border-color:var(--ko)!important;background:#fbe9ec!important}
+.typ{font:600 17px "DM Sans";border:0;border-bottom:2px solid var(--rose2);background:var(--rose3);border-radius:8px 8px 0 0;padding:3px 8px;width:min(230px,70vw);color:var(--brun)}
+.typ::placeholder{color:#c6a9a0;font-weight:400;font-size:13px}
+.hint{display:inline-block;font-size:12.5px;color:var(--caramel);background:var(--sable);border-radius:99px;padding:1px 10px;margin-top:4px}
+.btn,.chk{border:0;background:var(--brun);color:#fff;border-radius:99px;padding:7px 16px;font:700 13.5px "DM Sans";cursor:pointer;margin-top:8px}
+.btn.alt{background:var(--rose)}
+.btn.ghost{background:var(--sable);color:var(--brun);border:1px solid var(--line)}
+.sol{display:inline-block;margin-left:8px;color:var(--ok);font-weight:700}
+.full{display:none;margin-top:8px;background:#f4f9f2;border-radius:14px;padding:7px 10px;align-items:flex-start}
+.full.show{display:flex}
+.full .fr{font-size:18.5px}
+.dl{display:flex;gap:10px;border-left:3px solid var(--lc);padding:4px 0 4px 10px;margin:6px 0}
+.dl .who{font-weight:700;font-size:13px;color:var(--lc);min-width:54px;padding-top:4px}
+.order .pool,.order .built{display:flex;flex-wrap:wrap;gap:7px;min-height:44px;padding:8px;border-radius:14px}
+.order .built{background:var(--sable);border:2px dashed var(--rose2);margin-bottom:8px}
+.tok{border:0;background:#fff;border:1px solid var(--rose2);color:var(--brun);border-radius:10px;padding:6px 11px;font:600 15.5px "DM Sans";cursor:pointer}
+.built .tok{background:var(--rose3)}
+.trad textarea{width:100%;font:16px "DM Sans";border:1px solid var(--line);border-radius:14px;padding:10px;background:var(--sable);margin-top:8px;resize:vertical}
+.selfc{display:none;gap:8px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.selfc.show{display:flex}
+.alt{font-size:13.5px;color:var(--soft);font-style:italic}
+
+/* écriture */
+.sujet{background:linear-gradient(125deg,var(--brun),var(--rose));color:#fff;border-radius:28px 28px 28px 8px;padding:18px 20px}
+.sujet h3{font-size:30px;color:#fff;margin:4px 0}
+.sujet b{color:#ffe3c2}
+.sujet .it{color:#f6e0d6}
+.sk{display:inline-block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;background:rgba(255,255,255,.22);border-radius:99px;padding:3px 11px}
+.stim{display:grid;grid-template-columns:220px 1fr;gap:16px;background:#fff;border-radius:26px 26px 26px 8px;padding:14px;margin:16px 0;box-shadow:0 3px 14px rgba(107,68,51,.06)}
+.stim img{width:100%;height:100%;min-height:200px;object-fit:cover;border-radius:18px 18px 18px 6px}
+.stim .sk{background:var(--rose3);color:var(--rose)}
+@media(max-width:720px){.stim{grid-template-columns:1fr}.stim img{height:180px;min-height:0}}
+.mots{column-count:3;column-gap:10px;margin-top:10px}
+@media(max-width:720px){.mots{column-count:2}}
+.mot{break-inside:avoid;background:var(--sable);border:1px solid var(--line);border-radius:14px;padding:7px 11px;margin-bottom:10px}
+.mot b{font-size:15px}
+.mot:hover{background:var(--rose3)}
+.idees{padding-left:0;list-style:none;margin:8px 0 0}
+.idees li{background:var(--sable);border-radius:16px;padding:10px 14px;margin-bottom:10px;border-left:4px solid var(--rose2)}
+.piste{display:block;font-size:14px;color:var(--caramel);margin-top:4px}
+.step{display:flex;gap:12px;padding:10px 0;border-top:1px dashed var(--line)}
+.step:first-of-type{border-top:0}
+.sn{width:34px;height:34px;border-radius:50%;background:var(--rose);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.st{font-weight:700;color:var(--brun);font-size:17px}
+.st small{font-weight:500;color:var(--soft)}
+.step p{margin:2px 0 6px;font-size:15px}
+.starters{display:flex;flex-wrap:wrap;gap:7px}
+.starter{background:var(--rose3);color:var(--brun);border-radius:99px;padding:4px 12px;font-size:14.5px;font-style:italic}
+.write{background:#fff;border-radius:26px 26px 26px 8px;padding:16px 18px;box-shadow:0 3px 14px rgba(107,68,51,.08);border:2px solid var(--rose2)}
+.defi h3{font-size:25px;color:var(--rose)}
+#defi{list-style:none;padding:0;margin:10px 0 12px;display:flex;flex-wrap:wrap;gap:7px}
+#defi li{border:1px dashed var(--taupe);border-radius:99px;padding:4px 12px 4px 6px;font-size:14px;display:flex;align-items:center;gap:6px;transition:.2s}
+#defi .ck{width:18px;height:18px;border-radius:50%;border:2px solid var(--taupe);display:inline-flex;align-items:center;justify-content:center;font-size:11px;color:#fff}
+#defi li.done{border-style:solid;border-color:var(--ok);background:#eaf4e7}
+#defi li.done .ck{background:var(--ok);border-color:var(--ok)}
+#defi li.done .ck::after{content:"✓"}
+#txt{width:100%;font:16.5px/32px "DM Sans";border:1px solid var(--line);border-radius:16px;padding:6px 14px;color:var(--ink);resize:vertical;
+  background:#fffdfa repeating-linear-gradient(transparent 0 31px,#eadccb 31px 32px);background-attachment:local}
+.wbar{display:flex;align-items:center;gap:12px;justify-content:space-between;margin-top:6px}
+#wc{font-weight:700;color:var(--caramel)}
+.small{font-size:13.5px;color:var(--soft)}
+details.modele{background:#fff;border-radius:22px;padding:12px 18px;margin:18px 0;border:1px solid var(--line)}
+details.modele summary{cursor:pointer;font-weight:700;color:var(--rose)}
+.para .fr{font-size:18.5px;font-weight:500}
+
+/* corrigés et à revoir */
+.corr{background:#fff;border-radius:26px 26px 26px 8px;padding:12px 18px;margin:30px 0 16px;border:1px solid var(--line)}
+.corr summary{cursor:pointer;font-family:"Cormorant Garamond",serif;font-weight:700;font-size:25px;color:var(--brun)}
+.corr h4{margin:14px 0 4px;color:var(--rose);font-size:14px;letter-spacing:.1em;text-transform:uppercase}
+.corr ol{margin:0;padding-left:22px}
+.corr li{margin:4px 0}
+.corr .fr{font-size:17.5px}
+.revoir{background:linear-gradient(135deg,var(--rose3),#fff 60%);border:2px solid var(--rose);border-radius:28px 28px 28px 8px;padding:18px 20px;margin:20px 0 40px}
+.revoir h2{font-size:32px;color:var(--rose)}
+.revoir ul{list-style:none;padding:0;margin:12px 0 0}
+.revoir li{background:#fff;border-radius:14px;padding:9px 14px;margin-bottom:8px;border-left:4px solid var(--rose)}
+.revoir a{color:var(--brun);font-weight:700;text-decoration:none}
+.revoir a::after{content:"  ↑";color:var(--rose)}
+.revoir .final{font-weight:700;color:var(--ok)}
+.flash{animation:fl 1.8s ease}
+@keyframes fl{0%,60%{box-shadow:0 0 0 4px var(--rose),0 0 30px rgba(181,103,122,.5)}100%{box-shadow:0 3px 14px rgba(107,68,51,.07)}}
+.star{position:fixed;z-index:99;pointer-events:none;color:var(--rose);font-size:15px;transform:translate(-50%,-50%);animation:st .95s ease-out forwards}
+.star.c{color:#d6a56b}
+@keyframes st{0%{opacity:1;transform:translate(-50%,-50%) scale(.5)}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.1)}}
+footer{text-align:center;color:var(--soft);font-family:"Cormorant Garamond",serif;font-style:italic;font-size:18px;padding:10px 0 40px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="wg" x1="0" x2="1"><stop offset="0" stop-color="#6b4433"/><stop offset=".5" stop-color="#e7b9c2"/><stop offset="1" stop-color="#a7826a"/></linearGradient></defs></svg>
+<header class="top"><div class="wrap">
+<span class="brand">Le français avec Irène</span>
+<nav class="nav"><a href="#vocab">Vocabulaire</a><a href="#connect">Connecteurs</a><a href="#gram">Grammaire</a><a href="#synth">Synthèse</a><a href="#ecrire">Écriture</a><a href="#revoir">À revoir</a></nav>
+<button class="itbtn" id="itbtn" title="traductions">IT</button>
+<span class="score" id="score">★ <b>0</b> / 0</span>
+</div></header>
+
+<div class="hero"><img src="img/hero.jpg" alt="">
+<div class="cap"><span class="tag">Leçon de Marika</span><h1>Vocabulaire, expressions et grammaire</h1>
+<div class="sub">5 novembre 2026<span class="it">Vocabolario, espressioni e grammatica · 5 novembre 2026</span></div></div></div>
+<div class="ribbon"></div>
+
+<main class="wrap">
+<div class="intro"><div class="ic">▶</div><div>Marika, touche une phrase ou le bouton ▶ pour l'écouter. Les exercices se trouvent après chaque partie : réponds au fur et à mesure, ton score s'affiche en haut à droite. Le bouton <b>IT</b> cache ou montre les traductions.<span class="it">Tocca una frase o il pulsante ▶ per ascoltarla. Gli esercizi si trovano dopo ogni parte: rispondi man mano, il punteggio appare in alto a destra. Il pulsante IT nasconde o mostra le traduzioni.</span></div></div>
+
+<section id="vocab"><div class="band"><img src="img/band-vocab.jpg" alt=""><div class="lbl"><div class="num">01</div><h2>Vocabulaire et expressions</h2><span class="it">Vocabolario ed espressioni</span></div></div><div class="grid"><article class="card" id="v-comprendre" style="--c:#b5677a">
+<figure><img class="pic" src="img/comprendre.jpg" alt=""><figcaption>Relire pour bien saisir le sens</figcaption></figure>
+<div class="word"><button class="mini say" data-t="ne pas comprendre" aria-label="écouter">▶</button><span class="w">ne pas comprendre</span><span class="pill">locution verbale</span></div>
+<div class="eq"><b>IT</b>non capire</div>
+<div class="sens">= ne pas saisir le sens de quelque chose</div>
+<div class="ex say" data-t="Au début, je ne comprenais pas l&#x27;accent marseillais : les gens parlaient trop vite !"><span class="spk">▶</span><div><span class="fr">Au début, je ne comprenais pas l'accent marseillais : les gens parlaient trop vite !</span><span class="it">All'inizio non capivo l'accento marsigliese: la gente parlava troppo in fretta!</span></div></div><div class="ex say" data-t="Excusez-moi, je n&#x27;ai pas compris la dernière phrase."><span class="spk">▶</span><div><span class="fr">Excusez-moi, je n'ai pas compris la dernière phrase.</span><span class="it">Mi scusi, non ho capito l'ultima frase.</span></div></div>
+<div class="note">Plus soutenu : <b>ne pas saisir</b>. « Je n'ai pas saisi la blague. » <i>Non ho afferrato la battuta.</i></div></article><article class="card" id="v-habitant" style="--c:#8a5a44">
+<figure><img class="pic" src="img/habitant.jpg" alt=""><figcaption>Quelques heures à la ferme, en échange du gîte</figcaption></figure>
+<div class="word"><button class="mini say" data-t="dormir et manger chez l&#x27;habitant en échange de quelque chose" aria-label="écouter">▶</button><span class="w">dormir et manger chez l'habitant en échange de…</span><span class="pill">locution</span></div>
+<div class="eq"><b>IT</b>dormire e mangiare a casa di gente del posto in cambio di…</div>
+<div class="sens">= être hébergé et nourri chez une personne, en contrepartie de quelque chose</div>
+<div class="ex say" data-t="En Irlande, Alessio et moi avons dormi et mangé chez l&#x27;habitant en échange de quelques heures de travail à la ferme."><span class="spk">▶</span><div><span class="fr">En Irlande, Alessio et moi avons dormi et mangé chez l'habitant en échange de quelques heures de travail à la ferme.</span><span class="it">In Irlanda Alessio e io abbiamo dormito e mangiato a casa di gente del posto in cambio di qualche ora di lavoro in fattoria.</span></div></div>
+<div class="note"><b>loger chez l'habitant</b> = alloggiare presso privati · <b>en échange de</b> + nom : en échange d'un coup de main <i>(in cambio di un aiuto)</i>.</div></article><article class="card" id="v-memesi" style="--c:#c98a96">
+<figure><img class="pic" src="img/memesi.jpg" alt=""><figcaption>Partir quand même</figcaption></figure>
+<div class="word"><button class="mini say" data-t="même si" aria-label="écouter">▶</button><span class="w">même si</span><span class="pill">conjonction · concession</span></div>
+<div class="eq"><b>IT</b>anche se</div>
+<div class="sens">= introduit une concession : un obstacle qui n'empêche pas l'action</div>
+<div class="ex say" data-t="Même si le billet est cher, nous partirons à Lisbonne en mars."><span class="spk">▶</span><div><span class="fr">Même si le billet est cher, nous partirons à Lisbonne en mars.</span><span class="it">Anche se il biglietto è caro, partiremo per Lisbona a marzo.</span></div></div><div class="ex say" data-t="Je parle espagnol, même si je fais encore des fautes."><span class="spk">▶</span><div><span class="fr">Je parle espagnol, même si je fais encore des fautes.</span><span class="it">Parlo spagnolo, anche se faccio ancora degli errori.</span></div></div>
+<div class="note"><b>même si + indicatif</b>, comme en italien. Pour une hypothèse : <b>même si + imparfait → conditionnel</b>. « Même si j'avais le temps, je ne regarderais pas cette série. »</div></article><article class="card" id="v-esprit" style="--c:#a7826a">
+<figure><img class="pic" src="img/esprit.jpg" alt=""><figcaption>Un esprit au calme</figcaption></figure>
+<div class="word"><button class="mini say" data-t="mon esprit, ma mentalité" aria-label="écouter">▶</button><span class="w">mon esprit · ma mentalité</span><span class="pill">nom masc. · nom fém.</span></div>
+<div class="eq"><b>IT</b>la mia mente · la mia mentalità</div>
+<div class="sens">= ma façon de penser, mon état d'esprit</div>
+<div class="ex say" data-t="Voyager a complètement changé ma mentalité."><span class="spk">▶</span><div><span class="fr">Voyager a complètement changé ma mentalité.</span><span class="it">Viaggiare ha cambiato completamente la mia mentalità.</span></div></div><div class="ex say" data-t="Quand je marche au bord de la mer, mon esprit se repose."><span class="spk">▶</span><div><span class="fr">Quand je marche au bord de la mer, mon esprit se repose.</span><span class="it">Quando cammino in riva al mare, la mia mente si riposa.</span></div></div>
+<div class="note"><b>avoir l'esprit ouvert</b> = avere una mentalità aperta · <b>un état d'esprit</b> = uno stato d'animo, un atteggiamento.</div></article><article class="card" id="v-stimulus" style="--c:#b5677a">
+<figure><img class="pic" src="img/stimuli.jpg" alt=""><figcaption>Venise : des stimuli à chaque pas</figcaption></figure>
+<div class="word"><button class="mini say" data-t="un stimulus, des stimuli" aria-label="écouter">▶</button><span class="w">un stimulus · des stimuli</span><span class="pill">nom masculin</span></div>
+<div class="eq"><b>IT</b>uno stimolo · degli stimoli</div>
+<div class="sens">= ce qui provoque une réaction, éveille l'intérêt</div>
+<div class="ex say" data-t="À Venise, les stimuli sont partout : les couleurs, les sons, les odeurs."><span class="spk">▶</span><div><span class="fr">À Venise, les stimuli sont partout : les couleurs, les sons, les odeurs.</span><span class="it">A Venezia gli stimoli sono ovunque: i colori, i suoni, gli odori.</span></div></div>
+<div class="note">Pluriel d'origine latine : <b>des stimuli</b>. Famille : <b>stimuler</b>, <b>stimulant(e)</b> : un voyage stimulant <i>(un viaggio stimolante)</i>.</div></article><article class="card" id="v-demotive" style="--c:#8a5a44">
+<figure><img class="pic" src="img/demotive.jpg" alt=""><figcaption>Novembre, café et agenda</figcaption></figure>
+<div class="word"><button class="mini say" data-t="être démotivé, être démotivée" aria-label="écouter">▶</button><span class="w">être démotivé(e)</span><span class="pill">adjectif</span></div>
+<div class="eq"><b>IT</b>essere demotivato / demotivata</div>
+<div class="sens">= avoir perdu sa motivation</div>
+<div class="ex say" data-t="En novembre, avec la pluie, je suis parfois démotivée, mais le cours de français me redonne de l&#x27;énergie."><span class="spk">▶</span><div><span class="fr">En novembre, avec la pluie, je suis parfois démotivée, mais le cours de français me redonne de l'énergie.</span><span class="it">A novembre, con la pioggia, a volte sono demotivata, ma la lezione di francese mi ridà energia.</span></div></div>
+<div class="note">Contraire : <b>être motivé(e)</b>. Noms : <b>la motivation</b>, <b>la démotivation</b>. Verbe : <b>motiver quelqu'un</b>.</div></article><article class="card" id="v-laisser" style="--c:#c98a96">
+<figure><img class="pic" src="img/laisser.jpg" alt=""><figcaption>La liste des bonnes résolutions…</figcaption></figure>
+<div class="word"><button class="mini say" data-t="laisser tomber" aria-label="écouter">▶</button><span class="w">laisser tomber</span><span class="pill">locution verbale · familier</span></div>
+<div class="eq"><b>IT</b>lasciar perdere, mollare</div>
+<div class="sens">= abandonner, arrêter de faire quelque chose</div>
+<div class="ex say" data-t="J&#x27;ai laissé tomber l&#x27;espagnol pendant un an, puis j&#x27;ai recommencé avec plaisir."><span class="spk">▶</span><div><span class="fr">J'ai laissé tomber l'espagnol pendant un an, puis j'ai recommencé avec plaisir.</span><span class="it">Ho mollato lo spagnolo per un anno, poi ho ricominciato con piacere.</span></div></div><div class="ex say" data-t="Laisse tomber, ce n&#x27;est pas grave !"><span class="spk">▶</span><div><span class="fr">Laisse tomber, ce n'est pas grave !</span><span class="it">Lascia perdere, non è grave!</span></div></div>
+<div class="note"><b>laisser tomber quelqu'un</b> = abbandonare qualcuno, lasciarlo solo : « Ne me laisse pas tomber ! »</div></article><article class="card" id="v-moquer" style="--c:#a7826a">
+<figure><img class="pic" src="img/moquer.jpg" alt=""><figcaption>Rire entre amis</figcaption></figure>
+<div class="word"><button class="mini say" data-t="se moquer de quelqu&#x27;un" aria-label="écouter">▶</button><span class="w">se moquer de quelqu'un</span><span class="pill">verbe pronominal</span></div>
+<div class="eq"><b>IT</b>prendere in giro qualcuno</div>
+<div class="sens">= plaisanter aux dépens de quelqu'un, le taquiner</div>
+<div class="ex say" data-t="Alessio, tu te moques de moi quand je chante en espagnol ?"><span class="spk">▶</span><div><span class="fr">Alessio, tu te moques de moi quand je chante en espagnol ?</span><span class="it">Alessio, mi prendi in giro quando canto in spagnolo?</span></div></div><div class="ex say" data-t="Je me moque de toi, c&#x27;est pour rire !"><span class="spk">▶</span><div><span class="fr">Je me moque de toi, c'est pour rire !</span><span class="it">Ti prendo in giro, è per ridere!</span></div></div>
+<div class="note">Avec <b>en</b>, le sens change : <b>je m'en moque</b> = non me ne importa niente.</div></article><article class="card" id="v-heure" style="--c:#b5677a">
+<figure><img class="pic" src="img/heure.jpg" alt=""><figcaption>Le temps file…</figcaption></figure>
+<div class="word"><button class="mini say" data-t="ne pas voir l&#x27;heure passer" aria-label="écouter">▶</button><span class="w">ne pas voir l'heure passer</span><span class="pill">locution</span></div>
+<div class="eq"><b>IT</b>non accorgersi del tempo che passa</div>
+<div class="sens">= être si absorbé par une activité qu'on ne remarque pas le temps</div>
+<div class="ex say" data-t="Dans le train pour Paris, nous avons parlé toute la nuit : nous n&#x27;avons pas vu l&#x27;heure passer !"><span class="spk">▶</span><div><span class="fr">Dans le train pour Paris, nous avons parlé toute la nuit : nous n'avons pas vu l'heure passer !</span><span class="it">Sul treno per Parigi abbiamo parlato tutta la notte: non ci siamo accorti del tempo che passava!</span></div></div><div class="ex say" data-t="Avec un bon livre, je ne vois pas l&#x27;heure passer."><span class="spk">▶</span><div><span class="fr">Avec un bon livre, je ne vois pas l'heure passer.</span><span class="it">Con un buon libro, il tempo vola.</span></div></div>
+<div class="note">Contraire : <b>trouver le temps long</b> = annoiarsi, sembrare che il tempo non passi mai.</div></article></div><div class="exslot" data-ex="ex1"></div><div class="exslot" data-ex="ex2"></div></section>
+<svg class="wave" viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C150,0 300,60 450,30 C600,0 750,60 900,30 C1050,0 1150,45 1200,30" fill="none" stroke="url(#wg)" stroke-width="3"/></svg>
+<section id="connect"><div class="band"><img src="img/band-connect.jpg" alt=""><div class="lbl"><div class="num">02</div><h2>Connecteurs pour s'exprimer à l'oral</h2><span class="it">Connettivi per esprimersi all'orale</span></div></div>
+<div class="lead">Marika, ces petits mots rendent ton français oral naturel : ils servent à <b>préciser</b>, <b>corriger</b>, <b>confier</b> ou <b>conclure</b>.<span class="it">Queste piccole parole rendono naturale il tuo francese parlato: servono a precisare, correggere, confidare o concludere.</span></div>
+<div class="conns"><article class="conn" id="c-realite" style="--c:#b5677a">
+<div class="ch"><button class="mini say" data-t="En réalité">▶</button><span class="cw">En réalité</span><span class="cit">in realtà</span></div>
+<p class="cs">Pour opposer l'apparence et ce qui est vrai.</p><div class="ex say" data-t="Tout le monde pense que la Sardaigne, c&#x27;est seulement la mer. En réalité, l&#x27;intérieur de l&#x27;île est magnifique."><span class="spk">▶</span><div><span class="fr">Tout le monde pense que la Sardaigne, c'est seulement la mer. En réalité, l'intérieur de l'île est magnifique.</span><span class="it">Tutti pensano che la Sardegna sia solo mare. In realtà l'interno dell'isola è magnifico.</span></div></div></article><article class="conn" id="c-enfait" style="--c:#8a5a44">
+<div class="ch"><button class="mini say" data-t="En fait">▶</button><span class="cw">En fait</span><span class="cit">in effetti, in realtà, anzi</span></div>
+<p class="cs">Pour expliquer, préciser ou corriger ce qu'on vient de dire. Très fréquent à l'oral : on prononce le t, [ɑ̃fɛt].</p><div class="ex say" data-t="Je pensais partir en juin. En fait, nous partons en mai."><span class="spk">▶</span><div><span class="fr">Je pensais partir en juin. En fait, nous partons en mai.</span><span class="it">Pensavo di partire a giugno. Anzi, partiamo a maggio.</span></div></div></article><article class="conn" id="c-verite" style="--c:#a7826a">
+<div class="ch"><button class="mini say" data-t="En vérité">▶</button><span class="cw">En vérité</span><span class="cit">in verità</span></div>
+<p class="cs">Pour insister sur la vérité d'une affirmation. Plus soutenu, plus rare dans la conversation.</p><div class="ex say" data-t="En vérité, ce voyage a changé notre façon de vivre."><span class="spk">▶</span><div><span class="fr">En vérité, ce voyage a changé notre façon de vivre.</span><span class="it">In verità, questo viaggio ha cambiato il nostro modo di vivere.</span></div></div></article><article class="conn" id="c-vraidire" style="--c:#c98a96">
+<div class="ch"><button class="mini say" data-t="À vrai dire">▶</button><span class="cw">À vrai dire</span><span class="cit">a dire il vero, a essere sincera</span></div>
+<p class="cs">Pour introduire une opinion personnelle ou une confidence.</p><div class="ex say" data-t="À vrai dire, je préfère les petits villages aux grandes villes."><span class="spk">▶</span><div><span class="fr">À vrai dire, je préfère les petits villages aux grandes villes.</span><span class="it">A dire il vero, preferisco i piccoli paesi alle grandi città.</span></div></div></article><article class="conn" id="c-finalement" style="--c:#6b4433">
+<div class="ch"><button class="mini say" data-t="Finalement">▶</button><span class="cw">Finalement</span><span class="cit">alla fine</span></div>
+<p class="cs">Pour exprimer une conclusion ou le résultat final, souvent différent de ce qui était prévu.</p><div class="ex say" data-t="Nous voulions aller au Japon, mais finalement nous sommes restés en Europe."><span class="spk">▶</span><div><span class="fr">Nous voulions aller au Japon, mais finalement nous sommes restés en Europe.</span><span class="it">Volevamo andare in Giappone, ma alla fine siamo rimasti in Europa.</span></div></div></article></div>
+<div class="duo"><div class="duo-hd"><h3>Un week-end à Lyon</h3><span class="it">Marika e Alessio tornano da un fine settimana a Lione. Tocca ogni battuta per ascoltarla.</span></div><div class="line a say" data-t="Tu as aimé Lyon ? Au début, tu voulais absolument aller à Paris."><span class="who">Alessio</span><span class="spk">▶</span><div><span class="fr">Tu as aimé Lyon ? Au début, tu voulais absolument aller à Paris.</span><span class="it">Ti è piaciuta Lione? All'inizio volevi assolutamente andare a Parigi.</span></div></div><div class="line m say" data-t="En fait, j&#x27;ai adoré Lyon ! À vrai dire, je préfère les villes plus calmes."><span class="who">Marika</span><span class="spk">▶</span><div><span class="fr">En fait, j'ai adoré Lyon ! À vrai dire, je préfère les villes plus calmes.</span><span class="it">In realtà ho adorato Lione! A dire il vero, preferisco le città più tranquille.</span></div></div><div class="line a say" data-t="Moi, j&#x27;avais peur de m&#x27;ennuyer. En réalité, il y avait tellement de choses à voir !"><span class="who">Alessio</span><span class="spk">▶</span><div><span class="fr">Moi, j'avais peur de m'ennuyer. En réalité, il y avait tellement de choses à voir !</span><span class="it">Io avevo paura di annoiarmi. In realtà c'erano così tante cose da vedere!</span></div></div><div class="line m say" data-t="Et la cuisine… En vérité, c&#x27;est la capitale de la gastronomie."><span class="who">Marika</span><span class="spk">▶</span><div><span class="fr">Et la cuisine… En vérité, c'est la capitale de la gastronomie.</span><span class="it">E la cucina… In verità, è la capitale della gastronomia.</span></div></div><div class="line a say" data-t="Finalement, c&#x27;était une bonne idée de changer de destination."><span class="who">Alessio</span><span class="spk">▶</span><div><span class="fr">Finalement, c'était une bonne idée de changer de destination.</span><span class="it">Alla fine è stata una buona idea cambiare destinazione.</span></div></div><div class="line m say" data-t="Oui, et nous sommes enfin arrivés à prendre des vacances ensemble !"><span class="who">Marika</span><span class="spk">▶</span><div><span class="fr">Oui, et nous sommes enfin arrivés à prendre des vacances ensemble !</span><span class="it">Sì, e finalmente siamo riusciti a prenderci delle vacanze insieme!</span></div></div></div>
+<div class="nuance" id="g-nuance"><h3>Nuances à retenir</h3><span class="it">Sfumature da ricordare</span>
+<div class="inbox"><div class="ttl">Finalement ou enfin&nbsp;?</div>
+<div class="two"><div class="tw"><b>finalement</b> = alla fine<br><small>le résultat, souvent un changement de plan</small><div class="ex say" data-t="Finalement, nous sommes restés à la maison."><span class="spk">▶</span><div><span class="fr">Finalement, nous sommes restés à la maison.</span><span class="it">Alla fine siamo rimasti a casa.</span></div></div></div>
+<div class="tw"><b>enfin</b> = finalmente<br><small>après une longue attente, avec soulagement</small><div class="ex say" data-t="Le train est enfin arrivé !"><span class="spk">▶</span><div><span class="fr">Le train est enfin arrivé !</span><span class="it">Il treno è finalmente arrivato!</span></div></div></div></div></div>
+<div class="inbox"><div class="ttl">En fait ou en réalité&nbsp;?</div><p><b>En fait</b> corrige ou précise ce qu'on vient de dire ; c'est le plus fréquent dans la conversation. <b>En réalité</b> oppose une apparence et la vérité.<span class="it">« En fait » corregge o precisa ciò che si è appena detto; « en réalité » contrappone l'apparenza alla verità.</span></p></div></div>
+<div class="exslot" data-ex="ex3"></div><div class="exslot" data-ex="ex4"></div></section>
+<svg class="wave" viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C150,0 300,60 450,30 C600,0 750,60 900,30 C1050,0 1150,45 1200,30" fill="none" stroke="url(#wg)" stroke-width="3"/></svg>
+<section id="gram"><div class="band"><img src="img/band-gram.jpg" alt=""><div class="lbl"><div class="num">03</div><h2>Grammaire : exprimer la réussite</h2><span class="it">Grammatica: esprimere la riuscita</span></div></div>
+<div class="gintro"><p>Pour dire qu'on <b>est capable</b> de faire quelque chose ou qu'une action <b>a réussi</b>, le français utilise deux constructions, toujours suivies de <b>à + infinitif</b>.<span class="it">Per dire che si è capaci di fare qualcosa o che un'azione è riuscita, il francese usa due costruzioni, sempre seguite da à + infinito.</span></p>
+<span class="formula">arriver à + infinitif</span><span class="formula">réussir à + infinitif</span><span class="formula soft">= riuscire a + infinito</span></div>
+<div class="two">
+<div class="vb" id="g-arriver" style="--c:#b5677a"><div class="hd"><h3>Arriver à faire quelque chose</h3><span class="it">riuscire a fare qualcosa</span></div><div class="bd">
+<p>Pour une <b>capacité</b>, souvent dans la vie de tous les jours, après un effort. Très fréquent à l'oral, surtout à la forme négative : <b>je n'arrive pas à…</b><span class="it">Per una capacità, spesso nella vita quotidiana, dopo uno sforzo. Molto frequente all'orale, soprattutto alla forma negativa.</span></p>
+<div class="ex say" data-t="J&#x27;arrive à comprendre cette explication."><span class="spk">▶</span><div><span class="fr">J'arrive à comprendre cette explication.</span><span class="it">Riesco a capire questa spiegazione.</span></div></div><div class="ex say" data-t="Je n&#x27;arrive pas à dormir."><span class="spk">▶</span><div><span class="fr">Je n'arrive pas à dormir.</span><span class="it">Non riesco a dormire.</span></div></div><div class="ex say" data-t="Nous sommes arrivés à trouver une solution."><span class="spk">▶</span><div><span class="fr">Nous sommes arrivés à trouver une solution.</span><span class="it">Siamo riusciti a trovare una soluzione.</span></div></div></div></div>
+<div class="vb" id="g-reussir" style="--c:#8a5a44"><div class="hd"><h3>Réussir à faire quelque chose</h3><span class="it">riuscire a fare qualcosa</span></div><div class="bd">
+<p>Pour un <b>succès</b>, un résultat obtenu, souvent après une difficulté. On insiste sur la victoire.<span class="it">Per un successo, un risultato ottenuto, spesso dopo una difficoltà. Si insiste sulla vittoria.</span></p>
+<div class="ex say" data-t="Elle a réussi à terminer son travail."><span class="spk">▶</span><div><span class="fr">Elle a réussi à terminer son travail.</span><span class="it">È riuscita a finire il suo lavoro.</span></div></div><div class="ex say" data-t="J&#x27;ai réussi à réserver un hôtel au dernier moment."><span class="spk">▶</span><div><span class="fr">J'ai réussi à réserver un hôtel au dernier moment.</span><span class="it">Sono riuscita a prenotare un albergo all'ultimo momento.</span></div></div>
+<div class="inner">Sans <b>à</b>, avec un nom : <b>réussir un examen</b>, <b>réussir un gâteau</b>, <b>réussir sa vie</b>.<span class="it">Senza « à », con un nome: superare un esame, riuscire bene una torta, riuscire nella vita.</span></div></div></div>
+</div>
+<div class="box" id="g-conj"><h3>Au passé composé : être ou avoir&nbsp;?</h3><span class="it">Al passato prossimo: essere o avere? Tocca una forma per ascoltarla.</span>
+<table class="conj"><tr><th>arriver à → <b>être</b> + accord</th><th>réussir à → <b>avoir</b></th></tr><tr><td class="say" data-t="je suis arrivée à">je suis arrivée à</td><td class="say" data-t="j&#x27;ai réussi à">j'ai réussi à</td></tr><tr><td class="say" data-t="tu es arrivé à">tu es arrivé à</td><td class="say" data-t="tu as réussi à">tu as réussi à</td></tr><tr><td class="say" data-t="elle est arrivée à">elle est arrivée à</td><td class="say" data-t="elle a réussi à">elle a réussi à</td></tr><tr><td class="say" data-t="nous sommes arrivés à">nous sommes arrivés à</td><td class="say" data-t="nous avons réussi à">nous avons réussi à</td></tr><tr><td class="say" data-t="vous êtes arrivées à">vous êtes arrivées à</td><td class="say" data-t="vous avez réussi à">vous avez réussi à</td></tr><tr><td class="say" data-t="ils sont arrivés à">ils sont arrivés à</td><td class="say" data-t="ils ont réussi à">ils ont réussi à</td></tr></table>
+<div class="inner rose">Avec <b>être</b>, le participe s'accorde : <b>Marika est arrivée à…</b>, <b>Marika et Alessio sont arrivés à…</b><span class="it">Con « être » il participio si accorda, come in italiano: è riuscita, sono riusciti.</span></div></div>
+<div class="retenir"><h3>À retenir</h3>
+<div class="inbox"><div class="ttl">Toujours à, jamais de</div><p>On dit <b>arriver à faire</b> et <b>réussir à faire</b>, exactement comme <i>riuscire a fare</i>.<span class="it">Si dice sempre « à », mai « de ».</span></p></div>
+<div class="inbox"><div class="ttl">Arriver à + lieu ou arriver à + infinitif&nbsp;?</div>
+<div class="two"><div class="tw"><div class="ex say" data-t="Je suis arrivée à Nice."><span class="spk">▶</span><div><span class="fr">Je suis arrivée à Nice.</span><span class="it">Sono arrivata a Nizza. (un luogo)</span></div></div></div><div class="tw"><div class="ex say" data-t="Je suis arrivée à comprendre."><span class="spk">▶</span><div><span class="fr">Je suis arrivée à comprendre.</span><span class="it">Sono riuscita a capire. (un'azione)</span></div></div></div></div></div></div>
+<div class="plus" id="g-plus"><h3>Pour aller plus loin</h3><span class="it">Per andare oltre: il pronome « y » e il verbo « parvenir à »</span>
+<p><b>y</b> remplace <b>à + infinitif</b> : <b>j'y arrive</b>, <b>je n'y arrive pas</b>, <b>nous y sommes arrivés</b>. Avec <b>réussir</b>, on dit plus simplement <b>j'ai réussi</b>. Dans un texte soutenu, on rencontre <b>parvenir à</b>.<span class="it">« y » sostituisce « à + infinito », come « ci » in italiano: ci riesco, non ci riesco. Nello scritto formale si trova « parvenir à ».</span></p>
+<div class="ex say" data-t="Tu arrives à dormir dans l&#x27;avion ? Non, je n&#x27;y arrive pas."><span class="spk">▶</span><div><span class="fr">Tu arrives à dormir dans l'avion ? Non, je n'y arrive pas.</span><span class="it">Riesci a dormire in aereo? No, non ci riesco.</span></div></div><div class="ex say" data-t="Tu as réussi à joindre l&#x27;hôtel ? Oui, j&#x27;ai réussi !"><span class="spk">▶</span><div><span class="fr">Tu as réussi à joindre l'hôtel ? Oui, j'ai réussi !</span><span class="it">Sei riuscita a contattare l'albergo? Sì, ci sono riuscita!</span></div></div><div class="ex say" data-t="Après deux heures de discussion, nous sommes parvenus à un accord."><span class="spk">▶</span><div><span class="fr">Après deux heures de discussion, nous sommes parvenus à un accord.</span><span class="it">Dopo due ore di discussione, siamo arrivati a un accordo.</span></div></div></div>
+<div class="recit"><h3>Petit récit</h3><span class="it">Breve racconto: ascoltalo e osserva le strutture in grassetto</span>
+<div class="ex say" data-t="Quand Chiara est arrivée à Nice pour son stage, elle n&#x27;arrivait pas à comprendre les gens au téléphone."><span class="spk">▶</span><div><span class="fr">Quand Chiara est arrivée à Nice pour son stage, elle <b>n'arrivait pas à</b> comprendre les gens au téléphone.</span><span class="it">Quando Chiara è arrivata a Nizza per il suo tirocinio, non riusciva a capire la gente al telefono.</span></div></div><div class="ex say" data-t="Même si elle étudiait tous les soirs, elle était parfois démotivée."><span class="spk">▶</span><div><span class="fr"><b>Même si</b> elle étudiait tous les soirs, elle était parfois <b>démotivée</b>.</span><span class="it">Anche se studiava tutte le sere, a volte era demotivata.</span></div></div><div class="ex say" data-t="En fait, il fallait simplement du temps."><span class="spk">▶</span><div><span class="fr"><b>En fait</b>, il fallait simplement du temps.</span><span class="it">In realtà ci voleva semplicemente tempo.</span></div></div><div class="ex say" data-t="Petit à petit, elle a réussi à suivre les conversations, et un jour, elle est même arrivée à raconter une blague en français !"><span class="spk">▶</span><div><span class="fr">Petit à petit, elle <b>a réussi à</b> suivre les conversations, et un jour, elle <b>est même arrivée à</b> raconter une blague en français !</span><span class="it">Poco a poco è riuscita a seguire le conversazioni, e un giorno è persino riuscita a raccontare una barzelletta in francese!</span></div></div><div class="ex say" data-t="Finalement, elle n&#x27;a rien laissé tomber."><span class="spk">▶</span><div><span class="fr"><b>Finalement</b>, elle n'a rien <b>laissé tomber</b>.</span><span class="it">Alla fine non ha mollato niente.</span></div></div></div>
+<div class="exslot" data-ex="ex5"></div><div class="exslot" data-ex="ex6"></div></section>
+<svg class="wave" viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C150,0 300,60 450,30 C600,0 750,60 900,30 C1050,0 1150,45 1200,30" fill="none" stroke="url(#wg)" stroke-width="3"/></svg>
+<section id="synth"><div class="band"><img src="img/band-synth.jpg" alt=""><div class="lbl"><div class="num">04</div><h2>Exercices de synthèse</h2><span class="it">Esercizi di sintesi</span></div></div><div class="exslot" data-ex="ex7"></div><div class="exslot" data-ex="ex8"></div></section>
+<svg class="wave" viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C150,0 300,60 450,30 C600,0 750,60 900,30 C1050,0 1150,45 1200,30" fill="none" stroke="url(#wg)" stroke-width="3"/></svg>
+<section id="ecrire"><div class="band"><img src="img/band-ecrire.jpg" alt=""><div class="lbl"><div class="num">05</div><h2>Production écrite guidée</h2><span class="it">Produzione scritta guidata</span></div></div>
+<div class="sujet"><div class="sk">Sujet</div><h3>Voyager à l'ère d'Instagram : découvre-t-on encore vraiment le monde&nbsp;?</h3>
+<span class="it">Viaggiare nell'era di Instagram: scopriamo ancora davvero il mondo?</span>
+<p>Marika, écris un texte argumenté d'environ <b>200 à 250 mots</b> (une vingtaine de lignes). Donne ton point de vue personnel et appuie-toi sur des exemples tirés de tes voyages.<span class="it">Scrivi un testo argomentativo di circa 200-250 parole (una ventina di righe). Dai il tuo punto di vista personale e appoggiati su esempi tratti dai tuoi viaggi.</span></p></div>
+<div class="stim"><img src="img/x-santorin.jpg" alt=""><div><div class="sk">Pour réfléchir</div><div class="ex say" data-t="Aujourd&#x27;hui, avant de partir, on regarde des centaines de photos de sa destination."><span class="spk">▶</span><div><span class="fr">Aujourd'hui, avant de partir, on regarde des centaines de photos de sa destination.</span><span class="it">Oggi, prima di partire, si guardano centinaia di foto della propria meta.</span></div></div><div class="ex say" data-t="Sur place, le GPS nous guide, et les applications nous disent où manger et quel point de vue photographier."><span class="spk">▶</span><div><span class="fr">Sur place, le GPS nous guide, et les applications nous disent où manger et quel point de vue photographier.</span><span class="it">Sul posto il GPS ci guida, e le app ci dicono dove mangiare e quale panorama fotografare.</span></div></div><div class="ex say" data-t="Certains lieux sont envahis par des touristes qui veulent tous la même photo."><span class="spk">▶</span><div><span class="fr">Certains lieux sont envahis par des touristes qui veulent tous la même photo.</span><span class="it">Alcuni luoghi sono invasi da turisti che vogliono tutti la stessa foto.</span></div></div><div class="ex say" data-t="Pourtant, voyager, c&#x27;est aussi accepter de se perdre, de ne pas tout comprendre et de rencontrer des inconnus."><span class="spk">▶</span><div><span class="fr">Pourtant, voyager, c'est aussi accepter de se perdre, de ne pas tout comprendre et de rencontrer des inconnus.</span><span class="it">Eppure viaggiare significa anche accettare di perdersi, di non capire tutto e di incontrare degli sconosciuti.</span></div></div><div class="ex say" data-t="Alors, les réseaux sociaux nous aident-ils à découvrir le monde, ou nous empêchent-ils de le voir vraiment ?"><span class="spk">▶</span><div><span class="fr">Alors, les réseaux sociaux nous aident-ils à découvrir le monde, ou nous empêchent-ils de le voir vraiment ?</span><span class="it">Allora, i social ci aiutano a scoprire il mondo, o ci impediscono di vederlo davvero?</span></div></div></div></div>
+<div class="box"><h3>Mots utiles</h3><span class="it">Parole utili: tocca per ascoltare</span><div class="mots"><div class="mot say" data-t="une destination à la mode"><b>une destination à la mode</b><span class="it">una meta di moda</span></div><div class="mot say" data-t="le tourisme de masse"><b>le tourisme de masse</b><span class="it">il turismo di massa</span></div><div class="mot say" data-t="sortir des sentiers battus"><b>sortir des sentiers battus</b><span class="it">uscire dai percorsi più battuti</span></div><div class="mot say" data-t="se perdre"><b>se perdre</b><span class="it">perdersi</span></div><div class="mot say" data-t="l&#x27;imprévu"><b>l'imprévu (m.)</b><span class="it">l'imprevisto</span></div><div class="mot say" data-t="une rencontre authentique"><b>une rencontre authentique</b><span class="it">un incontro autentico</span></div><div class="mot say" data-t="publier, partager une photo"><b>publier, partager une photo</b><span class="it">pubblicare, condividere una foto</span></div><div class="mot say" data-t="se comparer aux autres"><b>se comparer aux autres</b><span class="it">paragonarsi agli altri</span></div><div class="mot say" data-t="vivre l&#x27;instant présent"><b>vivre l'instant présent</b><span class="it">vivere il momento presente</span></div><div class="mot say" data-t="lever les yeux de l&#x27;écran"><b>lever les yeux de l'écran</b><span class="it">alzare gli occhi dallo schermo</span></div><div class="mot say" data-t="s&#x27;ouvrir aux autres"><b>s'ouvrir aux autres</b><span class="it">aprirsi agli altri</span></div><div class="mot say" data-t="une source d&#x27;inspiration"><b>une source d'inspiration</b><span class="it">una fonte d'ispirazione</span></div></div></div>
+<div class="box"><h3>Pour trouver tes idées</h3><span class="it">Per trovare le tue idee</span><ul class="idees"><li><b>Comment choisis-tu tes destinations ? Les réseaux sociaux t'influencent-ils ?</b><span class="it">Come scegli le tue mete? I social ti influenzano?</span><span class="piste">Pistes : de l'inspiration, des idées nouvelles… mais aussi des lieux qui se ressemblent tous.</span></li><li><b>Te souviens-tu d'un moment imprévu pendant un voyage avec Alessio ? Qu'est-ce qu'il t'a appris ?</b><span class="it">Ti ricordi un momento imprevisto durante un viaggio con Alessio? Che cosa ti ha insegnato?</span><span class="piste">Pistes : une rencontre, une erreur de chemin, un repas chez l'habitant, une langue étrangère.</span></li><li><b>Quels sont les avantages du téléphone en voyage ?</b><span class="it">Quali sono i vantaggi del telefono in viaggio?</span><span class="piste">Pistes : la sécurité, la traduction, réserver au dernier moment, garder des souvenirs.</span></li><li><b>Et quels sont les risques ?</b><span class="it">E quali sono i rischi?</span><span class="piste">Pistes : regarder l'écran plutôt que le paysage, voyager pour la photo, le tourisme de masse.</span></li></ul></div>
+<div class="box"><h3>Organise ton texte</h3><span class="it">Organizza il tuo testo: puoi usare questi inizi di frase</span><div class="step"><div class="sn">1</div><div><div class="st">Introduction <small>· 3 à 4 lignes</small></div><p>Présente le sujet et pose la question.</p>
+<div class="starters"><span class="starter say" data-t="Aujourd&#x27;hui, il suffit d&#x27;ouvrir Instagram pour">Aujourd'hui, il suffit d'ouvrir Instagram pour…</span><span class="starter say" data-t="On peut alors se demander si">On peut alors se demander si…</span></div></div></div><div class="step"><div class="sn">2</div><div><div class="st">Première partie <small>· 5 à 6 lignes</small></div><p>Les réseaux sociaux et le GPS : une aide précieuse.</p>
+<div class="starters"><span class="starter say" data-t="D&#x27;un côté, il faut reconnaître que">D'un côté, il faut reconnaître que…</span><span class="starter say" data-t="Par exemple, quand Alessio et moi">Par exemple, quand Alessio et moi…</span><span class="starter say" data-t="Grâce à, nous avons réussi à">Grâce à…, nous avons réussi à…</span></div></div></div><div class="step"><div class="sn">3</div><div><div class="st">Deuxième partie <small>· 5 à 6 lignes</small></div><p>Mais le vrai voyage se trouve souvent ailleurs.</p>
+<div class="starters"><span class="starter say" data-t="Pourtant, en réalité">Pourtant, en réalité,…</span><span class="starter say" data-t="À vrai dire, mes plus beaux souvenirs">À vrai dire, mes plus beaux souvenirs…</span><span class="starter say" data-t="Même si">Même si…,…</span></div></div></div><div class="step"><div class="sn">4</div><div><div class="st">Conclusion <small>· 3 à 4 lignes</small></div><p>Donne ta réponse personnelle et ouvre la réflexion.</p>
+<div class="starters"><span class="starter say" data-t="Finalement, je pense que">Finalement, je pense que…</span><span class="starter say" data-t="L&#x27;essentiel, c&#x27;est de">L'essentiel, c'est de…</span></div></div></div></div>
+<div class="write"><div class="defi"><h3>Défi</h3><span class="it">La sfida: le caselle si spuntano da sole mentre scrivi</span><ul id="defi"><li data-re="m[êe]me s(i|&#x27;il|&#x27;ils)(?![a-zà-ÿ])"><span class="ck"></span>même si</li><li data-re="en (fait|r[ée]alit[ée]|v[ée]rit[ée])(?![a-zà-ÿ])"><span class="ck"></span>en fait · en réalité · en vérité</li><li data-re="[àa] vrai dire"><span class="ck"></span>à vrai dire</li><li data-re="finalement"><span class="ck"></span>finalement</li><li data-re="(arriv|r[ée]uss|parven)[a-zéèêûi]* (pas |plus |jamais |même )?[àa] |y (suis |sommes |est |sont )?(arriv|parven)|y ai r[ée]ussi"><span class="ck"></span>arriver à · réussir à</li><li data-re="l&#x27;heure passer"><span class="ck"></span>ne pas voir l'heure passer</li><li data-re="(esprit|mentalit[ée])"><span class="ck"></span>esprit · mentalité</li><li data-re="stimul(i|us)(?![a-zà-ÿ])"><span class="ck"></span>stimulus · stimuli</li><li data-re="chez l&#x27;habitant"><span class="ck"></span>chez l'habitant</li><li data-re="laiss[a-zé]* tomber"><span class="ck"></span>laisser tomber</li></ul></div>
+<textarea id="txt" rows="20" placeholder="Écris ton texte ici, Marika…"></textarea>
+<div class="wbar"><span id="wc">0 mot</span><button id="copy" class="btn">Copier mon texte</button></div>
+<p class="small">Ton texte est gardé sur cet appareil. Copie-le pour l'envoyer à Irène.<span class="it">Il testo resta salvato su questo dispositivo. Copialo per mandarlo a Irène.</span></p></div>
+<details class="modele"><summary>Voir un exemple de texte</summary><span class="it">Esempio di testo: leggilo solo dopo aver scritto il tuo</span><div class="ex para say" data-t="Aujourd&#x27;hui, il suffit d&#x27;ouvrir Instagram pour voir des milliers de photos de Lisbonne, de Santorin ou de Kyoto avant même de partir. On peut alors se demander si les réseaux sociaux nous aident vraiment à découvrir le monde, ou s&#x27;ils transforment nos voyages en une simple collection d&#x27;images."><span class="spk">▶</span><div><span class="fr">Aujourd'hui, il suffit d'ouvrir Instagram pour voir des milliers de photos de Lisbonne, de Santorin ou de Kyoto avant même de partir. On peut alors se demander si les réseaux sociaux nous aident vraiment à découvrir le monde, ou s'ils transforment nos voyages en une simple collection d'images.</span><span class="it">Oggi basta aprire Instagram per vedere migliaia di foto di Lisbona, Santorini o Kyoto ancora prima di partire. Ci si può allora chiedere se i social ci aiutino davvero a scoprire il mondo, o se trasformino i nostri viaggi in una semplice collezione di immagini.</span></div></div><div class="ex para say" data-t="D&#x27;un côté, il faut reconnaître que ces outils sont très utiles. Grâce aux applications, Alessio et moi avons réussi à trouver de petits restaurants loin des touristes, et le GPS nous a souvent évité de nous perdre. Les photos des autres voyageurs sont aussi une belle source d&#x27;inspiration et de stimuli."><span class="spk">▶</span><div><span class="fr">D'un côté, il faut reconnaître que ces outils sont très utiles. Grâce aux applications, Alessio et moi avons réussi à trouver de petits restaurants loin des touristes, et le GPS nous a souvent évité de nous perdre. Les photos des autres voyageurs sont aussi une belle source d'inspiration et de stimuli.</span><span class="it">Da un lato bisogna riconoscere che questi strumenti sono molto utili. Grazie alle app, Alessio e io siamo riusciti a trovare piccoli ristoranti lontani dai turisti, e il GPS ci ha spesso evitato di perderci. Le foto degli altri viaggiatori sono anche una bella fonte d'ispirazione e di stimoli.</span></div></div><div class="ex para say" data-t="Pourtant, en réalité, mes plus beaux souvenirs ne viennent pas de mon téléphone. À vrai dire, ce sont les imprévus qui ont changé ma mentalité : un train manqué, une conversation avec une inconnue, une semaine où nous avons dormi et mangé chez l&#x27;habitant en échange d&#x27;un peu d&#x27;aide à la ferme. Ces soirs-là, nous n&#x27;avons pas vu l&#x27;heure passer. Même si je publie encore des photos, je n&#x27;arrive plus à voyager seulement pour elles."><span class="spk">▶</span><div><span class="fr">Pourtant, en réalité, mes plus beaux souvenirs ne viennent pas de mon téléphone. À vrai dire, ce sont les imprévus qui ont changé ma mentalité : un train manqué, une conversation avec une inconnue, une semaine où nous avons dormi et mangé chez l'habitant en échange d'un peu d'aide à la ferme. Ces soirs-là, nous n'avons pas vu l'heure passer. Même si je publie encore des photos, je n'arrive plus à voyager seulement pour elles.</span><span class="it">Eppure, in realtà, i miei ricordi più belli non vengono dal mio telefono. A dire il vero, sono gli imprevisti ad aver cambiato la mia mentalità: un treno perso, una conversazione con una sconosciuta, una settimana in cui abbiamo dormito e mangiato da gente del posto in cambio di un po' di aiuto in fattoria. Quelle sere non ci siamo accorti del tempo che passava. Anche se pubblico ancora foto, non riesco più a viaggiare solo per quelle.</span></div></div><div class="ex para say" data-t="Finalement, je pense que les réseaux sociaux ne sont ni bons ni mauvais : tout dépend de notre état d&#x27;esprit. L&#x27;essentiel, c&#x27;est de garder notre curiosité, de lever les yeux de l&#x27;écran et de laisser une place à l&#x27;imprévu."><span class="spk">▶</span><div><span class="fr">Finalement, je pense que les réseaux sociaux ne sont ni bons ni mauvais : tout dépend de notre état d'esprit. L'essentiel, c'est de garder notre curiosité, de lever les yeux de l'écran et de laisser une place à l'imprévu.</span><span class="it">Alla fine penso che i social non siano né buoni né cattivi: tutto dipende dal nostro atteggiamento. L'essenziale è conservare la nostra curiosità, alzare gli occhi dallo schermo e lasciare spazio all'imprevisto.</span></div></div></details></section>
+
+<details class="corr" id="corriges"><summary>Corrigés des exercices</summary><span class="it">Soluzioni degli esercizi</span><div id="corrlist"></div></details>
+
+<section class="revoir" id="revoir"><h2>À revoir</h2><span class="it">Da ripassare: tocca un punto per tornare alla regola</span>
+<div id="revlist"><p class="small">Les points à revoir apparaîtront ici au fil des exercices.<span class="it">I punti da ripassare appariranno qui man mano.</span></p></div></section>
+</main>
+<footer>Le français avec Irène</footer>
+
+<script id="exdata" type="application/json">{"ex1": {"type": "qcm", "kind": "vocabulaire en images", "color": "#b5677a", "cons": "Marika, choisis le mot qui convient.", "consIt": "Marika, scegli la parola giusta.", "items": [{"img": "img/x-village.jpg", "q": "Les ruelles, les couleurs, la musique : dans ce village, il y a beaucoup de …", "qi": "Le viuzze, i colori, la musica: in questo paese ci sono molti …", "o": ["esprits", "stimuli", "habitants"], "a": "stimuli", "full": "Les ruelles, les couleurs, la musique : dans ce village, il y a beaucoup de stimuli.", "fullIt": "Le viuzze, i colori, la musica: in questo paese ci sono molti stimoli.", "rev": {"l": "Un stimulus, des stimuli", "h": "#v-stimulus", "i": "uno stimolo, degli stimoli"}}, {"img": "img/x-jardin.jpg", "q": "Pour voyager sans payer l'hôtel, nous avons dormi et mangé … en échange d'un peu de jardinage.", "qi": "Per viaggiare senza pagare l'albergo, abbiamo dormito e mangiato … in cambio di un po' di giardinaggio.", "o": ["à l'hôtel", "chez l'habitant", "au camping"], "a": "chez l'habitant", "full": "Pour voyager sans payer l'hôtel, nous avons dormi et mangé chez l'habitant en échange d'un peu de jardinage.", "fullIt": "Per viaggiare senza pagare l'albergo, abbiamo dormito e mangiato a casa di gente del posto in cambio di un po' di giardinaggio.", "rev": {"l": "Dormir et manger chez l'habitant", "h": "#v-habitant", "i": "a casa di gente del posto"}}, {"img": "img/x-avion.jpg", "q": "Le vol a duré douze heures, mais avec ce film, je n'ai pas vu l'… passer.", "qi": "Il volo è durato dodici ore, ma con quel film non mi sono accorta del tempo che passava.", "o": ["heure", "jour", "semaine"], "a": "heure", "full": "Le vol a duré douze heures, mais avec ce film, je n'ai pas vu l'heure passer.", "fullIt": "Il volo è durato dodici ore, ma con quel film non mi sono accorta del tempo che passava.", "rev": {"l": "Ne pas voir l'heure passer", "h": "#v-heure", "i": "il tempo vola"}}, {"img": "img/x-biblio.jpg", "q": "Ce livre de philosophie est difficile : je n'arrive pas à … le sens des phrases.", "qi": "Questo libro di filosofia è difficile: non riesco ad afferrare il senso delle frasi.", "o": ["laisser", "saisir", "moquer"], "a": "saisir", "full": "Ce livre de philosophie est difficile : je n'arrive pas à saisir le sens des phrases.", "fullIt": "Questo libro di filosofia è difficile: non riesco ad afferrare il senso delle frasi.", "rev": {"l": "Ne pas comprendre, ne pas saisir", "h": "#v-comprendre", "i": "non capire, non afferrare"}}, {"img": "img/x-ruelle.jpg", "q": "Ce voyage en Asie a complètement changé ma … : maintenant, je vis plus simplement.", "qi": "Questo viaggio in Asia ha cambiato completamente la mia …: adesso vivo in modo più semplice.", "o": ["mentalité", "stimulus", "échange"], "a": "mentalité", "full": "Ce voyage en Asie a complètement changé ma mentalité : maintenant, je vis plus simplement.", "fullIt": "Questo viaggio in Asia ha cambiato completamente la mia mentalità: adesso vivo in modo più semplice.", "rev": {"l": "Mon esprit, ma mentalité", "h": "#v-esprit", "i": "la mia mentalità"}}, {"img": "img/x-cerisier.jpg", "q": "Après trois semaines de pluie, Marika est un peu … : elle n'a plus envie de rien.", "qi": "Dopo tre settimane di pioggia, Marika è un po' …: non ha più voglia di niente.", "o": ["motivée", "démotivée", "stimulante"], "a": "démotivée", "full": "Après trois semaines de pluie, Marika est un peu démotivée : elle n'a plus envie de rien.", "fullIt": "Dopo tre settimane di pioggia, Marika è un po' demotivata: non ha più voglia di niente.", "rev": {"l": "Être démotivé(e)", "h": "#v-demotive", "i": "essere demotivata"}}]}, "ex2": {"type": "match", "kind": "situations", "color": "#8a5a44", "cons": "Que dis-tu dans chaque situation ? Choisis la bonne réplique.", "consIt": "Che cosa dici in ogni situazione? Scegli la battuta giusta.", "bank": ["J'ai laissé tomber.", "Je me moque de toi !", "Je n'ai pas compris.", "Je n'ai pas vu l'heure passer !", "Même s'il pleut, on y va !"], "items": [{"q": "Tu as arrêté le cours de guitare après deux mois.", "qi": "Hai smesso il corso di chitarra dopo due mesi.", "a": "J'ai laissé tomber.", "full": "J'ai laissé tomber.", "fullIt": "Ho mollato.", "rev": {"l": "Laisser tomber", "h": "#v-laisser", "i": "lasciar perdere, mollare"}}, {"q": "Tu dis à Alessio, en riant, que sa vieille chemise est « très élégante ». Il te regarde, surpris.", "qi": "Dici ad Alessio, ridendo, che la sua vecchia camicia è « molto elegante ». Lui ti guarda, sorpreso.", "a": "Je me moque de toi !", "full": "Je me moque de toi !", "fullIt": "Ti prendo in giro!", "rev": {"l": "Se moquer de quelqu'un", "h": "#v-moquer", "i": "prendere in giro"}}, {"q": "Le guide du musée parle très vite. Tu lui demandes de répéter.", "qi": "La guida del museo parla molto in fretta. Le chiedi di ripetere.", "a": "Je n'ai pas compris.", "full": "Excusez-moi, je n'ai pas compris.", "fullIt": "Mi scusi, non ho capito.", "rev": {"l": "Ne pas comprendre", "h": "#v-comprendre", "i": "non capire"}}, {"q": "Tu as lu tout l'après-midi, et il fait déjà nuit.", "qi": "Hai letto tutto il pomeriggio, ed è già buio.", "a": "Je n'ai pas vu l'heure passer !", "full": "Je n'ai pas vu l'heure passer !", "fullIt": "Non mi sono accorta del tempo che passava!", "rev": {"l": "Ne pas voir l'heure passer", "h": "#v-heure", "i": "il tempo vola"}}, {"q": "Le ciel est gris, mais vous avez très envie d'aller à la plage.", "qi": "Il cielo è grigio, ma avete molta voglia di andare al mare.", "a": "Même s'il pleut, on y va !", "full": "Même s'il pleut, on y va !", "fullIt": "Anche se piove, ci andiamo!", "rev": {"l": "Même si", "h": "#v-memesi", "i": "anche se"}}]}, "ex3": {"type": "dialog", "kind": "connecteurs à l'oral", "color": "#c98a96", "cons": "Au café, Marika parle avec son amie Giulia. Complète avec le bon connecteur.", "consIt": "Al bar, Marika parla con la sua amica Giulia. Completa con il connettivo giusto.", "bank": ["En fait", "En réalité", "À vrai dire", "Finalement", "En vérité"], "items": [{"who": "Giulia", "c": "#a7826a", "parts": ["Alors, ce voyage au Maroc, vous partez en avril ?"], "it": "Allora, questo viaggio in Marocco, partite ad aprile?", "full": "Alors, ce voyage au Maroc, vous partez en avril ?"}, {"who": "Marika", "c": "#b5677a", "parts": [{"a": "En fait", "acc": ["En fait", "En réalité"]}, ", nous avons changé nos plans : nous partons en octobre."], "it": "Anzi, abbiamo cambiato programma: partiamo a ottobre.", "full": "En fait, nous avons changé nos plans : nous partons en octobre.", "rev": [{"l": "En fait", "h": "#c-enfait", "i": "in effetti, anzi"}]}, {"who": "Giulia", "c": "#a7826a", "parts": ["Ah bon ? Pourquoi ?"], "it": "Ah sì? Perché?", "full": "Ah bon ? Pourquoi ?"}, {"who": "Marika", "c": "#b5677a", "parts": [{"a": "À vrai dire", "acc": ["À vrai dire"]}, ", je n'aime pas beaucoup la chaleur…"], "it": "A dire il vero, non amo molto il caldo…", "full": "À vrai dire, je n'aime pas beaucoup la chaleur…", "rev": [{"l": "À vrai dire", "h": "#c-vraidire", "i": "a dire il vero"}]}, {"who": "Giulia", "c": "#a7826a", "parts": ["Tout le monde dit qu'en automne, il fait déjà frais là-bas."], "it": "Tutti dicono che in autunno lì fa già fresco.", "full": "Tout le monde dit qu'en automne, il fait déjà frais là-bas."}, {"who": "Marika", "c": "#b5677a", "parts": ["Oui… ", {"a": "En réalité", "acc": ["En réalité", "En fait"]}, ", en octobre, il fait encore 28 degrés !"], "it": "Sì… In realtà, a ottobre ci sono ancora 28 gradi!", "full": "Oui… En réalité, en octobre, il fait encore 28 degrés !", "rev": [{"l": "En réalité", "h": "#c-realite", "i": "in realtà"}]}, {"who": "Giulia", "c": "#a7826a", "parts": ["Et Alessio ? Il voulait aller au Mexique, non ?"], "it": "E Alessio? Voleva andare in Messico, no?", "full": "Et Alessio ? Il voulait aller au Mexique, non ?"}, {"who": "Marika", "c": "#b5677a", "parts": ["Oui, mais ", {"a": "finalement", "acc": ["finalement", "Finalement"]}, " il a choisi le Maroc avec moi."], "it": "Sì, ma alla fine ha scelto il Marocco con me.", "full": "Oui, mais finalement il a choisi le Maroc avec moi.", "rev": [{"l": "Finalement", "h": "#c-finalement", "i": "alla fine"}]}]}, "ex4": {"type": "qcm", "kind": "nuance", "color": "#6b4433", "cons": "« Finalement » ou « enfin » ? Choisis.", "consIt": "« Finalement » (alla fine) o « enfin » (finalmente)? Scegli.", "items": [{"q": "Après trois heures de retard, l'avion a … décollé !", "qi": "Dopo tre ore di ritardo, l'aereo è finalmente decollato!", "o": ["enfin", "finalement"], "a": "enfin", "full": "Après trois heures de retard, l'avion a enfin décollé !", "fullIt": "Dopo tre ore di ritardo, l'aereo è finalmente decollato!", "rev": {"l": "Finalement ou enfin ?", "h": "#g-nuance", "i": "alla fine / finalmente"}}, {"q": "Nous voulions dormir à l'hôtel, mais … nous avons dormi chez l'habitant.", "qi": "Volevamo dormire in albergo, ma alla fine abbiamo dormito da gente del posto.", "o": ["enfin", "finalement"], "a": "finalement", "full": "Nous voulions dormir à l'hôtel, mais finalement nous avons dormi chez l'habitant.", "fullIt": "Volevamo dormire in albergo, ma alla fine abbiamo dormito a casa di gente del posto.", "rev": {"l": "Finalement ou enfin ?", "h": "#g-nuance", "i": "alla fine / finalmente"}}, {"q": "Vous voilà … ! On vous attend depuis midi.", "qi": "Eccovi finalmente! Vi aspettiamo da mezzogiorno.", "o": ["enfin", "finalement"], "a": "enfin", "full": "Vous voilà enfin ! On vous attend depuis midi.", "fullIt": "Eccovi finalmente! Vi aspettiamo da mezzogiorno.", "rev": {"l": "Finalement ou enfin ?", "h": "#g-nuance", "i": "alla fine / finalmente"}}, {"q": "J'hésitais entre la robe beige et la robe rose : … j'ai pris la rose.", "qi": "Esitavo tra il vestito beige e quello rosa: alla fine ho preso quello rosa.", "o": ["enfin", "finalement"], "a": "finalement", "full": "J'hésitais entre la robe beige et la robe rose : finalement, j'ai pris la rose.", "fullIt": "Esitavo tra il vestito beige e quello rosa: alla fine ho preso quello rosa.", "rev": {"l": "Finalement ou enfin ?", "h": "#g-nuance", "i": "alla fine / finalmente"}}]}, "ex5": {"type": "type", "kind": "conjugaison", "color": "#b5677a", "cons": "Écris arriver à ou réussir à au temps indiqué.", "consIt": "Scrivi arriver à o réussir à al tempo indicato.", "items": [{"q": "Maintenant, j'___ comprendre les films français sans sous-titres.", "hint": "arriver · présent", "a": ["arrive à"], "full": "Maintenant, j'arrive à comprendre les films français sans sous-titres.", "fullIt": "Adesso riesco a capire i film francesi senza sottotitoli.", "rev": {"l": "Arriver à + infinitif", "h": "#g-arriver", "i": "riuscire a"}}, {"q": "Alessio et moi, nous ___ trouver un vol pas cher pour Lisbonne.", "hint": "réussir · passé composé", "a": ["avons réussi à"], "full": "Alessio et moi, nous avons réussi à trouver un vol pas cher pour Lisbonne.", "fullIt": "Alessio e io siamo riusciti a trovare un volo economico per Lisbona.", "rev": {"l": "Réussir à : passé composé avec avoir", "h": "#g-reussir", "i": "riuscire a"}}, {"q": "Hier soir, avec le bruit de la rue, je ___ dormir.", "hint": "arriver · passé composé · négatif (je = Marika)", "a": ["ne suis pas arrivée à"], "full": "Hier soir, avec le bruit de la rue, je ne suis pas arrivée à dormir.", "fullIt": "Ieri sera, con il rumore della strada, non sono riuscita a dormire.", "rev": {"l": "Arriver à : passé composé avec être", "h": "#g-conj", "i": "l'accordo del participio"}}, {"q": "Elle ___ terminer son mémoire avant l'été.", "hint": "réussir · passé composé", "a": ["a réussi à"], "full": "Elle a réussi à terminer son mémoire avant l'été.", "fullIt": "È riuscita a finire la sua tesi prima dell'estate.", "rev": {"l": "Réussir à : passé composé avec avoir", "h": "#g-reussir", "i": "riuscire a"}}, {"q": "Tu ___ ouvrir cette bouteille ? Elle est vraiment bien fermée !", "hint": "arriver · présent", "a": ["arrives à"], "full": "Tu arrives à ouvrir cette bouteille ? Elle est vraiment bien fermée !", "fullIt": "Riesci ad aprire questa bottiglia? È chiusa davvero bene!", "rev": {"l": "Arriver à + infinitif", "h": "#g-arriver", "i": "riuscire a"}}, {"q": "Mes amies sont ___ convaincre leur patron de travailler à distance.", "hint": "arriver · participe passé (attention à l'accord)", "a": ["arrivées à"], "full": "Mes amies sont arrivées à convaincre leur patron de travailler à distance.", "fullIt": "Le mie amiche sono riuscite a convincere il loro capo a lavorare a distanza.", "rev": {"l": "Arriver à : passé composé avec être", "h": "#g-conj", "i": "l'accordo del participio"}}]}, "ex6": {"type": "qcm", "kind": "pour aller plus loin", "color": "#8a5a44", "cons": "Choisis la réponse correcte.", "consIt": "Scegli la risposta corretta.", "items": [{"q": "Tu arrives à dormir dans l'avion ? Non, je …", "qi": "Riesci a dormire in aereo? No, non ci riesco.", "o": ["n'arrive pas y", "n'y arrive pas", "n'en arrive pas"], "a": "n'y arrive pas", "full": "Tu arrives à dormir dans l'avion ? Non, je n'y arrive pas.", "fullIt": "Riesci a dormire in aereo? No, non ci riesco.", "rev": {"l": "Le pronom y : j'y arrive", "h": "#g-plus", "i": "ci riesco"}}, {"q": "Vous êtes arrivés à réserver la table ? Oui, nous … !", "qi": "Siete riusciti a prenotare il tavolo? Sì, ci siamo riusciti!", "o": ["y sommes arrivés", "sommes y arrivés", "y avons arrivés"], "a": "y sommes arrivés", "full": "Vous êtes arrivés à réserver la table ? Oui, nous y sommes arrivés !", "fullIt": "Siete riusciti a prenotare il tavolo? Sì, ci siamo riusciti!", "rev": {"l": "Le pronom y : j'y arrive", "h": "#g-plus", "i": "ci riesco"}}, {"q": "Tu as réussi à joindre la propriétaire ? Oui, j'… ce matin.", "qi": "Sei riuscita a contattare la proprietaria? Sì, ci sono riuscita stamattina.", "o": ["ai réussi", "suis réussie", "ai arrivé"], "a": "ai réussi", "full": "Tu as réussi à joindre la propriétaire ? Oui, j'ai réussi ce matin.", "fullIt": "Sei riuscita a contattare la proprietaria? Sì, ci sono riuscita stamattina.", "rev": {"l": "Réussir à : passé composé avec avoir", "h": "#g-reussir", "i": "riuscire a"}}, {"q": "Après des heures de discussion, ils sont … un accord.", "qi": "Dopo ore di discussione, sono arrivati a un accordo.", "o": ["parvenus à", "parvenus de", "réussis à"], "a": "parvenus à", "full": "Après des heures de discussion, ils sont parvenus à un accord.", "fullIt": "Dopo ore di discussione, sono arrivati a un accordo.", "rev": {"l": "Parvenir à (registre soutenu)", "h": "#g-plus", "i": "arrivare a, riuscire a"}}]}, "ex7": {"type": "order", "kind": "remise en ordre", "color": "#b5677a", "cons": "Touche les mots dans le bon ordre pour reconstruire la phrase.", "consIt": "Tocca le parole nell'ordine giusto per ricostruire la frase.", "items": [{"a": "Même si je suis fatiguée, je continue à étudier.", "fullIt": "Anche se sono stanca, continuo a studiare.", "rev": {"l": "Même si", "h": "#v-memesi", "i": "anche se"}}, {"a": "En fait, nous n'avons pas réussi à trouver l'hôtel.", "fullIt": "In realtà non siamo riusciti a trovare l'albergo.", "rev": {"l": "Réussir à + infinitif", "h": "#g-reussir", "i": "riuscire a"}}, {"a": "Je n'arrive pas à comprendre son accent.", "fullIt": "Non riesco a capire il suo accento.", "rev": {"l": "Arriver à + infinitif", "h": "#g-arriver", "i": "riuscire a"}}, {"a": "Finalement, Alessio a laissé tomber le projet.", "fullIt": "Alla fine Alessio ha lasciato perdere il progetto.", "rev": {"l": "Laisser tomber", "h": "#v-laisser", "i": "lasciar perdere"}}]}, "ex8": {"type": "trad", "kind": "traduction", "color": "#6b4433", "cons": "Traduis en français, puis compare avec la correction.", "consIt": "Traduci in francese, poi confronta con la correzione.", "items": [{"q": "Anche se parlo bene francese, a volte non capisco le battute.", "a": "Même si je parle bien français, parfois je ne comprends pas les blagues.", "rev": {"l": "Même si · ne pas comprendre", "h": "#v-memesi", "i": "anche se"}}, {"q": "In realtà Alessio non è riuscito a dormire in treno.", "a": "En réalité, Alessio n'est pas arrivé à dormir dans le train.", "alt": "ou : Alessio n'a pas réussi à dormir…", "rev": {"l": "Arriver à · réussir à", "h": "#g-arriver", "i": "riuscire a"}}, {"q": "Con te non mi accorgo del tempo che passa.", "a": "Avec toi, je ne vois pas l'heure passer.", "rev": {"l": "Ne pas voir l'heure passer", "h": "#v-heure", "i": "il tempo vola"}}, {"q": "Ho mollato la palestra, ma alla fine ho ricominciato a correre.", "a": "J'ai laissé tomber la salle de sport, mais finalement j'ai recommencé à courir.", "rev": {"l": "Laisser tomber · finalement", "h": "#v-laisser", "i": "mollare · alla fine"}}, {"q": "Siamo riusciti a dormire e mangiare a casa di gente del posto in cambio di qualche lezione d'italiano.", "a": "Nous avons réussi à dormir et manger chez l'habitant en échange de quelques cours d'italien.", "rev": {"l": "Chez l'habitant en échange de…", "h": "#v-habitant", "i": "in cambio di"}}]}}</script>
+<script>
+const AUDIO={"Au début, je ne comprenais pas l'accent marseillais : les gens parlaient trop vite !": "audio/e407a60157.mp3", "Excusez-moi, je n'ai pas compris la dernière phrase.": "audio/83bc9bf34b.mp3", "ne pas comprendre": "audio/1a40eb54eb.mp3", "En Irlande, Alessio et moi avons dormi et mangé chez l'habitant en échange de quelques heures de travail à la ferme.": "audio/a27bc4f972.mp3", "dormir et manger chez l'habitant en échange de quelque chose": "audio/fb25d77bac.mp3", "Même si le billet est cher, nous partirons à Lisbonne en mars.": "audio/3808abcdcd.mp3", "Je parle espagnol, même si je fais encore des fautes.": "audio/22a8982a09.mp3", "même si": "audio/9fd173e291.mp3", "Voyager a complètement changé ma mentalité.": "audio/5b75168913.mp3", "Quand je marche au bord de la mer, mon esprit se repose.": "audio/92b30bc735.mp3", "mon esprit, ma mentalité": "audio/9a6a987754.mp3", "À Venise, les stimuli sont partout : les couleurs, les sons, les odeurs.": "audio/a1794acd10.mp3", "un stimulus, des stimuli": "audio/78cca81d14.mp3", "En novembre, avec la pluie, je suis parfois démotivée, mais le cours de français me redonne de l'énergie.": "audio/cd9c588811.mp3", "être démotivé, être démotivée": "audio/8b6ebee881.mp3", "J'ai laissé tomber l'espagnol pendant un an, puis j'ai recommencé avec plaisir.": "audio/57b4840c55.mp3", "Laisse tomber, ce n'est pas grave !": "audio/ee9b262ecb.mp3", "laisser tomber": "audio/4a96aa5073.mp3", "Alessio, tu te moques de moi quand je chante en espagnol ?": "audio/d813f4408d.mp3", "Je me moque de toi, c'est pour rire !": "audio/f8ce4d0756.mp3", "se moquer de quelqu'un": "audio/8e4363c269.mp3", "Dans le train pour Paris, nous avons parlé toute la nuit : nous n'avons pas vu l'heure passer !": "audio/4d414aa1da.mp3", "Avec un bon livre, je ne vois pas l'heure passer.": "audio/801d20d9ac.mp3", "ne pas voir l'heure passer": "audio/6c09035e53.mp3", "Tu as aimé Lyon ? Au début, tu voulais absolument aller à Paris.": "audio/0c51102955.mp3", "En fait, j'ai adoré Lyon ! À vrai dire, je préfère les villes plus calmes.": "audio/e04c289edf.mp3", "Moi, j'avais peur de m'ennuyer. En réalité, il y avait tellement de choses à voir !": "audio/27588e439f.mp3", "Et la cuisine… En vérité, c'est la capitale de la gastronomie.": "audio/420e3f355d.mp3", "Finalement, c'était une bonne idée de changer de destination.": "audio/a738e0e2fe.mp3", "Oui, et nous sommes enfin arrivés à prendre des vacances ensemble !": "audio/7715156e5b.mp3", "Le train est enfin arrivé !": "audio/4df382b8ad.mp3", "Finalement, nous sommes restés à la maison.": "audio/e4ab4c9ef9.mp3", "Je suis arrivée à Nice.": "audio/2d59d7eca0.mp3", "Je suis arrivée à comprendre.": "audio/38f5be876c.mp3", "En réalité": "audio/c59f797bac.mp3", "Tout le monde pense que la Sardaigne, c'est seulement la mer. En réalité, l'intérieur de l'île est magnifique.": "audio/0b6b8e2718.mp3", "En fait": "audio/078e5f10ab.mp3", "Je pensais partir en juin. En fait, nous partons en mai.": "audio/26b9898bf5.mp3", "En vérité": "audio/51f45f8e67.mp3", "En vérité, ce voyage a changé notre façon de vivre.": "audio/0682a92462.mp3", "À vrai dire": "audio/31bc66a554.mp3", "À vrai dire, je préfère les petits villages aux grandes villes.": "audio/430b3e4c60.mp3", "Finalement": "audio/01fe8f6ebb.mp3", "Nous voulions aller au Japon, mais finalement nous sommes restés en Europe.": "audio/68c98465db.mp3", "je suis arrivée à": "audio/0ff92aac05.mp3", "j'ai réussi à": "audio/d0b686d315.mp3", "tu es arrivé à": "audio/bb75b14330.mp3", "tu as réussi à": "audio/537426d5c7.mp3", "elle est arrivée à": "audio/0bafc06b74.mp3", "elle a réussi à": "audio/bdb4b9d449.mp3", "nous sommes arrivés à": "audio/f8ac5ee7d9.mp3", "nous avons réussi à": "audio/c73a768298.mp3", "vous êtes arrivées à": "audio/3204ac7fdc.mp3", "vous avez réussi à": "audio/06a21aea12.mp3", "ils sont arrivés à": "audio/f9854b7ee3.mp3", "ils ont réussi à": "audio/99624a7b63.mp3", "J'arrive à comprendre cette explication.": "audio/bd10094cbb.mp3", "Je n'arrive pas à dormir.": "audio/9e3ba8776c.mp3", "Nous sommes arrivés à trouver une solution.": "audio/e9f6cf8f34.mp3", "Elle a réussi à terminer son travail.": "audio/2537d5fd99.mp3", "J'ai réussi à réserver un hôtel au dernier moment.": "audio/d10d5e0d5e.mp3", "Tu arrives à dormir dans l'avion ? Non, je n'y arrive pas.": "audio/a6c4eadad3.mp3", "Tu as réussi à joindre l'hôtel ? Oui, j'ai réussi !": "audio/575633e558.mp3", "Après deux heures de discussion, nous sommes parvenus à un accord.": "audio/406814843b.mp3", "Quand Chiara est arrivée à Nice pour son stage, elle n'arrivait pas à comprendre les gens au téléphone.": "audio/5e4c9b3d6d.mp3", "Même si elle étudiait tous les soirs, elle était parfois démotivée.": "audio/1b580eb21d.mp3", "En fait, il fallait simplement du temps.": "audio/9de4e069ae.mp3", "Petit à petit, elle a réussi à suivre les conversations, et un jour, elle est même arrivée à raconter une blague en français !": "audio/48067d6207.mp3", "Finalement, elle n'a rien laissé tomber.": "audio/66e7134aac.mp3", "Aujourd'hui, avant de partir, on regarde des centaines de photos de sa destination.": "audio/f37ce309ae.mp3", "Sur place, le GPS nous guide, et les applications nous disent où manger et quel point de vue photographier.": "audio/44e0689ca7.mp3", "Certains lieux sont envahis par des touristes qui veulent tous la même photo.": "audio/221d0e8b96.mp3", "Pourtant, voyager, c'est aussi accepter de se perdre, de ne pas tout comprendre et de rencontrer des inconnus.": "audio/3701452857.mp3", "Alors, les réseaux sociaux nous aident-ils à découvrir le monde, ou nous empêchent-ils de le voir vraiment ?": "audio/800041f454.mp3", "une destination à la mode": "audio/6fed8c78d0.mp3", "le tourisme de masse": "audio/286bb7d887.mp3", "sortir des sentiers battus": "audio/1fc7540697.mp3", "se perdre": "audio/1d256c04a6.mp3", "l'imprévu": "audio/ec76992620.mp3", "une rencontre authentique": "audio/a02a6e10bd.mp3", "publier, partager une photo": "audio/9052f65178.mp3", "se comparer aux autres": "audio/715947abf4.mp3", "vivre l'instant présent": "audio/998c2f2dc4.mp3", "lever les yeux de l'écran": "audio/adcdb230a7.mp3", "s'ouvrir aux autres": "audio/988a291c31.mp3", "une source d'inspiration": "audio/7f0914e347.mp3", "Aujourd'hui, il suffit d'ouvrir Instagram pour": "audio/b7e6a2e682.mp3", "On peut alors se demander si": "audio/dee2939792.mp3", "D'un côté, il faut reconnaître que": "audio/59c58a925b.mp3", "Par exemple, quand Alessio et moi": "audio/e3c8d87ec0.mp3", "Grâce à, nous avons réussi à": "audio/7a238b6f92.mp3", "Pourtant, en réalité": "audio/c829f8aa70.mp3", "À vrai dire, mes plus beaux souvenirs": "audio/88d5bb9d9e.mp3", "Même si": "audio/1359f35cbb.mp3", "Finalement, je pense que": "audio/77e4ad0aa8.mp3", "L'essentiel, c'est de": "audio/8623beb5f1.mp3", "Aujourd'hui, il suffit d'ouvrir Instagram pour voir des milliers de photos de Lisbonne, de Santorin ou de Kyoto avant même de partir. On peut alors se demander si les réseaux sociaux nous aident vraiment à découvrir le monde, ou s'ils transforment nos voyages en une simple collection d'images.": "audio/9b12fdf859.mp3", "D'un côté, il faut reconnaître que ces outils sont très utiles. Grâce aux applications, Alessio et moi avons réussi à trouver de petits restaurants loin des touristes, et le GPS nous a souvent évité de nous perdre. Les photos des autres voyageurs sont aussi une belle source d'inspiration et de stimuli.": "audio/200b0d1851.mp3", "Pourtant, en réalité, mes plus beaux souvenirs ne viennent pas de mon téléphone. À vrai dire, ce sont les imprévus qui ont changé ma mentalité : un train manqué, une conversation avec une inconnue, une semaine où nous avons dormi et mangé chez l'habitant en échange d'un peu d'aide à la ferme. Ces soirs-là, nous n'avons pas vu l'heure passer. Même si je publie encore des photos, je n'arrive plus à voyager seulement pour elles.": "audio/5a839a3815.mp3", "Finalement, je pense que les réseaux sociaux ne sont ni bons ni mauvais : tout dépend de notre état d'esprit. L'essentiel, c'est de garder notre curiosité, de lever les yeux de l'écran et de laisser une place à l'imprévu.": "audio/73019bb82c.mp3", "Les ruelles, les couleurs, la musique : dans ce village, il y a beaucoup de stimuli.": "audio/e0c83e543c.mp3", "Pour voyager sans payer l'hôtel, nous avons dormi et mangé chez l'habitant en échange d'un peu de jardinage.": "audio/6032bb1a59.mp3", "Le vol a duré douze heures, mais avec ce film, je n'ai pas vu l'heure passer.": "audio/c6629a7702.mp3", "Ce livre de philosophie est difficile : je n'arrive pas à saisir le sens des phrases.": "audio/031c1d2d03.mp3", "Ce voyage en Asie a complètement changé ma mentalité : maintenant, je vis plus simplement.": "audio/fe85379a92.mp3", "Après trois semaines de pluie, Marika est un peu démotivée : elle n'a plus envie de rien.": "audio/25e648aef7.mp3", "J'ai laissé tomber.": "audio/77a6fe0648.mp3", "Je me moque de toi !": "audio/a9d3fbec4d.mp3", "Excusez-moi, je n'ai pas compris.": "audio/848b2f1753.mp3", "Je n'ai pas vu l'heure passer !": "audio/0ca2ca6aec.mp3", "Même s'il pleut, on y va !": "audio/c1142c347e.mp3", "Je n'ai pas compris.": "audio/5e5b5c3e60.mp3", "Alors, ce voyage au Maroc, vous partez en avril ?": "audio/2e8e081051.mp3", "En fait, nous avons changé nos plans : nous partons en octobre.": "audio/334507928b.mp3", "Ah bon ? Pourquoi ?": "audio/118977ed41.mp3", "À vrai dire, je n'aime pas beaucoup la chaleur…": "audio/5402829598.mp3", "Tout le monde dit qu'en automne, il fait déjà frais là-bas.": "audio/63eca8b569.mp3", "Oui… En réalité, en octobre, il fait encore 28 degrés !": "audio/eaba1b13d3.mp3", "Et Alessio ? Il voulait aller au Mexique, non ?": "audio/7e34a1e41a.mp3", "Oui, mais finalement il a choisi le Maroc avec moi.": "audio/60ad44a11c.mp3", "Après trois heures de retard, l'avion a enfin décollé !": "audio/7793f6296d.mp3", "Nous voulions dormir à l'hôtel, mais finalement nous avons dormi chez l'habitant.": "audio/6fd90de2de.mp3", "Vous voilà enfin ! On vous attend depuis midi.": "audio/6c9524773c.mp3", "J'hésitais entre la robe beige et la robe rose : finalement, j'ai pris la rose.": "audio/8468893c9c.mp3", "Maintenant, j'arrive à comprendre les films français sans sous-titres.": "audio/4eb47e3df3.mp3", "Alessio et moi, nous avons réussi à trouver un vol pas cher pour Lisbonne.": "audio/1cf9add692.mp3", "Hier soir, avec le bruit de la rue, je ne suis pas arrivée à dormir.": "audio/393201a777.mp3", "Elle a réussi à terminer son mémoire avant l'été.": "audio/ae935b0499.mp3", "Tu arrives à ouvrir cette bouteille ? Elle est vraiment bien fermée !": "audio/8931ce01bd.mp3", "Mes amies sont arrivées à convaincre leur patron de travailler à distance.": "audio/f28018437d.mp3", "Vous êtes arrivés à réserver la table ? Oui, nous y sommes arrivés !": "audio/98c1ce2800.mp3", "Tu as réussi à joindre la propriétaire ? Oui, j'ai réussi ce matin.": "audio/159c77f86f.mp3", "Après des heures de discussion, ils sont parvenus à un accord.": "audio/c7bce11adb.mp3", "Même si je suis fatiguée, je continue à étudier.": "audio/e986bbe084.mp3", "En fait, nous n'avons pas réussi à trouver l'hôtel.": "audio/cb51623dde.mp3", "Je n'arrive pas à comprendre son accent.": "audio/fed3b78251.mp3", "Finalement, Alessio a laissé tomber le projet.": "audio/03039e4a96.mp3", "Même si je parle bien français, parfois je ne comprends pas les blagues.": "audio/47d064e6fb.mp3", "En réalité, Alessio n'est pas arrivé à dormir dans le train.": "audio/e0476b13b0.mp3", "Avec toi, je ne vois pas l'heure passer.": "audio/788e2d321c.mp3", "J'ai laissé tomber la salle de sport, mais finalement j'ai recommencé à courir.": "audio/f972de72d3.mp3", "Nous avons réussi à dormir et manger chez l'habitant en échange de quelques cours d'italien.": "audio/428c1ae042.mp3"};
+const EX=JSON.parse(document.getElementById("exdata").textContent);
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+
+/* audio */
+let cur=null;
+function play(t,el){
+  if(cur){cur.a.pause();if(cur.el)cur.el.classList.remove("on")}
+  const f=AUDIO[t];
+  if(!f){if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(t);u.lang="fr-FR";speechSynthesis.cancel();speechSynthesis.speak(u)}return}
+  const a=new Audio(f);cur={a,el};if(el)el.classList.add("on");
+  a.onended=()=>{if(el)el.classList.remove("on")};
+  a.play().catch(()=>{if(el)el.classList.remove("on")});
+}
+document.addEventListener("click",e=>{const s=e.target.closest(".say");if(s&&s.dataset.t&&!e.target.closest("select,input,textarea"))play(s.dataset.t,s)});
+$("#itbtn").onclick=()=>document.body.classList.toggle("noit");
+
+/* score, étoiles, à revoir */
+let pts=0,TOTAL=0;const wrong=new Map();
+function refresh(){$("#score").innerHTML=`★ <b>${pts}</b> / ${TOTAL}`}
+function stars(el){
+  const r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+  for(let i=0;i<6;i++){const s=document.createElement("span");s.className="star"+(i%2?" c":"");s.textContent=i%2?"✦":"★";
+    const ang=Math.PI*2*i/6+Math.random()*.4,d=28+Math.random()*18;s.style.left=cx+"px";s.style.top=cy+"px";
+    s.style.setProperty("--dx",Math.cos(ang)*d+"px");s.style.setProperty("--dy",Math.sin(ang)*d+"px");
+    document.body.appendChild(s);setTimeout(()=>s.remove(),1000)}
+}
+function good(el){pts++;refresh();stars(el)}
+function bad(rev,key){if(rev)wrong.set(key,rev);drawRev()}
+function drawRev(){
+  if(!wrong.size){$("#revlist").innerHTML=`<p class="final">Bravo Marika : aucune erreur pour l'instant !</p>`;return}
+  const seen=new Map();wrong.forEach(r=>{if(!seen.has(r.h))seen.set(r.h,r)});
+  $("#revlist").innerHTML=`<ul>${[...seen.values()].map(r=>`<li><a href="${r.h}" data-go="${r.h}">${r.l}</a>${r.i?`<span class="it">${r.i}</span>`:""}</li>`).join("")}</ul>`;
+}
+document.addEventListener("click",e=>{const a=e.target.closest("[data-go]");if(!a)return;const t=document.querySelector(a.dataset.go);if(t)setTimeout(()=>{t.classList.remove("flash");void t.offsetWidth;t.classList.add("flash")},400)});
+
+function fullLine(t,it){return `<div class="full say" data-t="${esc(t)}"><span class="spk">▶</span><div><span class="fr">${t}</span>${it?`<span class="it">${it}</span>`:""}</div></div>`}
+function showFull(q,auto){const f=q.querySelector(".full");if(f){f.classList.add("show");if(auto)play(f.dataset.t,f)}}
+const norm=s=>s.toLowerCase().replace(/[’`]/g,"'").replace(/\s+/g," ").trim().replace(/[.!?…]+$/,"").trim();
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+/* exercices */
+let num=0;const ORDER=[];
+document.querySelectorAll(".exslot").forEach(slot=>{
+  const id=slot.dataset.ex,ex=EX[id];num++;ORDER.push([num,ex]);
+  const box=document.createElement("div");box.className="exo";box.id=id;box.style.setProperty("--c",ex.color);
+  box.innerHTML=`<div class="hd"><span class="n">${num}</span><div style="flex:1"><div class="kind">Exercice · ${ex.kind}</div><div class="cons">${ex.cons}</div><span class="it">${ex.consIt}</span></div><button class="solbtn">solutions</button></div><div class="bd"></div>`;
+  box.querySelector(".solbtn").onclick=()=>{const c=$("#corriges");c.open=true;const h=document.getElementById("corr-"+id);if(h)h.scrollIntoView({behavior:"smooth",block:"start"})};
+  slot.replaceWith(box);const bd=box.querySelector(".bd");
+  ex.items.forEach((it,k)=>{
+    const key=id+"-"+k,q=document.createElement("div");q.className="q";bd.appendChild(q);
+    if(ex.type==="qcm"){
+      TOTAL++;
+      q.innerHTML=`<div class="qi">${it.img?`<img src="${it.img}" alt="">`:""}<div><span class="qt">${it.q}</span>${it.qi?`<span class="it">${it.qi}</span>`:""}</div></div><div class="opts">${shuffle(it.o).map(o=>`<button class="opt">${o}</button>`).join("")}</div>${fullLine(it.full,it.fullIt)}`;
+      q.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+        const ok=b.textContent===it.a;
+        q.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.textContent===it.a)x.classList.add("ok")});
+        if(ok)good(b);else{b.classList.add("ko");bad(it.rev,key)}
+        showFull(q,true);
+      });
+    }
+    if(ex.type==="match"){
+      TOTAL++;
+      q.innerHTML=`<span class="qt">${it.q}</span>${it.qi?`<span class="it">${it.qi}</span>`:""}<div style="margin-top:8px"><select class="mt"><option value="">Choisis…</option>${shuffle(ex.bank).map(w=>`<option>${w}</option>`).join("")}</select></div>${fullLine(it.full,it.fullIt)}`;
+      const s=q.querySelector("select");
+      s.onchange=()=>{if(!s.value)return;s.disabled=true;
+        if(s.value===it.a){s.classList.add("ok");good(s)}else{s.classList.add("ko");s.insertAdjacentHTML("afterend",`<span class="sol">✓ ${it.a}</span>`);bad(it.rev,key)}
+        showFull(q,true)};
+    }
+    if(ex.type==="type"){
+      TOTAL++;
+      const [a,b]=it.q.split("___");
+      q.innerHTML=`<span class="qt">${a}<input class="typ" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="…">${b}</span><br><span class="hint">${it.hint}</span><div><button class="chk">Vérifier</button><span class="solx"></span></div>${fullLine(it.full,it.fullIt)}`;
+      const inp=q.querySelector("input"),btn=q.querySelector(".chk");
+      const go=()=>{if(q.dataset.done||!inp.value.trim())return;q.dataset.done=1;inp.disabled=true;btn.style.display="none";
+        const ok=it.a.some(x=>norm(x)===norm(inp.value));
+        if(ok){inp.classList.add("ok");good(inp)}else{inp.classList.add("ko");q.querySelector(".solx").innerHTML=`<span class="sol">✓ ${it.a[0]}</span>`;bad(it.rev,key)}
+        showFull(q,true)};
+      btn.onclick=go;inp.onkeydown=e=>{if(e.key==="Enter")go()};
+    }
+    if(ex.type==="dialog"){
+      let h=`<div class="dl" style="--lc:${it.c}"><span class="who">${it.who}</span><div><span class="qt">`;
+      it.parts.forEach(p=>{if(typeof p==="string")h+=p;else{TOTAL++;h+=`<select class="gap"><option value="">…</option>${ex.bank.map(w=>`<option>${w}</option>`).join("")}</select>`}});
+      h+=`</span>${it.it?`<span class="it">${it.it}</span>`:""}</div></div>${fullLine(it.full)}`;
+      q.innerHTML=h;
+      const gaps=it.parts.filter(p=>typeof p!=="string");const sels=q.querySelectorAll("select");
+      if(!sels.length){q.querySelector(".full").classList.add("show")}
+      sels.forEach((s,j)=>s.onchange=()=>{if(!s.value)return;s.disabled=true;const g=gaps[j];
+        const ok=g.acc.some(x=>x.toLowerCase()===s.value.toLowerCase());
+        if(ok){s.classList.add("ok");good(s)}else{s.classList.add("ko");s.insertAdjacentHTML("afterend",`<span class="sol">✓ ${g.a}</span>`);bad(it.rev[j]||it.rev[0],key+"-"+j)}
+        showFull(q,true)});
+    }
+    if(ex.type==="order"){
+      TOTAL++;q.classList.add("order");
+      const words=it.a.split(" ");
+      q.innerHTML=`<div class="built"></div><div class="pool">${shuffle(words.map((w,i)=>[w,i])).map(([w,i])=>`<button class="tok" data-i="${i}">${w}</button>`).join("")}</div><button class="btn ghost reset">Recommencer</button>${fullLine(it.a,it.fullIt)}`;
+      const built=q.querySelector(".built"),pool=q.querySelector(".pool");
+      q.querySelector(".reset").onclick=()=>{if(q.dataset.done)return;built.querySelectorAll(".tok").forEach(t=>pool.appendChild(t))};
+      pool.addEventListener("click",e=>{const t=e.target.closest(".tok");if(!t||q.dataset.done)return;built.appendChild(t);
+        if(!pool.children.length){q.dataset.done=1;q.querySelector(".reset").style.display="none";
+          const res=[...built.children].map(x=>x.textContent).join(" ");
+          if(res===it.a){good(built)}else{built.style.borderColor="var(--ko)";bad(it.rev,key)}
+          showFull(q,true)}});
+      built.addEventListener("click",e=>{const t=e.target.closest(".tok");if(!t||q.dataset.done)return;pool.appendChild(t)});
+    }
+    if(ex.type==="trad"){
+      TOTAL++;q.classList.add("trad");
+      q.innerHTML=`<span class="qt">${it.q}</span><textarea rows="2" placeholder="Ta traduction…"></textarea><button class="btn alt see">Voir la correction</button>${fullLine(it.a,it.alt||"")}<div class="selfc"><span class="small">Ta traduction était…</span><button class="btn yes">juste</button><button class="btn ghost no">à revoir</button></div>`;
+      q.querySelector(".see").onclick=e=>{e.target.style.display="none";showFull(q,true);q.querySelector(".selfc").classList.add("show")};
+      q.querySelector(".yes").onclick=e=>{if(q.dataset.done)return;q.dataset.done=1;good(e.target);q.querySelector(".selfc").innerHTML=`<span class="sol">✓ Bravo !</span>`};
+      q.querySelector(".no").onclick=()=>{if(q.dataset.done)return;q.dataset.done=1;bad(it.rev,key);q.querySelector(".selfc").innerHTML=`<span class="small">Ajouté à la liste « À revoir ».</span>`};
+    }
+  });
+});
+refresh();
+
+/* corrigés */
+$("#corrlist").innerHTML=ORDER.map(([n,ex])=>{
+  const id=Object.keys(EX).find(k=>EX[k]===ex);
+  const lines=ex.items.map(it=>{const t=ex.type==="order"||ex.type==="trad"?it.a:it.full;return t?`<li class="say" data-t="${esc(t)}"><span class="fr">${t}</span>${it.alt?`<span class="alt"> ${it.alt}</span>`:""}</li>`:""}).join("");
+  return `<h4 id="corr-${id}">Exercice ${n} · ${ex.kind}</h4><ol>${lines}</ol>`}).join("");
+
+/* écriture */
+const txt=$("#txt");
+try{txt.value=localStorage.getItem("marika-ecrit-0511")||""}catch(e){}
+function upd(){
+  const v=txt.value,n=(v.trim().match(/\S+/g)||[]).length;
+  $("#wc").textContent=n+(n>1?" mots":" mot")+" · objectif 200 à 250";
+  document.querySelectorAll("#defi li").forEach(li=>li.classList.toggle("done",new RegExp(li.dataset.re,"i").test(v)));
+  try{localStorage.setItem("marika-ecrit-0511",v)}catch(e){}
+}
+txt.addEventListener("input",upd);upd();
+$("#copy").onclick=()=>{const b=$("#copy");const done=()=>{b.textContent="Texte copié ✓";setTimeout(()=>b.textContent="Copier mon texte",1800)};
+  if(navigator.clipboard)navigator.clipboard.writeText(txt.value).then(done,()=>{txt.select();document.execCommand("copy");done()});else{txt.select();document.execCommand("copy");done()}};
+</script>
+</body>
+</html>
