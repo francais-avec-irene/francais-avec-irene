@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leçon de Rita · 5 novembre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --mer:#0f5a7a; --mer2:#0b3f57; --turq:#1aa39b; --corail:#e46f5b; --lav:#8c78c4; --or:#d6a23a; --rose:#d9628f;
+  --ink:#1f2a33; --soft:#5d6b76; --line:#e4e9ee; --bg:#f7f4ef; --card:#ffffff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito Sans",system-ui,sans-serif;font-size:17px;line-height:1.55}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:700;line-height:1.15;margin:0}
+.it{display:block;color:#7c8892;font-style:italic;font-size:.86em;line-height:1.4;margin-top:2px}
+body.noit .it{display:none}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+
+/* barre du haut */
+.top{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;height:56px}
+.brand{font-family:"Fraunces",serif;font-style:italic;font-weight:500;color:var(--mer);font-size:15px;white-space:nowrap}
+.nav{display:flex;gap:6px;overflow-x:auto;flex:1;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{font-size:13px;font-weight:700;text-decoration:none;color:var(--mer);background:#eef5f8;border-radius:99px;padding:5px 11px;white-space:nowrap}
+.itbtn{border:1px solid var(--line);background:#fff;border-radius:99px;font:700 12px "Nunito Sans";color:var(--soft);padding:5px 9px;cursor:pointer}
+.score{font-weight:800;font-size:14px;color:#fff;background:linear-gradient(90deg,var(--mer),var(--turq));border-radius:99px;padding:6px 13px;white-space:nowrap}
+.score b{color:#ffe08a}
+@media(max-width:640px){.brand{display:none}}
+
+/* hero */
+.hero{position:relative;height:min(62vh,440px);overflow:hidden}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.hero .cap{position:absolute;left:16px;bottom:18px;right:16px;max-width:600px}
+.hero .tag{display:inline-block;background:var(--or);color:#fff;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;border-radius:99px;padding:5px 12px;margin-bottom:10px}
+.hero h1{color:#fff;font-size:clamp(30px,6vw,48px);text-shadow:0 2px 14px rgba(0,0,0,.55)}
+.hero .sub{color:#fff;font-style:italic;font-size:16px;text-shadow:0 1px 8px rgba(0,0,0,.7);margin-top:6px}
+.rainbow{height:5px;background:linear-gradient(90deg,var(--mer),var(--turq),var(--or),var(--corail),var(--rose),var(--lav))}
+
+.intro{background:#fff;border-radius:18px;padding:16px 18px;margin:22px 0 6px;box-shadow:0 2px 10px rgba(15,90,122,.07);display:flex;gap:14px;align-items:center}
+.intro .ic{font-size:26px}
+
+/* bandeaux de section */
+.band{position:relative;height:200px;border-radius:20px;overflow:hidden;margin:44px 0 18px}
+.band img{width:100%;height:100%;object-fit:cover;display:block}
+.band .lbl{position:absolute;left:14px;bottom:14px;background:rgba(10,30,42,.72);color:#fff;border-radius:14px;padding:10px 16px}
+.band .num{font-family:"Fraunces";font-size:13px;letter-spacing:.14em;opacity:.85}
+.band h2{font-size:26px}
+.band .lbl .it{color:#dfe8ee;font-size:14px;margin:0}
+
+/* audio */
+.say{cursor:pointer;position:relative;border-radius:10px;transition:background .2s}
+.say:hover{background:rgba(26,163,155,.07)}
+.say .spk{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#e7f5f4;color:var(--turq);font-size:13px;margin-right:8px;flex:none;vertical-align:middle}
+.say.on{background:rgba(26,163,155,.13)}
+.say.on .spk{background:var(--turq);color:#fff}
+
+/* vocabulaire */
+.grid{column-count:2;column-gap:16px}
+@media(max-width:700px){.grid{column-count:1}}
+.card{break-inside:avoid;background:var(--card);border-radius:18px;border-top:5px solid var(--c,var(--mer));padding:14px 16px 12px;margin:0 0 16px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card .pic{width:100%;height:150px;object-fit:cover;border-radius:12px;display:block;margin-bottom:10px}
+.word{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.word .w{font-weight:800;font-size:20px}
+.pill{font-size:11.5px;font-weight:800;border-radius:99px;padding:2px 9px;background:color-mix(in srgb,var(--c,var(--mer)) 14%,#fff);color:var(--c,var(--mer))}
+.eq{font-size:14px;color:var(--soft);margin:4px 0 8px}
+.eq b{color:#2b8a3e;font-size:11px;letter-spacing:.06em;background:#e8f6ec;border-radius:6px;padding:1px 6px;margin-right:6px}
+.ex{display:flex;align-items:flex-start;padding:6px 6px;margin:2px -6px}
+.ex .fr{font-family:"Fraunces",serif;font-weight:500;font-size:17.5px}
+.ex strong{color:var(--c,var(--mer))}
+.note{background:color-mix(in srgb,var(--c,var(--mer)) 8%,#fff);border-left:3px solid var(--c,var(--mer));border-radius:8px;padding:8px 11px;font-size:14.5px;margin-top:8px}
+
+/* expressions */
+.dlg{background:#fff;border-radius:18px;padding:14px 16px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.05);border-top:5px solid var(--corail)}
+.dlg h3{font-size:21px;color:var(--corail);margin-bottom:2px}
+.line{display:flex;gap:10px;align-items:flex-start;border-left:3px solid var(--lc,var(--mer));padding:4px 6px 4px 10px;margin:8px 0}
+.who{font-weight:800;font-size:13px;color:var(--lc,var(--mer));min-width:52px;padding-top:3px}
+
+/* prononciation */
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.tile{background:#fff;border-radius:14px;padding:10px 12px;border:1px solid var(--line);cursor:pointer;transition:transform .15s}
+.tile:hover{transform:translateY(-2px)}
+.tile .m{font-weight:800;font-size:18px}
+.tile .m u{text-decoration:none;color:#fff;background:var(--lav);border-radius:5px;padding:0 4px;margin-left:1px}
+.tile .p{font-size:13.5px;color:var(--lav);font-weight:700}
+.tile .t{font-size:13px;color:#7c8892;font-style:italic}
+body.noit .tile .t{display:none}
+.tile.mute{border:2px dashed var(--corail)}
+.tile.mute .m u{background:#bbb;text-decoration:line-through}
+.tile.on{outline:3px solid var(--turq)}
+.box{background:#fff;border-radius:18px;padding:14px 16px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.box h3{font-size:19px;margin-bottom:6px}
+
+/* grammaire */
+.gintro{background:linear-gradient(120deg,var(--mer2),var(--lav));color:#fff;border-radius:18px;padding:16px 18px;margin-bottom:16px}
+.gintro .it{color:#e4e0f5}
+.formula{display:inline-block;background:#fff;color:var(--mer2);font-weight:800;border-radius:99px;padding:4px 14px;margin:6px 6px 0 0;font-size:15px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.two{grid-template-columns:1fr}}
+.vb{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.vb .hd{background:var(--c);color:#fff;padding:12px 16px}
+.vb .hd h3{font-size:22px}
+.vb .hd .it{color:#ffffffcc}
+.vb .bd{padding:10px 14px 14px}
+table.conj{width:100%;border-collapse:collapse;margin-bottom:8px}
+table.conj td{padding:6px 8px;border-bottom:1px solid var(--line);font-size:16.5px}
+table.conj tr{cursor:pointer}
+table.conj tr:hover td{background:color-mix(in srgb,var(--c) 7%,#fff)}
+table.conj td:first-child{color:var(--soft);width:42%}
+table.conj td:last-child{font-weight:800;color:var(--c)}
+table.conj tr.same td{background:#fff6dc}
+table.conj tr.on td{background:color-mix(in srgb,var(--c) 16%,#fff)}
+.retenir{background:#fffaf0;border:2px solid var(--or);border-radius:18px;padding:16px 18px;margin-top:16px}
+.retenir h3{color:#a8781c;font-size:21px;margin-bottom:6px}
+.inner{background:#fff;border-left:4px solid var(--lav);border-radius:10px;padding:10px 12px;margin:10px 0}
+.k{font-weight:800}
+.k.e{color:var(--mer)} .k.s{color:var(--rose)}
+
+/* exercices */
+.exo{background:#fff;border-radius:18px;overflow:hidden;margin:0 0 20px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.exo>.hd{background:var(--c);color:#fff;padding:12px 16px;display:flex;gap:12px;align-items:flex-start}
+.exo>.hd .n{font-family:"Fraunces";font-size:34px;line-height:1;opacity:.9}
+.exo>.hd .kind{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;opacity:.85}
+.exo>.hd .cons{font-weight:800;font-size:16px}
+.exo>.hd .it{color:#ffffffd0}
+.exo .bd{padding:4px 16px 14px}
+.q{padding:12px 0;border-top:1px dashed var(--line)}
+.q:first-child{border-top:0}
+.q .qt{font-family:"Fraunces";font-weight:500;font-size:17.5px}
+.q .qi{display:flex;gap:12px;align-items:center}
+.q .qi img{width:78px;height:62px;object-fit:cover;border-radius:10px;flex:none}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.opt{border:2px solid var(--line);background:#fff;border-radius:99px;padding:6px 14px;font:700 15px "Nunito Sans";color:var(--ink);cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--c)}
+.opt.ok{background:#e6f6ea;border-color:#3aa55a;color:#24753c}
+.opt.ko{background:#fdeceb;border-color:var(--corail);color:#b23f2c;text-decoration:line-through}
+.opt:disabled{cursor:default}
+.full{display:none;margin-top:8px;background:#f4faf8;border-radius:10px;padding:6px 8px}
+.full.show{display:flex}
+.pre{border:0;background:var(--lav);color:#fff;border-radius:99px;padding:6px 14px;font:800 14px "Nunito Sans";cursor:pointer;margin-right:8px}
+.blank{display:inline-block;min-width:70px;border-bottom:2px solid var(--c);color:var(--c);font-weight:800;text-align:center}
+input.typ{font:700 16px "Nunito Sans";border:2px solid var(--line);border-radius:10px;padding:5px 8px;width:130px;margin:0 4px}
+input.typ.ok{border-color:#3aa55a;background:#e6f6ea}
+input.typ.ko{border-color:var(--corail);background:#fdeceb}
+.chk{border:0;background:var(--c);color:#fff;border-radius:99px;padding:6px 14px;font:800 14px "Nunito Sans";cursor:pointer}
+.sol{color:#24753c;font-weight:800;margin-left:6px}
+select.gap{font:700 15px "Nunito Sans";border:2px solid var(--c);border-radius:10px;padding:3px 6px;background:#fff;color:var(--c);max-width:150px}
+select.gap.ok{border-color:#3aa55a;color:#24753c;background:#e6f6ea}
+select.gap.ko{border-color:var(--corail);color:#b23f2c;background:#fdeceb}
+.tilesrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.tk{border:0;background:#e8f4ef;color:#1d6e52;border-radius:9px;padding:6px 11px;font:700 15px "Nunito Sans";cursor:pointer}
+.tk.used{opacity:.25;pointer-events:none}
+.built{min-height:40px;border:2px dashed var(--line);border-radius:12px;padding:6px 10px;margin-top:8px;font-family:"Fraunces";font-size:17px}
+.mini{border:1px solid var(--line);background:#fff;border-radius:99px;padding:4px 11px;font:700 13px "Nunito Sans";color:var(--soft);cursor:pointer;margin:8px 6px 0 0}
+
+/* production */
+.prod{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.prod .hd{background:linear-gradient(120deg,var(--mer2),var(--mer));color:#fff;padding:14px 18px}
+.prod .hd .it{color:#d5e6ee}
+.prod .bd{padding:14px 18px 18px}
+.sujet{background:#fdf4f1;border:1px solid #f3cfc6;border-radius:14px;padding:12px 14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{background:#eef5f8;color:var(--mer);border-radius:99px;padding:4px 11px;font-weight:700;font-size:14px}
+.steps{counter-reset:s;margin:8px 0;padding:0;list-style:none}
+.steps li{counter-increment:s;position:relative;padding:8px 0 8px 40px;border-bottom:1px dashed var(--line)}
+.steps li:before{content:counter(s);position:absolute;left:0;top:8px;width:28px;height:28px;border-radius:50%;background:var(--corail);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.steps .st{color:var(--corail);font-weight:800}
+textarea{width:100%;min-height:260px;border:2px solid var(--line);border-radius:14px;padding:12px;font:17px/1.7 "Nunito Sans";background:repeating-linear-gradient(#fff,#fff 28px,#eef2f5 29px)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+.copy{border:0;background:var(--corail);color:#fff;border-radius:99px;padding:10px 18px;font:800 15px "Nunito Sans";cursor:pointer}
+.cnt{color:var(--soft);font-size:14px}
+
+/* à revoir */
+.revoir{background:#fff;border:2px solid var(--rose);border-radius:18px;padding:16px 18px;margin:20px 0}
+.revoir h2{color:var(--rose);font-size:24px}
+.revoir ul{padding-left:0;list-style:none;margin:10px 0 0}
+.revoir li{padding:7px 0;border-bottom:1px dashed var(--line)}
+.revoir a{color:var(--mer);font-weight:800;text-decoration:none}
+.revoir a:after{content:" ↑"}
+.final{font-family:"Fraunces";font-size:20px;color:var(--mer)}
+.flash{animation:fl 1.6s ease}
+@keyframes fl{0%,60%{box-shadow:0 0 0 4px var(--or)}100%{box-shadow:0 0 0 0 transparent}}
+
+/* étoiles */
+.star{position:fixed;pointer-events:none;z-index:99;color:var(--or);font-size:18px;animation:st .95s ease-out forwards}
+@keyframes st{0%{opacity:0;transform:translate(0,0) scale(.4)}25%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(40deg)}}
+footer{text-align:center;color:var(--soft);font-size:13px;padding:30px 0 40px;font-style:italic}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <span class="brand">Le français avec Irène</span>
+  <nav class="nav">
+    <a href="#vocab">Mots</a><a href="#expr">Expressions</a><a href="#pron">Sons</a><a href="#gram">Grammaire</a><a href="#exos">Exercices</a><a href="#prod">Écriture</a><a href="#revoir">À revoir</a>
+  </nav>
+  <button class="itbtn" id="itbtn" title="Italien">IT</button>
+  <span class="score" id="score">★ <b>0</b> / 0</span>
+</div></div>
+
+<header class="hero">
+  <img src="img/monaco.jpg" alt="Le port de Monaco">
+  <div class="cap">
+    <span class="tag">Pour Rita · 5 novembre 2026</span>
+    <h1>Vocabulaire, expressions et grammaire</h1>
+    <div class="sub">Vocabolario, espressioni e grammatica</div>
+  </div>
+</header>
+<div class="rainbow"></div>
+
+<main class="wrap">
+
+<div class="intro"><span class="ic">🔊</span><div>Rita, clique sur chaque phrase pour l'écouter, puis répète-la à voix haute. Le bouton <b>IT</b>, en haut, cache ou montre l'italien.
+<span class="it">Rita, clicca su ogni frase per ascoltarla, poi ripetila ad alta voce. Il pulsante IT, in alto, nasconde o mostra l'italiano.</span></div></div>
+
+<!-- ============ 1. VOCABULAIRE ============ -->
+<section id="vocab">
+<div class="band"><img src="img/promenade.jpg" alt="La promenade des Anglais à Nice"><div class="lbl"><div class="num">01</div><h2>Vocabulaire et expressions</h2><span class="it">Vocabolario ed espressioni</span></div></div>
+
+<div class="grid">
+
+<div class="card" id="v-cestca" style="--c:var(--corail)">
+  <div class="word say" data-t="C'est ça !"><span class="spk">▶</span><span class="w">C'est ça !</span><span class="pill">expression</span></div>
+  <div class="eq"><b>IT</b>Esatto! · Proprio così!</div>
+  <div class="ex say" data-t="Tu pars à Paris en mai ? Oui, c'est ça !"><span class="spk">▶</span><div><span class="fr">Tu pars à Paris en mai ? Oui, <strong>c'est ça</strong> !</span><span class="it">Parti per Parigi a maggio? Sì, esatto!</span></div></div>
+  <div class="note">Pour confirmer une information exacte.<span class="it">Per confermare un'informazione esatta.</span></div>
+</div>
+
+<div class="card" id="v-ca" style="--c:var(--corail)">
+  <div class="word say" data-t="Ça"><span class="spk">▶</span><span class="w">Ça</span><span class="pill">pronom</span></div>
+  <div class="eq"><b>IT</b>questo · quello</div>
+  <div class="ex say" data-t="Regarde ça : la mer est toute bleue ce matin !"><span class="spk">▶</span><div><span class="fr">Regarde <strong>ça</strong> : la mer est toute bleue ce matin !</span><span class="it">Guarda: il mare è tutto blu stamattina!</span></div></div>
+  <div class="ex say" data-t="Ça, c'est un très beau tableau."><span class="spk">▶</span><div><span class="fr"><strong>Ça</strong>, c'est un très beau tableau.</span><span class="it">Questo è un quadro bellissimo.</span></div></div>
+</div>
+
+<div class="card" id="v-caddie" style="--c:var(--mer)">
+  <img class="pic" src="img/caddie.jpg" alt="Des caddies">
+  <div class="word say" data-t="le caddie"><span class="spk">▶</span><span class="w">le caddie</span><span class="pill">nom masculin</span></div>
+  <div class="eq"><b>IT</b>il carrello della spesa</div>
+  <div class="ex say" data-t="Au supermarché, Maya adore s'asseoir dans le caddie."><span class="spk">▶</span><div><span class="fr">Au supermarché, Maya adore s'asseoir dans le <strong>caddie</strong>.</span><span class="it">Al supermercato, Maya adora sedersi nel carrello.</span></div></div>
+</div>
+
+<div class="card" id="v-colis" style="--c:var(--mer)">
+  <img class="pic" src="img/colis.jpg" alt="Un colis">
+  <div class="word say" data-t="le colis"><span class="spk">▶</span><span class="w">le colis</span><span class="pill">nom masculin</span></div>
+  <div class="eq"><b>IT</b>il pacco</div>
+  <div class="ex say" data-t="J'ai reçu un colis : un livre sur les peintres de Provence."><span class="spk">▶</span><div><span class="fr">J'ai reçu un <strong>colis</strong> : un livre sur les peintres de Provence.</span><span class="it">Ho ricevuto un pacco: un libro sui pittori della Provenza.</span></div></div>
+  <div class="note">Le <b>s</b> final ne se prononce pas : un colis, des colis.<span class="it">La s finale non si pronuncia: un colis, des colis.</span></div>
+</div>
+
+<div class="card" id="v-reclamation" style="--c:var(--mer)">
+  <div class="word say" data-t="faire une réclamation"><span class="spk">▶</span><span class="w">faire une réclamation</span><span class="pill">locution verbale</span></div>
+  <div class="eq"><b>IT</b>fare un reclamo</div>
+  <div class="ex say" data-t="Le colis est arrivé abîmé, alors je fais une réclamation."><span class="spk">▶</span><div><span class="fr">Le colis est arrivé abîmé, alors je <strong>fais une réclamation</strong>.</span><span class="it">Il pacco è arrivato danneggiato, quindi faccio un reclamo.</span></div></div>
+  <div class="note">Attention : <b>une</b> réclamation (féminin), mais <i>un</i> reclamo.<span class="it">Attenzione: in francese è femminile.</span></div>
+</div>
+
+<div class="card" id="v-vitesse" style="--c:var(--turq)">
+  <img class="pic" src="img/vitesse.jpg" alt="Un train à grande vitesse">
+  <div class="word say" data-t="la vitesse"><span class="spk">▶</span><span class="w">la vitesse</span><span class="pill">nom féminin</span></div>
+  <div class="eq"><b>IT</b>la velocità</div>
+  <div class="ex say" data-t="Sur la Moyenne Corniche, il faut réduire la vitesse dans les virages."><span class="spk">▶</span><div><span class="fr">Sur la Moyenne Corniche, il faut réduire la <strong>vitesse</strong> dans les virages.</span><span class="it">Sulla Moyenne Corniche bisogna ridurre la velocità nelle curve.</span></div></div>
+  <div class="ex say" data-t="Le TGV roule à grande vitesse."><span class="spk">▶</span><div><span class="fr">Le TGV roule à grande <strong>vitesse</strong>.</span><span class="it">Il TGV viaggia ad alta velocità.</span></div></div>
+</div>
+
+<div class="card" id="v-clous" style="--c:var(--turq)">
+  <img class="pic" src="img/clous.jpg" alt="Planter un clou">
+  <div class="word say" data-t="un clou, des clous"><span class="spk">▶</span><span class="w">un clou · des clous</span><span class="pill">nom masculin</span></div>
+  <div class="eq"><b>IT</b>il chiodo · i chiodi</div>
+  <div class="ex say" data-t="Marco plante deux clous pour accrocher le tableau."><span class="spk">▶</span><div><span class="fr">Marco plante deux <strong>clous</strong> pour accrocher le tableau.</span><span class="it">Marco pianta due chiodi per appendere il quadro.</span></div></div>
+</div>
+
+<div class="card" id="v-passage" style="--c:var(--turq)">
+  <img class="pic" src="img/passage.jpg" alt="Un passage clouté à Paris">
+  <div class="word say" data-t="le passage clouté"><span class="spk">▶</span><span class="w">le passage clouté</span><span class="pill">nom masculin</span></div>
+  <div class="eq"><b>IT</b>le strisce pedonali</div>
+  <div class="ex say" data-t="Avec Maya, je traverse toujours sur le passage clouté."><span class="spk">▶</span><div><span class="fr">Avec Maya, je traverse toujours sur le <strong>passage clouté</strong>.</span><span class="it">Con Maya attraverso sempre sulle strisce pedonali.</span></div></div>
+  <div class="note"><b>Le saviez-vous ?</b> Autrefois, les bandes blanches étaient marquées par des <b>clous</b> plantés dans la chaussée. Aujourd'hui, on dit aussi <b>le passage piéton</b>.<span class="it">Un tempo le strisce erano segnate da chiodi piantati nella strada. Oggi si dice anche passage piéton.</span></div>
+</div>
+
+<div class="card" id="v-largement" style="--c:var(--lav)">
+  <div class="word say" data-t="avoir largement le temps de faire quelque chose"><span class="spk">▶</span><span class="w">avoir largement le temps de + infinitif</span><span class="pill">locution</span></div>
+  <div class="eq"><b>IT</b>avere tutto il tempo di fare qualcosa</div>
+  <div class="ex say" data-t="Le bateau part à midi : nous avons largement le temps de nager."><span class="spk">▶</span><div><span class="fr">Le bateau part à midi : nous <strong>avons largement le temps de</strong> nager.</span><span class="it">La barca parte a mezzogiorno: abbiamo tutto il tempo di nuotare.</span></div></div>
+</div>
+
+<div class="card" id="v-ravi" style="--c:var(--lav)">
+  <div class="word say" data-t="être ravi, être ravie"><span class="spk">▶</span><span class="w">être ravi(e) (de)</span><span class="pill">adjectif</span></div>
+  <div class="eq"><b>IT</b>essere felicissimo/a</div>
+  <div class="ex say" data-t="Je suis ravie : la famille va bientôt s'agrandir !"><span class="spk">▶</span><div><span class="fr">Je suis <strong>ravie</strong> : la famille va bientôt s'agrandir !</span><span class="it">Sono felicissima: la famiglia presto si allargherà!</span></div></div>
+  <div class="ex say" data-t="Nous sommes ravis de vous voir."><span class="spk">▶</span><div><span class="fr">Nous sommes <strong>ravis de</strong> vous voir.</span><span class="it">Siamo felicissimi di vedervi.</span></div></div>
+  <div class="note">Accord : ravi, ravi<b>e</b>, ravi<b>s</b>, ravi<b>es</b>.<span class="it">Si accorda come un aggettivo.</span></div>
+</div>
+
+</div>
+</section>
+
+<!-- ============ 2. EXPRESSIONS FAMILIÈRES ============ -->
+<section id="expr">
+<div class="band"><img src="img/rue.jpg" alt="Une rue pavée à Paris"><div class="lbl"><div class="num">02</div><h2>Expressions familières</h2><span class="it">Espressioni colloquiali molto usate</span></div></div>
+
+<div class="two">
+<div class="dlg" id="e-ou">
+  <h3 class="say" data-t="Et là, je vais où ?">Et là, je vais où ?</h3>
+  <span class="it" style="margin-bottom:6px">E adesso dove vado? · pour demander la direction ou l'étape suivante</span>
+  <div class="line say" style="--lc:var(--mer)" data-t="Le musée d'Orsay, c'est par là ?"><span class="who">Rita</span><div>Le musée d'Orsay, c'est par là ?<span class="it">Il museo d'Orsay è da quella parte?</span></div></div>
+  <div class="line say" style="--lc:var(--corail)" data-t="Oui, c'est ça. Tout droit jusqu'à la Seine."><span class="who">Un passant</span><div>Oui, <b>c'est ça</b>. Tout droit jusqu'à la Seine.<span class="it">Sì, esatto. Sempre dritto fino alla Senna.</span></div></div>
+  <div class="line say" style="--lc:var(--mer)" data-t="Et là, je vais où ?"><span class="who">Rita</span><div><b>Et là, je vais où ?</b><span class="it">E adesso dove vado?</span></div></div>
+  <div class="line say" style="--lc:var(--corail)" data-t="Vous traversez le pont, et le musée est à gauche."><span class="who">Un passant</span><div>Vous traversez le pont, et le musée est à gauche.<span class="it">Attraversa il ponte e il museo è a sinistra.</span></div></div>
+</div>
+
+<div class="dlg" id="e-quoi">
+  <h3 class="say" data-t="Et là, qu'est-ce qu'on fait ?">Et là, qu'est-ce qu'on fait ?</h3>
+  <span class="it" style="margin-bottom:6px">E adesso cosa facciamo? · pour demander la prochaine étape</span>
+  <div class="line say" style="--lc:var(--lav)" data-t="Il pleut et la plage est fermée."><span class="who">Marco</span><div>Il pleut et la plage est fermée.<span class="it">Piove e la spiaggia è chiusa.</span></div></div>
+  <div class="line say" style="--lc:var(--mer)" data-t="Et là, qu'est-ce qu'on fait ?"><span class="who">Rita</span><div><b>Et là, qu'est-ce qu'on fait ?</b><span class="it">E adesso cosa facciamo?</span></div></div>
+  <div class="line say" style="--lc:var(--lav)" data-t="On va au musée ! Nous avons largement le temps."><span class="who">Marco</span><div>On va au musée ! Nous avons <b>largement le temps</b>.<span class="it">Andiamo al museo! Abbiamo tutto il tempo.</span></div></div>
+</div>
+</div>
+<div class="note" style="--c:var(--corail);background:#fff">« Là » veut dire ici « maintenant, à ce moment-là ». On l'utilise beaucoup à l'oral.<span class="it">Qui « là » significa « adesso, in questo momento ». Si usa molto nella lingua parlata.</span></div>
+</section>
+
+<!-- ============ 3. PRONONCIATION ============ -->
+<section id="pron">
+<div class="band"><img src="img/orsay.jpg" alt="L'horloge du musée d'Orsay"><div class="lbl"><div class="num">03</div><h2>Les consonnes finales prononcées</h2><span class="it">Le consonanti finali che si pronunciano</span></div></div>
+
+<div class="box">En français, beaucoup de consonnes finales sont muettes. Dans ces mots, au contraire, <b>on entend la consonne finale</b>. Touche chaque mot pour l'écouter.
+<span class="it">In francese molte consonanti finali sono mute. In queste parole, invece, la consonante finale si sente. Tocca ogni parola per ascoltarla.</span></div>
+
+<div class="tiles" id="tiles"></div>
+
+<div class="box" style="border:2px dashed var(--corail)" id="p-riz"><h3 style="color:var(--corail)">Attention : le riz</h3>
+Dans <b>le riz</b>, on n'entend pas le <b>z</b> : on dit [ri]. La prononciation dépend toujours du mot.
+<span class="it">In « le riz » la z non si sente: si dice [ri]. La pronuncia dipende sempre dalla parola.</span></div>
+
+<div class="box"><h3>Écoute et répète</h3>
+<div class="ex say" data-t="Mon fils prend le bus vers le sud avec un gros sac."><span class="spk">▶</span><div><span class="fr">Mon fil<b>s</b> prend le bu<b>s</b> vers le su<b>d</b> avec un gros sa<b>c</b>.</span><span class="it">Mio figlio prende l'autobus verso sud con una grossa borsa.</span></div></div>
+<div class="ex say" data-t="Bref, un œuf et du riz, donc je n'ai plus faim."><span class="spk">▶</span><div><span class="fr">Bre<b>f</b>, un œu<b>f</b> et du riz, don<b>c</b> je n'ai plus faim.</span><span class="it">Insomma, un uovo e del riso, quindi non ho più fame.</span></div></div>
+<div class="ex say" data-t="Le chef du restaurant joue au tennis le dimanche."><span class="spk">▶</span><div><span class="fr">Le che<b>f</b> du restaurant joue au tenni<b>s</b> le dimanche.</span><span class="it">Lo chef del ristorante gioca a tennis la domenica.</span></div></div>
+</div>
+</section>
+
+<!-- ============ 4. GRAMMAIRE ============ -->
+<section id="gram">
+<div class="band"><img src="img/lavande.jpg" alt="Champs de lavande en Provence"><div class="lbl"><div class="num">04</div><h2>Les verbes « suivre » et « être »</h2><span class="it">I verbi « seguire » ed « essere » al presente</span></div></div>
+
+<div class="gintro">
+Les verbes <b>suivre</b> et <b>être</b> n'ont pas le même sens, mais au présent ils ont une forme identique :
+<div><span class="formula">je suis = je suis</span><span class="formula">sono = seguo</span></div>
+<span class="it">I verbi suivre ed être non hanno lo stesso significato, ma al presente hanno una forma identica: je suis.</span>
+</div>
+
+<div class="two">
+<div class="vb" id="g-suivre" style="--c:var(--rose)">
+  <div class="hd"><h3>SUIVRE</h3><span class="it">seguire</span></div>
+  <div class="bd">
+  <table class="conj">
+    <tr class="say same" data-t="je suis"><td>je</td><td>suis</td></tr>
+    <tr class="say" data-t="tu suis"><td>tu</td><td>suis</td></tr>
+    <tr class="say" data-t="il suit, elle suit, on suit"><td>il / elle / on</td><td>suit</td></tr>
+    <tr class="say" data-t="nous suivons"><td>nous</td><td>suivons</td></tr>
+    <tr class="say" data-t="vous suivez"><td>vous</td><td>suivez</td></tr>
+    <tr class="say" data-t="ils suivent, elles suivent"><td>ils / elles</td><td>suivent</td></tr>
+  </table>
+  <div class="ex say" data-t="Je suis un cours de français avec Irène."><span class="spk">▶</span><div><span class="fr">Je <strong>suis</strong> un cours de français avec Irène.</span><span class="it">Seguo un corso di francese con Irène.</span></div></div>
+  <div class="ex say" data-t="Maya suit sa maman partout."><span class="spk">▶</span><div><span class="fr">Maya <strong>suit</strong> sa maman partout.</span><span class="it">Maya segue la sua mamma dappertutto.</span></div></div>
+  <div class="ex say" data-t="Nous suivons le sentier jusqu'à l'abbaye."><span class="spk">▶</span><div><span class="fr">Nous <strong>suivons</strong> le sentier jusqu'à l'abbaye.</span><span class="it">Seguiamo il sentiero fino all'abbazia.</span></div></div>
+  </div>
+</div>
+
+<div class="vb" id="g-etre" style="--c:var(--mer)">
+  <div class="hd"><h3>ÊTRE</h3><span class="it">essere</span></div>
+  <div class="bd">
+  <table class="conj">
+    <tr class="say same" data-t="je suis"><td>je</td><td>suis</td></tr>
+    <tr class="say" data-t="tu es"><td>tu</td><td>es</td></tr>
+    <tr class="say" data-t="il est, elle est, on est"><td>il / elle / on</td><td>est</td></tr>
+    <tr class="say" data-t="nous sommes"><td>nous</td><td>sommes</td></tr>
+    <tr class="say" data-t="vous êtes"><td>vous</td><td>êtes</td></tr>
+    <tr class="say" data-t="ils sont, elles sont"><td>ils / elles</td><td>sont</td></tr>
+  </table>
+  <div class="ex say" data-t="Je suis à Monaco."><span class="spk">▶</span><div><span class="fr">Je <strong>suis</strong> à Monaco.</span><span class="it">Sono a Monaco.</span></div></div>
+  <div class="ex say" data-t="Tu es très gentille."><span class="spk">▶</span><div><span class="fr">Tu <strong>es</strong> très gentille.</span><span class="it">Sei molto gentile.</span></div></div>
+  <div class="ex say" data-t="Nous sommes ravis de partir en voyage."><span class="spk">▶</span><div><span class="fr">Nous <strong>sommes</strong> ravis de partir en voyage.</span><span class="it">Siamo felicissimi di partire in viaggio.</span></div></div>
+  </div>
+</div>
+</div>
+
+<div class="retenir" id="g-retenir">
+<h3>À retenir : comment savoir ?</h3>
+La prononciation de <b>je suis</b> est la même pour les deux verbes. C'est <b>le contexte</b> qui donne le sens.
+<span class="it">La pronuncia di « je suis » è la stessa per i due verbi: è il contesto a dare il significato.</span>
+<div class="inner">
+<span class="k e">ÊTRE</span> : je suis + un lieu, un adjectif, une profession.<br>
+<span class="k s">SUIVRE</span> : je suis + une personne, un chemin, un cours, des conseils.
+<span class="it">ÊTRE: + un luogo, un aggettivo, una professione. SUIVRE: + una persona, un sentiero, un corso, dei consigli.</span>
+</div>
+<div class="ex say" data-t="Je suis à la plage."><span class="spk">▶</span><div><span class="fr">Je suis à la plage. → <span class="k e">ÊTRE</span></span><span class="it">Sono in spiaggia.</span></div></div>
+<div class="ex say" data-t="Je suis le guide dans le musée."><span class="spk">▶</span><div><span class="fr">Je suis le guide dans le musée. → <span class="k s">SUIVRE</span></span><span class="it">Seguo la guida nel museo.</span></div></div>
+<div class="inner" style="border-color:var(--or)"><b>Astuce :</b> change de personne ! <i>Il <b>est</b> à la plage</i> (être) ; <i>il <b>suit</b> le guide</i> (suivre).
+<span class="it">Trucco: cambia persona! Con « il » le due forme sono diverse.</span></div>
+</div>
+</section>
+
+<!-- ============ EXERCICES ============ -->
+<section id="exos">
+<div class="band"><img src="img/nage.jpg" alt="Nager dans une mer turquoise"><div class="lbl"><div class="num">05</div><h2>Exercices</h2><span class="it">Esercizi</span></div></div>
+<div class="intro"><span class="ic">★</span><div>Rita, chaque bonne réponse au premier essai te donne un point. Ton score est en haut, à droite.
+<span class="it">Rita, ogni risposta giusta al primo tentativo vale un punto. Il punteggio è in alto a destra.</span></div></div>
+<div id="exzone"></div>
+</section>
+
+<!-- ============ PRODUCTION ÉCRITE ============ -->
+<section id="prod">
+<div class="band"><img src="img/eze.jpg" alt="Une porte ancienne à Èze"><div class="lbl"><div class="num">06</div><h2>À toi d'écrire !</h2><span class="it">Tocca a te scrivere!</span></div></div>
+<div class="prod">
+  <div class="hd"><b>Mise en situation · Un colis abîmé</b><span class="it">Messa in situazione · Un pacco danneggiato</span></div>
+  <div class="bd">
+  <div class="sujet">Pour l'anniversaire de Maya, tu as commandé en ligne un beau livre illustré sur la mer. Le colis est arrivé, mais le livre est abîmé. Écris un court message au service client pour <b>faire une réclamation</b> (60 à 80 mots).
+  <span class="it">Per il compleanno di Maya hai ordinato online un bel libro illustrato sul mare. Il pacco è arrivato, ma il libro è danneggiato. Scrivi un breve messaggio al servizio clienti per fare un reclamo (da 60 a 80 parole).</span></div>
+  <p style="margin:12px 0 2px"><b>Mots utiles</b><span class="it">Parole utili</span></p>
+  <div class="chips"><span class="chip">le colis</span><span class="chip">faire une réclamation</span><span class="chip">abîmé</span><span class="chip">la commande</span><span class="chip">le remboursement</span><span class="chip">un nouvel envoi</span><span class="chip">avoir largement le temps</span><span class="chip">être ravie</span></div>
+  <ol class="steps">
+    <li><span class="st">Introduction</span> · Salue et présente ta commande. <i>Bonjour, j'ai commandé… le…</i><span class="it">Saluta e presenta il tuo ordine.</span></li>
+    <li><span class="st">Le problème</span> · Explique ce qui ne va pas. <i>J'ai reçu le colis ce matin, mais…</i><span class="it">Spiega cosa non va.</span></li>
+    <li><span class="st">Ta demande</span> · Que veux-tu ? Un nouveau livre ou un remboursement ? <i>Je voudrais…</i><span class="it">Che cosa chiedi? Un nuovo libro o un rimborso?</span></li>
+    <li><span class="st">Conclusion</span> · Remercie et termine poliment. <i>Je vous remercie par avance. Cordialement, Rita</i><span class="it">Ringrazia e concludi con cortesia.</span></li>
+  </ol>
+  <p style="margin:8px 0">Défi : utilise aussi <b>je suis</b> (être) une fois !<span class="it">Sfida: usa anche « je suis » (essere) una volta!</span></p>
+  <textarea id="txt" placeholder="Bonjour,&#10;"></textarea>
+  <div class="row"><button class="copy" id="copy">Copier mon texte</button><span class="cnt" id="cnt">0 mot</span></div>
+  <p class="cnt" style="margin-top:8px">Ensuite, colle ton texte dans un message à Irène.<span class="it">Poi incolla il testo in un messaggio a Irène.</span></p>
+  </div>
+</div>
+</section>
+
+<!-- ============ À REVOIR ============ -->
+<section class="revoir" id="revoir">
+  <h2>À revoir</h2>
+  <span class="it">Da ripassare</span>
+  <div id="revlist"><p>Fais les exercices : ici apparaîtront les points à revoir, avec un lien vers la règle.<span class="it">Fai gli esercizi: qui appariranno i punti da ripassare, con un link alla regola.</span></p></div>
+</section>
+
+<footer>Le français avec Irène · 5 novembre 2026</footer>
+</main>
+
+<script id="exdata" type="application/json">[{"type": "qcm", "kind": "vocabulaire", "color": "#0f5a7a", "cons": "Choisis le bon mot.", "consIt": "Scegli la parola giusta.", "items": [{"img": "img/caddie.jpg", "q": "Au supermarché, je mets mes courses dans le …", "qi": "Al supermercato metto la spesa nel …", "o": ["colis", "caddie", "clou"], "a": "caddie", "full": "Au supermarché, je mets mes courses dans le caddie.", "fullIt": "Al supermercato metto la spesa nel carrello.", "rev": {"l": "Le caddie", "h": "#v-caddie", "i": "il carrello"}}, {"img": "img/passage.jpg", "q": "Pour traverser la rue, je passe sur le …", "qi": "Per attraversare la strada passo sulle …", "o": ["passage clouté", "colis", "caddie"], "a": "passage clouté", "full": "Pour traverser la rue, je passe sur le passage clouté.", "fullIt": "Per attraversare la strada passo sulle strisce pedonali.", "rev": {"l": "Le passage clouté", "h": "#v-passage", "i": "le strisce pedonali"}}, {"img": "img/colis.jpg", "q": "Le facteur m'apporte un …", "qi": "Il postino mi porta un …", "o": ["clou", "caddie", "colis"], "a": "colis", "full": "Le facteur m'apporte un colis.", "fullIt": "Il postino mi porta un pacco.", "rev": {"l": "Le colis", "h": "#v-colis", "i": "il pacco"}}, {"img": "img/vitesse.jpg", "q": "Sur l'autoroute, la … est limitée à 130 km/h.", "qi": "In autostrada la … è limitata a 130 km/h.", "o": ["vitesse", "réclamation", "caddie"], "a": "vitesse", "full": "Sur l'autoroute, la vitesse est limitée à 130 kilomètres à l'heure.", "fullIt": "In autostrada la velocità è limitata a 130 km/h.", "rev": {"l": "La vitesse", "h": "#v-vitesse", "i": "la velocità"}}, {"img": "img/clous.jpg", "q": "Pour accrocher ce tableau de Monet, il faut deux …", "qi": "Per appendere questo quadro di Monet servono due …", "o": ["colis", "clous", "caddies"], "a": "clous", "full": "Pour accrocher ce tableau de Monet, il faut deux clous.", "fullIt": "Per appendere questo quadro di Monet servono due chiodi.", "rev": {"l": "Les clous", "h": "#v-clous", "i": "i chiodi"}}]}, {"type": "qcm", "kind": "expressions", "color": "#e46f5b", "cons": "Complète la phrase.", "consIt": "Completa la frase.", "items": [{"q": "Le train part à 18 h et il est 15 h : nous avons … le temps de boire un café.", "qi": "Il treno parte alle 18 e sono le 15: abbiamo … il tempo di bere un caffè.", "o": ["largement", "vite", "ravi"], "a": "largement", "full": "Le train part à 18 heures et il est 15 heures : nous avons largement le temps de boire un café.", "fullIt": "Il treno parte alle 18 e sono le 15: abbiamo tutto il tempo di bere un caffè.", "rev": {"l": "Avoir largement le temps de", "h": "#v-largement", "i": "avere tutto il tempo di"}}, {"q": "Le livre est arrivé déchiré : je vais faire une …", "qi": "Il libro è arrivato strappato: farò un …", "o": ["vitesse", "réclamation", "caddie"], "a": "réclamation", "full": "Le livre est arrivé déchiré : je vais faire une réclamation.", "fullIt": "Il libro è arrivato strappato: farò un reclamo.", "rev": {"l": "Faire une réclamation", "h": "#v-reclamation", "i": "fare un reclamo"}}, {"q": "Ma fille vient avec Maya ce week-end : je suis … !", "qi": "Mia figlia viene con Maya questo fine settimana: sono … !", "o": ["largement", "ravie", "rapide"], "a": "ravie", "full": "Ma fille vient avec Maya ce week-end : je suis ravie !", "fullIt": "Mia figlia viene con Maya questo fine settimana: sono felicissima!", "rev": {"l": "Être ravi(e)", "h": "#v-ravi", "i": "essere felicissimo/a"}}, {"q": "Vous partez en Provence samedi ? Oui, … !", "qi": "Partite per la Provenza sabato? Sì, … !", "o": ["c'est ça", "ça", "et là"], "a": "c'est ça", "full": "Vous partez en Provence samedi ? Oui, c'est ça !", "fullIt": "Partite per la Provenza sabato? Sì, esatto!", "rev": {"l": "C'est ça !", "h": "#v-cestca", "i": "esatto"}}, {"q": "Regarde … : un dauphin à côté du bateau !", "qi": "Guarda …: un delfino accanto alla barca!", "o": ["c'est ça", "ça", "largement"], "a": "ça", "full": "Regarde ça : un dauphin à côté du bateau !", "fullIt": "Guarda: un delfino accanto alla barca!", "rev": {"l": "Ça", "h": "#v-ca", "i": "questo, quello"}}]}, {"type": "qcm", "kind": "situations", "color": "#d9628f", "cons": "Que dis-tu dans cette situation ?", "consIt": "Che cosa dici in questa situazione?", "items": [{"img": "img/rue.jpg", "q": "Tu es à Paris, au bout d'une rue, avec ton plan. Tu ne sais pas quelle direction prendre.", "qi": "Sei a Parigi, in fondo a una strada, con la tua cartina. Non sai che direzione prendere.", "o": ["C'est ça !", "Et là, je vais où ?", "Et là, qu'est-ce qu'on fait ?"], "a": "Et là, je vais où ?", "full": "Et là, je vais où ?", "fullIt": "E adesso dove vado?", "rev": {"l": "Et là, je vais où ?", "h": "#e-ou", "i": ""}}, {"img": "img/giverny.jpg", "q": "Le jardin de Monet est fermé aujourd'hui. Tu demandes à ton amie la prochaine étape.", "qi": "Il giardino di Monet oggi è chiuso. Chiedi alla tua amica la prossima tappa.", "o": ["Et là, qu'est-ce qu'on fait ?", "C'est ça !", "Et là, je vais où ?"], "a": "Et là, qu'est-ce qu'on fait ?", "full": "Et là, qu'est-ce qu'on fait ?", "fullIt": "E adesso cosa facciamo?", "rev": {"l": "Et là, qu'est-ce qu'on fait ?", "h": "#e-quoi", "i": ""}}, {"img": "img/nage.jpg", "q": "Une amie te dit : « Tu nages tous les matins, non ? » C'est exact.", "qi": "Un'amica ti dice: « Nuoti tutte le mattine, vero? » È esatto.", "o": ["Et là, je vais où ?", "Ça !", "C'est ça !"], "a": "C'est ça !", "full": "Tu nages tous les matins, non ? C'est ça !", "fullIt": "Nuoti tutte le mattine, vero? Esatto!", "rev": {"l": "C'est ça !", "h": "#v-cestca", "i": "esatto"}}]}, {"type": "qcm", "kind": "prononciation", "color": "#8c78c4", "cons": "Écoute le mot. Est-ce que tu entends la consonne finale ?", "consIt": "Ascolta la parola. Senti la consonante finale?", "items": [{"pre": "le sac", "q": "le sac", "o": ["Oui", "Non"], "a": "Oui", "rev": {"l": "Les consonnes finales prononcées", "h": "#pron", "i": "le consonanti finali"}}, {"pre": "le riz", "q": "le riz", "o": ["Oui", "Non"], "a": "Non", "rev": {"l": "Attention : le riz", "h": "#p-riz", "i": "la z non si pronuncia"}}, {"pre": "le bus", "q": "le bus", "o": ["Oui", "Non"], "a": "Oui", "rev": {"l": "Les consonnes finales prononcées", "h": "#pron", "i": "le consonanti finali"}}, {"pre": "Paris", "q": "Paris", "o": ["Oui", "Non"], "a": "Non", "rev": {"l": "Les consonnes finales prononcées", "h": "#pron", "i": "le consonanti finali"}}, {"pre": "le sud", "q": "le sud", "o": ["Oui", "Non"], "a": "Oui", "rev": {"l": "Les consonnes finales prononcées", "h": "#pron", "i": "le consonanti finali"}}, {"pre": "le chat", "q": "le chat", "o": ["Oui", "Non"], "a": "Non", "rev": {"l": "Les consonnes finales prononcées", "h": "#pron", "i": "le consonanti finali"}}, {"pre": "mon fils", "q": "mon fils", "o": ["Oui", "Non"], "a": "Oui", "rev": {"l": "Les consonnes finales prononcées", "h": "#pron", "i": "le consonanti finali"}}, {"pre": "donc", "q": "donc", "o": ["Oui", "Non"], "a": "Oui", "rev": {"l": "Les consonnes finales prononcées", "h": "#pron", "i": "le consonanti finali"}}]}, {"type": "qcm", "kind": "grammaire", "color": "#1aa39b", "cons": "« Je suis » : verbe ÊTRE ou verbe SUIVRE ?", "consIt": "« Je suis »: verbo ESSERE o verbo SEGUIRE?", "items": [{"q": "Je suis à la plage avec Maya.", "qi": "Sono in spiaggia con Maya.", "o": ["ÊTRE", "SUIVRE"], "a": "ÊTRE", "full": "Je suis à la plage avec Maya.", "rev": {"l": "Je suis : être ou suivre ?", "h": "#g-retenir", "i": "come distinguerli"}}, {"q": "Je suis le guide dans le musée du Louvre.", "qi": "Seguo la guida nel museo del Louvre.", "o": ["ÊTRE", "SUIVRE"], "a": "SUIVRE", "full": "Je suis le guide dans le musée du Louvre.", "rev": {"l": "Je suis : être ou suivre ?", "h": "#g-retenir", "i": "come distinguerli"}}, {"q": "Je suis ravie de ce voyage.", "qi": "Sono felicissima di questo viaggio.", "o": ["ÊTRE", "SUIVRE"], "a": "ÊTRE", "full": "Je suis ravie de ce voyage.", "rev": {"l": "Je suis : être ou suivre ?", "h": "#g-retenir", "i": "come distinguerli"}}, {"q": "Je suis un cours de yoga le mardi.", "qi": "Seguo un corso di yoga il martedì.", "o": ["ÊTRE", "SUIVRE"], "a": "SUIVRE", "full": "Je suis un cours de yoga le mardi.", "rev": {"l": "Je suis : être ou suivre ?", "h": "#g-retenir", "i": "come distinguerli"}}, {"q": "Je suis les conseils de mon médecin.", "qi": "Seguo i consigli del mio medico.", "o": ["ÊTRE", "SUIVRE"], "a": "SUIVRE", "full": "Je suis les conseils de mon médecin.", "rev": {"l": "Je suis : être ou suivre ?", "h": "#g-retenir", "i": "come distinguerli"}}, {"q": "Je suis italienne et j'habite à Monaco.", "qi": "Sono italiana e abito a Monaco.", "o": ["ÊTRE", "SUIVRE"], "a": "ÊTRE", "full": "Je suis italienne et j'habite à Monaco.", "rev": {"l": "Je suis : être ou suivre ?", "h": "#g-retenir", "i": "come distinguerli"}}]}, {"type": "type", "kind": "conjugaison", "color": "#0b3f57", "cons": "Écris le verbe au présent.", "consIt": "Scrivi il verbo al presente.", "items": [{"q": "Nous ___ le sentier jusqu'à la mer.", "hint": "suivre", "qi": "Seguiamo il sentiero fino al mare.", "a": "suivons", "full": "Nous suivons le sentier jusqu'à la mer.", "rev": {"l": "La conjugaison de suivre", "h": "#g-suivre", "i": "seguire"}}, {"q": "Marco ___ en voyage cette semaine.", "hint": "être", "qi": "Marco è in viaggio questa settimana.", "a": "est", "full": "Marco est en voyage cette semaine.", "rev": {"l": "La conjugaison de être", "h": "#g-etre", "i": "essere"}}, {"q": "Vous ___ un cours de peinture ?", "hint": "suivre", "qi": "Seguite un corso di pittura?", "a": "suivez", "full": "Vous suivez un cours de peinture ?", "rev": {"l": "La conjugaison de suivre", "h": "#g-suivre", "i": "seguire"}}, {"q": "Maya ___ sa maman partout.", "hint": "suivre", "qi": "Maya segue la sua mamma dappertutto.", "a": "suit", "full": "Maya suit sa maman partout.", "rev": {"l": "La conjugaison de suivre", "h": "#g-suivre", "i": "seguire"}}, {"q": "Mes enfants ___ ravis de venir à Monaco.", "hint": "être", "qi": "I miei figli sono felicissimi di venire a Monaco.", "a": "sont", "full": "Mes enfants sont ravis de venir à Monaco.", "rev": {"l": "La conjugaison de être", "h": "#g-etre", "i": "essere"}}, {"q": "Les touristes ___ les panneaux pour trouver le musée.", "hint": "suivre", "qi": "I turisti seguono i cartelli per trovare il museo.", "a": "suivent", "full": "Les touristes suivent les panneaux pour trouver le musée.", "rev": {"l": "La conjugaison de suivre", "h": "#g-suivre", "i": "seguire"}}]}, {"type": "dialog", "kind": "mise en situation", "color": "#d6a23a", "cons": "Au téléphone avec le service client : complète le dialogue.", "consIt": "Al telefono con il servizio clienti: completa il dialogo.", "bank": ["colis", "réclamation", "c'est ça", "largement", "ravie"], "items": [{"who": "Service client", "c": "#e46f5b", "parts": ["Bonjour madame, je vous écoute."], "full": "Bonjour madame, je vous écoute.", "it": "Buongiorno signora, la ascolto."}, {"who": "Rita", "c": "#0f5a7a", "parts": ["Bonjour. J'ai reçu un ", {"a": "colis"}, " ce matin, mais le livre d'art est abîmé. Je voudrais faire une ", {"a": "réclamation"}, "."], "full": "Bonjour. J'ai reçu un colis ce matin, mais le livre d'art est abîmé. Je voudrais faire une réclamation.", "it": "Buongiorno. Stamattina ho ricevuto un pacco, ma il libro d'arte è danneggiato. Vorrei fare un reclamo.", "rev": [{"l": "Le colis", "h": "#v-colis", "i": "il pacco"}, {"l": "Faire une réclamation", "h": "#v-reclamation", "i": "fare un reclamo"}]}, {"who": "Service client", "c": "#e46f5b", "parts": ["Un livre sur Monet, c'est bien ça ?"], "full": "Un livre sur Monet, c'est bien ça ?", "it": "Un libro su Monet, giusto?"}, {"who": "Rita", "c": "#0f5a7a", "parts": ["Oui, ", {"a": "c'est ça"}, " !"], "full": "Oui, c'est ça !", "it": "Sì, esatto!", "rev": [{"l": "C'est ça !", "h": "#v-cestca", "i": "esatto"}]}, {"who": "Service client", "c": "#e46f5b", "parts": ["Nous vous envoyons un nouveau livre demain."], "full": "Nous vous envoyons un nouveau livre demain.", "it": "Le spediamo un nuovo libro domani."}, {"who": "Rita", "c": "#0f5a7a", "parts": ["Parfait ! Je pars en voyage dans dix jours : j'ai ", {"a": "largement"}, " le temps de le recevoir. Je suis ", {"a": "ravie"}, ", merci !"], "full": "Parfait ! Je pars en voyage dans dix jours : j'ai largement le temps de le recevoir. Je suis ravie, merci !", "it": "Perfetto! Parto in viaggio fra dieci giorni: ho tutto il tempo di riceverlo. Sono felicissima, grazie!", "rev": [{"l": "Avoir largement le temps de", "h": "#v-largement", "i": "avere tutto il tempo di"}, {"l": "Être ravi(e)", "h": "#v-ravi", "i": "essere felicissimo/a"}]}]}, {"type": "order", "kind": "phrases", "color": "#5a8f3c", "cons": "Remets les mots dans l'ordre.", "consIt": "Rimetti le parole in ordine.", "items": [{"tiles": ["Nous", "avons", "largement", "le", "temps", "de", "nager", "."], "a": "Nous avons largement le temps de nager.", "aIt": "Abbiamo tutto il tempo di nuotare.", "rev": {"l": "Avoir largement le temps de", "h": "#v-largement", "i": "avere tutto il tempo di"}}, {"tiles": ["Je", "suis", "le", "chemin", "jusqu'à", "l'abbaye", "."], "a": "Je suis le chemin jusqu'à l'abbaye.", "aIt": "Seguo il sentiero fino all'abbazia.", "rev": {"l": "Je suis : être ou suivre ?", "h": "#g-retenir", "i": "come distinguerli"}}, {"tiles": ["Et", "là,", "qu'est-ce", "qu'on", "fait", "?"], "a": "Et là, qu'est-ce qu'on fait ?", "aIt": "E adesso cosa facciamo?", "rev": {"l": "Et là, qu'est-ce qu'on fait ?", "h": "#e-quoi", "i": ""}}]}]</script>
+<script>
+const AUDIO={"Au supermarché, Maya adore s'asseoir dans le caddie.": "audio/99cbc570e0.mp3", "Au supermarché, je mets mes courses dans le caddie.": "audio/c9865736a2.mp3", "Avec Maya, je traverse toujours sur le passage clouté.": "audio/880ada4fb7.mp3", "Bonjour madame, je vous écoute.": "audio/b7a5a2898b.mp3", "Bonjour. J'ai reçu un colis ce matin, mais le livre d'art est abîmé. Je voudrais faire une réclamation.": "audio/8f411dfd16.mp3", "Bref, un œuf et du riz, donc je n'ai plus faim.": "audio/3a9bad19fb.mp3", "C'est ça !": "audio/d12ee655b5.mp3", "Et là, je vais où ?": "audio/0d17bbafe0.mp3", "Et là, qu'est-ce qu'on fait ?": "audio/66d7bd25b4.mp3", "Il pleut et la plage est fermée.": "audio/64da38a346.mp3", "J'ai reçu un colis : un livre sur les peintres de Provence.": "audio/4db8e60a11.mp3", "Je suis italienne et j'habite à Monaco.": "audio/f75561481e.mp3", "Je suis le chemin jusqu'à l'abbaye.": "audio/6d06bbba23.mp3", "Je suis le guide dans le musée du Louvre.": "audio/bfa47c9c60.mp3", "Je suis le guide dans le musée.": "audio/1ffaa63341.mp3", "Je suis les conseils de mon médecin.": "audio/740bb3bb9b.mp3", "Je suis ravie : la famille va bientôt s'agrandir !": "audio/b1d514ba33.mp3", "Je suis ravie de ce voyage.": "audio/679928ba55.mp3", "Je suis un cours de français avec Irène.": "audio/56e22f7319.mp3", "Je suis un cours de yoga le mardi.": "audio/08117c7164.mp3", "Je suis à Monaco.": "audio/e7238a8f4b.mp3", "Je suis à la plage avec Maya.": "audio/98825c6159.mp3", "Je suis à la plage.": "audio/8649f5d359.mp3", "Le TGV roule à grande vitesse.": "audio/ce86d2dd23.mp3", "Le bateau part à midi : nous avons largement le temps de nager.": "audio/406b36f8b2.mp3", "Le chef du restaurant joue au tennis le dimanche.": "audio/edc60738dd.mp3", "Le colis est arrivé abîmé, alors je fais une réclamation.": "audio/d4a1d63790.mp3", "Le facteur m'apporte un colis.": "audio/79b4a73656.mp3", "Le livre est arrivé déchiré : je vais faire une réclamation.": "audio/896485e8bf.mp3", "Le musée d'Orsay, c'est par là ?": "audio/41e6a5d590.mp3", "Le train part à 18 heures et il est 15 heures : nous avons largement le temps de boire un café.": "audio/951d51555a.mp3", "Les touristes suivent les panneaux pour trouver le musée.": "audio/28581de846.mp3", "Ma fille vient avec Maya ce week-end : je suis ravie !": "audio/2221c1c384.mp3", "Marco est en voyage cette semaine.": "audio/1d08ea4042.mp3", "Marco plante deux clous pour accrocher le tableau.": "audio/d4ad9f9116.mp3", "Maya suit sa maman partout.": "audio/57e6e7a27f.mp3", "Mes enfants sont ravis de venir à Monaco.": "audio/e38d8c8bb9.mp3", "Mon fils prend le bus vers le sud avec un gros sac.": "audio/88dff28887.mp3", "Nous avons largement le temps de nager.": "audio/fe505e1b4b.mp3", "Nous sommes ravis de partir en voyage.": "audio/43579ab584.mp3", "Nous sommes ravis de vous voir.": "audio/da4819c24a.mp3", "Nous suivons le sentier jusqu'à l'abbaye.": "audio/4ef9fe2cd9.mp3", "Nous suivons le sentier jusqu'à la mer.": "audio/57564026da.mp3", "Nous vous envoyons un nouveau livre demain.": "audio/f97af5f98f.mp3", "On va au musée ! Nous avons largement le temps.": "audio/0bf6b0ed62.mp3", "Oui, c'est ça !": "audio/8a76bf841e.mp3", "Oui, c'est ça. Tout droit jusqu'à la Seine.": "audio/ead89bfe4e.mp3", "Parfait ! Je pars en voyage dans dix jours : j'ai largement le temps de le recevoir. Je suis ravie, merci !": "audio/dd5f69f5d8.mp3", "Paris": "audio/e20d37a5d7.mp3", "Pour accrocher ce tableau de Monet, il faut deux clous.": "audio/011726bc2d.mp3", "Pour traverser la rue, je passe sur le passage clouté.": "audio/4c3e381ad4.mp3", "Regarde ça : la mer est toute bleue ce matin !": "audio/eeaffd8f3c.mp3", "Regarde ça : un dauphin à côté du bateau !": "audio/3ab36f3330.mp3", "Sur l'autoroute, la vitesse est limitée à 130 kilomètres à l'heure.": "audio/7eb3839add.mp3", "Sur la Moyenne Corniche, il faut réduire la vitesse dans les virages.": "audio/03c0e32e9d.mp3", "Tu es très gentille.": "audio/97c179b719.mp3", "Tu nages tous les matins, non ? C'est ça !": "audio/5f81022f01.mp3", "Tu pars à Paris en mai ? Oui, c'est ça !": "audio/561e63d71c.mp3", "Un livre sur Monet, c'est bien ça ?": "audio/8f1490308c.mp3", "Vous partez en Provence samedi ? Oui, c'est ça !": "audio/b0595a6e46.mp3", "Vous suivez un cours de peinture ?": "audio/628a733520.mp3", "Vous traversez le pont, et le musée est à gauche.": "audio/0a8804f675.mp3", "avec": "audio/ba36fe9406.mp3", "avoir largement le temps de faire quelque chose": "audio/e0559f890f.mp3", "bref": "audio/4988041ffa.mp3", "donc": "audio/9ffc656b11.mp3", "faire une réclamation": "audio/f88f464417.mp3", "il est, elle est, on est": "audio/dbd7c63f9e.mp3", "il suit, elle suit, on suit": "audio/47d5a2f6b5.mp3", "ils sont, elles sont": "audio/51bdca7185.mp3", "ils suivent, elles suivent": "audio/48b4b5ab82.mp3", "je suis": "audio/950155ae8a.mp3", "l'œuf": "audio/ece0fa5781.mp3", "la vitesse": "audio/9d09901cb0.mp3", "le bus": "audio/5f77f6bbc5.mp3", "le cactus": "audio/79f31fe0ec.mp3", "le caddie": "audio/0a2e7c19bd.mp3", "le chat": "audio/297d33dafb.mp3", "le chef": "audio/33c4b34824.mp3", "le colis": "audio/467e513ad6.mp3", "le fils": "audio/0a9fa115eb.mp3", "le gaz": "audio/f84e23f644.mp3", "le passage clouté": "audio/2d02173cf8.mp3", "le pull": "audio/22f863578f.mp3", "le riz": "audio/242c1f91f9.mp3", "le sac": "audio/3de0f6cdbd.mp3", "le sens": "audio/8eda9bc64e.mp3", "le stop": "audio/823dd09216.mp3", "le sud": "audio/48a6b2fee5.mp3", "le tennis": "audio/015e52bc5f.mp3", "le virus": "audio/22da32f81e.mp3", "mon fils": "audio/088d4cbe6c.mp3", "neuf": "audio/dc0b8b59ed.mp3", "nous sommes": "audio/3e495993e0.mp3", "nous suivons": "audio/460f0281af.mp3", "tu es": "audio/e648758cfd.mp3", "tu suis": "audio/3fac471afb.mp3", "un clou, des clous": "audio/3b2ab9a795.mp3", "vous suivez": "audio/15bbaed03a.mp3", "vous êtes": "audio/0d9bf36a4a.mp3", "Ça": "audio/8d782487a9.mp3", "Ça, c'est un très beau tableau.": "audio/88173c833a.mp3", "être ravi, être ravie": "audio/729738752a.mp3"};
+const EX=JSON.parse(document.getElementById("exdata").textContent);
+const $=s=>document.querySelector(s);
+
+/* ---------- audio ---------- */
+let cur=null;
+function play(t,el){
+  if(cur){cur.a.pause();if(cur.el)cur.el.classList.remove("on")}
+  const f=AUDIO[t];
+  if(!f){ if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(t);u.lang="fr-FR";speechSynthesis.cancel();speechSynthesis.speak(u)} return }
+  const a=new Audio(f);cur={a,el};if(el)el.classList.add("on");
+  a.onended=()=>{if(el)el.classList.remove("on")};
+  a.play().catch(()=>{if(el)el.classList.remove("on")});
+}
+document.addEventListener("click",e=>{const s=e.target.closest(".say");if(s&&s.dataset.t)play(s.dataset.t,s)});
+
+/* ---------- italien ---------- */
+$("#itbtn").onclick=()=>document.body.classList.toggle("noit");
+
+/* ---------- prononciation ---------- */
+const TILES=[{"id": "sens", "html": "le sen<u>s</u>", "p": "[sɑ̃s]", "it": "il senso", "say": "le sens", "mute": false}, {"id": "sac", "html": "le sa<u>c</u>", "p": "[sak]", "it": "il sacco, la borsa", "say": "le sac", "mute": false}, {"id": "oeuf", "html": "l'œu<u>f</u>", "p": "[œf]", "it": "l'uovo", "say": "l'œuf", "mute": false}, {"id": "pull", "html": "le pu<u>ll</u>", "p": "[pyl]", "it": "il maglione", "say": "le pull", "mute": false}, {"id": "bus", "html": "le bu<u>s</u>", "p": "[bys]", "it": "l'autobus", "say": "le bus", "mute": false}, {"id": "fils", "html": "le fil<u>s</u>", "p": "[fis]", "it": "il figlio", "say": "le fils", "mute": false}, {"id": "cactus", "html": "le cactu<u>s</u>", "p": "[kaktys]", "it": "il cactus", "say": "le cactus", "mute": false}, {"id": "virus", "html": "le viru<u>s</u>", "p": "[virys]", "it": "il virus", "say": "le virus", "mute": false}, {"id": "tennis", "html": "le tenni<u>s</u>", "p": "[tenis]", "it": "il tennis", "say": "le tennis", "mute": false}, {"id": "stop", "html": "le sto<u>p</u>", "p": "[stɔp]", "it": "lo stop", "say": "le stop", "mute": false}, {"id": "chef", "html": "le che<u>f</u>", "p": "[ʃɛf]", "it": "il capo, lo chef", "say": "le chef", "mute": false}, {"id": "gaz", "html": "le ga<u>z</u>", "p": "[gaz]", "it": "il gas", "say": "le gaz", "mute": false}, {"id": "neuf", "html": "neu<u>f</u>", "p": "[nœf]", "it": "nove", "say": "neuf", "mute": false}, {"id": "sud", "html": "le su<u>d</u>", "p": "[syd]", "it": "il sud", "say": "le sud", "mute": false}, {"id": "avec", "html": "ave<u>c</u>", "p": "[avɛk]", "it": "con", "say": "avec", "mute": false}, {"id": "donc", "html": "don<u>c</u>", "p": "[dɔ̃k]", "it": "quindi", "say": "donc", "mute": false}, {"id": "bref", "html": "bre<u>f</u>", "p": "[bʁɛf]", "it": "insomma", "say": "bref", "mute": false}, {"id": "riz", "html": "le ri<u>z</u>", "p": "[ri] · z muet !", "it": "il riso", "say": "le riz", "mute": true}];
+$("#tiles").innerHTML=TILES.map(x=>`<div class="tile say${x.mute?' mute':''}" id="p-${x.id}" data-t="${x.say}"><div class="m">${x.html}</div><div class="p">${x.p}</div><div class="t">${x.it}</div></div>`).join("");
+
+/* ---------- score & étoiles ---------- */
+let pts=0,TOTAL=0;const wrong=new Map();
+function refresh(){$("#score").innerHTML=`★ <b>${pts}</b> / ${TOTAL}`}
+function stars(el){
+  const r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+  for(let i=0;i<7;i++){const s=document.createElement("span");s.className="star";s.textContent=i%2?"✦":"★";
+    const ang=Math.PI*2*i/7,d=34+Math.random()*22;s.style.left=cx+"px";s.style.top=cy+"px";
+    s.style.setProperty("--dx",Math.cos(ang)*d+"px");s.style.setProperty("--dy",Math.sin(ang)*d+"px");
+    document.body.appendChild(s);setTimeout(()=>s.remove(),1000)}
+}
+function good(el){pts++;refresh();stars(el)}
+function bad(rev,key){wrong.set(key,rev);drawRev()}
+function drawRev(){
+  const total=document.querySelectorAll("[data-done]").length;
+  if(!wrong.size){$("#revlist").innerHTML= total? `<p class="final">Bravo, Rita : aucune erreur pour l'instant !</p>`:$("#revlist").innerHTML;return}
+  const seen=new Map();wrong.forEach(r=>{if(!seen.has(r.h))seen.set(r.h,r)});
+  $("#revlist").innerHTML=`<ul>${[...seen.values()].map(r=>`<li><a href="${r.h}" data-go="${r.h}">${r.l}</a><span class="it">${r.i||""}</span></li>`).join("")}</ul>`;
+}
+document.addEventListener("click",e=>{const a=e.target.closest("[data-go]");if(!a)return;const t=document.querySelector(a.dataset.go);if(t){setTimeout(()=>{t.classList.remove("flash");void t.offsetWidth;t.classList.add("flash")},350)}});
+
+function fullLine(t,it){return `<div class="full say" data-t="${t.replace(/"/g,'&quot;')}"><span class="spk">▶</span><div><span class="fr">${t}</span>${it?`<span class="it">${it}</span>`:""}</div></div>`}
+function showFull(q,auto){const f=q.querySelector(".full");if(f){f.classList.add("show");if(auto)play(f.dataset.t,f)}}
+
+/* ---------- moteur des exercices ---------- */
+const zone=$("#exzone");
+EX.forEach((ex,n)=>{
+  const box=document.createElement("div");box.className="exo";box.id="ex"+(n+1);box.style.setProperty("--c",ex.color);
+  box.innerHTML=`<div class="hd"><span class="n">${n+1}</span><div><div class="kind">Exercice · ${ex.kind}</div><div class="cons">${ex.cons}</div><span class="it">${ex.consIt}</span></div></div><div class="bd"></div>`;
+  const bd=box.querySelector(".bd");zone.appendChild(box);
+  ex.items.forEach((it,k)=>{
+    const key=n+"-"+k,q=document.createElement("div");q.className="q";bd.appendChild(q);
+    if(ex.type==="qcm"){
+      TOTAL++;
+      q.innerHTML=`<div class="qi">${it.img?`<img src="${it.img}" alt="">`:""}<div>${it.pre?`<button class="pre say" data-t="${it.pre}">▶ Écoute</button>`:""}<span class="qt">${it.q}</span>${it.qi?`<span class="it">${it.qi}</span>`:""}</div></div><div class="opts">${it.o.map(o=>`<button class="opt">${o}</button>`).join("")}</div>${it.full?fullLine(it.full,it.fullIt):""}`;
+      q.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+        const ok=b.textContent===it.a;q.dataset.done=1;
+        q.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.textContent===it.a)x.classList.add("ok")});
+        if(ok)good(b);else{b.classList.add("ko");bad(it.rev,key)}
+        showFull(q,true);
+      });
+    }
+    if(ex.type==="type"){
+      TOTAL++;
+      const [a,b]=it.q.split("___");
+      q.innerHTML=`<span class="qt">${a}<input class="typ" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="${it.hint}">${b}</span>${it.qi?`<span class="it">${it.qi}</span>`:""}<div><button class="chk">Vérifier</button><span class="solx"></span></div>${fullLine(it.full,it.fullIt)}`;
+      const inp=q.querySelector("input"),btn=q.querySelector(".chk");
+      const go=()=>{if(q.dataset.done||!inp.value.trim())return;q.dataset.done=1;inp.disabled=true;btn.style.display="none";
+        const ok=inp.value.trim().toLowerCase().replace(/\s+/g," ")===it.a.toLowerCase();
+        if(ok){inp.classList.add("ok");good(inp)}else{inp.classList.add("ko");q.querySelector(".solx").innerHTML=`<span class="sol">✓ ${it.a}</span>`;bad(it.rev,key)}
+        showFull(q,true)};
+      btn.onclick=go;inp.onkeydown=e=>{if(e.key==="Enter")go()};
+    }
+    if(ex.type==="dialog"){
+      let html=`<div class="line" style="--lc:${it.c}"><span class="who">${it.who}</span><div><span class="qt">`;
+      it.parts.forEach(p=>{if(typeof p==="string")html+=p;else{TOTAL++;html+=`<select class="gap" data-a="${p.a}"><option value="">…</option>${ex.bank.map(w=>`<option>${w}</option>`).join("")}</select>`}});
+      html+=`</span>${it.it?`<span class="it">${it.it}</span>`:""}</div></div>${fullLine(it.full)}`;
+      q.innerHTML=html;
+      const sels=q.querySelectorAll("select");
+      if(!sels.length){q.querySelector(".full").classList.add("show")}
+      sels.forEach((s,j)=>s.onchange=()=>{if(!s.value)return;s.disabled=true;const ok=s.value===s.dataset.a;
+        if(ok){s.classList.add("ok");good(s)}else{s.classList.add("ko");s.insertAdjacentHTML("afterend",`<span class="sol">✓ ${s.dataset.a}</span>`);bad(it.rev[j]||it.rev[0],key+"-"+j)}
+        if([...sels].every(x=>x.disabled)){q.dataset.done=1;showFull(q,true)}});
+    }
+    if(ex.type==="order"){
+      TOTAL++;
+      const sh=it.tiles.map((t,i)=>[t,i]).sort(()=>Math.random()-.5);
+      q.innerHTML=`<div class="built"></div><div class="tilesrow">${sh.map(([t])=>`<button class="tk">${t}</button>`).join("")}</div><div><button class="mini rz">Effacer</button><button class="chk">Vérifier</button><span class="solx"></span></div>${fullLine(it.a,it.aIt)}`;
+      let pick=[];const built=q.querySelector(".built");
+      q.querySelectorAll(".tk").forEach(t=>t.onclick=()=>{pick.push(t.textContent);t.classList.add("used");built.textContent=pick.join(" ")});
+      q.querySelector(".rz").onclick=()=>{if(q.dataset.done)return;pick=[];built.textContent="";q.querySelectorAll(".tk").forEach(t=>t.classList.remove("used"))};
+      q.querySelector(".chk").onclick=e=>{if(q.dataset.done||pick.length<it.tiles.length)return;q.dataset.done=1;e.target.style.display="none";
+        const norm=s=>s.replace(/\s+([?!:.,])/g,"$1").replace(/\s+/g," ").trim();
+        const ok=norm(pick.join(" "))===norm(it.a);
+        if(ok){built.style.borderColor="#3aa55a";good(built)}else{built.style.borderColor="var(--corail)";q.querySelector(".solx").innerHTML=`<span class="sol">✓ ${it.a}</span>`;bad(it.rev,key)}
+        showFull(q,true)};
+    }
+  });
+});
+refresh();
+
+/* ---------- production écrite ---------- */
+const txt=$("#txt");
+try{txt.value=localStorage.getItem("rita-5nov")||""}catch(e){}
+const count=()=>{const n=(txt.value.match(/[\p{L}'’-]+/gu)||[]).length;$("#cnt").textContent=n+(n>1?" mots":" mot")};
+txt.oninput=()=>{count();try{localStorage.setItem("rita-5nov",txt.value)}catch(e){}};count();
+$("#copy").onclick=async()=>{
+  const b=$("#copy");
+  try{await navigator.clipboard.writeText(txt.value)}catch(e){txt.select();document.execCommand("copy")}
+  b.textContent="Copié ✓";stars(b);setTimeout(()=>b.textContent="Copier mon texte",1800)};
+</script>
+</body>
+</html>
