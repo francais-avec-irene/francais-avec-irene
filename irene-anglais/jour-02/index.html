@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English for French teachers · Day 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#24303f;--soft:#5d6878;--line:#e3e7ee;--bg:#fbfaf7;--gold:#e0a630;--ok:#2e8b57;--ko:#c0392b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Poppins,system-ui,sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:900px;margin:0 auto;padding:62px 16px 80px}
+/* barre du haut */
+.top{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.topin{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:8px 16px}
+.brand{font-weight:600;font-size:.82rem;color:#a0446a;letter-spacing:.02em;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbtn{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px;font-size:.78rem;font-weight:600;color:var(--soft)}
+.tbtn.on{border-color:#1f5f7a;color:#1f5f7a;background:#eaf3f7}
+.score{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#2b3a55,#6d4a7d);color:#fff;border-radius:999px;padding:5px 13px;font-weight:700;font-size:.9rem;white-space:nowrap;transition:transform .25s}
+.score.bump{transform:scale(1.15)}
+.score .st{color:#ffd56a}
+/* hero */
+.hero{position:relative;border-radius:22px;overflow:hidden;margin-top:6px;box-shadow:0 10px 30px rgba(36,48,63,.15)}
+.hero img{display:block;width:100%;height:clamp(240px,48vw,400px);object-fit:cover}
+.htitle{position:absolute;left:14px;bottom:14px;max-width:calc(100% - 28px);background:rgba(20,28,40,.62);border-radius:16px;padding:14px 18px;color:#fff}
+.tag{display:inline-block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;background:#e0a630;color:#2b2210;font-weight:700;padding:3px 10px;border-radius:999px;margin-bottom:6px}
+.hero h1{margin:0;font-size:clamp(1.5rem,5vw,2.3rem);line-height:1.15}
+.sub{margin:2px 0 0;font-size:clamp(.95rem,3vw,1.15rem);color:#ffe2b5;font-weight:500}
+.hit{display:flex;align-items:center;gap:6px;margin-top:4px}.hit .itb{margin-left:0;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}.hit .tr{color:#eee;margin:0}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 6px}
+.toc a{text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px 5px 5px;font-size:.8rem;font-weight:500}
+.toc a b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#2b3a55;color:#fff;font-size:.72rem;margin-right:5px}
+.howto{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--soft);margin:10px 0 0;flex-wrap:wrap}
+.howto .itb{order:2}
+.miniau svg{width:15px;height:15px;vertical-align:-3px;fill:#1f5f7a;stroke:#1f5f7a}
+/* boutons audio + IT */
+.au{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;border:none;background:color-mix(in srgb,var(--c,#1f5f7a) 14%,#fff);margin-right:8px;vertical-align:middle;transition:transform .15s,background .2s}
+.au svg{width:17px;height:17px;fill:var(--c,#1f5f7a);stroke:var(--c,#1f5f7a);stroke-width:1.8;stroke-linecap:round}
+.au svg .w1,.au svg .w2{fill:none}
+.au.au-l{width:38px;height:38px}.au.au-l svg{width:21px;height:21px}
+.au:active{transform:scale(.9)}
+.au.playing{background:var(--c,#1f5f7a)}.au.playing svg{fill:#fff;stroke:#fff}
+.au.playing svg .w2{animation:wave 1s infinite}
+@keyframes wave{50%{opacity:.2}}
+.itb{flex:none;border:1px solid #d5dae3;background:#fff;color:#8a93a3;border-radius:6px;font-size:.62rem;font-weight:700;letter-spacing:.06em;padding:1px 6px;margin-left:8px;vertical-align:middle;line-height:1.5}
+.itb.on{background:#5d6878;color:#fff;border-color:#5d6878}
+.tr{display:none;font:italic .92rem/1.5 Lora,serif;color:#6b7280;margin:3px 0 0}
+.tr.show,body.allit .tr{display:block}
+body.allit .itb{background:#5d6878;color:#fff;border-color:#5d6878}
+.s{margin:8px 0}
+.s .fr,.ex .fr{display:flex;align-items:flex-start}
+.s .fr .txt{flex:1;padding-top:3px;font-family:Lora,serif;font-size:1.02rem}
+.s .tr{padding-left:38px}
+.ex .fr .txt{flex:1}
+.ex.lead{margin:12px 0 16px;color:#3c4656}
+.ex.center .fr{justify-content:center;text-align:center}
+.s .txt b,.ex .txt b{color:var(--c,#1f5f7a)}
+em.k{font-style:normal;color:#c2410c;font-weight:700}
+/* sections */
+.sec{margin-top:38px}
+.sh{display:flex;gap:12px;align-items:center;background:linear-gradient(110deg,var(--c),color-mix(in srgb,var(--c) 70%,#fff));color:#fff;border-radius:16px;padding:12px 16px;margin-bottom:14px}
+.sh .num{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:#fff;color:var(--c);font-weight:700;font-size:1.15rem}
+.sh h2{margin:0;font-size:clamp(1.15rem,4vw,1.5rem);line-height:1.2}
+.shit{display:flex;align-items:center;gap:6px}
+.shit .itb{margin-left:0;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}
+.shit .tr{color:#fff;margin:0}
+.ph{margin:0 0 14px;border-radius:14px;overflow:hidden;background:#fff;border:3px solid #fff;box-shadow:0 4px 16px rgba(36,48,63,.12)}
+.ph img{display:block;width:100%;height:auto}
+.ph.band img{height:clamp(150px,30vw,230px);object-fit:cover}
+.ph figcaption{font:italic .8rem Lora,serif;color:var(--soft);padding:5px 10px}
+/* vocabulaire */
+.vgrid{columns:2 330px;column-gap:14px}
+.vc{break-inside:avoid;background:#fff;border:1px solid #e3e7ea;border-top:5px solid var(--c);border-radius:14px;padding:12px 14px;margin:0 0 14px;box-shadow:0 2px 8px rgba(181,82,59,.06)}
+.vc.flash,.flash{animation:flash 2.2s}
+@keyframes flash{0%,40%{box-shadow:0 0 0 4px #ffd56a}100%{box-shadow:0 0 0 0 transparent}}
+.vh{display:flex;align-items:center}
+.vh h3{margin:0;font-size:1.18rem;color:var(--c)}
+.vmeta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0 4px;font-size:.88rem}
+.pill{background:var(--t);color:var(--c);border:1px solid color-mix(in srgb,var(--c) 30%,#fff);border-radius:999px;padding:1px 9px;font-size:.72rem;font-weight:600}
+.itlab{background:#2e8b57;color:#fff;font-size:.62rem;font-weight:700;border-radius:4px;padding:1px 5px}
+.itw{font-family:Lora,serif;font-style:italic;color:#34495e}
+.vex .txt{font-size:.98rem!important}
+.vimg{margin:8px 0}
+.vimg img{max-height:190px;object-fit:cover}
+.note,.warn{background:var(--t);border-radius:10px;padding:8px 10px;margin-top:8px;font-size:.86rem}
+.warn{background:#fff4d6;border-left:4px solid #e0a630}
+.warn .ex{margin-bottom:2px}
+table.mini{width:100%;border-collapse:collapse;margin:8px 0 2px;font-size:.86rem}
+table.mini td{border-bottom:1px dashed #ecd9cf;padding:4px 2px;vertical-align:middle}
+table.mini td:last-child{font-family:Lora,serif;font-style:italic;color:#555}
+table.mini .au{width:24px;height:24px;margin-right:6px}table.mini .au svg{width:14px;height:14px}
+/* grammaire */
+.fams{display:grid;gap:14px}
+.fam{background:#fff;border:2px solid color-mix(in srgb,var(--c) 30%,#fff);border-radius:16px;padding:12px 14px}
+.famh{display:flex;align-items:center;gap:8px;font-size:1.1rem;color:var(--c);font-weight:600;margin-bottom:8px}
+.famh span{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--c);color:#fff;font-size:.95rem}
+.formula{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:4px 0 10px;font-weight:600}
+.formula span{border:2px solid var(--c);color:var(--c);border-radius:999px;padding:1px 10px;background:#fff}
+.formula span:first-child{background:var(--c);color:#fff}
+.formula.light{justify-content:center}.formula.light span:first-child{background:#fff;color:var(--c)}
+.ct{border-radius:12px;overflow:hidden;border:1px solid color-mix(in srgb,var(--c) 25%,#fff);background:#fff;margin:6px 0}
+.cth{background:color-mix(in srgb,var(--c) 12%,#fff);color:var(--c);font-weight:700;padding:5px 12px}
+.ctit{font:italic 400 .85rem Lora,serif;color:#6b7280;margin-left:8px}
+.ct table{width:100%;border-collapse:collapse}
+.ct td{padding:3px 8px;border-top:1px solid #f1f3f6;font-family:Lora,serif;font-size:1rem}
+.ct td:first-child{width:40px}
+.ct .au{width:26px;height:26px;margin:0}.ct .au svg{width:15px;height:15px}
+.inbox{border-left:4px solid var(--c);background:color-mix(in srgb,var(--c) 7%,#fff);border-radius:0 10px 10px 0;padding:7px 10px;margin:10px 0;font-size:.9rem}
+.sub3{margin:24px 0 4px;color:#1f5f7a;font-size:1.12rem;border-bottom:2px solid #cfe2ea;padding-bottom:4px}
+.parts{display:grid;gap:12px}
+.part{background:#fff;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:12px;padding:10px 12px}
+.parth{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--c);margin-bottom:4px}
+.parth span{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--c);color:#fff;font-size:.78rem;flex:none}
+.parth b{color:#c2410c}
+.part .ex .txt b{color:#c2410c}
+.part.wide{margin-top:14px}
+.big{background:#fff;border:2px solid var(--c);border-radius:18px;padding:14px;margin-bottom:14px}
+.bigh{text-align:center;font-weight:700;color:var(--c);font-size:1.1rem;margin-bottom:10px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:10px}
+.step{display:flex;gap:8px;background:var(--t);border-radius:12px;padding:8px 10px;font-size:.9rem}
+.step>span{display:grid;place-items:center;flex:none;width:26px;height:26px;border-radius:50%;background:var(--c);color:#fff;font-weight:700}
+.stx{display:flex;align-items:center;font:600 1.05rem Lora,serif;margin-top:4px}
+.stx s{color:#c0392b;text-decoration-thickness:2px}
+.good{background:linear-gradient(135deg,#eaf6ee,#fff8e6);border:2px solid #4f9a6b;border-radius:18px;padding:14px;margin:14px 0}
+.goodh{font-weight:700;color:#2e7d4f;font-size:1.15rem;margin-bottom:6px}
+.good .ex .txt b{color:#2e7d4f}
+.chain{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px;margin-top:10px}
+.ch{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#fff;border-radius:10px;padding:6px 10px;font-size:.92rem;border:1px solid #d6eadc}
+.ch b{color:#2e7d4f;min-width:66px}.ch span{font-family:Lora,serif}.ch i{color:#999;font-style:normal}
+.ch .au{--c:#2e7d4f;width:26px;height:26px;margin:0}.ch .au svg{width:15px;height:15px}
+.etre{background:#fff;border:2px solid #a0446a;border-radius:16px;padding:12px 14px;margin:14px 0;--c:#a0446a}
+.etreh{font-weight:600;color:#a0446a;margin-bottom:6px}
+.cts.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+/* tableau 27 */
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.lg{font-size:.75rem;font-weight:600;border-radius:999px;padding:2px 10px;border:1.5px solid}
+.lg.a,tr.a th{--v:#1f5f7a}.lg.b,tr.b th{--v:#c2410c}.lg.c,tr.c th{--v:#2e7d4f}.lg.d,tr.d th{--v:#6d4a7d}
+.lg{color:var(--v);border-color:var(--v)}
+.tw{overflow-x:auto;border-radius:14px;border:1px solid var(--line);background:#fff;-webkit-overflow-scrolling:touch}
+table.big27{border-collapse:collapse;min-width:760px;width:100%;font-size:.92rem}
+.big27 thead th{position:sticky;top:0;background:#4f7f63;color:#fff;padding:7px 8px;text-align:left;font-weight:600}
+.big27 thead th:first-child{left:0;z-index:2}
+.big27 tbody th{position:sticky;left:0;background:#fff;text-align:left;padding:5px 8px;border-left:5px solid var(--v);display:flex;align-items:center;min-width:190px;z-index:1}
+.big27 .inf{font-weight:700;color:var(--v)}
+.big27 .vit{font:italic .78rem Lora,serif;color:#888;margin-left:6px}
+.big27 td{padding:5px 8px;border-top:1px solid #eef1f4;font-family:Lora,serif;white-space:nowrap}
+.big27 tbody tr:nth-child(even) td{background:#f7faf8}
+.big27 td.ip{background:#f6f2f8!important}
+.big27 tbody th .au{--c:var(--v);width:26px;height:26px;margin-right:8px}.big27 tbody th .au svg{width:15px;height:15px}
+/* usage */
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px}
+.col{background:#fff;border-radius:16px;padding:12px 14px;border:2px solid var(--cc)}
+.col.pres{--cc:#1f5f7a;--c:#1f5f7a}.col.imp{--cc:#6d4a7d;--c:#6d4a7d}
+.colh{font-weight:700;font-size:1.12rem;color:var(--cc);margin-bottom:6px}
+.colh span{font:italic 400 .9rem Lora,serif;color:#888;margin-left:6px}
+.use{border-top:1px dashed var(--line);padding-top:6px;margin-top:6px}
+.uset{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--cc);font-weight:600}
+.uset i{text-transform:none;letter-spacing:0;color:#999;font-family:Lora,serif}
+.marks{margin-top:10px;background:color-mix(in srgb,var(--cc) 8%,#fff);border-radius:10px;padding:7px 10px;font-size:.85rem;color:var(--cc);font-weight:500}
+.duo{margin-top:12px;background:#fff8e6;border:2px dashed #c08a2a;border-radius:14px;padding:6px 12px;--c:#a86d10}
+/* exercices */
+.exb{background:#fff;border-radius:18px;margin:18px 0;border:1px solid var(--line);overflow:hidden;box-shadow:0 3px 14px rgba(36,48,63,.06)}
+.exh{display:flex;gap:12px;align-items:center;background:var(--c);color:#fff;padding:12px 16px}
+.exn{font-size:2rem;font-weight:700;line-height:1;opacity:.9}
+.exk{font-size:.68rem;letter-spacing:.18em;opacity:.85}
+.ext{font-weight:600;font-size:1.05rem;line-height:1.25}
+.exit{display:flex;align-items:center;gap:6px}
+.exit .itb{margin-left:0;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}
+.exit .tr{color:#fff;margin:0}
+.ex.cons{padding:10px 16px 0}
+.item{padding:12px 16px;border-top:1px solid #f0f2f5;position:relative}
+.qq{display:flex;align-items:flex-start;gap:8px;font-family:Lora,serif;font-size:1.04rem}
+.qq .txt{flex:1}
+.qn{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:color-mix(in srgb,var(--c) 15%,#fff);color:var(--c);font:700 .78rem Poppins,sans-serif;margin-top:2px}
+.gap{display:inline-block;min-width:60px;border-bottom:2px solid var(--c);color:var(--c);font-weight:700;text-align:center;padding:0 3px}
+.gap.ok{color:var(--ok);border-color:var(--ok)}.gap.ko{color:var(--ko);border-color:var(--ko)}
+.hint{font:italic .88rem Lora,serif;color:#888}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:9px 0 0 32px}
+.opt{border:2px solid color-mix(in srgb,var(--c) 35%,#fff);background:#fff;border-radius:999px;padding:5px 16px;font-family:Lora,serif;font-size:1rem;color:var(--ink);transition:.15s}
+.opt:hover{background:color-mix(in srgb,var(--c) 8%,#fff)}
+.opt.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.ko{background:var(--ko);border-color:var(--ko);color:#fff;text-decoration:line-through}
+.opt:disabled{cursor:default}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0 0 32px}
+.row.center{justify-content:center;margin-left:0;padding:10px 0}
+.vt{font-size:.8rem;font-weight:600;background:color-mix(in srgb,var(--c) 12%,#fff);color:var(--c);border-radius:999px;padding:3px 10px}
+.row input{flex:1;min-width:150px;max-width:260px;font:1rem Lora,serif;padding:6px 10px;border:2px solid #d6dbe4;border-radius:10px;outline:none}
+.row input:focus{border-color:var(--c)}
+.row input.ok{border-color:var(--ok);background:#eef8f2}.row input.ko{border-color:var(--ko);background:#fdf0ee}
+.chk{background:var(--c);color:#fff;border:none;border-radius:10px;padding:7px 16px;font-weight:600;font-size:.9rem}
+.chk:disabled{opacity:.4;cursor:default}
+.chk.big{padding:10px 22px;font-size:1rem}
+.fb{margin:0 0 0 32px}
+.fb:empty{display:none}
+.fbr{margin-top:9px;border-radius:12px;padding:8px 12px;font-size:.9rem}
+.fbr.ok{background:#eef8f2;border:1px solid #bfe3cd}.fbr.ko{background:#fdf1ee;border:1px solid #f1c9c0}
+.fbt{font-weight:700}.fbr.ok .fbt{color:var(--ok)}.fbr.ko .fbt{color:var(--ko)}
+.fbr .s{margin:5px 0}
+.fbr .s .txt b{color:var(--ok)}
+.why{display:flex;align-items:flex-start;color:#4b5563}
+.why .txt{flex:1}
+.story{padding:12px 16px;font:1.06rem/2.2 Lora,serif}
+.tg{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+.tg input{width:108px;font:1rem Lora,serif;padding:1px 6px;border:none;border-bottom:2px solid var(--c);background:color-mix(in srgb,var(--c) 6%,#fff);border-radius:6px 6px 0 0;outline:none}
+.tg input.ok{border-color:var(--ok);background:#eef8f2;color:var(--ok);font-weight:600}
+.tg input.ko{border-color:var(--ko);background:#fdf0ee;color:var(--ko);text-decoration:line-through}
+.tv{font:italic .8rem Lora,serif;color:#888}
+.tg .cor{font-weight:700;color:var(--ok);margin-left:3px}
+.storytr{padding:0 16px}
+.free{padding:12px 16px;border-top:1px solid #f0f2f5}
+.free .tr{padding-left:32px}
+.free textarea{width:100%;margin:8px 0;font:1rem Lora,serif;border:2px solid #d6dbe4;border-radius:12px;padding:8px 10px;resize:vertical}
+.model{border:1.5px dashed var(--c);color:var(--c);background:#fff;border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:600}
+.mod{display:none;background:color-mix(in srgb,var(--c) 7%,#fff);border-radius:12px;padding:4px 12px;margin-top:8px}
+.mod.show{display:block}
+/* à revoir */
+.scorebox{background:linear-gradient(135deg,#2b3a55,#6d4a7d);color:#fff;border-radius:16px;padding:14px 18px;text-align:center;margin-bottom:12px}
+.scorebox b{font-size:1.6rem;color:#ffd56a}
+.revlist .empty{color:var(--soft);font-style:italic;text-align:center}
+.rv{background:#fff;border:1px solid #efd6e1;border-left:5px solid #a0446a;border-radius:12px;padding:10px 12px;margin-bottom:10px;--c:#a0446a}
+.rvh{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#a0446a;font-weight:700}
+.rv .s .txt b{color:var(--ok)}
+.rvy{font-size:.88rem;color:#555}.rvy s{color:var(--ko)}
+.rvl{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.rvl a{font-size:.82rem;font-weight:600;color:#fff;background:#a0446a;text-decoration:none;border-radius:999px;padding:3px 12px}
+.rvl a.back{background:#fff;color:#a0446a;border:1.5px solid #a0446a}
+.reset{background:#fff;border:2px solid #a0446a;color:#a0446a;border-radius:999px;padding:7px 18px;font-weight:600}
+.tra textarea,.refl textarea{width:100%;margin:8px 0;font:1rem Lora,serif;border:2px solid #d6dbe4;border-radius:12px;padding:8px 10px;resize:vertical}
+.cmp{background:var(--c);color:#fff;border:none;border-radius:10px;padding:7px 16px;font-weight:600;font-size:.9rem}.cmp:disabled{opacity:.4}
+.selfq{margin-top:8px;font-weight:600;font-size:.9rem}.selfb{display:flex;gap:8px;margin-top:5px}
+.sb{border:2px solid #d6dbe4;background:#fff;border-radius:999px;padding:4px 14px;font-weight:600;font-size:.88rem}
+.sb.ok.chosen{background:var(--ok);border-color:var(--ok);color:#fff}.sb.ko.chosen{background:var(--ko);border-color:var(--ko);color:#fff}.sb:disabled:not(.chosen){opacity:.4}
+.enq{font:italic 1.05rem Lora,serif;color:#2b3a55}
+.refl{padding:12px 16px}
+.sujet{background:#2c2f4a;color:#fff;border-radius:14px;padding:12px 16px;margin-bottom:12px}
+.sujet .q{font:600 1.15rem Poppins,sans-serif;color:#f2c14e}.sujet .tr{color:#c9cbe0}.sujet .itb{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4)}
+.rh{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--c);margin:14px 0 6px}
+.guide{background:#f5f1f8;border-left:4px solid var(--c);border-radius:0 10px 10px 0;padding:6px 12px;margin:6px 0}
+.plan{display:grid;gap:8px}
+.pl{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 12px;display:flex;gap:10px}
+.pl .k{flex:none;width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.pl .nl{font-size:.75rem;color:var(--soft)}
+.kw{background:#fdf6e3;border-radius:10px;padding:8px 12px;font-size:.9rem;margin:6px 0}
+.pistesb{border:1.5px dashed var(--c);color:var(--c);background:#fff;border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:600;margin-top:8px}
+.pistes{display:none;background:#f5f1f8;border-radius:12px;padding:6px 12px;margin-top:8px}.pistes.show{display:block}
+.bank{display:flex;flex-wrap:wrap;gap:6px;margin:10px 16px 0;padding:8px 10px;border:2px dashed #cfd8d6;border-radius:12px}
+.bank span{background:#eef5f3;color:#2f7f73;border-radius:999px;padding:2px 10px;font:600 .85rem Poppins,sans-serif}
+.vgrid .ph{margin:0 0 14px;break-inside:avoid}
+.gtab{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:12px 0}
+.gcol{background:#fff;border:2px solid var(--gc);border-radius:14px;overflow:hidden}
+.gcol .h{background:var(--gc);color:#fff;font-weight:700;padding:6px 12px}.gcol .h small{display:block;font-weight:400;font-size:.75rem;opacity:.9}
+.gcol .b{padding:8px 12px;--c:var(--gc)}
+.gintro{background:#2c2f4a;color:#fff;border-radius:16px;padding:14px 16px;margin-bottom:12px}
+.gintro .gt{font-weight:700;color:#f2c14e;font-size:1.15rem}
+.gintro .ex .txt b{color:#f2c14e}.gintro .tr{color:#c9cbe0}.gintro .itb{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4)}
+.gpills{margin:8px 0}.gpills span{display:inline-block;border:1.5px solid #f2c14e;border-radius:999px;padding:1px 10px;margin:2px 4px 2px 0;font-weight:600;font-size:.88rem}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.cbx{background:#f5f1f8;border-radius:12px;padding:8px 12px}
+.pillc{display:inline-block;border:1.5px solid #7a5a8c;color:#7a5a8c;border-radius:999px;padding:0 10px;font-weight:600;font-size:.82rem;margin-bottom:4px}
+.inbx{border-left:4px solid #7a5a8c;background:#f5f1f8;border-radius:0 10px 10px 0;padding:6px 12px;margin:8px 0}
+.inbx.gold{border-color:#d9a21b;background:#fdf6e3}
+.slow{flex:none;border:none;background:#f1ecdf;border-radius:50%;width:30px;height:30px;margin-right:8px;font-size:15px;line-height:30px;padding:0}
+.slow.playing{background:#e0a630}
+.spk{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid #f0f2f5}
+.spk .txt{flex:1;min-width:200px;font:1.05rem Lora,serif}
+.mic{border:none;background:#a0446a;color:#fff;border-radius:999px;padding:6px 14px;font-weight:600;font-size:.88rem}
+.mic.rec{animation:mpulse 1s infinite}@keyframes mpulse{50%{box-shadow:0 0 0 8px rgba(160,68,106,.25)}}
+.heard{width:100%;font-size:.88rem;color:var(--soft)}.heard .gd{color:var(--ok)}.heard .md{color:#c08a2a}.nomic{font-style:italic}
+.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line);margin:8px 0}
+.tbl td{padding:7px 10px;border-top:1px solid #f0f2f5;vertical-align:top}
+.tbl .w{font-weight:700;color:var(--c)}.tbl .fr2{font:italic .95rem Lora,serif;color:#555}.tbl .tip{font-size:.82rem;color:#7a6a40;background:#fdf6e3;border-radius:8px;padding:2px 8px;display:inline-block;margin-top:3px}
+.tbl tr.grp td{background:var(--t);font-weight:700;color:var(--c);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.wcell{display:flex;align-items:center}
+.idiom{background:#fff;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:12px;padding:8px 12px;margin:10px 0}
+.idiom .eq{font:italic .95rem Lora,serif;color:#2b3a55;margin:2px 0 0 76px}.idiom .eq b{color:var(--c)}
+.tipbox{background:#fdf6e3;border:1px solid #f0dca8;border-radius:14px;padding:10px 14px;margin:12px 0;--c:#a8780d}
+.tipbox .h{font-weight:700;color:#a8780d;margin-bottom:4px}
+.kid{background:#fff0f6;border:1px solid #f6cfe0;border-radius:14px;padding:10px 14px;margin:12px 0;--c:#c43d7f}
+.kid .h{font-weight:700;color:#c43d7f}
+.timing{display:inline-block;background:rgba(255,255,255,.25);border-radius:999px;padding:0 10px;font-size:.72rem;font-weight:600;margin-left:6px;vertical-align:2px}
+@media(max-width:560px){.idiom .eq{margin-left:0}}
+.orow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 0 32px}.omod{border:1.5px dashed var(--c);color:var(--c);background:#fff;border-radius:999px;padding:5px 14px;font-weight:600;font-size:.88rem}.omod:disabled{opacity:.4}
+.item .heard{margin:6px 0 0 32px}
+@media(max-width:560px){.orow,.item .heard{margin-left:0}}
+/* étoiles */
+.star{position:fixed;pointer-events:none;z-index:99;color:#f2b632;font-size:18px;animation:fly .95s ease-out forwards;text-shadow:0 0 6px rgba(242,182,50,.6)}
+@keyframes fly{0%{opacity:0;transform:translate(0,0) scale(.4)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(40deg)}}
+/* accents */
+.acc{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#2b3a55;display:none;justify-content:center;flex-wrap:wrap;gap:5px;padding:6px}
+.acc.show{display:flex}
+.acc button{background:#fff;border:none;border-radius:7px;min-width:34px;padding:5px 0;font:600 1rem Lora,serif;color:#2b3a55}
+@media (max-width:560px){
+  body{font-size:15px}
+  .opts,.row,.fb{margin-left:0}
+  .s .tr{padding-left:0}
+  .htitle{left:10px;bottom:10px;padding:9px 12px}.tag{font-size:.58rem}
+}
+@media print{.top,.acc{display:none}.wrap{padding-top:0}}
+</style>
+</head>
+<body>
+<div class="top"><div class="topin">
+  <span class="brand">Le français avec Irène</span>
+  <button type="button" class="tbtn" id="allit" title="Afficher toutes les traductions">Trad.</button>
+  <button type="button" class="tbtn on" id="autoa" title="Lecture automatique des corrections">🔊 auto</button>
+  <span class="score" id="score"><span class="st">★</span><span id="sc">0</span>&nbsp;/&nbsp;27</span>
+</div></div>
+<main class="wrap">
+<header class="hero"><img src="../img/cambridge.jpg" alt="King's College, à Cambridge" style="object-position:center 42%">
+<div class="htitle"><span class="tag">English for French teachers · Day 2</span><h1>Expliquer les verbes</h1>
+<div class="hit"><button type="button" class="itb">EN</button><span class="tr">Explaining verbs</span></div></div></header>
+<nav class="toc"><a href="../"><b>☰</b> Mon programme</a><a href="#mots"><b>1</b> Les mots</a><a href="#expliquer"><b>2</b> Expliquer</a><a href="#trucs"><b>3</b> Deux trucs</a><a href="#lettres"><b>4</b> Épeler</a><a href="#idiomes"><b>5</b> Idiomes</a><a href="#exercices"><b>6</b> Exercices</a><a href="#revoir"><b>7</b> À revoir</a></nav>
+<div class="ex lead"><div class="fr"><span class="txt">Objectif du jour : expliquer le présent des verbes en -er, être et avoir, épeler une terminaison en anglais, et donner les deux explications qui changent tout pour un élève anglophone. Touchez le haut-parleur pour écouter, la tortue 🐢 pour écouter plus lentement, <b>FR</b> pour la traduction.</span><button type="button" class="itb">EN</button></div><div class="tr">Today's goal: explain the present tense of -er verbs, être and avoir, spell an ending in English, and give the two explanations that make all the difference for an English-speaking pupil. Tap the speaker to listen, the turtle 🐢 to listen more slowly, FR for the translation.</div></div>
+<section class="sec" style="--c:#1f5f7a;--t:#eaf3f7"><header class="sh" id="mots" style="--c:#1f5f7a"><span class="num">1</span><div><h2>Les mots pour parler des verbes<span class="timing">5 min</span></h2><div class="shit"><button type="button" class="itb">EN</button><span class="tr">Words for talking about verbs</span></div></div></header>
+<table class="tbl">
+<tr class="grp"><td colspan="2">Les mots du verbe</td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/c03150fee6d9.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">a regular verb</span></div></td><td><span class="fr2">un verbe régulier</span><div class="tip">reg-u-lar : l'accent est sur REG.</div></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/888f18db4c99.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">an irregular verb</span></div></td><td><span class="fr2">un verbe irrégulier</span><div class="tip">ir-REG-u-lar.</div></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/5d8cbefbc9ee.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">the stem</span></div></td><td><span class="fr2">le radical</span><div class="tip">parler → the stem is parl-. Attention : « radical » en anglais veut dire « extrémiste » ou « radical » au sens politique.</div></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/12b23abe5a0a.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">the ending</span></div></td><td><span class="fr2">la terminaison</span><div class="tip">verb endings = les terminaisons.</div></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/e43720e03090.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">to drop · to take off</span></div></td><td><span class="fr2">enlever, retirer</span><div class="tip">Drop the -er. · Take off the -er.</div></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/a5caac79e66a.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">the present tense</span></div></td><td><span class="fr2">le présent</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/097a6fcb4a86.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">a subject pronoun</span></div></td><td><span class="fr2">un pronom sujet</span><div class="tip">je, tu, il, elle, on, nous, vous, ils, elles.</div></td></tr>
+<tr class="grp"><td colspan="2">Les verbes clés</td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/719f2c96555c.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">to be</span></div></td><td><span class="fr2">être</span><div class="tip">I am, you are, he is…</div></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/55f701627434.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">to have</span></div></td><td><span class="fr2">avoir</span><div class="tip">I have, you have, she has…</div></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/c2a3196278fe.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">an -er verb</span></div></td><td><span class="fr2">un verbe en -er</span><div class="tip">On dit « an E-R verb » : les lettres se prononcent à l'anglaise.</div></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/8b48134403ca.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">a verb table</span></div></td><td><span class="fr2">un tableau de conjugaison</span><div class="tip">On dit aussi a conjugation table.</div></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/ede7be151200.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">to learn by heart</span></div></td><td><span class="fr2">apprendre par cœur</span></td></tr>
+</table></section>
+<section class="sec" style="--c:#2f7f73;--t:#eef6f4"><header class="sh" id="expliquer" style="--c:#2f7f73"><span class="num">2</span><div><h2>Expliquer le présent pas à pas<span class="timing">6 min</span></h2><div class="shit"><button type="button" class="itb">EN</button><span class="tr">Explaining the present step by step</span></div></div></header>
+<div class="ex lead"><div class="fr"><span class="txt">Voici un petit script complet. Lisez-le, écoutez-le, puis essayez de l'expliquer à voix haute comme si Penka était devant vous.</span><button type="button" class="itb">EN</button></div><div class="tr">Here is a short complete script. Read it, listen to it, then try explaining it aloud as if Penka were in front of you.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/de418f5c0053.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/6249ddd6df9f.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">To conjugate a regular -er verb, take off the -er to find the stem.</span><button type="button" class="itb">FR</button></div><div class="tr">Pour conjuguer un verbe régulier en -er, on enlève -er pour trouver le radical.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/1ec631eb7a85.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/4e0f423054f7.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Then add the right ending: e, es, e, ons, ez, ent.</span><button type="button" class="itb">FR</button></div><div class="tr">Ensuite, on ajoute la bonne terminaison : e, es, e, ons, ez, ent.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/6a4130d3d6ee.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/37d35ca418ff.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">These four forms sound exactly the same.</span><button type="button" class="itb">FR</button></div><div class="tr">Ces quatre formes se prononcent exactement de la même façon.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/b58856a52134.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/3dffd5a982ff.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">The -ent ending is silent in verbs.</span><button type="button" class="itb">FR</button></div><div class="tr">La terminaison -ent ne se prononce pas dans les verbes.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/64572942725c.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/c7bb27bc37ca.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Être means to be, and avoir means to have.</span><button type="button" class="itb">FR</button></div><div class="tr">Être veut dire to be, et avoir veut dire to have.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/4b65cf9f7a06.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/a2a4744e352a.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">They're irregular, so you need to learn them by heart.</span><button type="button" class="itb">FR</button></div><div class="tr">Ils sont irréguliers, donc il faut les apprendre par cœur.</div></div>
+<div class="kid"><div class="h">🧸 Avec Evelyn</div><div class="ex "><div class="fr"><span class="txt">On fait bouger, chanter et chercher.</span><button type="button" class="itb">EN</button></div><div class="tr">Get her moving, singing and searching.</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/9005c834f5c0.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/6bd539a93622.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Let's sing the verb song!</span><button type="button" class="itb">FR</button></div><div class="tr">Chantons la chanson des verbes !</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/89a8f8394b82.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/0e7531cc35e0.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Clap for each syllable.</span><button type="button" class="itb">FR</button></div><div class="tr">Tape dans tes mains pour chaque syllabe.</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/a8871223188a.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/244e5cd8d531.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Which one is the odd one out?</span><button type="button" class="itb">FR</button></div><div class="tr">Lequel est l'intrus ?</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/6f1a79c74628.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/eea77df4f1c7.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Can you find the verb in this sentence?</span><button type="button" class="itb">FR</button></div><div class="tr">Tu peux trouver le verbe dans cette phrase ?</div></div></div>
+<figure class="ph band"><img src="../img/livres.jpg" alt="Un coin d&#x27;albums pour enfants · A picture-book corner" loading="lazy"><figcaption>Un coin d'albums pour enfants · A picture-book corner</figcaption></figure>
+</section>
+<section class="sec" style="--c:#6d4a7d;--t:#f3edf6"><header class="sh" id="trucs" style="--c:#6d4a7d"><span class="num">3</span><div><h2>Deux trucs qui changent tout<span class="timing">6 min</span></h2><div class="shit"><button type="button" class="itb">EN</button><span class="tr">Two tricks that change everything</span></div></div></header>
+<div class="idiom"><div style="font-weight:700;color:var(--c);margin-bottom:4px">💡 Un seul présent en français</div><div class="ex "><div class="fr"><span class="txt">En anglais, il y a plusieurs présents : <b>I speak, I'm speaking, I do speak</b>. En français, un seul suffit : <b>je parle</b>. C'est l'explication qui rassure le plus les élèves anglophones.</span><button type="button" class="itb">EN</button></div><div class="tr">In English there are several presents: I speak, I'm speaking, I do speak. In French, one is enough: je parle. This is the explanation that reassures English-speaking pupils the most.</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/3c94dbc72fa3.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/7f3cb3a31f49.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">In French, je parle means I speak and I'm speaking.</span><button type="button" class="itb">FR</button></div><div class="tr">En français, je parle veut dire I speak et I'm speaking.</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/a66bc464ee7a.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/d1312285fc16.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">There's no -ing form in French.</span><button type="button" class="itb">FR</button></div><div class="tr">Il n'y a pas de forme en -ing en français.</div></div></div>
+<div class="idiom"><div style="font-weight:700;color:var(--c);margin-bottom:4px">💡 Avoir là où l'anglais dit to be</div><div class="ex "><div class="fr"><span class="txt">Pour l'âge, la faim, la soif, le froid, le chaud et la peur, le français utilise <b>avoir</b> alors que l'anglais utilise <b>to be</b>.</span><button type="button" class="itb">EN</button></div><div class="tr">For age, hunger, thirst, cold, heat and fear, French uses avoir where English uses to be.</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/9ecb6b04a430.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/9c18beca5cda.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">In French we say j'ai dix ans, with avoir, not être.</span><button type="button" class="itb">FR</button></div><div class="tr">En français, on dit j'ai dix ans, avec avoir, pas avec être.</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/2b09d33661e6.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/90c021014db9.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">I'm hungry is j'ai faim, and I'm cold is j'ai froid.</span><button type="button" class="itb">FR</button></div><div class="tr">I'm hungry se dit j'ai faim, et I'm cold se dit j'ai froid.</div></div></div>
+</section>
+<section class="sec" style="--c:#b5523b;--t:#fbefe9"><header class="sh" id="lettres" style="--c:#b5523b"><span class="num">4</span><div><h2>Épeler en anglais<span class="timing">5 min</span></h2><div class="shit"><button type="button" class="itb">EN</button><span class="tr">Spelling in English</span></div></div></header>
+<div class="ex lead"><div class="fr"><span class="txt">Pour expliquer une terminaison, il faut savoir épeler. Certaines lettres anglaises se prononcent comme d'autres lettres françaises : c'est un piège classique.</span><button type="button" class="itb">EN</button></div><div class="tr">To explain an ending, you need to be able to spell. Some English letters sound like other French letters: it's a classic trap.</div></div>
+<table class="tbl">
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/f24644766bfc.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="font-size:1.3rem">A</span></div></td><td><span class="fr2">se dit comme dans day.</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/fe08c59eabb3.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="font-size:1.3rem">E</span></div></td><td><span class="fr2">se dit comme dans see : c'est le piège principal !</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/fb762320c92e.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="font-size:1.3rem">I</span></div></td><td><span class="fr2">se dit comme dans my.</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/5d9b4a748e9b.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="font-size:1.3rem">G</span></div></td><td><span class="fr2">se dit comme dans jeans.</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/b9f5ed396ffb.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="font-size:1.3rem">J</span></div></td><td><span class="fr2">se dit comme dans jay.</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/e1b6946e0568.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="font-size:1.3rem">R</span></div></td><td><span class="fr2">se dit comme dans car.</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/9ac86ac4c871.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="font-size:1.3rem">H</span></div></td><td><span class="fr2">se dit aitch.</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/ce2028d36234.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="font-size:1.3rem">Z</span></div></td><td><span class="fr2">se dit zed en anglais britannique, zee en américain.</span></td></tr>
+</table>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/ca5942a519fc.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/bd61fba836b4.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Add an E-S for tu.</span><button type="button" class="itb">FR</button></div><div class="tr">Ajoute E-S pour tu.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/d91cf6a9b9fc.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/20ad19eb7c05.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">The nous ending is O-N-S.</span><button type="button" class="itb">FR</button></div><div class="tr">La terminaison de nous, c'est O-N-S.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/84c49aca1c91.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/21da7a2440ad.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Can you spell it, please?</span><button type="button" class="itb">FR</button></div><div class="tr">Tu peux l'épeler, s'il te plaît ?</div></div>
+<figure class="ph band"><img src="../img/oxford.jpg" alt="Oxford, la Radcliffe Camera · Oxford, the Radcliffe Camera" loading="lazy"><figcaption>Oxford, la Radcliffe Camera · Oxford, the Radcliffe Camera</figcaption></figure>
+</section>
+<section class="sec" style="--c:#c08a2a;--t:#fbf4e6"><header class="sh" id="idiomes" style="--c:#c08a2a"><span class="num">5</span><div><h2>Expressions idiomatiques<span class="timing">3 min</span></h2><div class="shit"><button type="button" class="itb">EN</button><span class="tr">Idioms</span></div></div></header>
+<div class="idiom"><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/2173fff8973b.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/eb46afcacd6c.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt"><b>to be on the same page</b></span><button type="button" class="itb">FR</button></div><div class="tr">être sur la même longueur d'onde</div></div><div class="eq">≈ <b>être sur la même longueur d'onde</b></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/d79e5d36e3e6.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/9654ded6c160.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Let's check we're on the same page.</span><button type="button" class="itb">FR</button></div><div class="tr">Vérifions qu'on est sur la même longueur d'onde.</div></div></div>
+<div class="idiom"><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/012d1b21deca.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/a2d015a70e5f.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt"><b>to get the ball rolling</b></span><button type="button" class="itb">FR</button></div><div class="tr">lancer les choses, commencer</div></div><div class="eq">≈ <b>lancer les choses, commencer</b></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/5b5d31e144f4.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/fa110f7f0fad.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Let's get the ball rolling with a quick warm-up.</span><button type="button" class="itb">FR</button></div><div class="tr">Commençons par un petit échauffement.</div></div></div>
+<div class="idiom"><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/c7f468e9e086.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/1508c7fbf2b5.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt"><b>Rome wasn't built in a day.</b></span><button type="button" class="itb">FR</button></div><div class="tr">Paris ne s'est pas fait en un jour.</div></div><div class="eq">≈ <b>Paris ne s'est pas fait en un jour.</b></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/79ceed43ebf8.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/cc85037f394e.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Don't worry, Rome wasn't built in a day.</span><button type="button" class="itb">FR</button></div><div class="tr">Ne t'inquiète pas, Paris ne s'est pas fait en un jour.</div></div></div>
+<div class="idiom"><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/764378207f9c.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/a9fd64e1084e.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt"><b>to pick something up</b></span><button type="button" class="itb">FR</button></div><div class="tr">apprendre, assimiler sans effort</div></div><div class="eq">≈ <b>apprendre, assimiler sans effort</b></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/a28d5a41b8f1.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/6388d9c76407.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">You'll pick it up very quickly.</span><button type="button" class="itb">FR</button></div><div class="tr">Tu vas l'assimiler très vite.</div></div></div>
+<div class="idiom"><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/e3a292cec620.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/d36a777d6106.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt"><b>Let's call it a day.</b></span><button type="button" class="itb">FR</button></div><div class="tr">Arrêtons-nous là pour aujourd'hui.</div></div><div class="eq">≈ <b>Arrêtons-nous là pour aujourd'hui.</b></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/5a05c63514f9.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/f3cd9177a892.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Let's call it a day. Great work today!</span><button type="button" class="itb">FR</button></div><div class="tr">On s'arrête là pour aujourd'hui. Excellent travail !</div></div></div>
+<figure class="ph band"><img src="../img/cotswolds.jpg" alt="Les Cotswolds, la campagne anglaise · The Cotswolds, the English countryside" loading="lazy"><figcaption>Les Cotswolds, la campagne anglaise · The Cotswolds, the English countryside</figcaption></figure>
+</section>
+<section class="sec" style="--c:#2b3a55;--t:#eef1f6"><header class="sh" id="exercices" style="--c:#2b3a55"><span class="num">6</span><div><h2>Exercices<span class="timing">10 min</span></h2><div class="shit"><button type="button" class="itb">EN</button><span class="tr">Exercises</span></div></div></header>
+<div class="ex lead"><div class="fr"><span class="txt">La correction est immédiate ; chaque bonne réponse vaut un point. Vos erreurs s'ajoutent à « À revoir » avec un lien vers la leçon.</span><button type="button" class="itb">EN</button></div><div class="tr">Answers are checked straight away; each correct answer is worth one point. Your mistakes go into « À revoir » with a link to the lesson.</div></div>
+<div class="exb" id="ex1" style="--c:#b5523b"><div class="exh" style="--c:#b5523b"><span class="exn">1</span><div><div class="exk">EXERCICE 1</div><div class="ext">J'écoute et j'écris la terminaison</div><div class="exit"><button type="button" class="itb">EN</button><span class="tr">I listen and identify the ending</span></div></div></div>
+<div class="item" id="q1" data-k="qcm" data-j='{&quot;id&quot;: &quot;q1&quot;, &quot;ans&quot;: [&quot;-es&quot;], &quot;full&quot;: &quot;Add an E-S for tu.&quot;, &quot;a&quot;: &quot;../audio/ca5942a519fc.mp3?v=2&quot;, &quot;it&quot;: &quot;Ajoute E-S pour tu.&quot;, &quot;rule&quot;: &quot;lettres&quot;, &quot;why&quot;: &quot;E se dit comme dans see.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">1</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/27755f5c0b77.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/dd7521e141af.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Quelle terminaison entendez-vous ?</span></span></div><div class="opts"><button type="button" class="opt">-is</button><button type="button" class="opt">-es</button><button type="button" class="opt">-as</button></div><div class="fb"></div></div>
+<div class="item" id="q2" data-k="qcm" data-j='{&quot;id&quot;: &quot;q2&quot;, &quot;ans&quot;: [&quot;-ons&quot;], &quot;full&quot;: &quot;The nous ending is O-N-S.&quot;, &quot;a&quot;: &quot;../audio/d91cf6a9b9fc.mp3?v=2&quot;, &quot;it&quot;: &quot;La terminaison de nous, c&#x27;est O-N-S.&quot;, &quot;rule&quot;: &quot;lettres&quot;, &quot;why&quot;: &quot;O-N-S.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">2</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/37a93a7b14d8.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/0d5a4080b82e.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Quelle terminaison entendez-vous ?</span></span></div><div class="opts"><button type="button" class="opt">-ans</button><button type="button" class="opt">-ons</button><button type="button" class="opt">-ens</button></div><div class="fb"></div></div>
+<div class="item" id="q3" data-k="qcm" data-j='{&quot;id&quot;: &quot;q3&quot;, &quot;ans&quot;: [&quot;-ez&quot;], &quot;full&quot;: &quot;The vous ending is E-Z.&quot;, &quot;a&quot;: &quot;../audio/158224177253.mp3?v=2&quot;, &quot;it&quot;: &quot;La terminaison de vous, c&#x27;est E-Z.&quot;, &quot;rule&quot;: &quot;lettres&quot;, &quot;why&quot;: &quot;Z se dit zed.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">3</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/1468438c99b7.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/a1aaf89c7891.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Quelle terminaison entendez-vous ?</span></span></div><div class="opts"><button type="button" class="opt">-es</button><button type="button" class="opt">-ez</button><button type="button" class="opt">-iz</button></div><div class="fb"></div></div>
+<div class="item" id="q4" data-k="qcm" data-j='{&quot;id&quot;: &quot;q4&quot;, &quot;ans&quot;: [&quot;-ent&quot;], &quot;full&quot;: &quot;The ils ending is E-N-T.&quot;, &quot;a&quot;: &quot;../audio/2b6ec6499e22.mp3?v=2&quot;, &quot;it&quot;: &quot;La terminaison de ils, c&#x27;est E-N-T.&quot;, &quot;rule&quot;: &quot;lettres&quot;, &quot;why&quot;: &quot;E = see, N, T.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">4</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/8cd75309832e.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/e001af30b287.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Quelle terminaison entendez-vous ?</span></span></div><div class="opts"><button type="button" class="opt">-ant</button><button type="button" class="opt">-ent</button><button type="button" class="opt">-int</button></div><div class="fb"></div></div>
+<div class="item" id="q5" data-k="qcm" data-j='{&quot;id&quot;: &quot;q5&quot;, &quot;ans&quot;: [&quot;-is&quot;], &quot;full&quot;: &quot;With finir, the je ending is I-S.&quot;, &quot;a&quot;: &quot;../audio/35d4cca7dbf6.mp3?v=2&quot;, &quot;it&quot;: &quot;Avec finir, la terminaison de je, c&#x27;est I-S.&quot;, &quot;rule&quot;: &quot;lettres&quot;, &quot;why&quot;: &quot;I se dit comme dans my.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">5</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/747980f3a7bc.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/9662c6f36d85.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Quelle terminaison entendez-vous ?</span></span></div><div class="opts"><button type="button" class="opt">-is</button><button type="button" class="opt">-ais</button><button type="button" class="opt">-es</button></div><div class="fb"></div></div>
+<div class="item" id="q6" data-k="qcm" data-j='{&quot;id&quot;: &quot;q6&quot;, &quot;ans&quot;: [&quot;-ais&quot;], &quot;full&quot;: &quot;The imperfect ending for je is A-I-S.&quot;, &quot;a&quot;: &quot;../audio/5f8e8bed3643.mp3?v=2&quot;, &quot;it&quot;: &quot;La terminaison de je à l&#x27;imparfait, c&#x27;est A-I-S.&quot;, &quot;rule&quot;: &quot;lettres&quot;, &quot;why&quot;: &quot;A = day, I = my.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">6</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/5db239ebe1c2.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/ba6765c54636.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Quelle terminaison entendez-vous ?</span></span></div><div class="opts"><button type="button" class="opt">-ees</button><button type="button" class="opt">-ais</button><button type="button" class="opt">-ies</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex2" style="--c:#1f5f7a"><div class="exh" style="--c:#1f5f7a"><span class="exn">2</span><div><div class="exk">EXERCICE 2</div><div class="ext">Le mot juste</div><div class="exit"><button type="button" class="itb">EN</button><span class="tr">The right word</span></div></div></div>
+<div class="item" id="q7" data-k="qcm" data-j='{&quot;id&quot;: &quot;q7&quot;, &quot;ans&quot;: [&quot;the stem&quot;], &quot;full&quot;: &quot;Take off the -er to find the stem.&quot;, &quot;a&quot;: &quot;../audio/4c543899ba24.mp3?v=2&quot;, &quot;it&quot;: &quot;On enlève -er pour trouver le radical.&quot;, &quot;rule&quot;: &quot;mots&quot;, &quot;why&quot;: &quot;le radical = the stem.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">1</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">le radical → <span class="gap">……</span></span></div><div class="opts"><button type="button" class="opt">the stem</button><button type="button" class="opt">the radical</button><button type="button" class="opt">the root verb</button></div><div class="fb"></div></div>
+<div class="item" id="q8" data-k="qcm" data-j='{&quot;id&quot;: &quot;q8&quot;, &quot;ans&quot;: [&quot;an irregular verb&quot;], &quot;full&quot;: &quot;Être is an irregular verb.&quot;, &quot;a&quot;: &quot;../audio/6614187f5bf8.mp3?v=2&quot;, &quot;it&quot;: &quot;Être est un verbe irrégulier.&quot;, &quot;rule&quot;: &quot;mots&quot;, &quot;why&quot;: &quot;irregular : ir-REG-u-lar.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">2</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">un verbe irrégulier → <span class="gap">……</span></span></div><div class="opts"><button type="button" class="opt">a strange verb</button><button type="button" class="opt">an unregular verb</button><button type="button" class="opt">an irregular verb</button></div><div class="fb"></div></div>
+<div class="item" id="q9" data-k="qcm" data-j='{&quot;id&quot;: &quot;q9&quot;, &quot;ans&quot;: [&quot;to drop the -er&quot;], &quot;full&quot;: &quot;Drop the -er and add the ending.&quot;, &quot;a&quot;: &quot;../audio/e4bbf6502274.mp3?v=2&quot;, &quot;it&quot;: &quot;Enlève -er et ajoute la terminaison.&quot;, &quot;rule&quot;: &quot;mots&quot;, &quot;why&quot;: &quot;to drop / to take off = enlever.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">3</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">enlever -er → <span class="gap">……</span></span></div><div class="opts"><button type="button" class="opt">to lose the -er</button><button type="button" class="opt">to drop the -er</button><button type="button" class="opt">to fall the -er</button></div><div class="fb"></div></div>
+<div class="item" id="q10" data-k="qcm" data-j='{&quot;id&quot;: &quot;q10&quot;, &quot;ans&quot;: [&quot;a subject pronoun&quot;], &quot;full&quot;: &quot;Je is a subject pronoun.&quot;, &quot;a&quot;: &quot;../audio/7e196992fd4e.mp3?v=2&quot;, &quot;it&quot;: &quot;Je est un pronom sujet.&quot;, &quot;rule&quot;: &quot;mots&quot;, &quot;why&quot;: &quot;a subject pronoun.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">4</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">un pronom sujet → <span class="gap">……</span></span></div><div class="opts"><button type="button" class="opt">a subject pronoun</button><button type="button" class="opt">a person word</button><button type="button" class="opt">a subject noun</button></div><div class="fb"></div></div>
+<div class="item" id="q11" data-k="qcm" data-j='{&quot;id&quot;: &quot;q11&quot;, &quot;ans&quot;: [&quot;a verb table&quot;], &quot;full&quot;: &quot;Look at the verb table.&quot;, &quot;a&quot;: &quot;../audio/4800a9620e98.mp3?v=2&quot;, &quot;it&quot;: &quot;Regarde le tableau de conjugaison.&quot;, &quot;rule&quot;: &quot;mots&quot;, &quot;why&quot;: &quot;a verb table / a conjugation table.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">5</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">un tableau de conjugaison → <span class="gap">……</span></span></div><div class="opts"><button type="button" class="opt">a verb board</button><button type="button" class="opt">a verb table</button><button type="button" class="opt">a verb painting</button></div><div class="fb"></div></div>
+<div class="item" id="q12" data-k="qcm" data-j='{&quot;id&quot;: &quot;q12&quot;, &quot;ans&quot;: [&quot;to have&quot;], &quot;full&quot;: &quot;Avoir means to have.&quot;, &quot;a&quot;: &quot;../audio/2a33c00a7e2b.mp3?v=2&quot;, &quot;it&quot;: &quot;Avoir veut dire to have.&quot;, &quot;rule&quot;: &quot;mots&quot;, &quot;why&quot;: &quot;être = to be · avoir = to have.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">6</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">avoir → <span class="gap">……</span></span></div><div class="opts"><button type="button" class="opt">to have</button><button type="button" class="opt">to be</button><button type="button" class="opt">to own</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex3" style="--c:#2f7f73"><div class="exh" style="--c:#2f7f73"><span class="exn">3</span><div><div class="exk">EXERCICE 3</div><div class="ext">Complétez la phrase du professeur</div><div class="exit"><button type="button" class="itb">EN</button><span class="tr">Complete the teacher's sentence</span></div></div></div>
+<div class="item" id="q13" data-k="qcm" data-j='{&quot;id&quot;: &quot;q13&quot;, &quot;ans&quot;: [&quot;Take&quot;], &quot;full&quot;: &quot;Take off the -er to find the stem.&quot;, &quot;a&quot;: &quot;../audio/4c543899ba24.mp3?v=2&quot;, &quot;it&quot;: &quot;On enlève -er pour trouver le radical.&quot;, &quot;rule&quot;: &quot;expliquer&quot;, &quot;why&quot;: &quot;to take off = enlever.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">1</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><span class="gap">……</span> off the -er to find the stem.</span></div><div class="opts"><button type="button" class="opt">Get</button><button type="button" class="opt">Put</button><button type="button" class="opt">Take</button></div><div class="fb"></div></div>
+<div class="item" id="q14" data-k="qcm" data-j='{&quot;id&quot;: &quot;q14&quot;, &quot;ans&quot;: [&quot;exactly&quot;], &quot;full&quot;: &quot;These four forms sound exactly the same.&quot;, &quot;a&quot;: &quot;../audio/6a4130d3d6ee.mp3?v=2&quot;, &quot;it&quot;: &quot;Ces quatre formes se prononcent exactement de la même façon.&quot;, &quot;rule&quot;: &quot;expliquer&quot;, &quot;why&quot;: &quot;exactly the same = exactement pareil.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">2</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">These four forms sound <span class="gap">……</span> the same.</span></div><div class="opts"><button type="button" class="opt">exactly</button><button type="button" class="opt">really</button><button type="button" class="opt">exact</button></div><div class="fb"></div></div>
+<div class="item" id="q15" data-k="qcm" data-j='{&quot;id&quot;: &quot;q15&quot;, &quot;ans&quot;: [&quot;silent&quot;], &quot;full&quot;: &quot;The -ent ending is silent in verbs.&quot;, &quot;a&quot;: &quot;../audio/b58856a52134.mp3?v=2&quot;, &quot;it&quot;: &quot;La terminaison -ent ne se prononce pas dans les verbes.&quot;, &quot;rule&quot;: &quot;expliquer&quot;, &quot;why&quot;: &quot;silent = muet.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">3</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">The -ent ending is <span class="gap">……</span> in verbs.</span></div><div class="opts"><button type="button" class="opt">silent</button><button type="button" class="opt">mute</button><button type="button" class="opt">quiet</button></div><div class="fb"></div></div>
+<div class="item" id="q16" data-k="qcm" data-j='{&quot;id&quot;: &quot;q16&quot;, &quot;ans&quot;: [&quot;with&quot;], &quot;full&quot;: &quot;In French we say j&#x27;ai dix ans, with avoir.&quot;, &quot;a&quot;: &quot;../audio/9628fd37aa6c.mp3?v=2&quot;, &quot;it&quot;: &quot;En français, on dit j&#x27;ai dix ans, avec avoir.&quot;, &quot;rule&quot;: &quot;trucs&quot;, &quot;why&quot;: &quot;with avoir = avec avoir.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">4</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">In French we say j'ai dix ans, <span class="gap">……</span> avoir.</span></div><div class="opts"><button type="button" class="opt">from</button><button type="button" class="opt">with</button><button type="button" class="opt">by</button></div><div class="fb"></div></div>
+<div class="item" id="q17" data-k="qcm" data-j='{&quot;id&quot;: &quot;q17&quot;, &quot;ans&quot;: [&quot;and&quot;], &quot;full&quot;: &quot;Je parle means I speak and I&#x27;m speaking.&quot;, &quot;a&quot;: &quot;../audio/14c37d7252cf.mp3?v=2&quot;, &quot;it&quot;: &quot;Je parle veut dire I speak et I&#x27;m speaking.&quot;, &quot;rule&quot;: &quot;trucs&quot;, &quot;why&quot;: &quot;Un seul présent en français.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">5</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Je parle means I speak <span class="gap">……</span> I'm speaking.</span></div><div class="opts"><button type="button" class="opt">but</button><button type="button" class="opt">or</button><button type="button" class="opt">and</button></div><div class="fb"></div></div>
+<div class="item" id="q18" data-k="qcm" data-j='{&quot;id&quot;: &quot;q18&quot;, &quot;ans&quot;: [&quot;heart&quot;], &quot;full&quot;: &quot;You need to learn them by heart.&quot;, &quot;a&quot;: &quot;../audio/2cd2d66e819a.mp3?v=2&quot;, &quot;it&quot;: &quot;Il faut les apprendre par cœur.&quot;, &quot;rule&quot;: &quot;expliquer&quot;, &quot;why&quot;: &quot;by heart = par cœur.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">6</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">You need to learn them by <span class="gap">……</span>.</span></div><div class="opts"><button type="button" class="opt">head</button><button type="button" class="opt">mind</button><button type="button" class="opt">heart</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex4" style="--c:#c08a2a"><div class="exh" style="--c:#c08a2a"><span class="exn">4</span><div><div class="exk">EXERCICE 4</div><div class="ext">Les expressions idiomatiques</div><div class="exit"><button type="button" class="itb">EN</button><span class="tr">Idioms</span></div></div></div>
+<div class="item" id="q19" data-k="qcm" data-j='{&quot;id&quot;: &quot;q19&quot;, &quot;ans&quot;: [&quot;On est sur la même longueur d&#x27;onde.&quot;], &quot;full&quot;: &quot;We&#x27;re on the same page.&quot;, &quot;a&quot;: &quot;../audio/7cdb910f637e.mp3?v=2&quot;, &quot;it&quot;: &quot;On est sur la même longueur d&#x27;onde.&quot;, &quot;rule&quot;: &quot;idiomes&quot;, &quot;why&quot;: &quot;We&#x27;re on the same page. ≈ On est sur la même longueur d&#x27;onde.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">1</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><b>We're on the same page.</b> → <span class="gap">……</span></span></div><div class="opts"><button type="button" class="opt">On est au même endroit.</button><button type="button" class="opt">On est sur la même longueur d&#x27;onde.</button><button type="button" class="opt">On lit la même page.</button></div><div class="fb"></div></div>
+<div class="item" id="q20" data-k="qcm" data-j='{&quot;id&quot;: &quot;q20&quot;, &quot;ans&quot;: [&quot;Commençons.&quot;], &quot;full&quot;: &quot;Let&#x27;s get the ball rolling.&quot;, &quot;a&quot;: &quot;../audio/0d4b0dc1c7f5.mp3?v=2&quot;, &quot;it&quot;: &quot;Commençons.&quot;, &quot;rule&quot;: &quot;idiomes&quot;, &quot;why&quot;: &quot;Let&#x27;s get the ball rolling. ≈ Commençons.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">2</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><b>Let's get the ball rolling.</b> → <span class="gap">……</span></span></div><div class="opts"><button type="button" class="opt">Commençons.</button><button type="button" class="opt">Faisons une pause.</button><button type="button" class="opt">Jouons au ballon.</button></div><div class="fb"></div></div>
+<div class="item" id="q21" data-k="qcm" data-j='{&quot;id&quot;: &quot;q21&quot;, &quot;ans&quot;: [&quot;Paris ne s&#x27;est pas fait en un jour.&quot;], &quot;full&quot;: &quot;Rome wasn&#x27;t built in a day.&quot;, &quot;a&quot;: &quot;../audio/c7f468e9e086.mp3?v=2&quot;, &quot;it&quot;: &quot;Paris ne s&#x27;est pas fait en un jour.&quot;, &quot;rule&quot;: &quot;idiomes&quot;, &quot;why&quot;: &quot;Rome wasn&#x27;t built in a day. ≈ Paris ne s&#x27;est pas fait en un jour.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">3</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><b>Rome wasn't built in a day.</b> → <span class="gap">……</span></span></div><div class="opts"><button type="button" class="opt">Rome est très ancienne.</button><button type="button" class="opt">Il faut se dépêcher.</button><button type="button" class="opt">Paris ne s&#x27;est pas fait en un jour.</button></div><div class="fb"></div></div>
+<div class="item" id="q22" data-k="qcm" data-j='{&quot;id&quot;: &quot;q22&quot;, &quot;ans&quot;: [&quot;Tu vas l&#x27;assimiler vite.&quot;], &quot;full&quot;: &quot;You&#x27;ll pick it up quickly.&quot;, &quot;a&quot;: &quot;../audio/432a8ec7062c.mp3?v=2&quot;, &quot;it&quot;: &quot;Tu vas l&#x27;assimiler vite.&quot;, &quot;rule&quot;: &quot;idiomes&quot;, &quot;why&quot;: &quot;You&#x27;ll pick it up quickly. ≈ Tu vas l&#x27;assimiler vite.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">4</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><b>You'll pick it up quickly.</b> → <span class="gap">……</span></span></div><div class="opts"><button type="button" class="opt">Tu vas le ramasser vite.</button><button type="button" class="opt">Tu vas le choisir vite.</button><button type="button" class="opt">Tu vas l&#x27;assimiler vite.</button></div><div class="fb"></div></div>
+<div class="item" id="q23" data-k="qcm" data-j='{&quot;id&quot;: &quot;q23&quot;, &quot;ans&quot;: [&quot;Arrêtons-nous là pour aujourd&#x27;hui.&quot;], &quot;full&quot;: &quot;Let&#x27;s call it a day.&quot;, &quot;a&quot;: &quot;../audio/e3a292cec620.mp3?v=2&quot;, &quot;it&quot;: &quot;Arrêtons-nous là pour aujourd&#x27;hui.&quot;, &quot;rule&quot;: &quot;idiomes&quot;, &quot;why&quot;: &quot;Let&#x27;s call it a day. ≈ Arrêtons-nous là pour aujourd&#x27;hui.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">5</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><b>Let's call it a day.</b> → <span class="gap">……</span></span></div><div class="opts"><button type="button" class="opt">Arrêtons-nous là pour aujourd&#x27;hui.</button><button type="button" class="opt">Appelons-le demain.</button><button type="button" class="opt">C&#x27;est une belle journée.</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex5" style="--c:#a0446a"><div class="exh" style="--c:#a0446a"><span class="exn">5</span><div><div class="exk">EXERCICE 5</div><div class="ext">Je parle comme une prof anglophone</div><div class="exit"><button type="button" class="itb">EN</button><span class="tr">I speak like an English-speaking teacher</span></div></div></div>
+<div class="ex cons"><div class="fr"><span class="txt">Écoutez la phrase, répétez-la, puis touchez 🎤 et dites-la. Cet exercice ne compte pas dans le score.</span><button type="button" class="itb">EN</button></div><div class="tr">Listen to the sentence, repeat it, then tap 🎤 and say it. This exercise doesn't count towards your score.</div></div>
+<div class="spk" data-t="Take off the -er to find the stem."><button type="button" class="au " data-a="../audio/4c543899ba24.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/fd622aa0e68a.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Take off the -er to find the stem.</span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="These four forms sound exactly the same."><button type="button" class="au " data-a="../audio/6a4130d3d6ee.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/37d35ca418ff.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">These four forms sound exactly the same.</span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="In French, je parle means I speak and I&#x27;m speaking."><button type="button" class="au " data-a="../audio/3c94dbc72fa3.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/7f3cb3a31f49.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">In French, je parle means I speak and I'm speaking.</span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="In French we say j&#x27;ai dix ans, with avoir."><button type="button" class="au " data-a="../audio/9628fd37aa6c.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/a7a393620002.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">In French we say j'ai dix ans, with avoir.</span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="Can you spell it, please?"><button type="button" class="au " data-a="../audio/84c49aca1c91.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/21da7a2440ad.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Can you spell it, please?</span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="Add an E-S for tu."><button type="button" class="au " data-a="../audio/ca5942a519fc.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/bd61fba836b4.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Add an E-S for tu.</span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="They&#x27;re irregular, so you need to learn them by heart."><button type="button" class="au " data-a="../audio/4b65cf9f7a06.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/a2a4744e352a.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">They're irregular, so you need to learn them by heart.</span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="Let&#x27;s call it a day. Great work today!"><button type="button" class="au " data-a="../audio/5a05c63514f9.mp3?v=2" aria-label="Listen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/f3cd9177a892.mp3?v=2" aria-label="Slowly" title="Plus lentement">🐢</button><span class="txt">Let's call it a day. Great work today!</span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+</div>
+<div class="exb" id="ex6" style="--c:#1f5f7a"><div class="exh" style="--c:#1f5f7a"><span class="exn">6</span><div><div class="exk">EXERCICE 6</div><div class="ext">En situation : je réponds à l'oral</div><div class="exit"><button type="button" class="itb">EN</button><span class="tr">In context: I answer out loud</span></div></div></div>
+<div class="ex cons"><div class="fr"><span class="txt">Lisez la situation, touchez 🎤 et dites votre phrase en anglais. La page vous montre ce qu'elle a compris et sa ressemblance avec le modèle. Écoutez ensuite le modèle, répétez-le, et dites si votre réponse était juste.</span><button type="button" class="itb">EN</button></div><div class="tr">Read the situation, tap 🎤 and say your sentence in English. The page shows what it understood and how close it is to the model. Then listen to the model, repeat it, and say whether your answer was right.</div></div>
+<div class="item" id="q24" data-k="ora" data-j='{&quot;id&quot;: &quot;q24&quot;, &quot;full&quot;: &quot;Nearly! In French we say j&#x27;ai seize ans, with avoir.&quot;, &quot;a&quot;: &quot;../audio/c6b29e813729.mp3?v=2&quot;, &quot;it&quot;: &quot;&quot;, &quot;rule&quot;: &quot;trucs&quot;, &quot;why&quot;: &quot;Nearly! · In French we say… · with avoir&quot;, &quot;ex&quot;: 6}'><div class="qq"><span class="qn">1</span><span class="txt">Emily dit « je suis seize ans » : corrigez-la gentiment.</span></div><div class="orow"><button type="button" class="mic omic">🎤 Je réponds</button><button type="button" class="omod">Voir le modèle</button></div><div class="heard"></div><div class="fb"></div></div>
+<div class="item" id="q25" data-k="ora" data-j='{&quot;id&quot;: &quot;q25&quot;, &quot;full&quot;: &quot;Je mange means both I eat and I&#x27;m eating.&quot;, &quot;a&quot;: &quot;../audio/bf6940a9c9c3.mp3?v=2&quot;, &quot;it&quot;: &quot;&quot;, &quot;rule&quot;: &quot;trucs&quot;, &quot;why&quot;: &quot;means both… and… · there&#x27;s no -ing form in French&quot;, &quot;ex&quot;: 6}'><div class="qq"><span class="qn">2</span><span class="txt">Expliquez à Penka que « je mange » veut aussi dire « I'm eating ».</span></div><div class="orow"><button type="button" class="mic omic">🎤 Je réponds</button><button type="button" class="omod">Voir le modèle</button></div><div class="heard"></div><div class="fb"></div></div>
+<div class="item" id="q26" data-k="ora" data-j='{&quot;id&quot;: &quot;q26&quot;, &quot;full&quot;: &quot;Can you spell mes, please?&quot;, &quot;a&quot;: &quot;../audio/141cdaf429ac.mp3?v=2&quot;, &quot;it&quot;: &quot;&quot;, &quot;rule&quot;: &quot;lettres&quot;, &quot;why&quot;: &quot;Can you spell…, please?&quot;, &quot;ex&quot;: 6}'><div class="qq"><span class="qn">3</span><span class="txt">Demandez à Evelyn d'épeler le mot « mes ».</span></div><div class="orow"><button type="button" class="mic omic">🎤 Je réponds</button><button type="button" class="omod">Voir le modèle</button></div><div class="heard"></div><div class="fb"></div></div>
+<div class="item" id="q27" data-k="ora" data-j='{&quot;id&quot;: &quot;q27&quot;, &quot;full&quot;: &quot;Let&#x27;s call it a day. Great work today!&quot;, &quot;a&quot;: &quot;../audio/5a05c63514f9.mp3?v=2&quot;, &quot;it&quot;: &quot;&quot;, &quot;rule&quot;: &quot;idiomes&quot;, &quot;why&quot;: &quot;Let&#x27;s call it a day · Great work today · Well done&quot;, &quot;ex&quot;: 6}'><div class="qq"><span class="qn">4</span><span class="txt">Le cours est fini : concluez avec une expression du jour.</span></div><div class="orow"><button type="button" class="mic omic">🎤 Je réponds</button><button type="button" class="omod">Voir le modèle</button></div><div class="heard"></div><div class="fb"></div></div>
+</div></section>
+<section class="sec" style="--c:#a0446a;--t:#f8edf2"><header class="sh" id="revoir" style="--c:#a0446a"><span class="num">7</span><div><h2>À revoir<span class="timing">2 min</span></h2><div class="shit"><button type="button" class="itb">EN</button><span class="tr">To review</span></div></div></header>
+<div id="scorebox" class="scorebox"></div>
+<div id="revlist" class="revlist"><p class="empty">Les points à revoir apparaîtront ici au fur et à mesure.<span class="tr show">The points to review will appear here as you go.</span></p></div>
+<div class="row center"><button type="button" class="reset" id="reset">Recommencer les exercices</button> <a href="../" class="reset" style="text-decoration:none;display:inline-block">☰ Mon programme</a></div></section>
+</main>
+<div class="acc" id="acc"></div>
+<script>
+(function(){
+var RULES={"mots": "Les mots du verbe", "expliquer": "Expliquer le présent", "trucs": "Les deux trucs pour anglophones", "lettres": "Épeler en anglais", "idiomes": "Les expressions idiomatiques"}, TOTAL=27, good=0, done=0, autoA=true;
+var player=null, cur=null;
+function stopAll(){try{if(player){player.pause();player.src='';}}catch(e){}if(cur)cur.classList.remove('playing');cur=null;}
+function play(src,btn){
+  var same=btn&&cur===btn&&player&&!player.paused;
+  stopAll(); if(same)return;
+  var a=new Audio(); a.preload='auto'; a.src=src; player=a; cur=btn||null;
+  if(btn)btn.classList.add('playing');
+  a.addEventListener('ended',function(){if(cur===btn&&btn)btn.classList.remove('playing');if(player===a)cur=null;});
+  a.addEventListener('error',function(){if(btn)btn.classList.remove('playing');});
+  try{var p=a.play();if(p&&p.catch)p.catch(function(){a.addEventListener('canplaythrough',function(){a.play();},{once:true});a.load();});}catch(e){}
+}
+function trOf(btn){
+  var p=btn.parentElement;
+  var t=p.querySelector(':scope > .tr'); if(t)return t;
+  if(p.nextElementSibling&&p.nextElementSibling.classList.contains('tr'))return p.nextElementSibling;
+  return p.parentElement.querySelector(':scope > .tr');
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.au'); if(b){play(b.dataset.a,b);return;}
+  var i=e.target.closest('.itb'); if(i){var t=trOf(i); if(t){t.classList.toggle('show');i.classList.toggle('on');}return;}
+  var m=e.target.closest('.model'); if(m){m.nextElementSibling.classList.toggle('show');return;}
+  var a=e.target.closest('a[href^="#"]'); if(a){var tg=document.getElementById(a.getAttribute('href').slice(1)); if(tg){tg.classList.remove('flash');void tg.offsetWidth;tg.classList.add('flash');}}
+});
+document.getElementById('allit').onclick=function(){document.body.classList.toggle('allit');this.classList.toggle('on');};
+document.getElementById('autoa').onclick=function(){autoA=!autoA;this.classList.toggle('on',autoA);};
+function norm(s){return (s||'').normalize('NFC').toLowerCase().replace(/[’ʼ`´]/g,"'").replace(/\s+/g,' ').replace(/^[\s.,!?;:]+|[\s.,!?;:]+$/g,'').trim();}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+var SPK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg>';
+function sentHTML(full,ans,it,a){
+  var t=esc(full); var an=esc(ans);
+  var k=t.indexOf(an); if(k>=0){t=t.slice(0,k)+'<b>'+an+'</b>'+t.slice(k+an.length);}
+  return '<div class="s"><div class="fr"><button type="button" class="au" data-a="'+a+'" aria-label="Écouter">'+SPK+'</button><span class="txt">'+t+'</span>'+(it?'<button type="button" class="itb">FR</button>':'')+'</div>'+(it?'<div class="tr">'+esc(it)+'</div>':'')+'</div>';
+}
+function stars(el,n){
+  var r=el.getBoundingClientRect(), cx=r.left+Math.min(r.width,260)/2, cy=r.top+r.height/2;
+  for(var i=0;i<(n||6);i++){var s=document.createElement('span');s.className='star';s.textContent='★';
+    s.style.left=cx+'px';s.style.top=cy+'px';var ang=Math.random()*Math.PI*2,d=40+Math.random()*50;
+    s.style.setProperty('--dx',Math.cos(ang)*d+'px');s.style.setProperty('--dy',Math.sin(ang)*d+'px');
+    s.style.animationDelay=(i*40)+'ms';document.body.appendChild(s);setTimeout(function(x){x.remove();}.bind(null,s),1300);}
+}
+function updScore(ok){
+  done++; if(ok)good++;
+  document.getElementById('sc').textContent=good;
+  var sc=document.getElementById('score'); sc.classList.add('bump'); setTimeout(function(){sc.classList.remove('bump');},250);
+  if(ok)stars(sc,5);
+  renderScore();
+}
+function renderScore(){
+  var box=document.getElementById('scorebox');
+  box.innerHTML='Bonnes réponses : <b>'+good+'</b> / '+TOTAL+'<div style="font-size:.85rem;opacity:.85;margin-top:2px">Questions faites : '+done+' / '+TOTAL+'</div>';
+}
+var revCount=0;
+function addRev(o){
+  var list=document.getElementById('revlist');
+  if(!revCount)list.innerHTML='';
+  revCount++;
+  var d=document.createElement('div');d.className='rv';
+  d.innerHTML='<div class="rvh">Exercice '+o.ex+'</div>'+sentHTML(o.full,o.ans,o.it,o.a)+
+   '<div class="rvy">Votre réponse : <s>'+esc(o.given||'—')+'</s> · Bonne réponse : <b style="color:var(--ok)">'+esc(o.ans)+'</b></div>'+
+   '<div class="rvl"><a href="#'+o.rule+'">Revoir la règle : '+esc(RULES[o.rule]||'')+'</a><a class="back" href="#'+o.id+'">Retour à la question</a></div>';
+  list.appendChild(d);
+}
+function feedback(item,d,ok,given){
+  var fb=item.querySelector('.fb');
+  fb.innerHTML='<div class="fbr '+(ok?'ok':'ko')+'"><div class="fbt">'+(ok?'✓ Correct':'✗ La bonne réponse : '+esc(d.ans[0]))+'</div>'+
+    sentHTML(d.full,d.ans[0],d.it,d.a)+
+    '<div class="why"><span class="txt">'+esc(d.why)+'</span></div></div>';
+  var g=item.querySelector('.gap'); if(g){g.textContent=ok?given:d.ans[0];g.classList.add(ok?'ok':'ko');}
+  if(ok)stars(item.querySelector('.qq'),7);
+  updScore(ok);
+  if(!ok)addRev({ex:d.ex,full:d.full,ans:d.ans[0],it:d.it,a:d.a,given:given,rule:d.rule,id:d.id});
+  if(autoA){var b=fb.querySelector('.au');setTimeout(function(){play(d.a,b);},ok?350:500);}
+}
+document.querySelectorAll('.item[data-k="qcm"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j);
+  item.querySelectorAll('.opt').forEach(function(o){
+    o.addEventListener('click',function(){
+      if(item.dataset.done)return; item.dataset.done=1;
+      var v=o.textContent, ok=d.ans.indexOf(v)>=0;
+      item.querySelectorAll('.opt').forEach(function(x){x.disabled=true;if(d.ans.indexOf(x.textContent)>=0)x.classList.add('ok');});
+      if(!ok)o.classList.add('ko');
+      feedback(item,d,ok,v);
+    });
+  });
+});
+document.querySelectorAll('.item[data-k="inp"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j), inp=item.querySelector('input'), btn=item.querySelector('.chk');
+  function check(){
+    if(item.dataset.done)return; var v=inp.value; if(!norm(v)){inp.focus();return;}
+    item.dataset.done=1; var ok=d.ans.map(norm).indexOf(norm(v))>=0;
+    inp.classList.add(ok?'ok':'ko'); inp.disabled=true; btn.disabled=true;
+    feedback(item,d,ok,v.trim());
+  }
+  btn.addEventListener('click',check);
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();check();}});
+});
+// texte à trous
+var chk5=document.getElementById('chk5');
+if(chk5)chk5.addEventListener('click',function(){
+  var story=document.querySelector('.story'), tgs=story.querySelectorAll('.tg');
+  var empty=[].some.call(tgs,function(t){return !norm(t.querySelector('input').value);});
+  if(empty&&!confirm('Certaines cases sont vides. Vérifier quand même ?'))return;
+  chk5.disabled=true; var nOk=0;
+  tgs.forEach(function(t){
+    var ans=JSON.parse(t.dataset.ans), inp=t.querySelector('input'), v=inp.value.trim(), ok=ans.map(norm).indexOf(norm(v))>=0;
+    inp.disabled=true; inp.classList.add(ok?'ok':'ko');
+    if(!ok){var c=document.createElement('span');c.className='cor';c.textContent=ans[0];t.insertBefore(c,t.querySelector('.tv'));
+      var full=story.dataset.full;
+      var sents=full.split(/(?<=[.;:])\s+/); var sen=sents.filter(function(x){return x.indexOf(ans[0])>=0;})[0]||full;
+      addRev({ex:5,full:sen,ans:ans[0],it:'',a:story.dataset.a,given:v,rule:t.dataset.rule,id:t.id});
+    } else nOk++;
+    updScore(ok);
+  });
+  if(nOk)stars(chk5,8);
+  var fb=document.getElementById('fb5');
+  fb.innerHTML='<div class="fbr '+(nOk===tgs.length?'ok':'ko')+'"><div class="fbt">'+nOk+' / '+tgs.length+' bonnes réponses</div>'+
+   '<div class="s"><div class="fr"><button type="button" class="au" data-a="'+story.dataset.a+'" aria-label="Écouter">'+SPK+'</button><span class="txt">Écoutez le texte corrigé.</span></div></div></div>';
+  document.querySelector('.storytr').classList.add('show');
+  if(autoA){var b=fb.querySelector('.au');setTimeout(function(){play(story.dataset.a,b);},500);}
+});
+document.getElementById('reset').addEventListener('click',function(){
+  if(!confirm('Effacer toutes les réponses et recommencer ?'))return;
+  location.hash='exercices'; location.reload();
+});
+// clavier d'accents
+var acc=document.getElementById('acc'), last=null;
+'é è ê à â ç ù û î ï ô œ É'.split(' ').forEach(function(ch){var b=document.createElement('button');b.type='button';b.textContent=ch;
+  b.addEventListener('mousedown',function(e){e.preventDefault();});b.addEventListener('pointerdown',function(e){e.preventDefault();});
+  b.addEventListener('click',function(){if(!last||last.disabled)return;var s=last.selectionStart||last.value.length,en=last.selectionEnd||s;
+    last.value=last.value.slice(0,s)+ch+last.value.slice(en);last.focus();last.setSelectionRange(s+ch.length,s+ch.length);});
+  acc.appendChild(b);});
+document.addEventListener('focusin',function(e){if(e.target.matches('input[type=text],textarea')){last=e.target;acc.classList.add('show');}});
+document.addEventListener('focusout',function(e){setTimeout(function(){var a=document.activeElement;if(!a||(!a.matches('input[type=text],textarea')&&!acc.contains(a)))acc.classList.remove('show');},150);});
+
+document.querySelectorAll('.item[data-k="tra"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j), ta=item.querySelector('textarea'), cmp=item.querySelector('.cmp'), zone=item.querySelector('.fb');
+  cmp.addEventListener('click',function(){
+    if(item.dataset.shown)return;
+    if(!ta.value.trim()){ta.focus();return;}
+    item.dataset.shown=1;cmp.disabled=true;ta.readOnly=true;
+    zone.innerHTML='<div class="fbr"><div class="fbt" style="color:#2f7f73">Corrigé</div>'+sentHTML(d.full,'',d.it,d.a)+
+      '<div class="why"><span class="txt"><b>À vérifier :</b> '+esc(d.why)+'</span></div>'+
+      '<div class="selfq">Votre traduction était-elle juste ?</div><div class="selfb"><button type="button" class="sb ok">✓ Oui</button><button type="button" class="sb ko">✗ Pas tout à fait</button></div></div>';
+    if(autoA){var b=zone.querySelector('.au');setTimeout(function(){play(d.a,b);},300);}
+    zone.querySelectorAll('.sb').forEach(function(b){b.addEventListener('click',function(){
+      if(item.dataset.done)return;item.dataset.done=1;var ok=b.classList.contains('ok');
+      zone.querySelectorAll('.sb').forEach(function(x){x.disabled=true;});b.classList.add('chosen');
+      if(ok)stars(item.querySelector('.qq'),7);
+      updScore(ok);
+      if(!ok)addRev({ex:d.ex,full:d.full,ans:'',it:d.it,a:d.a,given:ta.value.trim(),rule:d.rule,id:d.id});
+    });});
+  });
+});
+document.querySelectorAll('.pistesb').forEach(function(b){b.addEventListener('click',function(){b.nextElementSibling.classList.toggle('show');});});
+
+document.addEventListener('click',function(e){var s=e.target.closest('.slow');if(s){e.stopPropagation();play(s.dataset.a,s);}},true);
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function simil(a,b){a=norm(a).replace(/[^a-z' ]/g,'').split(' ');b=norm(b).replace(/[^a-z' ]/g,'').split(' ');var hit=0;b.forEach(function(w){if(a.indexOf(w)>=0)hit++;});return Math.round(hit/b.length*100);}
+document.querySelectorAll('.spk').forEach(function(box){
+  var mic=box.querySelector('.mic'),out=box.querySelector('.heard'),target=box.dataset.t;
+  if(!SR){mic.style.display='none';out.innerHTML='<span class="nomic">Écoutez, répétez à voix haute deux ou trois fois, puis passez à la phrase suivante.</span>';return;}
+  mic.addEventListener('click',function(){
+    var r=new SR();r.lang='en-GB';r.interimResults=false;r.maxAlternatives=3;mic.classList.add('rec');out.textContent='… je vous écoute';
+    r.onresult=function(ev){var best=0,txt='';for(var i=0;i<ev.results[0].length;i++){var c=ev.results[0][i].transcript,sc=simil(c,target);if(sc>=best){best=sc;txt=c;}}
+      out.innerHTML='Compris : « '+esc(txt)+' » · <b class="'+(best>=80?'gd':'md')+'">'+best+' %</b>'+(best>=80?' ✓':' · réessayez');
+      if(best>=80)stars(box,6);};
+    r.onerror=function(){out.textContent='Micro non disponible : répétez simplement à voix haute.';};
+    r.onend=function(){mic.classList.remove('rec');};
+    try{r.start();}catch(e){mic.classList.remove('rec');}
+  });
+});
+
+document.querySelectorAll('.item[data-k="ora"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j), mic=item.querySelector('.omic'), mod=item.querySelector('.omod'), out=item.querySelector('.heard'), zone=item.querySelector('.fb');
+  if(!SR){mic.style.display='none';out.innerHTML='<span class="nomic">Dites votre réponse à voix haute, puis touchez « Voir le modèle ».</span>';}
+  else mic.addEventListener('click',function(){
+    var r=new SR();r.lang='en-GB';r.maxAlternatives=3;mic.classList.add('rec');out.textContent='… je vous écoute';
+    r.onresult=function(ev){var best=0,txt='';for(var i=0;i<ev.results[0].length;i++){var c=ev.results[0][i].transcript,sc=simil(c,d.full);if(sc>=best){best=sc;txt=c;}}
+      out.innerHTML='Compris : « '+esc(txt)+' » · ressemblance avec le modèle : <b class="'+(best>=70?'gd':'md')+'">'+best+' %</b>';if(best>=70)stars(item,6);showModel();};
+    r.onerror=function(){out.textContent='Micro non disponible : dites votre réponse à voix haute.';};
+    r.onend=function(){mic.classList.remove('rec');};
+    try{r.start();}catch(e){mic.classList.remove('rec');}
+  });
+  function showModel(){
+    if(item.dataset.shown)return;item.dataset.shown=1;mod.disabled=true;
+    zone.innerHTML='<div class="fbr"><div class="fbt" style="color:#2f7f73">Modèle</div>'+sentHTML(d.full,'',d.it,d.a)+
+      '<div class="why"><span class="txt"><b>À retenir :</b> '+esc(d.why)+'</span></div>'+
+      '<div class="selfq">Votre réponse était-elle juste ?</div><div class="selfb"><button type="button" class="sb ok">✓ Oui</button><button type="button" class="sb ko">✗ Pas tout à fait</button></div></div>';
+    if(autoA){var b=zone.querySelector('.au');setTimeout(function(){play(d.a,b);},300);}
+    zone.querySelectorAll('.sb').forEach(function(b){b.addEventListener('click',function(){
+      if(item.dataset.done)return;item.dataset.done=1;var ok=b.classList.contains('ok');
+      zone.querySelectorAll('.sb').forEach(function(x){x.disabled=true;});b.classList.add('chosen');
+      if(ok)stars(item.querySelector('.qq'),7);updScore(ok);
+      if(!ok)addRev({ex:d.ex,full:d.full,ans:'',it:d.it,a:d.a,given:'',rule:d.rule,id:d.id});});});
+  }
+  mod.addEventListener('click',showModel);
+});
+renderScore();
+})();
+</script>
+</body>
+</html>
