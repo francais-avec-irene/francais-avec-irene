@@ -463,7 +463,7 @@ $('#snd').onclick=function(){sndOn=!sndOn;this.classList.toggle('on',sndOn);};
 /* ---------- construis le verbe ---------- */
 $$('.build').forEach(function(b){b.addEventListener('click',function(){var box=document.getElementById(b.dataset.t);var es=$$('.ce',box);
  es.forEach(function(e){e.classList.remove('land');e.classList.add('hide');});
- es.forEach(function(e,i){setTimeout(function(){e.classList.remove('hide');e.classList.add('land');var c=centerOf(e);burst(c[0],c[1],12,['star','dot'],.5);},400+i*380);});
+ es.forEach(function(e,i){setTimeout(function(){e.classList.remove('hide');e.classList.add('land');note(SC[i+2],0,.9,.18);var c=centerOf(e);burst(c[0],c[1],12,['star','dot'],.5);},400+i*380);});
  setTimeout(function(){var c=centerOf(box);burst(c[0],c[1],40);},400+es.length*380);});});
 
 function seq(gid,items,render){var body=$('[data-game="'+gid+'"]'),i=0,res=[];
