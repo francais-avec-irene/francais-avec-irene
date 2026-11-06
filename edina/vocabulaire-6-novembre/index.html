@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vocabulaire, expressions et grammaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#24303f;--soft:#5d6878;--line:#e3e7ee;--bg:#fbfaf7;--gold:#e0a630;--ok:#2e8b57;--ko:#c0392b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Poppins,system-ui,sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:900px;margin:0 auto;padding:62px 16px 80px}
+/* barre du haut */
+.top{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.topin{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:8px 16px}
+.brand{font-weight:600;font-size:.82rem;color:#a0446a;letter-spacing:.02em;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbtn{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px;font-size:.78rem;font-weight:600;color:var(--soft)}
+.tbtn.on{border-color:#1f5f7a;color:#1f5f7a;background:#eaf3f7}
+.score{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#2b3a55,#6d4a7d);color:#fff;border-radius:999px;padding:5px 13px;font-weight:700;font-size:.9rem;white-space:nowrap;transition:transform .25s}
+.score.bump{transform:scale(1.15)}
+.score .st{color:#ffd56a}
+/* hero */
+.hero{position:relative;border-radius:22px;overflow:hidden;margin-top:6px;box-shadow:0 10px 30px rgba(36,48,63,.15)}
+.hero img{display:block;width:100%;height:clamp(240px,48vw,400px);object-fit:cover}
+.htitle{position:absolute;left:14px;bottom:14px;max-width:calc(100% - 28px);background:rgba(20,28,40,.62);border-radius:16px;padding:14px 18px;color:#fff}
+.tag{display:inline-block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;background:#e0a630;color:#2b2210;font-weight:700;padding:3px 10px;border-radius:999px;margin-bottom:6px}
+.hero h1{margin:0;font-size:clamp(1.5rem,5vw,2.3rem);line-height:1.15}
+.sub{margin:2px 0 0;font-size:clamp(.95rem,3vw,1.15rem);color:#ffe2b5;font-weight:500}
+.hit{display:flex;align-items:center;gap:6px;margin-top:4px}.hit .itb{margin-left:0;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}.hit .tr{color:#eee;margin:0}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 6px}
+.toc a{text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px 5px 5px;font-size:.8rem;font-weight:500}
+.toc a b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#2b3a55;color:#fff;font-size:.72rem;margin-right:5px}
+.howto{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--soft);margin:10px 0 0;flex-wrap:wrap}
+.howto .itb{order:2}
+.miniau svg{width:15px;height:15px;vertical-align:-3px;fill:#1f5f7a;stroke:#1f5f7a}
+/* boutons audio + IT */
+.au{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;border:none;background:color-mix(in srgb,var(--c,#1f5f7a) 14%,#fff);margin-right:8px;vertical-align:middle;transition:transform .15s,background .2s}
+.au svg{width:17px;height:17px;fill:var(--c,#1f5f7a);stroke:var(--c,#1f5f7a);stroke-width:1.8;stroke-linecap:round}
+.au svg .w1,.au svg .w2{fill:none}
+.au.au-l{width:38px;height:38px}.au.au-l svg{width:21px;height:21px}
+.au:active{transform:scale(.9)}
+.au.playing{background:var(--c,#1f5f7a)}.au.playing svg{fill:#fff;stroke:#fff}
+.au.playing svg .w2{animation:wave 1s infinite}
+@keyframes wave{50%{opacity:.2}}
+.itb{flex:none;border:1px solid #d5dae3;background:#fff;color:#8a93a3;border-radius:6px;font-size:.62rem;font-weight:700;letter-spacing:.06em;padding:1px 6px;margin-left:8px;vertical-align:middle;line-height:1.5}
+.itb.on{background:#5d6878;color:#fff;border-color:#5d6878}
+.tr{display:none;font:italic .92rem/1.5 Lora,serif;color:#6b7280;margin:3px 0 0}
+.tr.show,body.allit .tr{display:block}
+body.allit .itb{background:#5d6878;color:#fff;border-color:#5d6878}
+.s{margin:8px 0}
+.s .fr,.ex .fr{display:flex;align-items:flex-start}
+.s .fr .txt{flex:1;padding-top:3px;font-family:Lora,serif;font-size:1.02rem}
+.s .tr{padding-left:38px}
+.ex .fr .txt{flex:1}
+.ex.lead{margin:12px 0 16px;color:#3c4656}
+.ex.center .fr{justify-content:center;text-align:center}
+.s .txt b,.ex .txt b{color:var(--c,#1f5f7a)}
+em.k{font-style:normal;color:#c2410c;font-weight:700}
+/* sections */
+.sec{margin-top:38px}
+.sh{display:flex;gap:12px;align-items:center;background:linear-gradient(110deg,var(--c),color-mix(in srgb,var(--c) 70%,#fff));color:#fff;border-radius:16px;padding:12px 16px;margin-bottom:14px}
+.sh .num{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:#fff;color:var(--c);font-weight:700;font-size:1.15rem}
+.sh h2{margin:0;font-size:clamp(1.15rem,4vw,1.5rem);line-height:1.2}
+.shit{display:flex;align-items:center;gap:6px}
+.shit .itb{margin-left:0;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}
+.shit .tr{color:#fff;margin:0}
+.ph{margin:0 0 14px;border-radius:14px;overflow:hidden;background:#fff;border:3px solid #fff;box-shadow:0 4px 16px rgba(36,48,63,.12)}
+.ph img{display:block;width:100%;height:auto}
+.ph.band img{height:clamp(150px,30vw,230px);object-fit:cover}
+.ph figcaption{font:italic .8rem Lora,serif;color:var(--soft);padding:5px 10px}
+/* vocabulaire */
+.vgrid{columns:2 330px;column-gap:14px}
+.vc{break-inside:avoid;background:#fff;border:1px solid #e3e7ea;border-top:5px solid var(--c);border-radius:14px;padding:12px 14px;margin:0 0 14px;box-shadow:0 2px 8px rgba(181,82,59,.06)}
+.vc.flash,.flash{animation:flash 2.2s}
+@keyframes flash{0%,40%{box-shadow:0 0 0 4px #ffd56a}100%{box-shadow:0 0 0 0 transparent}}
+.vh{display:flex;align-items:center}
+.vh h3{margin:0;font-size:1.18rem;color:var(--c)}
+.vmeta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0 4px;font-size:.88rem}
+.pill{background:var(--t);color:var(--c);border:1px solid color-mix(in srgb,var(--c) 30%,#fff);border-radius:999px;padding:1px 9px;font-size:.72rem;font-weight:600}
+.itlab{background:#2e8b57;color:#fff;font-size:.62rem;font-weight:700;border-radius:4px;padding:1px 5px}
+.itw{font-family:Lora,serif;font-style:italic;color:#34495e}
+.vex .txt{font-size:.98rem!important}
+.vimg{margin:8px 0}
+.vimg img{max-height:190px;object-fit:cover}
+.note,.warn{background:var(--t);border-radius:10px;padding:8px 10px;margin-top:8px;font-size:.86rem}
+.warn{background:#fff4d6;border-left:4px solid #e0a630}
+.warn .ex{margin-bottom:2px}
+table.mini{width:100%;border-collapse:collapse;margin:8px 0 2px;font-size:.86rem}
+table.mini td{border-bottom:1px dashed #ecd9cf;padding:4px 2px;vertical-align:middle}
+table.mini td:last-child{font-family:Lora,serif;font-style:italic;color:#555}
+table.mini .au{width:24px;height:24px;margin-right:6px}table.mini .au svg{width:14px;height:14px}
+/* grammaire */
+.fams{display:grid;gap:14px}
+.fam{background:#fff;border:2px solid color-mix(in srgb,var(--c) 30%,#fff);border-radius:16px;padding:12px 14px}
+.famh{display:flex;align-items:center;gap:8px;font-size:1.1rem;color:var(--c);font-weight:600;margin-bottom:8px}
+.famh span{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--c);color:#fff;font-size:.95rem}
+.formula{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:4px 0 10px;font-weight:600}
+.formula span{border:2px solid var(--c);color:var(--c);border-radius:999px;padding:1px 10px;background:#fff}
+.formula span:first-child{background:var(--c);color:#fff}
+.formula.light{justify-content:center}.formula.light span:first-child{background:#fff;color:var(--c)}
+.ct{border-radius:12px;overflow:hidden;border:1px solid color-mix(in srgb,var(--c) 25%,#fff);background:#fff;margin:6px 0}
+.cth{background:color-mix(in srgb,var(--c) 12%,#fff);color:var(--c);font-weight:700;padding:5px 12px}
+.ctit{font:italic 400 .85rem Lora,serif;color:#6b7280;margin-left:8px}
+.ct table{width:100%;border-collapse:collapse}
+.ct td{padding:3px 8px;border-top:1px solid #f1f3f6;font-family:Lora,serif;font-size:1rem}
+.ct td:first-child{width:40px}
+.ct .au{width:26px;height:26px;margin:0}.ct .au svg{width:15px;height:15px}
+.inbox{border-left:4px solid var(--c);background:color-mix(in srgb,var(--c) 7%,#fff);border-radius:0 10px 10px 0;padding:7px 10px;margin:10px 0;font-size:.9rem}
+.sub3{margin:24px 0 4px;color:#1f5f7a;font-size:1.12rem;border-bottom:2px solid #cfe2ea;padding-bottom:4px}
+.parts{display:grid;gap:12px}
+.part{background:#fff;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:12px;padding:10px 12px}
+.parth{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--c);margin-bottom:4px}
+.parth span{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--c);color:#fff;font-size:.78rem;flex:none}
+.parth b{color:#c2410c}
+.part .ex .txt b{color:#c2410c}
+.part.wide{margin-top:14px}
+.big{background:#fff;border:2px solid var(--c);border-radius:18px;padding:14px;margin-bottom:14px}
+.bigh{text-align:center;font-weight:700;color:var(--c);font-size:1.1rem;margin-bottom:10px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:10px}
+.step{display:flex;gap:8px;background:var(--t);border-radius:12px;padding:8px 10px;font-size:.9rem}
+.step>span{display:grid;place-items:center;flex:none;width:26px;height:26px;border-radius:50%;background:var(--c);color:#fff;font-weight:700}
+.stx{display:flex;align-items:center;font:600 1.05rem Lora,serif;margin-top:4px}
+.stx s{color:#c0392b;text-decoration-thickness:2px}
+.good{background:linear-gradient(135deg,#eaf6ee,#fff8e6);border:2px solid #4f9a6b;border-radius:18px;padding:14px;margin:14px 0}
+.goodh{font-weight:700;color:#2e7d4f;font-size:1.15rem;margin-bottom:6px}
+.good .ex .txt b{color:#2e7d4f}
+.chain{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px;margin-top:10px}
+.ch{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#fff;border-radius:10px;padding:6px 10px;font-size:.92rem;border:1px solid #d6eadc}
+.ch b{color:#2e7d4f;min-width:66px}.ch span{font-family:Lora,serif}.ch i{color:#999;font-style:normal}
+.ch .au{--c:#2e7d4f;width:26px;height:26px;margin:0}.ch .au svg{width:15px;height:15px}
+.etre{background:#fff;border:2px solid #a0446a;border-radius:16px;padding:12px 14px;margin:14px 0;--c:#a0446a}
+.etreh{font-weight:600;color:#a0446a;margin-bottom:6px}
+.cts.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+/* tableau 27 */
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.lg{font-size:.75rem;font-weight:600;border-radius:999px;padding:2px 10px;border:1.5px solid}
+.lg.a,tr.a th{--v:#1f5f7a}.lg.b,tr.b th{--v:#c2410c}.lg.c,tr.c th{--v:#2e7d4f}.lg.d,tr.d th{--v:#6d4a7d}
+.lg{color:var(--v);border-color:var(--v)}
+.tw{overflow-x:auto;border-radius:14px;border:1px solid var(--line);background:#fff;-webkit-overflow-scrolling:touch}
+table.big27{border-collapse:collapse;min-width:760px;width:100%;font-size:.92rem}
+.big27 thead th{position:sticky;top:0;background:#4f7f63;color:#fff;padding:7px 8px;text-align:left;font-weight:600}
+.big27 thead th:first-child{left:0;z-index:2}
+.big27 tbody th{position:sticky;left:0;background:#fff;text-align:left;padding:5px 8px;border-left:5px solid var(--v);display:flex;align-items:center;min-width:190px;z-index:1}
+.big27 .inf{font-weight:700;color:var(--v)}
+.big27 .vit{font:italic .78rem Lora,serif;color:#888;margin-left:6px}
+.big27 td{padding:5px 8px;border-top:1px solid #eef1f4;font-family:Lora,serif;white-space:nowrap}
+.big27 tbody tr:nth-child(even) td{background:#f7faf8}
+.big27 td.ip{background:#f6f2f8!important}
+.big27 tbody th .au{--c:var(--v);width:26px;height:26px;margin-right:8px}.big27 tbody th .au svg{width:15px;height:15px}
+/* usage */
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px}
+.col{background:#fff;border-radius:16px;padding:12px 14px;border:2px solid var(--cc)}
+.col.pres{--cc:#1f5f7a;--c:#1f5f7a}.col.imp{--cc:#6d4a7d;--c:#6d4a7d}
+.colh{font-weight:700;font-size:1.12rem;color:var(--cc);margin-bottom:6px}
+.colh span{font:italic 400 .9rem Lora,serif;color:#888;margin-left:6px}
+.use{border-top:1px dashed var(--line);padding-top:6px;margin-top:6px}
+.uset{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--cc);font-weight:600}
+.uset i{text-transform:none;letter-spacing:0;color:#999;font-family:Lora,serif}
+.marks{margin-top:10px;background:color-mix(in srgb,var(--cc) 8%,#fff);border-radius:10px;padding:7px 10px;font-size:.85rem;color:var(--cc);font-weight:500}
+.duo{margin-top:12px;background:#fff8e6;border:2px dashed #c08a2a;border-radius:14px;padding:6px 12px;--c:#a86d10}
+/* exercices */
+.exb{background:#fff;border-radius:18px;margin:18px 0;border:1px solid var(--line);overflow:hidden;box-shadow:0 3px 14px rgba(36,48,63,.06)}
+.exh{display:flex;gap:12px;align-items:center;background:var(--c);color:#fff;padding:12px 16px}
+.exn{font-size:2rem;font-weight:700;line-height:1;opacity:.9}
+.exk{font-size:.68rem;letter-spacing:.18em;opacity:.85}
+.ext{font-weight:600;font-size:1.05rem;line-height:1.25}
+.exit{display:flex;align-items:center;gap:6px}
+.exit .itb{margin-left:0;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}
+.exit .tr{color:#fff;margin:0}
+.ex.cons{padding:10px 16px 0}
+.item{padding:12px 16px;border-top:1px solid #f0f2f5;position:relative}
+.qq{display:flex;align-items:flex-start;gap:8px;font-family:Lora,serif;font-size:1.04rem}
+.qq .txt{flex:1}
+.qn{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:color-mix(in srgb,var(--c) 15%,#fff);color:var(--c);font:700 .78rem Poppins,sans-serif;margin-top:2px}
+.gap{display:inline-block;min-width:60px;border-bottom:2px solid var(--c);color:var(--c);font-weight:700;text-align:center;padding:0 3px}
+.gap.ok{color:var(--ok);border-color:var(--ok)}.gap.ko{color:var(--ko);border-color:var(--ko)}
+.hint{font:italic .88rem Lora,serif;color:#888}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:9px 0 0 32px}
+.opt{border:2px solid color-mix(in srgb,var(--c) 35%,#fff);background:#fff;border-radius:999px;padding:5px 16px;font-family:Lora,serif;font-size:1rem;color:var(--ink);transition:.15s}
+.opt:hover{background:color-mix(in srgb,var(--c) 8%,#fff)}
+.opt.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.ko{background:var(--ko);border-color:var(--ko);color:#fff;text-decoration:line-through}
+.opt:disabled{cursor:default}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0 0 32px}
+.row.center{justify-content:center;margin-left:0;padding:10px 0}
+.vt{font-size:.8rem;font-weight:600;background:color-mix(in srgb,var(--c) 12%,#fff);color:var(--c);border-radius:999px;padding:3px 10px}
+.row input{flex:1;min-width:150px;max-width:260px;font:1rem Lora,serif;padding:6px 10px;border:2px solid #d6dbe4;border-radius:10px;outline:none}
+.row input:focus{border-color:var(--c)}
+.row input.ok{border-color:var(--ok);background:#eef8f2}.row input.ko{border-color:var(--ko);background:#fdf0ee}
+.chk{background:var(--c);color:#fff;border:none;border-radius:10px;padding:7px 16px;font-weight:600;font-size:.9rem}
+.chk:disabled{opacity:.4;cursor:default}
+.chk.big{padding:10px 22px;font-size:1rem}
+.fb{margin:0 0 0 32px}
+.fb:empty{display:none}
+.fbr{margin-top:9px;border-radius:12px;padding:8px 12px;font-size:.9rem}
+.fbr.ok{background:#eef8f2;border:1px solid #bfe3cd}.fbr.ko{background:#fdf1ee;border:1px solid #f1c9c0}
+.fbt{font-weight:700}.fbr.ok .fbt{color:var(--ok)}.fbr.ko .fbt{color:var(--ko)}
+.fbr .s{margin:5px 0}
+.fbr .s .txt b{color:var(--ok)}
+.why{display:flex;align-items:flex-start;color:#4b5563}
+.why .txt{flex:1}
+.story{padding:12px 16px;font:1.06rem/2.2 Lora,serif}
+.tg{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+.tg input{width:108px;font:1rem Lora,serif;padding:1px 6px;border:none;border-bottom:2px solid var(--c);background:color-mix(in srgb,var(--c) 6%,#fff);border-radius:6px 6px 0 0;outline:none}
+.tg input.ok{border-color:var(--ok);background:#eef8f2;color:var(--ok);font-weight:600}
+.tg input.ko{border-color:var(--ko);background:#fdf0ee;color:var(--ko);text-decoration:line-through}
+.tv{font:italic .8rem Lora,serif;color:#888}
+.tg .cor{font-weight:700;color:var(--ok);margin-left:3px}
+.storytr{padding:0 16px}
+.free{padding:12px 16px;border-top:1px solid #f0f2f5}
+.free .tr{padding-left:32px}
+.free textarea{width:100%;margin:8px 0;font:1rem Lora,serif;border:2px solid #d6dbe4;border-radius:12px;padding:8px 10px;resize:vertical}
+.model{border:1.5px dashed var(--c);color:var(--c);background:#fff;border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:600}
+.mod{display:none;background:color-mix(in srgb,var(--c) 7%,#fff);border-radius:12px;padding:4px 12px;margin-top:8px}
+.mod.show{display:block}
+/* à revoir */
+.scorebox{background:linear-gradient(135deg,#2b3a55,#6d4a7d);color:#fff;border-radius:16px;padding:14px 18px;text-align:center;margin-bottom:12px}
+.scorebox b{font-size:1.6rem;color:#ffd56a}
+.revlist .empty{color:var(--soft);font-style:italic;text-align:center}
+.rv{background:#fff;border:1px solid #efd6e1;border-left:5px solid #a0446a;border-radius:12px;padding:10px 12px;margin-bottom:10px;--c:#a0446a}
+.rvh{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#a0446a;font-weight:700}
+.rv .s .txt b{color:var(--ok)}
+.rvy{font-size:.88rem;color:#555}.rvy s{color:var(--ko)}
+.rvl{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.rvl a{font-size:.82rem;font-weight:600;color:#fff;background:#a0446a;text-decoration:none;border-radius:999px;padding:3px 12px}
+.rvl a.back{background:#fff;color:#a0446a;border:1.5px solid #a0446a}
+.reset{background:#fff;border:2px solid #a0446a;color:#a0446a;border-radius:999px;padding:7px 18px;font-weight:600}
+.tra textarea,.refl textarea{width:100%;margin:8px 0;font:1rem Lora,serif;border:2px solid #d6dbe4;border-radius:12px;padding:8px 10px;resize:vertical}
+.cmp{background:var(--c);color:#fff;border:none;border-radius:10px;padding:7px 16px;font-weight:600;font-size:.9rem}.cmp:disabled{opacity:.4}
+.selfq{margin-top:8px;font-weight:600;font-size:.9rem}.selfb{display:flex;gap:8px;margin-top:5px}
+.sb{border:2px solid #d6dbe4;background:#fff;border-radius:999px;padding:4px 14px;font-weight:600;font-size:.88rem}
+.sb.ok.chosen{background:var(--ok);border-color:var(--ok);color:#fff}.sb.ko.chosen{background:var(--ko);border-color:var(--ko);color:#fff}.sb:disabled:not(.chosen){opacity:.4}
+.enq{font:italic 1.05rem Lora,serif;color:#2b3a55}
+.refl{padding:12px 16px}
+.sujet{background:#2c2f4a;color:#fff;border-radius:14px;padding:12px 16px;margin-bottom:12px}
+.sujet .q{font:600 1.15rem Poppins,sans-serif;color:#f2c14e}.sujet .tr{color:#c9cbe0}.sujet .itb{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4)}
+.rh{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--c);margin:14px 0 6px}
+.guide{background:#f5f1f8;border-left:4px solid var(--c);border-radius:0 10px 10px 0;padding:6px 12px;margin:6px 0}
+.plan{display:grid;gap:8px}
+.pl{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 12px;display:flex;gap:10px}
+.pl .k{flex:none;width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.pl .nl{font-size:.75rem;color:var(--soft)}
+.kw{background:#fdf6e3;border-radius:10px;padding:8px 12px;font-size:.9rem;margin:6px 0}
+.pistesb{border:1.5px dashed var(--c);color:var(--c);background:#fff;border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:600;margin-top:8px}
+.pistes{display:none;background:#f5f1f8;border-radius:12px;padding:6px 12px;margin-top:8px}.pistes.show{display:block}
+.bank{display:flex;flex-wrap:wrap;gap:6px;margin:10px 16px 0;padding:8px 10px;border:2px dashed #cfd8d6;border-radius:12px}
+.bank span{background:#eef5f3;color:#2f7f73;border-radius:999px;padding:2px 10px;font:600 .85rem Poppins,sans-serif}
+.vgrid .ph{margin:0 0 14px;break-inside:avoid}
+.gtab{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:12px 0}
+.gcol{background:#fff;border:2px solid var(--gc);border-radius:14px;overflow:hidden}
+.gcol .h{background:var(--gc);color:#fff;font-weight:700;padding:6px 12px}.gcol .h small{display:block;font-weight:400;font-size:.75rem;opacity:.9}
+.gcol .b{padding:8px 12px;--c:var(--gc)}
+.gintro{background:#2c2f4a;color:#fff;border-radius:16px;padding:14px 16px;margin-bottom:12px}
+.gintro .gt{font-weight:700;color:#f2c14e;font-size:1.15rem}
+.gintro .ex .txt b{color:#f2c14e}.gintro .tr{color:#c9cbe0}.gintro .itb{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4)}
+.gpills{margin:8px 0}.gpills span{display:inline-block;border:1.5px solid #f2c14e;border-radius:999px;padding:1px 10px;margin:2px 4px 2px 0;font-weight:600;font-size:.88rem}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.cbx{background:#f5f1f8;border-radius:12px;padding:8px 12px}
+.pillc{display:inline-block;border:1.5px solid #7a5a8c;color:#7a5a8c;border-radius:999px;padding:0 10px;font-weight:600;font-size:.82rem;margin-bottom:4px}
+.inbx{border-left:4px solid #7a5a8c;background:#f5f1f8;border-radius:0 10px 10px 0;padding:6px 12px;margin:8px 0}
+.inbx.gold{border-color:#d9a21b;background:#fdf6e3}
+/* étoiles */
+.star{position:fixed;pointer-events:none;z-index:99;color:#f2b632;font-size:18px;animation:fly .95s ease-out forwards;text-shadow:0 0 6px rgba(242,182,50,.6)}
+@keyframes fly{0%{opacity:0;transform:translate(0,0) scale(.4)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(40deg)}}
+/* accents */
+.acc{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#2b3a55;display:none;justify-content:center;flex-wrap:wrap;gap:5px;padding:6px}
+.acc.show{display:flex}
+.acc button{background:#fff;border:none;border-radius:7px;min-width:34px;padding:5px 0;font:600 1rem Lora,serif;color:#2b3a55}
+@media (max-width:560px){
+  body{font-size:15px}
+  .opts,.row,.fb{margin-left:0}
+  .s .tr{padding-left:0}
+  .htitle{left:10px;bottom:10px;padding:9px 12px}.tag{font-size:.58rem}
+}
+@media print{.top,.acc{display:none}.wrap{padding-top:0}}
+</style>
+</head>
+<body>
+<div class="top"><div class="topin">
+  <span class="brand">Le français avec Irène</span>
+  <button type="button" class="tbtn" id="allit" title="Afficher toutes les traductions">EN</button>
+  <button type="button" class="tbtn on" id="autoa" title="Lecture automatique des corrections">🔊 auto</button>
+  <span class="score" id="score"><span class="st">★</span><span id="sc">0</span>&nbsp;/&nbsp;26</span>
+</div></div>
+<main class="wrap">
+<header class="hero">
+ <img src="img/giverny.jpg" alt="Le bassin aux nymphéas, à Giverny">
+ <div class="htitle"><span class="tag">6 novembre 2026</span><h1>Vocabulaire, expressions et grammaire</h1>
+ <div class="hit"><button type="button" class="itb" aria-label="English translation">EN</button><span class="tr">Vocabulary, expressions and grammar</span></div></div>
+</header>
+<nav class="toc"><a href="#noms"><b>1</b> Noms et expressions</a><a href="#adj"><b>2</b> Adjectifs et locutions</a><a href="#grammaire"><b>3</b> Grammaire</a><a href="#exercices"><b>4</b> Exercices</a><a href="#revoir"><b>5</b> À revoir</a></nav>
+<p class="howto"><button type="button" class="itb" aria-label="English translation">EN</button><span class="txt">Touchez <span class="miniau"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></span> pour écouter et <b>EN</b> pour lire la traduction anglaise.</span></p>
+<div class="tr howtotr">Tap the speaker to listen and EN to read the English translation.</div>
+<section class="sec" style="--c:#2f7f73;--t:#f3f7f6"><header class="sh" id="noms" style="--c:#2f7f73"><span class="num">1</span><div><h2>Noms et expressions familières</h2><div class="shit"><button type="button" class="itb" aria-label="English translation">EN</button><span class="tr">Nouns and informal expressions</span></div></div></header><div class="vgrid">
+<article class="vc" id="v-bricole"><div class="vh"><button type="button" class="au au-l" data-a="audio/415eadad8f63.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>une bricole</h3></div><div class="vmeta"><span class="pill">nom féminin · familier</span><span class="itlab">EN</span><span class="itw">a little thing, a trifle</span></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/c576838de5b7.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">J'ai rapporté une petite <b>bricole</b> du marché de Noël.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">I brought back a little <b>something</b> from the Christmas market.</div></div><div class="ex note"><div class="fr"><span class="txt"><b>bricoler</b> = faire de petits travaux manuels ; <b>un bricoleur</b>. Familier : « Il va t'arriver des bricoles » = tu vas avoir des ennuis.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">bricoler = to do DIY, to tinker; un bricoleur = a handyman. Informal: « Il va t'arriver des bricoles » = you're going to get into trouble.</div></div></article>
+<article class="vc" id="v-acheter"><div class="vh"><button type="button" class="au au-l" data-a="audio/26025eb585a8.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>avoir des bricoles à acheter</h3></div><div class="vmeta"><span class="pill">locution · familier</span><span class="itlab">EN</span><span class="itw">to have a few bits and bobs to buy</span></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/7d009b6e0d7c.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Je passe à la droguerie : j'ai deux ou trois <b>bricoles à acheter</b>.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">I'm popping into the hardware shop: I've got <b>a few bits and bobs to buy</b>.</div></div></article>
+<figure class="ph "><img src="img/bricoles.jpg" alt="Un marchand de bricoles à Paris · A bric-a-brac seller in Paris" loading="lazy"><figcaption>Un marchand de bricoles à Paris · A bric-a-brac seller in Paris</figcaption></figure>
+<article class="vc" id="v-faire"><div class="vh"><button type="button" class="au au-l" data-a="audio/bdc15026e65f.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>avoir des bricoles à faire</h3></div><div class="vmeta"><span class="pill">locution · familier</span><span class="itlab">EN</span><span class="itw">to have a few odd jobs to do</span></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/04d30aa6bd9f.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Ce week-end, j'ai <b>des bricoles à faire</b> à la maison : changer une ampoule, accrocher un tableau.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">This weekend I've got <b>a few odd jobs to do</b> at home: change a light bulb, hang a picture.</div></div></article>
+<article class="vc" id="v-gaffe"><div class="vh"><button type="button" class="au au-l" data-a="audio/c74a9709a6ab.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>une gaffe</h3></div><div class="vmeta"><span class="pill">nom féminin · familier</span><span class="itlab">EN</span><span class="itw">a blunder, a faux pas</span></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/605c690da258.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">J'ai fait <b>une gaffe</b> : j'ai parlé de la fête surprise devant elle.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">I made <b>a blunder</b>: I mentioned the surprise party in front of her.</div></div><div class="ex note"><div class="fr"><span class="txt">On dit <b>faire une gaffe</b>. Une personne qui en fait souvent est <b>gaffeuse</b> (un gaffeur).</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">We say faire une gaffe. Someone who often does it is gaffeur / gaffeuse.</div></div></article>
+<article class="vc" id="v-faisgaffe"><div class="vh"><button type="button" class="au au-l" data-a="audio/bc8d0751ab5e.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>Fais gaffe !</h3></div><div class="vmeta"><span class="pill">expression · familier</span><span class="itlab">EN</span><span class="itw">Watch out! Be careful!</span></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/0723fd6d3b0f.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt"><b>Fais gaffe</b>, le sentier est glissant après la pluie.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr"><b>Watch out</b>, the path is slippery after the rain.</div></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/7aeea6c5b77c.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt"><b>Fais gaffe à</b> ne pas réveiller le bébé.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr"><b>Be careful</b> not to wake the baby.</div></div><div class="ex note"><div class="fr"><span class="txt">= <b>fais attention</b>. Construction : faire gaffe <b>à</b> quelque chose, <b>à</b> ne pas faire quelque chose. Dans un registre soutenu, on garde <b>faire attention</b>.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">= fais attention. Construction: faire gaffe à + noun / à ne pas + infinitive. In formal French, keep faire attention.</div></div></article>
+<article class="vc" id="v-maladresse"><div class="vh"><button type="button" class="au au-l" data-a="audio/7a3a6f143083.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>la maladresse</h3></div><div class="vmeta"><span class="pill">nom féminin</span><span class="itlab">EN</span><span class="itw">clumsiness; a tactless remark</span></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/3c61bb96f34b.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Par <b>maladresse</b>, il a renversé son café sur le catalogue de l'exposition.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Out of <b>clumsiness</b>, he spilled his coffee on the exhibition catalogue.</div></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/b62a0539f214.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Ce n'était pas méchant, juste <b>une maladresse</b>.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">It wasn't meant unkindly, just <b>a tactless remark</b>.</div></div><div class="ex note"><div class="fr"><span class="txt">Adjectif : <b>maladroit(e)</b> = clumsy. Le contraire : <b>adroit(e)</b>, habile.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Adjective: maladroit(e) = clumsy. Opposite: adroit(e), habile = skilful.</div></div></article>
+</div></section>
+<section class="sec" style="--c:#b5603f;--t:#f3f7f6"><header class="sh" id="adj" style="--c:#b5603f"><span class="num">2</span><div><h2>Adjectifs et locutions</h2><div class="shit"><button type="button" class="itb" aria-label="English translation">EN</button><span class="tr">Adjectives and phrases</span></div></div></header><div class="vgrid">
+<article class="vc" id="v-dubitatif"><div class="vh"><button type="button" class="au au-l" data-a="audio/848ee42693a2.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>être dubitatif / dubitative</h3></div><div class="vmeta"><span class="pill">locution</span><span class="itlab">EN</span><span class="itw">to be doubtful, sceptical</span></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/c575c68bfbd9.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Devant cette toile attribuée à Rembrandt, les experts restent <b>dubitatifs</b>.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Faced with this canvas attributed to Rembrandt, the experts remain <b>sceptical</b>.</div></div><div class="ex note"><div class="fr"><span class="txt">On dit aussi <b>avoir l'air dubitatif</b>. Synonymes : sceptique, perplexe.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Also: avoir l'air dubitatif (to look doubtful). Synonyms: sceptique, perplexe.</div></div></article>
+<figure class="ph "><img src="img/musee.jpg" alt="Deux visiteuses devant une toile, au musée d&#x27;Orsay · Two visitors in front of a painting" loading="lazy"><figcaption>Deux visiteuses devant une toile, au musée d'Orsay · Two visitors in front of a painting</figcaption></figure>
+<article class="vc" id="v-fins"><div class="vh"><button type="button" class="au au-l" data-a="audio/767f71dbdc29.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>des murs fins</h3></div><div class="vmeta"><span class="pill">nom + adjectif</span><span class="itlab">EN</span><span class="itw">thin walls</span></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/5ca8a9a4162e.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Les murs de mon appartement sont si <b>fins</b> que j'entends mes voisins parler.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">The walls of my flat are so <b>thin</b> that I can hear my neighbours talking.</div></div><div class="ex note"><div class="fr"><span class="txt"><b>fin / fine</b> ; on dit aussi <b>minces</b>.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">fin / fine; minces is also possible.</div></div></article>
+<article class="vc" id="v-epais"><div class="vh"><button type="button" class="au au-l" data-a="audio/77c67be2bf51.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>des murs épais</h3></div><div class="vmeta"><span class="pill">nom + adjectif</span><span class="itlab">EN</span><span class="itw">thick walls</span></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/1ae05204860c.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Les murs <b>épais</b> de ce village de pierre gardent la fraîcheur en été.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">The <b>thick</b> walls of this stone village keep the coolness in summer.</div></div><div class="ex note"><div class="fr"><span class="txt"><b>épais / épaisse</b> ; le nom : <b>l'épaisseur</b> (f.).</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">épais / épaisse; noun: l'épaisseur (thickness).</div></div></article>
+<figure class="ph "><img src="img/gordes.jpg" alt="Gordes, village perché du Luberon · Gordes, a hilltop village in Provence" loading="lazy"><figcaption>Gordes, village perché du Luberon · Gordes, a hilltop village in Provence</figcaption></figure>
+<article class="vc" id="v-ivre"><div class="vh"><button type="button" class="au au-l" data-a="audio/ba9b3bd60cfb.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>être ivre</h3></div><div class="vmeta"><span class="pill">locution</span><span class="itlab">EN</span><span class="itw">to be drunk</span></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/0e440eb1c16a.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Il était <b>ivre</b> et chantait dans l'escalier à deux heures du matin.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">He was <b>drunk</b> and singing on the stairs at two in the morning.</div></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/31e3f5c6b1df.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt"><b>Ivre</b> de joie, elle a couru annoncer la nouvelle.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr"><b>Drunk</b> with joy, she ran to share the news.</div></div><div class="ex note"><div class="fr"><span class="txt">Registres : <b>ivre</b> (neutre, soutenu), <b>soûl</b> (courant), <b>bourré</b> (familier). Le nom : <b>l'ivresse</b>. Au figuré : ivre de joie, de liberté.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Registers: ivre (neutral, formal), soûl (everyday), bourré (slang). Noun: l'ivresse. Figurative: ivre de joie, de liberté.</div></div></article>
+<article class="vc" id="v-bruyant"><div class="vh"><button type="button" class="au au-l" data-a="audio/4b02cc4240f6.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>être bruyant / bruyante</h3></div><div class="vmeta"><span class="pill">locution</span><span class="itlab">EN</span><span class="itw">to be noisy</span></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/8930a680088f.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Les terrasses des cafés sont <b>bruyantes</b> le samedi soir.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Café terraces are <b>noisy</b> on Saturday evenings.</div></div><div class="ex note"><div class="fr"><span class="txt">Le nom : <b>le bruit</b> ; faire du bruit.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Noun: le bruit; faire du bruit = to make noise.</div></div></article>
+<article class="vc" id="v-faudrait"><div class="vh"><button type="button" class="au au-l" data-a="audio/4d4b1ca93feb.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>il faudrait</h3></div><div class="vmeta"><span class="pill">verbe falloir · conditionnel</span><span class="itlab">EN</span><span class="itw">we should, it would be necessary</span></div><div class="s vex"><div class="fr"><button type="button" class="au " data-a="audio/6106905f8b2f.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt"><b>Il faudrait</b> prévenir les voisins avant la fête.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr"><b>We should</b> warn the neighbours before the party.</div></div><div class="ex note"><div class="fr"><span class="txt">Voir la grammaire ci-dessous.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">See the grammar point below.</div></div></article>
+</div></section>
+<section class="sec" style="--c:#7a5a8c;--t:#f5f1f8"><header class="sh" id="grammaire" style="--c:#7a5a8c"><span class="num">3</span><div><h2>Grammaire : il faut, il faudrait, il aurait fallu</h2><div class="shit"><button type="button" class="itb" aria-label="English translation">EN</button><span class="tr">Grammar: il faut, il faudrait, il aurait fallu</span></div></div></header>
+<div class="gintro" id="g-intro"><div class="gt">Un verbe, trois nuances</div><div class="gpills"><span>il faut</span>→ <span>il faudrait</span>→ <span>il aurait fallu</span></div><div class="ex "><div class="fr"><span class="txt"><b>Falloir</b> est un verbe impersonnel : son sujet est toujours <b>il</b>. Selon le temps, il exprime une obligation, un conseil ou un regret.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Falloir is an impersonal verb: its subject is always il. Depending on the tense, it expresses an obligation, a piece of advice or a regret.</div></div></div>
+<div class="gtab" id="g-cols">
+<div class="gcol" style="--gc:#2f7f73"><div class="h">il faut<small>présent</small></div><div class="b"><div class="ex "><div class="fr"><span class="txt">une obligation, une nécessité</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">an obligation, a necessity</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/b7435bc70a63.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt"><b>Il faut</b> réserver pour voir l'exposition.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">You have to book to see the exhibition.</div></div></div></div>
+<div class="gcol" style="--gc:#b5603f"><div class="h">il faudrait<small>conditionnel présent</small></div><div class="b"><div class="ex "><div class="fr"><span class="txt">un conseil, une suggestion polie</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">advice, a polite suggestion</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/c558c6846366.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt"><b>Il faudrait</b> fermer la fenêtre : la rue est bruyante.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">We should close the window: the street is noisy.</div></div></div></div>
+<div class="gcol" style="--gc:#7a5a8c"><div class="h">il aurait fallu<small>conditionnel passé</small></div><div class="b"><div class="ex "><div class="fr"><span class="txt">un regret, un reproche</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">a regret, a reproach</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/a0cd1af44d89.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt"><b>Il aurait fallu</b> choisir un appartement aux murs plus épais.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">We should have chosen a flat with thicker walls.</div></div></div></div>
+</div>
+<div class="two" id="g-cons">
+<div class="cbx" style="--c:#7a5a8c"><span class="pillc">il faut / il faudrait + infinitif</span><div class="ex "><div class="fr"><span class="txt">règle générale, pour tout le monde</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">general rule, for everyone</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/87dc3f57626a.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Il faudrait <b>faire</b> gaffe.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">We / one should be careful.</div></div></div>
+<div class="cbx" style="--c:#7a5a8c"><span class="pillc">il faut / il faudrait + que + subjonctif</span><div class="ex "><div class="fr"><span class="txt">pour une personne précise</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">for a specific person</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/bfe2daeeaf35.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Il faudrait que tu <b>fasses</b> gaffe.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">You should be careful.</div></div></div>
+</div>
+<div class="inbx" style="--c:#7a5a8c" id="g-nuance"><div class="ex "><div class="fr"><span class="txt"><b>Il ne faut pas</b> + infinitif = une interdiction. Pour dire qu'une chose n'est pas nécessaire, on dit <b>ce n'est pas la peine de</b> / <b>il n'est pas nécessaire de</b>.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Il ne faut pas + infinitive = must not (a prohibition). To say something is not necessary: ce n'est pas la peine de / il n'est pas nécessaire de (you don't have to).</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/e9ead3efcb5b.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt"><b>Il ne faut pas</b> toucher les tableaux.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">You must not touch the paintings.</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/e30817bf9740.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt"><b>Ce n'est pas la peine de</b> réserver le mardi.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">There's no need to book on Tuesdays.</div></div></div>
+<div class="inbx gold" style="--c:#a8780d"><div class="ex "><div class="fr"><span class="txt">Avec un pronom : <b>il me faudrait</b> un peu de temps = j'aurais besoin d'un peu de temps.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">With a pronoun: il me faudrait un peu de temps = I would need a little time.</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/5921b71bf7c5.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Pour finir toutes mes bricoles, <b>il me faudrait</b> une journée entière.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">To finish all my odd jobs, I would need a whole day.</div></div></div>
+<figure class="ph band"><img src="img/jardin.jpg" alt="Le jardin de Claude Monet à Giverny · Claude Monet&#x27;s garden at Giverny" loading="lazy"><figcaption>Le jardin de Claude Monet à Giverny · Claude Monet's garden at Giverny</figcaption></figure>
+</section>
+<section class="sec" style="--c:#2c2f4a;--t:#eef1f6"><header class="sh" id="exercices" style="--c:#2c2f4a"><span class="num">4</span><div><h2>Exercices</h2><div class="shit"><button type="button" class="itb" aria-label="English translation">EN</button><span class="tr">Exercises</span></div></div></header>
+<div class="ex lead"><div class="fr"><span class="txt">La correction apparaît tout de suite. Chaque bonne réponse vaut un point ; vos erreurs s'ajoutent à la rubrique « À revoir », avec un lien vers la règle.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">The answer is checked straight away. Each correct answer is worth one point; your mistakes are added to « À revoir », with a link to the rule.</div></div>
+<div class="exb" id="ex1" style="--c:#2f7f73"><div class="exh" style="--c:#2f7f73"><span class="exn">1</span><div><div class="exk">EXERCICE 1</div><div class="ext">Conjuguez au temps qui convient</div><div class="exit"><button type="button" class="itb" aria-label="English translation">EN</button><span class="tr">Conjugate in the appropriate tense</span></div></div></div>
+<div class="ex cons"><div class="fr"><span class="txt">Lisez bien toute la phrase : c'est le contexte qui indique le temps et le mode (indicatif, subjonctif, conditionnel).</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Read the whole sentence carefully: the context tells you the tense and mood (indicative, subjunctive, conditional).</div></div>
+<div class="item" id="q1" data-k="inp" data-j='{&quot;id&quot;: &quot;q1&quot;, &quot;ans&quot;: [&quot;aurions entendu&quot;], &quot;full&quot;: &quot;Si les murs avaient été plus épais, nous aurions entendu beaucoup moins de bruit.&quot;, &quot;a&quot;: &quot;audio/24dd3d93e095.mp3&quot;, &quot;it&quot;: &quot;If the walls had been thicker, we would have heard much less noise.&quot;, &quot;rule&quot;: &quot;v-epais&quot;, &quot;why&quot;: &quot;Conditionnel passé : si + plus-que-parfait → conditionnel passé.&quot;, &quot;whyit&quot;: &quot;If the walls had been thicker, we would have heard much less noise.&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">1</span><span class="txt">Si les murs avaient été plus épais, nous <span class="gap">……</span> beaucoup moins de bruit.</span></div><div class="row"><span class="vt">entendre</span><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q2" data-k="inp" data-j='{&quot;id&quot;: &quot;q2&quot;, &quot;ans&quot;: [&quot;fasses&quot;], &quot;full&quot;: &quot;Il faut que tu fasses gaffe en descendant : les marches sont glissantes.&quot;, &quot;a&quot;: &quot;audio/2f03f755acb6.mp3&quot;, &quot;it&quot;: &quot;You need to watch out going down: the steps are slippery.&quot;, &quot;rule&quot;: &quot;g-cons&quot;, &quot;why&quot;: &quot;Subjonctif présent après il faut que.&quot;, &quot;whyit&quot;: &quot;You need to watch out going down: the steps are slippery.&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">2</span><span class="txt">Il faut que tu <span class="gap">……</span> gaffe en descendant : les marches sont glissantes.</span></div><div class="row"><span class="vt">faire</span><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q3" data-k="inp" data-j='{&quot;id&quot;: &quot;q3&quot;, &quot;ans&quot;: [&quot;étaient&quot;], &quot;full&quot;: &quot;Hier soir, les voisins étaient si bruyants que personne n&#x27;a pu dormir.&quot;, &quot;a&quot;: &quot;audio/94d28fe1fb53.mp3&quot;, &quot;it&quot;: &quot;Last night the neighbours were so noisy that nobody could sleep.&quot;, &quot;rule&quot;: &quot;v-bruyant&quot;, &quot;why&quot;: &quot;Imparfait : une description dans le passé.&quot;, &quot;whyit&quot;: &quot;Last night the neighbours were so noisy that nobody could sleep.&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">3</span><span class="txt">Hier soir, les voisins <span class="gap">……</span> si bruyants que personne n'a pu dormir.</span></div><div class="row"><span class="vt">être</span><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q4" data-k="inp" data-j='{&quot;id&quot;: &quot;q4&quot;, &quot;ans&quot;: [&quot;ait&quot;], &quot;full&quot;: &quot;Je doute qu&#x27;il ait conscience de sa maladresse.&quot;, &quot;a&quot;: &quot;audio/76ad2c532f5d.mp3&quot;, &quot;it&quot;: &quot;I doubt he is aware of his clumsiness.&quot;, &quot;rule&quot;: &quot;v-maladresse&quot;, &quot;why&quot;: &quot;Subjonctif présent après douter que.&quot;, &quot;whyit&quot;: &quot;I doubt he is aware of his clumsiness.&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">4</span><span class="txt">Je doute qu'il <span class="gap">……</span> conscience de sa maladresse.</span></div><div class="row"><span class="vt">avoir</span><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q5" data-k="inp" data-j='{&quot;id&quot;: &quot;q5&quot;, &quot;ans&quot;: [&quot;aurai fini&quot;], &quot;full&quot;: &quot;Quand j&#x27;aurai fini mes bricoles, je te rejoindrai au musée.&quot;, &quot;a&quot;: &quot;audio/7dd1d5da04ff.mp3&quot;, &quot;it&quot;: &quot;When I&#x27;ve finished my odd jobs, I&#x27;ll join you at the museum.&quot;, &quot;rule&quot;: &quot;v-faire&quot;, &quot;why&quot;: &quot;Futur antérieur : action terminée avant une autre action future.&quot;, &quot;whyit&quot;: &quot;When I&#x27;ve finished my odd jobs, I&#x27;ll join you at the museum.&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">5</span><span class="txt">Quand j'<span class="gap">……</span> mes bricoles, je te rejoindrai au musée.</span></div><div class="row"><span class="vt">finir</span><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q6" data-k="inp" data-j='{&quot;id&quot;: &quot;q6&quot;, &quot;ans&quot;: [&quot;aurait fallu&quot;], &quot;full&quot;: &quot;Il aurait fallu réserver avant : maintenant, l&#x27;exposition est complète.&quot;, &quot;a&quot;: &quot;audio/e3e1a7a51ed7.mp3&quot;, &quot;it&quot;: &quot;We should have booked beforehand: now the exhibition is fully booked.&quot;, &quot;rule&quot;: &quot;g-cols&quot;, &quot;why&quot;: &quot;Conditionnel passé : un regret.&quot;, &quot;whyit&quot;: &quot;We should have booked beforehand: now the exhibition is fully booked.&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">6</span><span class="txt">Il <span class="gap">……</span> réserver avant : maintenant, l'exposition est complète.</span></div><div class="row"><span class="vt">falloir</span><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q7" data-k="inp" data-j='{&quot;id&quot;: &quot;q7&quot;, &quot;ans&quot;: [&quot;ait été&quot;], &quot;full&quot;: &quot;Bien qu&#x27;elle ait été dubitative au début, elle a fini par adorer l&#x27;exposition.&quot;, &quot;a&quot;: &quot;audio/2e935c3953e4.mp3&quot;, &quot;it&quot;: &quot;Although she had been doubtful at first, she ended up loving the exhibition.&quot;, &quot;rule&quot;: &quot;v-dubitatif&quot;, &quot;why&quot;: &quot;Subjonctif passé après bien que (action antérieure).&quot;, &quot;whyit&quot;: &quot;Although she had been doubtful at first, she ended up loving the exhibition.&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">7</span><span class="txt">Bien qu'elle <span class="gap">……</span> dubitative au début, elle a fini par adorer l'exposition.</span></div><div class="row"><span class="vt">être</span><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q8" data-k="inp" data-j='{&quot;id&quot;: &quot;q8&quot;, &quot;ans&quot;: [&quot;serait&quot;], &quot;full&quot;: &quot;S&#x27;il buvait moins, il ne serait pas ivre à chaque dîner.&quot;, &quot;a&quot;: &quot;audio/7abfe6391426.mp3&quot;, &quot;it&quot;: &quot;If he drank less, he wouldn&#x27;t be drunk at every dinner.&quot;, &quot;rule&quot;: &quot;v-ivre&quot;, &quot;why&quot;: &quot;Conditionnel présent : si + imparfait → conditionnel présent.&quot;, &quot;whyit&quot;: &quot;If he drank less, he wouldn&#x27;t be drunk at every dinner.&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">8</span><span class="txt">S'il buvait moins, il ne <span class="gap">……</span> pas ivre à chaque dîner.</span></div><div class="row"><span class="vt">être</span><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q9" data-k="inp" data-j='{&quot;id&quot;: &quot;q9&quot;, &quot;ans&quot;: [&quot;achèterai&quot;], &quot;full&quot;: &quot;Demain matin, j&#x27;achèterai deux ou trois bricoles au marché.&quot;, &quot;a&quot;: &quot;audio/4e8a07666404.mp3&quot;, &quot;it&quot;: &quot;Tomorrow morning I&#x27;ll buy a few bits and bobs at the market.&quot;, &quot;rule&quot;: &quot;v-acheter&quot;, &quot;why&quot;: &quot;Futur simple (attention à l&#x27;accent : achèterai).&quot;, &quot;whyit&quot;: &quot;Tomorrow morning I&#x27;ll buy a few bits and bobs at the market.&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">9</span><span class="txt">Demain matin, j'<span class="gap">……</span> deux ou trois bricoles au marché.</span></div><div class="row"><span class="vt">acheter</span><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q10" data-k="inp" data-j='{&quot;id&quot;: &quot;q10&quot;, &quot;ans&quot;: [&quot;commence&quot;, &quot;ne commence&quot;], &quot;full&quot;: &quot;Avant que le dîner commence, elle avait déjà fait une gaffe.&quot;, &quot;a&quot;: &quot;audio/c7cc0190a8e5.mp3&quot;, &quot;it&quot;: &quot;Before dinner even started, she had already made a blunder.&quot;, &quot;rule&quot;: &quot;v-gaffe&quot;, &quot;why&quot;: &quot;Subjonctif présent après avant que.&quot;, &quot;whyit&quot;: &quot;Before dinner even started, she had already made a blunder.&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">10</span><span class="txt">Avant que le dîner <span class="gap">……</span>, elle avait déjà fait une gaffe.</span></div><div class="row"><span class="vt">commencer</span><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex2" style="--c:#b5603f"><div class="exh" style="--c:#b5603f"><span class="exn">2</span><div><div class="exk">EXERCICE 2</div><div class="ext">Le mot juste</div><div class="exit"><button type="button" class="itb" aria-label="English translation">EN</button><span class="tr">The right word</span></div></div></div>
+<div class="ex cons"><div class="fr"><span class="txt">Complétez chaque phrase avec un mot ou une expression de la liste. Faites les accords si nécessaire.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Complete each sentence with a word or expression from the list. Make agreements where necessary.</div></div>
+<div class="bank"><span>bricoles</span><span>bruyants</span><span>dubitatif</span><span>épais</span><span>fais gaffe</span><span>fins</span><span>il faudrait</span><span>ivre</span><span>maladresse</span><span>une gaffe</span></div>
+<div class="item" id="q11" data-k="inp" data-j='{&quot;id&quot;: &quot;q11&quot;, &quot;ans&quot;: [&quot;une gaffe&quot;, &quot;une vraie gaffe&quot;], &quot;full&quot;: &quot;Ne lui parle pas de son ancien travail : ce serait une gaffe.&quot;, &quot;a&quot;: &quot;audio/1df234ee78da.mp3&quot;, &quot;it&quot;: &quot;Don&#x27;t mention his old job: it would be a blunder.&quot;, &quot;rule&quot;: &quot;v-gaffe&quot;, &quot;why&quot;: &quot;Revoyez l&#x27;emploi de « une gaffe ».&quot;, &quot;whyit&quot;: &quot;Don&#x27;t mention his old job: it would be a blunder.&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">1</span><span class="txt">Ne lui parle pas de son ancien travail : ce serait <span class="gap">……</span>.</span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q12" data-k="inp" data-j='{&quot;id&quot;: &quot;q12&quot;, &quot;ans&quot;: [&quot;dubitatif&quot;], &quot;full&quot;: &quot;Devant ce prétendu Picasso, le conservateur avait l&#x27;air dubitatif.&quot;, &quot;a&quot;: &quot;audio/ba5ada260505.mp3&quot;, &quot;it&quot;: &quot;Faced with this so-called Picasso, the curator looked doubtful.&quot;, &quot;rule&quot;: &quot;v-dubitatif&quot;, &quot;why&quot;: &quot;Revoyez l&#x27;emploi de « dubitatif ».&quot;, &quot;whyit&quot;: &quot;Faced with this so-called Picasso, the curator looked doubtful.&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">2</span><span class="txt">Devant ce prétendu Picasso, le conservateur avait l'air <span class="gap">……</span>.</span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q13" data-k="inp" data-j='{&quot;id&quot;: &quot;q13&quot;, &quot;ans&quot;: [&quot;fais gaffe&quot;], &quot;full&quot;: &quot;« Fais gaffe ! Le pont est glissant. »&quot;, &quot;a&quot;: &quot;audio/644973ac203c.mp3&quot;, &quot;it&quot;: &quot;\&quot;Watch out! The bridge is slippery.\&quot;&quot;, &quot;rule&quot;: &quot;v-faisgaffe&quot;, &quot;why&quot;: &quot;Revoyez l&#x27;emploi de « fais gaffe ».&quot;, &quot;whyit&quot;: &quot;\&quot;Watch out! The bridge is slippery.\&quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">3</span><span class="txt">« <span class="gap">……</span> ! Le pont est glissant. »</span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q14" data-k="inp" data-j='{&quot;id&quot;: &quot;q14&quot;, &quot;ans&quot;: [&quot;fins&quot;, &quot;minces&quot;], &quot;full&quot;: &quot;Avec des murs aussi fins, j&#x27;entends mon voisin éternuer.&quot;, &quot;a&quot;: &quot;audio/cf81421a85f9.mp3&quot;, &quot;it&quot;: &quot;With walls this thin, I can hear my neighbour sneeze.&quot;, &quot;rule&quot;: &quot;v-fins&quot;, &quot;why&quot;: &quot;Revoyez l&#x27;emploi de « fins ».&quot;, &quot;whyit&quot;: &quot;With walls this thin, I can hear my neighbour sneeze.&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">4</span><span class="txt">Avec des murs aussi <span class="gap">……</span>, j'entends mon voisin éternuer.</span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q15" data-k="inp" data-j='{&quot;id&quot;: &quot;q15&quot;, &quot;ans&quot;: [&quot;épais&quot;], &quot;full&quot;: &quot;Ce vieux mas a des murs si épais qu&#x27;il reste frais en plein mois d&#x27;août.&quot;, &quot;a&quot;: &quot;audio/f1251333bf1c.mp3&quot;, &quot;it&quot;: &quot;This old farmhouse has such thick walls that it stays cool in the middle of August.&quot;, &quot;rule&quot;: &quot;v-epais&quot;, &quot;why&quot;: &quot;Revoyez l&#x27;emploi de « épais ».&quot;, &quot;whyit&quot;: &quot;This old farmhouse has such thick walls that it stays cool in the middle of August.&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">5</span><span class="txt">Ce vieux mas a des murs si <span class="gap">……</span> qu'il reste frais en plein mois d'août.</span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q16" data-k="inp" data-j='{&quot;id&quot;: &quot;q16&quot;, &quot;ans&quot;: [&quot;bricoles&quot;], &quot;full&quot;: &quot;Rien de spécial ce week-end, juste quelques bricoles à faire au jardin.&quot;, &quot;a&quot;: &quot;audio/53aa5793a031.mp3&quot;, &quot;it&quot;: &quot;Nothing special this weekend, just a few odd jobs in the garden.&quot;, &quot;rule&quot;: &quot;v-faire&quot;, &quot;why&quot;: &quot;Revoyez l&#x27;emploi de « bricoles ».&quot;, &quot;whyit&quot;: &quot;Nothing special this weekend, just a few odd jobs in the garden.&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">6</span><span class="txt">Rien de spécial ce week-end, juste quelques <span class="gap">……</span> à faire au jardin.</span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q17" data-k="inp" data-j='{&quot;id&quot;: &quot;q17&quot;, &quot;ans&quot;: [&quot;maladresse&quot;], &quot;full&quot;: &quot;Il a renversé le vase par maladresse ; il est désolé.&quot;, &quot;a&quot;: &quot;audio/2e78bb4be2ba.mp3&quot;, &quot;it&quot;: &quot;He knocked over the vase out of clumsiness; he&#x27;s sorry.&quot;, &quot;rule&quot;: &quot;v-maladresse&quot;, &quot;why&quot;: &quot;Revoyez l&#x27;emploi de « maladresse ».&quot;, &quot;whyit&quot;: &quot;He knocked over the vase out of clumsiness; he&#x27;s sorry.&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">7</span><span class="txt">Il a renversé le vase par <span class="gap">……</span> ; il est désolé.</span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q18" data-k="inp" data-j='{&quot;id&quot;: &quot;q18&quot;, &quot;ans&quot;: [&quot;il faudrait&quot;], &quot;full&quot;: &quot;Il faudrait prévenir les voisins avant d&#x27;organiser la fête.&quot;, &quot;a&quot;: &quot;audio/a4a11f423c6d.mp3&quot;, &quot;it&quot;: &quot;We should warn the neighbours before throwing the party.&quot;, &quot;rule&quot;: &quot;v-faudrait&quot;, &quot;why&quot;: &quot;Revoyez l&#x27;emploi de « il faudrait ».&quot;, &quot;whyit&quot;: &quot;We should warn the neighbours before throwing the party.&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">8</span><span class="txt"><span class="gap">……</span> prévenir les voisins avant d'organiser la fête.</span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q19" data-k="inp" data-j='{&quot;id&quot;: &quot;q19&quot;, &quot;ans&quot;: [&quot;bruyants&quot;], &quot;full&quot;: &quot;Les enfants sont très bruyants quand ils jouent dans la cour.&quot;, &quot;a&quot;: &quot;audio/78a6802f3bc1.mp3&quot;, &quot;it&quot;: &quot;The children are very noisy when they play in the courtyard.&quot;, &quot;rule&quot;: &quot;v-bruyant&quot;, &quot;why&quot;: &quot;Revoyez l&#x27;emploi de « bruyants ».&quot;, &quot;whyit&quot;: &quot;The children are very noisy when they play in the courtyard.&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">9</span><span class="txt">Les enfants sont très <span class="gap">……</span> quand ils jouent dans la cour.</span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q20" data-k="inp" data-j='{&quot;id&quot;: &quot;q20&quot;, &quot;ans&quot;: [&quot;ivre&quot;], &quot;full&quot;: &quot;Ivre de joie, elle a couru annoncer la nouvelle à toute la famille.&quot;, &quot;a&quot;: &quot;audio/ecb40632974e.mp3&quot;, &quot;it&quot;: &quot;Drunk with joy, she ran to tell the whole family the news.&quot;, &quot;rule&quot;: &quot;v-ivre&quot;, &quot;why&quot;: &quot;Revoyez l&#x27;emploi de « ivre ».&quot;, &quot;whyit&quot;: &quot;Drunk with joy, she ran to tell the whole family the news.&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">10</span><span class="txt"><span class="gap">……</span> de joie, elle a couru annoncer la nouvelle à toute la famille.</span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="votre réponse"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+</div>
+<div class="exb tra" id="ex3" style="--c:#7a5a8c"><div class="exh" style="--c:#7a5a8c"><span class="exn">3</span><div><div class="exk">EXERCICE 3</div><div class="ext">Traduisez en français</div><div class="exit"><button type="button" class="itb" aria-label="English translation">EN</button><span class="tr">Translate into French</span></div></div></div>
+<div class="ex cons"><div class="fr"><span class="txt">Écrivez votre traduction, comparez-la avec le corrigé, puis indiquez si elle était juste. Plusieurs traductions sont souvent possibles : vérifiez surtout les points signalés.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Write your translation, compare it with the model answer, then say whether it was right. Several translations are often possible: check above all the points highlighted.</div></div>
+<div class="item" id="q21" data-k="tra" data-j='{&quot;id&quot;: &quot;q21&quot;, &quot;full&quot;: &quot;J&#x27;ai quelques bricoles à acheter avant la fermeture des magasins.&quot;, &quot;a&quot;: &quot;audio/72995b6a55e1.mp3&quot;, &quot;it&quot;: &quot;I&#x27;ve got a few bits and bobs to buy before the shops close.&quot;, &quot;rule&quot;: &quot;v-acheter&quot;, &quot;why&quot;: &quot;avoir des bricoles à acheter · avant la fermeture des magasins (ou : avant que les magasins ne ferment)&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">1</span><span class="txt enq">I&#x27;ve got a few bits and bobs to buy before the shops close.</span></div><textarea rows="2" placeholder="Votre traduction…"></textarea><button type="button" class="cmp">Comparer avec le corrigé</button><div class="fb"></div></div>
+<div class="item" id="q22" data-k="tra" data-j='{&quot;id&quot;: &quot;q22&quot;, &quot;full&quot;: &quot;Fais gaffe, les murs sont si fins que les voisins entendent tout !&quot;, &quot;a&quot;: &quot;audio/fb546b628d91.mp3&quot;, &quot;it&quot;: &quot;Watch out, the walls are so thin that the neighbours hear everything!&quot;, &quot;rule&quot;: &quot;v-fins&quot;, &quot;why&quot;: &quot;fais gaffe (ou : fais attention) · si + adjectif + que · des murs fins&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">2</span><span class="txt enq">Watch out, the walls are so thin that the neighbours hear everything!</span></div><textarea rows="2" placeholder="Votre traduction…"></textarea><button type="button" class="cmp">Comparer avec le corrigé</button><div class="fb"></div></div>
+<div class="item" id="q23" data-k="tra" data-j='{&quot;id&quot;: &quot;q23&quot;, &quot;full&quot;: &quot;Il aurait fallu réserver les billets de l&#x27;exposition plus tôt.&quot;, &quot;a&quot;: &quot;audio/53f5fbdbde09.mp3&quot;, &quot;it&quot;: &quot;We should have booked the exhibition tickets earlier.&quot;, &quot;rule&quot;: &quot;g-cols&quot;, &quot;why&quot;: &quot;il aurait fallu + infinitif (ou : nous aurions dû réserver)&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">3</span><span class="txt enq">We should have booked the exhibition tickets earlier.</span></div><textarea rows="2" placeholder="Votre traduction…"></textarea><button type="button" class="cmp">Comparer avec le corrigé</button><div class="fb"></div></div>
+<div class="item" id="q24" data-k="tra" data-j='{&quot;id&quot;: &quot;q24&quot;, &quot;full&quot;: &quot;Elle avait l&#x27;air dubitative quand je lui ai dit que le tableau était une copie.&quot;, &quot;a&quot;: &quot;audio/d4a9cadeb28f.mp3&quot;, &quot;it&quot;: &quot;She looked doubtful when I told her the painting was a copy.&quot;, &quot;rule&quot;: &quot;v-dubitatif&quot;, &quot;why&quot;: &quot;avoir l&#x27;air dubitatif / dubitative · concordance : était&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">4</span><span class="txt enq">She looked doubtful when I told her the painting was a copy.</span></div><textarea rows="2" placeholder="Votre traduction…"></textarea><button type="button" class="cmp">Comparer avec le corrigé</button><div class="fb"></div></div>
+<div class="item" id="q25" data-k="tra" data-j='{&quot;id&quot;: &quot;q25&quot;, &quot;full&quot;: &quot;Ce n&#x27;était pas impoli, juste une maladresse.&quot;, &quot;a&quot;: &quot;audio/cbaa6670b9af.mp3&quot;, &quot;it&quot;: &quot;It wasn&#x27;t rude, just a bit of clumsiness.&quot;, &quot;rule&quot;: &quot;v-maladresse&quot;, &quot;why&quot;: &quot;une maladresse (nom dénombrable) · c&#x27;était&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">5</span><span class="txt enq">It wasn&#x27;t rude, just a bit of clumsiness.</span></div><textarea rows="2" placeholder="Votre traduction…"></textarea><button type="button" class="cmp">Comparer avec le corrigé</button><div class="fb"></div></div>
+<div class="item" id="q26" data-k="tra" data-j='{&quot;id&quot;: &quot;q26&quot;, &quot;full&quot;: &quot;Il était ivre et très bruyant : l&#x27;inviter, c&#x27;était une vraie gaffe.&quot;, &quot;a&quot;: &quot;audio/e0c7723c337f.mp3&quot;, &quot;it&quot;: &quot;He was drunk and very noisy: inviting him was quite a blunder.&quot;, &quot;rule&quot;: &quot;v-gaffe&quot;, &quot;why&quot;: &quot;être ivre · bruyant · une gaffe · l&#x27;inviter, c&#x27;était…&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">6</span><span class="txt enq">He was drunk and very noisy: inviting him was quite a blunder.</span></div><textarea rows="2" placeholder="Votre traduction…"></textarea><button type="button" class="cmp">Comparer avec le corrigé</button><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex4" style="--c:#2c2f4a"><div class="exh" style="--c:#2c2f4a"><span class="exn">✦</span><div><div class="exk">POUR ALLER PLUS LOIN</div><div class="ext">Réflexion philosophique</div><div class="exit"><button type="button" class="itb" aria-label="English translation">EN</button><span class="tr">Philosophical reflection</span></div></div></div>
+<div class="refl" style="--c:#7a5a8c"><div class="sujet"><div class="fr" style="display:flex;align-items:flex-start"><span class="q" style="flex:1">Nos maladresses nous rendent-elles plus humains ?</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Do our blunders make us more human?</div></div>
+<div class="ex "><div class="fr"><span class="txt">Écrivez un texte argumenté d'environ 20 lignes. Utilisez au moins trois mots de la leçon et une construction avec <b>il faudrait</b> ou <b>il aurait fallu</b>.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Write an argued text of about 20 lines. Use at least three words from the lesson and one construction with il faudrait or il aurait fallu.</div></div>
+<div class="rh">Pour trouver vos idées</div>
+<div class="guide"><div class="ex "><div class="fr"><span class="txt">Pourquoi une gaffe nous met-elle si mal à l'aise ? Que craignons-nous vraiment : le regard des autres, ou notre propre image ?</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Why does a blunder make us so uncomfortable? What do we really fear: other people's eyes, or our own image?</div></div></div>
+<div class="guide"><div class="ex "><div class="fr"><span class="txt">Une maladresse peut-elle révéler une vérité que la politesse cachait ?</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Can a blunder reveal a truth that politeness was hiding?</div></div></div>
+<div class="guide"><div class="ex "><div class="fr"><span class="txt">En art comme dans la nature, rien n'est parfaitement régulier : la touche visible d'un peintre, une branche tordue. L'imperfection a-t-elle une beauté ?</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">In art as in nature, nothing is perfectly regular: a painter's visible brushstroke, a crooked branch. Does imperfection have a beauty of its own?</div></div></div>
+<div class="guide"><div class="ex "><div class="fr"><span class="txt">Faut-il chercher à tout maîtriser ? Que perdrait-on en ne commettant plus jamais d'erreur ?</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Should we try to control everything? What would we lose if we never made a mistake again?</div></div></div>
+<div class="rh">Pour organiser votre texte</div><div class="plan">
+<div class="pl"><span class="k">1</span><div style="flex:1"><b>Introduction</b> <span class="nl">· 3-4 lignes</span><div class="ex "><div class="fr"><span class="txt">Partez d'une situation concrète (une gaffe en société), puis posez la question : la maladresse est-elle seulement une faiblesse ?</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Start from a concrete situation (a social blunder), then ask: is clumsiness only a weakness?</div></div></div></div>
+<div class="pl"><span class="k">2</span><div style="flex:1"><b>Première partie</b> <span class="nl">· 6-7 lignes</span><div class="ex "><div class="fr"><span class="txt">La maladresse comme faiblesse : la honte, les codes sociaux, le désir de bien faire.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Clumsiness as weakness: shame, social codes, the wish to do well.</div></div></div></div>
+<div class="pl"><span class="k">3</span><div style="flex:1"><b>Deuxième partie</b> <span class="nl">· 6-7 lignes</span><div class="ex "><div class="fr"><span class="txt">La maladresse comme signe d'humanité : spontanéité, sincérité, apprentissage, beauté de l'imperfection (le kintsugi japonais, la touche des impressionnistes).</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Clumsiness as a sign of humanity: spontaneity, sincerity, learning, the beauty of imperfection (Japanese kintsugi, the impressionists' brushwork).</div></div></div></div>
+<div class="pl"><span class="k">4</span><div style="flex:1"><b>Conclusion</b> <span class="nl">· 3-4 lignes</span><div class="ex "><div class="fr"><span class="txt">Répondez à la question et ouvrez : ce qui compte, n'est-ce pas surtout la façon de réparer ?</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Answer the question and open it up: isn't what matters mostly the way we make amends?</div></div></div></div>
+</div>
+<div class="rh">Mots utiles</div><div class="kw">avouer · s'excuser · le regard d'autrui · la spontanéité · l'imperfection · la sincérité · se pardonner · maîtriser · un faux pas</div><div class="rh">Connecteurs</div><div class="kw">Certes… mais · D'une part… d'autre part · Pourtant · En effet · C'est pourquoi · Il faudrait sans doute · En définitive</div>
+<textarea rows="12" placeholder="Votre texte…"></textarea>
+<button type="button" class="pistesb">Voir des pistes</button><div class="pistes"><div class="ex "><div class="fr"><span class="txt">Exemple de problématique : si la maladresse nous expose au jugement des autres, n'est-elle pas aussi ce qui nous rend sincères et attachants ? Piste : on pourrait conclure qu'il ne faut pas tant éviter les gaffes que savoir les reconnaître et les réparer avec élégance.</span><button type="button" class="itb" aria-label="English translation">EN</button></div><div class="tr">Sample question: if clumsiness exposes us to others' judgement, isn't it also what makes us sincere and endearing? Idea: one could conclude that rather than avoiding blunders at all costs, we should learn to acknowledge them and make amends gracefully.</div></div></div></div></div>
+</section>
+<section class="sec" style="--c:#b5603f;--t:#fbf0ea"><header class="sh" id="revoir" style="--c:#b5603f"><span class="num">5</span><div><h2>À revoir</h2><div class="shit"><button type="button" class="itb" aria-label="English translation">EN</button><span class="tr">To review</span></div></div></header>
+<div id="scorebox" class="scorebox"></div>
+<div id="revlist" class="revlist"><p class="empty">Les points à revoir apparaîtront ici au fur et à mesure.<span class="tr show">The points to review will appear here as you go.</span></p></div>
+<div class="row center"><button type="button" class="reset" id="reset">Recommencer les exercices</button></div></section>
+</main>
+<div class="acc" id="acc"></div>
+<script>
+(function(){
+var RULES={"g-intro": "Le verbe falloir", "g-cols": "il faut / il faudrait / il aurait fallu", "g-cons": "il faut + infinitif / il faut que + subjonctif", "g-nuance": "il ne faut pas / ce n'est pas la peine de", "v-bricole": "Vocabulaire : une bricole", "v-acheter": "Vocabulaire : avoir des bricoles à acheter", "v-faire": "Vocabulaire : avoir des bricoles à faire", "v-gaffe": "Vocabulaire : une gaffe", "v-faisgaffe": "Vocabulaire : Fais gaffe !", "v-maladresse": "Vocabulaire : la maladresse", "v-dubitatif": "Vocabulaire : être dubitatif / dubitative", "v-fins": "Vocabulaire : des murs fins", "v-epais": "Vocabulaire : des murs épais", "v-ivre": "Vocabulaire : être ivre", "v-bruyant": "Vocabulaire : être bruyant / bruyante", "v-faudrait": "Vocabulaire : il faudrait"}, TOTAL=26, good=0, done=0, autoA=true;
+var player=new Audio(), cur=null;
+function play(src,btn){
+  try{
+    if(cur){cur.classList.remove('playing');}
+    if(btn&&cur===btn&&!player.paused){player.pause();cur=null;return;}
+    player.pause(); player.src=src; cur=btn||null;
+    if(btn)btn.classList.add('playing');
+    var p=player.play(); if(p&&p.catch)p.catch(function(){if(btn)btn.classList.remove('playing');});
+  }catch(e){}
+}
+player.addEventListener('ended',function(){if(cur)cur.classList.remove('playing');cur=null;});
+function trOf(btn){
+  var p=btn.parentElement;
+  var t=p.querySelector(':scope > .tr'); if(t)return t;
+  if(p.nextElementSibling&&p.nextElementSibling.classList.contains('tr'))return p.nextElementSibling;
+  return p.parentElement.querySelector(':scope > .tr');
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.au'); if(b){play(b.dataset.a,b);return;}
+  var i=e.target.closest('.itb'); if(i){var t=trOf(i); if(t){t.classList.toggle('show');i.classList.toggle('on');}return;}
+  var m=e.target.closest('.model'); if(m){m.nextElementSibling.classList.toggle('show');return;}
+  var a=e.target.closest('a[href^="#"]'); if(a){var tg=document.getElementById(a.getAttribute('href').slice(1)); if(tg){tg.classList.remove('flash');void tg.offsetWidth;tg.classList.add('flash');}}
+});
+document.getElementById('allit').onclick=function(){document.body.classList.toggle('allit');this.classList.toggle('on');};
+document.getElementById('autoa').onclick=function(){autoA=!autoA;this.classList.toggle('on',autoA);};
+function norm(s){return (s||'').normalize('NFC').toLowerCase().replace(/[’ʼ`´]/g,"'").replace(/\s+/g,' ').replace(/^[\s.,!?;:]+|[\s.,!?;:]+$/g,'').trim();}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+var SPK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg>';
+function sentHTML(full,ans,it,a){
+  var t=esc(full); var an=esc(ans);
+  var k=t.indexOf(an); if(k>=0){t=t.slice(0,k)+'<b>'+an+'</b>'+t.slice(k+an.length);}
+  return '<div class="s"><div class="fr"><button type="button" class="au" data-a="'+a+'" aria-label="Écouter">'+SPK+'</button><span class="txt">'+t+'</span><button type="button" class="itb">EN</button></div><div class="tr">'+esc(it)+'</div></div>';
+}
+function stars(el,n){
+  var r=el.getBoundingClientRect(), cx=r.left+Math.min(r.width,260)/2, cy=r.top+r.height/2;
+  for(var i=0;i<(n||6);i++){var s=document.createElement('span');s.className='star';s.textContent='★';
+    s.style.left=cx+'px';s.style.top=cy+'px';var ang=Math.random()*Math.PI*2,d=40+Math.random()*50;
+    s.style.setProperty('--dx',Math.cos(ang)*d+'px');s.style.setProperty('--dy',Math.sin(ang)*d+'px');
+    s.style.animationDelay=(i*40)+'ms';document.body.appendChild(s);setTimeout(function(x){x.remove();}.bind(null,s),1300);}
+}
+function updScore(ok){
+  done++; if(ok)good++;
+  document.getElementById('sc').textContent=good;
+  var sc=document.getElementById('score'); sc.classList.add('bump'); setTimeout(function(){sc.classList.remove('bump');},250);
+  if(ok)stars(sc,5);
+  renderScore();
+}
+function renderScore(){
+  var box=document.getElementById('scorebox');
+  box.innerHTML='Bonnes réponses : <b>'+good+'</b> / '+TOTAL+'<div style="font-size:.85rem;opacity:.85;margin-top:2px">Questions faites : '+done+' / '+TOTAL+'</div>';
+}
+var revCount=0;
+function addRev(o){
+  var list=document.getElementById('revlist');
+  if(!revCount)list.innerHTML='';
+  revCount++;
+  var d=document.createElement('div');d.className='rv';
+  d.innerHTML='<div class="rvh">Exercice '+o.ex+'</div>'+sentHTML(o.full,o.ans,o.it,o.a)+
+   '<div class="rvy">Votre réponse : <s>'+esc(o.given||'—')+'</s> · Bonne réponse : <b style="color:var(--ok)">'+esc(o.ans)+'</b></div>'+
+   '<div class="rvl"><a href="#'+o.rule+'">Revoir la règle : '+esc(RULES[o.rule]||'')+'</a><a class="back" href="#'+o.id+'">Retour à la question</a></div>';
+  list.appendChild(d);
+}
+function feedback(item,d,ok,given){
+  var fb=item.querySelector('.fb');
+  fb.innerHTML='<div class="fbr '+(ok?'ok':'ko')+'"><div class="fbt">'+(ok?'✓ Correct':'✗ La bonne réponse : '+esc(d.ans[0]))+'</div>'+
+    sentHTML(d.full,d.ans[0],d.it,d.a)+
+    '<div class="why"><span class="txt">'+esc(d.why)+'</span></div></div>';
+  var g=item.querySelector('.gap'); if(g){g.textContent=ok?given:d.ans[0];g.classList.add(ok?'ok':'ko');}
+  if(ok)stars(item.querySelector('.qq'),7);
+  updScore(ok);
+  if(!ok)addRev({ex:d.ex,full:d.full,ans:d.ans[0],it:d.it,a:d.a,given:given,rule:d.rule,id:d.id});
+  if(autoA){var b=fb.querySelector('.au');setTimeout(function(){play(d.a,b);},ok?350:500);}
+}
+document.querySelectorAll('.item[data-k="qcm"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j);
+  item.querySelectorAll('.opt').forEach(function(o){
+    o.addEventListener('click',function(){
+      if(item.dataset.done)return; item.dataset.done=1;
+      var v=o.textContent, ok=d.ans.indexOf(v)>=0;
+      item.querySelectorAll('.opt').forEach(function(x){x.disabled=true;if(d.ans.indexOf(x.textContent)>=0)x.classList.add('ok');});
+      if(!ok)o.classList.add('ko');
+      feedback(item,d,ok,v);
+    });
+  });
+});
+document.querySelectorAll('.item[data-k="inp"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j), inp=item.querySelector('input'), btn=item.querySelector('.chk');
+  function check(){
+    if(item.dataset.done)return; var v=inp.value; if(!norm(v)){inp.focus();return;}
+    item.dataset.done=1; var ok=d.ans.map(norm).indexOf(norm(v))>=0;
+    inp.classList.add(ok?'ok':'ko'); inp.disabled=true; btn.disabled=true;
+    feedback(item,d,ok,v.trim());
+  }
+  btn.addEventListener('click',check);
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();check();}});
+});
+// texte à trous
+var chk5=document.getElementById('chk5');
+if(chk5)chk5.addEventListener('click',function(){
+  var story=document.querySelector('.story'), tgs=story.querySelectorAll('.tg');
+  var empty=[].some.call(tgs,function(t){return !norm(t.querySelector('input').value);});
+  if(empty&&!confirm('Certaines cases sont vides. Vérifier quand même ?'))return;
+  chk5.disabled=true; var nOk=0;
+  tgs.forEach(function(t){
+    var ans=JSON.parse(t.dataset.ans), inp=t.querySelector('input'), v=inp.value.trim(), ok=ans.map(norm).indexOf(norm(v))>=0;
+    inp.disabled=true; inp.classList.add(ok?'ok':'ko');
+    if(!ok){var c=document.createElement('span');c.className='cor';c.textContent=ans[0];t.insertBefore(c,t.querySelector('.tv'));
+      var full=story.dataset.full;
+      var sents=full.split(/(?<=[.;:])\s+/); var sen=sents.filter(function(x){return x.indexOf(ans[0])>=0;})[0]||full;
+      addRev({ex:5,full:sen,ans:ans[0],it:'',a:story.dataset.a,given:v,rule:t.dataset.rule,id:t.id});
+    } else nOk++;
+    updScore(ok);
+  });
+  if(nOk)stars(chk5,8);
+  var fb=document.getElementById('fb5');
+  fb.innerHTML='<div class="fbr '+(nOk===tgs.length?'ok':'ko')+'"><div class="fbt">'+nOk+' / '+tgs.length+' bonnes réponses</div>'+
+   '<div class="s"><div class="fr"><button type="button" class="au" data-a="'+story.dataset.a+'" aria-label="Écouter">'+SPK+'</button><span class="txt">Écoutez le texte corrigé.</span></div></div></div>';
+  document.querySelector('.storytr').classList.add('show');
+  if(autoA){var b=fb.querySelector('.au');setTimeout(function(){play(story.dataset.a,b);},500);}
+});
+document.getElementById('reset').addEventListener('click',function(){
+  if(!confirm('Effacer toutes les réponses et recommencer ?'))return;
+  location.hash='exercices'; location.reload();
+});
+// clavier d'accents
+var acc=document.getElementById('acc'), last=null;
+'é è ê à â ç ù û î ï ô œ É'.split(' ').forEach(function(ch){var b=document.createElement('button');b.type='button';b.textContent=ch;
+  b.addEventListener('mousedown',function(e){e.preventDefault();});b.addEventListener('pointerdown',function(e){e.preventDefault();});
+  b.addEventListener('click',function(){if(!last||last.disabled)return;var s=last.selectionStart||last.value.length,en=last.selectionEnd||s;
+    last.value=last.value.slice(0,s)+ch+last.value.slice(en);last.focus();last.setSelectionRange(s+ch.length,s+ch.length);});
+  acc.appendChild(b);});
+document.addEventListener('focusin',function(e){if(e.target.matches('input[type=text],textarea')){last=e.target;acc.classList.add('show');}});
+document.addEventListener('focusout',function(e){setTimeout(function(){var a=document.activeElement;if(!a||(!a.matches('input[type=text],textarea')&&!acc.contains(a)))acc.classList.remove('show');},150);});
+
+document.querySelectorAll('.item[data-k="tra"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j), ta=item.querySelector('textarea'), cmp=item.querySelector('.cmp'), zone=item.querySelector('.fb');
+  cmp.addEventListener('click',function(){
+    if(item.dataset.shown)return;
+    if(!ta.value.trim()){ta.focus();return;}
+    item.dataset.shown=1;cmp.disabled=true;ta.readOnly=true;
+    zone.innerHTML='<div class="fbr"><div class="fbt" style="color:#2f7f73">Corrigé</div>'+sentHTML(d.full,'',d.it,d.a)+
+      '<div class="why"><span class="txt"><b>À vérifier :</b> '+esc(d.why)+'</span></div>'+
+      '<div class="selfq">Votre traduction était-elle juste ?</div><div class="selfb"><button type="button" class="sb ok">✓ Oui</button><button type="button" class="sb ko">✗ Pas tout à fait</button></div></div>';
+    if(autoA){var b=zone.querySelector('.au');setTimeout(function(){play(d.a,b);},300);}
+    zone.querySelectorAll('.sb').forEach(function(b){b.addEventListener('click',function(){
+      if(item.dataset.done)return;item.dataset.done=1;var ok=b.classList.contains('ok');
+      zone.querySelectorAll('.sb').forEach(function(x){x.disabled=true;});b.classList.add('chosen');
+      if(ok)stars(item.querySelector('.qq'),7);
+      updScore(ok);
+      if(!ok)addRev({ex:d.ex,full:d.full,ans:'',it:d.it,a:d.a,given:ta.value.trim(),rule:d.rule,id:d.id});
+    });});
+  });
+});
+document.querySelectorAll('.pistesb').forEach(function(b){b.addEventListener('click',function(){b.nextElementSibling.classList.toggle('show');});});
+renderScore();
+})();
+</script>
+</body>
+</html>
