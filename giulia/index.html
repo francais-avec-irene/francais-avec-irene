@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les verbes au présent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#3b2a4a;--soft:#7a6a88;--pink:#ff5fa2;--lilac:#8a5cf6;--mint:#33b5a6;--peach:#ff7b54;--gold:#f7a400;--ok:#22a06b;--ko:#e5484d}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:74px}
+body{margin:0;color:var(--ink);font:17px/1.55 Nunito,system-ui,sans-serif;background:#fff7fb;
+ background-image:radial-gradient(#ffd6ea 1.2px,transparent 1.2px);background-size:22px 22px;-webkit-text-size-adjust:100%}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+h1,h2,h3,.gt,.fred{font-family:Fredoka,Nunito,sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:70px 14px 90px}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:200}
+/* barre */
+.top{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);box-shadow:0 2px 14px rgba(209,77,216,.12)}
+.topin{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:7px;padding:8px 14px}
+.brand{flex:1;font:600 .85rem Fredoka,sans-serif;color:#d14dd8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb{border:2px solid #f3d3ea;background:#fff;border-radius:999px;padding:3px 10px;font:600 .8rem Fredoka,sans-serif;color:var(--soft)}
+.tb.on{border-color:var(--pink);color:var(--pink);background:#fff0f6}
+.score{display:flex;align-items:center;gap:5px;background:linear-gradient(135deg,#ff5fa2,#d14dd8 60%,#8a5cf6);color:#fff;border-radius:999px;padding:5px 13px;font:700 1rem Fredoka,sans-serif;box-shadow:0 4px 14px rgba(255,95,162,.4);white-space:nowrap}
+.score .h{display:inline-block;transition:transform .3s}
+.score.pop .h{animation:beat .6s}
+@keyframes beat{30%{transform:scale(1.7)}60%{transform:scale(.9)}}
+.prog{height:5px;background:#fde3f0}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff5fa2,#f7a400,#33b5a6,#8a5cf6);transition:width .6s;border-radius:0 4px 4px 0}
+/* hero */
+.hero{position:relative;border-radius:28px;overflow:hidden;box-shadow:0 14px 34px rgba(209,77,216,.25);border:5px solid #fff}
+.hero img{display:block;width:100%;height:clamp(250px,52vw,420px);object-fit:cover}
+.sparkles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.sparkles i{position:absolute;bottom:-30px;font-style:normal;animation:up linear infinite;opacity:.9;text-shadow:0 0 8px #fff}
+@keyframes up{to{transform:translateY(-480px) rotate(25deg);opacity:0}}
+.htitle{position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,.9);border-radius:22px;padding:10px 16px 12px;max-width:calc(100% - 28px);box-shadow:0 6px 18px rgba(0,0,0,.15)}
+.tag{display:inline-block;font:600 .72rem Fredoka,sans-serif;letter-spacing:.06em;color:#fff;background:linear-gradient(90deg,#ff5fa2,#d14dd8);border-radius:999px;padding:3px 12px}
+.hero h1{margin:4px 0 0;font-size:clamp(1.6rem,6vw,2.5rem);line-height:1.1;color:#3b2a4a}
+.hero h1 span{background:linear-gradient(90deg,#ff5fa2,#8a5cf6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hit{display:flex;align-items:center;gap:6px;margin-top:3px}.hit .itb{margin-left:0}.hit .tr{margin:0}
+.keys{height:22px;margin:-2px 30px 0;border-radius:0 0 12px 12px;background:repeating-linear-gradient(90deg,#fff 0 22px,#3b2a4a 22px 24px);position:relative;box-shadow:0 4px 10px rgba(0,0,0,.08)}
+.keys:after{content:"";position:absolute;inset:0 0 9px;background:repeating-linear-gradient(90deg,transparent 0 15px,#3b2a4a 15px 29px,transparent 29px 48px,#3b2a4a 48px 62px,transparent 62px 96px);border-radius:0}
+.toc{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 8px;justify-content:center}
+.toc a{text-decoration:none;color:#fff;font:600 .85rem Fredoka,sans-serif;border-radius:999px;padding:6px 14px;background:var(--pink);box-shadow:0 3px 0 rgba(0,0,0,.12)}
+.toc a:nth-child(2){background:var(--lilac)}.toc a:nth-child(3){background:var(--mint)}.toc a:nth-child(4){background:var(--peach)}.toc a:nth-child(5){background:#d14dd8}.toc a:nth-child(6){background:var(--gold)}
+.howto{background:#fff;border-radius:18px;padding:10px 14px;margin-top:10px;border:2px dashed #ffc2de}
+/* audio / IT */
+.au{flex:none;display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;border:none;background:color-mix(in srgb,var(--c,#ff5fa2) 16%,#fff);margin-right:8px;vertical-align:middle;transition:transform .15s}
+.au svg{width:18px;height:18px;fill:var(--c,#ff5fa2);stroke:var(--c,#ff5fa2);stroke-width:1.8;stroke-linecap:round}
+.au svg .w1,.au svg .w2{fill:none}
+.au.au-l{width:42px;height:42px}.au.au-l svg{width:23px;height:23px}
+.au:active{transform:scale(.88)}
+.au.playing{background:var(--c,#ff5fa2);box-shadow:0 0 0 6px color-mix(in srgb,var(--c,#ff5fa2) 25%,transparent)}.au.playing svg{fill:#fff;stroke:#fff}
+.au.playing svg .w2{animation:wv .9s infinite}@keyframes wv{50%{opacity:.15}}
+.itb{flex:none;border:1.5px solid #e8d5e5;background:#fff;color:#b39bb8;border-radius:7px;font:700 .62rem Nunito,sans-serif;letter-spacing:.06em;padding:1px 6px;margin-left:8px;vertical-align:middle}
+.itb.on,body.allit .itb{background:#b07bc0;color:#fff;border-color:#b07bc0}
+.tr{display:none;font-style:italic;color:#8b7896;font-size:.94rem;margin:3px 0 0}
+.tr.show,body.allit .tr{display:block}
+.s{margin:8px 0}.s .fr,.ex .fr{display:flex;align-items:flex-start}
+.s .txt{flex:1;padding-top:4px;font-weight:600}
+.s .tr{padding-left:40px}
+.ex .txt{flex:1}
+.s b,.ex b{color:var(--c,#ff5fa2)}
+.ex.lead{margin:6px 0 14px;font-size:1.02rem}
+/* sections */
+.sec{margin-top:40px}
+.sh{position:relative;display:flex;align-items:center;gap:12px;background:linear-gradient(120deg,var(--c),color-mix(in srgb,var(--c) 55%,#fff));color:#fff;border-radius:24px;padding:12px 16px;margin-bottom:14px;box-shadow:0 6px 0 color-mix(in srgb,var(--c) 60%,#000 10%)}
+.sh .num{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;background:#fff;color:var(--c);font:700 1.3rem Fredoka,sans-serif}
+.shx{flex:1}.sh h2{margin:0;font-size:clamp(1.2rem,4.5vw,1.6rem);line-height:1.15}
+.shit{display:flex;align-items:center;gap:6px}.shit .itb{margin-left:0;background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.6);color:#fff}.shit .tr{color:#fff;margin:0}
+.emo{font-size:2rem;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px) rotate(-8deg)}}
+/* pronoms */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.pc{background:#fff;border-radius:18px;padding:10px 12px;border:2px solid #ffd0e6;display:flex;flex-wrap:wrap;align-items:center;gap:2px 0;box-shadow:0 3px 0 #ffd0e6}
+.pc b{font:600 1.15rem Fredoka,sans-serif;color:var(--pink)}
+.pit{width:100%;font-style:italic;color:var(--soft);font-size:.9rem;padding-left:40px}
+.pn{width:100%;font-size:.75rem;background:#fff0f6;color:#c43d7f;border-radius:8px;padding:1px 8px;margin-top:3px}
+.bigtip{background:linear-gradient(135deg,#ffe3f1,#f1e7ff);border-radius:20px;padding:12px 14px;margin:14px 0;border:2px solid #fff;box-shadow:0 4px 14px rgba(138,92,246,.12);font-size:1.05rem}
+/* recette */
+.recipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:12px}
+.rstep{display:flex;gap:10px;background:#fff;border-radius:20px;padding:10px 12px;border:2px solid #e3d6ff}
+.rstep>span{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--lilac);color:#fff;font:700 1rem Fredoka,sans-serif}
+.rbig{font:600 1.6rem Fredoka,sans-serif;color:var(--lilac);margin-top:2px}.rbig s{color:var(--ko);text-decoration-thickness:3px}
+.ends{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.ends i{font:600 1rem Fredoka,sans-serif;font-style:normal;background:var(--lilac);color:#fff;border-radius:999px;padding:1px 10px;animation:bob 2.6s ease-in-out infinite}
+.ends i:nth-child(2n){animation-delay:.4s;background:var(--pink)}.ends i:nth-child(3n){animation-delay:.8s;background:var(--mint)}
+.conj{background:#fff;border-radius:22px;overflow:hidden;border:3px solid color-mix(in srgb,var(--c) 30%,#fff);margin:10px 0}
+.conjh{display:flex;align-items:center;flex-wrap:wrap;gap:6px;background:color-mix(in srgb,var(--c) 14%,#fff);padding:8px 14px;font:600 1.3rem Fredoka,sans-serif;color:var(--c)}
+.conjh span{font:italic 400 .95rem Nunito,sans-serif;color:var(--soft);flex:1}
+.build{border:none;border-radius:999px;background:linear-gradient(90deg,var(--c),#ff5fa2);color:#fff;font:600 .85rem Fredoka,sans-serif;padding:5px 13px;box-shadow:0 3px 0 rgba(0,0,0,.15)}
+.cl{display:flex;align-items:center;padding:5px 14px;border-top:1px dashed #eee;font:500 1.2rem Fredoka,sans-serif}
+.cp{width:130px;color:var(--soft);font-weight:400}
+.cr{color:var(--ink)}
+.ce{color:var(--pink);font-weight:700;display:inline-block}
+.ce.hide{opacity:0;transform:translateY(-30px) scale(2)}
+.ce.land{animation:land .55s cubic-bezier(.3,1.6,.6,1) forwards}
+@keyframes land{from{opacity:0;transform:translateY(-40px) scale(2.2) rotate(-20deg)}to{opacity:1;transform:none}}
+.tipbox{background:#fff;border-radius:20px;padding:10px 14px;margin:12px 0;border:2px solid #cfe9ff;--c:#3a8dde}
+.tipbox.pink{border-color:#ffc6e0;--c:#ff5fa2}.tipbox.gold{border-color:#ffe2a6;--c:#d48a00}
+.tiph{font:600 1.08rem Fredoka,sans-serif;color:var(--c);margin-bottom:4px}
+.twin{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.twin .tipbox{margin:0}
+/* cartes verbes */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.vc{--c:var(--vc);background:#fff;border-radius:22px;padding:12px;border:3px solid color-mix(in srgb,var(--vc) 35%,#fff);box-shadow:0 5px 0 color-mix(in srgb,var(--vc) 30%,#fff);transition:transform .2s}
+.vc:hover{transform:rotate(-1deg) translateY(-3px)}
+.vtop{display:flex;align-items:center;flex-wrap:wrap}
+.vtop h3{margin:0;font-size:1.45rem;color:var(--vc)}
+.vit{width:100%;padding-left:50px;font-style:italic;color:var(--soft);margin-top:-4px}
+.vc img{display:block;width:100%;height:130px;object-fit:cover;border-radius:14px;margin:8px 0 2px}
+.vc .s .tr{padding-left:0}
+.vnote{background:color-mix(in srgb,var(--vc) 10%,#fff);border-radius:12px;padding:6px 10px;font-size:.9rem;margin-top:6px}
+/* jeux */
+.game{background:#fff;border-radius:26px;margin:20px 0;overflow:hidden;border:3px solid color-mix(in srgb,var(--c) 30%,#fff);box-shadow:0 8px 24px color-mix(in srgb,var(--c) 18%,transparent)}
+.gh{display:flex;gap:12px;align-items:center;background:linear-gradient(120deg,var(--c),color-mix(in srgb,var(--c) 55%,#fff));color:#fff;padding:12px 16px}
+.gn{font:700 2.3rem Fredoka,sans-serif;line-height:1}
+.ghx{flex:1}.gk{font:500 .7rem Fredoka,sans-serif;letter-spacing:.2em;opacity:.85}.gt{font-weight:600;font-size:1.18rem;line-height:1.2}
+.git{display:flex;align-items:center;gap:6px}.git .itb{margin-left:0;background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.6);color:#fff}.git .tr{color:#fff;margin:0}
+.gemo{font-size:2rem;animation:bob 2.2s ease-in-out infinite}
+.ex.cons{padding:10px 16px 0;font-weight:600}
+.gbody{padding:12px 16px 16px}
+.gdone:empty{display:none}
+.gdone{margin:0 16px 16px;border-radius:18px;padding:12px;text-align:center;background:linear-gradient(135deg,#fff0f6,#f4efff);font:600 1.05rem Fredoka,sans-serif;color:#b0389a}
+.gdone .bd{font-size:2.4rem;display:block;animation:spinin 1s cubic-bezier(.3,1.5,.5,1)}
+@keyframes spinin{from{transform:scale(0) rotate(-200deg)}to{transform:none}}
+.counter{text-align:right;font:600 .85rem Fredoka,sans-serif;color:var(--c);margin-bottom:4px}
+.dots{display:flex;gap:5px;justify-content:center;margin-bottom:10px}
+.dots i{width:10px;height:10px;border-radius:50%;background:#eee}.dots i.ok{background:var(--ok)}.dots i.ko{background:var(--ko)}.dots i.cur{background:var(--c);transform:scale(1.3)}
+.next{display:block;margin:12px auto 0;border:none;background:var(--c);color:#fff;font:600 1rem Fredoka,sans-serif;border-radius:999px;padding:8px 22px;box-shadow:0 4px 0 color-mix(in srgb,var(--c) 60%,#000 15%);animation:pulse 1.4s infinite}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.fb{margin-top:10px;border-radius:16px;padding:8px 12px;font-size:.95rem}
+.fb.ok{background:#e9f9f1;border:2px solid #b7ebd2}.fb.ko{background:#fff0f1;border:2px solid #ffc9cc}
+.fbt{font:600 1rem Fredoka,sans-serif}.fb.ok .fbt{color:var(--ok)}.fb.ko .fbt{color:var(--ko)}
+.fb .s b{color:var(--ok)}
+.shake{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+/* memory */
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;max-width:560px;margin:0 auto}
+@media(max-width:480px){.mem{grid-template-columns:repeat(3,1fr)}}
+.card{aspect-ratio:3/3.4;perspective:700px;border:none;background:none;padding:0}
+.card .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in,.card.done .in{transform:rotateY(180deg)}
+.card .f,.card .b{position:absolute;inset:0;border-radius:16px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:4px;text-align:center}
+.card .f{background:linear-gradient(135deg,#ff8cc0,#b28cff);color:#fff;font-size:1.8rem;box-shadow:0 4px 0 #c86aa8}
+.card .b{transform:rotateY(180deg);background:#fff;border:3px solid #ffc2de;font:600 1rem Fredoka,sans-serif;color:var(--ink);line-height:1.15}
+.card .b.it{font-family:Nunito,sans-serif;font-style:italic;color:#8a5cf6;border-color:#d8c7ff;font-size:.92rem}
+.card.done .b{background:#e9f9f1;border-color:#22a06b;animation:glow 1s}
+@keyframes glow{50%{box-shadow:0 0 0 8px rgba(34,160,107,.25)}}
+/* bulles */
+.bsent{font:600 1.35rem Fredoka,sans-serif;text-align:center;margin:8px 0 18px;line-height:1.6}
+.slot{display:inline-block;min-width:54px;border-bottom:4px dotted var(--c);color:var(--c);padding:0 4px;transition:.3s}
+.slot.ok{color:var(--ok);border-color:var(--ok);border-bottom-style:solid}.slot.ko{color:var(--ko);border-color:var(--ko)}
+.bubbles{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;min-height:90px}
+.bub{width:70px;height:70px;border-radius:50%;border:none;font:600 1.2rem Fredoka,sans-serif;color:#6a3fd1;
+ background:radial-gradient(circle at 30% 28%,#fff 0 10%,rgba(255,255,255,.4) 18%,rgba(210,190,255,.55) 55%,rgba(255,170,215,.75));
+ box-shadow:inset -6px -8px 14px rgba(160,110,255,.35),0 6px 14px rgba(160,110,255,.25);animation:float 3s ease-in-out infinite}
+.bub:nth-child(2){animation-delay:.5s}.bub:nth-child(3){animation-delay:1s}.bub:nth-child(4){animation-delay:1.5s}.bub:nth-child(5){animation-delay:.25s}
+@keyframes float{50%{transform:translateY(-10px)}}
+.bub.pop{animation:popb .4s forwards}@keyframes popb{60%{transform:scale(1.4);opacity:.7}100%{transform:scale(0);opacity:0}}
+.bub.gone{opacity:.25;filter:grayscale(1);animation:none}
+/* chat */
+.phone{max-width:380px;margin:0 auto;background:#2d2238;border-radius:38px;padding:12px;box-shadow:0 14px 30px rgba(45,34,56,.35)}
+.scr{background:linear-gradient(#fff5fb,#f3edff);border-radius:28px;min-height:360px;padding:0 10px 10px;display:flex;flex-direction:column}
+.phead{display:flex;align-items:center;gap:8px;padding:10px 4px;border-bottom:1px solid #f0dcef;margin-bottom:8px}
+.ava{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#ff8cc0,#b28cff);color:#fff;display:grid;place-items:center;font:600 1rem Fredoka,sans-serif}
+.pname{font:600 1rem Fredoka,sans-serif}.pstat{font-size:.72rem;color:var(--ok)}
+.msg{max-width:84%;margin:5px 0;padding:8px 12px;border-radius:18px;font-size:.98rem;animation:msgin .35s cubic-bezier(.3,1.4,.6,1)}
+@keyframes msgin{from{opacity:0;transform:translateY(12px) scale(.9)}}
+.msg.a{background:#fff;border-bottom-left-radius:5px;align-self:flex-start;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.msg.g{background:linear-gradient(135deg,#ff6fae,#c35ee0);color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
+.msg .who{display:block;font:600 .7rem Fredoka,sans-serif;opacity:.7}
+.msg .slot{border-bottom-color:currentColor;color:inherit;min-width:46px}
+.msg.g .slot.ok,.msg.g .slot.ko{color:#fff;background:rgba(255,255,255,.25);border-radius:6px}
+.msg .mrow{display:flex;align-items:center;gap:4px;margin-top:4px}
+.msg .au{width:24px;height:24px;margin:0}.msg .au svg{width:14px;height:14px}
+.msg .itb{margin-left:0}.msg.g .itb{background:rgba(255,255,255,.25);color:#fff;border-color:rgba(255,255,255,.5)}
+.msg .tr{font-size:.85rem}.msg.g .tr{color:#ffe7f3}
+.typing{align-self:flex-start;background:#fff;border-radius:18px;padding:10px 14px;display:flex;gap:4px}
+.typing i{width:7px;height:7px;border-radius:50%;background:#c9b3d8;animation:tp 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tp{50%{transform:translateY(-5px);background:#ff5fa2}}
+.chips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:10px}
+.chip{border:2px solid var(--c);background:#fff;color:var(--c);border-radius:999px;padding:5px 14px;font:600 1rem Fredoka,sans-serif}
+.chip.ok{background:var(--ok);border-color:var(--ok);color:#fff}.chip.ko{background:var(--ko);border-color:var(--ko);color:#fff}
+.verbhint{text-align:center;font-size:.85rem;color:var(--soft);margin-top:8px}
+/* ordre */
+.line{min-height:58px;border:3px dashed color-mix(in srgb,var(--c) 40%,#fff);border-radius:18px;padding:8px;display:flex;flex-wrap:wrap;gap:7px;align-items:center;justify-content:center;background:color-mix(in srgb,var(--c) 5%,#fff)}
+.line.ok{border-color:var(--ok);border-style:solid;background:#e9f9f1}.line.ko{border-color:var(--ko)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px;min-height:46px}
+.tile{border:none;border-radius:12px;padding:7px 13px;font:600 1.05rem Fredoka,sans-serif;color:#fff;background:var(--peach);box-shadow:0 4px 0 #d85a35;animation:tin .3s}
+.tile:nth-child(2n){background:var(--pink);box-shadow:0 4px 0 #d23f81}.tile:nth-child(3n){background:var(--lilac);box-shadow:0 4px 0 #6a3fd1}.tile:nth-child(4n){background:var(--mint);box-shadow:0 4px 0 #23877b}
+@keyframes tin{from{transform:scale(.4)}}
+/* écris */
+.wi{border-top:1px dashed #f0dcef;padding:10px 0}
+.wi:first-child{border-top:none}
+.wq{display:flex;gap:8px;font-weight:600;font-size:1.05rem}
+.wn{flex:none;width:26px;height:26px;border-radius:50%;background:color-mix(in srgb,var(--c) 15%,#fff);color:var(--c);display:grid;place-items:center;font:700 .85rem Fredoka,sans-serif}
+.wrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0 0 34px}
+.vtag{background:color-mix(in srgb,var(--c) 14%,#fff);color:var(--c);border-radius:999px;padding:2px 10px;font:600 .85rem Fredoka,sans-serif}
+.wrow input,.wheelin input{font:600 1.05rem Nunito,sans-serif;padding:6px 12px;border:3px solid #e6d6f0;border-radius:14px;outline:none;width:170px}
+.wrow input:focus,.wheelin input:focus{border-color:var(--c)}
+input.ok{border-color:var(--ok)!important;background:#e9f9f1}input.ko{border-color:var(--ko)!important;background:#fff0f1}
+.go{border:none;background:var(--c);color:#fff;border-radius:12px;padding:7px 14px;font:600 .95rem Fredoka,sans-serif}
+.go:disabled{opacity:.4}
+.wi .fb{margin-left:34px}
+/* écoute */
+.bigplay{display:grid;place-items:center;margin:4px auto 14px;width:96px;height:96px;border-radius:50%;border:none;background:radial-gradient(circle at 35% 30%,#ff9ccc,#d14dd8);box-shadow:0 0 0 0 rgba(209,77,216,.5);animation:ring 1.8s infinite}
+.bigplay svg{width:46px;height:46px;fill:#fff;stroke:#fff;stroke-width:1.6}.bigplay svg .w1,.bigplay svg .w2{fill:none}
+@keyframes ring{70%{box-shadow:0 0 0 22px rgba(209,77,216,0)}}
+.lopts{display:grid;gap:9px;max-width:440px;margin:0 auto}
+.lopt{border:3px solid #ecd9f3;background:#fff;border-radius:16px;padding:10px 14px;font:600 1.08rem Fredoka,sans-serif;color:var(--ink);text-align:left}
+.lopt.ok{border-color:var(--ok);background:#e9f9f1}.lopt.ko{border-color:var(--ko);background:#fff0f1;text-decoration:line-through}
+/* roue */
+.wheelbox{position:relative;width:min(300px,82vw);margin:6px auto 0}
+.wheelbox svg{pointer-events:none;width:100%;height:auto;display:block;transition:transform 3.6s cubic-bezier(.12,.75,.12,1);filter:drop-shadow(0 8px 14px rgba(0,0,0,.18))}
+.pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:2.2rem;z-index:2;filter:drop-shadow(0 3px 2px rgba(0,0,0,.25))}
+.hub{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:1.7rem;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.spin{position:relative;z-index:3;display:block;margin:14px auto 0;border:none;background:linear-gradient(90deg,#f7a400,#ff5fa2);color:#fff;font:700 1.15rem Fredoka,sans-serif;border-radius:999px;padding:10px 30px;box-shadow:0 5px 0 #c4547f}
+.spin:disabled{opacity:.45;animation:none}
+.wheelin{text-align:center;margin-top:12px}
+.wtask{font:600 1.3rem Fredoka,sans-serif;margin-bottom:8px}
+.wtask .vv{color:var(--lilac)}.wtask .pp{color:var(--pink);font-size:1.5rem}
+/* à revoir */
+.final{background:linear-gradient(135deg,#ff5fa2,#d14dd8 55%,#8a5cf6);color:#fff;border-radius:26px;padding:16px;text-align:center;font:600 1.1rem Fredoka,sans-serif;box-shadow:0 10px 26px rgba(209,77,216,.35)}
+.final b{font-size:2.3rem;color:#fff6b0;display:block;line-height:1.1}
+.final .sub{font-weight:400;font-size:.9rem;opacity:.9}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:14px 0}
+.badge{background:#fff;border-radius:20px;padding:10px;text-align:center;border:3px dashed #ead8f0;font:500 .82rem Fredoka,sans-serif;color:#b9a6c4}
+.badge .bi{font-size:2.1rem;display:block;filter:grayscale(1) opacity(.35)}
+.badge.won{border:3px solid #ffd36e;color:#8a3d9a;background:linear-gradient(160deg,#fffbe9,#fff0f8);animation:spinin .9s}
+.badge.won .bi{filter:none}
+.badge.won.gold{box-shadow:0 0 0 4px #fff3c4,0 6px 18px rgba(247,164,0,.35)}
+.badge .bs{display:block;font-weight:600;color:#d14dd8}
+.rv{background:#fff;border-radius:20px;padding:10px 14px;margin:10px 0;border-left:7px solid var(--pink);box-shadow:0 3px 12px rgba(255,95,162,.12)}
+.rvh{font:600 .78rem Fredoka,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#d14dd8}
+.rv .s b{color:var(--ok)}
+.rvy{font-size:.92rem;color:#6a5a76}.rvy s{color:var(--ko)}
+.rvl{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.rvl a{text-decoration:none;font:600 .85rem Fredoka,sans-serif;border-radius:999px;padding:4px 12px;background:var(--pink);color:#fff}
+.rvl a.back{background:#fff;color:var(--pink);border:2px solid var(--pink)}
+.empty{text-align:center;color:var(--soft);font-style:italic}
+.center{text-align:center;margin-top:12px}
+.reset{border:3px solid var(--pink);background:#fff;color:var(--pink);font:600 1rem Fredoka,sans-serif;border-radius:999px;padding:7px 20px}
+.flash{animation:flash 2.4s}
+@keyframes flash{0%,45%{box-shadow:0 0 0 6px #ffe066,0 0 30px #ffd23f}100%{box-shadow:none}}
+/* toast */
+.toast{position:fixed;left:50%;top:84px;transform:translateX(-50%) scale(.5);opacity:0;z-index:210;background:#fff;border-radius:999px;padding:8px 20px;font:700 1.15rem Fredoka,sans-serif;color:#d14dd8;box-shadow:0 8px 26px rgba(209,77,216,.4);border:3px solid #ffd6ea;transition:.35s cubic-bezier(.3,1.5,.6,1);white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) scale(1)}
+.bpop{position:fixed;inset:0;z-index:205;display:grid;place-items:center;pointer-events:none}
+.bpop div{background:#fff;border-radius:30px;padding:18px 26px;text-align:center;box-shadow:0 20px 60px rgba(138,92,246,.4);border:4px solid #ffd36e;animation:bpop 2.8s forwards;font:600 1.1rem Fredoka,sans-serif;color:#8a3d9a}
+.bpop .bi{font-size:3.4rem;display:block;animation:spinin 1s}
+.bpop small{display:block;font:400 .85rem Nunito,sans-serif;color:var(--soft)}
+@keyframes bpop{0%{transform:scale(.2);opacity:0}12%{transform:scale(1.08);opacity:1}20%{transform:scale(1)}85%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.8) translateY(-40px)}}
+.acc{position:fixed;left:0;right:0;bottom:0;z-index:120;background:#8a5cf6;display:none;justify-content:center;flex-wrap:wrap;gap:5px;padding:6px}
+.acc.show{display:flex}
+.acc button{background:#fff;border:none;border-radius:8px;min-width:34px;padding:5px 0;font:700 1rem Nunito,sans-serif;color:#6a3fd1}
+@media(max-width:520px){body{font-size:16px}.cp{width:96px}.s .tr{padding-left:0}.wrow,.wi .fb{margin-left:0}.htitle{left:10px;bottom:10px;padding:8px 12px}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important}}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<div class="top"><div class="topin">
+ <span class="brand">Le français avec Irène</span>
+ <button type="button" class="tb" id="allit" title="Toutes les traductions">IT</button>
+ <button type="button" class="tb on" id="snd" title="Effets sonores">🎵</button>
+ <span class="score" id="score"><span class="h">♥</span><span id="sc">0</span>/<span>45</span></span>
+</div><div class="prog"><i id="progbar"></i></div></div>
+<main class="wrap">
+<header class="hero">
+ <img src="img/piano.jpg" alt="Un piano à queue">
+ <div class="sparkles" aria-hidden="true"></div>
+ <div class="htitle">
+  <span class="tag">♡ Révision · Pour Giulia ♡</span>
+  <h1>Les verbes <span>au présent</span></h1>
+  <div class="hit"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">I verbi al presente</span></div>
+ </div>
+</header>
+<div class="keys" aria-hidden="true"></div>
+<nav class="toc"><a href="#pronoms">1 · Les pronoms</a><a href="#er">2 · Les verbes en -er</a><a href="#ir">3 · Les verbes en -ir</a><a href="#verbes">4 · Mes 12 verbes</a><a href="#jeux">5 · Les jeux</a><a href="#revoir">6 · À revoir</a></nav>
+<div class="howto"><div class="ex "><div class="fr"><span class="txt">Giulia, touche <b>le haut-parleur</b> pour écouter et <b>IT</b> pour lire la traduction. Chaque bonne réponse te donne un cœur ♥.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Giulia, tocca l'altoparlante per ascoltare e IT per leggere la traduzione. Ogni risposta giusta ti regala un cuore ♥.</div></div></div>
+
+<section class="sec" style="--c:#ff5fa2;--t:#fff0f6">
+<header class="sh" id="pronoms" style="--c:#ff5fa2"><span class="num">1</span><div class="shx"><h2>Les pronoms personnels</h2><div class="shit"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">I pronomi personali</span></div></div><span class="emo">👭</span></header>
+<div class="pgrid" id="r-pronoms">
+<div class="pc"><button type="button" class="au " data-a="audio/79563e90630a.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><b>je</b><span class="pit">io</span><span class="pn">j' devant une voyelle</span></div>
+<div class="pc"><button type="button" class="au " data-a="audio/b6b4ce6df035.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><b>tu</b><span class="pit">tu</span></div>
+<div class="pc"><button type="button" class="au " data-a="audio/84b2343d1895.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><b>il / elle / on</b><span class="pit">lui / lei / noi</span><span class="pn">on = nous à l'oral</span></div>
+<div class="pc"><button type="button" class="au " data-a="audio/23300e00e858.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><b>nous</b><span class="pit">noi</span></div>
+<div class="pc"><button type="button" class="au " data-a="audio/593ffa780fc8.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><b>vous</b><span class="pit">voi · Lei</span><span class="pn">vous = aussi la politesse</span></div>
+<div class="pc"><button type="button" class="au " data-a="audio/b77f0c3aa39d.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><b>ils / elles</b><span class="pit">loro</span></div>
+</div>
+<div class="bigtip"><div class="ex "><div class="fr"><span class="txt">En italien, on peut dire « parlo » sans pronom. En français, <b>jamais</b> : on dit toujours <b>je parle</b>, <b>tu parles</b>, <b>nous parlons</b>…</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">In italiano si può dire « parlo » senza pronome. In francese mai: si dice sempre je parle, tu parles, nous parlons…</div></div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="audio/ba267c105757.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt"><b>Je</b> m'appelle Giulia et <b>j</b>'habite à Milan.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Mi chiamo Giulia e abito a Milano.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="audio/e015c4a5ba6e.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt"><b>Elle</b> s'appelle Alice. C'est ma sœur.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Si chiama Alice. È mia sorella.</div></div>
+</section>
+<section class="sec" style="--c:#8a5cf6;--t:#f4efff">
+<header class="sh" id="er" style="--c:#8a5cf6"><span class="num">2</span><div class="shx"><h2>Les verbes en -er</h2><div class="shit"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">I verbi in -er</span></div></div><span class="emo">🎹</span></header>
+<div class="ex lead"><div class="fr"><span class="txt">C'est la grande famille : presque tous les verbes en <b>-er</b> sont réguliers. Voici la recette magique.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">È la grande famiglia: quasi tutti i verbi in -er sono regolari. Ecco la ricetta magica.</div></div>
+<div class="recipe" id="r-er">
+ <div class="rstep"><span>1</span><div><div class="ex "><div class="fr"><span class="txt">Je prends l'infinitif</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Prendo l'infinito</div></div><div class="rbig">parl<s>er</s></div></div></div>
+ <div class="rstep"><span>2</span><div><div class="ex "><div class="fr"><span class="txt">J'enlève <b>-er</b></span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Tolgo -er</div></div><div class="rbig">parl-</div></div></div>
+ <div class="rstep"><span>3</span><div><div class="ex "><div class="fr"><span class="txt">J'ajoute la terminaison</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Aggiungo la desinenza</div></div><div class="ends"><i>e</i><i>es</i><i>e</i><i>ons</i><i>ez</i><i>ent</i></div></div></div>
+</div>
+<div class="conj" id="conj-parler"><div class="conjh">parler <span>parlare</span><button type="button" class="build" data-t="conj-parler">✨ Construis le verbe</button></div>
+<div class="cl"><button type="button" class="au " data-a="audio/087b4674d477.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="cp">je</span><span class="cr">parl</span><span class="ce">e</span></div>
+<div class="cl"><button type="button" class="au " data-a="audio/9588e8a1e2d1.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="cp">tu</span><span class="cr">parl</span><span class="ce">es</span></div>
+<div class="cl"><button type="button" class="au " data-a="audio/09f5945ed91d.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="cp">il / elle / on</span><span class="cr">parl</span><span class="ce">e</span></div>
+<div class="cl"><button type="button" class="au " data-a="audio/be1649f05a6a.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="cp">nous</span><span class="cr">parl</span><span class="ce">ons</span></div>
+<div class="cl"><button type="button" class="au " data-a="audio/b9aa945e9e13.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="cp">vous</span><span class="cr">parl</span><span class="ce">ez</span></div>
+<div class="cl"><button type="button" class="au " data-a="audio/f307002f0f19.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="cp">ils / elles</span><span class="cr">parl</span><span class="ce">ent</span></div>
+</div>
+<div class="tipbox" id="r-son"><div class="tiph">🎧 Quatre formes, un seul son</div><div class="ex "><div class="fr"><span class="txt"><b>je parle, tu parles, il parle, ils parlent</b> se prononcent de la même façon. On n'entend que <b>nous parlons</b> et <b>vous parlez</b>.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">je parle, tu parles, il parle, ils parlent si pronunciano allo stesso modo. Si sentono solo nous parlons e vous parlez.</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/ca417af5b372.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Je parle, tu parles, il parle, ils parlent.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Parlo, parli, parla, parlano.</div></div></div>
+<div class="twin">
+<div class="tipbox pink" id="r-j"><div class="tiph">💗 j' devant une voyelle</div><div class="ex "><div class="fr"><span class="txt">Devant <b>a, e, é, i, o, u</b> et <b>h</b>, je devient <b>j'</b>.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Davanti ad a, e, é, i, o, u e h, je diventa j'.</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/b68c91ebd540.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt"><b>J'</b>aime, <b>j'</b>adore, <b>j'</b>écoute, <b>j'</b>habite.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Amo, adoro, ascolto, abito.</div></div></div>
+<div class="tipbox gold" id="r-ger"><div class="tiph">⭐ nous mang<b>e</b>ons</div><div class="ex "><div class="fr"><span class="txt">Avec <b>manger</b>, on ajoute un <b>e</b> devant -ons pour garder le son doux : nous mangeons.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Con manger si aggiunge una e davanti a -ons per mantenere il suono dolce: nous mangeons.</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/a5d2c7dff1cf.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Nous <b>mangeons</b> des pâtes.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Mangiamo la pasta.</div></div></div>
+</div></section>
+<section class="sec" style="--c:#33b5a6;--t:#eafaf7">
+<header class="sh" id="ir" style="--c:#33b5a6"><span class="num">3</span><div class="shx"><h2>Les verbes en -ir : finir, choisir</h2><div class="shit"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">I verbi in -ir: finire, scegliere</span></div></div><span class="emo">🌸</span></header>
+<div class="ex lead"><div class="fr"><span class="txt">Au pluriel, ils ont un petit secret : <b>-iss-</b>.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Al plurale hanno un piccolo segreto: -iss-.</div></div>
+<div class="conj" id="r-ir" style="--c:#33b5a6"><div class="conjh">finir <span>finire</span><button type="button" class="build" data-t="r-ir">✨ Construis le verbe</button></div>
+<div class="cl"><button type="button" class="au " data-a="audio/b0797eb2ac86.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="cp">je</span><span class="cr">fin</span><span class="ce">is</span></div>
+<div class="cl"><button type="button" class="au " data-a="audio/685fac22ef40.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="cp">tu</span><span class="cr">fin</span><span class="ce">is</span></div>
+<div class="cl"><button type="button" class="au " data-a="audio/5eaae2c0cc40.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="cp">il / elle / on</span><span class="cr">fin</span><span class="ce">it</span></div>
+<div class="cl"><button type="button" class="au " data-a="audio/d42dc135f719.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="cp">nous</span><span class="cr">fin</span><span class="ce">issons</span></div>
+<div class="cl"><button type="button" class="au " data-a="audio/f79b33d74216.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="cp">vous</span><span class="cr">fin</span><span class="ce">issez</span></div>
+<div class="cl"><button type="button" class="au " data-a="audio/e09e34d8a5e8.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="cp">ils / elles</span><span class="cr">fin</span><span class="ce">issent</span></div>
+</div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="audio/c1eb6f5364f0.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Nous <b>choisissons</b> un film et Alice <b>choisit</b> les bonbons.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Noi scegliamo un film e Alice sceglie le caramelle.</div></div>
+</section>
+<section class="sec" style="--c:#ff7b54;--t:#fff3ee">
+<header class="sh" id="verbes" style="--c:#ff7b54"><span class="num">4</span><div class="shx"><h2>Mes 12 verbes préférés</h2><div class="shit"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">I miei 12 verbi preferiti</span></div></div><span class="emo">💖</span></header>
+<div class="ex lead"><div class="fr"><span class="txt">Écoute chaque verbe et sa phrase : ce sont les verbes de ta vie de tous les jours !</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Ascolta ogni verbo e la sua frase: sono i verbi della tua vita di tutti i giorni!</div></div>
+<div class="vgrid">
+<article class="vc" id="v-parler" style="--vc:#ff5fa2"><div class="vtop"><button type="button" class="au au-l" data-a="audio/4cecc22bd1f8.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>parler</h3><span class="vit">parlare</span></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/7a12d1955184.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Je <b>parle</b> italien et un peu français.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Parlo italiano e un po' di francese.</div></div></article>
+<article class="vc" id="v-aimer" style="--vc:#ff7b54"><div class="vtop"><button type="button" class="au au-l" data-a="audio/712fb4938708.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>aimer</h3><span class="vit">amare, piacere</span></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/9545d74f1838.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">J'<b>aime</b> beaucoup la musique.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Mi piace molto la musica.</div></div><div class="ex vnote"><div class="fr"><span class="txt">J'aime le chocolat = mi piace il cioccolato.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">J'aime le chocolat = mi piace il cioccolato.</div></div></article>
+<article class="vc" id="v-adorer" style="--vc:#f7a400"><div class="vtop"><button type="button" class="au au-l" data-a="audio/283de206482e.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>adorer</h3><span class="vit">adorare</span></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/2f2855917530.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Alice <b>adore</b> les crêpes au chocolat.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Alice adora le crêpes al cioccolato.</div></div></article>
+<article class="vc" id="v-habiter" style="--vc:#33b5a6"><div class="vtop"><button type="button" class="au au-l" data-a="audio/ed9477c0e36f.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>habiter</h3><span class="vit">abitare</span></div><img src="img/milan.jpg" alt="Milan · Milano"><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/f432a45bde49.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Nous <b>habitons</b> à Milan.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Abitiamo a Milano.</div></div></article>
+<article class="vc" id="v-jouer" style="--vc:#3a8dde"><div class="vtop"><button type="button" class="au au-l" data-a="audio/cc6aa7d3368c.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>jouer</h3><span class="vit">giocare · suonare</span></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/a51f82f6fa30.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Je <b>joue</b> du piano tous les jours.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Suono il pianoforte tutti i giorni.</div></div><div class="ex vnote"><div class="fr"><span class="txt"><b>jouer du</b> piano, de la guitare (un instrument) · <b>jouer au</b> tennis, aux cartes (un jeu, un sport)</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">jouer du piano = suonare il pianoforte · jouer au tennis = giocare a tennis</div></div></article>
+<article class="vc" id="v-ecouter" style="--vc:#8a5cf6"><div class="vtop"><button type="button" class="au au-l" data-a="audio/170290f5ca1e.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>écouter</h3><span class="vit">ascoltare</span></div><img src="img/casque.jpg" alt="un casque · le cuffie"><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/6342dee48bd6.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">J'<b>écoute</b> de la musique dans ma chambre.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Ascolto la musica in camera mia.</div></div></article>
+<article class="vc" id="v-regarder" style="--vc:#d14dd8"><div class="vtop"><button type="button" class="au au-l" data-a="audio/d9ea0d366a8f.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>regarder</h3><span class="vit">guardare</span></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/23e3897b8bd4.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Le soir, nous <b>regardons</b> un film en famille.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">La sera guardiamo un film in famiglia.</div></div></article>
+<article class="vc" id="v-manger" style="--vc:#ff5fa2"><div class="vtop"><button type="button" class="au au-l" data-a="audio/cea28ca4384d.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>manger</h3><span class="vit">mangiare</span></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/3ad48077dad4.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">À midi, nous <b>mangeons</b> à la cantine.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">A mezzogiorno mangiamo in mensa.</div></div><div class="ex vnote"><div class="fr"><span class="txt">Attention : nous mang<b>e</b>ons (avec un e).</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Attenzione: nous mangeons (con una e).</div></div></article>
+<article class="vc" id="v-chanter" style="--vc:#ff7b54"><div class="vtop"><button type="button" class="au au-l" data-a="audio/ef884f6136a0.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>chanter</h3><span class="vit">cantare</span></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/a064bd2d8457.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Alice <b>chante</b> sous la douche.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Alice canta sotto la doccia.</div></div></article>
+<article class="vc" id="v-danser" style="--vc:#33b5a6"><div class="vtop"><button type="button" class="au au-l" data-a="audio/e13daa15343b.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>danser</h3><span class="vit">ballare</span></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/f69be5633b71.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Maman et papa <b>dansent</b> dans la cuisine.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">La mamma e il papà ballano in cucina.</div></div></article>
+<article class="vc" id="v-finir" style="--vc:#3a8dde"><div class="vtop"><button type="button" class="au au-l" data-a="audio/6fdd63c11d51.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>finir</h3><span class="vit">finire</span></div><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/3e7981d9b58c.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Je <b>finis</b> mes devoirs à six heures.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Finisco i compiti alle sei.</div></div></article>
+<article class="vc" id="v-choisir" style="--vc:#8a5cf6"><div class="vtop"><button type="button" class="au au-l" data-a="audio/1ed9803ac57f.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><h3>choisir</h3><span class="vit">scegliere</span></div><img src="img/glaces.jpg" alt="un glacier à Milan · una gelateria a Milano"><div class="s "><div class="fr"><button type="button" class="au " data-a="audio/cc43baf86686.mp3" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Tu <b>choisis</b> quelle glace ?</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Quale gelato scegli?</div></div></article>
+</div></section>
+<section class="sec" style="--c:#d14dd8;--t:#fdf0fe">
+<header class="sh" id="jeux" style="--c:#d14dd8"><span class="num">5</span><div class="shx"><h2>Les jeux</h2><div class="shit"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">I giochi</span></div></div><span class="emo">🎀</span></header>
+<div class="ex lead"><div class="fr"><span class="txt">Giulia, à toi de jouer ! Chaque bonne réponse vaut un cœur. Si tu te trompes, tu retrouveras la règle dans « À revoir ».</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Giulia, tocca a te! Ogni risposta giusta vale un cuore. Se sbagli, ritroverai la regola in « À revoir ».</div></div>
+<div class="game" id="g-memory" style="--c:#ff5fa2"><div class="gh"><span class="gn">1</span><div class="ghx"><div class="gk">JEU 1</div><div class="gt">Le memory des verbes</div><div class="git"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">Il memory dei verbi</span></div></div><span class="gemo">🃏</span></div><div class="ex cons"><div class="fr"><span class="txt">Retourne deux cartes : trouve le verbe français et sa traduction.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Gira due carte: trova il verbo francese e la sua traduzione.</div></div><div class="gbody" data-game="g-memory"></div><div class="gdone"></div></div>
+<div class="game" id="g-bulles" style="--c:#8a5cf6"><div class="gh"><span class="gn">2</span><div class="ghx"><div class="gk">JEU 2</div><div class="gt">Les bulles magiques</div><div class="git"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">Le bolle magiche</span></div></div><span class="gemo">🫧</span></div><div class="ex cons"><div class="fr"><span class="txt">Touche la bulle avec la bonne terminaison.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Tocca la bolla con la desinenza giusta.</div></div><div class="gbody" data-game="g-bulles"></div><div class="gdone"></div></div>
+<div class="game" id="g-chat" style="--c:#33b5a6"><div class="gh"><span class="gn">3</span><div class="ghx"><div class="gk">JEU 3</div><div class="gt">Les messages d'Alice</div><div class="git"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">I messaggi di Alice</span></div></div><span class="gemo">📱</span></div><div class="ex cons"><div class="fr"><span class="txt">Alice t'écrit ! Choisis le bon verbe pour continuer la conversation.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Alice ti scrive! Scegli il verbo giusto per continuare la conversazione.</div></div><div class="gbody" data-game="g-chat"></div><div class="gdone"></div></div>
+<div class="game" id="g-ordre" style="--c:#ff7b54"><div class="gh"><span class="gn">4</span><div class="ghx"><div class="gk">JEU 4</div><div class="gt">Les phrases en désordre</div><div class="git"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">Le frasi in disordine</span></div></div><span class="gemo">🧩</span></div><div class="ex cons"><div class="fr"><span class="txt">Touche les étiquettes dans le bon ordre.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Tocca le etichette nell'ordine giusto.</div></div><div class="gbody" data-game="g-ordre"></div><div class="gdone"></div></div>
+<div class="game" id="g-ecris" style="--c:#3a8dde"><div class="gh"><span class="gn">5</span><div class="ghx"><div class="gk">JEU 5</div><div class="gt">J'écris le verbe</div><div class="git"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">Scrivo il verbo</span></div></div><span class="gemo">✏️</span></div><div class="ex cons"><div class="fr"><span class="txt">Écris le verbe au présent.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Scrivi il verbo al presente.</div></div><div class="gbody" data-game="g-ecris"></div><div class="gdone"></div></div>
+<div class="game" id="g-ecoute" style="--c:#d14dd8"><div class="gh"><span class="gn">6</span><div class="ghx"><div class="gk">JEU 6</div><div class="gt">J'écoute et je choisis</div><div class="git"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">Ascolto e scelgo</span></div></div><span class="gemo">🎧</span></div><div class="ex cons"><div class="fr"><span class="txt">Écoute bien la phrase, puis choisis ce que tu entends.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Ascolta bene la frase, poi scegli quello che senti.</div></div><div class="gbody" data-game="g-ecoute"></div><div class="gdone"></div></div>
+<div class="game" id="g-wheel" style="--c:#f7a400"><div class="gh"><span class="gn">7</span><div class="ghx"><div class="gk">JEU 7</div><div class="gt">La roue magique</div><div class="git"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">La ruota magica</span></div></div><span class="gemo">🎡</span></div><div class="ex cons"><div class="fr"><span class="txt">Fais tourner la roue, puis écris le verbe avec le pronom qui sort.</span><button type="button" class="itb" aria-label="Traduzione">IT</button></div><div class="tr">Fai girare la ruota, poi scrivi il verbo con il pronome che esce.</div></div><div class="gbody" data-game="g-wheel"></div><div class="gdone"></div></div>
+</section>
+<section class="sec" style="--c:#ff5fa2;--t:#fff0f6">
+<header class="sh" id="revoir" style="--c:#ff5fa2"><span class="num">6</span><div class="shx"><h2>À revoir</h2><div class="shit"><button type="button" class="itb" aria-label="Traduzione">IT</button><span class="tr">Da ripassare</span></div></div><span class="emo">📌</span></header>
+<div class="final" id="final"></div>
+<div class="badges" id="badges"></div>
+<div id="revlist" class="revlist"><p class="empty">Ici apparaîtront les points à revoir.<span class="tr show">Qui appariranno i punti da ripassare.</span></p></div>
+<div class="center"><button type="button" class="reset" id="reset">↺ Recommencer les jeux</button></div></section>
+</main>
+<div class="toast" id="toast"></div>
+<div class="acc" id="acc"></div>
+<script>
+(function(){
+var DATA={"memory": [{"fr": "parler", "it": "parlare", "a": "audio/4cecc22bd1f8.mp3"}, {"fr": "jouer", "it": "suonare · giocare", "a": "audio/cc6aa7d3368c.mp3"}, {"fr": "écouter", "it": "ascoltare", "a": "audio/170290f5ca1e.mp3"}, {"fr": "regarder", "it": "guardare", "a": "audio/d9ea0d366a8f.mp3"}, {"fr": "manger", "it": "mangiare", "a": "audio/cea28ca4384d.mp3"}, {"fr": "choisir", "it": "scegliere", "a": "audio/1ed9803ac57f.mp3"}], "bulles": [{"full": "Nous jouons au parc avec Alice.", "it": "Giochiamo al parco con Alice.", "a": "audio/484fb7818046.mp3", "rule": "r-er", "pre": "Nous jou", "post": " au parc avec Alice.", "opts": ["e", "es", "ons", "ez", "ent"], "ans": "ons"}, {"full": "Tu écoutes la radio ?", "it": "Ascolti la radio?", "a": "audio/19657cdb52be.mp3", "rule": "r-er", "pre": "Tu écout", "post": " la radio ?", "opts": ["e", "es", "ons", "ez", "ent"], "ans": "es"}, {"full": "Maman et papa regardent un film.", "it": "La mamma e il papà guardano un film.", "a": "audio/b086bd7f1479.mp3", "rule": "r-er", "pre": "Maman et papa regard", "post": " un film.", "opts": ["e", "es", "ons", "ez", "ent"], "ans": "ent"}, {"full": "Vous chantez très bien !", "it": "Cantate benissimo!", "a": "audio/3248ca168527.mp3", "rule": "r-er", "pre": "Vous chant", "post": " très bien !", "opts": ["e", "es", "ons", "ez", "ent"], "ans": "ez"}, {"full": "Je parle avec ma copine.", "it": "Parlo con la mia amica.", "a": "audio/6d790790a712.mp3", "rule": "r-er", "pre": "Je parl", "post": " avec ma copine.", "opts": ["e", "es", "ons", "ez", "ent"], "ans": "e"}, {"full": "Alice danse dans sa chambre.", "it": "Alice balla in camera sua.", "a": "audio/853c140f60f9.mp3", "rule": "r-er", "pre": "Alice dans", "post": " dans sa chambre.", "opts": ["e", "es", "ons", "ez", "ent"], "ans": "e"}, {"full": "Elles aiment les crêpes.", "it": "A loro piacciono le crêpes.", "a": "audio/61d00a230f44.mp3", "rule": "r-er", "pre": "Elles aim", "post": " les crêpes.", "opts": ["e", "es", "ons", "ez", "ent"], "ans": "ent"}, {"full": "Nous mangeons une pizza.", "it": "Mangiamo una pizza.", "a": "audio/77d6af5dd662.mp3", "rule": "r-ger", "pre": "Nous mang", "post": " une pizza.", "opts": ["e", "ons", "eons", "ent"], "ans": "eons"}], "chat": [{"who": "Alice", "text": "Coucou Giulia ! Tu ___ quoi ?", "verb": "écouter", "opts": ["écoute", "écoutes", "écoutent"], "ans": "écoutes", "it": "Ciao Giulia! Che cosa ascolti?", "rule": "r-er", "full": "Coucou Giulia ! Tu écoutes quoi ?", "a": "audio/7fd72bbbb101.mp3"}, {"who": "Giulia", "text": "J'___ une chanson française.", "verb": "écouter", "opts": ["écoute", "écoutes", "écoutons"], "ans": "écoute", "it": "Ascolto una canzone francese.", "rule": "r-j", "full": "J'écoute une chanson française.", "a": "audio/2eda861e6d02.mp3"}, {"who": "Alice", "text": "Ce soir, maman et papa ___ un film. Tu viens ?", "verb": "regarder", "opts": ["regarde", "regardez", "regardent"], "ans": "regardent", "it": "Stasera la mamma e il papà guardano un film. Vieni?", "rule": "r-er", "full": "Ce soir, maman et papa regardent un film. Tu viens ?", "a": "audio/b64661f37373.mp3"}, {"who": "Giulia", "text": "Oui ! Mais d'abord, je ___ mes devoirs.", "verb": "finir", "opts": ["fini", "finis", "finit"], "ans": "finis", "it": "Sì! Ma prima finisco i compiti.", "rule": "r-ir", "full": "Oui ! Mais d'abord, je finis mes devoirs.", "a": "audio/5da521366413.mp3"}, {"who": "Alice", "text": "Après, nous ___ des crêpes !", "verb": "manger", "opts": ["mangons", "mangeons", "mangez"], "ans": "mangeons", "it": "Dopo mangiamo delle crêpes!", "rule": "r-ger", "full": "Après, nous mangeons des crêpes !", "a": "audio/d4536417fa9e.mp3"}, {"who": "Giulia", "text": "Super, j'___ les crêpes !", "verb": "adorer", "opts": ["adore", "adores", "adorent"], "ans": "adore", "it": "Fantastico, adoro le crêpes!", "rule": "r-j", "full": "Super, j'adore les crêpes !", "a": "audio/26c9b5b25662.mp3"}], "ordre": [{"full": "Je joue du piano le soir.", "it": "Suono il pianoforte la sera.", "a": "audio/66d27655ae69.mp3", "rule": "v-jouer", "tiles": ["Je", "joue", "du piano", "le soir."]}, {"full": "Nous habitons à Milan.", "it": "Abitiamo a Milano.", "a": "audio/f432a45bde49.mp3", "rule": "v-habiter", "tiles": ["Nous", "habitons", "à", "Milan."]}, {"full": "Alice chante dans sa chambre.", "it": "Alice canta in camera sua.", "a": "audio/eac70b2377d9.mp3", "rule": "v-chanter", "tiles": ["Alice", "chante", "dans", "sa chambre."]}, {"full": "Tu choisis une glace ?", "it": "Scegli un gelato?", "a": "audio/a60011036e60.mp3", "rule": "r-ir", "tiles": ["Tu", "choisis", "une", "glace ?"]}, {"full": "Maman et papa dansent dans la cuisine.", "it": "La mamma e il papà ballano in cucina.", "a": "audio/f69be5633b71.mp3", "rule": "r-pronoms", "tiles": ["Maman", "et papa", "dansent", "dans la cuisine."]}], "ecris": [{"full": "Le samedi, je joue du piano.", "it": "Il sabato suono il pianoforte.", "a": "audio/76b7f271204b.mp3", "rule": "r-er", "q": "Le samedi, je ___ du piano.", "verb": "jouer", "ans": ["joue"]}, {"full": "Alice et moi, nous habitons à Milan.", "it": "Alice e io abitiamo a Milano.", "a": "audio/6a7fdf1e66a3.mp3", "rule": "r-er", "q": "Alice et moi, nous ___ à Milan.", "verb": "habiter", "ans": ["habitons"]}, {"full": "Tu aimes les mathématiques ?", "it": "Ti piace la matematica?", "a": "audio/a38374bd754d.mp3", "rule": "r-er", "q": "Tu ___ les mathématiques ?", "verb": "aimer", "ans": ["aimes"]}, {"full": "Maman choisit un livre pour Alice.", "it": "La mamma sceglie un libro per Alice.", "a": "audio/e8d8c9d90c79.mp3", "rule": "r-ir", "q": "Maman ___ un livre pour Alice.", "verb": "choisir", "ans": ["choisit"]}, {"full": "Vous parlez français ?", "it": "Parlate francese?", "a": "audio/f3ed8c26602f.mp3", "rule": "r-er", "q": "Vous ___ français ?", "verb": "parler", "ans": ["parlez"]}, {"full": "Les filles finissent l'école à quatre heures.", "it": "Le ragazze finiscono la scuola alle quattro.", "a": "audio/c925d7205cda.mp3", "rule": "r-ir", "q": "Les filles ___ l'école à quatre heures.", "verb": "finir", "ans": ["finissent"]}, {"full": "J'écoute mon professeur.", "it": "Ascolto il mio professore.", "a": "audio/c750a7a47f39.mp3", "rule": "r-j", "q": "J'___ mon professeur.", "verb": "écouter", "ans": ["écoute"]}, {"full": "Papa adore le café.", "it": "Il papà adora il caffè.", "a": "audio/a558705259b9.mp3", "rule": "r-er", "q": "Papa ___ le café.", "verb": "adorer", "ans": ["adore"]}], "ecoute": [{"full": "Nous dansons.", "it": "Balliamo.", "a": "audio/41c6001a4a02.mp3", "rule": "r-son", "opts": ["Je danse.", "Nous dansons.", "Vous dansez."]}, {"full": "Vous écoutez la chanson ?", "it": "Ascoltate la canzone?", "a": "audio/197270d7740f.mp3", "rule": "r-son", "opts": ["Tu écoutes la chanson ?", "Nous écoutons la chanson ?", "Vous écoutez la chanson ?"]}, {"full": "Ils finissent leurs devoirs.", "it": "Finiscono i compiti.", "a": "audio/af6c20c24a24.mp3", "rule": "r-ir", "opts": ["Il finit ses devoirs.", "Ils finissent leurs devoirs.", "Vous finissez vos devoirs."]}, {"full": "Tu manges une pomme.", "it": "Mangi una mela.", "a": "audio/0857d4e444c1.mp3", "rule": "r-son", "opts": ["Tu manges une pomme.", "Nous mangeons une pomme.", "Vous mangez une pomme."]}, {"full": "J'habite à Milan.", "it": "Abito a Milano.", "a": "audio/9b358d65c50e.mp3", "rule": "r-j", "opts": ["Nous habitons à Milan.", "J'habite à Milan.", "Vous habitez à Milan."]}, {"full": "Elles choisissent une robe.", "it": "Scelgono un vestito.", "a": "audio/ba8ed7b84ad2.mp3", "rule": "r-ir", "opts": ["Elle choisit une robe.", "Elles choisissent une robe.", "Nous choisissons une robe."]}], "wheel": {"p": ["je", "tu", "il", "elle", "nous", "vous", "ils", "elles"], "v": [{"v": "parler", "it": "parlare"}, {"v": "aimer", "it": "amare"}, {"v": "jouer", "it": "suonare"}, {"v": "écouter", "it": "ascoltare"}, {"v": "regarder", "it": "guardare"}, {"v": "manger", "it": "mangiare"}, {"v": "chanter", "it": "cantare"}, {"v": "finir", "it": "finire"}], "forms": {"parler|je": {"p": "je ", "f": "parle", "a": "audio/087b4674d477.mp3"}, "parler|tu": {"p": "tu ", "f": "parles", "a": "audio/9588e8a1e2d1.mp3"}, "parler|il": {"p": "il ", "f": "parle", "a": "audio/1636805271b9.mp3"}, "parler|elle": {"p": "elle ", "f": "parle", "a": "audio/2a73a6954dce.mp3"}, "parler|nous": {"p": "nous ", "f": "parlons", "a": "audio/be1649f05a6a.mp3"}, "parler|vous": {"p": "vous ", "f": "parlez", "a": "audio/b9aa945e9e13.mp3"}, "parler|ils": {"p": "ils ", "f": "parlent", "a": "audio/f62b36aef8ab.mp3"}, "parler|elles": {"p": "elles ", "f": "parlent", "a": "audio/431ddd5ad2cf.mp3"}, "aimer|je": {"p": "j'", "f": "aime", "a": "audio/fc2b7440c880.mp3"}, "aimer|tu": {"p": "tu ", "f": "aimes", "a": "audio/6978f4d5702f.mp3"}, "aimer|il": {"p": "il ", "f": "aime", "a": "audio/4cdb94356d12.mp3"}, "aimer|elle": {"p": "elle ", "f": "aime", "a": "audio/4fe4e8a50cd6.mp3"}, "aimer|nous": {"p": "nous ", "f": "aimons", "a": "audio/0e66d623cf1d.mp3"}, "aimer|vous": {"p": "vous ", "f": "aimez", "a": "audio/792057dc36f2.mp3"}, "aimer|ils": {"p": "ils ", "f": "aiment", "a": "audio/21faa68d7bb3.mp3"}, "aimer|elles": {"p": "elles ", "f": "aiment", "a": "audio/53911911f1c7.mp3"}, "jouer|je": {"p": "je ", "f": "joue", "a": "audio/30f8a22984b4.mp3"}, "jouer|tu": {"p": "tu ", "f": "joues", "a": "audio/f375255df90a.mp3"}, "jouer|il": {"p": "il ", "f": "joue", "a": "audio/390847b72cb7.mp3"}, "jouer|elle": {"p": "elle ", "f": "joue", "a": "audio/d7abe47bb7b9.mp3"}, "jouer|nous": {"p": "nous ", "f": "jouons", "a": "audio/bc9e1c06c36c.mp3"}, "jouer|vous": {"p": "vous ", "f": "jouez", "a": "audio/c8125dbc2005.mp3"}, "jouer|ils": {"p": "ils ", "f": "jouent", "a": "audio/ec32fce0e5ce.mp3"}, "jouer|elles": {"p": "elles ", "f": "jouent", "a": "audio/c2cbcd92cdb9.mp3"}, "écouter|je": {"p": "j'", "f": "écoute", "a": "audio/cfd1a084229b.mp3"}, "écouter|tu": {"p": "tu ", "f": "écoutes", "a": "audio/f1110b569d6f.mp3"}, "écouter|il": {"p": "il ", "f": "écoute", "a": "audio/59b694b6809d.mp3"}, "écouter|elle": {"p": "elle ", "f": "écoute", "a": "audio/41d0d5c1f86e.mp3"}, "écouter|nous": {"p": "nous ", "f": "écoutons", "a": "audio/8f7d5005c844.mp3"}, "écouter|vous": {"p": "vous ", "f": "écoutez", "a": "audio/d4876e41196d.mp3"}, "écouter|ils": {"p": "ils ", "f": "écoutent", "a": "audio/c241696a22fe.mp3"}, "écouter|elles": {"p": "elles ", "f": "écoutent", "a": "audio/d8822a853f23.mp3"}, "regarder|je": {"p": "je ", "f": "regarde", "a": "audio/7528b8a878a9.mp3"}, "regarder|tu": {"p": "tu ", "f": "regardes", "a": "audio/63b0b2ddf022.mp3"}, "regarder|il": {"p": "il ", "f": "regarde", "a": "audio/e62bb66f6555.mp3"}, "regarder|elle": {"p": "elle ", "f": "regarde", "a": "audio/a523a20b001e.mp3"}, "regarder|nous": {"p": "nous ", "f": "regardons", "a": "audio/340d3b82f0b0.mp3"}, "regarder|vous": {"p": "vous ", "f": "regardez", "a": "audio/f641ee1ffa34.mp3"}, "regarder|ils": {"p": "ils ", "f": "regardent", "a": "audio/d3988ee0a248.mp3"}, "regarder|elles": {"p": "elles ", "f": "regardent", "a": "audio/1c4556621fa7.mp3"}, "manger|je": {"p": "je ", "f": "mange", "a": "audio/18c56e700aa5.mp3"}, "manger|tu": {"p": "tu ", "f": "manges", "a": "audio/df838ec23cbb.mp3"}, "manger|il": {"p": "il ", "f": "mange", "a": "audio/31af24f2ff3e.mp3"}, "manger|elle": {"p": "elle ", "f": "mange", "a": "audio/cd2250718c6b.mp3"}, "manger|nous": {"p": "nous ", "f": "mangeons", "a": "audio/710539623b99.mp3"}, "manger|vous": {"p": "vous ", "f": "mangez", "a": "audio/9a7ca7d74084.mp3"}, "manger|ils": {"p": "ils ", "f": "mangent", "a": "audio/581f567c9e9b.mp3"}, "manger|elles": {"p": "elles ", "f": "mangent", "a": "audio/9f3adf32a842.mp3"}, "chanter|je": {"p": "je ", "f": "chante", "a": "audio/6ce8415cf7cf.mp3"}, "chanter|tu": {"p": "tu ", "f": "chantes", "a": "audio/e2bfc392bb40.mp3"}, "chanter|il": {"p": "il ", "f": "chante", "a": "audio/7e2aae8fac98.mp3"}, "chanter|elle": {"p": "elle ", "f": "chante", "a": "audio/ba6ec96f191e.mp3"}, "chanter|nous": {"p": "nous ", "f": "chantons", "a": "audio/66055e13d97b.mp3"}, "chanter|vous": {"p": "vous ", "f": "chantez", "a": "audio/214f8a2505dc.mp3"}, "chanter|ils": {"p": "ils ", "f": "chantent", "a": "audio/16a8ef8f8d42.mp3"}, "chanter|elles": {"p": "elles ", "f": "chantent", "a": "audio/cf14b4207f15.mp3"}, "finir|je": {"p": "je ", "f": "finis", "a": "audio/b0797eb2ac86.mp3"}, "finir|tu": {"p": "tu ", "f": "finis", "a": "audio/685fac22ef40.mp3"}, "finir|il": {"p": "il ", "f": "finit", "a": "audio/e82632c8ce38.mp3"}, "finir|elle": {"p": "elle ", "f": "finit", "a": "audio/6ec4e0256885.mp3"}, "finir|nous": {"p": "nous ", "f": "finissons", "a": "audio/d42dc135f719.mp3"}, "finir|vous": {"p": "vous ", "f": "finissez", "a": "audio/f79b33d74216.mp3"}, "finir|ils": {"p": "ils ", "f": "finissent", "a": "audio/3722e35a8a93.mp3"}, "finir|elles": {"p": "elles ", "f": "finissent", "a": "audio/dd6c83503aa9.mp3"}}, "turns": 6}}, RULES={"r-pronoms": "Les pronoms : en français, on dit toujours le pronom", "r-er": "Les verbes en -er : -e, -es, -e, -ons, -ez, -ent", "r-j": "j' devant une voyelle : j'aime, j'écoute", "r-ger": "nous mangeons (avec un e)", "r-ir": "Les verbes en -ir : finir, choisir", "r-son": "Quatre formes, un seul son", "v-parler": "Le verbe parler (parlare)", "v-aimer": "Le verbe aimer (amare, piacere)", "v-adorer": "Le verbe adorer (adorare)", "v-habiter": "Le verbe habiter (abitare)", "v-jouer": "Le verbe jouer (giocare · suonare)", "v-ecouter": "Le verbe écouter (ascoltare)", "v-regarder": "Le verbe regarder (guardare)", "v-manger": "Le verbe manger (mangiare)", "v-chanter": "Le verbe chanter (cantare)", "v-danser": "Le verbe danser (ballare)", "v-finir": "Le verbe finir (finire)", "v-choisir": "Le verbe choisir (scegliere)"}, TOTAL=45;
+var good=0, done=0, streak=0, sndOn=true;
+var SPK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg>';
+function $(s,r){return (r||document).querySelector(s);} function $$(s,r){return [].slice.call((r||document).querySelectorAll(s));}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function norm(s){return (s||'').normalize('NFC').toLowerCase().replace(/[’ʼ`´]/g,"'").replace(/\s+/g,' ').replace(/^[\s.,!?;:]+|[\s.,!?;:]+$/g,'').trim();}
+
+/* ---------- audio ---------- */
+var player=new Audio(), cur=null;
+function play(src,btn){try{if(cur)cur.classList.remove('playing');if(btn&&cur===btn&&!player.paused){player.pause();cur=null;return;}
+ player.pause();player.src=src;cur=btn||null;if(btn)btn.classList.add('playing');var p=player.play();if(p&&p.catch)p.catch(function(){if(btn)btn.classList.remove('playing');});}catch(e){}}
+player.addEventListener('ended',function(){if(cur)cur.classList.remove('playing');cur=null;});
+function auBtn(a){return '<button type="button" class="au" data-a="'+a+'" aria-label="Écouter">'+SPK+'</button>';}
+function sentHTML(full,ans,it,a){var t=esc(full);if(ans){var an=esc(ans),k=t.indexOf(an);if(k>=0)t=t.slice(0,k)+'<b>'+an+'</b>'+t.slice(k+an.length);}
+ return '<div class="s"><div class="fr">'+auBtn(a)+'<span class="txt">'+t+'</span>'+(it?'<button type="button" class="itb">IT</button>':'')+'</div>'+(it?'<div class="tr">'+esc(it)+'</div>':'')+'</div>';}
+
+/* ---------- petits sons de piano (synthétisés) ---------- */
+var AC=null;
+function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC;}
+function note(f,t,d,v){var c=ac();if(!c||!sndOn)return;var o=c.createOscillator(),o2=c.createOscillator(),g=c.createGain();
+ o.type='triangle';o2.type='sine';o.frequency.value=f;o2.frequency.value=f*2;var st=c.currentTime+(t||0);
+ g.gain.setValueAtTime(0,st);g.gain.linearRampToValueAtTime(v||.16,st+.01);g.gain.exponentialRampToValueAtTime(.001,st+(d||.6));
+ o.connect(g);o2.connect(g);g.connect(c.destination);o.start(st);o2.start(st);o.stop(st+(d||.6)+.05);o2.stop(st+(d||.6)+.05);}
+var SC=[523.25,587.33,659.25,698.46,783.99,880,987.77,1046.5,1174.66,1318.51];
+function chime(level){var b=Math.min(level||0,4);[0,2,4].forEach(function(k,i){note(SC[k+b],i*.08,.7,.13);});}
+function fanfare(){[0,2,4,7,4,7].forEach(function(k,i){note(SC[k],i*.11,.8,.12);});}
+function tick(){note(1500,0,.05,.05);}
+
+/* ---------- effets spéciaux : canvas ---------- */
+var cv=$('#fx'),cx=cv.getContext('2d'),P=[],W,H,raf=null;
+function rs(){var r=window.devicePixelRatio||1;W=innerWidth;H=innerHeight;cv.width=W*r;cv.height=H*r;cx.setTransform(r,0,0,r,0,0);}
+rs();addEventListener('resize',rs);
+var COLS=['#ff5fa2','#ff8cc0','#d14dd8','#8a5cf6','#b28cff','#f7a400','#ffd36e','#33b5a6','#ff7b54','#ffffff'];
+function heart(c,s){c.beginPath();c.moveTo(0,s*.3);c.bezierCurveTo(0,0,-s*.5,0,-s*.5,s*.3);c.bezierCurveTo(-s*.5,s*.6,0,s*.8,0,s);c.bezierCurveTo(0,s*.8,s*.5,s*.6,s*.5,s*.3);c.bezierCurveTo(s*.5,0,0,0,0,s*.3);c.fill();}
+function star(c,s){c.beginPath();for(var i=0;i<10;i++){var r=i%2?s*.42:s,a=Math.PI/5*i-Math.PI/2;c.lineTo(Math.cos(a)*r,Math.sin(a)*r);}c.closePath();c.fill();}
+function add(p){P.push(p);if(!raf)raf=requestAnimationFrame(loop);}
+function burst(x,y,n,kinds,spd){n=n||40;kinds=kinds||['heart','conf','star','dot'];spd=spd||1;
+ for(var i=0;i<n;i++){var a=Math.random()*Math.PI*2,v=(3+Math.random()*7)*spd;
+  add({x:x,y:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-3,g:.18,k:kinds[i%kinds.length],c:COLS[Math.floor(Math.random()*COLS.length)],s:6+Math.random()*9,r:Math.random()*6,vr:(Math.random()-.5)*.3,l:1,d:.011+Math.random()*.01});}}
+function rain(n){for(var i=0;i<(n||70);i++){add({x:Math.random()*W,y:-20-Math.random()*H*.6,vx:(Math.random()-.5)*1.5,vy:2+Math.random()*3,g:.03,k:['heart','conf','star'][i%3],c:COLS[i%COLS.length],s:8+Math.random()*10,r:Math.random()*6,vr:(Math.random()-.5)*.2,l:1,d:.004,sway:Math.random()*6});}}
+function fireworks(times){times=times||5;for(var t=0;t<times;t++)setTimeout(function(){var x=W*(.2+Math.random()*.6),y=H*(.2+Math.random()*.35);burst(x,y,55,['heart','star','dot'],1.15);note(SC[Math.floor(Math.random()*6)+3],0,.5,.07);},t*330);}
+function loop(){cx.clearRect(0,0,W,H);
+ for(var i=P.length-1;i>=0;i--){var p=P[i];p.vy+=p.g;p.vx*=.985;p.x+=p.vx+(p.sway?Math.sin((p.y+p.sway*40)/40)*.8:0);p.y+=p.vy;p.r+=p.vr;p.l-=p.d;
+  if(p.l<=0||p.y>H+40){P.splice(i,1);continue;}
+  cx.save();cx.globalAlpha=Math.min(1,p.l*1.6);cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;
+  if(p.k==='heart')heart(cx,p.s);else if(p.k==='star')star(cx,p.s*.7);else if(p.k==='conf')cx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);else{cx.beginPath();cx.arc(0,0,p.s/3,0,7);cx.fill();}
+  cx.restore();}
+ raf=P.length?requestAnimationFrame(loop):null;}
+function centerOf(el){var r=el.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2];}
+
+/* ---------- toast, badges ---------- */
+function toast(t){var e=$('#toast');e.innerHTML=t;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(function(){e.classList.remove('show');},1700);}
+var BADGES={'g-memory':['👑','Reine du memory'],'g-bulles':['🫧','Magicienne des bulles'],'g-chat':['💌','Super copine'],'g-ordre':['🧩','Architecte des phrases'],'g-ecris':['✒️','Plume d\'or'],'g-ecoute':['🎵','Oreille de musicienne'],'g-wheel':['🎡','Championne de la roue']};
+var GSCORE={},GMAX={'g-memory':6,'g-bulles':DATA.bulles.length,'g-chat':DATA.chat.length,'g-ordre':DATA.ordre.length,'g-ecris':DATA.ecris.length,'g-ecoute':DATA.ecoute.length,'g-wheel':DATA.wheel.turns};
+function renderBadges(){$('#badges').innerHTML=Object.keys(BADGES).map(function(k){var b=BADGES[k],w=k in GSCORE,gold=w&&GSCORE[k]>=GMAX[k]*.8;
+ return '<div class="badge'+(w?' won':'')+(gold?' gold':'')+'"><span class="bi">'+b[0]+'</span>'+b[1]+(w?'<span class="bs">'+GSCORE[k]+' / '+GMAX[k]+' ♥</span>':'')+'</div>';}).join('');}
+function renderFinal(){var f=$('#final');f.innerHTML='Tes cœurs<b>♥ '+good+' / '+TOTAL+'</b><span class="sub">Questions faites : '+done+' / '+TOTAL+' · I tuoi cuori</span>';}
+function gameDone(gid){var g=GSCORE[gid]=GSCORE[gid]||0;var b=BADGES[gid];
+ var gd=$('#'+gid+' .gdone');gd.innerHTML='<span class="bd">'+b[0]+'</span>Badge « '+b[1]+' » · '+g+' / '+GMAX[gid]+' ♥';
+ var pop=document.createElement('div');pop.className='bpop';pop.innerHTML='<div><span class="bi">'+b[0]+'</span>Nouveau badge !<br>'+b[1]+'<small>'+g+' / '+GMAX[gid]+' ♥</small></div>';
+ document.body.appendChild(pop);setTimeout(function(){pop.remove();},2900);
+ fanfare();fireworks(g>=GMAX[gid]*.8?6:3);renderBadges();
+ if(Object.keys(GSCORE).length===Object.keys(BADGES).length)setTimeout(function(){rain(160);fireworks(8);toast('✨ Tous les jeux sont finis ! ✨');},3000);}
+
+/* ---------- score ---------- */
+function award(ok,el,gid,rev){done++;
+ if(ok){good++;streak++;GSCORE[gid]=(GSCORE[gid]||0)+1;var c=centerOf(el);burst(c[0],c[1],streak>=3?60:38);chime(Math.min(streak-1,4));
+  var sc=$('#score');sc.classList.remove('pop');void sc.offsetWidth;sc.classList.add('pop');var s=centerOf(sc);burst(s[0],s[1],10,['heart'],.6);
+  if(streak===3)toast('Série ×3 💖');else if(streak===5){toast('Série ×5 🌟 Incroyable !');rain(70);}else if(streak===8){toast('Série ×8 👑');rain(110);}else if(streak>8&&streak%4===0){toast('Série ×'+streak+' 🦄');rain(90);}
+ }else{streak=0;el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');if(rev)addRev(rev);}
+ $('#sc').textContent=good;$('#progbar').style.width=(done/TOTAL*100)+'%';renderFinal();}
+
+/* ---------- à revoir ---------- */
+var nrev=0;
+function addRev(o){var l=$('#revlist');if(!nrev)l.innerHTML='';nrev++;var d=document.createElement('div');d.className='rv';
+ d.innerHTML='<div class="rvh">'+esc(o.g)+'</div>'+sentHTML(o.full,o.ans,o.it,o.a)+'<div class="rvy">Ta réponse : <s>'+esc(o.given||'—')+'</s> · Bonne réponse : <b style="color:var(--ok)">'+esc(o.ans)+'</b></div>'+
+ '<div class="rvl"><a href="#'+o.rule+'">Revoir : '+esc(RULES[o.rule]||'')+'</a><a class="back" href="#'+o.id+'">Retour au jeu</a></div>';l.appendChild(d);}
+
+/* ---------- clics globaux ---------- */
+function trOf(b){var p=b.parentElement,t=p.querySelector(':scope > .tr');if(t)return t;if(p.nextElementSibling&&p.nextElementSibling.classList.contains('tr'))return p.nextElementSibling;return p.parentElement.querySelector(':scope > .tr');}
+document.addEventListener('click',function(e){ac();
+ var b=e.target.closest('.au');if(b){play(b.dataset.a,b);return;}
+ var i=e.target.closest('.itb');if(i){var t=trOf(i);if(t){t.classList.toggle('show');i.classList.toggle('on');}return;}
+ var a=e.target.closest('a[href^="#"]');if(a){var tg=document.getElementById(a.getAttribute('href').slice(1));if(tg){tg.classList.remove('flash');void tg.offsetWidth;tg.classList.add('flash');}}
+});
+$('#allit').onclick=function(){document.body.classList.toggle('allit');this.classList.toggle('on');};
+$('#snd').onclick=function(){sndOn=!sndOn;this.classList.toggle('on',sndOn);};
+
+/* ---------- héros : cœurs qui flottent ---------- */
+(function(){var s=$('.sparkles');var em=['♥','✦','♡','✧','♥','✿'];for(var i=0;i<18;i++){var e=document.createElement('i');e.textContent=em[i%em.length];
+ e.style.left=Math.random()*100+'%';e.style.fontSize=(12+Math.random()*18)+'px';e.style.color=COLS[i%6];e.style.animationDuration=(5+Math.random()*6)+'s';e.style.animationDelay=(-Math.random()*8)+'s';s.appendChild(e);}})();
+
+/* ---------- construis le verbe ---------- */
+$$('.build').forEach(function(b){b.addEventListener('click',function(){var box=document.getElementById(b.dataset.t);var es=$$('.ce',box);
+ es.forEach(function(e){e.classList.remove('land');e.classList.add('hide');});
+ es.forEach(function(e,i){setTimeout(function(){e.classList.remove('hide');e.classList.add('land');note(SC[i+1],0,.5,.14);var c=centerOf(e);burst(c[0],c[1],12,['star','dot'],.5);},400+i*380);});
+ setTimeout(function(){var c=centerOf(box);burst(c[0],c[1],40);},400+es.length*380);});});
+
+function seq(gid,items,render){var body=$('[data-game="'+gid+'"]'),i=0,res=[];
+ function dots(){return '<div class="dots">'+items.map(function(_,k){return '<i class="'+(res[k]===true?'ok':res[k]===false?'ko':k===i?'cur':'')+'"></i>';}).join('')+'</div>';}
+ function show(){if(i>=items.length){body.innerHTML=dots();gameDone(gid);return;}
+  body.innerHTML=dots()+'<div class="stage"></div>';render(items[i],$('.stage',body),function(ok){res[i]=ok;
+   var n=document.createElement('button');n.type='button';n.className='next';n.textContent=i<items.length-1?'Suivant ➜':'Terminer ✨';
+   n.onclick=function(){i++;show();body.closest('.game').scrollIntoView({block:'start'});};$('.stage',body).appendChild(n);$('.dots',body).outerHTML=dots();},i);}
+ show();}
+function fbHTML(ok,ans,full,it,a){return '<div class="fb '+(ok?'ok':'ko')+'"><div class="fbt">'+(ok?'♥ Bravo !':'Oups ! La bonne réponse : '+esc(ans))+'</div>'+sentHTML(full,ans,it,a)+'</div>';}
+function autoPlay(stage){var b=$('.fb .au',stage);if(b)setTimeout(function(){play(b.dataset.a,b);},550);}
+
+/* ---------- JEU 1 : memory ---------- */
+(function(){var body=$('[data-game="g-memory"]');var cards=[];DATA.memory.forEach(function(p,k){cards.push({k:k,t:p.fr,it:false,a:p.a});cards.push({k:k,t:p.it,it:true,a:p.a});});
+ cards=shuffle(cards);body.innerHTML='<div class="mem">'+cards.map(function(c,n){return '<button type="button" class="card" data-n="'+n+'"><span class="in"><span class="f">♡</span><span class="b'+(c.it?' it':'')+'">'+esc(c.t)+'</span></span></button>';}).join('')+'</div>';
+ var open=[],lock=false,found=0;
+ $$('.card',body).forEach(function(el){el.addEventListener('click',function(){if(lock||el.classList.contains('flip')||el.classList.contains('done'))return;
+  el.classList.add('flip');note(SC[2],0,.2,.06);open.push(el);if(open.length<2)return;lock=true;
+  var a=cards[open[0].dataset.n],b=cards[open[1].dataset.n];
+  if(a.k===b.k){var pair=open;open=[];setTimeout(function(){pair.forEach(function(x){x.classList.add('done');});award(true,pair[1],'g-memory');play(a.a);found++;lock=false;if(found===6)setTimeout(function(){gameDone('g-memory');},700);},450);}
+  else{var pair2=open;open=[];setTimeout(function(){pair2.forEach(function(x){x.classList.remove('flip');});lock=false;},950);}
+ });});})();
+
+/* ---------- JEU 2 : bulles ---------- */
+seq('g-bulles',DATA.bulles,function(it,st,next,idx){
+ st.innerHTML='<div class="bsent">'+esc(it.pre)+'<span class="slot">?</span>'+esc(it.post)+'</div><div class="bubbles">'+shuffle(it.opts).map(function(o){return '<button type="button" class="bub">-'+esc(o)+'</button>';}).join('')+'</div>';
+ $$('.bub',st).forEach(function(b){b.addEventListener('click',function(){if(st.dataset.done)return;st.dataset.done=1;var v=b.textContent.slice(1),ok=v===it.ans;
+  var slot=$('.slot',st);slot.textContent=it.ans;slot.classList.add(ok?'ok':'ko');b.classList.add('pop');
+  $$('.bub',st).forEach(function(x){if(x!==b)x.classList.add('gone');});
+  award(ok,ok?slot:$('.bsent',st),'g-bulles',{g:'Jeu 2 · Les bulles magiques',full:it.full,ans:it.pre.split(' ').pop()+it.ans,it:it.it,a:it.a,given:it.pre.split(' ').pop()+v,rule:it.rule,id:'g-bulles'});
+  st.insertAdjacentHTML('beforeend',fbHTML(ok,it.pre.split(' ').pop()+it.ans,it.full,it.it,it.a));autoPlay(st);next(ok);});});});
+
+/* ---------- JEU 3 : chat ---------- */
+(function(){var body=$('[data-game="g-chat"]');body.innerHTML='<div class="phone"><div class="scr"><div class="phead"><span class="ava">A</span><div><div class="pname">Alice 💕</div><div class="pstat">en ligne</div></div></div><div class="msgs" style="display:flex;flex-direction:column"></div></div></div><div class="chips"></div><div class="verbhint"></div>';
+ var msgs=$('.msgs',body),chips=$('.chips',body),hint=$('.verbhint',body),i=0;
+ function step(){if(i>=DATA.chat.length){chips.innerHTML='';hint.innerHTML='';setTimeout(function(){gameDone('g-chat');},500);return;}
+  var m=DATA.chat[i],me=m.who==='Giulia';
+  function showMsg(){var d=document.createElement('div');d.className='msg '+(me?'g':'a');
+   d.innerHTML='<span class="who">'+m.who+'</span>'+esc(m.text).replace('___','<span class="slot">…</span>');msgs.appendChild(d);
+   hint.innerHTML='Verbe : <b>'+m.verb+'</b>';
+   chips.innerHTML=shuffle(m.opts).map(function(o){return '<button type="button" class="chip">'+esc(o)+'</button>';}).join('');
+   $$('.chip',chips).forEach(function(c){c.addEventListener('click',function(){if(chips.dataset.lock)return;chips.dataset.lock=1;var ok=c.textContent===m.ans;
+    c.classList.add(ok?'ok':'ko');$$('.chip',chips).forEach(function(x){if(x.textContent===m.ans)x.classList.add('ok');});
+    var slot=$('.slot',d);slot.textContent=m.ans;slot.classList.add(ok?'ok':'ko');
+    d.insertAdjacentHTML('beforeend','<div class="mrow">'+auBtn(m.a)+'<button type="button" class="itb">IT</button></div><div class="tr">'+esc(m.it)+'</div>');
+    award(ok,d,'g-chat',{g:'Jeu 3 · Les messages d\'Alice',full:m.full,ans:m.ans,it:m.it,a:m.a,given:c.textContent,rule:m.rule,id:'g-chat'});
+    play(m.a,$('.au',d));
+    setTimeout(function(){delete chips.dataset.lock;i++;step();},ok?1500:2400);});});}
+  chips.innerHTML='';hint.innerHTML='';
+  if(!me){var t=document.createElement('div');t.className='typing';t.innerHTML='<i></i><i></i><i></i>';msgs.appendChild(t);setTimeout(function(){t.remove();note(SC[4],0,.2,.06);note(SC[6],.08,.25,.06);showMsg();},i?1100:700);}
+  else showMsg();}
+ var started=false;new IntersectionObserver(function(es,ob){if(es[0].isIntersecting&&!started){started=true;ob.disconnect();step();}},{threshold:.3}).observe(body);})();
+
+/* ---------- JEU 4 : ordre ---------- */
+seq('g-ordre',DATA.ordre,function(it,st,next){
+ var tiles=shuffle(it.tiles);if(tiles.join(' ')===it.tiles.join(' '))tiles=tiles.reverse();
+ st.innerHTML='<div class="line"></div><div class="pool">'+tiles.map(function(t){return '<button type="button" class="tile">'+esc(t)+'</button>';}).join('')+'</div>';
+ var line=$('.line',st),pool=$('.pool',st);
+ st.addEventListener('click',function(e){var t=e.target.closest('.tile');if(!t||st.dataset.done)return;note(SC[Math.floor(Math.random()*5)],0,.25,.06);
+  if(t.parentElement===pool)line.appendChild(t);else pool.appendChild(t);
+  if(!pool.children.length){st.dataset.done=1;var got=$$('.tile',line).map(function(x){return x.textContent;}).join(' ');var ok=got===it.tiles.join(' ');
+   line.classList.add(ok?'ok':'ko');
+   award(ok,line,'g-ordre',{g:'Jeu 4 · Les phrases en désordre',full:it.full,ans:it.full,it:it.it,a:it.a,given:got,rule:it.rule,id:'g-ordre'});
+   st.insertAdjacentHTML('beforeend',fbHTML(ok,it.full,it.full,it.it,it.a));autoPlay(st);next(ok);}});});
+
+/* ---------- JEU 5 : écris ---------- */
+(function(){var body=$('[data-game="g-ecris"]'),n=0;
+ body.innerHTML=DATA.ecris.map(function(it,k){return '<div class="wi"><div class="wq"><span class="wn">'+(k+1)+'</span><span>'+esc(it.q).replace('___','<span class="slot">……</span>')+'</span></div><div class="wrow"><span class="vtag">'+esc(it.verb)+'</span><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="ta réponse"><button type="button" class="go">OK</button></div></div>';}).join('');
+ $$('.wi',body).forEach(function(w,k){var it=DATA.ecris[k],inp=$('input',w),btn=$('.go',w);
+  function check(){if(w.dataset.done)return;var v=inp.value;if(!norm(v)){inp.focus();return;}w.dataset.done=1;
+   var vv=norm(v).replace(/^(je|j'|tu|il|elle|on|nous|vous|ils|elles)\s?/,'');var ok=it.ans.map(norm).indexOf(vv)>=0||it.ans.map(norm).indexOf(norm(v))>=0;
+   inp.classList.add(ok?'ok':'ko');inp.disabled=btn.disabled=true;var slot=$('.slot',w);slot.textContent=it.ans[0];slot.classList.add(ok?'ok':'ko');
+   award(ok,ok?slot:w,'g-ecris',{g:'Jeu 5 · J\'écris le verbe',full:it.full,ans:it.ans[0],it:it.it,a:it.a,given:v.trim(),rule:it.rule,id:'g-ecris'});
+   w.insertAdjacentHTML('beforeend',fbHTML(ok,it.ans[0],it.full,it.it,it.a));autoPlay(w);n++;if(n===DATA.ecris.length)setTimeout(function(){gameDone('g-ecris');},900);}
+  btn.addEventListener('click',check);inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();check();}});});})();
+
+/* ---------- JEU 6 : écoute ---------- */
+seq('g-ecoute',DATA.ecoute,function(it,st,next){
+ st.innerHTML='<button type="button" class="bigplay" aria-label="Écouter">'+SPK+'</button><div class="lopts">'+shuffle(it.opts).map(function(o){return '<button type="button" class="lopt">'+esc(o)+'</button>';}).join('')+'</div>';
+ var bp=$('.bigplay',st);bp.onclick=function(){play(it.a);};
+ $$('.lopt',st).forEach(function(b){b.addEventListener('click',function(){if(st.dataset.done)return;st.dataset.done=1;var ok=b.textContent===it.full;
+  b.classList.add(ok?'ok':'ko');$$('.lopt',st).forEach(function(x){if(x.textContent===it.full)x.classList.add('ok');});
+  award(ok,b,'g-ecoute',{g:'Jeu 6 · J\'écoute et je choisis',full:it.full,ans:'',it:it.it,a:it.a,given:b.textContent,rule:it.rule,id:'g-ecoute'});
+  st.insertAdjacentHTML('beforeend','<div class="fb '+(ok?'ok':'ko')+'"><div class="fbt">'+(ok?'♥ Bravo !':'Oups ! Tu as entendu :')+'</div>'+sentHTML(it.full,'',it.it,it.a)+'</div>');next(ok);});});
+},0);
+(function(){var g=$('#g-ecoute'),first=true;new IntersectionObserver(function(es){if(es[0].isIntersecting&&first){first=false;}}).observe(g);})();
+
+/* ---------- JEU 7 : la roue ---------- */
+(function(){var body=$('[data-game="g-wheel"]'),WD=DATA.wheel,P=WD.p,n=P.length,turn=0,rot=0,used={};
+ var cols=['#ff5fa2','#8a5cf6','#33b5a6','#ff7b54','#d14dd8','#3a8dde','#f7a400','#ff8cc0'];
+ var svg='<svg viewBox="-110 -110 220 220">';for(var k=0;k<n;k++){var a0=(k/n)*2*Math.PI-Math.PI/2-Math.PI/n,a1=a0+2*Math.PI/n;
+  svg+='<path d="M0 0 L'+(100*Math.cos(a0)).toFixed(2)+' '+(100*Math.sin(a0)).toFixed(2)+' A100 100 0 0 1 '+(100*Math.cos(a1)).toFixed(2)+' '+(100*Math.sin(a1)).toFixed(2)+' Z" fill="'+cols[k]+'" stroke="#fff" stroke-width="3"/>';
+  var am=(a0+a1)/2;svg+='<text x="'+(70*Math.cos(am)).toFixed(1)+'" y="'+(70*Math.sin(am)).toFixed(1)+'" fill="#fff" font-family="Fredoka" font-weight="600" font-size="15" text-anchor="middle" dominant-baseline="middle" transform="rotate('+(am*180/Math.PI+90).toFixed(1)+' '+(70*Math.cos(am)).toFixed(1)+' '+(70*Math.sin(am)).toFixed(1)+')">'+P[k]+'</text>';}
+ svg+='<circle r="104" fill="none" stroke="#fff" stroke-width="6"/></svg>';
+ body.innerHTML='<div class="counter">Tour <span class="tn">1</span> / '+WD.turns+'</div><div class="wheelbox"><div class="pointer">🔻</div>'+svg+'<div class="hub">💖</div></div><button type="button" class="spin">Tourne la roue !</button><div class="wheelin"></div>';
+ var wsvg=$('svg',body),spin=$('.spin',body),zone=$('.wheelin',body);
+ spin.addEventListener('click',function(){spin.disabled=true;zone.innerHTML='';
+  var k,v,key,tries=0;do{k=Math.floor(Math.random()*n);v=WD.v[Math.floor(Math.random()*WD.v.length)];key=v.v+'|'+P[k];tries++;}while(used[key]&&tries<50);used[key]=1;
+  var target=360-(k*360/n);rot+=360*4+((target-rot%360)+360)%360;wsvg.style.transform='rotate('+rot+'deg)';
+  var tk=0,ti=setInterval(function(){tick();if(++tk>22)clearInterval(ti);},120+tk*8);
+  setTimeout(function(){clearInterval(ti);var f=WD.forms[key],c=centerOf($('.hub',body));burst(c[0],c[1],24,['star','dot'],.7);note(SC[4],0,.4,.12);
+   zone.innerHTML='<div class="wtask"><span class="pp">'+esc(P[k])+'</span> + <span class="vv">'+esc(v.v)+'</span> <i style="font:italic 400 .9rem Nunito;color:#8b7896">('+esc(v.it)+')</i></div>'+
+    '<div class="wrow" style="justify-content:center;margin:0"><b style="font:600 1.2rem Fredoka">'+esc(f.p)+'</b><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="…"><button type="button" class="go">OK</button></div>';
+   var inp=$('input',zone),go=$('.go',zone);inp.focus();
+   function check(){var val=inp.value;if(!norm(val))return;go.disabled=inp.disabled=true;var vv=norm(val).replace(/^(je|j'|tu|il|elle|on|nous|vous|ils|elles)\s?/,'');var ok=vv===norm(f.f);
+    inp.classList.add(ok?'ok':'ko');var full=f.p+f.f;
+    var rule=(v.v==='finir')?'r-ir':(v.v==='manger'&&P[k]==='nous')?'r-ger':(f.p==="j'")?'r-j':'r-er';
+    award(ok,inp,'g-wheel',{g:'Jeu 7 · La roue magique',full:full,ans:f.f,it:'',a:f.a,given:f.p+val.trim(),rule:rule,id:'g-wheel'});
+    zone.insertAdjacentHTML('beforeend',fbHTML(ok,f.f,full,'',f.a));autoPlay(zone);turn++;
+    if(turn<WD.turns){$('.tn',body).textContent=turn+1;spin.disabled=false;spin.textContent='Tourne encore !';}else{spin.textContent='Fini ! 🎉';setTimeout(function(){gameDone('g-wheel');},1200);}}
+   go.addEventListener('click',check);inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();check();}});},3700);});})();
+
+/* ---------- reset, accents ---------- */
+$('#reset').addEventListener('click',function(){if(confirm('Effacer toutes les réponses et recommencer ?')){location.hash='jeux';location.reload();}});
+var acc=$('#acc'),last=null;'é è ê à â ç ù û î ô ë ï œ'.split(' ').forEach(function(ch){var b=document.createElement('button');b.type='button';b.textContent=ch;
+ ['mousedown','pointerdown'].forEach(function(ev){b.addEventListener(ev,function(e){e.preventDefault();});});
+ b.addEventListener('click',function(){if(!last||last.disabled)return;var s=last.selectionStart||last.value.length,en=last.selectionEnd||s;last.value=last.value.slice(0,s)+ch+last.value.slice(en);last.focus();last.setSelectionRange(s+ch.length,s+ch.length);});acc.appendChild(b);});
+document.addEventListener('focusin',function(e){if(e.target.matches('input[type=text]')){last=e.target;acc.classList.add('show');}});
+document.addEventListener('focusout',function(){setTimeout(function(){var a=document.activeElement;if(!a||(!a.matches('input[type=text]')&&!acc.contains(a)))acc.classList.remove('show');},150);});
+renderBadges();renderFinal();
+})();
+</script>
+</body>
+</html>
