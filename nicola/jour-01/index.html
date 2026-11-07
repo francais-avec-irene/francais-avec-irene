@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'anglais de Nicola</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#24303f;--soft:#5d6878;--line:#e3e7ee;--bg:#fbfaf7;--gold:#e0a630;--ok:#2e8b57;--ko:#c0392b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Poppins,system-ui,sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:900px;margin:0 auto;padding:62px 16px 80px}
+/* barre du haut */
+.top{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.topin{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:8px 16px}
+.brand{font-weight:600;font-size:.82rem;color:#a0446a;letter-spacing:.02em;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbtn{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px;font-size:.78rem;font-weight:600;color:var(--soft)}
+.tbtn.on{border-color:#1f5f7a;color:#1f5f7a;background:#eaf3f7}
+.score{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#2b3a55,#6d4a7d);color:#fff;border-radius:999px;padding:5px 13px;font-weight:700;font-size:.9rem;white-space:nowrap;transition:transform .25s}
+.score.bump{transform:scale(1.15)}
+.score .st{color:#ffd56a}
+/* hero */
+.hero{position:relative;border-radius:22px;overflow:hidden;margin-top:6px;box-shadow:0 10px 30px rgba(36,48,63,.15)}
+.hero img{display:block;width:100%;height:clamp(240px,48vw,400px);object-fit:cover}
+.htitle{position:absolute;left:14px;bottom:14px;max-width:calc(100% - 28px);background:rgba(20,28,40,.62);border-radius:16px;padding:14px 18px;color:#fff}
+.tag{display:inline-block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;background:#e0a630;color:#2b2210;font-weight:700;padding:3px 10px;border-radius:999px;margin-bottom:6px}
+.hero h1{margin:0;font-size:clamp(1.5rem,5vw,2.3rem);line-height:1.15}
+.sub{margin:2px 0 0;font-size:clamp(.95rem,3vw,1.15rem);color:#ffe2b5;font-weight:500}
+.hit{display:flex;align-items:center;gap:6px;margin-top:4px}.hit .itb{margin-left:0;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}.hit .tr{color:#eee;margin:0}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 6px}
+.toc a{text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px 5px 5px;font-size:.8rem;font-weight:500}
+.toc a b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#2b3a55;color:#fff;font-size:.72rem;margin-right:5px}
+.howto{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--soft);margin:10px 0 0;flex-wrap:wrap}
+.howto .itb{order:2}
+.miniau svg{width:15px;height:15px;vertical-align:-3px;fill:#1f5f7a;stroke:#1f5f7a}
+/* boutons audio + IT */
+.au{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;border:none;background:color-mix(in srgb,var(--c,#1f5f7a) 14%,#fff);margin-right:8px;vertical-align:middle;transition:transform .15s,background .2s}
+.au svg{width:17px;height:17px;fill:var(--c,#1f5f7a);stroke:var(--c,#1f5f7a);stroke-width:1.8;stroke-linecap:round}
+.au svg .w1,.au svg .w2{fill:none}
+.au.au-l{width:38px;height:38px}.au.au-l svg{width:21px;height:21px}
+.au:active{transform:scale(.9)}
+.au.playing{background:var(--c,#1f5f7a)}.au.playing svg{fill:#fff;stroke:#fff}
+.au.playing svg .w2{animation:wave 1s infinite}
+@keyframes wave{50%{opacity:.2}}
+.itb{flex:none;border:1px solid #d5dae3;background:#fff;color:#8a93a3;border-radius:6px;font-size:.62rem;font-weight:700;letter-spacing:.06em;padding:1px 6px;margin-left:8px;vertical-align:middle;line-height:1.5}
+.itb.on{background:#5d6878;color:#fff;border-color:#5d6878}
+.tr{display:none;font:italic .92rem/1.5 Lora,serif;color:#6b7280;margin:3px 0 0}
+.tr.show,body.allit .tr{display:block}
+body.allit .itb{background:#5d6878;color:#fff;border-color:#5d6878}
+.s{margin:8px 0}
+.s .fr,.ex .fr{display:flex;align-items:flex-start}
+.s .fr .txt{flex:1;padding-top:3px;font-family:Lora,serif;font-size:1.02rem}
+.s .tr{padding-left:38px}
+.ex .fr .txt{flex:1}
+.ex.lead{margin:12px 0 16px;color:#3c4656}
+.ex.center .fr{justify-content:center;text-align:center}
+.s .txt b,.ex .txt b{color:var(--c,#1f5f7a)}
+em.k{font-style:normal;color:#c2410c;font-weight:700}
+/* sections */
+.sec{margin-top:38px}
+.sh{display:flex;gap:12px;align-items:center;background:linear-gradient(110deg,var(--c),color-mix(in srgb,var(--c) 70%,#fff));color:#fff;border-radius:16px;padding:12px 16px;margin-bottom:14px}
+.sh .num{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:#fff;color:var(--c);font-weight:700;font-size:1.15rem}
+.sh h2{margin:0;font-size:clamp(1.15rem,4vw,1.5rem);line-height:1.2}
+.shit{display:flex;align-items:center;gap:6px}
+.shit .itb{margin-left:0;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}
+.shit .tr{color:#fff;margin:0}
+.ph{margin:0 0 14px;border-radius:14px;overflow:hidden;background:#fff;border:3px solid #fff;box-shadow:0 4px 16px rgba(36,48,63,.12)}
+.ph img{display:block;width:100%;height:auto}
+.ph.band img{height:clamp(150px,30vw,230px);object-fit:cover}
+.ph figcaption{font:italic .8rem Lora,serif;color:var(--soft);padding:5px 10px}
+/* vocabulaire */
+.vgrid{columns:2 330px;column-gap:14px}
+.vc{break-inside:avoid;background:#fff;border:1px solid #e3e7ea;border-top:5px solid var(--c);border-radius:14px;padding:12px 14px;margin:0 0 14px;box-shadow:0 2px 8px rgba(181,82,59,.06)}
+.vc.flash,.flash{animation:flash 2.2s}
+@keyframes flash{0%,40%{box-shadow:0 0 0 4px #ffd56a}100%{box-shadow:0 0 0 0 transparent}}
+.vh{display:flex;align-items:center}
+.vh h3{margin:0;font-size:1.18rem;color:var(--c)}
+.vmeta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0 4px;font-size:.88rem}
+.pill{background:var(--t);color:var(--c);border:1px solid color-mix(in srgb,var(--c) 30%,#fff);border-radius:999px;padding:1px 9px;font-size:.72rem;font-weight:600}
+.itlab{background:#2e8b57;color:#fff;font-size:.62rem;font-weight:700;border-radius:4px;padding:1px 5px}
+.itw{font-family:Lora,serif;font-style:italic;color:#34495e}
+.vex .txt{font-size:.98rem!important}
+.vimg{margin:8px 0}
+.vimg img{max-height:190px;object-fit:cover}
+.note,.warn{background:var(--t);border-radius:10px;padding:8px 10px;margin-top:8px;font-size:.86rem}
+.warn{background:#fff4d6;border-left:4px solid #e0a630}
+.warn .ex{margin-bottom:2px}
+table.mini{width:100%;border-collapse:collapse;margin:8px 0 2px;font-size:.86rem}
+table.mini td{border-bottom:1px dashed #ecd9cf;padding:4px 2px;vertical-align:middle}
+table.mini td:last-child{font-family:Lora,serif;font-style:italic;color:#555}
+table.mini .au{width:24px;height:24px;margin-right:6px}table.mini .au svg{width:14px;height:14px}
+/* grammaire */
+.fams{display:grid;gap:14px}
+.fam{background:#fff;border:2px solid color-mix(in srgb,var(--c) 30%,#fff);border-radius:16px;padding:12px 14px}
+.famh{display:flex;align-items:center;gap:8px;font-size:1.1rem;color:var(--c);font-weight:600;margin-bottom:8px}
+.famh span{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--c);color:#fff;font-size:.95rem}
+.formula{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:4px 0 10px;font-weight:600}
+.formula span{border:2px solid var(--c);color:var(--c);border-radius:999px;padding:1px 10px;background:#fff}
+.formula span:first-child{background:var(--c);color:#fff}
+.formula.light{justify-content:center}.formula.light span:first-child{background:#fff;color:var(--c)}
+.ct{border-radius:12px;overflow:hidden;border:1px solid color-mix(in srgb,var(--c) 25%,#fff);background:#fff;margin:6px 0}
+.cth{background:color-mix(in srgb,var(--c) 12%,#fff);color:var(--c);font-weight:700;padding:5px 12px}
+.ctit{font:italic 400 .85rem Lora,serif;color:#6b7280;margin-left:8px}
+.ct table{width:100%;border-collapse:collapse}
+.ct td{padding:3px 8px;border-top:1px solid #f1f3f6;font-family:Lora,serif;font-size:1rem}
+.ct td:first-child{width:40px}
+.ct .au{width:26px;height:26px;margin:0}.ct .au svg{width:15px;height:15px}
+.inbox{border-left:4px solid var(--c);background:color-mix(in srgb,var(--c) 7%,#fff);border-radius:0 10px 10px 0;padding:7px 10px;margin:10px 0;font-size:.9rem}
+.sub3{margin:24px 0 4px;color:#1f5f7a;font-size:1.12rem;border-bottom:2px solid #cfe2ea;padding-bottom:4px}
+.parts{display:grid;gap:12px}
+.part{background:#fff;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:12px;padding:10px 12px}
+.parth{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--c);margin-bottom:4px}
+.parth span{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--c);color:#fff;font-size:.78rem;flex:none}
+.parth b{color:#c2410c}
+.part .ex .txt b{color:#c2410c}
+.part.wide{margin-top:14px}
+.big{background:#fff;border:2px solid var(--c);border-radius:18px;padding:14px;margin-bottom:14px}
+.bigh{text-align:center;font-weight:700;color:var(--c);font-size:1.1rem;margin-bottom:10px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:10px}
+.step{display:flex;gap:8px;background:var(--t);border-radius:12px;padding:8px 10px;font-size:.9rem}
+.step>span{display:grid;place-items:center;flex:none;width:26px;height:26px;border-radius:50%;background:var(--c);color:#fff;font-weight:700}
+.stx{display:flex;align-items:center;font:600 1.05rem Lora,serif;margin-top:4px}
+.stx s{color:#c0392b;text-decoration-thickness:2px}
+.good{background:linear-gradient(135deg,#eaf6ee,#fff8e6);border:2px solid #4f9a6b;border-radius:18px;padding:14px;margin:14px 0}
+.goodh{font-weight:700;color:#2e7d4f;font-size:1.15rem;margin-bottom:6px}
+.good .ex .txt b{color:#2e7d4f}
+.chain{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px;margin-top:10px}
+.ch{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#fff;border-radius:10px;padding:6px 10px;font-size:.92rem;border:1px solid #d6eadc}
+.ch b{color:#2e7d4f;min-width:66px}.ch span{font-family:Lora,serif}.ch i{color:#999;font-style:normal}
+.ch .au{--c:#2e7d4f;width:26px;height:26px;margin:0}.ch .au svg{width:15px;height:15px}
+.etre{background:#fff;border:2px solid #a0446a;border-radius:16px;padding:12px 14px;margin:14px 0;--c:#a0446a}
+.etreh{font-weight:600;color:#a0446a;margin-bottom:6px}
+.cts.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+/* tableau 27 */
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.lg{font-size:.75rem;font-weight:600;border-radius:999px;padding:2px 10px;border:1.5px solid}
+.lg.a,tr.a th{--v:#1f5f7a}.lg.b,tr.b th{--v:#c2410c}.lg.c,tr.c th{--v:#2e7d4f}.lg.d,tr.d th{--v:#6d4a7d}
+.lg{color:var(--v);border-color:var(--v)}
+.tw{overflow-x:auto;border-radius:14px;border:1px solid var(--line);background:#fff;-webkit-overflow-scrolling:touch}
+table.big27{border-collapse:collapse;min-width:760px;width:100%;font-size:.92rem}
+.big27 thead th{position:sticky;top:0;background:#4f7f63;color:#fff;padding:7px 8px;text-align:left;font-weight:600}
+.big27 thead th:first-child{left:0;z-index:2}
+.big27 tbody th{position:sticky;left:0;background:#fff;text-align:left;padding:5px 8px;border-left:5px solid var(--v);display:flex;align-items:center;min-width:190px;z-index:1}
+.big27 .inf{font-weight:700;color:var(--v)}
+.big27 .vit{font:italic .78rem Lora,serif;color:#888;margin-left:6px}
+.big27 td{padding:5px 8px;border-top:1px solid #eef1f4;font-family:Lora,serif;white-space:nowrap}
+.big27 tbody tr:nth-child(even) td{background:#f7faf8}
+.big27 td.ip{background:#f6f2f8!important}
+.big27 tbody th .au{--c:var(--v);width:26px;height:26px;margin-right:8px}.big27 tbody th .au svg{width:15px;height:15px}
+/* usage */
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px}
+.col{background:#fff;border-radius:16px;padding:12px 14px;border:2px solid var(--cc)}
+.col.pres{--cc:#1f5f7a;--c:#1f5f7a}.col.imp{--cc:#6d4a7d;--c:#6d4a7d}
+.colh{font-weight:700;font-size:1.12rem;color:var(--cc);margin-bottom:6px}
+.colh span{font:italic 400 .9rem Lora,serif;color:#888;margin-left:6px}
+.use{border-top:1px dashed var(--line);padding-top:6px;margin-top:6px}
+.uset{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--cc);font-weight:600}
+.uset i{text-transform:none;letter-spacing:0;color:#999;font-family:Lora,serif}
+.marks{margin-top:10px;background:color-mix(in srgb,var(--cc) 8%,#fff);border-radius:10px;padding:7px 10px;font-size:.85rem;color:var(--cc);font-weight:500}
+.duo{margin-top:12px;background:#fff8e6;border:2px dashed #c08a2a;border-radius:14px;padding:6px 12px;--c:#a86d10}
+/* exercices */
+.exb{background:#fff;border-radius:18px;margin:18px 0;border:1px solid var(--line);overflow:hidden;box-shadow:0 3px 14px rgba(36,48,63,.06)}
+.exh{display:flex;gap:12px;align-items:center;background:var(--c);color:#fff;padding:12px 16px}
+.exn{font-size:2rem;font-weight:700;line-height:1;opacity:.9}
+.exk{font-size:.68rem;letter-spacing:.18em;opacity:.85}
+.ext{font-weight:600;font-size:1.05rem;line-height:1.25}
+.exit{display:flex;align-items:center;gap:6px}
+.exit .itb{margin-left:0;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}
+.exit .tr{color:#fff;margin:0}
+.ex.cons{padding:10px 16px 0}
+.item{padding:12px 16px;border-top:1px solid #f0f2f5;position:relative}
+.qq{display:flex;align-items:flex-start;gap:8px;font-family:Lora,serif;font-size:1.04rem}
+.qq .txt{flex:1}
+.qn{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:color-mix(in srgb,var(--c) 15%,#fff);color:var(--c);font:700 .78rem Poppins,sans-serif;margin-top:2px}
+.gap{display:inline-block;min-width:60px;border-bottom:2px solid var(--c);color:var(--c);font-weight:700;text-align:center;padding:0 3px}
+.gap.ok{color:var(--ok);border-color:var(--ok)}.gap.ko{color:var(--ko);border-color:var(--ko)}
+.hint{font:italic .88rem Lora,serif;color:#888}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:9px 0 0 32px}
+.opt{border:2px solid color-mix(in srgb,var(--c) 35%,#fff);background:#fff;border-radius:999px;padding:5px 16px;font-family:Lora,serif;font-size:1rem;color:var(--ink);transition:.15s}
+.opt:hover{background:color-mix(in srgb,var(--c) 8%,#fff)}
+.opt.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.ko{background:var(--ko);border-color:var(--ko);color:#fff;text-decoration:line-through}
+.opt:disabled{cursor:default}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0 0 32px}
+.row.center{justify-content:center;margin-left:0;padding:10px 0}
+.vt{font-size:.8rem;font-weight:600;background:color-mix(in srgb,var(--c) 12%,#fff);color:var(--c);border-radius:999px;padding:3px 10px}
+.row input{flex:1;min-width:150px;max-width:260px;font:1rem Lora,serif;padding:6px 10px;border:2px solid #d6dbe4;border-radius:10px;outline:none}
+.row input:focus{border-color:var(--c)}
+.row input.ok{border-color:var(--ok);background:#eef8f2}.row input.ko{border-color:var(--ko);background:#fdf0ee}
+.chk{background:var(--c);color:#fff;border:none;border-radius:10px;padding:7px 16px;font-weight:600;font-size:.9rem}
+.chk:disabled{opacity:.4;cursor:default}
+.chk.big{padding:10px 22px;font-size:1rem}
+.fb{margin:0 0 0 32px}
+.fb:empty{display:none}
+.fbr{margin-top:9px;border-radius:12px;padding:8px 12px;font-size:.9rem}
+.fbr.ok{background:#eef8f2;border:1px solid #bfe3cd}.fbr.ko{background:#fdf1ee;border:1px solid #f1c9c0}
+.fbt{font-weight:700}.fbr.ok .fbt{color:var(--ok)}.fbr.ko .fbt{color:var(--ko)}
+.fbr .s{margin:5px 0}
+.fbr .s .txt b{color:var(--ok)}
+.why{display:flex;align-items:flex-start;color:#4b5563}
+.why .txt{flex:1}
+.story{padding:12px 16px;font:1.06rem/2.2 Lora,serif}
+.tg{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+.tg input{width:108px;font:1rem Lora,serif;padding:1px 6px;border:none;border-bottom:2px solid var(--c);background:color-mix(in srgb,var(--c) 6%,#fff);border-radius:6px 6px 0 0;outline:none}
+.tg input.ok{border-color:var(--ok);background:#eef8f2;color:var(--ok);font-weight:600}
+.tg input.ko{border-color:var(--ko);background:#fdf0ee;color:var(--ko);text-decoration:line-through}
+.tv{font:italic .8rem Lora,serif;color:#888}
+.tg .cor{font-weight:700;color:var(--ok);margin-left:3px}
+.storytr{padding:0 16px}
+.free{padding:12px 16px;border-top:1px solid #f0f2f5}
+.free .tr{padding-left:32px}
+.free textarea{width:100%;margin:8px 0;font:1rem Lora,serif;border:2px solid #d6dbe4;border-radius:12px;padding:8px 10px;resize:vertical}
+.model{border:1.5px dashed var(--c);color:var(--c);background:#fff;border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:600}
+.mod{display:none;background:color-mix(in srgb,var(--c) 7%,#fff);border-radius:12px;padding:4px 12px;margin-top:8px}
+.mod.show{display:block}
+/* à revoir */
+.scorebox{background:linear-gradient(135deg,#2b3a55,#6d4a7d);color:#fff;border-radius:16px;padding:14px 18px;text-align:center;margin-bottom:12px}
+.scorebox b{font-size:1.6rem;color:#ffd56a}
+.revlist .empty{color:var(--soft);font-style:italic;text-align:center}
+.rv{background:#fff;border:1px solid #efd6e1;border-left:5px solid #a0446a;border-radius:12px;padding:10px 12px;margin-bottom:10px;--c:#a0446a}
+.rvh{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#a0446a;font-weight:700}
+.rv .s .txt b{color:var(--ok)}
+.rvy{font-size:.88rem;color:#555}.rvy s{color:var(--ko)}
+.rvl{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.rvl a{font-size:.82rem;font-weight:600;color:#fff;background:#a0446a;text-decoration:none;border-radius:999px;padding:3px 12px}
+.rvl a.back{background:#fff;color:#a0446a;border:1.5px solid #a0446a}
+.reset{background:#fff;border:2px solid #a0446a;color:#a0446a;border-radius:999px;padding:7px 18px;font-weight:600}
+.tra textarea,.refl textarea{width:100%;margin:8px 0;font:1rem Lora,serif;border:2px solid #d6dbe4;border-radius:12px;padding:8px 10px;resize:vertical}
+.cmp{background:var(--c);color:#fff;border:none;border-radius:10px;padding:7px 16px;font-weight:600;font-size:.9rem}.cmp:disabled{opacity:.4}
+.selfq{margin-top:8px;font-weight:600;font-size:.9rem}.selfb{display:flex;gap:8px;margin-top:5px}
+.sb{border:2px solid #d6dbe4;background:#fff;border-radius:999px;padding:4px 14px;font-weight:600;font-size:.88rem}
+.sb.ok.chosen{background:var(--ok);border-color:var(--ok);color:#fff}.sb.ko.chosen{background:var(--ko);border-color:var(--ko);color:#fff}.sb:disabled:not(.chosen){opacity:.4}
+.enq{font:italic 1.05rem Lora,serif;color:#2b3a55}
+.refl{padding:12px 16px}
+.sujet{background:#2c2f4a;color:#fff;border-radius:14px;padding:12px 16px;margin-bottom:12px}
+.sujet .q{font:600 1.15rem Poppins,sans-serif;color:#f2c14e}.sujet .tr{color:#c9cbe0}.sujet .itb{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4)}
+.rh{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--c);margin:14px 0 6px}
+.guide{background:#f5f1f8;border-left:4px solid var(--c);border-radius:0 10px 10px 0;padding:6px 12px;margin:6px 0}
+.plan{display:grid;gap:8px}
+.pl{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 12px;display:flex;gap:10px}
+.pl .k{flex:none;width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.pl .nl{font-size:.75rem;color:var(--soft)}
+.kw{background:#fdf6e3;border-radius:10px;padding:8px 12px;font-size:.9rem;margin:6px 0}
+.pistesb{border:1.5px dashed var(--c);color:var(--c);background:#fff;border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:600;margin-top:8px}
+.pistes{display:none;background:#f5f1f8;border-radius:12px;padding:6px 12px;margin-top:8px}.pistes.show{display:block}
+.bank{display:flex;flex-wrap:wrap;gap:6px;margin:10px 16px 0;padding:8px 10px;border:2px dashed #cfd8d6;border-radius:12px}
+.bank span{background:#eef5f3;color:#2f7f73;border-radius:999px;padding:2px 10px;font:600 .85rem Poppins,sans-serif}
+.vgrid .ph{margin:0 0 14px;break-inside:avoid}
+.gtab{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:12px 0}
+.gcol{background:#fff;border:2px solid var(--gc);border-radius:14px;overflow:hidden}
+.gcol .h{background:var(--gc);color:#fff;font-weight:700;padding:6px 12px}.gcol .h small{display:block;font-weight:400;font-size:.75rem;opacity:.9}
+.gcol .b{padding:8px 12px;--c:var(--gc)}
+.gintro{background:#2c2f4a;color:#fff;border-radius:16px;padding:14px 16px;margin-bottom:12px}
+.gintro .gt{font-weight:700;color:#f2c14e;font-size:1.15rem}
+.gintro .ex .txt b{color:#f2c14e}.gintro .tr{color:#c9cbe0}.gintro .itb{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4)}
+.gpills{margin:8px 0}.gpills span{display:inline-block;border:1.5px solid #f2c14e;border-radius:999px;padding:1px 10px;margin:2px 4px 2px 0;font-weight:600;font-size:.88rem}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.cbx{background:#f5f1f8;border-radius:12px;padding:8px 12px}
+.pillc{display:inline-block;border:1.5px solid #7a5a8c;color:#7a5a8c;border-radius:999px;padding:0 10px;font-weight:600;font-size:.82rem;margin-bottom:4px}
+.inbx{border-left:4px solid #7a5a8c;background:#f5f1f8;border-radius:0 10px 10px 0;padding:6px 12px;margin:8px 0}
+.inbx.gold{border-color:#d9a21b;background:#fdf6e3}
+.slow{flex:none;border:none;background:#f1ecdf;border-radius:50%;width:30px;height:30px;margin-right:8px;font-size:15px;line-height:30px;padding:0}
+.slow.playing{background:#e0a630}
+.spk{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid #f0f2f5}
+.spk .txt{flex:1;min-width:200px;font:1.05rem Lora,serif}
+.mic{border:none;background:#a0446a;color:#fff;border-radius:999px;padding:6px 14px;font-weight:600;font-size:.88rem}
+.mic.rec{animation:mpulse 1s infinite}@keyframes mpulse{50%{box-shadow:0 0 0 8px rgba(160,68,106,.25)}}
+.heard{width:100%;font-size:.88rem;color:var(--soft)}.heard .gd{color:var(--ok)}.heard .md{color:#c08a2a}.nomic{font-style:italic}
+.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line);margin:8px 0}
+.tbl td{padding:7px 10px;border-top:1px solid #f0f2f5;vertical-align:top}
+.tbl .w{font-weight:700;color:var(--c)}.tbl .fr2{font:italic .95rem Lora,serif;color:#555}.tbl .tip{font-size:.82rem;color:#7a6a40;background:#fdf6e3;border-radius:8px;padding:2px 8px;display:inline-block;margin-top:3px}
+.tbl tr.grp td{background:var(--t);font-weight:700;color:var(--c);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.wcell{display:flex;align-items:center}
+.idiom{background:#fff;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:12px;padding:8px 12px;margin:10px 0}
+.idiom .eq{font:italic .95rem Lora,serif;color:#2b3a55;margin:2px 0 0 76px}.idiom .eq b{color:var(--c)}
+.tipbox{background:#fdf6e3;border:1px solid #f0dca8;border-radius:14px;padding:10px 14px;margin:12px 0;--c:#a8780d}
+.tipbox .h{font-weight:700;color:#a8780d;margin-bottom:4px}
+.kid{background:#fff0f6;border:1px solid #f6cfe0;border-radius:14px;padding:10px 14px;margin:12px 0;--c:#c43d7f}
+.kid .h{font-weight:700;color:#c43d7f}
+.timing{display:inline-block;background:rgba(255,255,255,.25);border-radius:999px;padding:0 10px;font-size:.72rem;font-weight:600;margin-left:6px;vertical-align:2px}
+@media(max-width:560px){.idiom .eq{margin-left:0}}
+.orow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 0 32px}.omod{border:1.5px dashed var(--c);color:var(--c);background:#fff;border-radius:999px;padding:5px 14px;font-weight:600;font-size:.88rem}.omod:disabled{opacity:.4}
+.item .heard{margin:6px 0 0 32px}
+@media(max-width:560px){.orow,.item .heard{margin-left:0}}
+.oline{min-height:52px;border:2px dashed color-mix(in srgb,var(--c) 45%,#fff);border-radius:14px;padding:7px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 0 32px;background:#fafbfc}
+.oline.ok{border:2px solid var(--ok);background:#eef8f2}.oline.ko{border-color:var(--ko)}
+.opool{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 0 32px;min-height:40px}
+.otile{border:none;border-radius:10px;padding:6px 12px;font:600 1rem Poppins,sans-serif;color:#fff;background:var(--c);box-shadow:0 3px 0 rgba(0,0,0,.18)}
+.otile:nth-child(3n+2){background:#c08a2a}.otile:nth-child(3n){background:#6d4a7d}
+.gline{display:flex;align-items:flex-start;gap:6px;background:#fff8ec;border-left:4px solid #c0392b;border-radius:0 10px 10px 0;padding:6px 10px;margin:6px 0 0 32px;font-family:Lora,serif}
+.gline .who{font:700 .78rem Poppins,sans-serif;color:#c0392b;margin-right:4px}
+.fam{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:10px 0}
+.fam div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 10px;font-size:.88rem}.fam b{display:block;color:var(--c)}
+@media(max-width:560px){.oline,.opool,.gline{margin-left:0}}
+/* étoiles */
+.star{position:fixed;pointer-events:none;z-index:99;color:#f2b632;font-size:18px;animation:fly .95s ease-out forwards;text-shadow:0 0 6px rgba(242,182,50,.6)}
+@keyframes fly{0%{opacity:0;transform:translate(0,0) scale(.4)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(40deg)}}
+/* accents */
+.acc{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#2b3a55;display:none;justify-content:center;flex-wrap:wrap;gap:5px;padding:6px}
+.acc.show{display:flex}
+.acc button{background:#fff;border:none;border-radius:7px;min-width:34px;padding:5px 0;font:600 1rem Lora,serif;color:#2b3a55}
+@media (max-width:560px){
+  body{font-size:15px}
+  .opts,.row,.fb{margin-left:0}
+  .s .tr{padding-left:0}
+  .htitle{left:10px;bottom:10px;padding:9px 12px}.tag{font-size:.58rem}
+}
+@media print{.top,.acc{display:none}.wrap{padding-top:0}}
+</style>
+</head>
+<body class="allit">
+<div class="top"><div class="topin">
+  <span class="brand">L'anglais de Nicola</span>
+  <button type="button" class="tbtn on" id="allit" title="Afficher ou cacher le français">FR</button>
+  <button type="button" class="tbtn on" id="autoa" title="Lecture automatique des corrections">🔊 auto</button>
+  <span class="score" id="score"><span class="st">★</span><span id="sc">0</span>&nbsp;/&nbsp;37</span>
+</div></div>
+<main class="wrap">
+<header class="hero"><img src="../img/cefalu.jpg" alt="Cefalù, en Sicile">
+<div class="htitle"><span class="tag">Jour 1 · Day 1</span><h1>Hello! Saluer et se présenter</h1>
+<div class="hit"><span class="tr" style="display:block;color:#eee">Greeting people and introducing yourself</span></div></div></header>
+<nav class="toc"><a href="../"><b>☰</b> Mon programme</a><a href="#bonjour"><b>1</b> Bonjour</a><a href="#presenter"><b>2</b> Se présenter</a><a href="#tobe"><b>3</b> To be</a><a href="#cava"><b>4</b> Ça va ?</a><a href="#giovanna"><b>5</b> Giovanna</a><a href="#exercices"><b>6</b> Exercices</a><a href="#revoir"><b>7</b> À revoir</a></nav>
+<div class="ex lead"><div class="fr"><span class="txt">Bonjour Nicola ! Aujourd'hui, vous apprenez à dire bonjour, à vous présenter et à demander des nouvelles : de quoi passer un premier coup de fil en anglais à Giovanna, au Canada. Touchez le haut-parleur pour écouter, la tortue 🐢 pour écouter lentement, et <b>répétez toujours à voix haute</b>. Le bouton <b>FR</b> en haut cache ou montre le français, pour vous tester.</span></div></div>
+<section class="sec" style="--c:#1f5f7a;--t:#eaf3f7"><header class="sh" id="bonjour" style="--c:#1f5f7a"><span class="num">1</span><div><h2>Dire bonjour et au revoir<span class="timing">5 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">Hello and goodbye</span></div></div></header>
+<table class="tbl"><tr class="grp"><td colspan="2">Pour dire bonjour</td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/e721642d70ec.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/7425c1add25f.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">Hello!</span></div></td><td><span class="fr2">Bonjour !</span><div class="tip">Le h se prononce : c'est un petit souffle, comme pour faire de la buée sur une vitre.</div></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/d15cc93cbf5a.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/f99110f9eefd.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">Hi!</span></div></td><td><span class="fr2">Salut !</span><div class="tip">Se prononce « haï ».</div></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/69b8f7fe4199.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/5c15fc1e7b23.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">Good morning!</span></div></td><td><span class="fr2">Bonjour ! (le matin)</span></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/a84c2be63917.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/4e5e64be7142.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">Good afternoon!</span></div></td><td><span class="fr2">Bonjour ! (l'après-midi)</span></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/e96f96080612.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/f069bc670621.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">Good evening!</span></div></td><td><span class="fr2">Bonsoir !</span></td></tr><tr class="grp"><td colspan="2">Pour dire au revoir</td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/6c5748b3bc52.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/8619f00f3cc3.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">Goodbye!</span></div></td><td><span class="fr2">Au revoir !</span></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/5c31546ae892.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/a17545ee806c.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">Bye!</span></div></td><td><span class="fr2">Salut ! Ciao !</span><div class="tip">Très courant entre amis et en famille.</div></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/a94d18a6e10a.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/201d980bb05a.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">See you soon!</span></div></td><td><span class="fr2">À bientôt !</span></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/c3f85c57b950.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/a4515478883a.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">See you tomorrow!</span></div></td><td><span class="fr2">À demain !</span></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/e0fb0b6cef29.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/96a2c2402509.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">Good night!</span></div></td><td><span class="fr2">Bonne nuit !</span><div class="tip">Seulement pour aller se coucher. Pour arriver le soir, on dit Good evening.</div></td></tr></table>
+<div class="tipbox"><div class="h">💡 Le truc</div><div class="ex "><div class="fr"><span class="txt">En anglais, le matin, l'après-midi et le soir ont chacun leur « bonjour ». Si vous hésitez, dites simplement <b>Hello!</b> : c'est toujours juste.</span></div></div></div>
+</section>
+<section class="sec" style="--c:#2f7f73;--t:#eef6f4"><header class="sh" id="presenter" style="--c:#2f7f73"><span class="num">2</span><div><h2>Se présenter<span class="timing">5 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">Introducing yourself</span></div></div></header>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/4b20b266b019.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/040e4f94a4c3.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">My name is Nicola.</span></div><div class="tr">Je m'appelle Nicola.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/4d015c4cd54c.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/1244607b9151.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I'm Nicola.</span></div><div class="tr">Je suis Nicola.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/faed6f02fb0e.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/7945343f60e6.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I'm Italian.</span></div><div class="tr">Je suis italien.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/e565db1fbd77.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/987dadd990d1.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I'm from Sicily.</span></div><div class="tr">Je viens de Sicile.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/79a7de2ecced.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/189102cf0602.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I love music.</span></div><div class="tr">J'adore la musique.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/aab1049e18a5.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/ea3223bcf86d.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Nice to meet you!</span></div><div class="tr">Enchanté !</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/43ad7f06ef15.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/5a1eaced42ce.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">What's your name?</span></div><div class="tr">Comment vous appelez-vous ? Comment tu t'appelles ?</div></div>
+<div class="tipbox"><div class="h">💡 Mot à mot</div><div class="ex "><div class="fr"><span class="txt"><b>My name is</b> veut dire « mon nom est ». <b>I'm from</b> veut dire « je viens de » : I'm from Sicily, I'm from Italy, I'm from Canada.</span></div></div></div>
+<figure class="ph band"><img src="../img/taormina.jpg" alt="Taormina, le théâtre antique · Taormina, the ancient theatre" loading="lazy"><figcaption>Taormina, le théâtre antique · Taormina, the ancient theatre</figcaption></figure>
+</section>
+<section class="sec" style="--c:#6d4a7d;--t:#f3edf6"><header class="sh" id="tobe" style="--c:#6d4a7d"><span class="num">3</span><div><h2>Le verbe to be (être)<span class="timing">8 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">The verb to be</span></div></div></header>
+<div class="ex lead"><div class="fr"><span class="txt">C'est le verbe le plus important de l'anglais. Il se conjugue avec trois formes seulement : <b>am</b>, <b>is</b> et <b>are</b>. La deuxième colonne montre la forme courte, celle qu'on dit presque toujours à l'oral.</span></div></div>
+<table class="tbl">
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/cd88df8fd920.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">I am</span></div></td><td><div class="wcell"><button type="button" class="au " data-a="../audio/c5847c611b2e.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="color:#a0446a">I'm</span></div></td><td><span class="fr2">je suis</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/c76c5bbd2ded.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">you are</span></div></td><td><div class="wcell"><button type="button" class="au " data-a="../audio/198ba9507b51.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="color:#a0446a">you're</span></div></td><td><span class="fr2">tu es · vous êtes</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/d7e25a38b225.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">he is</span></div></td><td><div class="wcell"><button type="button" class="au " data-a="../audio/ecdd6499efd2.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="color:#a0446a">he's</span></div></td><td><span class="fr2">il est</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/3612525b5a2a.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">she is</span></div></td><td><div class="wcell"><button type="button" class="au " data-a="../audio/c0b8c6d668a9.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="color:#a0446a">she's</span></div></td><td><span class="fr2">elle est</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/0f6ff8bd5763.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">it is</span></div></td><td><div class="wcell"><button type="button" class="au " data-a="../audio/1c84b3ce9f1c.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="color:#a0446a">it's</span></div></td><td><span class="fr2">il, elle est (une chose, un animal)</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/8a80263b7e16.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">we are</span></div></td><td><div class="wcell"><button type="button" class="au " data-a="../audio/d65f2483d9e5.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="color:#a0446a">we're</span></div></td><td><span class="fr2">nous sommes</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/5f2cb28960b0.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w">they are</span></div></td><td><div class="wcell"><button type="button" class="au " data-a="../audio/59357c636dec.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="w" style="color:#a0446a">they're</span></div></td><td><span class="fr2">ils, elles sont</span></td></tr>
+</table>
+<div class="tipbox"><div class="h">💡 Bonne nouvelle</div><div class="ex "><div class="fr"><span class="txt"><b>You</b> veut dire à la fois « tu » et « vous » : en anglais, pas besoin de choisir !</span></div></div></div>
+<div class="ex "><div class="fr"><span class="txt">Avec votre famille :</span></div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/f6e555b94635.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/3e411343554d.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Dominique is my wife.</span></div><div class="tr">Dominique est ma femme.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/c78f414e60df.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/f7f2aa8b8f41.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Giovanna is my sister. She's in Canada.</span></div><div class="tr">Giovanna est ma sœur. Elle est au Canada.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/f96a5ee0463e.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/1cf1e6226115.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Pietro is my brother. He's in Milan.</span></div><div class="tr">Pietro est mon frère. Il est à Milan.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/cc54ddbf1c9e.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/abad3c49db0b.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Mimma and Sabina are my sisters. They're in Milan.</span></div><div class="tr">Mimma et Sabina sont mes sœurs. Elles sont à Milan.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/64d3137657f4.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/7403cc9af16e.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">We're a big family!</span></div><div class="tr">Nous sommes une grande famille !</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/b3c2b69b756f.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/71d1bf8233c8.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Jolie is a dog. She's very sweet.</span></div><div class="tr">Jolie est une chienne. Elle est très mignonne.</div></div>
+<div class="tipbox"><div class="h">🐶 Et Jolie ?</div><div class="ex "><div class="fr"><span class="txt">Pour un objet ou un animal, on dit <b>it</b>. Mais pour un chien de la famille, comme Jolie, les Anglais disent volontiers <b>she</b> (ou <b>he</b> pour un mâle).</span></div></div></div>
+<figure class="ph band"><img src="../img/milan.jpg" alt="Milan, la place du Dôme · Milan, Cathedral Square" loading="lazy"><figcaption>Milan, la place du Dôme · Milan, Cathedral Square</figcaption></figure>
+</section>
+<section class="sec" style="--c:#b5523b;--t:#fbefe9"><header class="sh" id="cava" style="--c:#b5523b"><span class="num">4</span><div><h2>Comment ça va ?<span class="timing">4 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">How are you?</span></div></div></header>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/1864c4a47d71.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/845aba9a4911.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">How are you?</span></div><div class="tr">Comment vas-tu ? Comment allez-vous ?</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/90ecb745fc5b.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/ce3c797825b5.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I'm fine, thank you.</span></div><div class="tr">Je vais bien, merci.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/0ce0dec10806.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/24c1ebe46825.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I'm very well!</span></div><div class="tr">Je vais très bien !</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/ef2793a4ae02.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/a5b19ed0c98a.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Not bad.</span></div><div class="tr">Pas mal.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/db755cde9465.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/a378e97b01b5.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">And you?</span></div><div class="tr">Et toi ? Et vous ?</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/92ae19c85148.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/fc10e5a8d04a.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Thank you! Thanks!</span></div><div class="tr">Merci !</div></div>
+<div class="tipbox"><div class="h">👅 Prononciation : th</div><div class="ex "><div class="fr"><span class="txt">Pour <b>thank you</b>, posez le bout de la langue entre les dents et soufflez doucement. Ce n'est ni « t », ni « s » : écoutez et répétez lentement avec la tortue 🐢.</span></div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/a76bf96913ee.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/c1a2b2d1ba63.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Thank you, thank you very much.</span></div><div class="tr">Merci, merci beaucoup.</div></div></div>
+</section>
+<section class="sec" style="--c:#c08a2a;--t:#fbf4e6"><header class="sh" id="giovanna" style="--c:#c08a2a"><span class="num">5</span><div><h2>Un appel pour Giovanna<span class="timing">3 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">A call to Giovanna</span></div></div></header>
+<div class="ex lead"><div class="fr"><span class="txt">Giovanna habite au Canada. Voici une petite conversation à lui faire au téléphone. Écoutez Giovanna (voix canadienne), puis répondez avec les phrases de Nicola.</span></div></div>
+<div class="s" style="border-left:4px solid #c0392b;padding-left:8px"><div class="fr"><button type="button" class="au " data-a="../audio/10c075d98d0a.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/a9fd85343772.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt"><b style="color:#c0392b">Giovanna :</b> Hello Nicola! How are you?</span></div><div class="tr">Bonjour Nicola ! Comment vas-tu ?</div></div>
+<div class="s" style="border-left:4px solid #1f5f7a;padding-left:8px"><div class="fr"><button type="button" class="au " data-a="../audio/b6fa0d469a3d.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/dd8064b100a8.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt"><b style="color:#1f5f7a">Nicola :</b> Hello Giovanna! I'm fine, thank you. And you?</span></div><div class="tr">Bonjour Giovanna ! Je vais bien, merci. Et toi ?</div></div>
+<div class="s" style="border-left:4px solid #c0392b;padding-left:8px"><div class="fr"><button type="button" class="au " data-a="../audio/b17d56c86e1e.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/01e52d484063.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt"><b style="color:#c0392b">Giovanna :</b> I'm very well, thanks!</span></div><div class="tr">Je vais très bien, merci !</div></div>
+<div class="s" style="border-left:4px solid #1f5f7a;padding-left:8px"><div class="fr"><button type="button" class="au " data-a="../audio/945502c97334.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/da35c77520fc.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt"><b style="color:#1f5f7a">Nicola :</b> I miss you!</span></div><div class="tr">Tu me manques !</div></div>
+<div class="s" style="border-left:4px solid #c0392b;padding-left:8px"><div class="fr"><button type="button" class="au " data-a="../audio/f412c0a90b1c.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/e9516f6ac689.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt"><b style="color:#c0392b">Giovanna :</b> I miss you too!</span></div><div class="tr">Toi aussi, tu me manques !</div></div>
+<div class="s" style="border-left:4px solid #1f5f7a;padding-left:8px"><div class="fr"><button type="button" class="au " data-a="../audio/7d73b63ed92a.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/994c20ed50f7.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt"><b style="color:#1f5f7a">Nicola :</b> See you soon! Big hug!</span></div><div class="tr">À bientôt ! Je t'embrasse fort !</div></div>
+<div class="tipbox"><div class="h">💡 I miss you</div><div class="ex "><div class="fr"><span class="txt">Attention, c'est à l'envers du français : <b>I miss you</b> = « tu me manques » (mot à mot : « je manque de toi »). Retenez la phrase entière, elle fera plaisir à Giovanna !</span></div></div></div>
+<figure class="ph band"><img src="../img/canada.jpg" alt="Le lac Louise, au Canada · Lake Louise, Canada" loading="lazy"><figcaption>Le lac Louise, au Canada · Lake Louise, Canada</figcaption></figure>
+</section>
+<section class="sec" style="--c:#2b3a55;--t:#eef1f6"><header class="sh" id="exercices" style="--c:#2b3a55"><span class="num">6</span><div><h2>Exercices<span class="timing">10 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">Exercises</span></div></div></header>
+<div class="ex lead"><div class="fr"><span class="txt">La correction est immédiate et chaque bonne réponse vaut un point. Vos erreurs s'ajoutent à « À revoir », avec un lien pour relire la leçon.</span></div></div>
+<div class="exb" id="ex1" style="--c:#1f5f7a"><div class="exh" style="--c:#1f5f7a"><span class="exn">1</span><div><div class="exk">EXERCICE 1</div><div class="ext">J'écoute et je comprends</div><div style="font:italic .85rem Lora,serif;opacity:.9">Listen and choose</div></div></div>
+<div class="item" id="q1" data-k="qcm" data-j='{&quot;id&quot;: &quot;q1&quot;, &quot;ans&quot;: [&quot;Bonjour !&quot;], &quot;full&quot;: &quot;Hello!&quot;, &quot;a&quot;: &quot;../audio/e721642d70ec.mp3?v=1&quot;, &quot;it&quot;: &quot;Bonjour !&quot;, &quot;rule&quot;: &quot;bonjour&quot;, &quot;why&quot;: &quot;Hello = bonjour.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">1</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/e721642d70ec.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/7425c1add25f.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">Au revoir !</button><button type="button" class="opt">Merci !</button><button type="button" class="opt">Bonjour !</button></div><div class="fb"></div></div>
+<div class="item" id="q2" data-k="qcm" data-j='{&quot;id&quot;: &quot;q2&quot;, &quot;ans&quot;: [&quot;À bientôt !&quot;], &quot;full&quot;: &quot;See you soon!&quot;, &quot;a&quot;: &quot;../audio/a94d18a6e10a.mp3?v=1&quot;, &quot;it&quot;: &quot;À bientôt !&quot;, &quot;rule&quot;: &quot;bonjour&quot;, &quot;why&quot;: &quot;See you soon = à bientôt.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">2</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/a94d18a6e10a.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/201d980bb05a.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">Bonne nuit !</button><button type="button" class="opt">À demain !</button><button type="button" class="opt">À bientôt !</button></div><div class="fb"></div></div>
+<div class="item" id="q3" data-k="qcm" data-j='{&quot;id&quot;: &quot;q3&quot;, &quot;ans&quot;: [&quot;Je viens de Sicile.&quot;], &quot;full&quot;: &quot;I&#x27;m from Sicily.&quot;, &quot;a&quot;: &quot;../audio/e565db1fbd77.mp3?v=1&quot;, &quot;it&quot;: &quot;Je viens de Sicile.&quot;, &quot;rule&quot;: &quot;presenter&quot;, &quot;why&quot;: &quot;I&#x27;m from = je viens de.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">3</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/e565db1fbd77.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/987dadd990d1.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">J&#x27;aime la Sicile.</button><button type="button" class="opt">J&#x27;habite en Sicile.</button><button type="button" class="opt">Je viens de Sicile.</button></div><div class="fb"></div></div>
+<div class="item" id="q4" data-k="qcm" data-j='{&quot;id&quot;: &quot;q4&quot;, &quot;ans&quot;: [&quot;Enchanté !&quot;], &quot;full&quot;: &quot;Nice to meet you!&quot;, &quot;a&quot;: &quot;../audio/aab1049e18a5.mp3?v=1&quot;, &quot;it&quot;: &quot;Enchanté !&quot;, &quot;rule&quot;: &quot;presenter&quot;, &quot;why&quot;: &quot;Nice to meet you = enchanté.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">4</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/aab1049e18a5.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/ea3223bcf86d.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">Enchanté !</button><button type="button" class="opt">Bon appétit !</button><button type="button" class="opt">Bonne chance !</button></div><div class="fb"></div></div>
+<div class="item" id="q5" data-k="qcm" data-j='{&quot;id&quot;: &quot;q5&quot;, &quot;ans&quot;: [&quot;Comment ça va ?&quot;], &quot;full&quot;: &quot;How are you?&quot;, &quot;a&quot;: &quot;../audio/1864c4a47d71.mp3?v=1&quot;, &quot;it&quot;: &quot;Comment vas-tu ?&quot;, &quot;rule&quot;: &quot;cava&quot;, &quot;why&quot;: &quot;How are you? = comment ça va ?&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">5</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/1864c4a47d71.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/845aba9a4911.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">Comment ça va ?</button><button type="button" class="opt">Où es-tu ?</button><button type="button" class="opt">Comment tu t&#x27;appelles ?</button></div><div class="fb"></div></div>
+<div class="item" id="q6" data-k="qcm" data-j='{&quot;id&quot;: &quot;q6&quot;, &quot;ans&quot;: [&quot;Tu me manques !&quot;], &quot;full&quot;: &quot;I miss you!&quot;, &quot;a&quot;: &quot;../audio/945502c97334.mp3?v=1&quot;, &quot;it&quot;: &quot;Tu me manques !&quot;, &quot;rule&quot;: &quot;giovanna&quot;, &quot;why&quot;: &quot;I miss you = tu me manques.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">6</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/945502c97334.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/da35c77520fc.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">À bientôt !</button><button type="button" class="opt">Je t&#x27;aime !</button><button type="button" class="opt">Tu me manques !</button></div><div class="fb"></div></div>
+<div class="item" id="q7" data-k="qcm" data-j='{&quot;id&quot;: &quot;q7&quot;, &quot;ans&quot;: [&quot;Bonne nuit !&quot;], &quot;full&quot;: &quot;Good night!&quot;, &quot;a&quot;: &quot;../audio/e0fb0b6cef29.mp3?v=1&quot;, &quot;it&quot;: &quot;Bonne nuit !&quot;, &quot;rule&quot;: &quot;bonjour&quot;, &quot;why&quot;: &quot;Good night = bonne nuit, pour aller se coucher.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">7</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/e0fb0b6cef29.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/96a2c2402509.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">Bonjour !</button><button type="button" class="opt">Bonne nuit !</button><button type="button" class="opt">Bonsoir !</button></div><div class="fb"></div></div>
+<div class="item" id="q8" data-k="qcm" data-j='{&quot;id&quot;: &quot;q8&quot;, &quot;ans&quot;: [&quot;Nous sommes une grande famille.&quot;], &quot;full&quot;: &quot;We&#x27;re a big family.&quot;, &quot;a&quot;: &quot;../audio/abb332ff047e.mp3?v=1&quot;, &quot;it&quot;: &quot;Nous sommes une grande famille.&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;We&#x27;re = we are = nous sommes.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">8</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/abb332ff047e.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/604810849b3a.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">Nous sommes en famille.</button><button type="button" class="opt">Nous sommes une grande famille.</button><button type="button" class="opt">Nous avons une grande maison.</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex2" style="--c:#2f7f73"><div class="exh" style="--c:#2f7f73"><span class="exn">2</span><div><div class="exk">EXERCICE 2</div><div class="ext">Que dites-vous ?</div><div style="font:italic .85rem Lora,serif;opacity:.9">What do you say?</div></div></div>
+<div class="item" id="q9" data-k="qcm" data-j='{&quot;id&quot;: &quot;q9&quot;, &quot;ans&quot;: [&quot;Good morning!&quot;], &quot;full&quot;: &quot;Good morning!&quot;, &quot;a&quot;: &quot;../audio/69b8f7fe4199.mp3?v=1&quot;, &quot;it&quot;: &quot;Bonjour ! (le matin)&quot;, &quot;rule&quot;: &quot;bonjour&quot;, &quot;why&quot;: &quot;Le matin : Good morning.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">1</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">🕗 Il est 8 h du matin, vous entrez dans un café.</span></div><div class="opts"><button type="button" class="opt">Good morning!</button><button type="button" class="opt">Good evening!</button><button type="button" class="opt">Good night!</button></div><div class="fb"></div></div>
+<div class="item" id="q10" data-k="qcm" data-j='{&quot;id&quot;: &quot;q10&quot;, &quot;ans&quot;: [&quot;Good afternoon!&quot;], &quot;full&quot;: &quot;Good afternoon!&quot;, &quot;a&quot;: &quot;../audio/a84c2be63917.mp3?v=1&quot;, &quot;it&quot;: &quot;Bonjour ! (l&#x27;après-midi)&quot;, &quot;rule&quot;: &quot;bonjour&quot;, &quot;why&quot;: &quot;L&#x27;après-midi : Good afternoon.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">2</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">🕒 Il est 15 h, vous croisez un voisin.</span></div><div class="opts"><button type="button" class="opt">Good night!</button><button type="button" class="opt">Good afternoon!</button><button type="button" class="opt">Good morning!</button></div><div class="fb"></div></div>
+<div class="item" id="q11" data-k="qcm" data-j='{&quot;id&quot;: &quot;q11&quot;, &quot;ans&quot;: [&quot;Good evening!&quot;], &quot;full&quot;: &quot;Good evening!&quot;, &quot;a&quot;: &quot;../audio/e96f96080612.mp3?v=1&quot;, &quot;it&quot;: &quot;Bonsoir !&quot;, &quot;rule&quot;: &quot;bonjour&quot;, &quot;why&quot;: &quot;Pour arriver le soir : Good evening.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">3</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">🕗 Il est 20 h, vous arrivez à un dîner.</span></div><div class="opts"><button type="button" class="opt">Good night!</button><button type="button" class="opt">Goodbye!</button><button type="button" class="opt">Good evening!</button></div><div class="fb"></div></div>
+<div class="item" id="q12" data-k="qcm" data-j='{&quot;id&quot;: &quot;q12&quot;, &quot;ans&quot;: [&quot;Good night!&quot;], &quot;full&quot;: &quot;Good night!&quot;, &quot;a&quot;: &quot;../audio/e0fb0b6cef29.mp3?v=1&quot;, &quot;it&quot;: &quot;Bonne nuit !&quot;, &quot;rule&quot;: &quot;bonjour&quot;, &quot;why&quot;: &quot;Pour aller se coucher : Good night.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">4</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">🛏️ Vous allez vous coucher.</span></div><div class="opts"><button type="button" class="opt">Hello!</button><button type="button" class="opt">Good night!</button><button type="button" class="opt">Good evening!</button></div><div class="fb"></div></div>
+<div class="item" id="q13" data-k="qcm" data-j='{&quot;id&quot;: &quot;q13&quot;, &quot;ans&quot;: [&quot;Nice to meet you!&quot;], &quot;full&quot;: &quot;Nice to meet you!&quot;, &quot;a&quot;: &quot;../audio/aab1049e18a5.mp3?v=1&quot;, &quot;it&quot;: &quot;Enchanté !&quot;, &quot;rule&quot;: &quot;presenter&quot;, &quot;why&quot;: &quot;Nice to meet you = enchanté.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">5</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">🤝 Quelqu'un vous dit « My name is Tom ». Vous répondez…</span></div><div class="opts"><button type="button" class="opt">See you tomorrow!</button><button type="button" class="opt">Nice to meet you!</button><button type="button" class="opt">Thank you!</button></div><div class="fb"></div></div>
+<div class="item" id="q14" data-k="qcm" data-j='{&quot;id&quot;: &quot;q14&quot;, &quot;ans&quot;: [&quot;I&#x27;m fine, thank you.&quot;], &quot;full&quot;: &quot;I&#x27;m fine, thank you.&quot;, &quot;a&quot;: &quot;../audio/90ecb745fc5b.mp3?v=1&quot;, &quot;it&quot;: &quot;Je vais bien, merci.&quot;, &quot;rule&quot;: &quot;cava&quot;, &quot;why&quot;: &quot;I&#x27;m fine, thank you = je vais bien, merci.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">6</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">📞 Giovanna vous demande « How are you? ».</span></div><div class="opts"><button type="button" class="opt">My name is Nicola.</button><button type="button" class="opt">See you soon!</button><button type="button" class="opt">I&#x27;m fine, thank you.</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex3" style="--c:#6d4a7d"><div class="exh" style="--c:#6d4a7d"><span class="exn">3</span><div><div class="exk">EXERCICE 3</div><div class="ext">am, is ou are ?</div><div style="font:italic .85rem Lora,serif;opacity:.9">am, is or are?</div></div></div>
+<div class="item" id="q15" data-k="qcm" data-j='{&quot;id&quot;: &quot;q15&quot;, &quot;ans&quot;: [&quot;am&quot;], &quot;full&quot;: &quot;I am Nicola.&quot;, &quot;a&quot;: &quot;../audio/ef5edb3fd987.mp3?v=1&quot;, &quot;it&quot;: &quot;Je suis Nicola.&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;I → am.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">1</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">I <span class="gap">……</span> Nicola.</span></div><div class="opts"><button type="button" class="opt">are</button><button type="button" class="opt">am</button><button type="button" class="opt">is</button></div><div class="fb"></div></div>
+<div class="item" id="q16" data-k="qcm" data-j='{&quot;id&quot;: &quot;q16&quot;, &quot;ans&quot;: [&quot;is&quot;], &quot;full&quot;: &quot;Giovanna is my sister.&quot;, &quot;a&quot;: &quot;../audio/6c14af4fdd6e.mp3?v=1&quot;, &quot;it&quot;: &quot;Giovanna est ma sœur.&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;she (Giovanna) → is.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">2</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Giovanna <span class="gap">……</span> my sister.</span></div><div class="opts"><button type="button" class="opt">is</button><button type="button" class="opt">am</button><button type="button" class="opt">are</button></div><div class="fb"></div></div>
+<div class="item" id="q17" data-k="qcm" data-j='{&quot;id&quot;: &quot;q17&quot;, &quot;ans&quot;: [&quot;is&quot;], &quot;full&quot;: &quot;Pietro is in Milan.&quot;, &quot;a&quot;: &quot;../audio/16a63c46ca6d.mp3?v=1&quot;, &quot;it&quot;: &quot;Pietro est à Milan.&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;he (Pietro) → is.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">3</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Pietro <span class="gap">……</span> in Milan.</span></div><div class="opts"><button type="button" class="opt">am</button><button type="button" class="opt">are</button><button type="button" class="opt">is</button></div><div class="fb"></div></div>
+<div class="item" id="q18" data-k="qcm" data-j='{&quot;id&quot;: &quot;q18&quot;, &quot;ans&quot;: [&quot;are&quot;], &quot;full&quot;: &quot;We are a big family.&quot;, &quot;a&quot;: &quot;../audio/9ea742087e88.mp3?v=1&quot;, &quot;it&quot;: &quot;Nous sommes une grande famille.&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;we → are.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">4</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">We <span class="gap">……</span> a big family.</span></div><div class="opts"><button type="button" class="opt">is</button><button type="button" class="opt">am</button><button type="button" class="opt">are</button></div><div class="fb"></div></div>
+<div class="item" id="q19" data-k="qcm" data-j='{&quot;id&quot;: &quot;q19&quot;, &quot;ans&quot;: [&quot;are&quot;], &quot;full&quot;: &quot;Mimma and Sabina are my sisters.&quot;, &quot;a&quot;: &quot;../audio/283dff9d39b4.mp3?v=1&quot;, &quot;it&quot;: &quot;Mimma et Sabina sont mes sœurs.&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;they (Mimma and Sabina) → are.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">5</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Mimma and Sabina <span class="gap">……</span> my sisters.</span></div><div class="opts"><button type="button" class="opt">is</button><button type="button" class="opt">am</button><button type="button" class="opt">are</button></div><div class="fb"></div></div>
+<div class="item" id="q20" data-k="qcm" data-j='{&quot;id&quot;: &quot;q20&quot;, &quot;ans&quot;: [&quot;is&quot;], &quot;full&quot;: &quot;Jolie is a dog.&quot;, &quot;a&quot;: &quot;../audio/b2ddd33f0c31.mp3?v=1&quot;, &quot;it&quot;: &quot;Jolie est une chienne.&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;she / it (Jolie) → is.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">6</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Jolie <span class="gap">……</span> a dog.</span></div><div class="opts"><button type="button" class="opt">are</button><button type="button" class="opt">am</button><button type="button" class="opt">is</button></div><div class="fb"></div></div>
+<div class="item" id="q21" data-k="qcm" data-j='{&quot;id&quot;: &quot;q21&quot;, &quot;ans&quot;: [&quot;are&quot;], &quot;full&quot;: &quot;You are my brother.&quot;, &quot;a&quot;: &quot;../audio/7be494c33408.mp3?v=1&quot;, &quot;it&quot;: &quot;Tu es mon frère.&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;you → are.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">7</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">You <span class="gap">……</span> my brother.</span></div><div class="opts"><button type="button" class="opt">am</button><button type="button" class="opt">are</button><button type="button" class="opt">is</button></div><div class="fb"></div></div>
+<div class="item" id="q22" data-k="qcm" data-j='{&quot;id&quot;: &quot;q22&quot;, &quot;ans&quot;: [&quot;is&quot;], &quot;full&quot;: &quot;Music is my passion.&quot;, &quot;a&quot;: &quot;../audio/56318e7fdc72.mp3?v=1&quot;, &quot;it&quot;: &quot;La musique est ma passion.&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;it (music) → is.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">8</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Music <span class="gap">……</span> my passion.</span></div><div class="opts"><button type="button" class="opt">is</button><button type="button" class="opt">are</button><button type="button" class="opt">am</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex4" style="--c:#b5523b"><div class="exh" style="--c:#b5523b"><span class="exn">4</span><div><div class="exk">EXERCICE 4</div><div class="ext">La forme courte</div><div style="font:italic .85rem Lora,serif;opacity:.9">Write the short form</div></div></div>
+<div class="ex cons"><div class="fr"><span class="txt">Écrivez la forme courte, avec l'apostrophe. Exemple : I am → I'm.</span></div></div>
+<div class="item" id="q23" data-k="inp" data-j='{&quot;id&quot;: &quot;q23&quot;, &quot;ans&quot;: [&quot;I&#x27;m&quot;], &quot;full&quot;: &quot;I am = I&#x27;m&quot;, &quot;a&quot;: &quot;../audio/c5847c611b2e.mp3?v=1&quot;, &quot;it&quot;: &quot;&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;I am → I&#x27;m&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">1</span><span class="txt"><b>I am</b> → <span class="gap">……</span></span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="forme courte"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q24" data-k="inp" data-j='{&quot;id&quot;: &quot;q24&quot;, &quot;ans&quot;: [&quot;you&#x27;re&quot;], &quot;full&quot;: &quot;you are = you&#x27;re&quot;, &quot;a&quot;: &quot;../audio/198ba9507b51.mp3?v=1&quot;, &quot;it&quot;: &quot;&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;you are → you&#x27;re&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">2</span><span class="txt"><b>you are</b> → <span class="gap">……</span></span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="forme courte"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q25" data-k="inp" data-j='{&quot;id&quot;: &quot;q25&quot;, &quot;ans&quot;: [&quot;he&#x27;s&quot;], &quot;full&quot;: &quot;he is = he&#x27;s&quot;, &quot;a&quot;: &quot;../audio/ecdd6499efd2.mp3?v=1&quot;, &quot;it&quot;: &quot;&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;he is → he&#x27;s&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">3</span><span class="txt"><b>he is</b> → <span class="gap">……</span></span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="forme courte"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q26" data-k="inp" data-j='{&quot;id&quot;: &quot;q26&quot;, &quot;ans&quot;: [&quot;she&#x27;s&quot;], &quot;full&quot;: &quot;she is = she&#x27;s&quot;, &quot;a&quot;: &quot;../audio/c0b8c6d668a9.mp3?v=1&quot;, &quot;it&quot;: &quot;&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;she is → she&#x27;s&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">4</span><span class="txt"><b>she is</b> → <span class="gap">……</span></span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="forme courte"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q27" data-k="inp" data-j='{&quot;id&quot;: &quot;q27&quot;, &quot;ans&quot;: [&quot;we&#x27;re&quot;], &quot;full&quot;: &quot;we are = we&#x27;re&quot;, &quot;a&quot;: &quot;../audio/d65f2483d9e5.mp3?v=1&quot;, &quot;it&quot;: &quot;&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;we are → we&#x27;re&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">5</span><span class="txt"><b>we are</b> → <span class="gap">……</span></span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="forme courte"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q28" data-k="inp" data-j='{&quot;id&quot;: &quot;q28&quot;, &quot;ans&quot;: [&quot;they&#x27;re&quot;], &quot;full&quot;: &quot;they are = they&#x27;re&quot;, &quot;a&quot;: &quot;../audio/59357c636dec.mp3?v=1&quot;, &quot;it&quot;: &quot;&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;they are → they&#x27;re&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">6</span><span class="txt"><b>they are</b> → <span class="gap">……</span></span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="forme courte"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex5" style="--c:#2f7f73"><div class="exh" style="--c:#2f7f73"><span class="exn">5</span><div><div class="exk">EXERCICE 5</div><div class="ext">Remettez les mots dans l'ordre</div><div style="font:italic .85rem Lora,serif;opacity:.9">Put the words in order</div></div></div>
+<div class="ex cons"><div class="fr"><span class="txt">Touchez les étiquettes dans le bon ordre. Touchez une étiquette déjà placée pour la remettre en bas.</span></div></div>
+<div class="item" id="q29" data-k="ord" data-j='{&quot;id&quot;: &quot;q29&quot;, &quot;ans&quot;: [&quot;My name is Nicola.&quot;], &quot;full&quot;: &quot;My name is Nicola.&quot;, &quot;a&quot;: &quot;../audio/4b20b266b019.mp3?v=1&quot;, &quot;it&quot;: &quot;Je m&#x27;appelle Nicola.&quot;, &quot;rule&quot;: &quot;presenter&quot;, &quot;why&quot;: &quot;Ordre : My name is Nicola.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 5}'><div class="qq"><span class="qn">1</span><span class="txt" style="font-style:italic;color:var(--soft)">Je m'appelle Nicola.</span></div><div class="oline"></div><div class="opool"><button type="button" class="otile">name</button><button type="button" class="otile">Nicola.</button><button type="button" class="otile">is</button><button type="button" class="otile">My</button></div><div class="fb"></div></div>
+<div class="item" id="q30" data-k="ord" data-j='{&quot;id&quot;: &quot;q30&quot;, &quot;ans&quot;: [&quot;I&#x27;m from Sicily.&quot;], &quot;full&quot;: &quot;I&#x27;m from Sicily.&quot;, &quot;a&quot;: &quot;../audio/e565db1fbd77.mp3?v=1&quot;, &quot;it&quot;: &quot;Je viens de Sicile.&quot;, &quot;rule&quot;: &quot;presenter&quot;, &quot;why&quot;: &quot;Ordre : I&#x27;m from Sicily.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 5}'><div class="qq"><span class="qn">2</span><span class="txt" style="font-style:italic;color:var(--soft)">Je viens de Sicile.</span></div><div class="oline"></div><div class="opool"><button type="button" class="otile">Sicily.</button><button type="button" class="otile">I&#x27;m</button><button type="button" class="otile">from</button></div><div class="fb"></div></div>
+<div class="item" id="q31" data-k="ord" data-j='{&quot;id&quot;: &quot;q31&quot;, &quot;ans&quot;: [&quot;Nice to meet you!&quot;], &quot;full&quot;: &quot;Nice to meet you!&quot;, &quot;a&quot;: &quot;../audio/aab1049e18a5.mp3?v=1&quot;, &quot;it&quot;: &quot;Enchanté !&quot;, &quot;rule&quot;: &quot;presenter&quot;, &quot;why&quot;: &quot;Ordre : Nice to meet you!&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 5}'><div class="qq"><span class="qn">3</span><span class="txt" style="font-style:italic;color:var(--soft)">Enchanté !</span></div><div class="oline"></div><div class="opool"><button type="button" class="otile">you!</button><button type="button" class="otile">Nice</button><button type="button" class="otile">to</button><button type="button" class="otile">meet</button></div><div class="fb"></div></div>
+<div class="item" id="q32" data-k="ord" data-j='{&quot;id&quot;: &quot;q32&quot;, &quot;ans&quot;: [&quot;Giovanna is in Canada.&quot;], &quot;full&quot;: &quot;Giovanna is in Canada.&quot;, &quot;a&quot;: &quot;../audio/133fbdc1551b.mp3?v=1&quot;, &quot;it&quot;: &quot;Giovanna est au Canada.&quot;, &quot;rule&quot;: &quot;tobe&quot;, &quot;why&quot;: &quot;Ordre : Giovanna is in Canada.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 5}'><div class="qq"><span class="qn">4</span><span class="txt" style="font-style:italic;color:var(--soft)">Giovanna est au Canada.</span></div><div class="oline"></div><div class="opool"><button type="button" class="otile">is</button><button type="button" class="otile">in</button><button type="button" class="otile">Giovanna</button><button type="button" class="otile">Canada.</button></div><div class="fb"></div></div>
+<div class="item" id="q33" data-k="ord" data-j='{&quot;id&quot;: &quot;q33&quot;, &quot;ans&quot;: [&quot;How are you?&quot;], &quot;full&quot;: &quot;How are you?&quot;, &quot;a&quot;: &quot;../audio/1864c4a47d71.mp3?v=1&quot;, &quot;it&quot;: &quot;Comment vas-tu ?&quot;, &quot;rule&quot;: &quot;cava&quot;, &quot;why&quot;: &quot;Ordre : How are you?&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 5}'><div class="qq"><span class="qn">5</span><span class="txt" style="font-style:italic;color:var(--soft)">Comment vas-tu ?</span></div><div class="oline"></div><div class="opool"><button type="button" class="otile">are</button><button type="button" class="otile">you?</button><button type="button" class="otile">How</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex6" style="--c:#a0446a"><div class="exh" style="--c:#a0446a"><span class="exn">6</span><div><div class="exk">EXERCICE 6</div><div class="ext">Je répète et je parle</div><div style="font:italic .85rem Lora,serif;opacity:.9">Listen, repeat and speak</div></div></div>
+<div class="ex cons"><div class="fr"><span class="txt">Écoutez, répétez à voix haute, puis touchez 🎤 et dites la phrase : la page vous montre ce qu'elle a compris. Recommencez autant de fois que vous voulez ; cet exercice ne compte pas dans le score.</span></div></div>
+<div class="spk" data-t="Hello! My name is Nicola."><button type="button" class="au " data-a="../audio/1ffa89edc49f.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/22255e19f56f.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Hello! My name is Nicola.<span class="tr" style="font-size:.85rem">Bonjour ! Je m'appelle Nicola.</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="I&#x27;m from Sicily."><button type="button" class="au " data-a="../audio/e565db1fbd77.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/987dadd990d1.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I'm from Sicily.<span class="tr" style="font-size:.85rem">Je viens de Sicile.</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="Nice to meet you!"><button type="button" class="au " data-a="../audio/aab1049e18a5.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/ea3223bcf86d.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Nice to meet you!<span class="tr" style="font-size:.85rem">Enchanté !</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="How are you?"><button type="button" class="au " data-a="../audio/1864c4a47d71.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/845aba9a4911.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">How are you?<span class="tr" style="font-size:.85rem">Comment allez-vous ?</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="I&#x27;m fine, thank you."><button type="button" class="au " data-a="../audio/90ecb745fc5b.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/ce3c797825b5.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I'm fine, thank you.<span class="tr" style="font-size:.85rem">Je vais bien, merci.</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="We&#x27;re a big family."><button type="button" class="au " data-a="../audio/abb332ff047e.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/604810849b3a.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">We're a big family.<span class="tr" style="font-size:.85rem">Nous sommes une grande famille.</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="I love music."><button type="button" class="au " data-a="../audio/79a7de2ecced.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/189102cf0602.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I love music.<span class="tr" style="font-size:.85rem">J'adore la musique.</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="I miss you! See you soon!"><button type="button" class="au " data-a="../audio/5ea6aad28690.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/306dfbf662f4.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I miss you! See you soon!<span class="tr" style="font-size:.85rem">Tu me manques ! À bientôt !</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+</div>
+<div class="exb" id="ex7" style="--c:#c08a2a"><div class="exh" style="--c:#c08a2a"><span class="exn">7</span><div><div class="exk">EXERCICE 7</div><div class="ext">Au téléphone avec Giovanna</div><div style="font:italic .85rem Lora,serif;opacity:.9">On the phone with Giovanna</div></div></div>
+<div class="ex cons"><div class="fr"><span class="txt">Écoutez Giovanna, puis répondez-lui à voix haute : touchez 🎤 et parlez. Écoutez ensuite le modèle, répétez-le et dites si vous aviez bien répondu.</span></div></div>
+<div class="item" id="q34" data-k="ora" data-j='{&quot;id&quot;: &quot;q34&quot;, &quot;full&quot;: &quot;I&#x27;m fine, thank you. And you?&quot;, &quot;a&quot;: &quot;../audio/deba62508934.mp3?v=1&quot;, &quot;it&quot;: &quot;Je vais bien, merci. Et toi ?&quot;, &quot;rule&quot;: &quot;giovanna&quot;, &quot;why&quot;: &quot;Dites que vous allez bien, merci, et demandez « et toi ? ».&quot;, &quot;ex&quot;: 7}'><div class="qq"><span class="qn">1</span><span class="txt">Dites que vous allez bien, merci, et demandez « et toi ? ».</span></div><div class="gline"><button type="button" class="au " data-a="../audio/10c075d98d0a.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><div><span class="who">Giovanna</span>Hello Nicola! How are you?<div class="tr">Bonjour Nicola ! Comment vas-tu ?</div></div></div><div class="orow"><button type="button" class="mic omic">🎤 Je réponds</button><button type="button" class="omod">Voir le modèle</button></div><div class="heard"></div><div class="fb"></div></div>
+<div class="item" id="q35" data-k="ora" data-j='{&quot;id&quot;: &quot;q35&quot;, &quot;full&quot;: &quot;I&#x27;m at home.&quot;, &quot;a&quot;: &quot;../audio/821ea27621b6.mp3?v=1&quot;, &quot;it&quot;: &quot;Je suis à la maison.&quot;, &quot;rule&quot;: &quot;giovanna&quot;, &quot;why&quot;: &quot;Dites que vous êtes à la maison : at home.&quot;, &quot;ex&quot;: 7}'><div class="qq"><span class="qn">2</span><span class="txt">Dites que vous êtes à la maison : at home.</span></div><div class="gline"><button type="button" class="au " data-a="../audio/8be2e1b2dd0f.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><div><span class="who">Giovanna</span>I'm very well! Where are you now?<div class="tr">Je vais très bien ! Où es-tu en ce moment ?</div></div></div><div class="orow"><button type="button" class="mic omic">🎤 Je réponds</button><button type="button" class="omod">Voir le modèle</button></div><div class="heard"></div><div class="fb"></div></div>
+<div class="item" id="q36" data-k="ora" data-j='{&quot;id&quot;: &quot;q36&quot;, &quot;full&quot;: &quot;Thank you! She&#x27;s fine.&quot;, &quot;a&quot;: &quot;../audio/d44b7719ee52.mp3?v=1&quot;, &quot;it&quot;: &quot;Merci ! Elle va bien.&quot;, &quot;rule&quot;: &quot;giovanna&quot;, &quot;why&quot;: &quot;Dites merci, et que Dominique va bien : she&#x27;s fine.&quot;, &quot;ex&quot;: 7}'><div class="qq"><span class="qn">3</span><span class="txt">Dites merci, et que Dominique va bien : she's fine.</span></div><div class="gline"><button type="button" class="au " data-a="../audio/f06b40eec27c.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><div><span class="who">Giovanna</span>Say hello to Dominique!<div class="tr">Dis bonjour à Dominique !</div></div></div><div class="orow"><button type="button" class="mic omic">🎤 Je réponds</button><button type="button" class="omod">Voir le modèle</button></div><div class="heard"></div><div class="fb"></div></div>
+<div class="item" id="q37" data-k="ora" data-j='{&quot;id&quot;: &quot;q37&quot;, &quot;full&quot;: &quot;I miss you! See you soon!&quot;, &quot;a&quot;: &quot;../audio/5ea6aad28690.mp3?v=1&quot;, &quot;it&quot;: &quot;Tu me manques ! À bientôt !&quot;, &quot;rule&quot;: &quot;giovanna&quot;, &quot;why&quot;: &quot;Dites-lui qu&#x27;elle vous manque et « à bientôt ».&quot;, &quot;ex&quot;: 7}'><div class="qq"><span class="qn">4</span><span class="txt">Dites-lui qu'elle vous manque et « à bientôt ».</span></div><div class="gline"><button type="button" class="au " data-a="../audio/135b7b22ad6b.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><div><span class="who">Giovanna</span>Goodbye, Nicola!<div class="tr">Au revoir, Nicola !</div></div></div><div class="orow"><button type="button" class="mic omic">🎤 Je réponds</button><button type="button" class="omod">Voir le modèle</button></div><div class="heard"></div><div class="fb"></div></div>
+</div></section>
+<section class="sec" style="--c:#a0446a;--t:#f8edf2"><header class="sh" id="revoir" style="--c:#a0446a"><span class="num">7</span><div><h2>À revoir<span class="timing">2 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">To review</span></div></div></header>
+<div id="scorebox" class="scorebox"></div>
+<div id="revlist" class="revlist"><p class="empty">Les points à revoir apparaîtront ici au fur et à mesure.</p></div>
+<div class="tipbox"><div class="h">📒 Pour demain</div><div class="ex "><div class="fr"><span class="txt">Dites à voix haute, sans lire : <b>Hello! My name is Nicola. I'm from Sicily. Nice to meet you!</b> Et si vous en avez l'occasion, essayez « How are you? » avec Giovanna !</span></div></div></div>
+<div class="row center"><button type="button" class="reset" id="reset">Recommencer les exercices</button> <a href="../" class="reset" style="text-decoration:none;display:inline-block">☰ Mon programme</a></div></section>
+</main>
+<div class="acc" id="acc"></div>
+<script>
+(function(){
+var RULES={"bonjour": "Dire bonjour et au revoir", "presenter": "Se présenter", "tobe": "Le verbe to be", "cava": "Comment ça va ?", "giovanna": "Un appel pour Giovanna"}, TOTAL=37, good=0, done=0, autoA=true;
+var player=null, cur=null;
+function stopAll(){try{if(player){player.pause();player.src='';}}catch(e){}if(cur)cur.classList.remove('playing');cur=null;}
+function play(src,btn){
+  var same=btn&&cur===btn&&player&&!player.paused;
+  stopAll(); if(same)return;
+  var a=new Audio(); a.preload='auto'; a.src=src; player=a; cur=btn||null;
+  if(btn)btn.classList.add('playing');
+  a.addEventListener('ended',function(){if(cur===btn&&btn)btn.classList.remove('playing');if(player===a)cur=null;});
+  a.addEventListener('error',function(){if(btn)btn.classList.remove('playing');});
+  try{var p=a.play();if(p&&p.catch)p.catch(function(){a.addEventListener('canplaythrough',function(){a.play();},{once:true});a.load();});}catch(e){}
+}
+function trOf(btn){
+  var p=btn.parentElement;
+  var t=p.querySelector(':scope > .tr'); if(t)return t;
+  if(p.nextElementSibling&&p.nextElementSibling.classList.contains('tr'))return p.nextElementSibling;
+  return p.parentElement.querySelector(':scope > .tr');
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.au'); if(b){play(b.dataset.a,b);return;}
+  var i=e.target.closest('.itb'); if(i){var t=trOf(i); if(t){t.classList.toggle('show');i.classList.toggle('on');}return;}
+  var m=e.target.closest('.model'); if(m){m.nextElementSibling.classList.toggle('show');return;}
+  var a=e.target.closest('a[href^="#"]'); if(a){var tg=document.getElementById(a.getAttribute('href').slice(1)); if(tg){tg.classList.remove('flash');void tg.offsetWidth;tg.classList.add('flash');}}
+});
+document.getElementById('allit').onclick=function(){document.body.classList.toggle('allit');this.classList.toggle('on');};
+document.getElementById('autoa').onclick=function(){autoA=!autoA;this.classList.toggle('on',autoA);};
+function norm(s){return (s||'').normalize('NFC').toLowerCase().replace(/[’ʼ`´]/g,"'").replace(/\s+/g,' ').replace(/^[\s.,!?;:]+|[\s.,!?;:]+$/g,'').trim();}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+var SPK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg>';
+function sentHTML(full,ans,it,a){
+  var t=esc(full); var an=esc(ans);
+  var k=t.indexOf(an); if(k>=0){t=t.slice(0,k)+'<b>'+an+'</b>'+t.slice(k+an.length);}
+  return '<div class="s"><div class="fr"><button type="button" class="au" data-a="'+a+'" aria-label="Écouter">'+SPK+'</button><span class="txt">'+t+'</span>'+(it?'<button type="button" class="itb">FR</button>':'')+'</div>'+(it?'<div class="tr">'+esc(it)+'</div>':'')+'</div>';
+}
+function stars(el,n){
+  var r=el.getBoundingClientRect(), cx=r.left+Math.min(r.width,260)/2, cy=r.top+r.height/2;
+  for(var i=0;i<(n||6);i++){var s=document.createElement('span');s.className='star';s.textContent='★';
+    s.style.left=cx+'px';s.style.top=cy+'px';var ang=Math.random()*Math.PI*2,d=40+Math.random()*50;
+    s.style.setProperty('--dx',Math.cos(ang)*d+'px');s.style.setProperty('--dy',Math.sin(ang)*d+'px');
+    s.style.animationDelay=(i*40)+'ms';document.body.appendChild(s);setTimeout(function(x){x.remove();}.bind(null,s),1300);}
+}
+function updScore(ok){
+  done++; if(ok)good++;
+  document.getElementById('sc').textContent=good;
+  var sc=document.getElementById('score'); sc.classList.add('bump'); setTimeout(function(){sc.classList.remove('bump');},250);
+  if(ok)stars(sc,5);
+  renderScore();
+}
+function renderScore(){
+  var box=document.getElementById('scorebox');
+  box.innerHTML='Bonnes réponses : <b>'+good+'</b> / '+TOTAL+'<div style="font-size:.85rem;opacity:.85;margin-top:2px">Questions faites : '+done+' / '+TOTAL+'</div>';
+}
+var revCount=0;
+function addRev(o){
+  var list=document.getElementById('revlist');
+  if(!revCount)list.innerHTML='';
+  revCount++;
+  var d=document.createElement('div');d.className='rv';
+  d.innerHTML='<div class="rvh">Exercice '+o.ex+'</div>'+sentHTML(o.full,o.ans,o.it,o.a)+
+   '<div class="rvy">Votre réponse : <s>'+esc(o.given||'—')+'</s> · Bonne réponse : <b style="color:var(--ok)">'+esc(o.ans)+'</b></div>'+
+   '<div class="rvl"><a href="#'+o.rule+'">Revoir la règle : '+esc(RULES[o.rule]||'')+'</a><a class="back" href="#'+o.id+'">Retour à la question</a></div>';
+  list.appendChild(d);
+}
+function feedback(item,d,ok,given){
+  var fb=item.querySelector('.fb');
+  fb.innerHTML='<div class="fbr '+(ok?'ok':'ko')+'"><div class="fbt">'+(ok?'✓ Correct':'✗ La bonne réponse : '+esc(d.ans[0]))+'</div>'+
+    sentHTML(d.full,d.ans[0],d.it,d.a)+
+    '<div class="why"><span class="txt">'+esc(d.why)+'</span></div></div>';
+  var g=item.querySelector('.gap'); if(g){g.textContent=ok?given:d.ans[0];g.classList.add(ok?'ok':'ko');}
+  if(ok)stars(item.querySelector('.qq'),7);
+  updScore(ok);
+  if(!ok)addRev({ex:d.ex,full:d.full,ans:d.ans[0],it:d.it,a:d.a,given:given,rule:d.rule,id:d.id});
+  if(autoA){var b=fb.querySelector('.au');setTimeout(function(){play(d.a,b);},ok?350:500);}
+}
+document.querySelectorAll('.item[data-k="qcm"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j);
+  item.querySelectorAll('.opt').forEach(function(o){
+    o.addEventListener('click',function(){
+      if(item.dataset.done)return; item.dataset.done=1;
+      var v=o.textContent, ok=d.ans.indexOf(v)>=0;
+      item.querySelectorAll('.opt').forEach(function(x){x.disabled=true;if(d.ans.indexOf(x.textContent)>=0)x.classList.add('ok');});
+      if(!ok)o.classList.add('ko');
+      feedback(item,d,ok,v);
+    });
+  });
+});
+document.querySelectorAll('.item[data-k="inp"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j), inp=item.querySelector('input'), btn=item.querySelector('.chk');
+  function check(){
+    if(item.dataset.done)return; var v=inp.value; if(!norm(v)){inp.focus();return;}
+    item.dataset.done=1; var ok=d.ans.map(norm).indexOf(norm(v))>=0;
+    inp.classList.add(ok?'ok':'ko'); inp.disabled=true; btn.disabled=true;
+    feedback(item,d,ok,v.trim());
+  }
+  btn.addEventListener('click',check);
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();check();}});
+});
+// texte à trous
+var chk5=document.getElementById('chk5');
+if(chk5)chk5.addEventListener('click',function(){
+  var story=document.querySelector('.story'), tgs=story.querySelectorAll('.tg');
+  var empty=[].some.call(tgs,function(t){return !norm(t.querySelector('input').value);});
+  if(empty&&!confirm('Certaines cases sont vides. Vérifier quand même ?'))return;
+  chk5.disabled=true; var nOk=0;
+  tgs.forEach(function(t){
+    var ans=JSON.parse(t.dataset.ans), inp=t.querySelector('input'), v=inp.value.trim(), ok=ans.map(norm).indexOf(norm(v))>=0;
+    inp.disabled=true; inp.classList.add(ok?'ok':'ko');
+    if(!ok){var c=document.createElement('span');c.className='cor';c.textContent=ans[0];t.insertBefore(c,t.querySelector('.tv'));
+      var full=story.dataset.full;
+      var sents=full.split(/(?<=[.;:])\s+/); var sen=sents.filter(function(x){return x.indexOf(ans[0])>=0;})[0]||full;
+      addRev({ex:5,full:sen,ans:ans[0],it:'',a:story.dataset.a,given:v,rule:t.dataset.rule,id:t.id});
+    } else nOk++;
+    updScore(ok);
+  });
+  if(nOk)stars(chk5,8);
+  var fb=document.getElementById('fb5');
+  fb.innerHTML='<div class="fbr '+(nOk===tgs.length?'ok':'ko')+'"><div class="fbt">'+nOk+' / '+tgs.length+' bonnes réponses</div>'+
+   '<div class="s"><div class="fr"><button type="button" class="au" data-a="'+story.dataset.a+'" aria-label="Écouter">'+SPK+'</button><span class="txt">Écoutez le texte corrigé.</span></div></div></div>';
+  document.querySelector('.storytr').classList.add('show');
+  if(autoA){var b=fb.querySelector('.au');setTimeout(function(){play(story.dataset.a,b);},500);}
+});
+document.getElementById('reset').addEventListener('click',function(){
+  if(!confirm('Effacer toutes les réponses et recommencer ?'))return;
+  location.hash='exercices'; location.reload();
+});
+// clavier d'accents
+var acc=document.getElementById('acc'), last=null;
+["'"].forEach(function(ch){var b=document.createElement('button');b.type='button';b.textContent=ch;
+  b.addEventListener('mousedown',function(e){e.preventDefault();});b.addEventListener('pointerdown',function(e){e.preventDefault();});
+  b.addEventListener('click',function(){if(!last||last.disabled)return;var s=last.selectionStart||last.value.length,en=last.selectionEnd||s;
+    last.value=last.value.slice(0,s)+ch+last.value.slice(en);last.focus();last.setSelectionRange(s+ch.length,s+ch.length);});
+  acc.appendChild(b);});
+document.addEventListener('focusin',function(e){if(e.target.matches('input[type=text],textarea')){last=e.target;acc.classList.add('show');}});
+document.addEventListener('focusout',function(e){setTimeout(function(){var a=document.activeElement;if(!a||(!a.matches('input[type=text],textarea')&&!acc.contains(a)))acc.classList.remove('show');},150);});
+
+document.querySelectorAll('.item[data-k="tra"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j), ta=item.querySelector('textarea'), cmp=item.querySelector('.cmp'), zone=item.querySelector('.fb');
+  cmp.addEventListener('click',function(){
+    if(item.dataset.shown)return;
+    if(!ta.value.trim()){ta.focus();return;}
+    item.dataset.shown=1;cmp.disabled=true;ta.readOnly=true;
+    zone.innerHTML='<div class="fbr"><div class="fbt" style="color:#2f7f73">Corrigé</div>'+sentHTML(d.full,'',d.it,d.a)+
+      '<div class="why"><span class="txt"><b>À vérifier :</b> '+esc(d.why)+'</span></div>'+
+      '<div class="selfq">Votre traduction était-elle juste ?</div><div class="selfb"><button type="button" class="sb ok">✓ Oui</button><button type="button" class="sb ko">✗ Pas tout à fait</button></div></div>';
+    if(autoA){var b=zone.querySelector('.au');setTimeout(function(){play(d.a,b);},300);}
+    zone.querySelectorAll('.sb').forEach(function(b){b.addEventListener('click',function(){
+      if(item.dataset.done)return;item.dataset.done=1;var ok=b.classList.contains('ok');
+      zone.querySelectorAll('.sb').forEach(function(x){x.disabled=true;});b.classList.add('chosen');
+      if(ok)stars(item.querySelector('.qq'),7);
+      updScore(ok);
+      if(!ok)addRev({ex:d.ex,full:d.full,ans:'',it:d.it,a:d.a,given:ta.value.trim(),rule:d.rule,id:d.id});
+    });});
+  });
+});
+document.querySelectorAll('.pistesb').forEach(function(b){b.addEventListener('click',function(){b.nextElementSibling.classList.toggle('show');});});
+
+document.addEventListener('click',function(e){var s=e.target.closest('.slow');if(s){e.stopPropagation();play(s.dataset.a,s);}},true);
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function simil(a,b){a=norm(a).replace(/[^a-z' ]/g,'').split(' ');b=norm(b).replace(/[^a-z' ]/g,'').split(' ');var hit=0;b.forEach(function(w){if(a.indexOf(w)>=0)hit++;});return Math.round(hit/b.length*100);}
+document.querySelectorAll('.spk').forEach(function(box){
+  var mic=box.querySelector('.mic'),out=box.querySelector('.heard'),target=box.dataset.t;
+  if(!SR){mic.style.display='none';out.innerHTML='<span class="nomic">Écoutez, répétez à voix haute deux ou trois fois, puis passez à la phrase suivante.</span>';return;}
+  mic.addEventListener('click',function(){
+    var r=new SR();r.lang='en-GB';r.interimResults=false;r.maxAlternatives=3;mic.classList.add('rec');out.textContent='… je vous écoute';
+    r.onresult=function(ev){var best=0,txt='';for(var i=0;i<ev.results[0].length;i++){var c=ev.results[0][i].transcript,sc=simil(c,target);if(sc>=best){best=sc;txt=c;}}
+      out.innerHTML='Compris : « '+esc(txt)+' » · <b class="'+(best>=80?'gd':'md')+'">'+best+' %</b>'+(best>=80?' ✓':' · réessayez');
+      if(best>=80)stars(box,6);};
+    r.onerror=function(){out.textContent='Micro non disponible : répétez simplement à voix haute.';};
+    r.onend=function(){mic.classList.remove('rec');};
+    try{r.start();}catch(e){mic.classList.remove('rec');}
+  });
+});
+
+document.querySelectorAll('.item[data-k="ora"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j), mic=item.querySelector('.omic'), mod=item.querySelector('.omod'), out=item.querySelector('.heard'), zone=item.querySelector('.fb');
+  if(!SR){mic.style.display='none';out.innerHTML='<span class="nomic">Dites votre réponse à voix haute, puis touchez « Voir le modèle ».</span>';}
+  else mic.addEventListener('click',function(){
+    var r=new SR();r.lang='en-GB';r.maxAlternatives=3;mic.classList.add('rec');out.textContent='… je vous écoute';
+    r.onresult=function(ev){var best=0,txt='';for(var i=0;i<ev.results[0].length;i++){var c=ev.results[0][i].transcript,sc=simil(c,d.full);if(sc>=best){best=sc;txt=c;}}
+      out.innerHTML='Compris : « '+esc(txt)+' » · ressemblance avec le modèle : <b class="'+(best>=70?'gd':'md')+'">'+best+' %</b>';if(best>=70)stars(item,6);showModel();};
+    r.onerror=function(){out.textContent='Micro non disponible : dites votre réponse à voix haute.';};
+    r.onend=function(){mic.classList.remove('rec');};
+    try{r.start();}catch(e){mic.classList.remove('rec');}
+  });
+  function showModel(){
+    if(item.dataset.shown)return;item.dataset.shown=1;mod.disabled=true;
+    zone.innerHTML='<div class="fbr"><div class="fbt" style="color:#2f7f73">Modèle</div>'+sentHTML(d.full,'',d.it,d.a)+
+      '<div class="why"><span class="txt"><b>À retenir :</b> '+esc(d.why)+'</span></div>'+
+      '<div class="selfq">Votre réponse était-elle juste ?</div><div class="selfb"><button type="button" class="sb ok">✓ Oui</button><button type="button" class="sb ko">✗ Pas tout à fait</button></div></div>';
+    if(autoA){var b=zone.querySelector('.au');setTimeout(function(){play(d.a,b);},300);}
+    zone.querySelectorAll('.sb').forEach(function(b){b.addEventListener('click',function(){
+      if(item.dataset.done)return;item.dataset.done=1;var ok=b.classList.contains('ok');
+      zone.querySelectorAll('.sb').forEach(function(x){x.disabled=true;});b.classList.add('chosen');
+      if(ok)stars(item.querySelector('.qq'),7);updScore(ok);
+      if(!ok)addRev({ex:d.ex,full:d.full,ans:'',it:d.it,a:d.a,given:'',rule:d.rule,id:d.id});});});
+  }
+  mod.addEventListener('click',showModel);
+});
+
+document.querySelectorAll('.item[data-k="ord"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j), line=item.querySelector('.oline'), pool=item.querySelector('.opool');
+  item.addEventListener('click',function(e){var t=e.target.closest('.otile');if(!t||item.dataset.done)return;
+    if(t.parentElement===pool)line.appendChild(t);else pool.appendChild(t);
+    if(!pool.children.length){item.dataset.done=1;var got=[].map.call(line.children,function(x){return x.textContent;}).join(' ');var ok=got===d.ans[0];
+      line.classList.add(ok?'ok':'ko');feedback(item,d,ok,got);}});
+});
+renderScore();
+})();
+</script>
+</body>
+</html>
