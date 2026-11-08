@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'anglais de Nicola · Jour 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#24303f;--soft:#5d6878;--line:#e3e7ee;--bg:#fbfaf7;--gold:#e0a630;--ok:#2e8b57;--ko:#c0392b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Poppins,system-ui,sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:900px;margin:0 auto;padding:62px 16px 80px}
+/* barre du haut */
+.top{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.topin{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:8px 16px}
+.brand{font-weight:600;font-size:.82rem;color:#a0446a;letter-spacing:.02em;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbtn{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px;font-size:.78rem;font-weight:600;color:var(--soft)}
+.tbtn.on{border-color:#1f5f7a;color:#1f5f7a;background:#eaf3f7}
+.score{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#2b3a55,#6d4a7d);color:#fff;border-radius:999px;padding:5px 13px;font-weight:700;font-size:.9rem;white-space:nowrap;transition:transform .25s}
+.score.bump{transform:scale(1.15)}
+.score .st{color:#ffd56a}
+/* hero */
+.hero{position:relative;border-radius:22px;overflow:hidden;margin-top:6px;box-shadow:0 10px 30px rgba(36,48,63,.15)}
+.hero img{display:block;width:100%;height:clamp(240px,48vw,400px);object-fit:cover}
+.htitle{position:absolute;left:14px;bottom:14px;max-width:calc(100% - 28px);background:rgba(20,28,40,.62);border-radius:16px;padding:14px 18px;color:#fff}
+.tag{display:inline-block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;background:#e0a630;color:#2b2210;font-weight:700;padding:3px 10px;border-radius:999px;margin-bottom:6px}
+.hero h1{margin:0;font-size:clamp(1.5rem,5vw,2.3rem);line-height:1.15}
+.sub{margin:2px 0 0;font-size:clamp(.95rem,3vw,1.15rem);color:#ffe2b5;font-weight:500}
+.hit{display:flex;align-items:center;gap:6px;margin-top:4px}.hit .itb{margin-left:0;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}.hit .tr{color:#eee;margin:0}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 6px}
+.toc a{text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 12px 5px 5px;font-size:.8rem;font-weight:500}
+.toc a b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#2b3a55;color:#fff;font-size:.72rem;margin-right:5px}
+.howto{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--soft);margin:10px 0 0;flex-wrap:wrap}
+.howto .itb{order:2}
+.miniau svg{width:15px;height:15px;vertical-align:-3px;fill:#1f5f7a;stroke:#1f5f7a}
+/* boutons audio + IT */
+.au{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;border:none;background:color-mix(in srgb,var(--c,#1f5f7a) 14%,#fff);margin-right:8px;vertical-align:middle;transition:transform .15s,background .2s}
+.au svg{width:17px;height:17px;fill:var(--c,#1f5f7a);stroke:var(--c,#1f5f7a);stroke-width:1.8;stroke-linecap:round}
+.au svg .w1,.au svg .w2{fill:none}
+.au.au-l{width:38px;height:38px}.au.au-l svg{width:21px;height:21px}
+.au:active{transform:scale(.9)}
+.au.playing{background:var(--c,#1f5f7a)}.au.playing svg{fill:#fff;stroke:#fff}
+.au.playing svg .w2{animation:wave 1s infinite}
+@keyframes wave{50%{opacity:.2}}
+.itb{flex:none;border:1px solid #d5dae3;background:#fff;color:#8a93a3;border-radius:6px;font-size:.62rem;font-weight:700;letter-spacing:.06em;padding:1px 6px;margin-left:8px;vertical-align:middle;line-height:1.5}
+.itb.on{background:#5d6878;color:#fff;border-color:#5d6878}
+.tr{display:none;font:italic .92rem/1.5 Lora,serif;color:#6b7280;margin:3px 0 0}
+.tr.show,body.allit .tr{display:block}
+body.allit .itb{background:#5d6878;color:#fff;border-color:#5d6878}
+.s{margin:8px 0}
+.s .fr,.ex .fr{display:flex;align-items:flex-start}
+.s .fr .txt{flex:1;padding-top:3px;font-family:Lora,serif;font-size:1.02rem}
+.s .tr{padding-left:38px}
+.ex .fr .txt{flex:1}
+.ex.lead{margin:12px 0 16px;color:#3c4656}
+.ex.center .fr{justify-content:center;text-align:center}
+.s .txt b,.ex .txt b{color:var(--c,#1f5f7a)}
+em.k{font-style:normal;color:#c2410c;font-weight:700}
+/* sections */
+.sec{margin-top:38px}
+.sh{display:flex;gap:12px;align-items:center;background:linear-gradient(110deg,var(--c),color-mix(in srgb,var(--c) 70%,#fff));color:#fff;border-radius:16px;padding:12px 16px;margin-bottom:14px}
+.sh .num{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:#fff;color:var(--c);font-weight:700;font-size:1.15rem}
+.sh h2{margin:0;font-size:clamp(1.15rem,4vw,1.5rem);line-height:1.2}
+.shit{display:flex;align-items:center;gap:6px}
+.shit .itb{margin-left:0;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}
+.shit .tr{color:#fff;margin:0}
+.ph{margin:0 0 14px;border-radius:14px;overflow:hidden;background:#fff;border:3px solid #fff;box-shadow:0 4px 16px rgba(36,48,63,.12)}
+.ph img{display:block;width:100%;height:auto}
+.ph.band img{height:clamp(150px,30vw,230px);object-fit:cover}
+.ph figcaption{font:italic .8rem Lora,serif;color:var(--soft);padding:5px 10px}
+/* vocabulaire */
+.vgrid{columns:2 330px;column-gap:14px}
+.vc{break-inside:avoid;background:#fff;border:1px solid #e3e7ea;border-top:5px solid var(--c);border-radius:14px;padding:12px 14px;margin:0 0 14px;box-shadow:0 2px 8px rgba(181,82,59,.06)}
+.vc.flash,.flash{animation:flash 2.2s}
+@keyframes flash{0%,40%{box-shadow:0 0 0 4px #ffd56a}100%{box-shadow:0 0 0 0 transparent}}
+.vh{display:flex;align-items:center}
+.vh h3{margin:0;font-size:1.18rem;color:var(--c)}
+.vmeta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0 4px;font-size:.88rem}
+.pill{background:var(--t);color:var(--c);border:1px solid color-mix(in srgb,var(--c) 30%,#fff);border-radius:999px;padding:1px 9px;font-size:.72rem;font-weight:600}
+.itlab{background:#2e8b57;color:#fff;font-size:.62rem;font-weight:700;border-radius:4px;padding:1px 5px}
+.itw{font-family:Lora,serif;font-style:italic;color:#34495e}
+.vex .txt{font-size:.98rem!important}
+.vimg{margin:8px 0}
+.vimg img{max-height:190px;object-fit:cover}
+.note,.warn{background:var(--t);border-radius:10px;padding:8px 10px;margin-top:8px;font-size:.86rem}
+.warn{background:#fff4d6;border-left:4px solid #e0a630}
+.warn .ex{margin-bottom:2px}
+table.mini{width:100%;border-collapse:collapse;margin:8px 0 2px;font-size:.86rem}
+table.mini td{border-bottom:1px dashed #ecd9cf;padding:4px 2px;vertical-align:middle}
+table.mini td:last-child{font-family:Lora,serif;font-style:italic;color:#555}
+table.mini .au{width:24px;height:24px;margin-right:6px}table.mini .au svg{width:14px;height:14px}
+/* grammaire */
+.fams{display:grid;gap:14px}
+.fam{background:#fff;border:2px solid color-mix(in srgb,var(--c) 30%,#fff);border-radius:16px;padding:12px 14px}
+.famh{display:flex;align-items:center;gap:8px;font-size:1.1rem;color:var(--c);font-weight:600;margin-bottom:8px}
+.famh span{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--c);color:#fff;font-size:.95rem}
+.formula{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:4px 0 10px;font-weight:600}
+.formula span{border:2px solid var(--c);color:var(--c);border-radius:999px;padding:1px 10px;background:#fff}
+.formula span:first-child{background:var(--c);color:#fff}
+.formula.light{justify-content:center}.formula.light span:first-child{background:#fff;color:var(--c)}
+.ct{border-radius:12px;overflow:hidden;border:1px solid color-mix(in srgb,var(--c) 25%,#fff);background:#fff;margin:6px 0}
+.cth{background:color-mix(in srgb,var(--c) 12%,#fff);color:var(--c);font-weight:700;padding:5px 12px}
+.ctit{font:italic 400 .85rem Lora,serif;color:#6b7280;margin-left:8px}
+.ct table{width:100%;border-collapse:collapse}
+.ct td{padding:3px 8px;border-top:1px solid #f1f3f6;font-family:Lora,serif;font-size:1rem}
+.ct td:first-child{width:40px}
+.ct .au{width:26px;height:26px;margin:0}.ct .au svg{width:15px;height:15px}
+.inbox{border-left:4px solid var(--c);background:color-mix(in srgb,var(--c) 7%,#fff);border-radius:0 10px 10px 0;padding:7px 10px;margin:10px 0;font-size:.9rem}
+.sub3{margin:24px 0 4px;color:#1f5f7a;font-size:1.12rem;border-bottom:2px solid #cfe2ea;padding-bottom:4px}
+.parts{display:grid;gap:12px}
+.part{background:#fff;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:12px;padding:10px 12px}
+.parth{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--c);margin-bottom:4px}
+.parth span{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--c);color:#fff;font-size:.78rem;flex:none}
+.parth b{color:#c2410c}
+.part .ex .txt b{color:#c2410c}
+.part.wide{margin-top:14px}
+.big{background:#fff;border:2px solid var(--c);border-radius:18px;padding:14px;margin-bottom:14px}
+.bigh{text-align:center;font-weight:700;color:var(--c);font-size:1.1rem;margin-bottom:10px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:10px}
+.step{display:flex;gap:8px;background:var(--t);border-radius:12px;padding:8px 10px;font-size:.9rem}
+.step>span{display:grid;place-items:center;flex:none;width:26px;height:26px;border-radius:50%;background:var(--c);color:#fff;font-weight:700}
+.stx{display:flex;align-items:center;font:600 1.05rem Lora,serif;margin-top:4px}
+.stx s{color:#c0392b;text-decoration-thickness:2px}
+.good{background:linear-gradient(135deg,#eaf6ee,#fff8e6);border:2px solid #4f9a6b;border-radius:18px;padding:14px;margin:14px 0}
+.goodh{font-weight:700;color:#2e7d4f;font-size:1.15rem;margin-bottom:6px}
+.good .ex .txt b{color:#2e7d4f}
+.chain{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px;margin-top:10px}
+.ch{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#fff;border-radius:10px;padding:6px 10px;font-size:.92rem;border:1px solid #d6eadc}
+.ch b{color:#2e7d4f;min-width:66px}.ch span{font-family:Lora,serif}.ch i{color:#999;font-style:normal}
+.ch .au{--c:#2e7d4f;width:26px;height:26px;margin:0}.ch .au svg{width:15px;height:15px}
+.etre{background:#fff;border:2px solid #a0446a;border-radius:16px;padding:12px 14px;margin:14px 0;--c:#a0446a}
+.etreh{font-weight:600;color:#a0446a;margin-bottom:6px}
+.cts.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+/* tableau 27 */
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.lg{font-size:.75rem;font-weight:600;border-radius:999px;padding:2px 10px;border:1.5px solid}
+.lg.a,tr.a th{--v:#1f5f7a}.lg.b,tr.b th{--v:#c2410c}.lg.c,tr.c th{--v:#2e7d4f}.lg.d,tr.d th{--v:#6d4a7d}
+.lg{color:var(--v);border-color:var(--v)}
+.tw{overflow-x:auto;border-radius:14px;border:1px solid var(--line);background:#fff;-webkit-overflow-scrolling:touch}
+table.big27{border-collapse:collapse;min-width:760px;width:100%;font-size:.92rem}
+.big27 thead th{position:sticky;top:0;background:#4f7f63;color:#fff;padding:7px 8px;text-align:left;font-weight:600}
+.big27 thead th:first-child{left:0;z-index:2}
+.big27 tbody th{position:sticky;left:0;background:#fff;text-align:left;padding:5px 8px;border-left:5px solid var(--v);display:flex;align-items:center;min-width:190px;z-index:1}
+.big27 .inf{font-weight:700;color:var(--v)}
+.big27 .vit{font:italic .78rem Lora,serif;color:#888;margin-left:6px}
+.big27 td{padding:5px 8px;border-top:1px solid #eef1f4;font-family:Lora,serif;white-space:nowrap}
+.big27 tbody tr:nth-child(even) td{background:#f7faf8}
+.big27 td.ip{background:#f6f2f8!important}
+.big27 tbody th .au{--c:var(--v);width:26px;height:26px;margin-right:8px}.big27 tbody th .au svg{width:15px;height:15px}
+/* usage */
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px}
+.col{background:#fff;border-radius:16px;padding:12px 14px;border:2px solid var(--cc)}
+.col.pres{--cc:#1f5f7a;--c:#1f5f7a}.col.imp{--cc:#6d4a7d;--c:#6d4a7d}
+.colh{font-weight:700;font-size:1.12rem;color:var(--cc);margin-bottom:6px}
+.colh span{font:italic 400 .9rem Lora,serif;color:#888;margin-left:6px}
+.use{border-top:1px dashed var(--line);padding-top:6px;margin-top:6px}
+.uset{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--cc);font-weight:600}
+.uset i{text-transform:none;letter-spacing:0;color:#999;font-family:Lora,serif}
+.marks{margin-top:10px;background:color-mix(in srgb,var(--cc) 8%,#fff);border-radius:10px;padding:7px 10px;font-size:.85rem;color:var(--cc);font-weight:500}
+.duo{margin-top:12px;background:#fff8e6;border:2px dashed #c08a2a;border-radius:14px;padding:6px 12px;--c:#a86d10}
+/* exercices */
+.exb{background:#fff;border-radius:18px;margin:18px 0;border:1px solid var(--line);overflow:hidden;box-shadow:0 3px 14px rgba(36,48,63,.06)}
+.exh{display:flex;gap:12px;align-items:center;background:var(--c);color:#fff;padding:12px 16px}
+.exn{font-size:2rem;font-weight:700;line-height:1;opacity:.9}
+.exk{font-size:.68rem;letter-spacing:.18em;opacity:.85}
+.ext{font-weight:600;font-size:1.05rem;line-height:1.25}
+.exit{display:flex;align-items:center;gap:6px}
+.exit .itb{margin-left:0;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}
+.exit .tr{color:#fff;margin:0}
+.ex.cons{padding:10px 16px 0}
+.item{padding:12px 16px;border-top:1px solid #f0f2f5;position:relative}
+.qq{display:flex;align-items:flex-start;gap:8px;font-family:Lora,serif;font-size:1.04rem}
+.qq .txt{flex:1}
+.qn{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:color-mix(in srgb,var(--c) 15%,#fff);color:var(--c);font:700 .78rem Poppins,sans-serif;margin-top:2px}
+.gap{display:inline-block;min-width:60px;border-bottom:2px solid var(--c);color:var(--c);font-weight:700;text-align:center;padding:0 3px}
+.gap.ok{color:var(--ok);border-color:var(--ok)}.gap.ko{color:var(--ko);border-color:var(--ko)}
+.hint{font:italic .88rem Lora,serif;color:#888}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:9px 0 0 32px}
+.opt{border:2px solid color-mix(in srgb,var(--c) 35%,#fff);background:#fff;border-radius:999px;padding:5px 16px;font-family:Lora,serif;font-size:1rem;color:var(--ink);transition:.15s}
+.opt:hover{background:color-mix(in srgb,var(--c) 8%,#fff)}
+.opt.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.ko{background:var(--ko);border-color:var(--ko);color:#fff;text-decoration:line-through}
+.opt:disabled{cursor:default}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0 0 32px}
+.row.center{justify-content:center;margin-left:0;padding:10px 0}
+.vt{font-size:.8rem;font-weight:600;background:color-mix(in srgb,var(--c) 12%,#fff);color:var(--c);border-radius:999px;padding:3px 10px}
+.row input{flex:1;min-width:150px;max-width:260px;font:1rem Lora,serif;padding:6px 10px;border:2px solid #d6dbe4;border-radius:10px;outline:none}
+.row input:focus{border-color:var(--c)}
+.row input.ok{border-color:var(--ok);background:#eef8f2}.row input.ko{border-color:var(--ko);background:#fdf0ee}
+.chk{background:var(--c);color:#fff;border:none;border-radius:10px;padding:7px 16px;font-weight:600;font-size:.9rem}
+.chk:disabled{opacity:.4;cursor:default}
+.chk.big{padding:10px 22px;font-size:1rem}
+.fb{margin:0 0 0 32px}
+.fb:empty{display:none}
+.fbr{margin-top:9px;border-radius:12px;padding:8px 12px;font-size:.9rem}
+.fbr.ok{background:#eef8f2;border:1px solid #bfe3cd}.fbr.ko{background:#fdf1ee;border:1px solid #f1c9c0}
+.fbt{font-weight:700}.fbr.ok .fbt{color:var(--ok)}.fbr.ko .fbt{color:var(--ko)}
+.fbr .s{margin:5px 0}
+.fbr .s .txt b{color:var(--ok)}
+.why{display:flex;align-items:flex-start;color:#4b5563}
+.why .txt{flex:1}
+.story{padding:12px 16px;font:1.06rem/2.2 Lora,serif}
+.tg{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+.tg input{width:108px;font:1rem Lora,serif;padding:1px 6px;border:none;border-bottom:2px solid var(--c);background:color-mix(in srgb,var(--c) 6%,#fff);border-radius:6px 6px 0 0;outline:none}
+.tg input.ok{border-color:var(--ok);background:#eef8f2;color:var(--ok);font-weight:600}
+.tg input.ko{border-color:var(--ko);background:#fdf0ee;color:var(--ko);text-decoration:line-through}
+.tv{font:italic .8rem Lora,serif;color:#888}
+.tg .cor{font-weight:700;color:var(--ok);margin-left:3px}
+.storytr{padding:0 16px}
+.free{padding:12px 16px;border-top:1px solid #f0f2f5}
+.free .tr{padding-left:32px}
+.free textarea{width:100%;margin:8px 0;font:1rem Lora,serif;border:2px solid #d6dbe4;border-radius:12px;padding:8px 10px;resize:vertical}
+.model{border:1.5px dashed var(--c);color:var(--c);background:#fff;border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:600}
+.mod{display:none;background:color-mix(in srgb,var(--c) 7%,#fff);border-radius:12px;padding:4px 12px;margin-top:8px}
+.mod.show{display:block}
+/* à revoir */
+.scorebox{background:linear-gradient(135deg,#2b3a55,#6d4a7d);color:#fff;border-radius:16px;padding:14px 18px;text-align:center;margin-bottom:12px}
+.scorebox b{font-size:1.6rem;color:#ffd56a}
+.revlist .empty{color:var(--soft);font-style:italic;text-align:center}
+.rv{background:#fff;border:1px solid #efd6e1;border-left:5px solid #a0446a;border-radius:12px;padding:10px 12px;margin-bottom:10px;--c:#a0446a}
+.rvh{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#a0446a;font-weight:700}
+.rv .s .txt b{color:var(--ok)}
+.rvy{font-size:.88rem;color:#555}.rvy s{color:var(--ko)}
+.rvl{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.rvl a{font-size:.82rem;font-weight:600;color:#fff;background:#a0446a;text-decoration:none;border-radius:999px;padding:3px 12px}
+.rvl a.back{background:#fff;color:#a0446a;border:1.5px solid #a0446a}
+.reset{background:#fff;border:2px solid #a0446a;color:#a0446a;border-radius:999px;padding:7px 18px;font-weight:600}
+.tra textarea,.refl textarea{width:100%;margin:8px 0;font:1rem Lora,serif;border:2px solid #d6dbe4;border-radius:12px;padding:8px 10px;resize:vertical}
+.cmp{background:var(--c);color:#fff;border:none;border-radius:10px;padding:7px 16px;font-weight:600;font-size:.9rem}.cmp:disabled{opacity:.4}
+.selfq{margin-top:8px;font-weight:600;font-size:.9rem}.selfb{display:flex;gap:8px;margin-top:5px}
+.sb{border:2px solid #d6dbe4;background:#fff;border-radius:999px;padding:4px 14px;font-weight:600;font-size:.88rem}
+.sb.ok.chosen{background:var(--ok);border-color:var(--ok);color:#fff}.sb.ko.chosen{background:var(--ko);border-color:var(--ko);color:#fff}.sb:disabled:not(.chosen){opacity:.4}
+.enq{font:italic 1.05rem Lora,serif;color:#2b3a55}
+.refl{padding:12px 16px}
+.sujet{background:#2c2f4a;color:#fff;border-radius:14px;padding:12px 16px;margin-bottom:12px}
+.sujet .q{font:600 1.15rem Poppins,sans-serif;color:#f2c14e}.sujet .tr{color:#c9cbe0}.sujet .itb{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4)}
+.rh{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--c);margin:14px 0 6px}
+.guide{background:#f5f1f8;border-left:4px solid var(--c);border-radius:0 10px 10px 0;padding:6px 12px;margin:6px 0}
+.plan{display:grid;gap:8px}
+.pl{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 12px;display:flex;gap:10px}
+.pl .k{flex:none;width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.pl .nl{font-size:.75rem;color:var(--soft)}
+.kw{background:#fdf6e3;border-radius:10px;padding:8px 12px;font-size:.9rem;margin:6px 0}
+.pistesb{border:1.5px dashed var(--c);color:var(--c);background:#fff;border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:600;margin-top:8px}
+.pistes{display:none;background:#f5f1f8;border-radius:12px;padding:6px 12px;margin-top:8px}.pistes.show{display:block}
+.bank{display:flex;flex-wrap:wrap;gap:6px;margin:10px 16px 0;padding:8px 10px;border:2px dashed #cfd8d6;border-radius:12px}
+.bank span{background:#eef5f3;color:#2f7f73;border-radius:999px;padding:2px 10px;font:600 .85rem Poppins,sans-serif}
+.vgrid .ph{margin:0 0 14px;break-inside:avoid}
+.gtab{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:12px 0}
+.gcol{background:#fff;border:2px solid var(--gc);border-radius:14px;overflow:hidden}
+.gcol .h{background:var(--gc);color:#fff;font-weight:700;padding:6px 12px}.gcol .h small{display:block;font-weight:400;font-size:.75rem;opacity:.9}
+.gcol .b{padding:8px 12px;--c:var(--gc)}
+.gintro{background:#2c2f4a;color:#fff;border-radius:16px;padding:14px 16px;margin-bottom:12px}
+.gintro .gt{font-weight:700;color:#f2c14e;font-size:1.15rem}
+.gintro .ex .txt b{color:#f2c14e}.gintro .tr{color:#c9cbe0}.gintro .itb{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4)}
+.gpills{margin:8px 0}.gpills span{display:inline-block;border:1.5px solid #f2c14e;border-radius:999px;padding:1px 10px;margin:2px 4px 2px 0;font-weight:600;font-size:.88rem}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.cbx{background:#f5f1f8;border-radius:12px;padding:8px 12px}
+.pillc{display:inline-block;border:1.5px solid #7a5a8c;color:#7a5a8c;border-radius:999px;padding:0 10px;font-weight:600;font-size:.82rem;margin-bottom:4px}
+.inbx{border-left:4px solid #7a5a8c;background:#f5f1f8;border-radius:0 10px 10px 0;padding:6px 12px;margin:8px 0}
+.inbx.gold{border-color:#d9a21b;background:#fdf6e3}
+.slow{flex:none;border:none;background:#f1ecdf;border-radius:50%;width:30px;height:30px;margin-right:8px;font-size:15px;line-height:30px;padding:0}
+.slow.playing{background:#e0a630}
+.spk{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid #f0f2f5}
+.spk .txt{flex:1;min-width:200px;font:1.05rem Lora,serif}
+.mic{border:none;background:#a0446a;color:#fff;border-radius:999px;padding:6px 14px;font-weight:600;font-size:.88rem}
+.mic.rec{animation:mpulse 1s infinite}@keyframes mpulse{50%{box-shadow:0 0 0 8px rgba(160,68,106,.25)}}
+.heard{width:100%;font-size:.88rem;color:var(--soft)}.heard .gd{color:var(--ok)}.heard .md{color:#c08a2a}.nomic{font-style:italic}
+.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line);margin:8px 0}
+.tbl td{padding:7px 10px;border-top:1px solid #f0f2f5;vertical-align:top}
+.tbl .w{font-weight:700;color:var(--c)}.tbl .fr2{font:italic .95rem Lora,serif;color:#555}.tbl .tip{font-size:.82rem;color:#7a6a40;background:#fdf6e3;border-radius:8px;padding:2px 8px;display:inline-block;margin-top:3px}
+.tbl tr.grp td{background:var(--t);font-weight:700;color:var(--c);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.wcell{display:flex;align-items:center}
+.idiom{background:#fff;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:12px;padding:8px 12px;margin:10px 0}
+.idiom .eq{font:italic .95rem Lora,serif;color:#2b3a55;margin:2px 0 0 76px}.idiom .eq b{color:var(--c)}
+.tipbox{background:#fdf6e3;border:1px solid #f0dca8;border-radius:14px;padding:10px 14px;margin:12px 0;--c:#a8780d}
+.tipbox .h{font-weight:700;color:#a8780d;margin-bottom:4px}
+.kid{background:#fff0f6;border:1px solid #f6cfe0;border-radius:14px;padding:10px 14px;margin:12px 0;--c:#c43d7f}
+.kid .h{font-weight:700;color:#c43d7f}
+.timing{display:inline-block;background:rgba(255,255,255,.25);border-radius:999px;padding:0 10px;font-size:.72rem;font-weight:600;margin-left:6px;vertical-align:2px}
+@media(max-width:560px){.idiom .eq{margin-left:0}}
+.orow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 0 32px}.omod{border:1.5px dashed var(--c);color:var(--c);background:#fff;border-radius:999px;padding:5px 14px;font-weight:600;font-size:.88rem}.omod:disabled{opacity:.4}
+.item .heard{margin:6px 0 0 32px}
+@media(max-width:560px){.orow,.item .heard{margin-left:0}}
+.oline{min-height:52px;border:2px dashed color-mix(in srgb,var(--c) 45%,#fff);border-radius:14px;padding:7px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 0 32px;background:#fafbfc}
+.oline.ok{border:2px solid var(--ok);background:#eef8f2}.oline.ko{border-color:var(--ko)}
+.opool{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 0 32px;min-height:40px}
+.otile{border:none;border-radius:10px;padding:6px 12px;font:600 1rem Poppins,sans-serif;color:#fff;background:var(--c);box-shadow:0 3px 0 rgba(0,0,0,.18)}
+.otile:nth-child(3n+2){background:#c08a2a}.otile:nth-child(3n){background:#6d4a7d}
+.gline{display:flex;align-items:flex-start;gap:6px;background:#fff8ec;border-left:4px solid #c0392b;border-radius:0 10px 10px 0;padding:6px 10px;margin:6px 0 0 32px;font-family:Lora,serif}
+.gline .who{font:700 .78rem Poppins,sans-serif;color:#c0392b;margin-right:4px}
+.fam{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:10px 0}
+.fam div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 10px;font-size:.88rem}.fam b{display:block;color:var(--c)}
+@media(max-width:560px){.oline,.opool,.gline{margin-left:0}}
+/* étoiles */
+.star{position:fixed;pointer-events:none;z-index:99;color:#f2b632;font-size:18px;animation:fly .95s ease-out forwards;text-shadow:0 0 6px rgba(242,182,50,.6)}
+@keyframes fly{0%{opacity:0;transform:translate(0,0) scale(.4)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(40deg)}}
+/* accents */
+.acc{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#2b3a55;display:none;justify-content:center;flex-wrap:wrap;gap:5px;padding:6px}
+.acc.show{display:flex}
+.acc button{background:#fff;border:none;border-radius:7px;min-width:34px;padding:5px 0;font:600 1rem Lora,serif;color:#2b3a55}
+@media (max-width:560px){
+  body{font-size:15px}
+  .opts,.row,.fb{margin-left:0}
+  .s .tr{padding-left:0}
+  .htitle{left:10px;bottom:10px;padding:9px 12px}.tag{font-size:.58rem}
+}
+@media print{.top,.acc{display:none}.wrap{padding-top:0}}
+
+/* ===== Nicola : lisibilité mobile + couleurs ===== */
+.au.fra{--c:#c0392b;background:#fdeceb}.au.fra.playing{background:#c0392b}
+.au.mini{width:32px;height:32px;margin-right:6px}.au.mini svg{width:17px;height:17px}
+.ex .fr{align-items:flex-start}.ex .fr .au{margin-top:-2px}
+body{font-size:18px;background:linear-gradient(180deg,#fff7ec 0,#f4f8ff 40%,#fdf3f8 100%) fixed}
+.wrap{padding-top:66px}
+.top{background:rgba(255,255,255,.96)}
+.brand{font-size:.95rem;color:#c0392b}
+.tbtn{font-size:.85rem;padding:5px 12px}
+.score{font-size:1rem;padding:6px 14px;background:linear-gradient(135deg,#e0a630,#c0392b 55%,#6d4a7d)}
+.prog{position:fixed;top:52px;left:0;right:0;height:5px;background:#f1e6d6;z-index:49}.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1f5f7a,#2f7f73,#c08a2a,#c0392b,#6d4a7d);transition:width .6s}
+.hero{border:4px solid #fff}
+.rainbow{height:6px;border-radius:6px;margin:10px 0 0;background:linear-gradient(90deg,#1f5f7a,#2f7f73,#c08a2a,#e0a630,#c0392b,#a0446a,#6d4a7d)}
+.notes{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.notes i{position:absolute;bottom:-40px;font-style:normal;color:#fff;opacity:.85;text-shadow:0 2px 8px rgba(0,0,0,.35);animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-460px) rotate(20deg);opacity:0}}
+.hero h1{font-size:clamp(1.7rem,6.5vw,2.4rem)}
+.toc a{font-size:.95rem;padding:7px 14px 7px 6px;background:#fff;border:2px solid var(--tc,#e3e7ee)}
+.toc a b{width:26px;height:26px;background:var(--tc,#2b3a55);font-size:.8rem}
+.toc a:nth-child(2){--tc:#1f5f7a}.toc a:nth-child(3){--tc:#2f7f73}.toc a:nth-child(4){--tc:#6d4a7d}.toc a:nth-child(5){--tc:#b5523b}.toc a:nth-child(6){--tc:#c08a2a}.toc a:nth-child(7){--tc:#2b3a55}.toc a:nth-child(8){--tc:#a0446a}
+.ex{font-size:1.05rem}.ex.lead{font-size:1.08rem}
+.sec{background:var(--t);border-radius:24px;padding:12px 12px 16px;box-shadow:0 4px 18px rgba(36,48,63,.06)}
+.sh{padding:14px 16px;border-radius:20px;box-shadow:0 5px 0 color-mix(in srgb,var(--c) 65%,#000 10%)}
+.sh h2{font-size:clamp(1.3rem,5vw,1.6rem)}
+.sh .num{width:46px;height:46px;font-size:1.3rem}
+.s{background:#fff;border-radius:14px;padding:9px 10px;margin:9px 0;box-shadow:0 2px 8px rgba(36,48,63,.06)}
+.s .fr .txt{font-size:1.2rem;line-height:1.45;font-weight:500}
+.tr{font-size:1.08rem;color:#4b5563;line-height:1.45}
+.s .tr{padding-left:4px;margin-top:6px;border-top:1px dashed #e6e1d6;padding-top:5px}
+.au{width:42px;height:42px}.au svg{width:22px;height:22px}
+.slow{width:40px;height:40px;font-size:19px;line-height:40px}
+.tbl{font-size:1.05rem}
+.tbl td{padding:9px 10px}
+.tbl .w{font-size:1.15rem}
+.tbl .fr2{font-size:1.08rem;color:#374151}
+.tbl .tip{font-size:.95rem}
+.tbl tr.grp td{font-size:.85rem}
+.tipbox,.kid{font-size:1.05rem;border-width:2px}
+.tipbox .h,.kid .h{font-size:1.08rem}
+.ph figcaption{font-size:.95rem}
+.exh{padding:14px 16px}.ext{font-size:1.2rem}
+.qq{font-size:1.15rem}
+.qn{width:30px;height:30px;font-size:.9rem}
+.opts{gap:10px}
+.opt{font-size:1.12rem;padding:9px 18px}
+.row input{font-size:1.15rem;padding:9px 12px;min-width:180px}
+.chk,.omod,.mic{font-size:1rem;padding:9px 16px}
+.otile{font-size:1.15rem;padding:9px 15px}
+.gline{font-size:1.1rem}
+.fbr{font-size:1rem}.fbt{font-size:1.05rem}
+.spk .txt{font-size:1.15rem}
+.heard{font-size:1rem}
+.scorebox{font-size:1.1rem}.scorebox b{font-size:2rem}
+.rv{font-size:1rem}
+.toast{position:fixed;left:50%;top:74px;transform:translateX(-50%) scale(.5);opacity:0;z-index:210;background:#fff;border-radius:999px;padding:9px 22px;font:700 1.1rem Poppins,sans-serif;color:#c0392b;box-shadow:0 8px 26px rgba(192,57,43,.3);border:3px solid #f6d7a7;transition:.35s cubic-bezier(.3,1.5,.6,1);white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) scale(1)}
+.exdone{margin:0 16px 16px;border-radius:16px;padding:12px;text-align:center;background:linear-gradient(135deg,#fff4dc,#fde8ef);font-weight:700;color:#a0446a;font-size:1.1rem;animation:popin .7s cubic-bezier(.3,1.5,.5,1)}
+.exdone span{display:block;font-size:2rem}
+@keyframes popin{from{transform:scale(.3);opacity:0}}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:200}
+@media(max-width:560px){
+ body{font-size:18px}
+ .wrap{padding-left:12px;padding-right:12px}
+ .sec{padding:10px 8px 14px;border-radius:20px}
+ .tbl tr{display:block;border-top:1px solid #f0f2f5}
+ .tbl td{display:block;border:none;padding:6px 10px}
+ .tbl td+td{padding-top:0;padding-left:60px}
+ .tbl tr.grp td{padding:8px 10px}
+ .s .fr .txt{font-size:1.18rem}
+ .opts,.row,.fb,.oline,.opool,.orow,.item .heard,.gline{margin-left:0}
+ .htitle{padding:10px 13px}.tag{font-size:.66rem}
+ .brand{font-size:.85rem}
+ .tbl3 tr{display:grid;grid-template-columns:1fr 1fr}
+ .tbl3 td:nth-child(2){padding:6px 10px!important}
+ .tbl3 td:last-child{grid-column:1/-1;padding:0 10px 8px 60px!important}
+}
+</style>
+</head>
+<body class="allit">
+<div class="top"><div class="topin">
+  <span class="brand">L'anglais de Nicola</span>
+  <button type="button" class="tbtn on" id="allit" title="Afficher ou cacher le français">FR</button>
+  <button type="button" class="tbtn on" id="autoa" title="Lecture automatique des corrections">🔊 auto</button>
+  <span class="score" id="score"><span class="st">★</span><span id="sc">0</span>&nbsp;/&nbsp;44</span>
+</div></div>
+<canvas id="fx"></canvas><div class="prog"><i id="progbar"></i></div><div class="toast" id="toast"></div>
+<main class="wrap">
+<header class="hero"><img src="../img/palermo.jpg" alt="Le Teatro Massimo, à Palerme">
+<div class="htitle"><span class="tag">Jour 2 · Day 2</span><h1>Ma grande famille</h1>
+<div class="hit"><span class="tr" style="display:block;color:#eee">My big family</span></div></div></header>
+<nav class="toc"><a href="../"><b>☰</b> Mon programme</a><a href="#famille"><b>1</b> La famille</a><a href="#possessifs"><b>2</b> my, his, her</a><a href="#have"><b>3</b> have</a><a href="#presentation"><b>4</b> Ma famille</a><a href="#prononciation"><b>5</b> Prononciation</a><a href="#exercices"><b>6</b> Exercices</a><a href="#revoir"><b>7</b> À revoir</a></nav>
+<div class="ex lead"><div class="fr"><button type="button" class="au fra" data-a="../audio/fccfb5f87619.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Bonjour Nicola ! Aujourd'hui, vous apprenez à présenter votre grande famille en anglais : les mots de la famille, les petits mots <b>my</b>, <b>his</b> et <b>her</b>, et le verbe <b>have</b> (avoir). Comme hier : écoutez, la tortue 🐢 pour écouter lentement, et répétez toujours à voix haute. Le haut-parleur rouge lit les explications en français.</span></div></div>
+<section class="sec" style="--c:#1f5f7a;--t:#eaf3f7"><header class="sh" id="famille" style="--c:#1f5f7a"><span class="num">1</span><div><h2>Les mots de la famille<span class="timing">6 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">Family words</span></div></div></header>
+<table class="tbl"><tr class="grp"><td colspan="2">Mon couple et mes enfants</td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/dca98bfc862d.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/8bfc3fe2be84.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">my wife</span></div></td><td><span class="fr2">ma femme, mon épouse</span><div class="tip" style="display:flex;align-items:flex-start"><button type="button" class="au fra mini" data-a="../audio/70f65f61fffe.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span>Le mari se dit husband.</span></div></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/eba5a8c3a808.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/f4ee87b5d09f.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">my son</span></div></td><td><span class="fr2">mon fils</span><div class="tip" style="display:flex;align-items:flex-start"><button type="button" class="au fra mini" data-a="../audio/7a33d6d6c74a.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span>Se prononce comme sun, le soleil.</span></div></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/407453d62bf0.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/b0615baf87d8.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">my daughter</span></div></td><td><span class="fr2">ma fille</span><div class="tip" style="display:flex;align-items:flex-start"><button type="button" class="au fra mini" data-a="../audio/db4f6ddeff37.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span>Le gh ne se prononce pas : « dô-teu ».</span></div></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/057f53e22d78.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/8b33845d9b86.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">my children</span></div></td><td><span class="fr2">mes enfants</span><div class="tip" style="display:flex;align-items:flex-start"><button type="button" class="au fra mini" data-a="../audio/417cd66333ed.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span>Un enfant : a child. Au pluriel, le mot change : children.</span></div></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/2402c3240272.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/83c491dfe30a.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">my daughter-in-law</span></div></td><td><span class="fr2">ma belle-fille</span><div class="tip" style="display:flex;align-items:flex-start"><button type="button" class="au fra mini" data-a="../audio/77a358a230b3.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span>in-law veut dire « par alliance » : my mother-in-law, ma belle-mère.</span></div></td></tr><tr class="grp"><td colspan="2">Mes frères et sœurs</td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/455dd4938b79.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/4cbd101db179.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">my sister</span></div></td><td><span class="fr2">ma sœur</span></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/2a0dd475669f.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/7312193efefb.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">my brother</span></div></td><td><span class="fr2">mon frère</span></td></tr><tr class="grp"><td colspan="2">Mes petits-enfants</td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/4a57429b35b5.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/6bfa93f7c6a8.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">my grandson</span></div></td><td><span class="fr2">mon petit-fils</span></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/856b93722e6e.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/6d38d6f557b1.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">my granddaughter</span></div></td><td><span class="fr2">ma petite-fille</span></td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/753fe49e232a.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/dbc349e141f3.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">my grandchildren</span></div></td><td><span class="fr2">mes petits-enfants</span><div class="tip" style="display:flex;align-items:flex-start"><button type="button" class="au fra mini" data-a="../audio/a5b5628905fd.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span>grand + children : le mot se construit comme en français.</span></div></td></tr><tr class="grp"><td colspan="2">Et la famille à quatre pattes</td></tr><tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/7cdbb10024b4.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/a6fd71e3032b.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">our dog</span></div></td><td><span class="fr2">notre chien, notre chienne</span><div class="tip" style="display:flex;align-items:flex-start"><button type="button" class="au fra mini" data-a="../audio/8f8dfc272216.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span>Le même mot pour le mâle et la femelle.</span></div></td></tr></table>
+<figure class="ph band"><img src="../img/milan.jpg" alt="Milan, où habitent Mimma, Sabina et Pietro · Milan" loading="lazy"><figcaption>Milan, où habitent Mimma, Sabina et Pietro · Milan</figcaption></figure>
+</section>
+<section class="sec" style="--c:#6d4a7d;--t:#f3edf6"><header class="sh" id="possessifs" style="--c:#6d4a7d"><span class="num">2</span><div><h2>my, your, his, her…<span class="timing">8 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">Possessive words</span></div></div></header>
+<div class="ex lead"><div class="fr"><button type="button" class="au fra" data-a="../audio/ffc4b3f3b466.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Ces petits mots disent à qui appartient quelque chose ou quelqu'un. Bonne nouvelle : en anglais, ils ne changent jamais, que le mot qui suit soit masculin, féminin ou pluriel. <b>My</b> veut dire mon, ma et mes.</span></div></div>
+<table class="tbl tbl3">
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/21508efce3de.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/338d9dd47c9c.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">my</span></div></td><td></td><td><span class="fr2">mon, ma, mes</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/a82964d39ff3.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/ddd1b642da48.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">your</span></div></td><td></td><td><span class="fr2">ton, ta, tes · votre, vos</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/7cd6551dc64d.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/2c8708f99ceb.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">his</span></div></td><td></td><td><span class="fr2">son, sa, ses (à lui)</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/ff2643fce4dd.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/37b776b92ddd.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">her</span></div></td><td></td><td><span class="fr2">son, sa, ses (à elle)</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/542b7e24223b.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/3908c0b9db35.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">our</span></div></td><td></td><td><span class="fr2">notre, nos</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/c754909c642b.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/9f6c32ba0728.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w">their</span></div></td><td></td><td><span class="fr2">leur, leurs</span></td></tr>
+</table>
+<div class="tipbox"><div class="h">💡 Le grand truc : his ou her ?</div><div class="ex "><div class="fr"><button type="button" class="au fra" data-a="../audio/ba9dafa30688.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">En français, on dit « son frère » pour un homme comme pour une femme. En anglais, on regarde <b>la personne à qui il appartient</b> : un homme, c'est <b>his</b> ; une femme, c'est <b>her</b>.</span></div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/5d4584a3be90.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/5cf60671352c.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Pietro and <b>his</b> sisters are in Milan.</span></div><div class="tr">Pietro et ses sœurs sont à Milan.</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/526dec40bf72.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/3c567d16ceab.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Giovanna and <b>her</b> brother Nicola.</span></div><div class="tr">Giovanna et son frère Nicola.</div></div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/228546156ebe.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/27d2e0029893.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt"><b>My</b> wife is Dominique.</span></div><div class="tr">Ma femme, c'est Dominique.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/9c1bbca82fcb.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/99aa84d0718a.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Mimma and <b>her</b> sister Sabina are in Milan.</span></div><div class="tr">Mimma et sa sœur Sabina sont à Milan.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/44e940eac854.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/def24bdd14fb.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Jolie is <b>our</b> dog. <b>Her</b> name means pretty in French!</span></div><div class="tr">Jolie est notre chienne. Son nom veut dire « jolie » en français !</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/5bc9db2e13c1.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/3a1ffea75f04.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt"><b>Our</b> family is very big.</span></div><div class="tr">Notre famille est très grande.</div></div>
+</section>
+<section class="sec" style="--c:#2f7f73;--t:#eef6f4"><header class="sh" id="have" style="--c:#2f7f73"><span class="num">3</span><div><h2>Le verbe have (avoir)<span class="timing">6 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">The verb to have</span></div></div></header>
+<div class="ex lead"><div class="fr"><button type="button" class="au fra" data-a="../audio/667f0bc90b5a.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Un seul changement à retenir : avec <b>he</b>, <b>she</b> et <b>it</b>, have devient <b>has</b>. Pour toutes les autres personnes, c'est have.</span></div></div>
+<table class="tbl tbl3">
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/bdd58aa1d04b.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/a4010a6e27d0.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w" style="color:var(--c)">I have</span></div></td><td></td><td><span class="fr2">j'ai</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/745d3d6e54f0.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/7455f1ffc04a.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w" style="color:var(--c)">you have</span></div></td><td></td><td><span class="fr2">tu as · vous avez</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/6032df664d04.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/76a4463f483b.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w" style="color:#c0392b">he has</span></div></td><td></td><td><span class="fr2">il a</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/7ccc96cc12eb.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/e0079b924860.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w" style="color:#c0392b">she has</span></div></td><td></td><td><span class="fr2">elle a</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/3eb08a9c1816.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/fde369346458.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w" style="color:#c0392b">it has</span></div></td><td></td><td><span class="fr2">il, elle a (une chose, un animal)</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/a8913b6d57a7.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/900c34f2be16.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w" style="color:var(--c)">we have</span></div></td><td></td><td><span class="fr2">nous avons</span></td></tr>
+<tr><td><div class="wcell"><button type="button" class="au " data-a="../audio/6251ee5ac4a5.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/b1d6ae6e75ec.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="w" style="color:var(--c)">they have</span></div></td><td></td><td><span class="fr2">ils, elles ont</span></td></tr>
+</table>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/88b66dca9f25.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/6941792f74d3.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I have four children.</span></div><div class="tr">J'ai quatre enfants.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/516fb79414c4.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/76e7b7725b97.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I have three sisters and one brother.</span></div><div class="tr">J'ai trois sœurs et un frère.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/63c81d6f85a7.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/b867592b59b8.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Pietro has three sisters.</span></div><div class="tr">Pietro a trois sœurs.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/6f0bc4bbb6ce.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/356938570cbc.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Dominique and I have four grandchildren.</span></div><div class="tr">Dominique et moi avons quatre petits-enfants.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/9a5c0f712479.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/3c941c36d529.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I have a piano and a guitar.</span></div><div class="tr">J'ai un piano et une guitare.</div></div>
+<div class="tipbox"><div class="h">❓ Pour poser la question</div><div class="ex "><div class="fr"><button type="button" class="au fra" data-a="../audio/6362cd49d47b.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Retenez cette question toute faite, Giovanna pourrait vous la poser :</span></div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/601a7fb4eb04.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/710409e63b90.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">How many children do you have?</span></div><div class="tr">Combien d'enfants as-tu ? Combien d'enfants avez-vous ?</div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/f970b5b3dba2.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/17af08f1fe65.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">How many grandchildren do you have?</span></div><div class="tr">Combien de petits-enfants as-tu ?</div></div></div>
+<div class="tipbox"><div class="h">🇬🇧 À savoir</div><div class="ex "><div class="fr"><button type="button" class="au fra" data-a="../audio/b6e522939034.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">En Angleterre, on entend aussi <b>I've got</b>, qui veut dire exactement la même chose que <b>I have</b> : I've got four children.</span></div></div></div>
+<figure class="ph band"><img src="../img/piano.jpg" alt="Un piano à queue · A grand piano" loading="lazy"><figcaption>Un piano à queue · A grand piano</figcaption></figure>
+</section>
+<section class="sec" style="--c:#c08a2a;--t:#fbf4e6"><header class="sh" id="presentation" style="--c:#c08a2a"><span class="num">4</span><div><h2>Je présente ma famille<span class="timing">4 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">Introducing my family</span></div></div></header>
+<div class="ex lead"><div class="fr"><button type="button" class="au fra" data-a="../audio/943b5f49ae6b.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Voici votre famille, présentée en anglais. Écoutez chaque phrase, puis lisez tout le texte à voix haute, comme si vous le racontiez à Giovanna.</span></div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/4d8c8fa2f723.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/101381fea067.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Hello! I'm Nicola. I have a big family.</span></div><div class="tr">Bonjour ! Je suis Nicola. J'ai une grande famille.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/228546156ebe.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/27d2e0029893.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">My wife is Dominique.</span></div><div class="tr">Ma femme, c'est Dominique.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/6612ac50e7d0.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/9394b4b95b99.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I have four children: Emanuele, Irene, Sabine and Sergio.</span></div><div class="tr">J'ai quatre enfants : Emanuele, Irene, Sabine et Sergio.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/8579d36c7e1a.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/06535ecd2760.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Cristina is my daughter-in-law.</span></div><div class="tr">Cristina est ma belle-fille.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/3dc85d682938.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/b90ce770f5f3.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I have four grandchildren: Dominique, Tom, Lilio and Saveria.</span></div><div class="tr">J'ai quatre petits-enfants : Dominique, Tom, Lilio et Saveria.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/00604a7b160e.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/5a43ee0a10a3.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">And we have a dog, Jolie: our little granddaughter!</span></div><div class="tr">Et nous avons une chienne, Jolie : notre petite-fille !</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/516fb79414c4.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/76e7b7725b97.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I have three sisters and one brother.</span></div><div class="tr">J'ai trois sœurs et un frère.</div></div>
+<div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/a9a461c09cdc.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/93dee461acf9.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Giovanna is in Canada. Mimma, Sabina and Pietro are in Milan.</span></div><div class="tr">Giovanna est au Canada. Mimma, Sabina et Pietro sont à Milan.</div></div>
+<figure class="ph band"><img src="../img/canada.jpg" alt="Le Canada, chez Giovanna · Canada" loading="lazy"><figcaption>Le Canada, chez Giovanna · Canada</figcaption></figure>
+</section>
+<section class="sec" style="--c:#b5523b;--t:#fbefe9"><header class="sh" id="prononciation" style="--c:#b5523b"><span class="num">5</span><div><h2>Prononciation<span class="timing">3 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">Pronunciation</span></div></div></header>
+<div class="tipbox"><div class="h">👅 Le th de brother</div><div class="ex "><div class="fr"><button type="button" class="au fra" data-a="../audio/e963fda32a6f.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Comme pour thank you : le bout de la langue entre les dents, mais cette fois la gorge vibre, comme un « z » très doux.</span></div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/8db0f5c2eede.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/41796c1ab492.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">brother, mother, father</span></div><div class="tr">frère, mère, père</div></div></div>
+<div class="tipbox"><div class="h">💨 Le h de his, her, have</div><div class="ex "><div class="fr"><button type="button" class="au fra" data-a="../audio/59201a8ed169.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Le h se prononce : un petit souffle. Sans lui, his devient is, et ce n'est plus le même mot !</span></div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/d5a19d3fd7e9.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/be2923e65d9b.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">his, her, have, has</span></div><div class="tr">son, sa, avoir, a</div></div></div>
+<div class="tipbox"><div class="h">🤫 Les lettres muettes</div><div class="ex "><div class="fr"><button type="button" class="au fra" data-a="../audio/789d5723408b.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Dans <b>daughter</b>, le gh ne se prononce pas. Dans <b>grandson</b>, le d s'entend à peine.</span></div></div><div class="s "><div class="fr"><button type="button" class="au " data-a="../audio/5687cfb1543b.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/db7fee931192.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">daughter, granddaughter, grandson</span></div><div class="tr">fille, petite-fille, petit-fils</div></div></div>
+</section>
+<section class="sec" style="--c:#2b3a55;--t:#eef1f6"><header class="sh" id="exercices" style="--c:#2b3a55"><span class="num">6</span><div><h2>Exercices<span class="timing">12 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">Exercises</span></div></div></header>
+<div class="ex lead"><div class="fr"><button type="button" class="au fra" data-a="../audio/3448939e155b.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">La correction est immédiate et chaque bonne réponse vaut un point. Vos erreurs s'ajoutent à « À revoir », avec un lien pour relire la leçon.</span></div></div>
+<div class="exb" id="ex1" style="--c:#1f5f7a"><div class="exh" style="--c:#1f5f7a"><span class="exn">1</span><div><div class="exk">EXERCICE 1</div><div class="ext">J'écoute et je comprends</div><div style="font:italic .85rem Lora,serif;opacity:.9">Listen and choose</div></div></div>
+<div class="item" id="q1" data-k="qcm" data-j='{&quot;id&quot;: &quot;q1&quot;, &quot;ans&quot;: [&quot;ma fille&quot;], &quot;full&quot;: &quot;my daughter&quot;, &quot;a&quot;: &quot;../audio/407453d62bf0.mp3?v=1&quot;, &quot;it&quot;: &quot;ma fille&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;daughter = fille.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">1</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/407453d62bf0.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/b0615baf87d8.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">mon fils</button><button type="button" class="opt">ma femme</button><button type="button" class="opt">ma fille</button></div><div class="fb"></div></div>
+<div class="item" id="q2" data-k="qcm" data-j='{&quot;id&quot;: &quot;q2&quot;, &quot;ans&quot;: [&quot;mon fils&quot;], &quot;full&quot;: &quot;my son&quot;, &quot;a&quot;: &quot;../audio/eba5a8c3a808.mp3?v=1&quot;, &quot;it&quot;: &quot;mon fils&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;son = fils.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">2</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/eba5a8c3a808.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/f4ee87b5d09f.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">mon frère</button><button type="button" class="opt">mon fils</button><button type="button" class="opt">le soleil</button></div><div class="fb"></div></div>
+<div class="item" id="q3" data-k="qcm" data-j='{&quot;id&quot;: &quot;q3&quot;, &quot;ans&quot;: [&quot;mes petits-enfants&quot;], &quot;full&quot;: &quot;my grandchildren&quot;, &quot;a&quot;: &quot;../audio/753fe49e232a.mp3?v=1&quot;, &quot;it&quot;: &quot;mes petits-enfants&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;grandchildren = petits-enfants.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">3</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/753fe49e232a.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/dbc349e141f3.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">mes sœurs</button><button type="button" class="opt">mes enfants</button><button type="button" class="opt">mes petits-enfants</button></div><div class="fb"></div></div>
+<div class="item" id="q4" data-k="qcm" data-j='{&quot;id&quot;: &quot;q4&quot;, &quot;ans&quot;: [&quot;ma belle-fille&quot;], &quot;full&quot;: &quot;my daughter-in-law&quot;, &quot;a&quot;: &quot;../audio/2402c3240272.mp3?v=1&quot;, &quot;it&quot;: &quot;ma belle-fille&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;daughter-in-law = belle-fille.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">4</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/2402c3240272.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/83c491dfe30a.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">ma belle-fille</button><button type="button" class="opt">ma petite-fille</button><button type="button" class="opt">ma belle-sœur</button></div><div class="fb"></div></div>
+<div class="item" id="q5" data-k="qcm" data-j='{&quot;id&quot;: &quot;q5&quot;, &quot;ans&quot;: [&quot;J&#x27;ai quatre enfants.&quot;], &quot;full&quot;: &quot;I have four children.&quot;, &quot;a&quot;: &quot;../audio/88b66dca9f25.mp3?v=1&quot;, &quot;it&quot;: &quot;J&#x27;ai quatre enfants.&quot;, &quot;rule&quot;: &quot;have&quot;, &quot;why&quot;: &quot;I have = j&#x27;ai.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">5</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/88b66dca9f25.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/6941792f74d3.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">J&#x27;ai quatre enfants.</button><button type="button" class="opt">Je suis quatre enfants.</button><button type="button" class="opt">J&#x27;ai quatre frères.</button></div><div class="fb"></div></div>
+<div class="item" id="q6" data-k="qcm" data-j='{&quot;id&quot;: &quot;q6&quot;, &quot;ans&quot;: [&quot;Combien d&#x27;enfants as-tu ?&quot;], &quot;full&quot;: &quot;How many children do you have?&quot;, &quot;a&quot;: &quot;../audio/601a7fb4eb04.mp3?v=1&quot;, &quot;it&quot;: &quot;Combien d&#x27;enfants as-tu ?&quot;, &quot;rule&quot;: &quot;have&quot;, &quot;why&quot;: &quot;How many…? = combien de… ?&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">6</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/601a7fb4eb04.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/710409e63b90.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">Où sont tes enfants ?</button><button type="button" class="opt">Comment vont tes enfants ?</button><button type="button" class="opt">Combien d&#x27;enfants as-tu ?</button></div><div class="fb"></div></div>
+<div class="item" id="q7" data-k="qcm" data-j='{&quot;id&quot;: &quot;q7&quot;, &quot;ans&quot;: [&quot;Pietro et ses sœurs&quot;], &quot;full&quot;: &quot;Pietro and his sisters&quot;, &quot;a&quot;: &quot;../audio/abc2a4a60404.mp3?v=1&quot;, &quot;it&quot;: &quot;Pietro et ses sœurs&quot;, &quot;rule&quot;: &quot;possessifs&quot;, &quot;why&quot;: &quot;his sisters = ses sœurs (à lui).&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">7</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/abc2a4a60404.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/64c4c58c1328.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">Pietro et son frère</button><button type="button" class="opt">Pietro et ses sœurs</button><button type="button" class="opt">Pietro et sa sœur</button></div><div class="fb"></div></div>
+<div class="item" id="q8" data-k="qcm" data-j='{&quot;id&quot;: &quot;q8&quot;, &quot;ans&quot;: [&quot;Notre famille est très grande.&quot;], &quot;full&quot;: &quot;Our family is very big.&quot;, &quot;a&quot;: &quot;../audio/5bc9db2e13c1.mp3?v=1&quot;, &quot;it&quot;: &quot;Notre famille est très grande.&quot;, &quot;rule&quot;: &quot;possessifs&quot;, &quot;why&quot;: &quot;our = notre.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 1}'><div class="qq"><span class="qn">8</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap"><button type="button" class="au " data-a="../audio/5bc9db2e13c1.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/3a1ffea75f04.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span style="color:var(--soft);font-style:italic">Écoutez et choisissez.</span></span></div><div class="opts"><button type="button" class="opt">Leur famille est très grande.</button><button type="button" class="opt">Notre famille est très grande.</button><button type="button" class="opt">Ma famille est très grande.</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex2" style="--c:#2f7f73"><div class="exh" style="--c:#2f7f73"><span class="exn">2</span><div><div class="exk">EXERCICE 2</div><div class="ext">Qui est-ce ?</div><div style="font:italic .85rem Lora,serif;opacity:.9">Who is it?</div></div></div>
+<div class="item" id="q9" data-k="qcm" data-j='{&quot;id&quot;: &quot;q9&quot;, &quot;ans&quot;: [&quot;wife&quot;], &quot;full&quot;: &quot;Dominique is my wife.&quot;, &quot;a&quot;: &quot;../audio/f6e555b94635.mp3?v=1&quot;, &quot;it&quot;: &quot;Dominique est ma femme.&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;wife = femme, épouse.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">1</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">👩 Dominique, c'est votre femme : Dominique is my <span class="gap">……</span>.</span></div><div class="opts"><button type="button" class="opt">wife</button><button type="button" class="opt">sister</button><button type="button" class="opt">daughter</button></div><div class="fb"></div></div>
+<div class="item" id="q10" data-k="qcm" data-j='{&quot;id&quot;: &quot;q10&quot;, &quot;ans&quot;: [&quot;son&quot;], &quot;full&quot;: &quot;Sergio is my son.&quot;, &quot;a&quot;: &quot;../audio/aff1b82e0d03.mp3?v=1&quot;, &quot;it&quot;: &quot;Sergio est mon fils.&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;son = fils.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">2</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">👨 Sergio, c'est votre fils : Sergio is my <span class="gap">……</span>.</span></div><div class="opts"><button type="button" class="opt">grandson</button><button type="button" class="opt">son</button><button type="button" class="opt">brother</button></div><div class="fb"></div></div>
+<div class="item" id="q11" data-k="qcm" data-j='{&quot;id&quot;: &quot;q11&quot;, &quot;ans&quot;: [&quot;granddaughter&quot;], &quot;full&quot;: &quot;Saveria is my granddaughter.&quot;, &quot;a&quot;: &quot;../audio/29415ec7b6b7.mp3?v=1&quot;, &quot;it&quot;: &quot;Saveria est ma petite-fille.&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;granddaughter = petite-fille.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">3</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">👧 Saveria, c'est votre petite-fille : Saveria is my <span class="gap">……</span>.</span></div><div class="opts"><button type="button" class="opt">daughter</button><button type="button" class="opt">daughter-in-law</button><button type="button" class="opt">granddaughter</button></div><div class="fb"></div></div>
+<div class="item" id="q12" data-k="qcm" data-j='{&quot;id&quot;: &quot;q12&quot;, &quot;ans&quot;: [&quot;brother&quot;], &quot;full&quot;: &quot;Pietro is my brother.&quot;, &quot;a&quot;: &quot;../audio/6b8ae3e7a7cd.mp3?v=1&quot;, &quot;it&quot;: &quot;Pietro est mon frère.&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;brother = frère.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">4</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">🧔 Pietro, c'est votre frère : Pietro is my <span class="gap">……</span>.</span></div><div class="opts"><button type="button" class="opt">grandson</button><button type="button" class="opt">brother</button><button type="button" class="opt">son</button></div><div class="fb"></div></div>
+<div class="item" id="q13" data-k="qcm" data-j='{&quot;id&quot;: &quot;q13&quot;, &quot;ans&quot;: [&quot;daughter-in-law&quot;], &quot;full&quot;: &quot;Cristina is my daughter-in-law.&quot;, &quot;a&quot;: &quot;../audio/8579d36c7e1a.mp3?v=1&quot;, &quot;it&quot;: &quot;Cristina est ma belle-fille.&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;daughter-in-law = belle-fille.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">5</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">👩 Cristina, c'est votre belle-fille : Cristina is my <span class="gap">……</span>.</span></div><div class="opts"><button type="button" class="opt">sister</button><button type="button" class="opt">daughter-in-law</button><button type="button" class="opt">granddaughter</button></div><div class="fb"></div></div>
+<div class="item" id="q14" data-k="qcm" data-j='{&quot;id&quot;: &quot;q14&quot;, &quot;ans&quot;: [&quot;grandson&quot;], &quot;full&quot;: &quot;Tom is my grandson.&quot;, &quot;a&quot;: &quot;../audio/5f74845d1e2d.mp3?v=1&quot;, &quot;it&quot;: &quot;Tom est mon petit-fils.&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;grandson = petit-fils.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 2}'><div class="qq"><span class="qn">6</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">👦 Tom, c'est votre petit-fils : Tom is my <span class="gap">……</span>.</span></div><div class="opts"><button type="button" class="opt">son</button><button type="button" class="opt">brother</button><button type="button" class="opt">grandson</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex3" style="--c:#6d4a7d"><div class="exh" style="--c:#6d4a7d"><span class="exn">3</span><div><div class="exk">EXERCICE 3</div><div class="ext">his ou her ?</div><div style="font:italic .85rem Lora,serif;opacity:.9">his or her?</div></div></div>
+<div class="item" id="q15" data-k="qcm" data-j='{&quot;id&quot;: &quot;q15&quot;, &quot;ans&quot;: [&quot;his&quot;], &quot;full&quot;: &quot;Pietro and his sisters.&quot;, &quot;a&quot;: &quot;../audio/7895d79d7db2.mp3?v=1&quot;, &quot;it&quot;: &quot;Pietro et ses sœurs.&quot;, &quot;rule&quot;: &quot;possessifs&quot;, &quot;why&quot;: &quot;Pietro est un homme → his.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">1</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Pietro and <span class="gap">……</span> sisters.</span></div><div class="opts"><button type="button" class="opt">his</button><button type="button" class="opt">her</button></div><div class="fb"></div></div>
+<div class="item" id="q16" data-k="qcm" data-j='{&quot;id&quot;: &quot;q16&quot;, &quot;ans&quot;: [&quot;her&quot;], &quot;full&quot;: &quot;Giovanna and her brother Nicola.&quot;, &quot;a&quot;: &quot;../audio/526dec40bf72.mp3?v=1&quot;, &quot;it&quot;: &quot;Giovanna et son frère Nicola.&quot;, &quot;rule&quot;: &quot;possessifs&quot;, &quot;why&quot;: &quot;Giovanna est une femme → her.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">2</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Giovanna and <span class="gap">……</span> brother Nicola.</span></div><div class="opts"><button type="button" class="opt">her</button><button type="button" class="opt">his</button></div><div class="fb"></div></div>
+<div class="item" id="q17" data-k="qcm" data-j='{&quot;id&quot;: &quot;q17&quot;, &quot;ans&quot;: [&quot;her&quot;], &quot;full&quot;: &quot;Irene and her father.&quot;, &quot;a&quot;: &quot;../audio/c97852839bf6.mp3?v=1&quot;, &quot;it&quot;: &quot;Irene et son père.&quot;, &quot;rule&quot;: &quot;possessifs&quot;, &quot;why&quot;: &quot;Irene → her.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">3</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Irene and <span class="gap">……</span> father.</span></div><div class="opts"><button type="button" class="opt">her</button><button type="button" class="opt">his</button></div><div class="fb"></div></div>
+<div class="item" id="q18" data-k="qcm" data-j='{&quot;id&quot;: &quot;q18&quot;, &quot;ans&quot;: [&quot;his&quot;], &quot;full&quot;: &quot;Emanuele and his sister Sabine.&quot;, &quot;a&quot;: &quot;../audio/3d1a114f7177.mp3?v=1&quot;, &quot;it&quot;: &quot;Emanuele et sa sœur Sabine.&quot;, &quot;rule&quot;: &quot;possessifs&quot;, &quot;why&quot;: &quot;Emanuele → his.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">4</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Emanuele and <span class="gap">……</span> sister Sabine.</span></div><div class="opts"><button type="button" class="opt">his</button><button type="button" class="opt">her</button></div><div class="fb"></div></div>
+<div class="item" id="q19" data-k="qcm" data-j='{&quot;id&quot;: &quot;q19&quot;, &quot;ans&quot;: [&quot;her&quot;], &quot;full&quot;: &quot;Mimma and her sister Sabina.&quot;, &quot;a&quot;: &quot;../audio/7251662cf2b7.mp3?v=1&quot;, &quot;it&quot;: &quot;Mimma et sa sœur Sabina.&quot;, &quot;rule&quot;: &quot;possessifs&quot;, &quot;why&quot;: &quot;Mimma → her.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">5</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Mimma and <span class="gap">……</span> sister Sabina.</span></div><div class="opts"><button type="button" class="opt">her</button><button type="button" class="opt">his</button></div><div class="fb"></div></div>
+<div class="item" id="q20" data-k="qcm" data-j='{&quot;id&quot;: &quot;q20&quot;, &quot;ans&quot;: [&quot;his&quot;], &quot;full&quot;: &quot;Nicola and his guitar.&quot;, &quot;a&quot;: &quot;../audio/a1f217943d16.mp3?v=1&quot;, &quot;it&quot;: &quot;Nicola et sa guitare.&quot;, &quot;rule&quot;: &quot;possessifs&quot;, &quot;why&quot;: &quot;Nicola → his.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">6</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Nicola and <span class="gap">……</span> guitar.</span></div><div class="opts"><button type="button" class="opt">her</button><button type="button" class="opt">his</button></div><div class="fb"></div></div>
+<div class="item" id="q21" data-k="qcm" data-j='{&quot;id&quot;: &quot;q21&quot;, &quot;ans&quot;: [&quot;her&quot;], &quot;full&quot;: &quot;Dominique and her husband.&quot;, &quot;a&quot;: &quot;../audio/6aa993e12fa2.mp3?v=1&quot;, &quot;it&quot;: &quot;Dominique et son mari.&quot;, &quot;rule&quot;: &quot;possessifs&quot;, &quot;why&quot;: &quot;Dominique (votre femme) → her.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">7</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Dominique and <span class="gap">……</span> husband.</span></div><div class="opts"><button type="button" class="opt">his</button><button type="button" class="opt">her</button></div><div class="fb"></div></div>
+<div class="item" id="q22" data-k="qcm" data-j='{&quot;id&quot;: &quot;q22&quot;, &quot;ans&quot;: [&quot;his&quot;], &quot;full&quot;: &quot;Tom and his grandfather.&quot;, &quot;a&quot;: &quot;../audio/caac5cf1442d.mp3?v=1&quot;, &quot;it&quot;: &quot;Tom et son grand-père.&quot;, &quot;rule&quot;: &quot;possessifs&quot;, &quot;why&quot;: &quot;Tom → his.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 3}'><div class="qq"><span class="qn">8</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Tom and <span class="gap">……</span> grandfather.</span></div><div class="opts"><button type="button" class="opt">his</button><button type="button" class="opt">her</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex4" style="--c:#2f7f73"><div class="exh" style="--c:#2f7f73"><span class="exn">4</span><div><div class="exk">EXERCICE 4</div><div class="ext">have ou has ?</div><div style="font:italic .85rem Lora,serif;opacity:.9">have or has?</div></div></div>
+<div class="item" id="q23" data-k="qcm" data-j='{&quot;id&quot;: &quot;q23&quot;, &quot;ans&quot;: [&quot;have&quot;], &quot;full&quot;: &quot;I have four children.&quot;, &quot;a&quot;: &quot;../audio/88b66dca9f25.mp3?v=1&quot;, &quot;it&quot;: &quot;J&#x27;ai quatre enfants.&quot;, &quot;rule&quot;: &quot;have&quot;, &quot;why&quot;: &quot;I → have.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">1</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">I <span class="gap">……</span> four children.</span></div><div class="opts"><button type="button" class="opt">have</button><button type="button" class="opt">has</button></div><div class="fb"></div></div>
+<div class="item" id="q24" data-k="qcm" data-j='{&quot;id&quot;: &quot;q24&quot;, &quot;ans&quot;: [&quot;has&quot;], &quot;full&quot;: &quot;Pietro has three sisters.&quot;, &quot;a&quot;: &quot;../audio/63c81d6f85a7.mp3?v=1&quot;, &quot;it&quot;: &quot;Pietro a trois sœurs.&quot;, &quot;rule&quot;: &quot;have&quot;, &quot;why&quot;: &quot;he (Pietro) → has.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">2</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Pietro <span class="gap">……</span> three sisters.</span></div><div class="opts"><button type="button" class="opt">has</button><button type="button" class="opt">have</button></div><div class="fb"></div></div>
+<div class="item" id="q25" data-k="qcm" data-j='{&quot;id&quot;: &quot;q25&quot;, &quot;ans&quot;: [&quot;have&quot;], &quot;full&quot;: &quot;We have a dog.&quot;, &quot;a&quot;: &quot;../audio/847f8cf60966.mp3?v=1&quot;, &quot;it&quot;: &quot;Nous avons une chienne.&quot;, &quot;rule&quot;: &quot;have&quot;, &quot;why&quot;: &quot;we → have.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">3</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">We <span class="gap">……</span> a dog.</span></div><div class="opts"><button type="button" class="opt">has</button><button type="button" class="opt">have</button></div><div class="fb"></div></div>
+<div class="item" id="q26" data-k="qcm" data-j='{&quot;id&quot;: &quot;q26&quot;, &quot;ans&quot;: [&quot;has&quot;], &quot;full&quot;: &quot;Giovanna has two sisters and two brothers.&quot;, &quot;a&quot;: &quot;../audio/3c356ab63ded.mp3?v=1&quot;, &quot;it&quot;: &quot;Giovanna a deux sœurs et deux frères.&quot;, &quot;rule&quot;: &quot;have&quot;, &quot;why&quot;: &quot;she (Giovanna) → has.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">4</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Giovanna <span class="gap">……</span> two sisters and two brothers.</span></div><div class="opts"><button type="button" class="opt">have</button><button type="button" class="opt">has</button></div><div class="fb"></div></div>
+<div class="item" id="q27" data-k="qcm" data-j='{&quot;id&quot;: &quot;q27&quot;, &quot;ans&quot;: [&quot;have&quot;], &quot;full&quot;: &quot;Nicola and Dominique have four children.&quot;, &quot;a&quot;: &quot;../audio/f864e9500368.mp3?v=1&quot;, &quot;it&quot;: &quot;Nicola et Dominique ont quatre enfants.&quot;, &quot;rule&quot;: &quot;have&quot;, &quot;why&quot;: &quot;they → have.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">5</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Nicola and Dominique <span class="gap">……</span> four children.</span></div><div class="opts"><button type="button" class="opt">has</button><button type="button" class="opt">have</button></div><div class="fb"></div></div>
+<div class="item" id="q28" data-k="qcm" data-j='{&quot;id&quot;: &quot;q28&quot;, &quot;ans&quot;: [&quot;have&quot;], &quot;full&quot;: &quot;You have a beautiful family.&quot;, &quot;a&quot;: &quot;../audio/90b52a840ab1.mp3?v=1&quot;, &quot;it&quot;: &quot;Tu as une belle famille.&quot;, &quot;rule&quot;: &quot;have&quot;, &quot;why&quot;: &quot;you → have.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">6</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">You <span class="gap">……</span> a beautiful family.</span></div><div class="opts"><button type="button" class="opt">have</button><button type="button" class="opt">has</button></div><div class="fb"></div></div>
+<div class="item" id="q29" data-k="qcm" data-j='{&quot;id&quot;: &quot;q29&quot;, &quot;ans&quot;: [&quot;has&quot;], &quot;full&quot;: &quot;Nicola has a piano and a guitar.&quot;, &quot;a&quot;: &quot;../audio/c8e5d4dd458f.mp3?v=1&quot;, &quot;it&quot;: &quot;Nicola a un piano et une guitare.&quot;, &quot;rule&quot;: &quot;have&quot;, &quot;why&quot;: &quot;he (Nicola) → has.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 4}'><div class="qq"><span class="qn">7</span><span class="txt" style="display:flex;align-items:center;flex-wrap:wrap">Nicola <span class="gap">……</span> a piano and a guitar.</span></div><div class="opts"><button type="button" class="opt">has</button><button type="button" class="opt">have</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex5" style="--c:#c08a2a"><div class="exh" style="--c:#c08a2a"><span class="exn">5</span><div><div class="exk">EXERCICE 5</div><div class="ext">Remettez les mots dans l'ordre</div><div style="font:italic .85rem Lora,serif;opacity:.9">Put the words in order</div></div></div>
+<div class="ex cons"><div class="fr"><button type="button" class="au fra" data-a="../audio/af96d05d5272.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Touchez les étiquettes dans le bon ordre. Touchez une étiquette déjà placée pour la remettre en bas.</span></div></div>
+<div class="item" id="q30" data-k="ord" data-j='{&quot;id&quot;: &quot;q30&quot;, &quot;ans&quot;: [&quot;I have four children.&quot;], &quot;full&quot;: &quot;I have four children.&quot;, &quot;a&quot;: &quot;../audio/88b66dca9f25.mp3?v=1&quot;, &quot;it&quot;: &quot;J&#x27;ai quatre enfants.&quot;, &quot;rule&quot;: &quot;have&quot;, &quot;why&quot;: &quot;Ordre : I have four children.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 5}'><div class="qq"><span class="qn">1</span><span class="txt" style="font-style:italic;color:var(--soft)">J'ai quatre enfants.</span></div><div class="oline"></div><div class="opool"><button type="button" class="otile">have</button><button type="button" class="otile">four</button><button type="button" class="otile">I</button><button type="button" class="otile">children.</button></div><div class="fb"></div></div>
+<div class="item" id="q31" data-k="ord" data-j='{&quot;id&quot;: &quot;q31&quot;, &quot;ans&quot;: [&quot;My wife is Dominique.&quot;], &quot;full&quot;: &quot;My wife is Dominique.&quot;, &quot;a&quot;: &quot;../audio/228546156ebe.mp3?v=1&quot;, &quot;it&quot;: &quot;Ma femme, c&#x27;est Dominique.&quot;, &quot;rule&quot;: &quot;possessifs&quot;, &quot;why&quot;: &quot;Ordre : My wife is Dominique.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 5}'><div class="qq"><span class="qn">2</span><span class="txt" style="font-style:italic;color:var(--soft)">Ma femme, c'est Dominique.</span></div><div class="oline"></div><div class="opool"><button type="button" class="otile">Dominique.</button><button type="button" class="otile">My</button><button type="button" class="otile">is</button><button type="button" class="otile">wife</button></div><div class="fb"></div></div>
+<div class="item" id="q32" data-k="ord" data-j='{&quot;id&quot;: &quot;q32&quot;, &quot;ans&quot;: [&quot;Jolie is our dog.&quot;], &quot;full&quot;: &quot;Jolie is our dog.&quot;, &quot;a&quot;: &quot;../audio/a08e7f7e43f4.mp3?v=1&quot;, &quot;it&quot;: &quot;Jolie est notre chienne.&quot;, &quot;rule&quot;: &quot;possessifs&quot;, &quot;why&quot;: &quot;Ordre : Jolie is our dog.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 5}'><div class="qq"><span class="qn">3</span><span class="txt" style="font-style:italic;color:var(--soft)">Jolie est notre chienne.</span></div><div class="oline"></div><div class="opool"><button type="button" class="otile">our</button><button type="button" class="otile">is</button><button type="button" class="otile">dog.</button><button type="button" class="otile">Jolie</button></div><div class="fb"></div></div>
+<div class="item" id="q33" data-k="ord" data-j='{&quot;id&quot;: &quot;q33&quot;, &quot;ans&quot;: [&quot;I have three sisters.&quot;], &quot;full&quot;: &quot;I have three sisters.&quot;, &quot;a&quot;: &quot;../audio/c3d86bfa7a1f.mp3?v=1&quot;, &quot;it&quot;: &quot;J&#x27;ai trois sœurs.&quot;, &quot;rule&quot;: &quot;have&quot;, &quot;why&quot;: &quot;Ordre : I have three sisters.&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 5}'><div class="qq"><span class="qn">4</span><span class="txt" style="font-style:italic;color:var(--soft)">J'ai trois sœurs.</span></div><div class="oline"></div><div class="opool"><button type="button" class="otile">have</button><button type="button" class="otile">three</button><button type="button" class="otile">I</button><button type="button" class="otile">sisters.</button></div><div class="fb"></div></div>
+<div class="item" id="q34" data-k="ord" data-j='{&quot;id&quot;: &quot;q34&quot;, &quot;ans&quot;: [&quot;How many children do you have?&quot;], &quot;full&quot;: &quot;How many children do you have?&quot;, &quot;a&quot;: &quot;../audio/601a7fb4eb04.mp3?v=1&quot;, &quot;it&quot;: &quot;Combien d&#x27;enfants as-tu ?&quot;, &quot;rule&quot;: &quot;have&quot;, &quot;why&quot;: &quot;Ordre : How many children do you have?&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 5}'><div class="qq"><span class="qn">5</span><span class="txt" style="font-style:italic;color:var(--soft)">Combien d'enfants as-tu ?</span></div><div class="oline"></div><div class="opool"><button type="button" class="otile">have?</button><button type="button" class="otile">How</button><button type="button" class="otile">children</button><button type="button" class="otile">many</button><button type="button" class="otile">you</button><button type="button" class="otile">do</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex6" style="--c:#b5523b"><div class="exh" style="--c:#b5523b"><span class="exn">6</span><div><div class="exk">EXERCICE 6</div><div class="ext">Écrivez le mot anglais</div><div style="font:italic .85rem Lora,serif;opacity:.9">Write the English word</div></div></div>
+<div class="ex cons"><div class="fr"><button type="button" class="au fra" data-a="../audio/eddc262c6b91.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Écrivez le mot anglais qui correspond. Pas besoin de majuscule.</span></div></div>
+<div class="item" id="q35" data-k="inp" data-j='{&quot;id&quot;: &quot;q35&quot;, &quot;ans&quot;: [&quot;son&quot;], &quot;full&quot;: &quot;my son&quot;, &quot;a&quot;: &quot;../audio/eba5a8c3a808.mp3?v=1&quot;, &quot;it&quot;: &quot;mon fils&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;mon fils = my son&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 6}'><div class="qq"><span class="qn">1</span><span class="txt"><b>mon fils → my <span class=gap>……</span></b></span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="le mot anglais"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q36" data-k="inp" data-j='{&quot;id&quot;: &quot;q36&quot;, &quot;ans&quot;: [&quot;daughter&quot;], &quot;full&quot;: &quot;my daughter&quot;, &quot;a&quot;: &quot;../audio/407453d62bf0.mp3?v=1&quot;, &quot;it&quot;: &quot;ma fille&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;ma fille = my daughter&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 6}'><div class="qq"><span class="qn">2</span><span class="txt"><b>ma fille → my <span class=gap>……</span></b></span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="le mot anglais"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q37" data-k="inp" data-j='{&quot;id&quot;: &quot;q37&quot;, &quot;ans&quot;: [&quot;sister&quot;], &quot;full&quot;: &quot;my sister&quot;, &quot;a&quot;: &quot;../audio/455dd4938b79.mp3?v=1&quot;, &quot;it&quot;: &quot;ma sœur&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;ma sœur = my sister&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 6}'><div class="qq"><span class="qn">3</span><span class="txt"><b>ma sœur → my <span class=gap>……</span></b></span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="le mot anglais"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q38" data-k="inp" data-j='{&quot;id&quot;: &quot;q38&quot;, &quot;ans&quot;: [&quot;brother&quot;], &quot;full&quot;: &quot;my brother&quot;, &quot;a&quot;: &quot;../audio/2a0dd475669f.mp3?v=1&quot;, &quot;it&quot;: &quot;mon frère&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;mon frère = my brother&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 6}'><div class="qq"><span class="qn">4</span><span class="txt"><b>mon frère → my <span class=gap>……</span></b></span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="le mot anglais"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q39" data-k="inp" data-j='{&quot;id&quot;: &quot;q39&quot;, &quot;ans&quot;: [&quot;wife&quot;], &quot;full&quot;: &quot;my wife&quot;, &quot;a&quot;: &quot;../audio/dca98bfc862d.mp3?v=1&quot;, &quot;it&quot;: &quot;ma femme&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;ma femme = my wife&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 6}'><div class="qq"><span class="qn">5</span><span class="txt"><b>ma femme → my <span class=gap>……</span></b></span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="le mot anglais"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+<div class="item" id="q40" data-k="inp" data-j='{&quot;id&quot;: &quot;q40&quot;, &quot;ans&quot;: [&quot;dog&quot;], &quot;full&quot;: &quot;our dog&quot;, &quot;a&quot;: &quot;../audio/7cdbb10024b4.mp3?v=1&quot;, &quot;it&quot;: &quot;notre chien&quot;, &quot;rule&quot;: &quot;famille&quot;, &quot;why&quot;: &quot;notre chien = our dog&quot;, &quot;whyit&quot;: &quot;&quot;, &quot;ex&quot;: 6}'><div class="qq"><span class="qn">6</span><span class="txt"><b>notre chien → our <span class=gap>……</span></b></span></div><div class="row"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="le mot anglais"><button type="button" class="chk">Vérifier</button></div><div class="fb"></div></div>
+</div>
+<div class="exb" id="ex7" style="--c:#a0446a"><div class="exh" style="--c:#a0446a"><span class="exn">7</span><div><div class="exk">EXERCICE 7</div><div class="ext">Je répète et je parle</div><div style="font:italic .85rem Lora,serif;opacity:.9">Listen, repeat and speak</div></div></div>
+<div class="ex cons"><div class="fr"><button type="button" class="au fra" data-a="../audio/562a6fe16a27.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Écoutez, répétez à voix haute, puis touchez 🎤 et dites la phrase : la page vous montre ce qu'elle a compris. Recommencez autant de fois que vous voulez ; cet exercice ne compte pas dans le score.</span></div></div>
+<div class="spk" data-t="Hello! I&#x27;m Nicola. I have a big family."><button type="button" class="au " data-a="../audio/4d8c8fa2f723.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/101381fea067.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Hello! I'm Nicola. I have a big family.<span class="tr" style="font-size:.95rem">Bonjour ! Je suis Nicola. J'ai une grande famille.</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="My wife is Dominique."><button type="button" class="au " data-a="../audio/228546156ebe.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/27d2e0029893.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">My wife is Dominique.<span class="tr" style="font-size:.95rem">Ma femme, c'est Dominique.</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="I have four children: Emanuele, Irene, Sabine and Sergio."><button type="button" class="au " data-a="../audio/6612ac50e7d0.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/9394b4b95b99.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I have four children: Emanuele, Irene, Sabine and Sergio.<span class="tr" style="font-size:.95rem">J'ai quatre enfants : Emanuele, Irene, Sabine et Sergio.</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="Cristina is my daughter-in-law."><button type="button" class="au " data-a="../audio/8579d36c7e1a.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/06535ecd2760.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Cristina is my daughter-in-law.<span class="tr" style="font-size:.95rem">Cristina est ma belle-fille.</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="I have four grandchildren: Dominique, Tom, Lilio and Saveria."><button type="button" class="au " data-a="../audio/3dc85d682938.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/b90ce770f5f3.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I have four grandchildren: Dominique, Tom, Lilio and Saveria.<span class="tr" style="font-size:.95rem">J'ai quatre petits-enfants : Dominique, Tom, Lilio et Saveria.</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="And we have a dog, Jolie: our little granddaughter!"><button type="button" class="au " data-a="../audio/00604a7b160e.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/5a43ee0a10a3.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">And we have a dog, Jolie: our little granddaughter!<span class="tr" style="font-size:.95rem">Et nous avons une chienne, Jolie : notre petite-fille !</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="I have three sisters and one brother."><button type="button" class="au " data-a="../audio/516fb79414c4.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/76e7b7725b97.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">I have three sisters and one brother.<span class="tr" style="font-size:.95rem">J'ai trois sœurs et un frère.</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+<div class="spk" data-t="Giovanna is in Canada. Mimma, Sabina and Pietro are in Milan."><button type="button" class="au " data-a="../audio/a9a461c09cdc.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><button type="button" class="slow" data-a="../audio/93dee461acf9.mp3?v=1" aria-label="Lentement" title="Plus lentement">🐢</button><span class="txt">Giovanna is in Canada. Mimma, Sabina and Pietro are in Milan.<span class="tr" style="font-size:.95rem">Giovanna est au Canada. Mimma, Sabina et Pietro sont à Milan.</span></span><button type="button" class="mic">🎤 Je parle</button><div class="heard"></div></div>
+</div>
+<div class="exb" id="ex8" style="--c:#1f5f7a"><div class="exh" style="--c:#1f5f7a"><span class="exn">8</span><div><div class="exk">EXERCICE 8</div><div class="ext">Giovanna demande des nouvelles</div><div style="font:italic .85rem Lora,serif;opacity:.9">Giovanna asks about the family</div></div></div>
+<div class="ex cons"><div class="fr"><button type="button" class="au fra" data-a="../audio/fe8bfe5c9130.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Écoutez Giovanna, puis répondez-lui à voix haute : touchez 🎤 et parlez. Écoutez ensuite le modèle, répétez-le et dites si vous aviez bien répondu.</span></div></div>
+<div class="item" id="q41" data-k="ora" data-j='{&quot;id&quot;: &quot;q41&quot;, &quot;full&quot;: &quot;She&#x27;s fine, thank you.&quot;, &quot;a&quot;: &quot;../audio/a309eaf93257.mp3?v=1&quot;, &quot;it&quot;: &quot;Elle va bien, merci.&quot;, &quot;rule&quot;: &quot;presentation&quot;, &quot;why&quot;: &quot;Dites qu&#x27;elle va bien, merci.&quot;, &quot;ex&quot;: 8}'><div class="qq"><span class="qn">1</span><button type="button" class="au fra" data-a="../audio/efa2f3fc5540.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Dites qu'elle va bien, merci.</span></div><div class="gline"><button type="button" class="au " data-a="../audio/db3b679564a0.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><div><span class="who">Giovanna</span>Hello Nicola! How is Dominique?<div class="tr">Bonjour Nicola ! Comment va Dominique ?</div></div></div><div class="orow"><button type="button" class="mic omic">🎤 Je réponds</button><button type="button" class="omod">Voir le modèle</button></div><div class="heard"></div><div class="fb"></div></div>
+<div class="item" id="q42" data-k="ora" data-j='{&quot;id&quot;: &quot;q42&quot;, &quot;full&quot;: &quot;I have four grandchildren.&quot;, &quot;a&quot;: &quot;../audio/d2152b46cb9a.mp3?v=1&quot;, &quot;it&quot;: &quot;J&#x27;ai quatre petits-enfants.&quot;, &quot;rule&quot;: &quot;presentation&quot;, &quot;why&quot;: &quot;Dites que vous avez quatre petits-enfants.&quot;, &quot;ex&quot;: 8}'><div class="qq"><span class="qn">2</span><button type="button" class="au fra" data-a="../audio/14665e6b252e.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Dites que vous avez quatre petits-enfants.</span></div><div class="gline"><button type="button" class="au " data-a="../audio/60b5f0851901.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><div><span class="who">Giovanna</span>How many grandchildren do you have now?<div class="tr">Combien de petits-enfants as-tu maintenant ?</div></div></div><div class="orow"><button type="button" class="mic omic">🎤 Je réponds</button><button type="button" class="omod">Voir le modèle</button></div><div class="heard"></div><div class="fb"></div></div>
+<div class="item" id="q43" data-k="ora" data-j='{&quot;id&quot;: &quot;q43&quot;, &quot;full&quot;: &quot;Jolie is very well. She&#x27;s a sweet dog!&quot;, &quot;a&quot;: &quot;../audio/fd97709dbc28.mp3?v=1&quot;, &quot;it&quot;: &quot;Jolie va très bien. C&#x27;est une chienne adorable !&quot;, &quot;rule&quot;: &quot;presentation&quot;, &quot;why&quot;: &quot;Dites que Jolie va très bien et que c&#x27;est une chienne adorable : a sweet dog.&quot;, &quot;ex&quot;: 8}'><div class="qq"><span class="qn">3</span><button type="button" class="au fra" data-a="../audio/7e654cbf052d.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Dites que Jolie va très bien et que c'est une chienne adorable : a sweet dog.</span></div><div class="gline"><button type="button" class="au " data-a="../audio/54775fe9d2e4.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><div><span class="who">Giovanna</span>And how is Jolie?<div class="tr">Et comment va Jolie ?</div></div></div><div class="orow"><button type="button" class="mic omic">🎤 Je réponds</button><button type="button" class="omod">Voir le modèle</button></div><div class="heard"></div><div class="fb"></div></div>
+<div class="item" id="q44" data-k="ora" data-j='{&quot;id&quot;: &quot;q44&quot;, &quot;full&quot;: &quot;Thank you! My sisters and my brother are in Milan.&quot;, &quot;a&quot;: &quot;../audio/91350979d1c7.mp3?v=1&quot;, &quot;it&quot;: &quot;Merci ! Mes sœurs et mon frère sont à Milan.&quot;, &quot;rule&quot;: &quot;presentation&quot;, &quot;why&quot;: &quot;Dites merci, et que vos sœurs et votre frère sont à Milan.&quot;, &quot;ex&quot;: 8}'><div class="qq"><span class="qn">4</span><button type="button" class="au fra" data-a="../audio/5d136e2ee3ab.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Dites merci, et que vos sœurs et votre frère sont à Milan.</span></div><div class="gline"><button type="button" class="au " data-a="../audio/8a7d7cd8e369.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><div><span class="who">Giovanna</span>Say hello to Mimma, Sabina and Pietro!<div class="tr">Dis bonjour à Mimma, Sabina et Pietro !</div></div></div><div class="orow"><button type="button" class="mic omic">🎤 Je réponds</button><button type="button" class="omod">Voir le modèle</button></div><div class="heard"></div><div class="fb"></div></div>
+</div></section>
+<section class="sec" style="--c:#a0446a;--t:#f8edf2"><header class="sh" id="revoir" style="--c:#a0446a"><span class="num">7</span><div><h2>À revoir<span class="timing">2 min</span></h2><div class="shit"><span style="font:italic .9rem Lora,serif;opacity:.95">To review</span></div></div></header>
+<div id="scorebox" class="scorebox"></div>
+<div id="revlist" class="revlist"><p class="empty">Les points à revoir apparaîtront ici au fur et à mesure.</p></div>
+<div class="tipbox"><div class="h">📒 Pour demain</div><div class="ex "><div class="fr"><button type="button" class="au fra" data-a="../audio/f621e173cfa2.mp3?v=1" aria-label="Écouter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg></button><span class="txt">Présentez votre famille à voix haute, sans lire : <b>My wife is Dominique. I have four children and four grandchildren. We have a dog, Jolie!</b></span></div></div></div>
+<div class="row center"><button type="button" class="reset" id="reset">Recommencer les exercices</button> <a href="../" class="reset" style="text-decoration:none;display:inline-block">☰ Mon programme</a></div></section>
+</main>
+<div class="acc" id="acc"></div>
+<script>
+(function(){
+var RULES={"famille": "Les mots de la famille", "possessifs": "my, his, her…", "have": "Le verbe have", "presentation": "Je présente ma famille", "prononciation": "Prononciation"}, TOTAL=44, good=0, done=0, autoA=true;
+var player=null, cur=null;
+function stopAll(){try{if(player){player.pause();player.src='';}}catch(e){}if(cur)cur.classList.remove('playing');cur=null;}
+function play(src,btn){
+  var same=btn&&cur===btn&&player&&!player.paused;
+  stopAll(); if(same)return;
+  var a=new Audio(); a.preload='auto'; a.src=src; player=a; cur=btn||null;
+  if(btn)btn.classList.add('playing');
+  a.addEventListener('ended',function(){if(cur===btn&&btn)btn.classList.remove('playing');if(player===a)cur=null;});
+  a.addEventListener('error',function(){if(btn)btn.classList.remove('playing');});
+  try{var p=a.play();if(p&&p.catch)p.catch(function(){a.addEventListener('canplaythrough',function(){a.play();},{once:true});a.load();});}catch(e){}
+}
+function trOf(btn){
+  var p=btn.parentElement;
+  var t=p.querySelector(':scope > .tr'); if(t)return t;
+  if(p.nextElementSibling&&p.nextElementSibling.classList.contains('tr'))return p.nextElementSibling;
+  return p.parentElement.querySelector(':scope > .tr');
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.au'); if(b){play(b.dataset.a,b);return;}
+  var i=e.target.closest('.itb'); if(i){var t=trOf(i); if(t){t.classList.toggle('show');i.classList.toggle('on');}return;}
+  var m=e.target.closest('.model'); if(m){m.nextElementSibling.classList.toggle('show');return;}
+  var a=e.target.closest('a[href^="#"]'); if(a){var tg=document.getElementById(a.getAttribute('href').slice(1)); if(tg){tg.classList.remove('flash');void tg.offsetWidth;tg.classList.add('flash');}}
+});
+document.getElementById('allit').onclick=function(){document.body.classList.toggle('allit');this.classList.toggle('on');};
+document.getElementById('autoa').onclick=function(){autoA=!autoA;this.classList.toggle('on',autoA);};
+function norm(s){return (s||'').normalize('NFC').toLowerCase().replace(/[’ʼ`´]/g,"'").replace(/\s+/g,' ').replace(/^[\s.,!?;:]+|[\s.,!?;:]+$/g,'').trim();}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+var SPK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w1" d="M16 8.5a4.5 4.5 0 0 1 0 7"/><path class="w2" d="M18.5 6a8 8 0 0 1 0 12"/></svg>';
+function sentHTML(full,ans,it,a){
+  var t=esc(full); var an=esc(ans);
+  var k=t.indexOf(an); if(k>=0){t=t.slice(0,k)+'<b>'+an+'</b>'+t.slice(k+an.length);}
+  return '<div class="s"><div class="fr"><button type="button" class="au" data-a="'+a+'" aria-label="Écouter">'+SPK+'</button><span class="txt">'+t+'</span>'+(it?'<button type="button" class="itb">FR</button>':'')+'</div>'+(it?'<div class="tr">'+esc(it)+'</div>':'')+'</div>';
+}
+function stars(el,n){
+  var r=el.getBoundingClientRect(), cx=r.left+Math.min(r.width,260)/2, cy=r.top+r.height/2;
+  for(var i=0;i<(n||6);i++){var s=document.createElement('span');s.className='star';s.textContent='★';
+    s.style.left=cx+'px';s.style.top=cy+'px';var ang=Math.random()*Math.PI*2,d=40+Math.random()*50;
+    s.style.setProperty('--dx',Math.cos(ang)*d+'px');s.style.setProperty('--dy',Math.sin(ang)*d+'px');
+    s.style.animationDelay=(i*40)+'ms';document.body.appendChild(s);setTimeout(function(x){x.remove();}.bind(null,s),1300);}
+}
+function updScore(ok){
+  done++; if(ok)good++;
+  document.getElementById('sc').textContent=good;
+  var sc=document.getElementById('score'); sc.classList.add('bump'); setTimeout(function(){sc.classList.remove('bump');},250);
+  if(ok)stars(sc,5);
+  renderScore();
+}
+function renderScore(){
+  var box=document.getElementById('scorebox');
+  box.innerHTML='Bonnes réponses : <b>'+good+'</b> / '+TOTAL+'<div style="font-size:.85rem;opacity:.85;margin-top:2px">Questions faites : '+done+' / '+TOTAL+'</div>';
+}
+var revCount=0;
+function addRev(o){
+  var list=document.getElementById('revlist');
+  if(!revCount)list.innerHTML='';
+  revCount++;
+  var d=document.createElement('div');d.className='rv';
+  d.innerHTML='<div class="rvh">Exercice '+o.ex+'</div>'+sentHTML(o.full,o.ans,o.it,o.a)+
+   '<div class="rvy">Votre réponse : <s>'+esc(o.given||'—')+'</s> · Bonne réponse : <b style="color:var(--ok)">'+esc(o.ans)+'</b></div>'+
+   '<div class="rvl"><a href="#'+o.rule+'">Revoir la règle : '+esc(RULES[o.rule]||'')+'</a><a class="back" href="#'+o.id+'">Retour à la question</a></div>';
+  list.appendChild(d);
+}
+function feedback(item,d,ok,given){
+  var fb=item.querySelector('.fb');
+  fb.innerHTML='<div class="fbr '+(ok?'ok':'ko')+'"><div class="fbt">'+(ok?'✓ Correct':'✗ La bonne réponse : '+esc(d.ans[0]))+'</div>'+
+    sentHTML(d.full,d.ans[0],d.it,d.a)+
+    '<div class="why"><span class="txt">'+esc(d.why)+'</span></div></div>';
+  var g=item.querySelector('.gap'); if(g){g.textContent=ok?given:d.ans[0];g.classList.add(ok?'ok':'ko');}
+  if(ok)stars(item.querySelector('.qq'),7);
+  updScore(ok);
+  if(!ok)addRev({ex:d.ex,full:d.full,ans:d.ans[0],it:d.it,a:d.a,given:given,rule:d.rule,id:d.id});
+  if(autoA){var b=fb.querySelector('.au');setTimeout(function(){play(d.a,b);},ok?350:500);}
+}
+document.querySelectorAll('.item[data-k="qcm"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j);
+  item.querySelectorAll('.opt').forEach(function(o){
+    o.addEventListener('click',function(){
+      if(item.dataset.done)return; item.dataset.done=1;
+      var v=o.textContent, ok=d.ans.indexOf(v)>=0;
+      item.querySelectorAll('.opt').forEach(function(x){x.disabled=true;if(d.ans.indexOf(x.textContent)>=0)x.classList.add('ok');});
+      if(!ok)o.classList.add('ko');
+      feedback(item,d,ok,v);
+    });
+  });
+});
+document.querySelectorAll('.item[data-k="inp"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j), inp=item.querySelector('input'), btn=item.querySelector('.chk');
+  function check(){
+    if(item.dataset.done)return; var v=inp.value; if(!norm(v)){inp.focus();return;}
+    item.dataset.done=1; var ok=d.ans.map(norm).indexOf(norm(v))>=0;
+    inp.classList.add(ok?'ok':'ko'); inp.disabled=true; btn.disabled=true;
+    feedback(item,d,ok,v.trim());
+  }
+  btn.addEventListener('click',check);
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();check();}});
+});
+// texte à trous
+var chk5=document.getElementById('chk5');
+if(chk5)chk5.addEventListener('click',function(){
+  var story=document.querySelector('.story'), tgs=story.querySelectorAll('.tg');
+  var empty=[].some.call(tgs,function(t){return !norm(t.querySelector('input').value);});
+  if(empty&&!confirm('Certaines cases sont vides. Vérifier quand même ?'))return;
+  chk5.disabled=true; var nOk=0;
+  tgs.forEach(function(t){
+    var ans=JSON.parse(t.dataset.ans), inp=t.querySelector('input'), v=inp.value.trim(), ok=ans.map(norm).indexOf(norm(v))>=0;
+    inp.disabled=true; inp.classList.add(ok?'ok':'ko');
+    if(!ok){var c=document.createElement('span');c.className='cor';c.textContent=ans[0];t.insertBefore(c,t.querySelector('.tv'));
+      var full=story.dataset.full;
+      var sents=full.split(/(?<=[.;:])\s+/); var sen=sents.filter(function(x){return x.indexOf(ans[0])>=0;})[0]||full;
+      addRev({ex:5,full:sen,ans:ans[0],it:'',a:story.dataset.a,given:v,rule:t.dataset.rule,id:t.id});
+    } else nOk++;
+    updScore(ok);
+  });
+  if(nOk)stars(chk5,8);
+  var fb=document.getElementById('fb5');
+  fb.innerHTML='<div class="fbr '+(nOk===tgs.length?'ok':'ko')+'"><div class="fbt">'+nOk+' / '+tgs.length+' bonnes réponses</div>'+
+   '<div class="s"><div class="fr"><button type="button" class="au" data-a="'+story.dataset.a+'" aria-label="Écouter">'+SPK+'</button><span class="txt">Écoutez le texte corrigé.</span></div></div></div>';
+  document.querySelector('.storytr').classList.add('show');
+  if(autoA){var b=fb.querySelector('.au');setTimeout(function(){play(story.dataset.a,b);},500);}
+});
+document.getElementById('reset').addEventListener('click',function(){
+  if(!confirm('Effacer toutes les réponses et recommencer ?'))return;
+  location.hash='exercices'; location.reload();
+});
+// clavier d'accents
+var acc=document.getElementById('acc'), last=null;
+["'"].forEach(function(ch){var b=document.createElement('button');b.type='button';b.textContent=ch;
+  b.addEventListener('mousedown',function(e){e.preventDefault();});b.addEventListener('pointerdown',function(e){e.preventDefault();});
+  b.addEventListener('click',function(){if(!last||last.disabled)return;var s=last.selectionStart||last.value.length,en=last.selectionEnd||s;
+    last.value=last.value.slice(0,s)+ch+last.value.slice(en);last.focus();last.setSelectionRange(s+ch.length,s+ch.length);});
+  acc.appendChild(b);});
+document.addEventListener('focusin',function(e){if(e.target.matches('input[type=text],textarea')){last=e.target;acc.classList.add('show');}});
+document.addEventListener('focusout',function(e){setTimeout(function(){var a=document.activeElement;if(!a||(!a.matches('input[type=text],textarea')&&!acc.contains(a)))acc.classList.remove('show');},150);});
+
+document.querySelectorAll('.item[data-k="tra"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j), ta=item.querySelector('textarea'), cmp=item.querySelector('.cmp'), zone=item.querySelector('.fb');
+  cmp.addEventListener('click',function(){
+    if(item.dataset.shown)return;
+    if(!ta.value.trim()){ta.focus();return;}
+    item.dataset.shown=1;cmp.disabled=true;ta.readOnly=true;
+    zone.innerHTML='<div class="fbr"><div class="fbt" style="color:#2f7f73">Corrigé</div>'+sentHTML(d.full,'',d.it,d.a)+
+      '<div class="why"><span class="txt"><b>À vérifier :</b> '+esc(d.why)+'</span></div>'+
+      '<div class="selfq">Votre traduction était-elle juste ?</div><div class="selfb"><button type="button" class="sb ok">✓ Oui</button><button type="button" class="sb ko">✗ Pas tout à fait</button></div></div>';
+    if(autoA){var b=zone.querySelector('.au');setTimeout(function(){play(d.a,b);},300);}
+    zone.querySelectorAll('.sb').forEach(function(b){b.addEventListener('click',function(){
+      if(item.dataset.done)return;item.dataset.done=1;var ok=b.classList.contains('ok');
+      zone.querySelectorAll('.sb').forEach(function(x){x.disabled=true;});b.classList.add('chosen');
+      if(ok)stars(item.querySelector('.qq'),7);
+      updScore(ok);
+      if(!ok)addRev({ex:d.ex,full:d.full,ans:'',it:d.it,a:d.a,given:ta.value.trim(),rule:d.rule,id:d.id});
+    });});
+  });
+});
+document.querySelectorAll('.pistesb').forEach(function(b){b.addEventListener('click',function(){b.nextElementSibling.classList.toggle('show');});});
+
+document.addEventListener('click',function(e){var s=e.target.closest('.slow');if(s){e.stopPropagation();play(s.dataset.a,s);}},true);
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function simil(a,b){a=norm(a).replace(/[^a-z' ]/g,'').split(' ');b=norm(b).replace(/[^a-z' ]/g,'').split(' ');var hit=0;b.forEach(function(w){if(a.indexOf(w)>=0)hit++;});return Math.round(hit/b.length*100);}
+document.querySelectorAll('.spk').forEach(function(box){
+  var mic=box.querySelector('.mic'),out=box.querySelector('.heard'),target=box.dataset.t;
+  if(!SR){mic.style.display='none';out.innerHTML='<span class="nomic">Écoutez, répétez à voix haute deux ou trois fois, puis passez à la phrase suivante.</span>';return;}
+  mic.addEventListener('click',function(){
+    var r=new SR();r.lang='en-GB';r.interimResults=false;r.maxAlternatives=3;mic.classList.add('rec');out.textContent='… je vous écoute';
+    r.onresult=function(ev){var best=0,txt='';for(var i=0;i<ev.results[0].length;i++){var c=ev.results[0][i].transcript,sc=simil(c,target);if(sc>=best){best=sc;txt=c;}}
+      out.innerHTML='Compris : « '+esc(txt)+' » · <b class="'+(best>=80?'gd':'md')+'">'+best+' %</b>'+(best>=80?' ✓':' · réessayez');
+      if(best>=80)stars(box,6);};
+    r.onerror=function(){out.textContent='Micro non disponible : répétez simplement à voix haute.';};
+    r.onend=function(){mic.classList.remove('rec');};
+    try{r.start();}catch(e){mic.classList.remove('rec');}
+  });
+});
+
+document.querySelectorAll('.item[data-k="ora"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j), mic=item.querySelector('.omic'), mod=item.querySelector('.omod'), out=item.querySelector('.heard'), zone=item.querySelector('.fb');
+  if(!SR){mic.style.display='none';out.innerHTML='<span class="nomic">Dites votre réponse à voix haute, puis touchez « Voir le modèle ».</span>';}
+  else mic.addEventListener('click',function(){
+    var r=new SR();r.lang='en-GB';r.maxAlternatives=3;mic.classList.add('rec');out.textContent='… je vous écoute';
+    r.onresult=function(ev){var best=0,txt='';for(var i=0;i<ev.results[0].length;i++){var c=ev.results[0][i].transcript,sc=simil(c,d.full);if(sc>=best){best=sc;txt=c;}}
+      out.innerHTML='Compris : « '+esc(txt)+' » · ressemblance avec le modèle : <b class="'+(best>=70?'gd':'md')+'">'+best+' %</b>';if(best>=70)stars(item,6);showModel();};
+    r.onerror=function(){out.textContent='Micro non disponible : dites votre réponse à voix haute.';};
+    r.onend=function(){mic.classList.remove('rec');};
+    try{r.start();}catch(e){mic.classList.remove('rec');}
+  });
+  function showModel(){
+    if(item.dataset.shown)return;item.dataset.shown=1;mod.disabled=true;
+    zone.innerHTML='<div class="fbr"><div class="fbt" style="color:#2f7f73">Modèle</div>'+sentHTML(d.full,'',d.it,d.a)+
+      '<div class="why"><span class="txt"><b>À retenir :</b> '+esc(d.why)+'</span></div>'+
+      '<div class="selfq">Votre réponse était-elle juste ?</div><div class="selfb"><button type="button" class="sb ok">✓ Oui</button><button type="button" class="sb ko">✗ Pas tout à fait</button></div></div>';
+    if(autoA){var b=zone.querySelector('.au');setTimeout(function(){play(d.a,b);},300);}
+    zone.querySelectorAll('.sb').forEach(function(b){b.addEventListener('click',function(){
+      if(item.dataset.done)return;item.dataset.done=1;var ok=b.classList.contains('ok');
+      zone.querySelectorAll('.sb').forEach(function(x){x.disabled=true;});b.classList.add('chosen');
+      if(ok)stars(item.querySelector('.qq'),7);updScore(ok);
+      if(!ok)addRev({ex:d.ex,full:d.full,ans:'',it:d.it,a:d.a,given:'',rule:d.rule,id:d.id});});});
+  }
+  mod.addEventListener('click',showModel);
+});
+
+document.querySelectorAll('.item[data-k="ord"]').forEach(function(item){
+  var d=JSON.parse(item.dataset.j), line=item.querySelector('.oline'), pool=item.querySelector('.opool');
+  item.addEventListener('click',function(e){var t=e.target.closest('.otile');if(!t||item.dataset.done)return;
+    if(t.parentElement===pool)line.appendChild(t);else pool.appendChild(t);
+    if(!pool.children.length){item.dataset.done=1;var got=[].map.call(line.children,function(x){return x.textContent;}).join(' ');var ok=got===d.ans[0];
+      line.classList.add(ok?'ok':'ko');feedback(item,d,ok,got);}});
+});
+
+/* ===== effets ===== */
+var cv=document.getElementById('fx'),cx=cv.getContext('2d'),P=[],CW,CH,raf=null;
+function rs(){var r=window.devicePixelRatio||1;CW=innerWidth;CH=innerHeight;cv.width=CW*r;cv.height=CH*r;cx.setTransform(r,0,0,r,0,0);}rs();addEventListener('resize',rs);
+var COLS=['#1f5f7a','#2f7f73','#c08a2a','#e0a630','#c0392b','#a0446a','#6d4a7d','#3a8dde'];
+function starP(c,s){c.beginPath();for(var i=0;i<10;i++){var r=i%2?s*.42:s,a=Math.PI/5*i-Math.PI/2;c.lineTo(Math.cos(a)*r,Math.sin(a)*r);}c.closePath();c.fill();}
+function noteP(c,s){c.font=(s*2.2)+'px serif';c.fillText(Math.random()<.5?'♪':'♫',-s*.6,s*.6);}
+function addP(p){P.push(p);if(!raf)raf=requestAnimationFrame(loopP);}
+function burst(x,y,n,spd){for(var i=0;i<n;i++){var a=Math.random()*Math.PI*2,v=(2.5+Math.random()*6)*(spd||1);
+ addP({x:x,y:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-2.5,k:['conf','star','note','conf'][i%4],c:COLS[i%COLS.length],s:5+Math.random()*7,r:Math.random()*6,vr:(Math.random()-.5)*.3,l:1,d:.014+Math.random()*.01});}}
+function rain(n){for(var i=0;i<n;i++)addP({x:Math.random()*CW,y:-20-Math.random()*CH*.5,vx:(Math.random()-.5)*1.4,vy:2+Math.random()*2.5,k:['conf','star','note'][i%3],c:COLS[i%COLS.length],s:6+Math.random()*8,r:Math.random()*6,vr:(Math.random()-.5)*.2,l:1,d:.005,g:.02});}
+function loopP(){cx.clearRect(0,0,CW,CH);for(var i=P.length-1;i>=0;i--){var p=P[i];p.vy+=(p.g||.16);p.vx*=.985;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l-=p.d;
+ if(p.l<=0||p.y>CH+30){P.splice(i,1);continue;}cx.save();cx.globalAlpha=Math.min(1,p.l*1.5);cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;
+ if(p.k==='star')starP(cx,p.s*.75);else if(p.k==='note')noteP(cx,p.s);else cx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);cx.restore();}
+ raf=P.length?requestAnimationFrame(loopP):null;}
+var _stars=stars;stars=function(el,n){_stars(el,n);try{var r=el.getBoundingClientRect();burst(r.left+Math.min(r.width,300)/2,r.top+Math.min(r.height,80)/2,26);}catch(e){}};
+function toast(t){var e=document.getElementById('toast');e.innerHTML=t;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(function(){e.classList.remove('show');},1800);}
+var streak=0,_upd=updScore;
+updScore=function(ok){_upd(ok);streak=ok?streak+1:0;
+ if(streak===3)toast('3 de suite ! 🎵');else if(streak===5){toast('5 de suite, bravo ! 🎶');rain(60);}else if(streak>5&&streak%5===0){toast(streak+' de suite ! 🌟');rain(80);}
+ document.getElementById('progbar').style.width=(done/TOTAL*100)+'%';
+ document.querySelectorAll('.exb').forEach(function(b){if(b.dataset.fin)return;var its=b.querySelectorAll('.item');if(!its.length)return;
+  var all=[].every.call(its,function(x){return x.dataset.done;});if(!all)return;b.dataset.fin=1;
+  var g=[].filter.call(its,function(x){return x.querySelector('.fbr.ok,.oline.ok,.sb.ok.chosen,input.ok');}).length;
+  var d=document.createElement('div');d.className='exdone';d.innerHTML='<span>'+(g>=its.length*.8?'🏆':g>=its.length*.5?'🎵':'💪')+'</span>Exercice terminé : '+g+' / '+its.length;b.appendChild(d);
+  setTimeout(function(){rain(g>=its.length*.8?110:60);var r=d.getBoundingClientRect();burst(r.left+r.width/2,r.top,50,1.2);},200);});
+ if(done===TOTAL)setTimeout(function(){toast('Leçon terminée ! 🎉');rain(160);},1500);
+};
+(function(){var h=document.querySelector('.hero');if(!h)return;var n=document.createElement('div');n.className='notes';var s=['♪','♫','♬','♩'];
+ for(var i=0;i<14;i++){var e=document.createElement('i');e.textContent=s[i%4];e.style.left=Math.random()*100+'%';e.style.fontSize=(16+Math.random()*20)+'px';e.style.animationDuration=(6+Math.random()*6)+'s';e.style.animationDelay=(-Math.random()*9)+'s';n.appendChild(e);}
+ h.appendChild(n);var rb=document.createElement('div');rb.className='rainbow';h.parentNode.insertBefore(rb,h.nextSibling);})();
+renderScore();
+})();
+</script>
+</body>
+</html>
