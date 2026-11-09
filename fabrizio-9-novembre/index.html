@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vocabulaire, expressions et grammaire · Fabrizio</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>:root{
+ --ink:#1d2433; --muted:#6a7186; --bg:#f5f7f4;
+ --green:#2f9e44; --green-l:#ebfbee; --blue:#1c7ed6; --blue-l:#e7f5ff; --violet:#7048e8; --violet-l:#f3f0ff;
+ --orange:#f76707; --orange-l:#fff4e6; --pink:#d6336c; --pink-l:#fff0f6; --teal:#0c8599; --teal-l:#e3fafc;
+ --sun:#fab005; --sun-l:#fff9db; --ok:#2b8a3e; --ok-l:#ebfbee; --ko:#e03131; --ko-l:#fff5f5;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:17px;line-height:1.5}
+main{max-width:920px;margin:0 auto;padding:64px 14px 80px}
+h1,h2,h3,.cardt,.exkind,.secnum,.exn,.qn,.boxt,.cgt,.wpt,#timer .big,#score{font-family:Fredoka,Nunito,sans-serif}
+b{font-weight:800}
+u{text-decoration-color:var(--pink);text-decoration-thickness:3px;text-underline-offset:3px}
+s{color:var(--ko)}
+.k{color:var(--pink);font-weight:800}
+
+/* barre du haut */
+#topbar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:8px 10px;pointer-events:none}
+#topbar>*{pointer-events:auto}
+#timer{background:#fff;border-radius:16px;padding:6px 12px;box-shadow:0 4px 16px rgba(29,36,51,.18);border:2px solid var(--blue);display:flex;align-items:center;gap:10px;max-width:68vw;transition:border-color .3s}
+#timer .big{font-size:22px;font-weight:600;color:var(--blue);min-width:62px}
+#timer .stepinfo{font-size:13px;line-height:1.25;color:var(--muted);font-weight:700}
+#timer .stepinfo b{color:var(--ink)}
+#timer button{border:0;border-radius:999px;background:var(--blue-l);color:var(--blue);font:800 13px Nunito;padding:4px 10px;cursor:pointer}
+#timer .nextbtn{display:none;background:var(--orange);color:#fff}
+#timer.late{border-color:var(--orange)}
+#timer.late .nextbtn{display:inline-block}
+#timer.paused .big{color:var(--muted)}
+#timer.over{border-color:var(--ko)}
+#timer.over .big{color:var(--ko)}
+#right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+#score{white-space:nowrap;background:#fff;border-radius:999px;padding:5px 14px;box-shadow:0 4px 14px rgba(29,36,51,.18);font-size:18px;border:2px solid var(--sun)}
+#score .st0{color:var(--sun)}
+#score.bump{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.25)}}
+#deall{border:0;border-radius:999px;padding:4px 12px;font:800 13px Nunito;background:var(--ink);color:#fff;cursor:pointer;opacity:.85}
+body.de-all #deall{background:var(--sun);color:var(--ink)}
+
+/* étoiles */
+.star{position:fixed;z-index:80;pointer-events:none;font-size:22px;animation:fly 1s ease-out forwards}
+@keyframes fly{0%{transform:translate(0,0) scale(.4);opacity:1}70%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.3) rotate(160deg);opacity:0}}
+
+/* lignes FR + DE */
+.line{margin:6px 0}
+.line .fr{display:flex;align-items:flex-start;gap:8px}
+.line .txt{flex:1}
+.btns{display:inline-flex;gap:5px;flex-shrink:0;margin-top:1px}
+.pb,.deb{border:0;cursor:pointer;border-radius:999px;font:800 12px Nunito;height:26px;min-width:26px;padding:0 7px;line-height:26px}
+.pb{background:var(--green);color:#fff;font-size:11px}
+.pb.sm{height:22px;min-width:22px;line-height:22px;font-size:10px}
+.pb.playing{box-shadow:0 0 0 3px rgba(250,176,5,.6)}
+.deb{background:#eceef3;color:#5b6278;letter-spacing:.5px}
+.line.open>.fr .deb,body.de-all .deb{background:var(--ink);color:#fff}
+.det{display:none;color:#5b6278;font-style:italic;font-size:.9em;margin:3px 0 0 2px;padding-left:10px;border-left:3px solid #d9dce6}
+.line.open>.det,body.de-all .det{display:block}
+.line.ex{background:#f8faf8;border-radius:10px;padding:6px 10px;border:1px solid #e4e9e4}
+.line.ex .txt{font-weight:800}
+.de2{font-family:Nunito;font-style:italic;color:var(--muted);font-weight:400;font-size:.8em}
+
+/* hero */
+.hero{position:relative;border-radius:22px;overflow:hidden;height:300px;box-shadow:0 10px 30px rgba(29,36,51,.18)}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.herotext{position:absolute;left:16px;bottom:16px;right:16px;display:flex;flex-direction:column;align-items:flex-start}
+.tag{display:inline-block;background:var(--sun);color:var(--ink);font:700 12px Fredoka;letter-spacing:2px;padding:5px 12px;border-radius:999px;margin-bottom:8px}
+.hero h1{margin:0;display:inline-block;background:rgba(255,255,255,.94);padding:10px 16px;border-radius:16px;font-size:30px;line-height:1.15}
+.hero h1 span{display:block;color:var(--green);font-size:.62em}
+.intro{background:#fff;border-radius:18px;padding:14px 18px;margin:14px 0 10px;border:2px solid var(--green-l)}
+.intro h2{margin:0 0 4px;color:var(--green);font-size:24px}
+.how{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin:8px 0}
+.how div{background:#f8faf8;border-radius:12px;padding:6px 10px}
+.plan8{list-style:none;padding:0;margin:10px 0;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.plan8 a{display:flex;justify-content:space-between;gap:8px;text-decoration:none;background:var(--blue-l);color:var(--ink);font-weight:800;border-radius:12px;padding:7px 12px}
+.plan8 a span{color:var(--blue);white-space:nowrap}
+.plan8 a.rev{background:var(--sun-l)}
+.startbox{text-align:center;margin:14px 0 4px}
+.start{border:0;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--teal));color:#fff;font:600 22px Fredoka;padding:12px 28px;cursor:pointer;box-shadow:0 6px 18px rgba(47,158,68,.35)}
+.start:hover{transform:translateY(-1px)}
+.resume{display:none;margin-top:8px;border:0;background:none;color:var(--blue);font:800 15px Nunito;cursor:pointer;text-decoration:underline}
+body.started .startbox .start{display:none}
+body.started .startbox::after{content:"⏱ C'est parti ! Le chronomètre tourne en haut à gauche.";font:600 18px Fredoka;color:var(--green)}
+
+/* sections */
+.step{scroll-margin-top:60px}
+.sechead{position:relative;border-radius:20px;overflow:hidden;height:200px;margin:40px 0 14px;box-shadow:0 8px 24px rgba(29,36,51,.15)}
+.sechead img{width:100%;height:100%;object-fit:cover;display:block}
+.seclabel{position:absolute;left:14px;bottom:14px;right:14px;display:flex;align-items:center;gap:10px}
+.seclabel>div{background:rgba(255,255,255,.95);border-radius:14px;padding:2px 14px;max-width:100%}
+.secnum{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:22px;box-shadow:0 3px 10px rgba(0,0,0,.25)}
+.h2line .txt{font-family:Fredoka;font-size:23px;font-weight:600}
+.secmin{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.95);border-radius:999px;padding:3px 12px;font:600 15px Fredoka;color:var(--blue)}
+
+/* règles */
+.rule{background:#fff;border-radius:18px;margin:16px 0;overflow:hidden;border:2px solid;scroll-margin-top:80px}
+.rulehead{padding:6px 16px;color:#fff}
+.rulehead .txt{font-family:Fredoka;font-size:20px;font-weight:600}
+.rulehead .deb{background:rgba(255,255,255,.25);color:#fff}
+.rulehead .det{color:#fff;border-color:rgba(255,255,255,.5)}
+.rulebody{padding:8px 16px 14px}
+.c-green{border-color:var(--green)}.c-green .rulehead{background:linear-gradient(90deg,#2f9e44,#66a80f)}
+.c-teal{border-color:var(--teal)}.c-teal .rulehead{background:linear-gradient(90deg,#0c8599,#1c7ed6)}
+.c-blue{border-color:var(--blue)}.c-blue .rulehead{background:linear-gradient(90deg,#1c7ed6,#7048e8)}
+.c-violet{border-color:var(--violet)}.c-violet .rulehead{background:linear-gradient(90deg,#7048e8,#d6336c)}
+.c-orange{border-color:var(--orange)}.c-orange .rulehead{background:linear-gradient(90deg,#f76707,#fab005)}
+.c-pink{border-color:var(--pink)}.c-pink .rulehead{background:linear-gradient(90deg,#d6336c,#f76707)}
+.flashed{animation:flashr 2.2s}
+@keyframes flashr{0%,60%{box-shadow:0 0 0 6px rgba(250,176,5,.85)}100%{box-shadow:0 0 0 0 rgba(250,176,5,0)}}
+.inbox{background:var(--blue-l);border-left:5px solid var(--blue);border-radius:12px;padding:8px 12px;margin:10px 0}
+.inbox.yellow{background:var(--sun-l);border-color:var(--sun)}
+.inbox.pinkbox{background:var(--pink-l);border-color:var(--pink)}
+.boxt{font-weight:600;font-size:16px;margin-bottom:2px}
+.formula{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0}
+.formula span{border:2px solid var(--green);color:var(--green);border-radius:999px;padding:3px 12px;font-weight:800;background:#fff}
+.formula span.f{background:var(--green);color:#fff}
+.formula span.op{border:0;padding:0;color:var(--muted);font-size:20px;background:none}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pair{background:var(--green-l);border-radius:12px;padding:5px 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.pair .vs{color:var(--muted);margin:0 4px}
+.acc .line{margin:4px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.card{border-radius:14px;padding:8px 12px;border:2px solid}
+.card.k1{border-color:#b2f2bb;background:var(--green-l)}.card.k2{border-color:#a5d8ff;background:var(--blue-l)}.card.k3{border-color:#fcc2d7;background:var(--pink-l)}
+.cardt{font-size:18px;font-weight:600;margin-bottom:2px}
+.k1 .cardt{color:var(--ok)}.k2 .cardt{color:var(--blue)}.k3 .cardt{color:var(--pink)}
+.three.slim .card{padding:4px 10px}
+.irr{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}
+.ir{background:var(--teal-l);border-radius:12px;padding:5px 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.ir .inf{color:var(--teal);font-weight:800;font-size:.9em}
+.rules4{margin:4px 0;padding-left:22px}
+.rules4 li::marker{font:600 18px Fredoka;color:var(--violet)}
+.mots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mot{background:var(--orange-l);border-radius:12px;padding:6px 10px}
+.mot>b{color:var(--orange);font-size:1.1em}
+.meth{margin:4px 0;padding-left:22px}
+.meth li::marker{font:600 18px Fredoka;color:var(--green)}
+
+/* exercices */
+.exercise{background:#fff;border-radius:20px;margin:22px 0;overflow:hidden;box-shadow:0 6px 20px rgba(29,36,51,.08);padding-bottom:6px;scroll-margin-top:70px}
+.exhead{display:flex;gap:12px;align-items:center;padding:10px 16px;color:#fff}
+.exn{font-size:36px;font-weight:700;line-height:1}
+.exh{flex:1}
+.exkind{font-size:13px;letter-spacing:2px;opacity:.9}
+.consigne{margin:2px 0}.consigne .txt{font-weight:800;font-size:17px}
+.exhead .deb{background:rgba(255,255,255,.25);color:#fff}
+.exhead .det{color:#fff;border-color:rgba(255,255,255,.5)}
+.g-a{background:linear-gradient(90deg,#2f9e44,#0c8599)}.g-b{background:linear-gradient(90deg,#d6336c,#f76707)}
+.g-c{background:linear-gradient(90deg,#1c7ed6,#0c8599)}.g-d{background:linear-gradient(90deg,#7048e8,#1c7ed6)}
+.g-e{background:linear-gradient(90deg,#f76707,#fab005)}.g-f{background:linear-gradient(90deg,#0c8599,#2f9e44)}
+.g-g{background:linear-gradient(90deg,#d6336c,#7048e8)}.g-h{background:linear-gradient(90deg,#1d2433,#1c7ed6)}
+.g-i{background:linear-gradient(90deg,#66a80f,#0c8599)}
+.exphoto{height:160px;overflow:hidden}.exphoto img{width:100%;height:100%;object-fit:cover;display:block}
+.item{border-bottom:1px solid #eef0f4;padding:10px 16px;position:relative}
+.item:last-child{border-bottom:0}
+.qrow{display:flex;gap:10px;align-items:flex-start}
+.qn{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#eef0f4;color:var(--muted);display:grid;place-items:center;font-size:15px;margin-top:4px}
+.qtxt{flex:1;min-width:0}
+.qtxt .line{margin:2px 0}
+.blank{display:inline-block;min-width:60px;border-bottom:3px solid var(--blue);color:transparent;line-height:1}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0 38px}
+.opts.col{flex-direction:column;align-items:flex-start}
+.opt{border:2px solid #dde1ea;background:#fff;border-radius:12px;padding:6px 14px;font:800 16px Nunito;color:var(--ink);cursor:pointer;transition:.15s;text-align:left}
+.opt:hover{border-color:var(--blue)}
+.opt.good{background:var(--ok-l);border-color:var(--ok);color:var(--ok)}
+.opt.bad{background:var(--ko-l);border-color:var(--ko);color:var(--ko);text-decoration:line-through}
+.done .opt{cursor:default}
+.after{display:none;margin:8px 0 0 38px}
+.done .after{display:block}
+.sol{background:var(--ok-l);border-radius:10px;padding:6px 10px;margin:4px 0}
+.sol .txt{font-weight:800;color:var(--ok)}
+.item.wrong .sol{background:#fff4e6}.item.wrong .sol .ic{display:none}.item.wrong .sol::before{content:'La bonne réponse : ';font-weight:700;color:#a14d00}.item.wrong .sol .txt{color:#a14d00}
+input.w{font:800 17px Nunito;border:0;border-bottom:3px solid var(--blue);background:#f1f6ff;border-radius:8px 8px 0 0;padding:4px 8px;color:var(--ink);outline:none;max-width:100%}
+input.w.short{width:120px}input.w.mid{width:180px}input.w.long3{width:240px}
+input.w:focus{background:#e5efff}
+.check,.undo{border:0;border-radius:12px;background:var(--blue);color:#fff;font:800 14px Nunito;padding:8px 14px;cursor:pointer;flex-shrink:0;align-self:flex-start;margin-top:2px}
+.undo{background:#eef0f4;color:var(--muted);margin-top:6px}
+.col-btn{display:flex;flex-direction:column}
+.done .check,.done .undo{display:none}
+.done input.w{pointer-events:none}
+.item.right input.w{border-color:var(--ok);background:var(--ok-l)}
+.item.wrong input.w{border-color:var(--ko);background:var(--ko-l)}
+.msg{margin:6px 0 0 38px;font-weight:800;font-size:.95em}
+.msg .det{display:block}
+.item.right .msg{color:var(--ok)}.item.wrong .msg{color:var(--ko)}
+.built{min-height:44px;border:2px dashed #c7cdda;border-radius:12px;padding:6px;display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.pool{display:flex;flex-wrap:wrap;gap:6px}
+.tile{border:0;border-radius:10px;background:var(--green-l);color:#1d6b2d;font:800 16px Nunito;padding:6px 12px;cursor:pointer;box-shadow:0 2px 0 #b2f2bb}
+.built .tile{background:var(--blue-l);color:var(--blue);box-shadow:0 2px 0 #a5d8ff}
+
+/* lecture */
+.readwrap{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;align-items:start}
+.mail{background:#fff;border-radius:18px;padding:12px 18px;border:2px solid #d3f9d8;font-size:17.5px;line-height:1.6}
+.mail p{margin:8px 0}
+.mailh{font-size:14px;color:var(--muted);border-bottom:1px solid #eef0f4;padding-bottom:6px}
+.side img{width:100%;border-radius:14px;display:block;height:150px;object-fit:cover}
+.side .cap{font-size:13px;color:var(--muted);font-style:italic;text-align:center;margin:3px 0 8px}
+.gloss{background:var(--sun-l);border-radius:14px;padding:8px 12px;font-size:15px}
+.listen{margin-top:8px;font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center}
+
+/* production */
+.sujet{background:linear-gradient(135deg,#fff0f6,#fff4e6);border:2px solid var(--pink);border-radius:18px;padding:10px 16px;margin:16px 0}
+.sujet .txt{font-weight:800;font-size:18px}
+.chipsbox{padding:10px 16px 0}
+.cgroup{margin:6px 0 12px}
+.cgt{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.cmax{font:800 12px Nunito;background:#eef0f4;color:var(--muted);border-radius:999px;padding:1px 8px;margin-left:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:2px solid #dde1ea;background:#fff;border-radius:999px;padding:5px 12px;font:700 15px Nunito;color:var(--ink);cursor:pointer}
+.chip.on{background:var(--violet);border-color:var(--violet);color:#fff}
+.cgroup[data-part=milieu] .chip.on{background:var(--green);border-color:var(--green)}
+.cgroup[data-part=fin] .chip.on{background:var(--pink);border-color:var(--pink)}
+.plan{margin:6px 16px 12px;background:#f8f9fc;border-radius:16px;padding:10px 12px}
+.plancols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pc{border-radius:12px;padding:6px 10px;border-top:5px solid;background:#fff;min-height:70px}
+.pc1{border-color:var(--violet)}.pc2{border-color:var(--green)}.pc3{border-color:var(--pink)}
+.pc ul{margin:4px 0 0;padding-left:18px;font-size:15px}
+.wgrid{display:grid;grid-template-columns:1.55fr 1fr;gap:4px;align-items:start}
+.wgrid .side2{position:sticky;top:70px;margin:10px 16px 12px 0}
+.writing{padding:10px 16px}
+.conns{display:flex;flex-wrap:wrap;gap:6px;align-items:center;position:sticky;top:62px;background:#fff;z-index:5;padding:6px 0}
+.cl{font-weight:800;color:var(--muted);font-size:14px}
+.cn{border:0;border-radius:999px;background:var(--sun-l);color:#8a5a00;font:800 14px Nunito;padding:4px 10px;cursor:pointer;box-shadow:0 2px 0 #ffe066}
+.wpart{border-left:6px solid;border-radius:12px;padding:6px 10px;margin:10px 0;background:#fcfcfd}
+.wpart.pc1{border-color:var(--violet)}.wpart.pc2{border-color:var(--green)}.wpart.pc3{border-color:var(--pink)}
+.wpt{font-size:18px;font-weight:600}
+.help{font-size:14px;color:var(--muted);margin:2px 0 6px}
+.wta{width:100%;border:2px solid #dde1ea;border-radius:12px;padding:8px 10px;font:600 17px/1.6 Nunito;color:var(--ink);resize:vertical;outline:none}
+.wta:focus{border-color:var(--blue)}
+.side2{margin:0 16px 12px;background:#f8f9fc;border-radius:16px;padding:10px 12px}
+.crit{list-style:none;margin:6px 0;padding:0}
+.crit li{display:flex;gap:8px;align-items:flex-start}
+.crit .tick{font-size:18px;color:#c7cdda;margin-top:5px;width:18px}
+.crit li.ok .tick{color:var(--ok)}
+.crit li.ok .txt{color:var(--ok)}
+.warns .w1{background:var(--orange-l);border-left:5px solid var(--orange);border-radius:10px;padding:6px 10px;margin:6px 0;font-weight:700}
+.count{font-size:14px;color:var(--muted);font-weight:700;margin-top:6px}
+.model{margin:10px 16px}.model summary{cursor:pointer;color:var(--blue);font:800 17px Nunito}
+.legend{margin:8px 0;font-size:14px}.legend span{margin-right:8px}
+.mpar{display:flex;gap:8px;align-items:flex-start;background:#fbfbfd;border-radius:12px;padding:4px 10px;margin:6px 0}
+.mlab{font:600 13px Fredoka;color:#fff;background:var(--muted);border-radius:8px;padding:2px 8px;margin-top:8px}
+.mpar .line{flex:1}
+.cn2{background:#ffec99;border-radius:5px;padding:0 3px;font-weight:800}
+.pcv{color:var(--ok);font-weight:800}.impv{color:var(--blue);font-weight:800}.futv{color:var(--violet);font-weight:800}
+.sendbox{margin:8px 16px 12px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.sendbox .line{flex-basis:100%}
+.copy{border:0;border-radius:999px;background:var(--pink);color:#fff;font:800 16px Nunito;padding:8px 18px;cursor:pointer}
+.copied{color:var(--ok);font-weight:800}
+
+/* bilan */
+.revbody{background:#fff;border-radius:18px;padding:12px 16px;border:2px solid var(--sun)}
+.revsum{font:600 20px Fredoka;color:var(--blue);margin:8px 0}
+.tablewrap{overflow-x:auto}
+.revt{width:100%;border-collapse:collapse;min-width:540px}
+.revt th{text-align:left;font-size:13px;color:var(--muted);padding:6px;border-bottom:2px solid #eef0f4}
+.revt td{padding:8px 6px;border-bottom:1px solid #eef0f4;vertical-align:top}
+.revt .good{color:var(--ok);font-weight:800}
+.revt .yours{color:var(--ko);text-decoration:line-through}
+.revlink{color:var(--blue);font-weight:800;text-decoration:none}
+.revempty{color:var(--muted);font-style:italic}
+.selfc{list-style:none;padding:0;margin:8px 0}
+.selfc li{margin:4px 0}
+.selfc label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;background:#f8faf8;border-radius:12px;padding:6px 10px}
+.selfc input{width:20px;height:20px;margin-top:3px;accent-color:var(--green)}
+
+/* fin du temps */
+#overlay{display:none;position:fixed;inset:0;background:rgba(29,36,51,.55);z-index:90;align-items:center;justify-content:center;padding:20px}
+#overlay.show{display:flex}
+#overlay .ov{background:#fff;border-radius:22px;padding:20px 24px;max-width:440px;text-align:center}
+#overlay h3{margin:0 0 6px;color:var(--blue);font-size:26px}
+#overlay button{border:0;border-radius:999px;padding:9px 18px;font:800 16px Nunito;cursor:pointer;margin:6px 4px 0}
+#overlay .go{background:var(--sun);color:var(--ink)}
+#overlay .stay{background:#eef0f4;color:var(--muted)}
+
+@media (max-width:640px){
+ body{font-size:16px}
+ main{padding-top:64px}
+ .wgrid{grid-template-columns:1fr}.wgrid .side2{position:static;margin:0 16px 12px}
+ .two,.three,.pairs,.mots,.irr,.how,.plan8,.plancols,.readwrap{grid-template-columns:1fr}
+ .irr{grid-template-columns:1fr 1fr}
+ .hero{height:230px}.hero h1{font-size:23px}
+ .sechead{height:160px}
+ .h2line .txt{font-size:19px}
+ .opts{margin-left:0}
+ .after,.msg{margin-left:0}
+ #timer{flex-wrap:wrap;gap:4px 8px;padding:5px 10px}
+ #timer .big{font-size:19px}
+ .conns{top:96px}
+}
+
+.oral{background:linear-gradient(135deg,#fff9db,#fff0f6);border:2px solid var(--sun);border-radius:20px;padding:12px 16px;margin:18px 0}
+.oralh{font:600 21px Fredoka;color:#b07d00;margin-bottom:2px}
+.oq{display:flex;gap:10px;background:#fff;border-radius:14px;padding:8px 12px;margin:10px 0;border:1px solid #f3e3a1}
+.oqn{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--sun);color:#fff;display:grid;place-items:center;font:600 16px Fredoka;margin-top:4px}
+.oqb{flex:1;min-width:0}.oqb>.line .txt{font-weight:800}
+.starters{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0}
+.stl{font-size:13px;color:var(--muted);font-weight:700}
+.st{border:2px solid #ffe066;background:#fffdf0;color:#5c4400;border-radius:999px;padding:3px 11px;font:700 14.5px Nunito;cursor:pointer}
+.st::before{content:"▶ ";font-size:10px;color:var(--green)}
+.modelans summary{cursor:pointer;color:var(--pink);font-weight:800;font-size:14px;margin-top:4px}
+.phrases{columns:2;column-gap:14px}.phrases .line{break-inside:avoid}
+@media (max-width:640px){.phrases{columns:1}}
+
+/* ======== Fabrizio : thème galerie ======== */
+:root{--ink:#1f2433;--muted:#6b6f7d;--bg:#f6f2ea;--navy:#1e3a5f;--gold:#b8893b;--terra:#c0573e;--sage:#5f8a6b;--plum:#7a4a6e;
+ --green:#5f8a6b;--blue:#1e3a5f;--pink:#c0573e;--sun:#b8893b;--sun-l:#fbf3e3}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--bg);font-size:17.5px}
+h1,h2,h3,.cardt,.exkind,.secnum,.exn,.qn,.boxt,#score,.h2line .txt,.rulehead .txt,.vw,.tlh,.oralh{font-family:'Playfair Display',Georgia,serif}
+.pb{background:var(--navy)}
+#score{border-color:var(--gold)} #score .st0{color:var(--gold)}
+#deall{background:var(--navy)}
+body.de-all #deall{background:var(--gold);color:#fff}
+.hero{height:380px;border-radius:6px}
+.hero h1{background:rgba(255,255,255,.95);font-weight:600;font-size:34px;border-radius:4px}
+.hero h1 span{color:var(--gold);font-family:'Source Sans 3';font-weight:700;letter-spacing:2px;font-size:13px;text-transform:uppercase}
+.tag{background:var(--navy);color:#fff;font-family:'Source Sans 3';letter-spacing:3px;border-radius:2px}
+figure.art{margin:0}
+.artcap{font-size:13.5px;color:var(--muted);margin:6px 2px 0;font-style:italic}
+.artcap b{font-style:normal;color:var(--ink);font-weight:700}
+.intro{border:0;border-top:4px solid var(--gold);border-radius:4px}
+.intro h2{color:var(--navy);font-family:'Playfair Display';font-weight:600}
+.plan8 a{background:#fff;border:1px solid #e3dccd;border-radius:4px}
+.sechead{border-radius:6px;height:auto;background:#fff;box-shadow:0 10px 30px rgba(31,36,51,.12)}
+.sechead img{height:300px}
+.sechead .artcap{padding:6px 14px 10px;margin:0}
+.seclabel{bottom:auto;top:14px}
+.secnum{background:var(--gold);border-radius:4px}
+.seclabel>div{border-radius:4px}
+.rule{border-radius:6px;border-width:1px}
+.rulehead{background:var(--navy)!important}
+.c-terra .rulehead{background:var(--terra)!important}.c-sage .rulehead{background:var(--sage)!important}.c-plum .rulehead{background:var(--plum)!important}
+.c-terra{border-color:var(--terra)}.c-sage{border-color:var(--sage)}.c-plum{border-color:var(--plum)}
+.exercise{border-radius:6px}
+.exhead{background:linear-gradient(90deg,#1e3a5f,#35567f)!important}
+.ex-t .exhead{background:linear-gradient(90deg,#c0573e,#d98a5f)!important}
+.ex-s .exhead{background:linear-gradient(90deg,#5f8a6b,#86a98a)!important}
+.ex-p .exhead{background:linear-gradient(90deg,#7a4a6e,#a3708f)!important}
+.ex-g .exhead{background:linear-gradient(90deg,#8a6420,#b8893b)!important}
+.opt{border-radius:4px}.opt.good{border-color:var(--sage);color:#2e5e3a;background:#eef5ef}
+.line.ex{background:#fffdf8;border-color:#ece3d2}
+
+/* cartes recto-verso */
+.vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:16px 0}
+.vcard{perspective:1400px;min-height:270px;cursor:pointer}
+.vin{position:relative;width:100%;height:100%;min-height:270px;transition:transform .7s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+.vcard.flip .vin{transform:rotateY(180deg)}
+.vf,.vb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;background:#fff;box-shadow:0 8px 24px rgba(31,36,51,.10);overflow:hidden;display:flex;flex-direction:column}
+.vb{transform:rotateY(180deg);padding:14px 16px;overflow:auto;border-top:5px solid var(--gold);cursor:default}
+.vf{justify-content:flex-end}
+.vf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vf .vfo{position:relative;background:linear-gradient(0deg,rgba(255,255,255,.98) 60%,rgba(255,255,255,.0));padding:40px 18px 16px}
+.vf.noimg{justify-content:center;background:linear-gradient(135deg,#1e3a5f,#35567f);color:#fff}
+.vf.noimg .vfo{background:none;padding:18px}
+.vf.noimg .vcat,.vf.noimg .vhint{color:#e9d8b6}
+.vw{font-size:28px;font-weight:600;line-height:1.15}
+.vcat{font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px}
+.vhint{font-size:13px;color:var(--muted);margin-top:6px}
+.vhint::before{content:"↻ "}
+.vit{font-size:15px;background:#eef3f8;border-radius:4px;padding:2px 8px;display:inline-block;margin:4px 0 6px;color:var(--navy);font-weight:700}
+.vit::before{content:"IT  ";font-size:11px;letter-spacing:1px;color:var(--gold)}
+.vnote{font-size:14.5px;background:var(--sun-l);border-left:3px solid var(--gold);padding:5px 9px;margin-top:6px;border-radius:2px}
+.vb .back{float:right;border:0;background:#f1ece2;border-radius:999px;font:700 12px 'Source Sans 3';padding:3px 10px;cursor:pointer;color:var(--muted)}
+.vb .vwb{font-family:'Playfair Display';font-size:22px;font-weight:600}
+.vcard.big{grid-column:1/-1}
+.vgrid .vcard .artmini{font-size:11.5px;color:#8b8f9c;font-style:italic;position:relative;padding:0 18px 8px;background:rgba(255,255,255,.98)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.tbtn{border:1px solid #d9cfbd;background:#fff;border-radius:999px;padding:6px 14px;font:700 14px 'Source Sans 3';color:var(--navy);cursor:pointer}
+.tbtn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* tableaux de conjugaison avec mode entraînement */
+.ctab{width:100%;border-collapse:collapse;background:#fff;border-radius:6px;overflow:hidden;margin:8px 0}
+.ctab td{padding:7px 12px;border-bottom:1px solid #eee6d8;vertical-align:middle}
+.ctab td.fr{font-weight:700;font-size:18px}
+.ctab td.it{color:var(--muted);font-style:italic;font-size:15px}
+.ctab td.p{width:40px}
+.ctab.hide td.fr .v{filter:blur(7px);cursor:pointer;transition:filter .3s}
+.ctab.hide td.fr .v.show{filter:none}
+.ctab .v b{color:var(--terra)}
+.vtab{width:100%;border-collapse:collapse;background:#fff;font-size:15.5px}
+.vtab td{padding:6px 10px;border-bottom:1px solid #eee6d8}
+.vtab td:first-child{color:var(--muted);width:24%}
+.vtab td:nth-child(2){font-weight:700}
+.vtab td:nth-child(3){color:var(--muted);font-style:italic}
+.vtab.hide td:nth-child(2) .v{filter:blur(7px);cursor:pointer}
+.vtab.hide td:nth-child(2) .v.show{filter:none}
+
+/* frise du plus-que-parfait */
+.tl{position:relative;margin:20px 0 10px;padding:56px 10px 10px;background:#fff;border-radius:6px;box-shadow:0 6px 18px rgba(31,36,51,.08)}
+.tl::before{content:"";position:absolute;left:30px;right:30px;top:38px;height:3px;background:linear-gradient(90deg,#7a4a6e,#1e3a5f,#5f8a6b)}
+.tl::after{content:"maintenant →";position:absolute;right:12px;top:12px;font-size:12px;color:var(--muted);letter-spacing:1px}
+.tlr{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tlc{position:relative;opacity:.18;transform:translateY(10px);transition:all .6s}
+.tlc.on{opacity:1;transform:none}
+.tlc .dot{position:absolute;top:-25px;left:12px;width:16px;height:16px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px currentColor}
+.tlc.pqp{color:var(--plum)}.tlc.pc{color:var(--navy)}.tlc.imp{color:var(--sage)}
+.tlc.pqp .dot{background:var(--plum)}.tlc.pc .dot{background:var(--navy)}.tlc.imp .dot{background:var(--sage)}
+.tlh{font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.tlc .txt2{color:var(--ink);font-size:17px;margin:4px 0}
+.tlc .lab{font-size:12.5px;font-weight:700}
+.tlbtn{display:block;margin:12px auto 2px}
+.pqpv{color:var(--plum);font-weight:800}.pcv{color:var(--navy);font-weight:800}.impv{color:var(--sage);font-weight:800}
+
+/* traduction et réflexion */
+.item.tr textarea,.refl textarea{width:100%;border:1px solid #d9cfbd;border-radius:4px;padding:8px 10px;font:600 17px/1.5 'Source Sans 3';color:var(--ink);background:#fffdf8;resize:vertical;margin-top:6px}
+.trbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.reveal{border:0;border-radius:999px;background:var(--navy);color:#fff;font:700 14px 'Source Sans 3';padding:6px 14px;cursor:pointer}
+.self{display:none;gap:8px}
+.item.tr.revealed .self{display:flex}.item.tr.revealed .reveal{display:none}
+.item.tr.revealed .after{display:block}
+.selfok,.selfko{border:0;border-radius:999px;font:700 14px 'Source Sans 3';padding:6px 14px;cursor:pointer}
+.selfok{background:#eef5ef;color:#2e5e3a}.selfko{background:#fbecea;color:#9a3a26}
+.item.tr.done .self{display:none}
+.story{background:#fff;border-radius:6px;padding:14px 18px;line-height:2.15;font-size:17.5px}
+.inl{display:inline;padding:0;border:0}
+.inl input.w{width:150px;font-size:16px;padding:1px 6px}
+.inl .check{padding:2px 8px;font-size:12px;margin:0 2px;vertical-align:middle;align-self:auto}
+.inl .after{display:none;margin:0}
+.inl.done .after{display:inline}
+.inl .sol{display:inline;padding:1px 6px;margin:0 2px;font-size:15px}
+.inl .sol .ic{display:none}
+.item.inl.wrong .sol::before{content:"→ "}
+.storyde{margin-top:8px}
+.refl{background:#fff;border-radius:6px;padding:14px 18px}
+.refl h4{font-family:'Playfair Display';font-size:20px;margin:12px 0 4px;color:var(--plum)}
+.qs{margin:4px 0;padding-left:20px}.qs li{margin:4px 0}
+.wb{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.wb button{border:1px solid #e3d3ec;background:#faf5f9;color:var(--plum);border-radius:999px;padding:3px 11px;font:700 14px 'Source Sans 3';cursor:pointer}
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0}
+.steps3>div{border-top:4px solid var(--plum);background:#fbf8fb;padding:8px 10px;border-radius:4px;font-size:15px}
+.steps3 b.t{display:block;font-family:'Playfair Display';font-size:17px;color:var(--plum)}
+.wc{font-size:14px;color:var(--muted);font-weight:700;margin-top:4px}
+@media (max-width:640px){.vgrid,.steps3,.tlr{grid-template-columns:1fr}.hero{height:280px}.hero h1{font-size:25px}.sechead img{height:200px}.tlc{opacity:1;transform:none}.tl::before{display:none}.tlc .dot{display:none}}
+.vcard,.vin{min-height:440px}
+.vb .back{align-self:flex-end;float:none}
+.vb .line.ex{padding:4px 9px;margin:4px 0}
+.vb .line.ex .txt{font-size:16px}
+.vf .vfo{background:linear-gradient(0deg,rgba(255,255,255,.97) 70%,rgba(255,255,255,0));padding:30px 18px 12px}
+@media (max-width:640px){.vcard,.vin{min-height:470px}}
+.inl.right .after .txt{display:none}
+.inl.right .after .sol{background:none;padding:0}
+</style></head><body>
+<div id="topbar"><div></div><div id="right"><div id="score"><span class="st0">★</span> <span id="sc">0</span> / <span id="tot">0</span></div><button id="deall">IT</button></div></div><main><div class="hero"><img src="img/hero.jpg" alt=""><div class="herotext"><span class="tag">POUR FABRIZIO</span><h1>Vocabulaire, expressions et grammaire<span>9 novembre 2026</span></h1></div></div><div class="artcap"><b>Claude Monet, <i>Impression, soleil levant</i>, 1872</b> · Musée Marmottan Monet, Paris</div><div class="intro"><h2>Bonjour Fabrizio !</h2><div class="line "><div class="fr"><span class="txt">Aujourd'hui : huit mots et expressions de la vie quotidienne, le verbe <b>vivre</b>, et le <b>plus-que-parfait</b> pour raconter une histoire. Ensuite, cinq exercices pour tout mettre en pratique.</span><span class="btns"><button class="pb" data-a="a1097ce7bb" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Oggi: otto parole ed espressioni della vita quotidiana, il verbo «vivre» e il trapassato prossimo per raccontare una storia. Poi cinque esercizi per mettere tutto in pratica.</div></div><div class="how"><div><div class="line "><div class="fr"><span class="txt">▶ Chaque phrase et chaque explication a son <b>audio</b>. Écoute et répète.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Ogni frase e ogni spiegazione ha il suo audio. Ascolta e ripeti.</div></div></div><div><div class="line "><div class="fr"><span class="txt"><b>IT</b> : la traduction italienne. Essaie d'abord sans !</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">La traduzione italiana. Prova prima senza!</div></div></div><div><div class="line "><div class="fr"><span class="txt">🙈 Dans les tableaux, cache les formes et récite-les : clique sur une forme pour vérifier.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Nelle tabelle, nascondi le forme e recitale: clicca su una forma per verificare.</div></div></div><div><div class="line "><div class="fr"><span class="txt">★ Tes erreurs vont dans « À revoir », à la fin, avec un lien vers la règle.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">I tuoi errori vanno in «À revoir», alla fine, con un link alla regola.</div></div></div></div><ul class="plan8"><li><a href="#s1">1. Le vocabulaire</a></li><li><a href="#s2">2. Le verbe vivre</a></li><li><a href="#s3">3. Le plus-que-parfait</a></li><li><a href="#s4">4. Les exercices</a></li><li><a class="rev" href="#bilan">★ À revoir</a></li></ul></div><section class="step" id="s1" data-n="1"><div class="sechead"><div class="seclabel" style="position:static;padding:12px 14px"><span class="secnum">1</span><div><div class="line h2line"><div class="fr"><span class="txt">Le vocabulaire</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Il vocabolario</div></div></div></div></div><div class="line "><div class="fr"><span class="txt">Huit mots et expressions de la vie de tous les jours. Lis le mot, essaie de deviner le sens, puis retourne la carte : tu trouves la traduction, des exemples et une petite remarque.</span><span class="btns"><button class="pb" data-a="4ecae1c385" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Otto parole ed espressioni della vita di tutti i giorni. Leggi la parola, prova a indovinarne il significato, poi gira la carta: trovi la traduzione, degli esempi e una piccola nota.</div></div><div class="toolbar"><button class="tbtn flipall">↻ Retourner toutes les cartes</button><button class="tbtn playall" data-box="vgrid">▶ Écouter tout le vocabulaire</button></div><div class="vgrid" id="vgrid"><div class="vcard" id="v-conge"><div class="vin"><div class="vf noimg"><div class="vfo"><div class="vcat">locution verbale</div><div class="vw">être en congé</div><div class="vhint">Clique pour retourner la carte</div></div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">être en congé <button class="pb sm" data-a="30763b48e2" aria-label="Écouter">▶</button></div><div class="vit">essere in ferie, in congedo</div><div class="line ex"><div class="fr"><span class="txt">Je suis en congé jusqu'à lundi : je ne réponds pas aux e-mails.</span><span class="btns"><button class="pb" data-a="91a1824ec9" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Sono in ferie fino a lunedì: non rispondo alle e-mail.</div></div><div class="line ex"><div class="fr"><span class="txt">Ma collègue est en congé maternité.</span><span class="btns"><button class="pb" data-a="9387bbddda" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">La mia collega è in congedo di maternità.</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt">On l'utilise pour le <b>travail</b> : le salarié ne travaille pas. On dit aussi : <b>prendre</b> un congé, un congé <b>maladie</b>.</span><span class="btns"><button class="pb" data-a="4164204e21" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Si usa per il lavoro. Si dice anche: prendere un congedo, un congedo per malattia.</div></div></div></div></div></div><div class="vcard" id="v-vacances"><div class="vin"><div class="vf"><img src="img/plage.jpg" alt="" loading="lazy"><div class="vfo"><div class="vcat">locution verbale</div><div class="vw">être en vacances</div><div class="vhint">Clique pour retourner la carte</div></div><div class="artmini">Eugène Boudin, <i>La Plage de Trouville</i></div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">être en vacances <button class="pb sm" data-a="7f8b6818e0" aria-label="Écouter">▶</button></div><div class="vit">essere in vacanza</div><div class="line ex"><div class="fr"><span class="txt">Cet été, nous serons en vacances en Bretagne.</span><span class="btns"><button class="pb" data-a="556412fbce" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Quest'estate saremo in vacanza in Bretagna.</div></div><div class="line ex"><div class="fr"><span class="txt">Les enfants sont en vacances depuis vendredi.</span><span class="btns"><button class="pb" data-a="929ac2bda9" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">I bambini sono in vacanza da venerdì.</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt"><b>Les vacances</b> est toujours <b>au pluriel</b> : <i>de bonnes vacances</i>. On part <b>en</b> vacances, on rentre <b>de</b> vacances.</span><span class="btns"><button class="pb" data-a="c2a3a572f0" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">«Les vacances» è sempre plurale. Si parte «en vacances», si torna «de vacances».</div></div></div></div></div></div><div class="vcard" id="v-cambrioler"><div class="vin"><div class="vf"><img src="img/caille.jpg" alt="" loading="lazy"><div class="vfo"><div class="vcat">verbe</div><div class="vw">cambrioler</div><div class="vhint">Clique pour retourner la carte</div></div><div class="artmini">Gustave Caillebotte, <i>Rue de Paris, temps de pluie</i>, 1877</div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">cambrioler <button class="pb sm" data-a="15a884753e" aria-label="Écouter">▶</button></div><div class="vit">svaligiare, scassinare</div><div class="line ex"><div class="fr"><span class="txt">Pendant notre absence, des voleurs ont cambriolé la maison.</span><span class="btns"><button class="pb" data-a="e99b3264fd" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Durante la nostra assenza, dei ladri hanno svaligiato la casa.</div></div><div class="line ex"><div class="fr"><span class="txt">Notre voisin s'est fait cambrioler la semaine dernière.</span><span class="btns"><button class="pb" data-a="5624f53862" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Il nostro vicino ha subito un furto in casa la settimana scorsa.</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt">La famille du mot : <b>un cambriolage</b> (il furto in casa), <b>un cambrioleur</b> (lo scassinatore).</span><span class="btns"><button class="pb" data-a="5b39744770" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">La famiglia della parola: un cambriolage, un cambrioleur.</div></div></div></div></div></div><div class="vcard" id="v-raide"><div class="vin"><div class="vf"><img src="img/degas.jpg" alt="" loading="lazy"><div class="vfo"><div class="vcat">adjectif</div><div class="vw">raide</div><div class="vhint">Clique pour retourner la carte</div></div><div class="artmini">Edgar Degas, <i>La Classe de danse</i>, 1873-1876</div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">raide <button class="pb sm" data-a="38872f321e" aria-label="Écouter">▶</button></div><div class="vit">rigido · ripido · liscio (capelli)</div><div class="line ex"><div class="fr"><span class="txt">Après le sport, j'ai les jambes raides.</span><span class="btns"><button class="pb" data-a="9218753f72" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Dopo lo sport, ho le gambe rigide.</div></div><div class="line ex"><div class="fr"><span class="txt">Le chemin est très raide : attention en descendant !</span><span class="btns"><button class="pb" data-a="cd38cd4b15" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Il sentiero è molto ripido: attenzione scendendo!</div></div><div class="line ex"><div class="fr"><span class="txt">Elle a les cheveux longs et raides.</span><span class="btns"><button class="pb" data-a="381546b92e" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Ha i capelli lunghi e lisci.</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt">Un mot, <b>trois sens</b> : un corps <b>raide</b> (qui ne plie pas), une pente <b>raide</b> (qui monte fort), des cheveux <b>raides</b> (le contraire de bouclés).</span><span class="btns"><button class="pb" data-a="822c6b0c39" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Una parola, tre significati: rigido, ripido, liscio.</div></div></div></div></div></div><div class="vcard" id="v-pied"><div class="vin"><div class="vf noimg"><div class="vfo"><div class="vcat">verbe pronominal</div><div class="vw">se casser le pied</div><div class="vhint">Clique pour retourner la carte</div></div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">se casser le pied <button class="pb sm" data-a="2a115ef500" aria-label="Écouter">▶</button></div><div class="vit">rompersi il piede</div><div class="line ex"><div class="fr"><span class="txt">Mon frère s'est cassé le pied au ski.</span><span class="btns"><button class="pb" data-a="01e373eaf7" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Mio fratello si è rotto il piede sugli sci.</div></div><div class="line ex"><div class="fr"><span class="txt">Elle s'est cassé le pied en tombant dans l'escalier.</span><span class="btns"><button class="pb" data-a="6938d9ff23" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Si è rotta il piede cadendo dalle scale.</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt">Avec une partie du corps, on dit <b>le</b>, pas <b>mon</b> : je me casse <b>le</b> bras. Au passé composé, <b>pas d'accord</b> : elle s'est <b>cassé</b> le pied (le complément est après le verbe).</span><span class="btns"><button class="pb" data-a="4c6841fbcd" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Con una parte del corpo si usa l'articolo, non il possessivo. Al passato prossimo, nessun accordo: «elle s'est cassé le pied».</div></div></div></div></div></div><div class="vcard" id="v-entendre"><div class="vin"><div class="vf"><img src="img/renoir.jpg" alt="" loading="lazy"><div class="vfo"><div class="vcat">verbe pronominal</div><div class="vw">s'entendre · bien s'entendre avec quelqu'un</div><div class="vhint">Clique pour retourner la carte</div></div><div class="artmini">Auguste Renoir, <i>Le Déjeuner des canotiers</i>, 1880-1881</div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">s'entendre · bien s'entendre avec quelqu'un <button class="pb sm" data-a="eb93e087ef" aria-label="Écouter">▶</button></div><div class="vit">andare d'accordo (con qualcuno)</div><div class="line ex"><div class="fr"><span class="txt">Je m'entends très bien avec mes collègues.</span><span class="btns"><button class="pb" data-a="c92b0529c3" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Vado molto d'accordo con i miei colleghi.</div></div><div class="line ex"><div class="fr"><span class="txt">Mes deux fils ne s'entendent pas du tout.</span><span class="btns"><button class="pb" data-a="8b34c0319e" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">I miei due figli non vanno per niente d'accordo.</div></div><div class="line ex"><div class="fr"><span class="txt">On s'entend sur le prix ?</span><span class="btns"><button class="pb" data-a="44e8270d4c" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Siamo d'accordo sul prezzo?</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt"><b>bien / mal s'entendre avec</b> quelqu'un. Attention : <i>Parle plus fort, on ne s'entend pas !</i> = on n'arrive pas à <b>entendre</b>.</span><span class="btns"><button class="pb" data-a="8a75abd46e" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Andare d'accordo / non andare d'accordo con qualcuno. Attenzione: «on ne s'entend pas» può anche voler dire «non si sente niente».</div></div></div></div></div></div><div class="vcard" id="v-rapport"><div class="vin"><div class="vf"><img src="img/monet.jpg" alt="" loading="lazy"><div class="vfo"><div class="vcat">locution prépositive</div><div class="vw">par rapport à</div><div class="vhint">Clique pour retourner la carte</div></div><div class="artmini">Claude Monet, <i>La Promenade, la femme à l'ombrelle</i>, 1875</div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">par rapport à <button class="pb sm" data-a="362073344c" aria-label="Écouter">▶</button></div><div class="vit">rispetto a, in confronto a</div><div class="line ex"><div class="fr"><span class="txt">Par rapport à l'année dernière, les prix ont beaucoup augmenté.</span><span class="btns"><button class="pb" data-a="a36069f0e1" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Rispetto all'anno scorso, i prezzi sono aumentati molto.</div></div><div class="line ex"><div class="fr"><span class="txt">Lyon est petite par rapport à Paris.</span><span class="btns"><button class="pb" data-a="7a0b028ad8" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Lione è piccola in confronto a Parigi.</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt">Elle sert à <b>comparer</b>. Attention à la contraction : par rapport <b>au</b> passé, par rapport <b>aux</b> autres.</span><span class="btns"><button class="pb" data-a="882c27d2fc" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Serve a confrontare. Attenzione alle preposizioni articolate: au, aux.</div></div></div></div></div></div><div class="vcard" id="v-fache"><div class="vin"><div class="vf"><img src="img/courbet.jpg" alt="" loading="lazy"><div class="vfo"><div class="vcat">locution verbale</div><div class="vw">être fâché (avec / contre quelqu'un)</div><div class="vhint">Clique pour retourner la carte</div></div><div class="artmini">Gustave Courbet, <i>Le Désespéré</i>, 1843-1845</div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">être fâché (avec / contre quelqu'un) <button class="pb sm" data-a="f6450dc8e0" aria-label="Écouter">▶</button></div><div class="vit">essere arrabbiato · essere in rotta (con qualcuno)</div><div class="line ex"><div class="fr"><span class="txt">Mon père est fâché contre moi parce que je suis rentré tard.</span><span class="btns"><button class="pb" data-a="faa586a6ca" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Mio padre è arrabbiato con me perché sono rientrato tardi.</div></div><div class="line ex"><div class="fr"><span class="txt">Ils sont fâchés depuis des années : ils ne se parlent plus.</span><span class="btns"><button class="pb" data-a="99a9b2b162" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Sono in rotta da anni: non si parlano più.</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt"><b>fâché contre</b> quelqu'un = en colère, pour un moment. <b>fâché avec</b> quelqu'un = on ne se parle plus.</span><span class="btns"><button class="pb" data-a="b7106a8971" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">«fâché contre»: arrabbiato per un momento. «fâché avec»: non ci si parla più.</div></div></div></div></div></div></div></section><section class="step" id="s2" data-n="2"><div class="sechead"><img src="img/seurat.jpg" alt="" loading="lazy"><div class="artcap"><b>Georges Seurat, <i>Un dimanche après-midi à l'île de la Grande Jatte</i>, 1884-1886</b> · Art Institute of Chicago</div><div class="seclabel" style=""><span class="secnum">2</span><div><div class="line h2line"><div class="fr"><span class="txt">Le verbe vivre</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Il verbo vivere</div></div></div></div></div><div class="rule c-sage" id="r-vivre"><div class="rulehead"><div class="line h3line"><div class="fr"><span class="txt">Vivre au présent</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Vivere al presente</div></div></div><div class="rulebody"><div class="line "><div class="fr"><span class="txt"><b>Vivre</b> est un verbe <b>irrégulier</b>. Au singulier, on entend la même chose : <i>je vis, tu vis, il vit</i>. Au pluriel, le <b>v</b> revient : <i>nous vivons</i>.</span><span class="btns"><button class="pb" data-a="469ea8d790" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">«Vivre» è un verbo irregolare. Al singolare si sente la stessa cosa. Al plurale ritorna la «v».</div></div><table class="ctab" id="t-vivre"><tbody><tr><td class="p"><button class="pb sm" data-a="c005fb350c" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">je <b>\1</b></span></td><td class="it">io vivo</td></tr><tr><td class="p"><button class="pb sm" data-a="72d40a9d84" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">tu <b>\1</b></span></td><td class="it">tu vivi</td></tr><tr><td class="p"><button class="pb sm" data-a="dc1bd5a692" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">il / elle <b>\1</b></span></td><td class="it">lui / lei vive</td></tr><tr><td class="p"><button class="pb sm" data-a="d828aab916" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">nous <b>\1</b></span></td><td class="it">noi viviamo</td></tr><tr><td class="p"><button class="pb sm" data-a="1d0079e9ce" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">vous <b>\1</b></span></td><td class="it">voi vivete</td></tr><tr><td class="p"><button class="pb sm" data-a="8f4b634314" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">ils / elles <b>\1</b></span></td><td class="it">loro vivono</td></tr></tbody></table><div class="toolbar"><button class="tbtn hidebtn" data-t="t-vivre">🙈 Je cache et je récite</button></div><div class="inbox yellow"><div class="boxt">Le participe passé : vécu</div><div class="line "><div class="fr"><span class="txt">Le participe passé de <b>vivre</b> est <b>vécu</b>. Au passé composé, on utilise <b>avoir</b> : <b>j'ai vécu</b>.</span><span class="btns"><button class="pb" data-a="6abbee6ef1" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Il participio passato di «vivre» è «vécu». Al passato prossimo si usa «avoir».</div></div><div class="line ex"><div class="fr"><span class="txt">J'ai vécu trois ans à Lyon avant de m'installer à Paris.</span><span class="btns"><button class="pb" data-a="dcaad5ecf5" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Ho vissuto tre anni a Lione prima di trasferirmi a Parigi.</div></div><div class="line ex"><div class="fr"><span class="txt">Nous avons vécu une expérience inoubliable.</span><span class="btns"><button class="pb" data-a="41497685a3" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Abbiamo vissuto un'esperienza indimenticabile.</div></div></div><div class="inbox "><div class="boxt">Vivre ou habiter ?</div><div class="line "><div class="fr"><span class="txt"><b>Habiter</b> = avoir son logement quelque part. <b>Vivre</b> = c'est plus large : sa vie, une expérience, une période.</span><span class="btns"><button class="pb" data-a="37bdbffd20" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">«Habiter» = avere la propria casa da qualche parte. «Vivre» è più ampio: la vita, un'esperienza, un periodo.</div></div><div class="line ex"><div class="fr"><span class="txt">J'habite rue Lepic. Je vis à Paris depuis dix ans. Nous vivons une période difficile.</span><span class="btns"><button class="pb" data-a="8eda7aea4c" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Abito in rue Lepic. Vivo a Parigi da dieci anni. Stiamo vivendo un periodo difficile.</div></div></div></div></div></section><section class="step" id="s3" data-n="3"><div class="sechead"><img src="img/frago.jpg" alt="" loading="lazy"><div class="artcap"><b>Jean-Honoré Fragonard, <i>La Liseuse</i>, vers 1770</b> · National Gallery of Art, Washington</div><div class="seclabel" style=""><span class="secnum">3</span><div><div class="line h2line"><div class="fr"><span class="txt">Le plus-que-parfait dans le récit</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Il trapassato prossimo nel racconto</div></div></div></div></div><div class="rule c-plum" id="r-pqp"><div class="rulehead"><div class="line h3line"><div class="fr"><span class="txt">À quoi sert le plus-que-parfait ?</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">A cosa serve il trapassato prossimo?</div></div></div><div class="rulebody"><div class="line "><div class="fr"><span class="txt">Le plus-que-parfait exprime une action passée <b>qui a eu lieu avant</b> une autre action passée.</span><span class="btns"><button class="pb" data-a="1a6b6c33f4" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Il trapassato prossimo esprime un'azione passata avvenuta prima di un'altra azione passata.</div></div><div class="line "><div class="fr"><span class="txt">Dans un récit, il permet de <b>revenir en arrière</b> : c'est un <b>retour en arrière</b> dans l'histoire.</span><span class="btns"><button class="pb" data-a="692d902463" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">In un racconto, permette di tornare indietro nel tempo.</div></div><div class="formula"><span class="f">avais / étais</span><span class="op">+</span><span>participe passé</span></div><div class="line "><div class="fr"><span class="txt">auxiliaire <b>avoir</b> ou <b>être</b> à l'<b>imparfait</b> + <b>participe passé</b></span><span class="btns"><button class="pb" data-a="e8b19e9968" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">ausiliare avere o essere all'imperfetto + participio passato</div></div><div class="tlwrap"><div class="tl"><div class="tlr"><div class="tlc pqp"><span class="dot"></span><div class="tlh">hier soir, 20 h</div><div class="txt2">Des voleurs <b>avaient cambriolé</b> la maison. <button class="pb sm" data-a="8ef6c22d8a" aria-label="Écouter">▶</button></div><div class="lab">action 1 · plus-que-parfait</div></div><div class="tlc pc"><span class="dot"></span><div class="tlh">hier soir, 22 h</div><div class="txt2">Quand nous <b>sommes rentrés</b>, … <button class="pb sm" data-a="ef0fa80523" aria-label="Écouter">▶</button></div><div class="lab">action 2 · passé composé</div></div><div class="tlc imp"><span class="dot"></span><div class="tlh">décor</div><div class="txt2">… la porte <b>était</b> ouverte. <button class="pb sm" data-a="a8be5c1655" aria-label="Écouter">▶</button></div><div class="lab">description · imparfait</div></div></div></div><button class="tbtn tlbtn">▶ Voir l'histoire étape par étape</button></div><div class="line "><div class="fr"><span class="txt">Dans le récit, on entend d'abord l'action 2, mais l'action 1 s'est passée <b>avant</b> : on la met au <b>plus-que-parfait</b>.</span><span class="btns"><button class="pb" data-a="96a14b7a78" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Nel racconto si sente prima l'azione 2, ma l'azione 1 è avvenuta prima: la si mette al trapassato prossimo.</div></div><div class="line ex"><div class="fr"><span class="txt">Quand nous sommes rentrés, la porte était ouverte : des voleurs avaient cambriolé la maison.</span><span class="btns"><button class="pb" data-a="132400d960" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Quando siamo rientrati, la porta era aperta: dei ladri avevano svaligiato la casa.</div></div><div class="inbox yellow"><div class="boxt">🔎 Les mots signaux</div><div class="line "><div class="fr"><span class="txt">Mots qui l'annoncent souvent : <b>déjà</b>, <b>avant</b>, <b>la veille</b>, <b>parce que</b>, <b>quand</b>, <b>ne… pas encore</b>.</span><span class="btns"><button class="pb" data-a="cd20dc72cd" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Parole che lo annunciano spesso: già, prima, il giorno prima, perché, quando, non ancora.</div></div></div><div class="boxt" style="margin-top:12px">Exemples</div><div class="line ex"><div class="fr"><span class="txt">Quand nous sommes rentrés de vacances, des voleurs avaient cambriolé la maison.</span><span class="btns"><button class="pb" data-a="1f7d96f506" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Quando siamo tornati dalle vacanze, dei ladri avevano svaligiato la casa.</div></div><div class="line ex"><div class="fr"><span class="txt">Il est arrivé en retard parce qu'il avait raté le bus.</span><span class="btns"><button class="pb" data-a="b98d9b040f" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">È arrivato in ritardo perché aveva perso l'autobus.</div></div><div class="line ex"><div class="fr"><span class="txt">Elle était fâchée : son frère avait oublié son anniversaire.</span><span class="btns"><button class="pb" data-a="ba34b553c9" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Era arrabbiata: suo fratello aveva dimenticato il suo compleanno.</div></div><div class="line ex"><div class="fr"><span class="txt">J'ai enfin vu le film dont tu m'avais parlé.</span><span class="btns"><button class="pb" data-a="5f76af4fa0" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Ho finalmente visto il film di cui mi avevi parlato.</div></div></div></div><div class="rule c-navy" id="r-pqpform"><div class="rulehead"><div class="line h3line"><div class="fr"><span class="txt">La conjugaison</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">La coniugazione</div></div></div><div class="rulebody"><div class="two"><div><div class="boxt">Avec avoir : finir</div><table class="ctab" id="t-avoir"><tbody><tr><td class="p"><button class="pb sm" data-a="e9a1cf3de0" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">j'avais fini</span></td><td class="it">avevo finito</td></tr><tr><td class="p"><button class="pb sm" data-a="6620479b9e" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">tu avais fini</span></td><td class="it">avevi finito</td></tr><tr><td class="p"><button class="pb sm" data-a="d3332cedbc" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">il / elle avait fini</span></td><td class="it">aveva finito</td></tr><tr><td class="p"><button class="pb sm" data-a="55b6a49d54" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">nous avions fini</span></td><td class="it">avevamo finito</td></tr><tr><td class="p"><button class="pb sm" data-a="eccf9fd223" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">vous aviez fini</span></td><td class="it">avevate finito</td></tr><tr><td class="p"><button class="pb sm" data-a="d5e5d0c7b8" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">ils / elles avaient fini</span></td><td class="it">avevano finito</td></tr></tbody></table><button class="tbtn hidebtn" data-t="t-avoir">🙈 Je cache et je récite</button></div><div><div class="boxt">Avec être : partir</div><table class="ctab" id="t-etre"><tbody><tr><td class="p"><button class="pb sm" data-a="7f0cbcaf0c" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">j'étais parti(e)</span></td><td class="it">ero partito/a</td></tr><tr><td class="p"><button class="pb sm" data-a="52fc8d6795" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">tu étais parti(e)</span></td><td class="it">eri partito/a</td></tr><tr><td class="p"><button class="pb sm" data-a="274ab1c120" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">il / elle était parti(e)</span></td><td class="it">era partito/a</td></tr><tr><td class="p"><button class="pb sm" data-a="42cd31fb57" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">nous étions parti(e)s</span></td><td class="it">eravamo partiti/e</td></tr><tr><td class="p"><button class="pb sm" data-a="ce9763660c" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">vous étiez parti(e)s</span></td><td class="it">eravate partiti/e</td></tr><tr><td class="p"><button class="pb sm" data-a="a262bbdc38" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">ils / elles étaient parti(e)s</span></td><td class="it">erano partiti/e</td></tr></tbody></table><button class="tbtn hidebtn" data-t="t-etre">🙈 Je cache et je récite</button></div></div><div class="inbox "><div class="boxt">Rappel</div><div class="line "><div class="fr"><span class="txt">Comme au passé composé : avec <b>être</b>, le participe s'accorde avec le sujet (<i>elle était partie</i>). Les verbes pronominaux se conjuguent avec <b>être</b> (<i>je m'étais cassé le pied</i>).</span><span class="btns"><button class="pb" data-a="3a3a6d4f3c" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Come al passato prossimo: con «être» il participio si accorda col soggetto. I verbi pronominali si coniugano con «être».</div></div></div><div class="inbox yellow"><div class="boxt">Comme en italien</div><div class="line "><div class="fr"><span class="txt">Bonne nouvelle : c'est comme le <b>trapassato prossimo</b> italien (<i>avevo finito, ero partito</i>). Mais attention à l'auxiliaire : <i>j'<b>avais</b> vécu</i> = <i>avevo vissuto</i>, mais <i>j'<b>avais</b> été</i> = <i>ero stato</i>.</span><span class="btns"><button class="pb" data-a="3d1d7e60a4" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Buona notizia: è come il trapassato prossimo italiano. Ma attenzione all'ausiliare: «j'avais été» = «ero stato».</div></div></div></div></div><div class="rule c-terra" id="r-pqpverbs"><div class="rulehead"><div class="line h3line"><div class="fr"><span class="txt">Les 20 verbes à connaître</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">I 20 verbi da conoscere</div></div></div><div class="rulebody"><div class="line "><div class="fr"><span class="txt">Voici les verbes les plus utilisés au plus-que-parfait. Écoute, répète, puis cache la colonne et récite.</span><span class="btns"><button class="pb" data-a="5487e9ddd8" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Ecco i verbi più usati al trapassato prossimo. Ascolta, ripeti, poi nascondi la colonna e recita.</div></div><div class="toolbar"><button class="tbtn playall" data-box="t-verbs">▶ Écouter les 20 verbes</button><button class="tbtn hidebtn" data-t="t-verbs">🙈 Je cache et je récite</button></div><div class="tablewrap" style="display:block"><table class="vtab" id="t-verbs"><tbody><tr><td>être</td><td><span class="v"><button class="pb sm" data-a="b8de5aeeac" aria-label="Écouter">▶</button> j'avais été</span></td><td>ero stato</td></tr><tr><td>avoir</td><td><span class="v"><button class="pb sm" data-a="775a4747f1" aria-label="Écouter">▶</button> j'avais eu</span></td><td>avevo avuto</td></tr><tr><td>faire</td><td><span class="v"><button class="pb sm" data-a="0c83df27eb" aria-label="Écouter">▶</button> j'avais fait</span></td><td>avevo fatto</td></tr><tr><td>aller</td><td><span class="v"><button class="pb sm" data-a="c20a507b70" aria-label="Écouter">▶</button> j'étais allé(e)</span></td><td>ero andato/a</td></tr><tr><td>venir</td><td><span class="v"><button class="pb sm" data-a="1702cdb6bd" aria-label="Écouter">▶</button> j'étais venu(e)</span></td><td>ero venuto/a</td></tr><tr><td>partir</td><td><span class="v"><button class="pb sm" data-a="7f0cbcaf0c" aria-label="Écouter">▶</button> j'étais parti(e)</span></td><td>ero partito/a</td></tr><tr><td>arriver</td><td><span class="v"><button class="pb sm" data-a="b8e6c3de32" aria-label="Écouter">▶</button> j'étais arrivé(e)</span></td><td>ero arrivato/a</td></tr><tr><td>rentrer</td><td><span class="v"><button class="pb sm" data-a="cea5ebc388" aria-label="Écouter">▶</button> j'étais rentré(e)</span></td><td>ero rientrato/a</td></tr><tr><td>prendre</td><td><span class="v"><button class="pb sm" data-a="662599a992" aria-label="Écouter">▶</button> j'avais pris</span></td><td>avevo preso</td></tr><tr><td>voir</td><td><span class="v"><button class="pb sm" data-a="1a2cef9f1b" aria-label="Écouter">▶</button> j'avais vu</span></td><td>avevo visto</td></tr><tr><td>dire</td><td><span class="v"><button class="pb sm" data-a="f024b9b21e" aria-label="Écouter">▶</button> j'avais dit</span></td><td>avevo detto</td></tr><tr><td>mettre</td><td><span class="v"><button class="pb sm" data-a="c36d0be34e" aria-label="Écouter">▶</button> j'avais mis</span></td><td>avevo messo</td></tr><tr><td>pouvoir</td><td><span class="v"><button class="pb sm" data-a="30662f7c4e" aria-label="Écouter">▶</button> j'avais pu</span></td><td>avevo potuto</td></tr><tr><td>vouloir</td><td><span class="v"><button class="pb sm" data-a="c97ca86d3c" aria-label="Écouter">▶</button> j'avais voulu</span></td><td>avevo voluto</td></tr><tr><td>devoir</td><td><span class="v"><button class="pb sm" data-a="b33d3a5d54" aria-label="Écouter">▶</button> j'avais dû</span></td><td>avevo dovuto</td></tr><tr><td>savoir</td><td><span class="v"><button class="pb sm" data-a="38291929b1" aria-label="Écouter">▶</button> j'avais su</span></td><td>avevo saputo</td></tr><tr><td>vivre</td><td><span class="v"><button class="pb sm" data-a="73db4147db" aria-label="Écouter">▶</button> j'avais vécu</span></td><td>avevo vissuto</td></tr><tr><td>oublier</td><td><span class="v"><button class="pb sm" data-a="d76af05734" aria-label="Écouter">▶</button> j'avais oublié</span></td><td>avevo dimenticato</td></tr><tr><td>se casser</td><td><span class="v"><button class="pb sm" data-a="82a09ee94a" aria-label="Écouter">▶</button> je m'étais cassé</span></td><td>mi ero rotto</td></tr><tr><td>s'entendre</td><td><span class="v"><button class="pb sm" data-a="b4b625ef98" aria-label="Écouter">▶</button> nous nous étions bien entendus</span></td><td>eravamo andati d'accordo</td></tr></tbody></table></div></div></div></section><section class="step" id="s4" data-n="4"><div class="sechead"><img src="img/caille.jpg" alt="" loading="lazy"><div class="artcap"><b>Gustave Caillebotte, <i>Rue de Paris, temps de pluie</i>, 1877</b> · Art Institute of Chicago</div><div class="seclabel" style=""><span class="secnum">4</span><div><div class="line h2line"><div class="fr"><span class="txt">Je m'entraîne</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Mi esercito</div></div></div></div></div><div class="exercise" id="ex1"><div class="exhead g-a"><span class="exn">1</span><div class="exh"><div class="exkind">VOCABULAIRE</div><div class="line consigne"><div class="fr"><span class="txt">Complète chaque phrase avec un mot de la liste, puis clique sur OK.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Completa ogni frase con una parola della lista, poi clicca su OK.</div></div></div></div><div class="wb" style="margin:10px 16px"><span class="pl" style="--c:#1e3a5f">cambriolé</span><span class="pl" style="--c:#1e3a5f">en congé</span><span class="pl" style="--c:#1e3a5f">entends</span><span class="pl" style="--c:#1e3a5f">Par rapport à</span><span class="pl" style="--c:#1e3a5f">cassé</span><span class="pl" style="--c:#1e3a5f">raides</span><span class="pl" style="--c:#1e3a5f">fâché</span><span class="pl" style="--c:#1e3a5f">en vacances</span><span class="pl" style="--c:#1e3a5f">vécu</span></div><div class="item inp" data-ans="[&quot;cambriolé&quot;]" data-anchor="v-cambrioler" data-label="cambrioler"><div class="qrow"><span class="qn">1</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Pendant nos vacances, des voleurs ont <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> notre appartement.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Durante le nostre vacanze, dei ladri hanno svaligiato il nostro appartamento.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Pendant nos vacances, des voleurs ont cambriolé notre appartement.</span> <button class="pb sm" data-a="ca80f9e491" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;en congé&quot;]" data-anchor="v-conge" data-label="être en congé"><div class="qrow"><span class="qn">2</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Je ne travaille pas cette semaine : je suis <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> .</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Non lavoro questa settimana: sono in ferie.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Je ne travaille pas cette semaine : je suis en congé.</span> <button class="pb sm" data-a="def7aa07fb" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;entends&quot;]" data-anchor="v-entendre" data-label="s&#x27;entendre"><div class="qrow"><span class="qn">3</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Je m' <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> très bien avec ma belle-sœur.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Vado molto d'accordo con mia cognata.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Je m'entends très bien avec ma belle-sœur.</span> <button class="pb sm" data-a="9a52aa8617" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;par rapport à&quot;]" data-anchor="v-rapport" data-label="par rapport à"><div class="qrow"><span class="qn">4</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"> <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> l'année dernière, il y a plus de touristes.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Rispetto all'anno scorso, ci sono più turisti.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Par rapport à l'année dernière, il y a plus de touristes.</span> <button class="pb sm" data-a="2895cb8faa" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;cassé&quot;]" data-anchor="v-pied" data-label="se casser le pied"><div class="qrow"><span class="qn">5</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Il est tombé en skiant et il s'est <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> le pied.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>È caduto sciando e si è rotto il piede.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Il est tombé en skiant et il s'est cassé le pied.</span> <button class="pb sm" data-a="ddce4aedd8" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;raides&quot;]" data-anchor="v-raide" data-label="raide"><div class="qrow"><span class="qn">6</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Ma fille a les cheveux <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> comme sa grand-mère.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Mia figlia ha i capelli lisci come sua nonna.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Ma fille a les cheveux raides comme sa grand-mère.</span> <button class="pb sm" data-a="89e4055a4a" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;fâché&quot;]" data-anchor="v-fache" data-label="être fâché"><div class="qrow"><span class="qn">7</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Il ne me parle plus : il est <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> avec moi depuis la fête.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Non mi parla più: è in rotta con me dalla festa.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Il ne me parle plus : il est fâché avec moi depuis la fête.</span> <button class="pb sm" data-a="5852de0241" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;en vacances&quot;]" data-anchor="v-vacances" data-label="être en vacances"><div class="qrow"><span class="qn">8</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Les enfants sont <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> jusqu'au 3 janvier.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>I bambini sono in vacanza fino al 3 gennaio.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Les enfants sont en vacances jusqu'au 3 janvier.</span> <button class="pb sm" data-a="22f01d4e7a" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;vécu&quot;]" data-anchor="r-vivre" data-label="vécu"><div class="qrow"><span class="qn">9</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Nous avons <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> dix ans en Italie avant de venir en France.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Abbiamo vissuto dieci anni in Italia prima di venire in Francia.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Nous avons vécu dix ans en Italie avant de venir en France.</span> <button class="pb sm" data-a="ce37a6912a" aria-label="Écouter">▶</button></div></div></div></div><div class="exercise ex-s" id="ex2"><div class="exhead g-b"><span class="exn">2</span><div class="exh"><div class="exkind">VERBES</div><div class="line consigne"><div class="fr"><span class="txt">Conjugue le verbe au temps demandé.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Coniuga il verbo al tempo richiesto.</div></div></div></div><div class="item inp" data-ans="[&quot;vivent&quot;]" data-anchor="r-vivre" data-label="vivre au présent"><div class="qrow"><span class="qn">1</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Mes parents (vivre, présent) <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> à Turin.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>I miei genitori vivono a Torino.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Mes parents vivent à Turin.</span> <button class="pb sm" data-a="a8c91fcf29" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;vivons&quot;]" data-anchor="r-vivre" data-label="vivre au présent"><div class="qrow"><span class="qn">2</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Nous (vivre, présent) <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> à Paris depuis 2020.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Viviamo a Parigi dal 2020.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Nous vivons à Paris depuis 2020.</span> <button class="pb sm" data-a="7b6b11d6f4" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;vis&quot;]" data-anchor="r-vivre" data-label="vivre au présent"><div class="qrow"><span class="qn">3</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Tu (vivre, présent) <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> seul ou en colocation ?</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Vivi da solo o in coinquilinato?</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Tu vis seul ou en colocation ?</span> <button class="pb sm" data-a="29e8a810d8" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;a vécu&quot;]" data-anchor="r-vivre" data-label="vécu"><div class="qrow"><span class="qn">4</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Pendant son voyage, elle (vivre, passé composé) <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> une grande aventure.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Durante il suo viaggio, ha vissuto una grande avventura.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Pendant son voyage, elle a vécu une grande aventure.</span> <button class="pb sm" data-a="4b62d48382" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;était parti&quot;, &quot;était déjà parti&quot;]" data-anchor="r-pqpform" data-label="plus-que-parfait avec être"><div class="qrow"><span class="qn">5</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Quand je suis arrivé à la gare, le train (partir, plus-que-parfait) <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> .</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Quando sono arrivato alla stazione, il treno era partito.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Quand je suis arrivé à la gare, le train était parti.</span> <button class="pb sm" data-a="5a5bc01cd6" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;avait travaillé&quot;]" data-anchor="r-pqpform" data-label="plus-que-parfait avec avoir"><div class="qrow"><span class="qn">6</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Elle était fatiguée parce qu'elle (travailler, plus-que-parfait) <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> toute la nuit.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Era stanca perché aveva lavorato tutta la notte.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Elle était fatiguée parce qu'elle avait travaillé toute la nuit.</span> <button class="pb sm" data-a="02c8a19a4a" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;s&#x27;était cassé&quot;]" data-anchor="r-pqpverbs" data-label="se casser au plus-que-parfait"><div class="qrow"><span class="qn">7</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">La veille du match, il (se casser, plus-que-parfait) <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> le pied.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Il giorno prima della partita, si era rotto il piede.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">La veille du match, il s'était cassé le pied.</span> <button class="pb sm" data-a="74585f88bf" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;n&#x27;avais pas encore fini&quot;]" data-anchor="r-pqp" data-label="ne… pas encore"><div class="qrow"><span class="qn">8</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Je (ne pas encore finir, plus-que-parfait) <input class="w long3" autocomplete="off" autocapitalize="off" spellcheck="false"> quand tu as appelé.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Non avevo ancora finito quando hai chiamato.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Je n'avais pas encore fini quand tu as appelé.</span> <button class="pb sm" data-a="543223e70a" aria-label="Écouter">▶</button></div></div></div></div><div class="exercise ex-t" id="ex3"><div class="exhead g-c"><span class="exn">3</span><div class="exh"><div class="exkind">TEXTE À CONJUGUER</div><div class="line consigne"><div class="fr"><span class="txt">Le retour de vacances : mets les verbes au bon temps.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Il ritorno dalle vacanze: metti i verbi al tempo giusto.</div></div></div></div><div style="padding:10px 16px"><div class="line "><div class="fr"><span class="txt">Lis tout le texte une première fois. Puis conjugue chaque verbe : passé composé, imparfait, plus-que-parfait ou présent.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Leggi tutto il testo una prima volta. Poi coniuga ogni verbo: passato prossimo, imperfetto, trapassato prossimo o presente.</div></div><div class="story"><b style="font-family:Playfair Display;font-size:20px">Le retour de vacances</b><br>L'été dernier, nous <span class="item inp inl" data-ans="[&quot;avons passé&quot;]" data-anchor="r-pqp" data-label="passé composé"><span class="vb0">(passer)</span> <input class="w" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="check">OK</button><span class="after"><span class="sol"><span class="txt">avons passé</span> <button class="pb sm" data-a="858c822b7e" aria-label="Écouter">▶</button></span></span></span> trois semaines en Normandie. Il <span class="item inp inl" data-ans="[&quot;faisait&quot;]" data-anchor="r-pqp" data-label="imparfait : le décor"><span class="vb0">(faire)</span> <input class="w" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="check">OK</button><span class="after"><span class="sol"><span class="txt">faisait</span> <button class="pb sm" data-a="9b5e80656b" aria-label="Écouter">▶</button></span></span></span> beau et nous <span class="item inp inl" data-ans="[&quot;nous entendions&quot;]" data-anchor="v-entendre" data-label="s&#x27;entendre à l&#x27;imparfait"><span class="vb0">(s’entendre)</span> <input class="w" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="check">OK</button><span class="after"><span class="sol"><span class="txt">nous entendions</span> <button class="pb sm" data-a="f0fce3392c" aria-label="Écouter">▶</button></span></span></span> très bien avec nos voisins de camping. Le dernier jour, mon fils <span class="item inp inl" data-ans="[&quot;est tombé&quot;]" data-anchor="r-pqp" data-label="passé composé avec être"><span class="vb0">(tomber)</span> <input class="w" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="check">OK</button><span class="after"><span class="sol"><span class="txt">est tombé</span> <button class="pb sm" data-a="b08bf5f258" aria-label="Écouter">▶</button></span></span></span> sur les rochers et il <span class="item inp inl" data-ans="[&quot;s&#x27;est cassé&quot;]" data-anchor="v-pied" data-label="se casser le pied"><span class="vb0">(se casser)</span> <input class="w" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="check">OK</button><span class="after"><span class="sol"><span class="txt">s'est cassé</span> <button class="pb sm" data-a="d4816a062e" aria-label="Écouter">▶</button></span></span></span> le pied. Quand nous <span class="item inp inl" data-ans="[&quot;sommes rentrés&quot;]" data-anchor="r-pqp" data-label="passé composé avec être"><span class="vb0">(rentrer)</span> <input class="w" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="check">OK</button><span class="after"><span class="sol"><span class="txt">sommes rentrés</span> <button class="pb sm" data-a="f68ab44d9e" aria-label="Écouter">▶</button></span></span></span> à Paris, nous <span class="item inp inl" data-ans="[&quot;avons eu&quot;]" data-anchor="r-pqp" data-label="passé composé"><span class="vb0">(avoir)</span> <input class="w" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="check">OK</button><span class="after"><span class="sol"><span class="txt">avons eu</span> <button class="pb sm" data-a="2be4d2ae16" aria-label="Écouter">▶</button></span></span></span> une mauvaise surprise : des voleurs <span class="item inp inl" data-ans="[&quot;avaient cambriolé&quot;]" data-anchor="r-pqp" data-label="plus-que-parfait : action antérieure"><span class="vb0">(cambrioler)</span> <input class="w" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="check">OK</button><span class="after"><span class="sol"><span class="txt">avaient cambriolé</span> <button class="pb sm" data-a="18eb7373cd" aria-label="Écouter">▶</button></span></span></span> l'appartement ! Ils <span class="item inp inl" data-ans="[&quot;avaient pris&quot;]" data-anchor="r-pqpverbs" data-label="prendre au plus-que-parfait"><span class="vb0">(prendre)</span> <input class="w" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="check">OK</button><span class="after"><span class="sol"><span class="txt">avaient pris</span> <button class="pb sm" data-a="6980e734fe" aria-label="Écouter">▶</button></span></span></span> l'ordinateur et les bijoux. Heureusement, la voisine <span class="item inp inl" data-ans="[&quot;avait déjà appelé&quot;]" data-anchor="r-pqp" data-label="déjà + plus-que-parfait"><span class="vb0">(déjà appeler)</span> <input class="w" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="check">OK</button><span class="after"><span class="sol"><span class="txt">avait déjà appelé</span> <button class="pb sm" data-a="54529bc8f6" aria-label="Écouter">▶</button></span></span></span> la police. Aujourd'hui, nous <span class="item inp inl" data-ans="[&quot;vivons&quot;]" data-anchor="r-vivre" data-label="vivre au présent"><span class="vb0">(vivre)</span> <input class="w" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="check">OK</button><span class="after"><span class="sol"><span class="txt">vivons</span> <button class="pb sm" data-a="13bee2f875" aria-label="Écouter">▶</button></span></span></span> toujours dans ce quartier, mais nous <span class="item inp inl" data-ans="[&quot;sommes&quot;]" data-anchor="r-vivre" data-label="présent"><span class="vb0">(être)</span> <input class="w" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="check">OK</button><span class="after"><span class="sol"><span class="txt">sommes</span> <button class="pb sm" data-a="ff54801795" aria-label="Écouter">▶</button></span></span></span> plus prudents.</div><div class="storyde"><div class="line "><div class="fr"><span class="txt"><i>Traduction du texte</i></span><span class="btns"><button class="deb">IT</button></span></div><div class="det">L'estate scorsa abbiamo passato tre settimane in Normandia. Faceva bello e andavamo molto d'accordo con i nostri vicini di campeggio. L'ultimo giorno, mio figlio è caduto sugli scogli e si è rotto il piede. Quando siamo rientrati a Parigi, abbiamo avuto una brutta sorpresa: dei ladri avevano svaligiato l'appartamento! Avevano preso il computer e i gioielli. Per fortuna, la vicina aveva già chiamato la polizia. Oggi viviamo ancora in questo quartiere, ma siamo più prudenti.</div></div></div></div></div><div class="exercise ex-p" id="ex4"><div class="exhead g-d"><span class="exn">4</span><div class="exh"><div class="exkind">TRADUCTION</div><div class="line consigne"><div class="fr"><span class="txt">Traduis en français. Puis regarde la correction et dis honnêtement si tu avais juste.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Traduci in francese. Poi guarda la correzione e di' onestamente se era giusto.</div></div></div></div><div class="item tr" data-anchor="v-conge" data-label="être en congé"><div class="qrow"><span class="qn">1</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>Sono in ferie fino al 15 gennaio.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Je suis en congé jusqu'au 15 janvier.</span> <button class="pb sm" data-a="70bd17a32e" aria-label="Écouter">▶</button></div></div></div><div class="item tr" data-anchor="v-rapport" data-label="par rapport à"><div class="qrow"><span class="qn">2</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>Rispetto a Milano, Parigi è più cara.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Par rapport à Milan, Paris est plus chère.</span> <button class="pb sm" data-a="b48049801d" aria-label="Écouter">▶</button></div></div></div><div class="item tr" data-anchor="v-entendre" data-label="s&#x27;entendre avec"><div class="qrow"><span class="qn">3</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>Vado molto d'accordo con mia sorella.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Je m'entends très bien avec ma sœur.</span> <button class="pb sm" data-a="4b1cf45898" aria-label="Écouter">▶</button></div></div></div><div class="item tr" data-anchor="v-cambrioler" data-label="cambrioler"><div class="qrow"><span class="qn">4</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>Durante le vacanze, dei ladri hanno svaligiato la casa dei nostri vicini.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Pendant les vacances, des voleurs ont cambriolé la maison de nos voisins.</span> <button class="pb sm" data-a="acc7133534" aria-label="Écouter">▶</button></div></div></div><div class="item tr" data-anchor="r-pqp" data-label="plus-que-parfait"><div class="qrow"><span class="qn">5</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>Quando sono arrivato, il film era già cominciato.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Quand je suis arrivé, le film avait déjà commencé.</span> <button class="pb sm" data-a="cb44dbf0c5" aria-label="Écouter">▶</button></div></div></div><div class="item tr" data-anchor="v-fache" data-label="être fâché + plus-que-parfait"><div class="qrow"><span class="qn">6</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>Mia madre è arrabbiata con me perché avevo dimenticato il suo compleanno.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Ma mère est fâchée contre moi parce que j'avais oublié son anniversaire.</span> <button class="pb sm" data-a="9f02ed3d48" aria-label="Écouter">▶</button></div></div></div><div class="item tr" data-anchor="r-vivre" data-label="vécu"><div class="qrow"><span class="qn">7</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>Abbiamo vissuto due anni in Francia.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Nous avons vécu deux ans en France.</span> <button class="pb sm" data-a="1c226acc03" aria-label="Écouter">▶</button></div></div></div></div><div class="exercise ex-g" id="ex5"><div class="exhead g-e"><span class="exn">5</span><div class="exh"><div class="exkind">RÉFLEXION</div><div class="line consigne"><div class="fr"><span class="txt">Un sujet d'actualité : donne ton avis dans un petit texte organisé.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Un tema d'attualità: esprimi la tua opinione in un breve testo organizzato.</div></div></div></div><div style="padding:10px 16px"><div class="refl"><figure class="art"><img src="img/msm.jpg" alt="" loading="lazy" style="width:100%;height:240px;object-fit:cover;border-radius:4px"><div class="artcap"><b>Le Mont-Saint-Michel, en Normandie</b> · Plusieurs millions de visiteurs chaque année</div></figure><h4>Le surtourisme : faut-il limiter le nombre de visiteurs ?</h4><div class="line "><div class="fr"><span class="txt">Chaque été, les lieux les plus célèbres sont envahis par les touristes. Depuis 2024, Venise fait payer une taxe d'entrée aux visiteurs qui viennent seulement pour la journée.</span><span class="btns"><button class="pb" data-a="d71ca0f30e" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Ogni estate i luoghi più famosi sono invasi dai turisti. Dal 2024, Venezia fa pagare un contributo d'accesso ai visitatori giornalieri.</div></div><div class="line "><div class="fr"><span class="txt">En France, certaines calanques près de Marseille ne sont accessibles en été que sur réservation. Les habitants se plaignent du bruit, des prix et des embouteillages, mais le tourisme fait aussi vivre beaucoup de familles.</span><span class="btns"><button class="pb" data-a="eb42e10a67" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">In Francia, alcune calanche vicino a Marsiglia in estate sono accessibili solo su prenotazione. Gli abitanti si lamentano del rumore, dei prezzi e degli ingorghi, ma il turismo fa anche vivere molte famiglie.</div></div><h4>Pour trouver tes idées</h4><ol class="qs"><li><div class="line "><div class="fr"><span class="txt">Est-ce que tu as déjà vécu une mauvaise expérience à cause de la foule, en vacances ?</span><span class="btns"><button class="pb" data-a="ca9bc4ea73" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Hai già vissuto una brutta esperienza a causa della folla, in vacanza?</div></div></li><li><div class="line "><div class="fr"><span class="txt">Quels sont les avantages du tourisme pour une ville ? Et les problèmes pour les habitants ?</span><span class="btns"><button class="pb" data-a="d534b00493" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Quali sono i vantaggi del turismo per una città? E i problemi per gli abitanti?</div></div></li><li><div class="line "><div class="fr"><span class="txt">Faire payer, réserver, limiter le nombre de visiteurs : quelle solution te semble juste ?</span><span class="btns"><button class="pb" data-a="ad76b7afaf" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Far pagare, prenotare, limitare il numero di visitatori: quale soluzione ti sembra giusta?</div></div></li></ol><h4>Pour organiser ton texte</h4><div class="steps3"><div><b class="t">Introduction</b><div class="line "><div class="fr"><span class="txt">Présente le problème en une ou deux phrases et pose la question.</span><span class="btns"><button class="pb" data-a="2a8644ceb4" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Presenta il problema e poni la domanda.</div></div><i style="font-size:14px;color:#7a4a6e">Aujourd'hui, de nombreux sites… On peut se demander si…</i></div><div><b class="t">Développement</b><div class="line "><div class="fr"><span class="txt">D'un côté, les avantages du tourisme. De l'autre, les problèmes. Donne un exemple que tu as vécu.</span><span class="btns"><button class="pb" data-a="83c67e6a9b" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Da un lato i vantaggi, dall'altro i problemi. Fai un esempio vissuto.</div></div><i style="font-size:14px;color:#7a4a6e">D'un côté… De l'autre… Par exemple, l'été dernier…</i></div><div><b class="t">Conclusion</b><div class="line "><div class="fr"><span class="txt">Donne ton avis et propose une solution.</span><span class="btns"><button class="pb" data-a="96b2aed394" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Dai la tua opinione e proponi una soluzione.</div></div><i style="font-size:14px;color:#7a4a6e">En conclusion, à mon avis… C'est pourquoi il faudrait…</i></div></div><h4>Mots utiles <span style="font-size:14px;font-family:Source Sans 3;color:#6b6f7d">(clique pour les ajouter)</span></h4><div class="wb"><button>le surtourisme</button><button>la foule</button><button>les habitants</button><button>la qualité de vie</button><button>faire vivre</button><button>préserver</button><button>limiter</button><button>une réservation</button><button>une taxe</button><button>par rapport à</button><button>D'un côté,</button><button>De l'autre,</button><button>À mon avis,</button><button>C'est pourquoi</button><button>En conclusion,</button></div><textarea rows="10" placeholder="Écris ton texte ici (120 à 150 mots)…"></textarea><div class="wc"></div><details class="modelans" style="margin-top:8px"><summary>Voir un exemple de texte</summary><div class="line ex"><div class="fr"><span class="txt">Aujourd'hui, de nombreux sites célèbres reçoivent trop de visiteurs, surtout en été. On peut se demander s'il faut limiter leur nombre. D'un côté, le tourisme fait vivre beaucoup de familles : les hôtels, les restaurants et les commerçants en ont besoin. De l'autre, les habitants souffrent du bruit et des prix, et les lieux s'abîment. Par exemple, l'été dernier, j'avais réservé une visite au Mont-Saint-Michel, mais la foule était telle que je n'ai presque rien vu. Par rapport à il y a vingt ans, le problème est beaucoup plus grave. En conclusion, à mon avis, il ne faut pas fermer ces lieux, mais il faut organiser les visites. C'est pourquoi je trouve que la réservation est une solution juste : elle permet de préserver les sites et la qualité de vie des habitants.</span><span class="btns"><button class="pb" data-a="b725cafb52" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Oggi molti siti famosi ricevono troppi visitatori, soprattutto d'estate. Ci si può chiedere se bisogna limitarne il numero. Da un lato, il turismo fa vivere molte famiglie: alberghi, ristoranti e commercianti ne hanno bisogno. Dall'altro, gli abitanti soffrono per il rumore e i prezzi, e i luoghi si rovinano. Per esempio, l'estate scorsa avevo prenotato una visita al Mont-Saint-Michel, ma c'era una tale folla che non ho visto quasi niente. Rispetto a vent'anni fa, il problema è molto più grave. In conclusione, secondo me, non bisogna chiudere questi luoghi, ma bisogna organizzare le visite. Per questo trovo che la prenotazione sia una soluzione giusta: permette di preservare i siti e la qualità della vita degli abitanti.</div></div></details><div class="sendbox" style="margin:10px 0 0"><button class="copy copyrefl">📋 Copier mon texte pour Irène</button><span class="copied"></span></div></div></div></div></section><section id="bilan" style="scroll-margin-top:60px"><div class="sechead"><img src="img/renoir.jpg" alt="" loading="lazy"><div class="artcap"><b>Auguste Renoir, <i>Le Déjeuner des canotiers</i>, 1880-1881</b> · The Phillips Collection, Washington</div><div class="seclabel"><span class="secnum">★</span><div><div class="line h2line"><div class="fr"><span class="txt">À revoir</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Da ripassare</div></div></div></div></div><div class="revbody"><div class="revsum"></div><div class="line "><div class="fr"><span class="txt">Clique sur le lien pour relire la règle ou le mot, puis écoute la bonne réponse et répète-la.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Clicca sul link per rileggere la regola o la parola, poi ascolta la risposta giusta e ripetila.</div></div><div class="revempty">Pas encore d'erreur. Les points à revoir apparaissent ici quand tu fais les exercices.</div><div class="tablewrap"><table class="revt"><thead><tr><th>Ex.</th><th>La bonne réponse</th><th>Ma réponse</th><th>À revoir</th></tr></thead><tbody></tbody></table></div></div></section></main>
+<script>(function(){
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const KEY='fabrizio-vocabulaire-1';
+function load(){ try{ return JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ return {}; } }
+function save(o){ try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){} }
+let store=load();
+
+/* ---------- audio ---------- */
+let cur=null, curBtn=null;
+function play(id,btn){
+  if(!id) return;
+  try{ if(cur) cur.pause(); }catch(e){}
+  if(curBtn) curBtn.classList.remove('playing');
+  cur=new Audio('audio/'+id+'.mp3'); curBtn=btn||null;
+  if(btn) btn.classList.add('playing');
+  cur.onended=()=>{ if(btn) btn.classList.remove('playing'); };
+  cur.play().catch(()=>{ if(btn) btn.classList.remove('playing'); });
+}
+function playSol(item){ const b=$('.after .sol .pb',item); if(b) play(b.dataset.a,b); }
+
+/* ---------- score + étoiles ---------- */
+const items=$$('.item.qcm, .item.inp, .item.tiles, .item.tr');
+let score=0; const errors=[];
+$('#tot').textContent=items.length;
+function bump(){ $('#sc').textContent=score; const s=$('#score'); s.classList.remove('bump'); void s.offsetWidth; s.classList.add('bump'); }
+function stars(el){
+  const r=el.getBoundingClientRect(); const cx=r.left+Math.min(r.width,260)/2, cy=Math.max(r.top+20,60);
+  const sym=['★','✦','★','✧','★','✦','★','✧','★','✦','★','✧'];
+  sym.forEach((c,i)=>{ const s=document.createElement('span'); s.className='star'; s.textContent=c;
+    const a=(Math.PI*2)*(i/sym.length)+Math.random()*.5, d=55+Math.random()*55;
+    s.style.left=cx+'px'; s.style.top=cy+'px';
+    s.style.setProperty('--dx',Math.cos(a)*d+'px'); s.style.setProperty('--dy',(Math.sin(a)*d-35)+'px');
+    s.style.color=['#fab005','#d6336c','#7048e8','#2f9e44','#1c7ed6','#f76707'][i%6];
+    document.body.appendChild(s); setTimeout(()=>s.remove(),1100); });
+}
+function exNum(item){ const e=item.closest('.exercise'); return e? e.id.replace('ex','') : ''; }
+function finish(item,ok,yours,goodText,msgFr,msgDe){
+  item.classList.add('done', ok?'right':'wrong');
+  if(ok){ score++; bump(); stars(item); }
+  else{ errors.push({ex:exNum(item), good:goodText, yours:yours, anchor:item.dataset.anchor, label:item.dataset.label}); }
+  renderRevoir();
+  if(msgFr){ const m=document.createElement('div'); m.className='msg';
+    m.innerHTML=msgFr+(msgDe?'<div class="det">'+msgDe+'</div>':'');
+    item.insertBefore(m, $('.after',item)); }
+  setTimeout(()=>playSol(item), ok?350:150);
+}
+function solText(item){ const s=$('.after .sol .txt',item); return s? s.textContent : ''; }
+function norm(s){
+  return s.normalize('NFC').replace(/[’‘`´]/g,"'").replace(/[‐‑‒–—−]/g,'-')
+   .replace(/\s*'\s*/g,"'").replace(/[\s?.!]+$/,'').replace(/\s+/g,' ').trim().toLowerCase();
+}
+
+document.addEventListener('click',e=>{
+  const t=e.target.closest('button,a'); if(!t) return;
+  if(t.matches('.pb')||t.matches('.st')){ play(t.dataset.a,t); return; }
+  if(t.matches('.deb')){ const h=t.closest('.line'); if(h) h.classList.toggle('open'); return; }
+  if(t.id==='deall'){ document.body.classList.toggle('de-all'); return; }
+  if(t.matches('.opt')){
+    const item=t.closest('.item'); if(item.classList.contains('done')) return;
+    const good=item.dataset.good, ok=t.dataset.v===good;
+    $$('.opt',item).forEach(o=>{ if(o.dataset.v===good) o.classList.add('good'); });
+    if(!ok) t.classList.add('bad');
+    finish(item,ok,t.dataset.v,solText(item)); return;
+  }
+  if(t.matches('.check')){ const item=t.closest('.item'); if(item.classList.contains('tiles')) checkTiles(item); else checkInp(item); return; }
+  if(t.matches('.tile')){
+    const item=t.closest('.item'); if(item.classList.contains('done')) return;
+    const into = t.parentElement.classList.contains('pool') ? $('.built',item) : $('.pool',item);
+    into.appendChild(t);
+    if(!$('.pool .tile',item)) checkTiles(item);
+    return;
+  }
+  if(t.matches('.undo')){ const item=t.closest('.item'); $$('.built .tile',item).forEach(x=>$('.pool',item).appendChild(x)); return; }
+  if(t.matches('.revlink')){ e.preventDefault(); goTo(t.getAttribute('href').slice(1)); return; }
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter' && e.target.matches('input.w')){ checkInp(e.target.closest('.item')); }
+});
+function checkInp(item){
+  if(item.classList.contains('done')) return;
+  const inp=$('input.w',item); const raw=inp.value.trim(); if(!raw){ inp.focus(); return; }
+  const answers=JSON.parse(item.dataset.ans);
+  const ok=answers.some(a=>norm(a)===norm(raw));
+  const inl=item.classList.contains('inl');
+  finish(item,ok,raw,solText(item), inl?null:(ok?"✓ Juste !":"✗ Regarde la bonne réponse et écoute-la :"), inl?null:(ok?"Giusto!":"Guarda la risposta giusta e ascoltala:"));
+}
+function joinT(toks){ let out=''; toks.forEach(t=>{ out = out ? out+' '+t : t; }); return out; }
+function checkTiles(item){
+  if(item.classList.contains('done')) return;
+  if($('.pool .tile',item)) return;
+  const built=joinT($$('.built .tile',item).map(x=>x.textContent)), ok=built===item.dataset.good;
+  finish(item,ok,built,item.dataset.good, ok?"✓ Juste !":"✗ Regarde la bonne phrase :", ok?"Giusto!":"Guarda la frase giusta:");
+}
+
+/* ---------- à revoir ---------- */
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function renderRevoir(){
+  const tb=$('.revt tbody'); tb.innerHTML='';
+  errors.forEach(er=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${esc(er.ex)}</td><td class="good">${esc(er.good)}</td><td class="yours">${esc(er.yours)}</td>`+
+      `<td><a class="revlink" href="#${esc(er.anchor)}">→ ${esc(er.label)}</a></td>`;
+    tb.appendChild(tr);
+  });
+  $('.revempty').style.display=errors.length?'none':'block';
+  $('.tablewrap').style.display=errors.length?'block':'none';
+  const answered=$$('.item.done').length;
+  $('.revsum').textContent = answered ? `★ ${score} bonnes réponses sur ${answered} · ${errors.length} point${errors.length>1?'s':''} à revoir` : '';
+}
+function goTo(id){
+  const el=document.getElementById(id); if(!el) return;
+  el.scrollIntoView({behavior:'smooth',block:id==='bilan'?'start':'center'});
+  el.classList.remove('flashed'); void el.offsetWidth; el.classList.add('flashed');
+}
+renderRevoir();
+
+
+/* ---------- extras Fabrizio ---------- */
+let seq=null;
+function playAll(box,btn){
+  if(seq){ seq.stop=true; seq=null; $$('.playall').forEach(b=>b.classList.remove('on')); try{cur.pause();}catch(e){} return; }
+  const list=$$('.pb',box).filter(b=>b.dataset.a); let i=0; seq={stop:false}; const me=seq; btn.classList.add('on');
+  const next=()=>{ if(me.stop||i>=list.length){ btn.classList.remove('on'); if(seq===me) seq=null; return; }
+    const b=list[i++]; const card=b.closest('.vcard'); b.scrollIntoView({block:'nearest',behavior:'smooth'});
+    play(b.dataset.a,b); cur.onended=()=>{ b.classList.remove('playing'); setTimeout(next,500); }; cur.onerror=()=>setTimeout(next,200); };
+  next();
+}
+document.addEventListener('click',e=>{
+  const t=e.target;
+  const card=t.closest('.vcard');
+  if(card && !t.closest('button') && !t.closest('.vb')){ card.classList.add('flip'); return; }
+  if(t.matches('.vb .back')){ t.closest('.vcard').classList.remove('flip'); return; }
+  if(t.matches('.flipall')){ const on=!t.classList.contains('on'); t.classList.toggle('on',on); $$('.vcard').forEach(c=>c.classList.toggle('flip',on)); return; }
+  if(t.matches('.playall')){ playAll(document.getElementById(t.dataset.box),t); return; }
+  if(t.matches('.hidebtn')){ const tb=document.getElementById(t.dataset.t); const on=!tb.classList.contains('hide'); tb.classList.toggle('hide',on); t.classList.toggle('on',on);
+    $$('.v',tb).forEach(v=>v.classList.remove('show')); t.textContent=on?'👁 Tout montrer':'🙈 Je cache et je récite'; return; }
+  if(t.closest('.hide .v')){ const v=t.closest('.v'); v.classList.add('show'); const b=v.closest('tr').querySelector('.pb'); if(b) play(b.dataset.a,b); return; }
+  if(t.matches('.tlbtn')){ const tl=t.closest('.tlwrap'); const cs=$$('.tlc',tl); const k=cs.filter(c=>c.classList.contains('on')).length;
+    if(k<cs.length){ cs[k].classList.add('on'); const b=$('.pb',cs[k]); if(b) play(b.dataset.a,b); t.textContent = k+1<cs.length ? 'Étape suivante →' : '↺ Recommencer'; }
+    else { cs.forEach(c=>c.classList.remove('on')); t.textContent='▶ Voir l\'histoire étape par étape'; } return; }
+  if(t.matches('.reveal')){ const it=t.closest('.item'); if(!$('textarea',it).value.trim()){ $('textarea',it).focus(); $('textarea',it).placeholder='Écris d\'abord ta traduction…'; return; } it.classList.add('revealed'); playSol(it); return; }
+  if(t.matches('.selfok')||t.matches('.selfko')){ const it=t.closest('.item'); finish(it,t.matches('.selfok'),$('textarea',it).value.trim(),solText(it)); return; }
+  if(t.closest('.wb') && t.tagName==='BUTTON'){ const ta=$('.refl textarea'); const s=ta.selectionStart??ta.value.length; const bef=ta.value.slice(0,s), aft=ta.value.slice(s);
+    const w=t.textContent; const sep=(bef&&!/\s$/.test(bef))?' ':''; ta.value=bef+sep+w+' '+aft; ta.focus(); const p=(bef+sep+w+' ').length; ta.setSelectionRange(p,p); ta.dispatchEvent(new Event('input')); return; }
+  if(t.matches('.copyrefl')){ const v=$('.refl textarea').value.trim(); const m=$('.copied'); if(!v){ m.textContent='Écris d’abord ton texte.'; return; }
+    const ok=()=>m.textContent='✓ Copié ! Tu peux l’envoyer à Irène.';
+    if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(ok,()=>{}); return; }
+});
+const rta=$('.refl textarea');
+if(rta){ try{ const s=load(); if(s.refl) rta.value=s.refl; }catch(e){}
+  const upd=()=>{ const n=(rta.value.trim().match(/\S+/g)||[]).length; $('.wc').textContent=n+' mots'+(n>=120?' ✓':' (objectif : 120 à 150 mots)'); store.refl=rta.value; save(store); };
+  rta.addEventListener('input',upd); upd(); }
+})();
+</script>
+</body></html>
