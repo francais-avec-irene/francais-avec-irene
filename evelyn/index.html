@@ -190,6 +190,23 @@ footer{text-align:center;color:var(--ink-2);font-size:.85rem;padding-bottom:28px
   .pick{grid-template-columns:1fr 1fr}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* lecture confortable */
+body{font-size:20px;line-height:1.6}
+.it .s{font-size:1.35rem}
+.opt{font-size:1.25rem;padding:10px 18px;border-width:3px}
+.opts.col2 .opt{font-size:1.2rem}
+.after{font-size:1.1rem}
+.consigne{font-size:1.1rem}
+.tip{font-size:1rem}
+.en{color:#4a3b52}
+.vc .fr{font-size:1.15rem}
+.vc .tr{font-size:1rem}
+.vgrid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.vt li button{font-size:1.2rem}
+.vt li span{font-size:1rem}
+.eyebreak{display:flex;gap:12px;align-items:center;max-width:var(--max,880px);margin:18px auto;background:#fff;border:3px dashed var(--mint);border-radius:22px;padding:14px 18px;font-size:1.1rem}
+.eyebreak svg{width:34px;height:34px;flex:none;fill:var(--sun)}
 </style>
 </head>
 <body>
@@ -226,7 +243,7 @@ footer{text-align:center;color:var(--ink-2);font-size:.85rem;padding-bottom:28px
       <span class="name">Evelyn</span>
       <p>Révision avant le contrôle : les verbes être et avoir, à la forme affirmative et à la forme négative.
         <span class="en">Revision before the test: the verbs être (to be) and avoir (to have), in the positive and negative forms.</span></p>
-      <div class="time"><span>9 étapes · 9 steps</span><span>30 minutes</span></div>
+      <div class="time"><span>8 étapes · 8 steps</span><span>20 minutes</span></div>
     </div>
     <svg class="heart-photo" viewBox="0 0 100 100" role="img" aria-label="Un petit lapin blanc">
       <image href="" id="heroImg" x="0" y="0" width="100" height="100" preserveAspectRatio="xMidYMid slice" clip-path="url(#heartClip)"/>
@@ -240,7 +257,7 @@ footer{text-align:center;color:var(--ink-2);font-size:.85rem;padding-bottom:28px
 <section class="step" id="e1" style="--c:var(--pink)">
   <div class="step-head"><span class="num"><svg><use href="#heart"/></svg><b>1</b></span><h2>Mes mots <span class="en">My words</span></h2><span class="mins">5 min</span></div>
   <div class="card">
-    <p class="consigne">Touche chaque image : tu entends le mot et tu vois la traduction. Dis le mot à voix haute.
+    <p class="consigne">Touche chaque image : tu entends le mot et tu vois la traduction. Dis le mot à voix haute. Prends ton temps.
       <span class="en">Tap each picture: you hear the word and see the translation. Say the word out loud.</span></p>
     <p class="vocab-title">Les animaux <span class="en">Animals</span></p>
     <div class="vgrid" id="vAnimals"></div>
@@ -250,13 +267,6 @@ footer{text-align:center;color:var(--ink-2);font-size:.85rem;padding-bottom:28px
     <div class="colors" id="vColors"></div>
     <p class="vocab-title">Petits mots utiles <span class="en">Useful little words</span></p>
     <div class="colors" id="vWords"></div>
-    <div class="game">
-      <p class="consigne" style="background:#fff">Jeu : lis le mot (ou écoute-le) et touche la bonne photo.
-        <span class="en">Game: read the word (or listen to it) and tap the right photo.</span></p>
-      <div class="game-q"><span id="gWord">un lapin</span><button class="listen small" id="gListen" type="button" style="--c:var(--sky)"><svg><use href="#spk"/></svg>Écouter · Listen</button></div>
-      <div class="pick" id="gPick"></div>
-      <p class="tip" id="gInfo">Mot 1 sur 6 · Word 1 of 6</p>
-    </div>
   </div>
 </section>
 
@@ -289,6 +299,8 @@ footer{text-align:center;color:var(--ink-2);font-size:.85rem;padding-bottom:28px
   </div>
 </section>
 
+<div class="eyebreak"><svg><use href="#star"/></svg><div><b>Petite pause</b> · Ferme les yeux et compte jusqu'à 10. Puis regarde par la fenêtre, très loin.<span class="en">Little break · Close your eyes and count to 10. Then look out of the window, far away.</span></div></div>
+
 <section class="step" id="e4" style="--c:var(--mint)">
   <div class="step-head"><span class="num"><svg><use href="#heart"/></svg><b>4</b></span><h2>Être ou avoir ? <span class="en">To be or to have?</span></h2><span class="mins">4 min</span></div>
   <div class="card">
@@ -300,11 +312,10 @@ footer{text-align:center;color:var(--ink-2);font-size:.85rem;padding-bottom:28px
 </section>
 
 <section class="step" id="e5" style="--c:var(--lilac)">
-  <div class="step-head"><span class="num"><svg><use href="#heart"/></svg><b>5</b></span><h2>Je construis la phrase <span class="en">I build the sentence</span></h2><span class="mins">4 min</span></div>
+  <div class="step-head"><span class="num"><svg><use href="#heart"/></svg><b>5</b></span><h2>Je choisis la phrase <span class="en">I choose the sentence</span></h2><span class="mins">4 min</span></div>
   <div class="card">
-    <p class="consigne">Lis la phrase en anglais. Touche les mots français dans le bon ordre. Attention : un mot ne sert à rien !
-      <span class="en">Read the sentence in English. Tap the French words in the right order. Careful: one word is not needed!</span></p>
-    <p class="tip">Pour enlever un mot, touche-le dans la ligne.<span class="en">To remove a word, tap it in the line.</span></p>
+    <p class="consigne">Lis la phrase en anglais. Quelle est la bonne phrase en français ? Choisis.
+      <span class="en">Read the sentence in English. Which is the right sentence in French? Choose.</span></p>
     <div class="items" id="q5"></div>
   </div>
 </section>
@@ -335,23 +346,16 @@ footer{text-align:center;color:var(--ink-2);font-size:.85rem;padding-bottom:28px
     <p class="consigne">A. Choisis <b>ne</b> ou <b>n'</b>.
       <span class="en">A. Choose ne or n'.</span></p>
     <div class="items" id="q6a"></div>
-    <p class="consigne">B. Lis la phrase en anglais et construis la phrase négative en français. Attention : un mot ne sert à rien !
-      <span class="en">B. Read the sentence in English and build the negative sentence in French. Careful: one word is not needed!</span></p>
+    <p class="consigne">B. Lis la phrase en anglais. Quelle est la bonne phrase négative ? Choisis.
+      <span class="en">B. Read the sentence in English. Which is the right negative sentence? Choose.</span></p>
     <div class="items" id="q6b"></div>
   </div>
 </section>
 
-<section class="step" id="e7" style="--c:var(--sun)">
-  <div class="step-head"><span class="num"><svg><use href="#heart"/></svg><b>7</b></span><h2>Regarde bien la photo <span class="en">Look carefully at the photo</span></h2><span class="mins">2 min</span></div>
-  <div class="card">
-    <p class="consigne">Quelle phrase est vraie pour la photo ? La phrase affirmative ou la phrase négative ?
-      <span class="en">Which sentence is true for the photo? The positive sentence or the negative sentence?</span></p>
-    <div class="items" id="q7"></div>
-  </div>
-</section>
+<div class="eyebreak"><svg><use href="#star"/></svg><div><b>Petite pause</b> · Ferme les yeux et compte jusqu'à 10. Puis regarde par la fenêtre, très loin.<span class="en">Little break · Close your eyes and count to 10. Then look out of the window, far away.</span></div></div>
 
 <section class="step" id="e8" style="--c:var(--sky)">
-  <div class="step-head"><span class="num"><svg><use href="#heart"/></svg><b>8</b></span><h2>J'écoute <span class="en">I listen</span></h2><span class="mins">2 min</span></div>
+  <div class="step-head"><span class="num"><svg><use href="#heart"/></svg><b>7</b></span><h2>J'écoute <span class="en">I listen</span></h2><span class="mins">2 min</span></div>
   <div class="card">
     <p class="consigne">Écoute la phrase. Quel verbe entends-tu ? Choisis.
       <span class="en">Listen to the sentence. Which verb do you hear? Choose.</span></p>
@@ -362,7 +366,7 @@ footer{text-align:center;color:var(--ink-2);font-size:.85rem;padding-bottom:28px
 </section>
 
 <section class="step" id="e9" style="--c:var(--berry)">
-  <div class="step-head"><span class="num"><svg><use href="#heart"/></svg><b>9</b></span><h2>Le petit contrôle <span class="en">The little test</span></h2><span class="mins">4 min</span></div>
+  <div class="step-head"><span class="num"><svg><use href="#heart"/></svg><b>8</b></span><h2>Le petit contrôle <span class="en">The little test</span></h2><span class="mins">4 min</span></div>
   <div class="card">
     <p class="consigne">10 questions, comme le vrai contrôle. Tu as une seule chance par question. Le résultat apparaît à la fin.
       <span class="en">10 questions, like the real test. You have only one try per question. Your score appears at the end.</span></p>
@@ -400,7 +404,7 @@ let stars=0;
 function star(){stars++;$("#stars").textContent=stars;const b=$("#starsBox");b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop")}
 
 /* ---------- navigation ---------- */
-const ST=[["e1","Mes mots"],["e2","Être et avoir"],["e3","La bonne forme"],["e4","Être ou avoir ?"],["e5","Je construis"],["e6","La négation"],["e7","La photo"],["e8","J'écoute"],["e9","Le contrôle"]];
+const ST=[["e1","Mes mots"],["e2","Être et avoir"],["e3","La bonne forme"],["e4","Être ou avoir ?"],["e5","Je choisis"],["e6","La négation"],["e8","J'écoute"],["e9","Le contrôle"]];
 $("#steps").innerHTML=ST.map(([id,n],i)=>`<a href="#${id}">${i+1}. ${n}</a>`).join("");
 const links=[...document.querySelectorAll("#steps a")];
 if("IntersectionObserver" in window){
@@ -439,24 +443,6 @@ $("#vColors").innerHTML=COLS.map(([f,e,c])=>(reg(f),`<button type="button" class
 const WORDS=[["petit / petite","small"],["grand / grande","big, tall"],["content / contente","happy"],["triste","sad"],["fatigué / fatiguée","tired"],["dans","in"],["sur","on"],["à l'école","at school"],["à la maison","at home"]];
 $("#vWords").innerHTML=WORDS.map(([f,e])=>(reg(f.replace(" / ",", ")),`<button type="button" class="col" data-fr="${f.replace(" / ",", ")}">${f}<em>· ${e}</em></button>`)).join("");
 document.querySelectorAll(".col").forEach(b=>b.onclick=()=>{b.classList.add("shown");say(b.dataset.fr)});
-
-/* jeu : trouve la photo */
-let gRound=0,gCur=null,gTried=false;const gOrder=ANIM.slice().sort(()=>Math.random()-.5).slice(0,6);
-function gDraw(){
-  if(gRound>=gOrder.length){$("#gWord").textContent="Fini · Finished";$("#gPick").innerHTML="";$("#gListen").hidden=true;$("#gInfo").innerHTML=`<button class="btn ghost" type="button" id="gAgain">Rejouer · Play again</button>`;$("#gAgain").onclick=()=>{gRound=0;gOrder.sort(()=>Math.random()-.5);$("#gListen").hidden=false;gDraw()};return}
-  gCur=gOrder[gRound];gTried=false;
-  const others=ANIM.filter(a=>a!==gCur).sort(()=>Math.random()-.5).slice(0,3);
-  const choices=[gCur,...others].sort(()=>Math.random()-.5);
-  $("#gWord").textContent=gCur[1];
-  $("#gPick").innerHTML=choices.map(c=>`<button type="button" data-k="${c[0]}" aria-label="photo"><img src="${IMG[c[0]]}" alt=""></button>`).join("");
-  $("#gInfo").textContent=`Mot ${gRound+1} sur ${gOrder.length} · Word ${gRound+1} of ${gOrder.length}`;
-  document.querySelectorAll("#gPick button").forEach(b=>b.onclick=()=>{
-    if(b.dataset.k===gCur[0]){b.classList.add("ok");if(!gTried)star();$("#gInfo").innerHTML=`<b>${gCur[1]}</b> = ${gCur[2]}`;document.querySelectorAll("#gPick button").forEach(x=>x.disabled=true);setTimeout(()=>{gRound++;gDraw()},1300)}
-    else{b.classList.add("ko");b.disabled=true;gTried=true}
-  });
-}
-$("#gListen").onclick=()=>{if(gCur)say(gCur[1])};
-gDraw();
 
 /* ---------- 2. tableaux ---------- */
 const ETRE=[["je","suis","I am"],["tu","es","you are"],["il","est","he / it is"],["elle","est","she / it is"],["nous","sommes","we are"],["vous","êtes","you are"],["ils","sont","they are"],["elles","sont","they are"]];
@@ -541,13 +527,12 @@ function builder(sel,items){
 }
 
 /* ---------- 5. construire ---------- */
-builder("#q5",[
- {en:"I have a pencil case.",tiles:["J'ai","une","trousse","Je suis"],answer:["J'ai","une","trousse"]},
- {en:"We are at school.",tiles:["Nous","sommes","à l'école","avons"],answer:["Nous","sommes","à l'école"]},
- {en:"The cat is black.",tiles:["Le chat","est","noir","a"],answer:["Le chat","est","noir"]},
- {en:"She has a blue ruler.",tiles:["Elle","a","une règle","bleue","est"],answer:["Elle","a","une règle","bleue"]},
- {en:"They are happy. (only girls)",tiles:["Elles","sont","contentes","ont"],answer:["Elles","sont","contentes"]},
- {en:"I am seven.",tiles:["J'ai","sept ans","Je suis"],answer:["J'ai","sept ans"]}
+qcm("#q5",[
+ {prompt:"I have a pencil case.",opts:["J'ai une trousse.","Je suis une trousse."],a:0,long:1,en:"I have a pencil case.",full:"J'ai une trousse."},
+ {prompt:"We are at school.",opts:["Nous avons à l'école.","Nous sommes à l'école."],a:1,long:1,en:"We are at school.",full:"Nous sommes à l'école."},
+ {prompt:"The cat is black.",opts:["Le chat est noir.","Le chat a noir."],a:0,long:1,en:"The cat is black.",full:"Le chat est noir."},
+ {prompt:"She has a blue ruler.",opts:["Elle est une règle bleue.","Elle a une règle bleue."],a:1,long:1,en:"She has a blue ruler.",full:"Elle a une règle bleue."},
+ {prompt:"I am seven.",opts:["J'ai sept ans.","Je suis sept ans."],a:0,long:1,en:"I am seven.",full:"J'ai sept ans."}
 ]);
 
 /* ---------- 6. négation ---------- */
@@ -559,20 +544,10 @@ qcm("#q6a",[
  {fr:"Elles ___ ont pas de {cartable|school bag}.",opts:["ne","n'"],a:1,en:"They don't have a school bag.",full:"Elles n'ont pas de cartable."},
  {fr:"Vous ___ êtes pas {fatiguées|tired}.",opts:["ne","n'"],a:1,en:"You are not tired.",full:"Vous n'êtes pas fatiguées."}
 ]);
-builder("#q6b",[
- {en:"The horse is not grey.",tiles:["Le cheval","n'","est","pas","gris","ne"],answer:["Le cheval","n'","est","pas","gris"]},
- {en:"I don't have a pencil case.",tiles:["Je","n'","ai","pas","de","trousse","une"],answer:["Je","n'","ai","pas","de","trousse"]},
- {en:"We are not sad.",tiles:["Nous","ne","sommes","pas","tristes","n'"],answer:["Nous","ne","sommes","pas","tristes"]},
- {en:"The turtle doesn't have a rucksack.",tiles:["La tortue","n'","a","pas","de","sac à dos","un"],answer:["La tortue","n'","a","pas","de","sac à dos"]}
-]);
-
-/* ---------- 7. la photo ---------- */
-qcm("#q7",[
- {img:"lapin",opts:["Le {lapin|rabbit} est {noir|black}.","Le {lapin|rabbit} n'est pas {noir|black}."],a:1,long:1,en:"The rabbit is not black. It is white."},
- {img:"chienpull",opts:["Le {chien|dog} a un {pull|jumper} {jaune|yellow}.","Le {chien|dog} n'a pas de {pull|jumper} {jaune|yellow}."],a:0,long:1,en:"The dog has a yellow jumper."},
- {img:"tortue",opts:["La {tortue|turtle} est dans l'{eau|water}.","La {tortue|turtle} n'est pas dans l'{eau|water}."],a:0,long:1,en:"The turtle is in the water."},
- {img:"sac",opts:["Le {sac à dos|rucksack} est {rose|pink}.","Le {sac à dos|rucksack} n'est pas {rose|pink}."],a:1,long:1,en:"The rucksack is not pink. It is black."},
- {img:"chat",opts:["Le {chat|cat} a un {chapeau|hat}.","Le {chat|cat} n'a pas de {chapeau|hat}."],a:1,long:1,en:"The cat doesn't have a hat."}
+qcm("#q6b",[
+ {prompt:"The horse is not grey.",opts:["Le cheval n'est pas gris.","Le cheval ne est pas gris."],a:0,long:1,en:"The horse is not grey.",full:"Le cheval n'est pas gris."},
+ {prompt:"I don't have a pencil case.",opts:["Je n'ai pas une trousse.","Je n'ai pas de trousse."],a:1,long:1,en:"I don't have a pencil case.",full:"Je n'ai pas de trousse."},
+ {prompt:"We are not sad.",opts:["Nous ne sommes pas tristes.","Nous sommes ne pas tristes."],a:0,long:1,en:"We are not sad.",full:"Nous ne sommes pas tristes."}
 ]);
 
 /* ---------- 8. écoute ---------- */
