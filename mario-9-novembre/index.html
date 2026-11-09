@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vocabulaire, expressions et grammaire · Mario</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>:root{
+ --ink:#1d2433; --muted:#6a7186; --bg:#f5f7f4;
+ --green:#2f9e44; --green-l:#ebfbee; --blue:#1c7ed6; --blue-l:#e7f5ff; --violet:#7048e8; --violet-l:#f3f0ff;
+ --orange:#f76707; --orange-l:#fff4e6; --pink:#d6336c; --pink-l:#fff0f6; --teal:#0c8599; --teal-l:#e3fafc;
+ --sun:#fab005; --sun-l:#fff9db; --ok:#2b8a3e; --ok-l:#ebfbee; --ko:#e03131; --ko-l:#fff5f5;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:17px;line-height:1.5}
+main{max-width:920px;margin:0 auto;padding:64px 14px 80px}
+h1,h2,h3,.cardt,.exkind,.secnum,.exn,.qn,.boxt,.cgt,.wpt,#timer .big,#score{font-family:Fredoka,Nunito,sans-serif}
+b{font-weight:800}
+u{text-decoration-color:var(--pink);text-decoration-thickness:3px;text-underline-offset:3px}
+s{color:var(--ko)}
+.k{color:var(--pink);font-weight:800}
+
+/* barre du haut */
+#topbar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:8px 10px;pointer-events:none}
+#topbar>*{pointer-events:auto}
+#timer{background:#fff;border-radius:16px;padding:6px 12px;box-shadow:0 4px 16px rgba(29,36,51,.18);border:2px solid var(--blue);display:flex;align-items:center;gap:10px;max-width:68vw;transition:border-color .3s}
+#timer .big{font-size:22px;font-weight:600;color:var(--blue);min-width:62px}
+#timer .stepinfo{font-size:13px;line-height:1.25;color:var(--muted);font-weight:700}
+#timer .stepinfo b{color:var(--ink)}
+#timer button{border:0;border-radius:999px;background:var(--blue-l);color:var(--blue);font:800 13px Nunito;padding:4px 10px;cursor:pointer}
+#timer .nextbtn{display:none;background:var(--orange);color:#fff}
+#timer.late{border-color:var(--orange)}
+#timer.late .nextbtn{display:inline-block}
+#timer.paused .big{color:var(--muted)}
+#timer.over{border-color:var(--ko)}
+#timer.over .big{color:var(--ko)}
+#right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+#score{white-space:nowrap;background:#fff;border-radius:999px;padding:5px 14px;box-shadow:0 4px 14px rgba(29,36,51,.18);font-size:18px;border:2px solid var(--sun)}
+#score .st{color:var(--sun)}
+#score.bump{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.25)}}
+#deall{border:0;border-radius:999px;padding:4px 12px;font:800 13px Nunito;background:var(--ink);color:#fff;cursor:pointer;opacity:.85}
+body.de-all #deall{background:var(--sun);color:var(--ink)}
+
+/* étoiles */
+.star{position:fixed;z-index:80;pointer-events:none;font-size:22px;animation:fly 1s ease-out forwards}
+@keyframes fly{0%{transform:translate(0,0) scale(.4);opacity:1}70%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.3) rotate(160deg);opacity:0}}
+
+/* lignes FR + DE */
+.line{margin:6px 0}
+.line .fr{display:flex;align-items:flex-start;gap:8px}
+.line .txt{flex:1}
+.btns{display:inline-flex;gap:5px;flex-shrink:0;margin-top:1px}
+.pb,.deb{border:0;cursor:pointer;border-radius:999px;font:800 12px Nunito;height:26px;min-width:26px;padding:0 7px;line-height:26px}
+.pb{background:var(--green);color:#fff;font-size:11px}
+.pb.sm{height:22px;min-width:22px;line-height:22px;font-size:10px}
+.pb.playing{box-shadow:0 0 0 3px rgba(250,176,5,.6)}
+.deb{background:#eceef3;color:#5b6278;letter-spacing:.5px}
+.line.open>.fr .deb,body.de-all .deb{background:var(--ink);color:#fff}
+.det{display:none;color:#5b6278;font-style:italic;font-size:.9em;margin:3px 0 0 2px;padding-left:10px;border-left:3px solid #d9dce6}
+.line.open>.det,body.de-all .det{display:block}
+.line.ex{background:#f8faf8;border-radius:10px;padding:6px 10px;border:1px solid #e4e9e4}
+.line.ex .txt{font-weight:800}
+.de2{font-family:Nunito;font-style:italic;color:var(--muted);font-weight:400;font-size:.8em}
+
+/* hero */
+.hero{position:relative;border-radius:22px;overflow:hidden;height:300px;box-shadow:0 10px 30px rgba(29,36,51,.18)}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.herotext{position:absolute;left:16px;bottom:16px;right:16px;display:flex;flex-direction:column;align-items:flex-start}
+.tag{display:inline-block;background:var(--sun);color:var(--ink);font:700 12px Fredoka;letter-spacing:2px;padding:5px 12px;border-radius:999px;margin-bottom:8px}
+.hero h1{margin:0;display:inline-block;background:rgba(255,255,255,.94);padding:10px 16px;border-radius:16px;font-size:30px;line-height:1.15}
+.hero h1 span{display:block;color:var(--green);font-size:.62em}
+.intro{background:#fff;border-radius:18px;padding:14px 18px;margin:14px 0 10px;border:2px solid var(--green-l)}
+.intro h2{margin:0 0 4px;color:var(--green);font-size:24px}
+.how{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin:8px 0}
+.how div{background:#f8faf8;border-radius:12px;padding:6px 10px}
+.plan8{list-style:none;padding:0;margin:10px 0;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.plan8 a{display:flex;justify-content:space-between;gap:8px;text-decoration:none;background:var(--blue-l);color:var(--ink);font-weight:800;border-radius:12px;padding:7px 12px}
+.plan8 a span{color:var(--blue);white-space:nowrap}
+.plan8 a.rev{background:var(--sun-l)}
+.startbox{text-align:center;margin:14px 0 4px}
+.start{border:0;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--teal));color:#fff;font:600 22px Fredoka;padding:12px 28px;cursor:pointer;box-shadow:0 6px 18px rgba(47,158,68,.35)}
+.start:hover{transform:translateY(-1px)}
+.resume{display:none;margin-top:8px;border:0;background:none;color:var(--blue);font:800 15px Nunito;cursor:pointer;text-decoration:underline}
+body.started .startbox .start{display:none}
+body.started .startbox::after{content:"⏱ C'est parti ! Le chronomètre tourne en haut à gauche.";font:600 18px Fredoka;color:var(--green)}
+
+/* sections */
+.step{scroll-margin-top:60px}
+.sechead{position:relative;border-radius:20px;overflow:hidden;height:200px;margin:40px 0 14px;box-shadow:0 8px 24px rgba(29,36,51,.15)}
+.sechead img{width:100%;height:100%;object-fit:cover;display:block}
+.seclabel{position:absolute;left:14px;bottom:14px;right:14px;display:flex;align-items:center;gap:10px}
+.seclabel>div{background:rgba(255,255,255,.95);border-radius:14px;padding:2px 14px;max-width:100%}
+.secnum{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:22px;box-shadow:0 3px 10px rgba(0,0,0,.25)}
+.h2line .txt{font-family:Fredoka;font-size:23px;font-weight:600}
+.secmin{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.95);border-radius:999px;padding:3px 12px;font:600 15px Fredoka;color:var(--blue)}
+
+/* règles */
+.rule{background:#fff;border-radius:18px;margin:16px 0;overflow:hidden;border:2px solid;scroll-margin-top:80px}
+.rulehead{padding:6px 16px;color:#fff}
+.rulehead .txt{font-family:Fredoka;font-size:20px;font-weight:600}
+.rulehead .deb{background:rgba(255,255,255,.25);color:#fff}
+.rulehead .det{color:#fff;border-color:rgba(255,255,255,.5)}
+.rulebody{padding:8px 16px 14px}
+.c-green{border-color:var(--green)}.c-green .rulehead{background:linear-gradient(90deg,#2f9e44,#66a80f)}
+.c-teal{border-color:var(--teal)}.c-teal .rulehead{background:linear-gradient(90deg,#0c8599,#1c7ed6)}
+.c-blue{border-color:var(--blue)}.c-blue .rulehead{background:linear-gradient(90deg,#1c7ed6,#7048e8)}
+.c-violet{border-color:var(--violet)}.c-violet .rulehead{background:linear-gradient(90deg,#7048e8,#d6336c)}
+.c-orange{border-color:var(--orange)}.c-orange .rulehead{background:linear-gradient(90deg,#f76707,#fab005)}
+.c-pink{border-color:var(--pink)}.c-pink .rulehead{background:linear-gradient(90deg,#d6336c,#f76707)}
+.flashed{animation:flashr 2.2s}
+@keyframes flashr{0%,60%{box-shadow:0 0 0 6px rgba(250,176,5,.85)}100%{box-shadow:0 0 0 0 rgba(250,176,5,0)}}
+.inbox{background:var(--blue-l);border-left:5px solid var(--blue);border-radius:12px;padding:8px 12px;margin:10px 0}
+.inbox.yellow{background:var(--sun-l);border-color:var(--sun)}
+.inbox.pinkbox{background:var(--pink-l);border-color:var(--pink)}
+.boxt{font-weight:600;font-size:16px;margin-bottom:2px}
+.formula{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0}
+.formula span{border:2px solid var(--green);color:var(--green);border-radius:999px;padding:3px 12px;font-weight:800;background:#fff}
+.formula span.f{background:var(--green);color:#fff}
+.formula span.op{border:0;padding:0;color:var(--muted);font-size:20px;background:none}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pair{background:var(--green-l);border-radius:12px;padding:5px 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.pair .vs{color:var(--muted);margin:0 4px}
+.acc .line{margin:4px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.card{border-radius:14px;padding:8px 12px;border:2px solid}
+.card.k1{border-color:#b2f2bb;background:var(--green-l)}.card.k2{border-color:#a5d8ff;background:var(--blue-l)}.card.k3{border-color:#fcc2d7;background:var(--pink-l)}
+.cardt{font-size:18px;font-weight:600;margin-bottom:2px}
+.k1 .cardt{color:var(--ok)}.k2 .cardt{color:var(--blue)}.k3 .cardt{color:var(--pink)}
+.three.slim .card{padding:4px 10px}
+.irr{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}
+.ir{background:var(--teal-l);border-radius:12px;padding:5px 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.ir .inf{color:var(--teal);font-weight:800;font-size:.9em}
+.rules4{margin:4px 0;padding-left:22px}
+.rules4 li::marker{font:600 18px Fredoka;color:var(--violet)}
+.mots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mot{background:var(--orange-l);border-radius:12px;padding:6px 10px}
+.mot>b{color:var(--orange);font-size:1.1em}
+.meth{margin:4px 0;padding-left:22px}
+.meth li::marker{font:600 18px Fredoka;color:var(--green)}
+
+/* exercices */
+.exercise{background:#fff;border-radius:20px;margin:22px 0;overflow:hidden;box-shadow:0 6px 20px rgba(29,36,51,.08);padding-bottom:6px;scroll-margin-top:70px}
+.exhead{display:flex;gap:12px;align-items:center;padding:10px 16px;color:#fff}
+.exn{font-size:36px;font-weight:700;line-height:1}
+.exh{flex:1}
+.exkind{font-size:13px;letter-spacing:2px;opacity:.9}
+.consigne{margin:2px 0}.consigne .txt{font-weight:800;font-size:17px}
+.exhead .deb{background:rgba(255,255,255,.25);color:#fff}
+.exhead .det{color:#fff;border-color:rgba(255,255,255,.5)}
+.g-a{background:linear-gradient(90deg,#2f9e44,#0c8599)}.g-b{background:linear-gradient(90deg,#d6336c,#f76707)}
+.g-c{background:linear-gradient(90deg,#1c7ed6,#0c8599)}.g-d{background:linear-gradient(90deg,#7048e8,#1c7ed6)}
+.g-e{background:linear-gradient(90deg,#f76707,#fab005)}.g-f{background:linear-gradient(90deg,#0c8599,#2f9e44)}
+.g-g{background:linear-gradient(90deg,#d6336c,#7048e8)}.g-h{background:linear-gradient(90deg,#1d2433,#1c7ed6)}
+.g-i{background:linear-gradient(90deg,#66a80f,#0c8599)}
+.exphoto{height:160px;overflow:hidden}.exphoto img{width:100%;height:100%;object-fit:cover;display:block}
+.item{border-bottom:1px solid #eef0f4;padding:10px 16px;position:relative}
+.item:last-child{border-bottom:0}
+.qrow{display:flex;gap:10px;align-items:flex-start}
+.qn{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#eef0f4;color:var(--muted);display:grid;place-items:center;font-size:15px;margin-top:4px}
+.qtxt{flex:1;min-width:0}
+.qtxt .line{margin:2px 0}
+.blank{display:inline-block;min-width:60px;border-bottom:3px solid var(--blue);color:transparent;line-height:1}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0 38px}
+.opts.col{flex-direction:column;align-items:flex-start}
+.opt{border:2px solid #dde1ea;background:#fff;border-radius:12px;padding:6px 14px;font:800 16px Nunito;color:var(--ink);cursor:pointer;transition:.15s;text-align:left}
+.opt:hover{border-color:var(--blue)}
+.opt.good{background:var(--ok-l);border-color:var(--ok);color:var(--ok)}
+.opt.bad{background:var(--ko-l);border-color:var(--ko);color:var(--ko);text-decoration:line-through}
+.done .opt{cursor:default}
+.after{display:none;margin:8px 0 0 38px}
+.done .after{display:block}
+.sol{background:var(--ok-l);border-radius:10px;padding:6px 10px;margin:4px 0}
+.sol .txt{font-weight:800;color:var(--ok)}
+.item.wrong .sol{background:#fff4e6}.item.wrong .sol .ic{display:none}.item.wrong .sol::before{content:'La bonne réponse : ';font-weight:700;color:#a14d00}.item.wrong .sol .txt{color:#a14d00}
+input.w{font:800 17px Nunito;border:0;border-bottom:3px solid var(--blue);background:#f1f6ff;border-radius:8px 8px 0 0;padding:4px 8px;color:var(--ink);outline:none;max-width:100%}
+input.w.short{width:120px}input.w.mid{width:180px}input.w.long3{width:240px}
+input.w:focus{background:#e5efff}
+.check,.undo{border:0;border-radius:12px;background:var(--blue);color:#fff;font:800 14px Nunito;padding:8px 14px;cursor:pointer;flex-shrink:0;align-self:flex-start;margin-top:2px}
+.undo{background:#eef0f4;color:var(--muted);margin-top:6px}
+.col-btn{display:flex;flex-direction:column}
+.done .check,.done .undo{display:none}
+.done input.w{pointer-events:none}
+.item.right input.w{border-color:var(--ok);background:var(--ok-l)}
+.item.wrong input.w{border-color:var(--ko);background:var(--ko-l)}
+.msg{margin:6px 0 0 38px;font-weight:800;font-size:.95em}
+.msg .det{display:block}
+.item.right .msg{color:var(--ok)}.item.wrong .msg{color:var(--ko)}
+.built{min-height:44px;border:2px dashed #c7cdda;border-radius:12px;padding:6px;display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.pool{display:flex;flex-wrap:wrap;gap:6px}
+.tile{border:0;border-radius:10px;background:var(--green-l);color:#1d6b2d;font:800 16px Nunito;padding:6px 12px;cursor:pointer;box-shadow:0 2px 0 #b2f2bb}
+.built .tile{background:var(--blue-l);color:var(--blue);box-shadow:0 2px 0 #a5d8ff}
+
+/* lecture */
+.readwrap{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;align-items:start}
+.mail{background:#fff;border-radius:18px;padding:12px 18px;border:2px solid #d3f9d8;font-size:17.5px;line-height:1.6}
+.mail p{margin:8px 0}
+.mailh{font-size:14px;color:var(--muted);border-bottom:1px solid #eef0f4;padding-bottom:6px}
+.side img{width:100%;border-radius:14px;display:block;height:150px;object-fit:cover}
+.side .cap{font-size:13px;color:var(--muted);font-style:italic;text-align:center;margin:3px 0 8px}
+.gloss{background:var(--sun-l);border-radius:14px;padding:8px 12px;font-size:15px}
+.listen{margin-top:8px;font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center}
+
+/* production */
+.sujet{background:linear-gradient(135deg,#fff0f6,#fff4e6);border:2px solid var(--pink);border-radius:18px;padding:10px 16px;margin:16px 0}
+.sujet .txt{font-weight:800;font-size:18px}
+.chipsbox{padding:10px 16px 0}
+.cgroup{margin:6px 0 12px}
+.cgt{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.cmax{font:800 12px Nunito;background:#eef0f4;color:var(--muted);border-radius:999px;padding:1px 8px;margin-left:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:2px solid #dde1ea;background:#fff;border-radius:999px;padding:5px 12px;font:700 15px Nunito;color:var(--ink);cursor:pointer}
+.chip.on{background:var(--violet);border-color:var(--violet);color:#fff}
+.cgroup[data-part=milieu] .chip.on{background:var(--green);border-color:var(--green)}
+.cgroup[data-part=fin] .chip.on{background:var(--pink);border-color:var(--pink)}
+.plan{margin:6px 16px 12px;background:#f8f9fc;border-radius:16px;padding:10px 12px}
+.plancols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pc{border-radius:12px;padding:6px 10px;border-top:5px solid;background:#fff;min-height:70px}
+.pc1{border-color:var(--violet)}.pc2{border-color:var(--green)}.pc3{border-color:var(--pink)}
+.pc ul{margin:4px 0 0;padding-left:18px;font-size:15px}
+.wgrid{display:grid;grid-template-columns:1.55fr 1fr;gap:4px;align-items:start}
+.wgrid .side2{position:sticky;top:70px;margin:10px 16px 12px 0}
+.writing{padding:10px 16px}
+.conns{display:flex;flex-wrap:wrap;gap:6px;align-items:center;position:sticky;top:62px;background:#fff;z-index:5;padding:6px 0}
+.cl{font-weight:800;color:var(--muted);font-size:14px}
+.cn{border:0;border-radius:999px;background:var(--sun-l);color:#8a5a00;font:800 14px Nunito;padding:4px 10px;cursor:pointer;box-shadow:0 2px 0 #ffe066}
+.wpart{border-left:6px solid;border-radius:12px;padding:6px 10px;margin:10px 0;background:#fcfcfd}
+.wpart.pc1{border-color:var(--violet)}.wpart.pc2{border-color:var(--green)}.wpart.pc3{border-color:var(--pink)}
+.wpt{font-size:18px;font-weight:600}
+.help{font-size:14px;color:var(--muted);margin:2px 0 6px}
+.wta{width:100%;border:2px solid #dde1ea;border-radius:12px;padding:8px 10px;font:600 17px/1.6 Nunito;color:var(--ink);resize:vertical;outline:none}
+.wta:focus{border-color:var(--blue)}
+.side2{margin:0 16px 12px;background:#f8f9fc;border-radius:16px;padding:10px 12px}
+.crit{list-style:none;margin:6px 0;padding:0}
+.crit li{display:flex;gap:8px;align-items:flex-start}
+.crit .tick{font-size:18px;color:#c7cdda;margin-top:5px;width:18px}
+.crit li.ok .tick{color:var(--ok)}
+.crit li.ok .txt{color:var(--ok)}
+.warns .w1{background:var(--orange-l);border-left:5px solid var(--orange);border-radius:10px;padding:6px 10px;margin:6px 0;font-weight:700}
+.count{font-size:14px;color:var(--muted);font-weight:700;margin-top:6px}
+.model{margin:10px 16px}.model summary{cursor:pointer;color:var(--blue);font:800 17px Nunito}
+.legend{margin:8px 0;font-size:14px}.legend span{margin-right:8px}
+.mpar{display:flex;gap:8px;align-items:flex-start;background:#fbfbfd;border-radius:12px;padding:4px 10px;margin:6px 0}
+.mlab{font:600 13px Fredoka;color:#fff;background:var(--muted);border-radius:8px;padding:2px 8px;margin-top:8px}
+.mpar .line{flex:1}
+.cn2{background:#ffec99;border-radius:5px;padding:0 3px;font-weight:800}
+.pcv{color:var(--ok);font-weight:800}.impv{color:var(--blue);font-weight:800}.futv{color:var(--violet);font-weight:800}
+.sendbox{margin:8px 16px 12px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.sendbox .line{flex-basis:100%}
+.copy{border:0;border-radius:999px;background:var(--pink);color:#fff;font:800 16px Nunito;padding:8px 18px;cursor:pointer}
+.copied{color:var(--ok);font-weight:800}
+
+/* bilan */
+.revbody{background:#fff;border-radius:18px;padding:12px 16px;border:2px solid var(--sun)}
+.revsum{font:600 20px Fredoka;color:var(--blue);margin:8px 0}
+.tablewrap{overflow-x:auto}
+.revt{width:100%;border-collapse:collapse;min-width:540px}
+.revt th{text-align:left;font-size:13px;color:var(--muted);padding:6px;border-bottom:2px solid #eef0f4}
+.revt td{padding:8px 6px;border-bottom:1px solid #eef0f4;vertical-align:top}
+.revt .good{color:var(--ok);font-weight:800}
+.revt .yours{color:var(--ko);text-decoration:line-through}
+.revlink{color:var(--blue);font-weight:800;text-decoration:none}
+.revempty{color:var(--muted);font-style:italic}
+.selfc{list-style:none;padding:0;margin:8px 0}
+.selfc li{margin:4px 0}
+.selfc label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;background:#f8faf8;border-radius:12px;padding:6px 10px}
+.selfc input{width:20px;height:20px;margin-top:3px;accent-color:var(--green)}
+
+/* fin du temps */
+#overlay{display:none;position:fixed;inset:0;background:rgba(29,36,51,.55);z-index:90;align-items:center;justify-content:center;padding:20px}
+#overlay.show{display:flex}
+#overlay .ov{background:#fff;border-radius:22px;padding:20px 24px;max-width:440px;text-align:center}
+#overlay h3{margin:0 0 6px;color:var(--blue);font-size:26px}
+#overlay button{border:0;border-radius:999px;padding:9px 18px;font:800 16px Nunito;cursor:pointer;margin:6px 4px 0}
+#overlay .go{background:var(--sun);color:var(--ink)}
+#overlay .stay{background:#eef0f4;color:var(--muted)}
+
+@media (max-width:640px){
+ body{font-size:16px}
+ main{padding-top:64px}
+ .wgrid{grid-template-columns:1fr}.wgrid .side2{position:static;margin:0 16px 12px}
+ .two,.three,.pairs,.mots,.irr,.how,.plan8,.plancols,.readwrap{grid-template-columns:1fr}
+ .irr{grid-template-columns:1fr 1fr}
+ .hero{height:230px}.hero h1{font-size:23px}
+ .sechead{height:160px}
+ .h2line .txt{font-size:19px}
+ .opts{margin-left:0}
+ .after,.msg{margin-left:0}
+ #timer{flex-wrap:wrap;gap:4px 8px;padding:5px 10px}
+ #timer .big{font-size:19px}
+ .conns{top:96px}
+}
+
+.oral{background:linear-gradient(135deg,#fff9db,#fff0f6);border:2px solid var(--sun);border-radius:20px;padding:12px 16px;margin:18px 0}
+.oralh{font:600 21px Fredoka;color:#b07d00;margin-bottom:2px}
+.oq{display:flex;gap:10px;background:#fff;border-radius:14px;padding:8px 12px;margin:10px 0;border:1px solid #f3e3a1}
+.oqn{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--sun);color:#fff;display:grid;place-items:center;font:600 16px Fredoka;margin-top:4px}
+.oqb{flex:1;min-width:0}.oqb>.line .txt{font-weight:800}
+.starters{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0}
+.stl{font-size:13px;color:var(--muted);font-weight:700}
+.st{border:2px solid #ffe066;background:#fffdf0;color:#5c4400;border-radius:999px;padding:3px 11px;font:700 14.5px Nunito;cursor:pointer}
+.st::before{content:"▶ ";font-size:10px;color:var(--green)}
+.modelans summary{cursor:pointer;color:var(--pink);font-weight:800;font-size:14px;margin-top:4px}
+.phrases{columns:2;column-gap:14px}.phrases .line{break-inside:avoid}
+@media (max-width:640px){.phrases{columns:1}}
+
+/* ======== Fabrizio : thème galerie ======== */
+:root{--ink:#1f2433;--muted:#6b6f7d;--bg:#f6f2ea;--navy:#1e3a5f;--gold:#b8893b;--terra:#c0573e;--sage:#5f8a6b;--plum:#7a4a6e;
+ --green:#5f8a6b;--blue:#1e3a5f;--pink:#c0573e;--sun:#b8893b;--sun-l:#fbf3e3}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--bg);font-size:17.5px}
+h1,h2,h3,.cardt,.exkind,.secnum,.exn,.qn,.boxt,#score,.h2line .txt,.rulehead .txt,.vw,.tlh,.oralh{font-family:'Playfair Display',Georgia,serif}
+.pb{background:var(--navy)}
+#score{border-color:var(--gold)} #score .st0{color:var(--gold)}
+#deall{background:var(--navy)}
+body.de-all #deall{background:var(--gold);color:#fff}
+.hero{height:380px;border-radius:6px}
+.hero h1{background:rgba(255,255,255,.95);font-weight:600;font-size:34px;border-radius:4px}
+.hero h1 span{color:var(--gold);font-family:'Source Sans 3';font-weight:700;letter-spacing:2px;font-size:13px;text-transform:uppercase}
+.tag{background:var(--navy);color:#fff;font-family:'Source Sans 3';letter-spacing:3px;border-radius:2px}
+figure.art{margin:0}
+.artcap{font-size:13.5px;color:var(--muted);margin:6px 2px 0;font-style:italic}
+.artcap b{font-style:normal;color:var(--ink);font-weight:700}
+.intro{border:0;border-top:4px solid var(--gold);border-radius:4px}
+.intro h2{color:var(--navy);font-family:'Playfair Display';font-weight:600}
+.plan8 a{background:#fff;border:1px solid #e3dccd;border-radius:4px}
+.sechead{border-radius:6px;height:auto;background:#fff;box-shadow:0 10px 30px rgba(31,36,51,.12)}
+.sechead img{height:300px}
+.sechead .artcap{padding:6px 14px 10px;margin:0}
+.seclabel{bottom:auto;top:14px}
+.secnum{background:var(--gold);border-radius:4px}
+.seclabel>div{border-radius:4px}
+.rule{border-radius:6px;border-width:1px}
+.rulehead{background:var(--navy)!important}
+.c-terra .rulehead{background:var(--terra)!important}.c-sage .rulehead{background:var(--sage)!important}.c-plum .rulehead{background:var(--plum)!important}
+.c-terra{border-color:var(--terra)}.c-sage{border-color:var(--sage)}.c-plum{border-color:var(--plum)}
+.exercise{border-radius:6px}
+.exhead{background:linear-gradient(90deg,#1e3a5f,#35567f)!important}
+.ex-t .exhead{background:linear-gradient(90deg,#c0573e,#d98a5f)!important}
+.ex-s .exhead{background:linear-gradient(90deg,#5f8a6b,#86a98a)!important}
+.ex-p .exhead{background:linear-gradient(90deg,#7a4a6e,#a3708f)!important}
+.ex-g .exhead{background:linear-gradient(90deg,#8a6420,#b8893b)!important}
+.opt{border-radius:4px}.opt.good{border-color:var(--sage);color:#2e5e3a;background:#eef5ef}
+.line.ex{background:#fffdf8;border-color:#ece3d2}
+
+/* cartes recto-verso */
+.vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:16px 0}
+.vcard{perspective:1400px;min-height:270px;cursor:pointer}
+.vin{position:relative;width:100%;height:100%;min-height:270px;transition:transform .7s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d}
+.vcard.flip .vin{transform:rotateY(180deg)}
+.vf,.vb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:6px;background:#fff;box-shadow:0 8px 24px rgba(31,36,51,.10);overflow:hidden;display:flex;flex-direction:column}
+.vb{transform:rotateY(180deg);padding:14px 16px;overflow:auto;border-top:5px solid var(--gold);cursor:default}
+.vf{justify-content:flex-end}
+.vf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vf .vfo{position:relative;background:linear-gradient(0deg,rgba(255,255,255,.98) 60%,rgba(255,255,255,.0));padding:40px 18px 16px}
+.vf.noimg{justify-content:center;background:linear-gradient(135deg,#1e3a5f,#35567f);color:#fff}
+.vf.noimg .vfo{background:none;padding:18px}
+.vf.noimg .vcat,.vf.noimg .vhint{color:#e9d8b6}
+.vw{font-size:28px;font-weight:600;line-height:1.15}
+.vcat{font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:4px}
+.vhint{font-size:13px;color:var(--muted);margin-top:6px}
+.vhint::before{content:"↻ "}
+.vit{font-size:15px;background:#eef3f8;border-radius:4px;padding:2px 8px;display:inline-block;margin:4px 0 6px;color:var(--navy);font-weight:700}
+.vit::before{content:"IT  ";font-size:11px;letter-spacing:1px;color:var(--gold)}
+.vnote{font-size:14.5px;background:var(--sun-l);border-left:3px solid var(--gold);padding:5px 9px;margin-top:6px;border-radius:2px}
+.vb .back{float:right;border:0;background:#f1ece2;border-radius:999px;font:700 12px 'Source Sans 3';padding:3px 10px;cursor:pointer;color:var(--muted)}
+.vb .vwb{font-family:'Playfair Display';font-size:22px;font-weight:600}
+.vcard.big{grid-column:1/-1}
+.vgrid .vcard .artmini{font-size:11.5px;color:#8b8f9c;font-style:italic;position:relative;padding:0 18px 8px;background:rgba(255,255,255,.98)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.tbtn{border:1px solid #d9cfbd;background:#fff;border-radius:999px;padding:6px 14px;font:700 14px 'Source Sans 3';color:var(--navy);cursor:pointer}
+.tbtn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* tableaux de conjugaison avec mode entraînement */
+.ctab{width:100%;border-collapse:collapse;background:#fff;border-radius:6px;overflow:hidden;margin:8px 0}
+.ctab td{padding:7px 12px;border-bottom:1px solid #eee6d8;vertical-align:middle}
+.ctab td.fr{font-weight:700;font-size:18px}
+.ctab td.it{color:var(--muted);font-style:italic;font-size:15px}
+.ctab td.p{width:40px}
+.ctab.hide td.fr .v{filter:blur(7px);cursor:pointer;transition:filter .3s}
+.ctab.hide td.fr .v.show{filter:none}
+.ctab .v b{color:var(--terra)}
+.vtab{width:100%;border-collapse:collapse;background:#fff;font-size:15.5px}
+.vtab td{padding:6px 10px;border-bottom:1px solid #eee6d8}
+.vtab td:first-child{color:var(--muted);width:24%}
+.vtab td:nth-child(2){font-weight:700}
+.vtab td:nth-child(3){color:var(--muted);font-style:italic}
+.vtab.hide td:nth-child(2) .v{filter:blur(7px);cursor:pointer}
+.vtab.hide td:nth-child(2) .v.show{filter:none}
+
+/* frise du plus-que-parfait */
+.tl{position:relative;margin:20px 0 10px;padding:56px 10px 10px;background:#fff;border-radius:6px;box-shadow:0 6px 18px rgba(31,36,51,.08)}
+.tl::before{content:"";position:absolute;left:30px;right:30px;top:38px;height:3px;background:linear-gradient(90deg,#7a4a6e,#1e3a5f,#5f8a6b)}
+.tl::after{content:"maintenant →";position:absolute;right:12px;top:12px;font-size:12px;color:var(--muted);letter-spacing:1px}
+.tlr{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tlc{position:relative;opacity:.18;transform:translateY(10px);transition:all .6s}
+.tlc.on{opacity:1;transform:none}
+.tlc .dot{position:absolute;top:-25px;left:12px;width:16px;height:16px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px currentColor}
+.tlc.pqp{color:var(--plum)}.tlc.pc{color:var(--navy)}.tlc.imp{color:var(--sage)}
+.tlc.pqp .dot{background:var(--plum)}.tlc.pc .dot{background:var(--navy)}.tlc.imp .dot{background:var(--sage)}
+.tlh{font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.tlc .txt2{color:var(--ink);font-size:17px;margin:4px 0}
+.tlc .lab{font-size:12.5px;font-weight:700}
+.tlbtn{display:block;margin:12px auto 2px}
+.pqpv{color:var(--plum);font-weight:800}.pcv{color:var(--navy);font-weight:800}.impv{color:var(--sage);font-weight:800}
+
+/* traduction et réflexion */
+.item.tr textarea,.refl textarea{width:100%;border:1px solid #d9cfbd;border-radius:4px;padding:8px 10px;font:600 17px/1.5 'Source Sans 3';color:var(--ink);background:#fffdf8;resize:vertical;margin-top:6px}
+.trbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.reveal{border:0;border-radius:999px;background:var(--navy);color:#fff;font:700 14px 'Source Sans 3';padding:6px 14px;cursor:pointer}
+.self{display:none;gap:8px}
+.item.tr.revealed .self{display:flex}.item.tr.revealed .reveal{display:none}
+.item.tr.revealed .after{display:block}
+.selfok,.selfko{border:0;border-radius:999px;font:700 14px 'Source Sans 3';padding:6px 14px;cursor:pointer}
+.selfok{background:#eef5ef;color:#2e5e3a}.selfko{background:#fbecea;color:#9a3a26}
+.item.tr.done .self{display:none}
+.story{background:#fff;border-radius:6px;padding:14px 18px;line-height:2.15;font-size:17.5px}
+.inl{display:inline;padding:0;border:0}
+.inl input.w{width:150px;font-size:16px;padding:1px 6px}
+.inl .check{padding:2px 8px;font-size:12px;margin:0 2px;vertical-align:middle;align-self:auto}
+.inl .after{display:none;margin:0}
+.inl.done .after{display:inline}
+.inl .sol{display:inline;padding:1px 6px;margin:0 2px;font-size:15px}
+.inl .sol .ic{display:none}
+.item.inl.wrong .sol::before{content:"→ "}
+.storyde{margin-top:8px}
+.refl{background:#fff;border-radius:6px;padding:14px 18px}
+.refl h4{font-family:'Playfair Display';font-size:20px;margin:12px 0 4px;color:var(--plum)}
+.qs{margin:4px 0;padding-left:20px}.qs li{margin:4px 0}
+.wb{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.wb button{border:1px solid #e3d3ec;background:#faf5f9;color:var(--plum);border-radius:999px;padding:3px 11px;font:700 14px 'Source Sans 3';cursor:pointer}
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0}
+.steps3>div{border-top:4px solid var(--plum);background:#fbf8fb;padding:8px 10px;border-radius:4px;font-size:15px}
+.steps3 b.t{display:block;font-family:'Playfair Display';font-size:17px;color:var(--plum)}
+.wc{font-size:14px;color:var(--muted);font-weight:700;margin-top:4px}
+@media (max-width:640px){.vgrid,.steps3,.tlr{grid-template-columns:1fr}.hero{height:280px}.hero h1{font-size:25px}.sechead img{height:200px}.tlc{opacity:1;transform:none}.tl::before{display:none}.tlc .dot{display:none}}
+.vcard,.vin{min-height:440px}
+.vb .back{align-self:flex-end;float:none}
+.vb .line.ex{padding:4px 9px;margin:4px 0}
+.vb .line.ex .txt{font-size:16px}
+.vf .vfo{background:linear-gradient(0deg,rgba(255,255,255,.97) 70%,rgba(255,255,255,0));padding:30px 18px 12px}
+@media (max-width:640px){.vcard,.vin{min-height:470px}}
+.inl.right .after .txt{display:none}
+.inl.right .after .sol{background:none;padding:0}
+
+/* ======== Mario : vitrail gothique ======== */
+:root{--ink:#1c2233;--muted:#626a7e;--bg:#f4f1ea;--navy:#1b2f5e;--gold:#c49a2c;--terra:#8e1b33;--sage:#2f6b5a;--plum:#4b2c6b;--ruby:#8e1b33}
+body{background:#f4f1ea;font-family:'Source Sans 3',system-ui,sans-serif}
+h1,h2,h3,.cardt,.exkind,.secnum,.exn,.qn,.boxt,#score,.h2line .txt,.rulehead .txt,.vw,.vwb,.oralh,.refl h4,.stt,.ut{font-family:'Cormorant Garamond',Georgia,serif!important}
+.h2line .txt{font-size:27px!important}.rulehead .txt{font-size:23px!important}.vw{font-size:30px!important}.cardt{font-size:21px}
+.hero{border-radius:4px;height:420px}
+.hero h1{font-size:40px;border-radius:2px;background:rgba(255,255,255,.95);border-left:6px solid var(--ruby)}
+.hero h1 span{color:var(--ruby)}
+.tag{background:var(--ruby);color:#fff}
+.intro{border-top:4px solid var(--ruby)}
+.intro h2{color:var(--navy);font-family:'Cormorant Garamond';font-size:32px}
+.rulehead{background:linear-gradient(90deg,#1b2f5e,#2e4d8a)!important}
+.c-ruby{border-color:var(--ruby)}.c-ruby .rulehead{background:linear-gradient(90deg,#6d1426,#a3283f)!important}
+.c-terra{border-color:#a3283f}.c-terra .rulehead{background:linear-gradient(90deg,#4b2c6b,#7a4a9a)!important}
+.exhead{background:linear-gradient(90deg,#1b2f5e,#2e4d8a)!important}
+.ex-t .exhead{background:linear-gradient(90deg,#4b2c6b,#7a4a9a)!important}
+.ex-s .exhead{background:linear-gradient(90deg,#2f6b5a,#3f8a73)!important}
+.ex-p .exhead{background:linear-gradient(90deg,#6d1426,#a3283f)!important}
+.ex-g .exhead{background:linear-gradient(90deg,#8e1b33,#c44a3a)!important}
+.ex-a .exhead{background:linear-gradient(90deg,#8a6a12,#c49a2c)!important}
+.ex-r .exhead{background:linear-gradient(90deg,#1c2233,#1b2f5e)!important}
+.vf.noimg{background:linear-gradient(135deg,#1b2f5e,#4b2c6b)}
+.vb{border-top-color:var(--ruby)}
+.vcat{color:var(--ruby)}
+.pb{background:var(--navy)}
+#score{border-color:var(--gold)}#deall{background:var(--navy)}
+.secnum{background:var(--ruby);color:#fff}
+.card.k1{background:#eef2fa;border-color:#b9c7e6}.card.k2{background:#f8eef1;border-color:#e2b5c0}.card.k3{background:#f2eef8;border-color:#cbb9e2}
+.k1 .cardt{color:#1b2f5e}.k2 .cardt{color:#8e1b33}.k3 .cardt{color:#4b2c6b}
+.uses{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
+.use{display:flex;gap:10px;background:#fff;border-radius:6px;padding:8px 10px;border:1px solid #ead9de}
+.un{flex:none;width:28px;height:28px;border-radius:50%;background:var(--ruby);color:#fff;display:grid;place-items:center;font-weight:800}
+.ut{font-size:18px;font-weight:700;color:var(--ruby)}
+.use>div:last-child{flex:1;min-width:0}
+.ctab td.it:first-child{width:34%;font-style:normal;color:var(--plum);font-weight:700;font-size:14px}
+.saved{font-size:14px;color:var(--sage);font-weight:700;margin:6px 0}
+.wb .pl{display:inline-block;border:1px solid #c7cfe3;border-radius:999px;padding:3px 11px;font-weight:700;font-size:14.5px;background:#fff;color:var(--navy)}
+.hint3{font-size:14px;color:var(--plum)}.smalll{font-size:14px;font-family:'Source Sans 3';color:#626a7e}
+.vgrid{grid-template-columns:repeat(3,1fr)}
+@media (max-width:900px){.vgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.vgrid,.uses{grid-template-columns:1fr}}
+</style></head><body>
+<div id="topbar"><div></div><div id="right"><div id="score"><span class="st0">★</span> <span id="sc">0</span> / <span id="tot">0</span></div><button id="deall">IT</button></div></div><main><div class="hero"><img src="img/hero.jpg" alt=""><div class="herotext"><span class="tag">POUR MARIO</span><h1>Vocabulaire, expressions et grammaire<span>9 novembre 2026</span></h1></div></div><div class="artcap"><b>La Sainte-Chapelle, Paris, 1242-1248</b> · Chef-d'œuvre du gothique rayonnant</div><div class="intro"><h2>Bonjour Mario !</h2><div class="line "><div class="fr"><span class="txt">Aujourd'hui, nous nous promenons entre les cathédrales gothiques et les toiles impressionnistes. Au programme : six mots et expressions, <b>il y a</b> à tous les temps, <b>avoir changé</b>, puis les pronoms compléments et surtout les <b>pronoms toniques</b>. Ensuite, sept exercices.</span><span class="btns"><button class="pb" data-a="6430ae814d" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Oggi passeggiamo tra le cattedrali gotiche e le tele impressioniste. In programma: sei parole ed espressioni, «il y a» in tutti i tempi, «avoir changé», poi i pronomi complemento e soprattutto i pronomi tonici. Poi, sette esercizi.</div></div><div class="how"><div><div class="line "><div class="fr"><span class="txt">▶ Chaque phrase a son <b>audio</b> : écoute et répète.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Ogni frase ha il suo audio: ascolta e ripeti.</div></div></div><div><div class="line "><div class="fr"><span class="txt"><b>IT</b> : la traduction italienne. Essaie d'abord sans !</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">La traduzione italiana. Prova prima senza!</div></div></div><div><div class="line "><div class="fr"><span class="txt">💾 Tes réponses sont <b>enregistrées</b> : tu peux fermer la page et revenir plus tard, sur le même appareil.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Le tue risposte vengono salvate: puoi chiudere la pagina e tornare più tardi, sullo stesso dispositivo.</div></div></div><div><div class="line "><div class="fr"><span class="txt">★ Tes erreurs vont dans « À revoir », avec un lien vers la règle.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">I tuoi errori vanno in «À revoir», con un link alla regola.</div></div></div></div><ul class="plan8"><li><a href="#s1">1. Vocabulaire et expressions</a></li><li><a href="#s2">2. Il y a · avoir changé</a></li><li><a href="#s3">3. Les pronoms</a></li><li><a href="#s4">4. Les exercices</a></li><li><a class="rev" href="#bilan">★ À revoir</a></li></ul></div><section class="step" id="s1" data-n="1"><div class="sechead"><img src="img/notredame.jpg" alt="" loading="lazy"><div class="artcap"><b>Notre-Dame de Paris, façade occidentale, XIIe-XIIIe siècles</b> · Art gothique</div><div class="seclabel"><span class="secnum">1</span><div><div class="line h2line"><div class="fr"><span class="txt">Vocabulaire et expressions</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Lessico ed espressioni</div></div></div></div></div><div class="line "><div class="fr"><span class="txt">Lis le mot, essaie d'en deviner le sens, puis retourne la carte : tu trouveras la traduction, deux exemples et une remarque.</span><span class="btns"><button class="pb" data-a="041590d6ba" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Leggi la parola, prova a indovinarne il significato, poi gira la carta: troverai la traduzione, due esempi e un'osservazione.</div></div><div class="toolbar"><button class="tbtn flipall">↻ Retourner toutes les cartes</button><button class="tbtn playall" data-box="vall">▶ Écouter tout le vocabulaire</button></div><div class="vgrid" id="vall"><div class="vcard" id="v-ameliorer"><div class="vin"><div class="vf"><img src="img/monet.jpg" alt="" loading="lazy"><div class="vfo"><div class="vcat">expression</div><div class="vw">ça va s'améliorer</div><div class="vhint">Clique pour retourner la carte</div></div><div class="artmini">Claude Monet, <i>La Promenade, la femme à l'ombrelle</i>, 1875</div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">ça va s'améliorer <button class="pb sm" data-a="c659669659" aria-label="Écouter">▶</button></div><div class="vit">andrà meglio, migliorerà</div><div class="line ex"><div class="fr"><span class="txt">Le temps est gris, mais ça va s'améliorer cet après-midi.</span><span class="btns"><button class="pb" data-a="9341632b77" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Il tempo è grigio, ma migliorerà nel pomeriggio.</div></div><div class="line ex"><div class="fr"><span class="txt">Les marchés sont nerveux, mais à mon avis ça va s'améliorer.</span><span class="btns"><button class="pb" data-a="3b01110e19" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">I mercati sono nervosi, ma secondo me la situazione migliorerà.</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt"><b>s'améliorer</b> = devenir meilleur. Futur proche : <b>ça va</b> + infinitif. Le nom : <b>une amélioration</b>.</span><span class="btns"><button class="pb" data-a="c3fb5d1d8b" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">«s'améliorer» = diventare migliore. Futuro prossimo: «ça va» + infinito. Il sostantivo: «une amélioration».</div></div></div></div></div></div><div class="vcard" id="v-change"><div class="vin"><div class="vf"><img src="img/pissarro.jpg" alt="" loading="lazy"><div class="vfo"><div class="vcat">verbe · passé composé</div><div class="vw">avoir changé</div><div class="vhint">Clique pour retourner la carte</div></div><div class="artmini">Camille Pissarro, <i>Le Boulevard Montmartre, printemps</i>, 1897</div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">avoir changé <button class="pb sm" data-a="71660830b9" aria-label="Écouter">▶</button></div><div class="vit">essere cambiato</div><div class="line ex"><div class="fr"><span class="txt">Paris a beaucoup changé depuis mes études.</span><span class="btns"><button class="pb" data-a="6ee07a1680" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Parigi è cambiata molto dai tempi dei miei studi.</div></div><div class="line ex"><div class="fr"><span class="txt">Les prix ont changé : tout coûte plus cher.</span><span class="btns"><button class="pb" data-a="66ed891c23" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">I prezzi sono cambiati: tutto costa di più.</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt">Attention : en français, <b>changer</b> se conjugue avec <b>avoir</b>. On dit <b>il a changé</b>, jamais <s>il est changé</s>.</span><span class="btns"><button class="pb" data-a="e61aafc66b" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Attenzione: in francese «changer» si coniuga con «avoir», mentre in italiano si dice «è cambiato».</div></div></div></div></div></div><div class="vcard" id="v-empecher"><div class="vin"><div class="vf"><img src="img/pluie.jpg" alt="" loading="lazy"><div class="vfo"><div class="vcat">verbe</div><div class="vw">empêcher (quelqu'un de faire quelque chose)</div><div class="vhint">Clique pour retourner la carte</div></div><div class="artmini">Gustave Caillebotte, <i>Rue de Paris, temps de pluie</i>, 1877</div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">empêcher (quelqu'un de faire quelque chose) <button class="pb sm" data-a="f75642e6f3" aria-label="Écouter">▶</button></div><div class="vit">impedire (a qualcuno di fare qualcosa)</div><div class="line ex"><div class="fr"><span class="txt">La pluie nous a empêchés de visiter le cloître.</span><span class="btns"><button class="pb" data-a="c906a2e789" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">La pioggia ci ha impedito di visitare il chiostro.</div></div><div class="line ex"><div class="fr"><span class="txt">Rien ne m'empêche de partir à Paris en mai.</span><span class="btns"><button class="pb" data-a="12efa90c90" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Niente mi impedisce di partire per Parigi a maggio.</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt">Construction : <b>empêcher qqn de</b> + infinitif. Attention : en français, la personne est un <b>COD</b> (<i>la pluie <b>nous</b> a empêchés</i>).</span><span class="btns"><button class="pb" data-a="c9f3afa31d" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Costruzione: «empêcher qqn de» + infinito. In francese la persona è complemento oggetto diretto.</div></div></div></div></div></div><div class="vcard" id="v-consultation"><div class="vin"><div class="vf noimg"><div class="vfo"><div class="vcat">nom féminin</div><div class="vw">une consultation</div><div class="vhint">Clique pour retourner la carte</div></div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">une consultation <button class="pb sm" data-a="34577bdaaf" aria-label="Écouter">▶</button></div><div class="vit">una consulenza · una visita (medica) · una consultazione</div><div class="line ex"><div class="fr"><span class="txt">Le médecin donne ses consultations le matin.</span><span class="btns"><button class="pb" data-a="b64d588687" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Il medico riceve la mattina.</div></div><div class="line ex"><div class="fr"><span class="txt">Une consultation chez un conseiller financier dure une heure.</span><span class="btns"><button class="pb" data-a="cfa09cdf10" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Una consulenza da un consulente finanziario dura un'ora.</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt">Le verbe : <b>consulter</b> un médecin, un avocat, un document, un site.</span><span class="btns"><button class="pb" data-a="acc40c4fd5" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Il verbo: «consulter» un medico, un avvocato, un documento, un sito.</div></div></div></div></div></div><div class="vcard" id="v-hausse"><div class="vin"><div class="vf"><img src="img/lazare.jpg" alt="" loading="lazy"><div class="vfo"><div class="vcat">nom féminin</div><div class="vw">la hausse des prix</div><div class="vhint">Clique pour retourner la carte</div></div><div class="artmini">Claude Monet, <i>La Gare Saint-Lazare</i>, 1877</div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">la hausse des prix <button class="pb sm" data-a="bf5bc37067" aria-label="Écouter">▶</button></div><div class="vit">l'aumento dei prezzi</div><div class="line ex"><div class="fr"><span class="txt">La hausse des prix touche surtout l'énergie et l'alimentation.</span><span class="btns"><button class="pb" data-a="40a59c4d23" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">L'aumento dei prezzi colpisce soprattutto l'energia e i generi alimentari.</div></div><div class="line ex"><div class="fr"><span class="txt">Les loyers sont en hausse à Florence.</span><span class="btns"><button class="pb" data-a="05f67175cf" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Gli affitti sono in aumento a Firenze.</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt">Le contraire : <b>la baisse</b>. Les expressions : être <b>en hausse</b> / <b>en baisse</b>.</span><span class="btns"><button class="pb" data-a="819bf47a13" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Il contrario: «la baisse». Espressioni: «être en hausse / en baisse».</div></div></div></div></div></div><div class="vcard" id="v-menaces"><div class="vin"><div class="vf"><img src="img/gargouille.jpg" alt="" loading="lazy"><div class="vfo"><div class="vcat">nom féminin pluriel</div><div class="vw">les menaces</div><div class="vhint">Clique pour retourner la carte</div></div><div class="artmini">Une gargouille gothique, la nuit</div></div><div class="vb"><button class="back">↺ recto</button><div class="vwb">les menaces <button class="pb sm" data-a="0d7f34ba99" aria-label="Écouter">▶</button></div><div class="vit">le minacce</div><div class="line ex"><div class="fr"><span class="txt">Les gargouilles devaient éloigner les menaces.</span><span class="btns"><button class="pb" data-a="7ddf90dd03" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">I doccioni dovevano allontanare le minacce.</div></div><div class="line ex"><div class="fr"><span class="txt">Le changement climatique est une menace pour le patrimoine.</span><span class="btns"><button class="pb" data-a="ab9c97bc13" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Il cambiamento climatico è una minaccia per il patrimonio.</div></div><div class="vnote"><div class="line "><div class="fr"><span class="txt">Le verbe : <b>menacer</b> (minacciare). L'adjectif : <b>menaçant</b>.</span><span class="btns"><button class="pb" data-a="036933b0cc" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Il verbo: «menacer». L'aggettivo: «menaçant».</div></div></div></div></div></div></div></section><section class="step" id="s2" data-n="2"><div class="sechead"><img src="img/chartres.jpg" alt="" loading="lazy"><div class="artcap"><b>Cathédrale Notre-Dame de Chartres, XIIe-XIIIe siècles</b> · Patrimoine mondial de l'UNESCO</div><div class="seclabel"><span class="secnum">2</span><div><div class="line h2line"><div class="fr"><span class="txt">« Il y a » à tous les temps</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">«Il y a» in tutti i tempi</div></div></div></div></div><div class="rule c-navy" id="r-ilya"><div class="rulehead"><div class="line h3line"><div class="fr"><span class="txt">Il y a, il y avait, il y a eu, il y aura</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">C'è, c'era, c'è stato, ci sarà</div></div></div><div class="rulebody"><div class="line "><div class="fr"><span class="txt"><b>Il y a</b> = <i>c'è / ci sono</i>. On l'utilise pour dire qu'une chose ou une personne <b>existe</b> ou <b>se trouve</b> quelque part.</span><span class="btns"><button class="pb" data-a="6908c4b916" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">«Il y a» = c'è / ci sono. Si usa per dire che una cosa o una persona esiste o si trova da qualche parte.</div></div><div class="inbox pinkbox"><div class="boxt">⚠️ Toujours au singulier</div><div class="line "><div class="fr"><span class="txt">Le verbe reste <b>toujours au singulier</b>, même avec un pluriel : <b>il y a</b> des touristes, <b>il y avait</b> trois portails. Jamais <s>il y ont</s>, jamais <s>ils y a</s>.</span><span class="btns"><button class="pb" data-a="5a32c139a1" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Il verbo resta sempre al singolare, anche con un plurale. A differenza dell'italiano («ci sono»), non si accorda mai.</div></div><div class="line ex"><div class="fr"><span class="txt">Il y a trois portails sur la façade de Chartres.</span><span class="btns"><button class="pb" data-a="7765bd7e44" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Ci sono tre portali sulla facciata di Chartres.</div></div></div><table class="ctab" id="t-ilya"><tbody><tr><td class="it">présent</td><td class="p"><button class="pb sm" data-a="02607091fa" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">il y a</span></td><td class="it">c'è · ci sono</td></tr><tr><td class="it">imparfait (description)</td><td class="p"><button class="pb sm" data-a="9f4df0ca7e" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">il y avait</span></td><td class="it">c'era · c'erano</td></tr><tr><td class="it">passé composé (événement)</td><td class="p"><button class="pb sm" data-a="6aef85e9b5" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">il y a eu</span></td><td class="it">c'è stato · ci sono stati</td></tr><tr><td class="it">futur simple</td><td class="p"><button class="pb sm" data-a="d79d43cec3" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">il y aura</span></td><td class="it">ci sarà · ci saranno</td></tr><tr><td class="it">futur proche</td><td class="p"><button class="pb sm" data-a="4cd1620a52" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">il va y avoir</span></td><td class="it">sta per esserci · ci sarà</td></tr><tr><td class="it">conditionnel</td><td class="p"><button class="pb sm" data-a="1052d3418e" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">il y aurait</span></td><td class="it">ci sarebbe · ci sarebbero</td></tr></tbody></table><div class="toolbar"><button class="tbtn hidebtn" data-t="t-ilya">🙈 Je cache et je récite</button></div><div class="line ex"><div class="fr"><span class="txt">Il y a beaucoup de touristes devant Notre-Dame.</span><span class="btns"><button class="pb" data-a="8df88e9452" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Ci sono molti turisti davanti a Notre-Dame.</div></div><div class="line ex"><div class="fr"><span class="txt">Autrefois, il y avait des marchands sur le parvis.</span><span class="btns"><button class="pb" data-a="d519c96ca5" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Un tempo c'erano dei mercanti sul sagrato.</div></div><div class="line ex"><div class="fr"><span class="txt">En 2019, il y a eu un grave incendie.</span><span class="btns"><button class="pb" data-a="fc4db94496" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Nel 2019 c'è stato un grave incendio.</div></div><div class="line ex"><div class="fr"><span class="txt">L'année prochaine, il y aura une grande exposition Monet.</span><span class="btns"><button class="pb" data-a="5994594674" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">L'anno prossimo ci sarà una grande mostra di Monet.</div></div><div class="line ex"><div class="fr"><span class="txt">Attention, il va y avoir du monde ce week-end.</span><span class="btns"><button class="pb" data-a="7e934fa9d7" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Attenzione, ci sarà molta gente questo fine settimana.</div></div><div class="line ex"><div class="fr"><span class="txt">Sans la pluie, il y aurait plus de visiteurs.</span><span class="btns"><button class="pb" data-a="41e9fe8f37" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Senza la pioggia, ci sarebbero più visitatori.</div></div><div class="two"><div class="card k1"><div class="cardt">La négation</div><div class="line "><div class="fr"><span class="txt"><b>il n'y a pas de</b> + nom (<b>de</b>, pas <i>des</i>)</span><span class="btns"><button class="pb" data-a="ed60415dad" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">«il n'y a pas de» + nome</div></div><div class="line ex"><div class="fr"><span class="txt">Il n'y a pas de musée baroque dans ce quartier.</span><span class="btns"><button class="pb" data-a="5e294d851e" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Non c'è nessun museo barocco in questo quartiere.</div></div><div class="line ex"><div class="fr"><span class="txt">Il n'y avait pas de file d'attente. Il n'y aura pas de grève.</span><span class="btns"><button class="pb" data-a="449a68c6e7" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Non c'era fila. Non ci sarà sciopero.</div></div></div><div class="card k2"><div class="cardt">La question</div><div class="line "><div class="fr"><span class="txt"><b>Est-ce qu'il y a</b>… ? · <b>Y a-t-il</b>… ? (soutenu)</span><span class="btns"><button class="pb" data-a="da2cee42f9" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Due forme di domanda.</div></div><div class="line ex"><div class="fr"><span class="txt">Est-ce qu'il y a une visite guidée ? Y a-t-il des billets pour demain ?</span><span class="btns"><button class="pb" data-a="d272552ce9" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">C'è una visita guidata? Ci sono biglietti per domani?</div></div></div></div><div class="inbox yellow"><div class="boxt">💡 Il y a + durée = « fa »</div><div class="line "><div class="fr"><span class="txt">Avec une durée, <b>il y a</b> veut dire <i>fa</i> : je suis allé à Chartres <b>il y a</b> deux ans.</span><span class="btns"><button class="pb" data-a="92d8a42e32" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Con una durata, «il y a» significa «fa».</div></div><div class="line ex"><div class="fr"><span class="txt">J'ai visité la Sainte-Chapelle il y a dix ans.</span><span class="btns"><button class="pb" data-a="8f03e743f9" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Ho visitato la Sainte-Chapelle dieci anni fa.</div></div></div></div></div><div class="rule c-terra" id="r-change"><div class="rulehead"><div class="line h3line"><div class="fr"><span class="txt">Avoir changé, s'être amélioré</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Essere cambiato, essere migliorato</div></div></div><div class="rulebody"><div class="line "><div class="fr"><span class="txt"><b>Changer</b> se conjugue avec <b>avoir</b> au passé composé, même quand en italien on utilise <i>essere</i>.</span><span class="btns"><button class="pb" data-a="eb1817dee1" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">«Changer» si coniuga con «avoir» al passato prossimo, anche quando in italiano si usa «essere».</div></div><div class="line ex"><div class="fr"><span class="txt">La ville a changé. Les prix ont changé. Tu n'as pas changé !</span><span class="btns"><button class="pb" data-a="3159efbbcd" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">La città è cambiata. I prezzi sono cambiati. Non sei cambiato!</div></div><div class="line "><div class="fr"><span class="txt">Même chose avec <b>s'améliorer</b> ? Non : c'est un verbe pronominal, donc <b>être</b> : <i>la situation <b>s'est</b> améliorée</i>.</span><span class="btns"><button class="pb" data-a="10747be66a" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Con «s'améliorer» invece si usa «être», perché è pronominale.</div></div><div class="line ex"><div class="fr"><span class="txt">La situation s'est améliorée depuis l'été.</span><span class="btns"><button class="pb" data-a="d3b190f4e0" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">La situazione è migliorata dall'estate.</div></div></div></div></section><section class="step" id="s3" data-n="3"><div class="sechead"><img src="img/rouen.jpg" alt="" loading="lazy"><div class="artcap"><b>Claude Monet, <i>La Cathédrale de Rouen, le portail (soleil)</i>, 1894</b> · Série des cathédrales</div><div class="seclabel"><span class="secnum">3</span><div><div class="line h2line"><div class="fr"><span class="txt">Les pronoms compléments</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">I pronomi complemento</div></div></div></div></div><div class="rule c-navy" id="r-simples"><div class="rulehead"><div class="line h3line"><div class="fr"><span class="txt">Les pronoms simples</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">I pronomi semplici</div></div></div><div class="rulebody"><div class="two"><div class="card k1"><div class="cardt">COD : le, la, l', les</div><div class="line "><div class="fr"><span class="txt">répondent à <b>qui ? quoi ?</b> (sans préposition)</span><span class="btns"><button class="pb" data-a="077224192e" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">rispondono a «chi? che cosa?»</div></div><div class="line ex"><div class="fr"><span class="txt">Je visite la cathédrale. → Je la visite.</span><span class="btns"><button class="pb" data-a="da3fb62aa1" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">La visito.</div></div></div><div class="card k2"><div class="cardt">COI : lui, leur</div><div class="line "><div class="fr"><span class="txt">remplacent <b>à + une personne</b></span><span class="btns"><button class="pb" data-a="2a3fc9776c" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">sostituiscono «à + persona»</div></div><div class="line ex"><div class="fr"><span class="txt">J'écris à ma fille. → Je lui écris.</span><span class="btns"><button class="pb" data-a="cca7e551da" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Le scrivo.</div></div></div><div class="card k3"><div class="cardt">Y</div><div class="line "><div class="fr"><span class="txt">remplace <b>à + chose</b> ou <b>un lieu</b></span><span class="btns"><button class="pb" data-a="620883ef86" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">sostituisce «à + cosa» o un luogo</div></div><div class="line ex"><div class="fr"><span class="txt">Je vais à Paris. → J'y vais.</span><span class="btns"><button class="pb" data-a="b694e71733" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Ci vado.</div></div></div><div class="card k1"><div class="cardt">En</div><div class="line "><div class="fr"><span class="txt">remplace <b>de + chose</b> ou une <b>quantité</b></span><span class="btns"><button class="pb" data-a="40de024374" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">sostituisce «de + cosa» o una quantità</div></div><div class="line ex"><div class="fr"><span class="txt">Je parle de l'exposition. → J'en parle.</span><span class="btns"><button class="pb" data-a="1129130755" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Ne parlo.</div></div></div></div><div class="line "><div class="fr"><span class="txt">Le pronom se place <b>devant le verbe</b> conjugué, ou devant l'<b>infinitif</b> : <i>je vais <b>la</b> visiter</i>. Au passé composé, devant l'auxiliaire : <i>je <b>l'</b>ai visitée</i>.</span><span class="btns"><button class="pb" data-a="15e29cd2cf" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Il pronome va prima del verbo coniugato, o prima dell'infinito. Al passato prossimo, prima dell'ausiliare.</div></div></div></div><div class="rule c-terra" id="r-doubles"><div class="rulehead"><div class="line h3line"><div class="fr"><span class="txt">Les pronoms doubles</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">I pronomi doppi</div></div></div><div class="rulebody"><div class="line "><div class="fr"><span class="txt">Avec deux pronoms, l'ordre est toujours le même :</span><span class="btns"><button class="pb" data-a="666658570f" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Con due pronomi, l'ordine è sempre lo stesso:</div></div><div class="formula"><span>me te nous vous</span><span class="op">→</span><span class="f">le la les</span><span class="op">→</span><span>lui leur</span><span class="op">→</span><span>y</span><span class="op">→</span><span>en</span></div><div class="line ex"><div class="fr"><span class="txt">Tu me prêtes ce livre ? Je te le prête.</span><span class="btns"><button class="pb" data-a="7d577a9e5e" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Me lo presti? Te lo presto.</div></div><div class="line ex"><div class="fr"><span class="txt">Je donne le catalogue à mon fils. → Je le lui donne.</span><span class="btns"><button class="pb" data-a="954223e0b4" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Glielo do.</div></div><div class="line ex"><div class="fr"><span class="txt">Il y a des billets ? Oui, il y en a.</span><span class="btns"><button class="pb" data-a="e8a4df17c1" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Ci sono biglietti? Sì, ce ne sono.</div></div><div class="inbox yellow"><div class="boxt">💡 Différent de l'italien</div><div class="line "><div class="fr"><span class="txt">En italien, <i>glielo</i> = un seul mot. En français, deux mots et l'ordre change : <b>le lui</b>, <b>les leur</b>.</span><span class="btns"><button class="pb" data-a="2c79f6db5c" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">In italiano «glielo» è una parola sola; in francese sono due parole, in quest'ordine: «le lui», «les leur».</div></div></div></div></div><div class="rule c-ruby" id="r-toniques"><div class="rulehead"><div class="line h3line"><div class="fr"><span class="txt">Les pronoms toniques : moi, toi, lui, elle…</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">I pronomi tonici: io, tu, lui, lei…</div></div></div><div class="rulebody"><div class="line "><div class="fr"><span class="txt">Les pronoms <b>toniques</b> représentent une <b>personne</b>. Ils ne se placent pas devant le verbe : ils sont <b>seuls</b>, après une <b>préposition</b>, ou pour <b>insister</b>.</span><span class="btns"><button class="pb" data-a="7c4b0268c8" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">I pronomi tonici rappresentano una persona. Non si mettono davanti al verbo: sono soli, dopo una preposizione, o servono a dare enfasi.</div></div><div class="two"><div><table class="ctab" id="t-ton"><tbody><tr><td class="it">je</td><td class="p"><button class="pb sm" data-a="8f8ad28dd6" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">moi</span></td></tr><tr><td class="it">tu</td><td class="p"><button class="pb sm" data-a="501446ac98" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">toi</span></td></tr><tr><td class="it">il</td><td class="p"><button class="pb sm" data-a="55681f25f2" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">lui</span></td></tr><tr><td class="it">elle</td><td class="p"><button class="pb sm" data-a="1aec34a522" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">elle</span></td></tr><tr><td class="it">nous</td><td class="p"><button class="pb sm" data-a="23300e00e8" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">nous</span></td></tr><tr><td class="it">vous</td><td class="p"><button class="pb sm" data-a="593ffa780f" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">vous</span></td></tr><tr><td class="it">ils</td><td class="p"><button class="pb sm" data-a="a00db5fd17" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">eux</span></td></tr><tr><td class="it">elles</td><td class="p"><button class="pb sm" data-a="610795d000" aria-label="Écouter">▶</button></td><td class="fr"><span class="v">elles</span></td></tr></tbody></table><div class="toolbar"><button class="tbtn hidebtn" data-t="t-ton">🙈 Je cache et je récite</button></div></div><div><div class="inbox yellow"><div class="boxt">💡 Les deux pièges</div><div class="line "><div class="fr"><span class="txt"><b>il → lui</b> et <b>ils → eux</b>. <b>elle</b>, <b>nous</b>, <b>vous</b>, <b>elles</b> ne changent pas.</span><span class="btns"><button class="pb" data-a="8faabda4a4" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">«il → lui», «ils → eux»; gli altri non cambiano.</div></div><div class="line ex"><div class="fr"><span class="txt">C'est lui. Je pars avec eux.</span><span class="btns"><button class="pb" data-a="f3d6e240a4" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">È lui. Parto con loro.</div></div></div><div class="inbox pinkbox"><div class="boxt">⚠️ moi, pas je</div><div class="line "><div class="fr"><span class="txt"><s>C'est je.</s> → <b>C'est moi.</b> · <s>Je et ma femme</s> → <b>Ma femme et moi</b>, nous partons.</span><span class="btns"><button class="pb" data-a="bbe7fddb4a" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Dopo «c'est» e nelle coppie si usa il tonico.</div></div></div></div></div><div class="boxt" style="margin-top:12px">Quand utiliser les pronoms toniques ? <span class="de2">Quando si usano?</span></div><div class="uses"><div class="use"><div class="un">1</div><div><div class="ut">Pour insister sur la personne <span class="de2">Per mettere in risalto la persona</span></div><div class="line ex"><div class="fr"><span class="txt">Moi, je préfère l'art gothique.</span><span class="btns"><button class="pb" data-a="e175b399fc" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Io preferisco l'arte gotica.</div></div></div></div><div class="use"><div class="un">2</div><div><div class="ut">Après une préposition <span class="de2">Dopo una preposizione</span></div><div class="line ex"><div class="fr"><span class="txt">Je pars à Paris avec eux. Ce livre est pour toi.</span><span class="btns"><button class="pb" data-a="53bf00b3f6" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Parto per Parigi con loro. Questo libro è per te.</div></div></div></div><div class="use"><div class="un">3</div><div><div class="ut">Après c'est / ce sont <span class="de2">Dopo «c'est / ce sont»</span></div><div class="line ex"><div class="fr"><span class="txt">C'est lui qui a organisé la visite.</span><span class="btns"><button class="pb" data-a="13dc14e45c" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">È lui che ha organizzato la visita.</div></div></div></div><div class="use"><div class="un">4</div><div><div class="ut">Seul, dans une réponse courte <span class="de2">Da solo, in una risposta breve</span></div><div class="line ex"><div class="fr"><span class="txt">Qui veut un café ? – Moi !</span><span class="btns"><button class="pb" data-a="f8ea2d3b8c" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Chi vuole un caffè? – Io!</div></div></div></div><div class="use"><div class="un">5</div><div><div class="ut">Avec aussi, non plus, même <span class="de2">Con «aussi, non plus, même»</span></div><div class="line ex"><div class="fr"><span class="txt">J'adore Monet. – Moi aussi ! – Lui non plus n'aime pas le baroque.</span><span class="btns"><button class="pb" data-a="a531333383" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Adoro Monet. – Anch'io! – Neanche a lui piace il barocco.</div></div></div></div><div class="use"><div class="un">6</div><div><div class="ut">Dans une comparaison <span class="de2">In un paragone</span></div><div class="line ex"><div class="fr"><span class="txt">Ma fille connaît Paris mieux que moi.</span><span class="btns"><button class="pb" data-a="5ebd1f65f8" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Mia figlia conosce Parigi meglio di me.</div></div></div></div><div class="use"><div class="un">7</div><div><div class="ut">Avec penser à, s'intéresser à, être à <span class="de2">Con «penser à, s'intéresser à, être à»</span></div><div class="line ex"><div class="fr"><span class="txt">Je pense souvent à elle. Ce manteau est à lui.</span><span class="btns"><button class="pb" data-a="ef6b58dbd2" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Penso spesso a lei. Questo cappotto è suo.</div></div></div></div><div class="use"><div class="un">8</div><div><div class="ut">À l'impératif affirmatif <span class="de2">All'imperativo affermativo</span></div><div class="line ex"><div class="fr"><span class="txt">Écoute-moi ! Donnez-moi le catalogue, s'il vous plaît.</span><span class="btns"><button class="pb" data-a="4f8dfb427a" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Ascoltami! Mi dia il catalogo, per favore.</div></div></div></div><div class="use"><div class="un">9</div><div><div class="ut">Avec -même <span class="de2">Con «-même»</span></div><div class="line ex"><div class="fr"><span class="txt">Je l'ai fait moi-même.</span><span class="btns"><button class="pb" data-a="9e482e25c9" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">L'ho fatto io stesso.</div></div></div></div></div><div class="toolbar"><button class="tbtn playall" data-box="r-toniques">▶ Écouter tous les exemples</button></div></div></div></section><section class="step" id="s4" data-n="4"><div class="sechead"><img src="img/cloitre.jpg" alt="" loading="lazy"><div class="artcap"><b>Le cloître de l'abbaye du Mont-Saint-Michel, XIIIe siècle</b> · Architecture gothique normande</div><div class="seclabel"><span class="secnum">4</span><div><div class="line h2line"><div class="fr"><span class="txt">Je m'entraîne</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Mi esercito</div></div></div></div></div><div class="exercise" id="ex1"><div class="exhead g-a"><span class="exn">1</span><div class="exh"><div class="exkind">VOCABULAIRE</div><div class="line consigne"><div class="fr"><span class="txt">Complète avec un mot ou une expression de la liste.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Completa con una parola o un'espressione della lista.</div></div></div></div><div class="wb" style="margin:10px 16px"><span class="pl">va s'améliorer</span><span class="pl">a changé</span><span class="pl">empêche</span><span class="pl">consultation</span><span class="pl">hausse</span><span class="pl">menaces</span><span class="pl">consulter</span></div><div class="item inp" data-ans="[&quot;va s&#x27;améliorer&quot;]" data-anchor="v-ameliorer" data-label="ça va s&#x27;améliorer"><div class="qrow"><span class="qn">1</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Les marchés sont inquiets, mais je pense que la situation <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> .</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>I mercati sono preoccupati, ma penso che la situazione migliorerà.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Les marchés sont inquiets, mais je pense que la situation va s'améliorer.</span> <button class="pb sm" data-a="15647697d3" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;a changé&quot;]" data-anchor="v-change" data-label="avoir changé"><div class="qrow"><span class="qn">2</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Florence <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> beaucoup depuis vingt ans.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Firenze è cambiata molto in vent'anni.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Florence a changé beaucoup depuis vingt ans.</span> <button class="pb sm" data-a="728f6033c1" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;empêche&quot;]" data-anchor="v-empecher" data-label="empêcher"><div class="qrow"><span class="qn">3</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Le bruit m' <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> de me concentrer.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Il rumore mi impedisce di concentrarmi.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Le bruit m'empêche de me concentrer.</span> <button class="pb sm" data-a="7d7cf742d2" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;consultation&quot;]" data-anchor="v-consultation" data-label="une consultation"><div class="qrow"><span class="qn">4</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">La première <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> avec un nouveau client dure une heure.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>La prima consulenza con un nuovo cliente dura un'ora.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">La première consultation avec un nouveau client dure une heure.</span> <button class="pb sm" data-a="51d1905793" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;hausse&quot;]" data-anchor="v-hausse" data-label="la hausse des prix"><div class="qrow"><span class="qn">5</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">La <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> des prix inquiète les familles.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>L'aumento dei prezzi preoccupa le famiglie.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">La hausse des prix inquiète les familles.</span> <button class="pb sm" data-a="e3e810cf33" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;menaces&quot;]" data-anchor="v-menaces" data-label="les menaces"><div class="qrow"><span class="qn">6</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Les gargouilles devaient éloigner les <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> .</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>I doccioni dovevano allontanare le minacce.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Les gargouilles devaient éloigner les menaces.</span> <button class="pb sm" data-a="7ddf90dd03" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;consulter&quot;]" data-anchor="v-consultation" data-label="consulter"><div class="qrow"><span class="qn">7</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Avant d'investir, il faut <input class="w mid" autocomplete="off" autocapitalize="off" spellcheck="false"> un spécialiste.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Prima di investire bisogna consultare uno specialista.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Avant d'investir, il faut consulter un spécialiste.</span> <button class="pb sm" data-a="928a336660" aria-label="Écouter">▶</button></div></div></div></div><div class="exercise ex-t" id="ex2"><div class="exhead g-b"><span class="exn">2</span><div class="exh"><div class="exkind">IL Y A · AVOIR CHANGÉ</div><div class="line consigne"><div class="fr"><span class="txt">Clique sur la bonne forme.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Clicca sulla forma corretta.</div></div></div></div><div class="item qcm" data-good="il y a" data-anchor="r-ilya" data-label="il y a"><div class="qrow"><span class="qn">1</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Aujourd'hui, <span class="blank">______</span> beaucoup de visiteurs à la Sainte-Chapelle.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Oggi ci sono molti visitatori alla Sainte-Chapelle.</div></div></div></div><div class="opts"><button class="opt" data-v="il y a">il y a</button><button class="opt" data-v="il y ont">il y ont</button><button class="opt" data-v="ils y a">ils y a</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Aujourd'hui, il y a beaucoup de visiteurs à la Sainte-Chapelle.</span> <button class="pb sm" data-a="c2b7e6e3c1" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="il y avait" data-anchor="r-ilya" data-label="il y a"><div class="qrow"><span class="qn">2</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Au Moyen Âge, <span class="blank">______</span> des marchands devant la cathédrale.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Nel Medioevo c'erano dei mercanti davanti alla cattedrale.</div></div></div></div><div class="opts"><button class="opt" data-v="il y avait">il y avait</button><button class="opt" data-v="il y avaient">il y avaient</button><button class="opt" data-v="il y a eu">il y a eu</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Au Moyen Âge, il y avait des marchands devant la cathédrale.</span> <button class="pb sm" data-a="3660d03e1a" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="il y a eu" data-anchor="r-ilya" data-label="il y a"><div class="qrow"><span class="qn">3</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">En avril 2019, <span class="blank">______</span> un incendie à Notre-Dame.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Nell'aprile 2019 c'è stato un incendio a Notre-Dame.</div></div></div></div><div class="opts"><button class="opt" data-v="il y avait">il y avait</button><button class="opt" data-v="il y a eu">il y a eu</button><button class="opt" data-v="il y aura">il y aura</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">En avril 2019, il y a eu un incendie à Notre-Dame.</span> <button class="pb sm" data-a="bce4ff094f" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="il y aura" data-anchor="r-ilya" data-label="il y a"><div class="qrow"><span class="qn">4</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">L'été prochain, <span class="blank">______</span> une exposition sur les cathédrales de Monet.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">La prossima estate ci sarà una mostra sulle cattedrali di Monet.</div></div></div></div><div class="opts"><button class="opt" data-v="il y aura">il y aura</button><button class="opt" data-v="il y auront">il y auront</button><button class="opt" data-v="il y avait">il y avait</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">L'été prochain, il y aura une exposition sur les cathédrales de Monet.</span> <button class="pb sm" data-a="ec6baa4094" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="de" data-anchor="r-ilya" data-label="il y a"><div class="qrow"><span class="qn">5</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Désolé, il n'y a pas <span class="blank">______</span> billets pour ce soir.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Mi dispiace, non ci sono biglietti per stasera.</div></div></div></div><div class="opts"><button class="opt" data-v="de">de</button><button class="opt" data-v="des">des</button><button class="opt" data-v="les">les</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Désolé, il n'y a pas de billets pour ce soir.</span> <button class="pb sm" data-a="901fb84547" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="Est-ce qu&#x27;il y a" data-anchor="r-ilya" data-label="il y a"><div class="qrow"><span class="qn">6</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt"><span class="blank">______</span> une visite guidée en italien ?</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">C'è una visita guidata in italiano?</div></div></div></div><div class="opts"><button class="opt" data-v="Est-ce qu&#x27;il y a">Est-ce qu'il y a</button><button class="opt" data-v="Est-ce qu&#x27;ils y ont">Est-ce qu'ils y ont</button><button class="opt" data-v="Il y a-t-il">Il y a-t-il</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Est-ce qu'il y a une visite guidée en italien ?</span> <button class="pb sm" data-a="c416f2c7a5" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="il y a" data-anchor="r-ilya" data-label="il y a"><div class="qrow"><span class="qn">7</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">J'ai visité Chartres <span class="blank">______</span> cinq ans.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Ho visitato Chartres cinque anni fa.</div></div></div></div><div class="opts"><button class="opt" data-v="il y a">il y a</button><button class="opt" data-v="depuis">depuis</button><button class="opt" data-v="pendant">pendant</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">J'ai visité Chartres il y a cinq ans.</span> <button class="pb sm" data-a="1f1251daa5" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="ont changé" data-anchor="r-change" data-label="avoir changé"><div class="qrow"><span class="qn">8</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Depuis la crise, les prix <span class="blank">______</span> .</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Dalla crisi, i prezzi sono cambiati.</div></div></div></div><div class="opts"><button class="opt" data-v="ont changé">ont changé</button><button class="opt" data-v="sont changés">sont changés</button><button class="opt" data-v="sont changé">sont changé</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Depuis la crise, les prix ont changé.</span> <button class="pb sm" data-a="ac8066a760" aria-label="Écouter">▶</button></div></div></div></div><div class="exercise ex-s" id="ex3"><div class="exhead g-c"><span class="exn">3</span><div class="exh"><div class="exkind">PRONOMS SIMPLES ET DOUBLES</div><div class="line consigne"><div class="fr"><span class="txt">Réponds avec le ou les bons pronoms.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Rispondi con il pronome o i pronomi giusti.</div></div></div></div><div class="item inp" data-ans="[&quot;la&quot;]" data-anchor="r-simples" data-label="le, la, les"><div class="qrow"><span class="qn">1</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Tu connais la Sainte-Chapelle ? Oui, je <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> connais.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Conosci la Sainte-Chapelle? Sì, la conosco.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Oui, je la connais.</span> <button class="pb sm" data-a="6dadda8a58" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;lui&quot;]" data-anchor="r-simples" data-label="lui, leur"><div class="qrow"><span class="qn">2</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Tu as écrit à ta fille ? Oui, je <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> ai écrit hier.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Hai scritto a tua figlia? Sì, le ho scritto ieri.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Oui, je lui ai écrit hier.</span> <button class="pb sm" data-a="e7d317cf3d" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;y&quot;]" data-anchor="r-simples" data-label="y"><div class="qrow"><span class="qn">3</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Tu vas souvent à Paris ? Oui, j' <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> vais deux fois par an.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Vai spesso a Parigi? Sì, ci vado due volte all'anno.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Oui, j'y vais deux fois par an.</span> <button class="pb sm" data-a="b5534296f4" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;en&quot;]" data-anchor="r-simples" data-label="en"><div class="qrow"><span class="qn">4</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Tu as des clients français ? Oui, j' <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> ai trois.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Hai clienti francesi? Sì, ne ho tre.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Oui, j'en ai trois.</span> <button class="pb sm" data-a="e9723b991c" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;le lui&quot;]" data-anchor="r-doubles" data-label="le lui"><div class="qrow"><span class="qn">5</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Tu donnes le rapport au client ? Oui, je <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> donne demain.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Dai il rapporto al cliente? Sì, glielo do domani.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Oui, je le lui donne demain.</span> <button class="pb sm" data-a="9427ed2572" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;te le&quot;]" data-anchor="r-doubles" data-label="te le"><div class="qrow"><span class="qn">6</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Tu me prêtes ton guide de Rouen ? Oui, je <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> prête.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Mi presti la tua guida di Rouen? Sì, te la presto.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Oui, je te le prête.</span> <button class="pb sm" data-a="3a0f6e9465" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;les leur&quot;]" data-anchor="r-doubles" data-label="les leur"><div class="qrow"><span class="qn">7</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Tu envoies les photos à tes enfants ? Oui, je <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> envoie ce soir.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Mandi le foto ai tuoi figli? Sì, gliele mando stasera.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Oui, je les leur envoie ce soir.</span> <button class="pb sm" data-a="e75109235d" aria-label="Écouter">▶</button></div></div></div></div><div class="exercise ex-p" id="ex4"><div class="exhead g-d"><span class="exn">4</span><div class="exh"><div class="exkind">PRONOMS TONIQUES · 1</div><div class="line consigne"><div class="fr"><span class="txt">Clique sur le bon pronom.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Clicca sul pronome giusto.</div></div></div></div><div class="item qcm" data-good="moi" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">1</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Qui a réservé les billets ? – C'est <span class="blank">______</span> .</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Chi ha prenotato i biglietti? – Sono io.</div></div></div></div><div class="opts"><button class="opt" data-v="moi">moi</button><button class="opt" data-v="je">je</button><button class="opt" data-v="me">me</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">C'est moi.</span> <button class="pb sm" data-a="c31ce3af2d" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="moi" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">2</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Mon fils travaille avec <span class="blank">______</span> depuis cinq ans.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Mio figlio lavora con me da cinque anni.</div></div></div></div><div class="opts"><button class="opt" data-v="il">il</button><button class="opt" data-v="moi">moi</button><button class="opt" data-v="me">me</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Mon fils travaille avec moi depuis cinq ans.</span> <button class="pb sm" data-a="2b8572414b" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="elle" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">3</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Ma fille habite à Paris. Je pense souvent à <span class="blank">______</span> .</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Penso spesso a lei.</div></div></div></div><div class="opts"><button class="opt" data-v="lui">lui</button><button class="opt" data-v="elle">elle</button><button class="opt" data-v="la">la</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Je pense souvent à elle.</span> <button class="pb sm" data-a="977a4b8786" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="eux" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">4</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Mes clients ? Je dîne avec <span class="blank">______</span> ce soir.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Ceno con loro stasera.</div></div></div></div><div class="opts"><button class="opt" data-v="ils">ils</button><button class="opt" data-v="leur">leur</button><button class="opt" data-v="eux">eux</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Je dîne avec eux ce soir.</span> <button class="pb sm" data-a="425b5a651a" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="Moi" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">5</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">J'adore l'art gothique. – <span class="blank">______</span> aussi !</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Adoro l'arte gotica. – Anch'io!</div></div></div></div><div class="opts"><button class="opt" data-v="Moi">Moi</button><button class="opt" data-v="Je">Je</button><button class="opt" data-v="Me">Me</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Moi aussi !</span> <button class="pb sm" data-a="65246149b3" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="Lui" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">6</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Je n'aime pas le baroque. – <span class="blank">______</span> non plus.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Non mi piace il barocco. – Neanche a lui.</div></div></div></div><div class="opts"><button class="opt" data-v="Lui">Lui</button><button class="opt" data-v="Il">Il</button><button class="opt" data-v="Le">Le</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Lui non plus.</span> <button class="pb sm" data-a="987d39051c" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="Moi" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">7</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt"><span class="blank">______</span>, je préfère les impressionnistes.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Io preferisco gli impressionisti.</div></div></div></div><div class="opts"><button class="opt" data-v="Moi">Moi</button><button class="opt" data-v="Je">Je</button><button class="opt" data-v="Me">Me</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Moi, je préfère les impressionnistes.</span> <button class="pb sm" data-a="619b77365a" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="moi" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">8</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Ma fille connaît Paris mieux que <span class="blank">______</span> .</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Mia figlia conosce Parigi meglio di me.</div></div></div></div><div class="opts"><button class="opt" data-v="je">je</button><button class="opt" data-v="moi">moi</button><button class="opt" data-v="me">me</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Ma fille connaît Paris mieux que moi.</span> <button class="pb sm" data-a="5ebd1f65f8" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="toi" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">9</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Ce parapluie est à <span class="blank">______</span> ? (à toi)</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Quest'ombrello è tuo?</div></div></div></div><div class="opts"><button class="opt" data-v="te">te</button><button class="opt" data-v="toi">toi</button><button class="opt" data-v="tu">tu</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Ce parapluie est à toi ?</span> <button class="pb sm" data-a="54678dfef7" aria-label="Écouter">▶</button></div></div></div><div class="item qcm" data-good="moi" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">10</span><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Donnez-<span class="blank">______</span> le plan du musée, s'il vous plaît.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Mi dia la piantina del museo, per favore.</div></div></div></div><div class="opts"><button class="opt" data-v="moi">moi</button><button class="opt" data-v="me">me</button><button class="opt" data-v="je">je</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Donnez-moi le plan du musée, s'il vous plaît.</span> <button class="pb sm" data-a="377beef7bf" aria-label="Écouter">▶</button></div></div></div></div><div class="exercise ex-g" id="ex5"><div class="exhead g-e"><span class="exn">5</span><div class="exh"><div class="exkind">PRONOMS TONIQUES · 2</div><div class="line consigne"><div class="fr"><span class="txt">Écris le pronom tonique.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Scrivi il pronome tonico.</div></div></div></div><div class="item inp" data-ans="[&quot;moi&quot;]" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">1</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Ma femme et <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> , nous partons à Rouen.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Mia moglie e io partiamo per Rouen.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Ma femme et moi, nous partons à Rouen.</span> <button class="pb sm" data-a="25c067a92c" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;toi&quot;]" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">2</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">C'est <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> qui as organisé le voyage ? (toi)</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Sei tu che hai organizzato il viaggio?</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">C'est toi qui as organisé le voyage ?</span> <button class="pb sm" data-a="e006be2196" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;eux&quot;]" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">3</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Mes enfants ? Je suis très fier d' <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> .</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Sono molto fiero di loro.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Je suis très fier d'eux.</span> <button class="pb sm" data-a="adf78cfaa1" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;lui&quot;]" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">4</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Ce n'est pas mon livre, il est à <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> . (à mon fils)</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>È suo (di mio figlio).</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Il est à lui.</span> <button class="pb sm" data-a="17c4931283" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;nous&quot;]" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">5</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Vous venez avec <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> ? (nous)</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>Venite con noi?</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Vous venez avec nous ?</span> <button class="pb sm" data-a="67510d8703" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;elle&quot;]" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">6</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Ma collègue s'intéresse à l'art. Je vais lui offrir ce livre : c'est pour <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> .</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>È per lei.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">C'est pour elle.</span> <button class="pb sm" data-a="3d8b901b67" aria-label="Écouter">▶</button></div></div></div><div class="item inp" data-ans="[&quot;moi&quot;]" data-anchor="r-toniques" data-label="pronoms toniques"><div class="qrow"><span class="qn">7</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt">Je l'ai fait <input class="w short" autocomplete="off" autocapitalize="off" spellcheck="false"> -même.</span><span class="btns"><button class=deb>IT</button></span></div><div class=det>L'ho fatto io stesso.</div></div></div><button class="check">OK</button></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Je l'ai fait moi-même.</span> <button class="pb sm" data-a="9e482e25c9" aria-label="Écouter">▶</button></div></div></div></div><div class="exercise ex-a" id="ex6"><div class="exhead g-f"><span class="exn">6</span><div class="exh"><div class="exkind">TRADUCTION</div><div class="line consigne"><div class="fr"><span class="txt">Traduis en français, puis compare avec la correction et écoute-la.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Traduci in francese, poi confronta con la correzione e ascoltala.</div></div></div></div><div class="item tr" data-anchor="r-toniques" data-label="moi, je"><div class="qrow"><span class="qn">1</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>Moi, preferisco l'arte gotica.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Moi, je préfère l'art gothique.</span> <button class="pb sm" data-a="e175b399fc" aria-label="Écouter">▶</button></div></div></div><div class="item tr" data-anchor="r-ilya" data-label="il y avait"><div class="qrow"><span class="qn">2</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>C'erano molte persone davanti alla cattedrale.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Il y avait beaucoup de monde devant la cathédrale.</span> <button class="pb sm" data-a="690c671a61" aria-label="Écouter">▶</button></div></div></div><div class="item tr" data-anchor="r-ilya" data-label="il y aura"><div class="qrow"><span class="qn">3</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>L'anno prossimo ci saranno nuove regole.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">L'année prochaine, il y aura de nouvelles règles.</span> <button class="pb sm" data-a="0c550bff0e" aria-label="Écouter">▶</button></div></div></div><div class="item tr" data-anchor="r-change" data-label="avoir changé"><div class="qrow"><span class="qn">4</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>La città è cambiata molto.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">La ville a beaucoup changé.</span> <button class="pb sm" data-a="3e71f79a19" aria-label="Écouter">▶</button></div></div></div><div class="item tr" data-anchor="v-empecher" data-label="empêcher de"><div class="qrow"><span class="qn">5</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>La pioggia ci ha impedito di uscire.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">La pluie nous a empêchés de sortir.</span> <button class="pb sm" data-a="e8fbc89e7a" aria-label="Écouter">▶</button></div></div></div><div class="item tr" data-anchor="r-toniques" data-label="penser à elle"><div class="qrow"><span class="qn">6</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>Mia figlia vive a Parigi: penso spesso a lei.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Ma fille vit à Paris : je pense souvent à elle.</span> <button class="pb sm" data-a="f2dfaee2ed" aria-label="Écouter">▶</button></div></div></div><div class="item tr" data-anchor="r-doubles" data-label="le lui"><div class="qrow"><span class="qn">7</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>Il catalogo? Glielo do domani.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Le catalogue ? Je le lui donne demain.</span> <button class="pb sm" data-a="5c4f9d76b4" aria-label="Écouter">▶</button></div></div></div><div class="item tr" data-anchor="v-ameliorer" data-label="ça va s&#x27;améliorer"><div class="qrow"><span class="qn">8</span><div class="qtxt"><div class="line"><div class="fr"><span class="txt"><i>Non preoccuparti, andrà meglio.</i></span></div></div><textarea rows="2" placeholder="Scrivi la traduzione in francese…"></textarea><div class="trbtns"><button class="reveal">Voir la correction</button><span class="self"><button class="selfok">✓ J'avais juste</button><button class="selfko">✗ Je me suis trompé</button></span></div></div></div><div class="after"><div class="sol"><span class="ic">✓ </span><span class="txt">Ne t'inquiète pas, ça va s'améliorer.</span> <button class="pb sm" data-a="c874e7ca41" aria-label="Écouter">▶</button></div></div></div></div><div class="exercise ex-r" id="ex7"><div class="exhead g-g"><span class="exn">7</span><div class="exh"><div class="exkind">PRODUCTION ÉCRITE · ACTUALITÉ</div><div class="line consigne"><div class="fr"><span class="txt">La hausse des prix : qu'est-ce qui a changé ? Écris un petit texte organisé.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">L'aumento dei prezzi: che cosa è cambiato? Scrivi un breve testo organizzato.</div></div></div></div><div style="padding:10px 16px"><div class="refl"><div class="line "><div class="fr"><span class="txt">En France, comme en Italie, la hausse des prix a changé la vie quotidienne : l'énergie, les courses et les loyers coûtent plus cher qu'il y a quelques années.</span><span class="btns"><button class="pb" data-a="2ffe911b86" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">In Francia come in Italia, l'aumento dei prezzi ha cambiato la vita quotidiana: energia, spesa e affitti costano più di qualche anno fa.</div></div><div class="line "><div class="fr"><span class="txt">Certains pensent que ça va s'améliorer bientôt ; d'autres voient de nouvelles menaces.</span><span class="btns"><button class="pb" data-a="2abf798005" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Alcuni pensano che la situazione migliorerà presto; altri vedono nuove minacce.</div></div><h4>Pour trouver tes idées</h4><ol class="qs"><li><div class="line "><div class="fr"><span class="txt">Qu'est-ce qui a le plus changé pour toi et pour tes clients ?</span><span class="btns"><button class="pb" data-a="9c4c9f083c" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Che cosa è cambiato di più per te e per i tuoi clienti?</div></div></li><li><div class="line "><div class="fr"><span class="txt">Est-ce que la hausse des prix empêche les gens de voyager, d'aller au musée, d'épargner ?</span><span class="btns"><button class="pb" data-a="d775e64d8e" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">L'aumento dei prezzi impedisce alle persone di viaggiare, di andare al museo, di risparmiare?</div></div></li><li><div class="line "><div class="fr"><span class="txt">À ton avis, est-ce que ça va s'améliorer ? Pourquoi ?</span><span class="btns"><button class="pb" data-a="8015ad9625" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Secondo te, la situazione migliorerà? Perché?</div></div></li></ol><h4>Pour organiser ton texte</h4><div class="steps3"><div><b class="t">Introduction</b><div class="line "><div class="fr"><span class="txt">Présente la situation : qu'est-ce qui a changé ?</span><span class="btns"><button class="pb" data-a="3ff9c48a10" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Presenta la situazione: che cosa è cambiato?</div></div><i class="hint3">Il y a quelques années, … Aujourd'hui, …</i></div><div><b class="t">Développement</b><div class="line "><div class="fr"><span class="txt">Les conséquences pour les familles et pour ton métier. Un exemple précis.</span><span class="btns"><button class="pb" data-a="eb19cd412d" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Le conseguenze per le famiglie e per il tuo mestiere. Un esempio preciso.</div></div><i class="hint3">D'un côté… De l'autre… Par exemple, mes clients…</i></div><div><b class="t">Conclusion</b><div class="line "><div class="fr"><span class="txt">Ton avis : est-ce que ça va s'améliorer ?</span><span class="btns"><button class="pb" data-a="b4ddd5db95" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">La tua opinione: andrà meglio?</div></div><i class="hint3">En conclusion, moi, je pense que…</i></div></div><h4>Mots utiles <span class="smalll">(clique pour les ajouter)</span></h4><div class="wb"><button>la hausse des prix</button><button>il y a quelques années</button><button>il y avait</button><button>il y aura</button><button>a changé</button><button>empêcher de</button><button>les menaces</button><button>ça va s'améliorer</button><button>moi, je pense que</button><button>selon eux</button><button>D'un côté,</button><button>De l'autre,</button><button>En conclusion,</button></div><textarea rows="10" placeholder="Écris ton texte ici (120 à 150 mots)…"></textarea><div class="wc"></div><p class="saved">💾 Ton texte est enregistré automatiquement sur cet appareil. · Il tuo testo viene salvato automaticamente su questo dispositivo.</p><details class="modelans" style="margin-top:8px"><summary>Voir un exemple de texte</summary><div class="line ex"><div class="fr"><span class="txt">Il y a quelques années, il y avait moins d'inquiétude pour les prix. Aujourd'hui, la vie quotidienne a beaucoup changé : l'énergie et les loyers coûtent plus cher, en Toscane comme à Paris. D'un côté, la hausse des prix empêche certaines familles d'épargner ou de voyager. De l'autre, beaucoup de mes clients sont devenus plus prudents et plus attentifs à leurs placements. Par exemple, pendant une consultation, un client m'a dit qu'il avait renoncé à son voyage à Paris. En conclusion, moi, je pense que ça va s'améliorer lentement, mais il y aura toujours des menaces : il faut rester prudent et bien informé.</span><span class="btns"><button class="pb" data-a="85aca4ff35" aria-label="Écouter">▶</button><button class="deb">IT</button></span></div><div class="det">Qualche anno fa c'era meno preoccupazione per i prezzi. Oggi la vita quotidiana è cambiata molto: l'energia e gli affitti costano di più, in Toscana come a Parigi. Da un lato, l'aumento dei prezzi impedisce ad alcune famiglie di risparmiare o di viaggiare. Dall'altro, molti miei clienti sono diventati più prudenti e più attenti ai loro investimenti. Per esempio, durante una consulenza, un cliente mi ha detto che aveva rinunciato al suo viaggio a Parigi. In conclusione, io penso che la situazione migliorerà lentamente, ma ci saranno sempre delle minacce: bisogna restare prudenti e ben informati.</div></div></details><div class="sendbox" style="margin:10px 0 0"><button class="copy copyrefl">📋 Copier mon texte pour Irène</button><span class="copied"></span></div></div></div></div></section><section id="bilan" style="scroll-margin-top:60px"><div class="sechead"><img src="img/strasbourg.jpg" alt="" loading="lazy"><div class="artcap"><b>Cathédrale Notre-Dame de Strasbourg, XIIe-XVe siècles</b> · Grès rose des Vosges</div><div class="seclabel"><span class="secnum">★</span><div><div class="line h2line"><div class="fr"><span class="txt">À revoir</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Da ripassare</div></div></div></div></div><div class="revbody"><div class="revsum"></div><div class="line "><div class="fr"><span class="txt">Clique sur le lien pour relire la règle, puis écoute la bonne réponse et répète-la.</span><span class="btns"><button class="deb">IT</button></span></div><div class="det">Clicca sul link per rileggere la regola, poi ascolta la risposta giusta e ripetila.</div></div><div class="revempty">Pas encore d'erreur. Les points à revoir apparaissent ici quand tu fais les exercices.</div><div class="tablewrap"><table class="revt"><thead><tr><th>Ex.</th><th>La bonne réponse</th><th>Ma réponse</th><th>À revoir</th></tr></thead><tbody></tbody></table></div><div class="toolbar" style="margin-top:14px"><button class="tbtn" id="resetall">↺ Tout recommencer · Ricomincia da capo</button></div></div></section></main>
+<script>(function(){
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const KEY='mario-il-y-a-pronoms-v1';
+function load(){ try{ return JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ return {}; } }
+function save(o){ try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){} }
+let store=load();
+
+/* ---------- audio ---------- */
+let cur=null, curBtn=null;
+function play(id,btn){
+  if(!id) return;
+  try{ if(cur) cur.pause(); }catch(e){}
+  if(curBtn) curBtn.classList.remove('playing');
+  cur=new Audio('audio/'+id+'.mp3'); curBtn=btn||null;
+  if(btn) btn.classList.add('playing');
+  cur.onended=()=>{ if(btn) btn.classList.remove('playing'); };
+  cur.play().catch(()=>{ if(btn) btn.classList.remove('playing'); });
+}
+function playSol(item){ const b=$('.after .sol .pb',item); if(b) play(b.dataset.a,b); }
+
+/* ---------- score + étoiles ---------- */
+const items=$$('.item.qcm, .item.inp, .item.tiles, .item.tr');
+let score=0; const errors=[];
+$('#tot').textContent=items.length;
+function bump(){ $('#sc').textContent=score; const s=$('#score'); s.classList.remove('bump'); void s.offsetWidth; s.classList.add('bump'); }
+function stars(el){
+  const r=el.getBoundingClientRect(); const cx=r.left+Math.min(r.width,260)/2, cy=Math.max(r.top+20,60);
+  const sym=['★','✦','★','✧','★','✦','★','✧','★','✦','★','✧'];
+  sym.forEach((c,i)=>{ const s=document.createElement('span'); s.className='star'; s.textContent=c;
+    const a=(Math.PI*2)*(i/sym.length)+Math.random()*.5, d=55+Math.random()*55;
+    s.style.left=cx+'px'; s.style.top=cy+'px';
+    s.style.setProperty('--dx',Math.cos(a)*d+'px'); s.style.setProperty('--dy',(Math.sin(a)*d-35)+'px');
+    s.style.color=['#fab005','#d6336c','#7048e8','#2f9e44','#1c7ed6','#f76707'][i%6];
+    document.body.appendChild(s); setTimeout(()=>s.remove(),1100); });
+}
+function exNum(item){ const e=item.closest('.exercise'); return e? e.id.replace('ex','') : ''; }
+let restoring=false;
+function finish(item,ok,yours,goodText,msgFr,msgDe){
+  item.classList.add('done', ok?'right':'wrong');
+  if(!restoring){ store.ans=store.ans||{}; store.ans[item.dataset.key]={ok:ok,y:yours}; save(store); }
+  if(ok){ score++; bump(); if(!restoring) stars(item); }
+  else{ errors.push({ex:exNum(item), good:goodText, yours:yours, anchor:item.dataset.anchor, label:item.dataset.label}); }
+  renderRevoir();
+  if(msgFr){ const m=document.createElement('div'); m.className='msg';
+    m.innerHTML=msgFr+(msgDe?'<div class="det">'+msgDe+'</div>':'');
+    item.insertBefore(m, $('.after',item)); }
+  if(!restoring) setTimeout(()=>playSol(item), ok?350:150);
+}
+function solText(item){ const s=$('.after .sol .txt',item); return s? s.textContent : ''; }
+function norm(s){
+  return s.normalize('NFC').replace(/[’‘`´]/g,"'").replace(/[‐‑‒–—−]/g,'-')
+   .replace(/\s*'\s*/g,"'").replace(/[\s?.!]+$/,'').replace(/\s+/g,' ').trim().toLowerCase();
+}
+
+document.addEventListener('click',e=>{
+  const t=e.target.closest('button,a'); if(!t) return;
+  if(t.matches('.pb')||t.matches('.st')){ play(t.dataset.a,t); return; }
+  if(t.matches('.deb')){ const h=t.closest('.line'); if(h) h.classList.toggle('open'); return; }
+  if(t.id==='deall'){ document.body.classList.toggle('de-all'); return; }
+  if(t.matches('.opt')){
+    const item=t.closest('.item'); if(item.classList.contains('done')) return;
+    const good=item.dataset.good, ok=t.dataset.v===good;
+    $$('.opt',item).forEach(o=>{ if(o.dataset.v===good) o.classList.add('good'); });
+    if(!ok) t.classList.add('bad');
+    finish(item,ok,t.dataset.v,solText(item)); return;
+  }
+  if(t.matches('.check')){ const item=t.closest('.item'); if(item.classList.contains('tiles')) checkTiles(item); else checkInp(item); return; }
+  if(t.matches('.tile')){
+    const item=t.closest('.item'); if(item.classList.contains('done')) return;
+    const into = t.parentElement.classList.contains('pool') ? $('.built',item) : $('.pool',item);
+    into.appendChild(t);
+    if(!$('.pool .tile',item)) checkTiles(item);
+    return;
+  }
+  if(t.matches('.undo')){ const item=t.closest('.item'); $$('.built .tile',item).forEach(x=>$('.pool',item).appendChild(x)); return; }
+  if(t.matches('.revlink')){ e.preventDefault(); goTo(t.getAttribute('href').slice(1)); return; }
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter' && e.target.matches('input.w')){ checkInp(e.target.closest('.item')); }
+});
+function checkInp(item){
+  if(item.classList.contains('done')) return;
+  const inp=$('input.w',item); const raw=inp.value.trim(); if(!raw){ inp.focus(); return; }
+  const answers=JSON.parse(item.dataset.ans);
+  const ok=answers.some(a=>norm(a)===norm(raw));
+  const inl=item.classList.contains('inl');
+  finish(item,ok,raw,solText(item), inl?null:(ok?"✓ Juste !":"✗ Regarde la bonne réponse et écoute-la :"), inl?null:(ok?"Giusto!":"Guarda la risposta giusta e ascoltala:"));
+}
+function joinT(toks){ let out=''; toks.forEach(t=>{ out = out ? out+' '+t : t; }); return out; }
+function checkTiles(item){
+  if(item.classList.contains('done')) return;
+  if($('.pool .tile',item)) return;
+  const built=joinT($$('.built .tile',item).map(x=>x.textContent)), ok=built===item.dataset.good;
+  finish(item,ok,built,item.dataset.good, ok?"✓ Juste !":"✗ Regarde la bonne phrase :", ok?"Giusto!":"Guarda la frase giusta:");
+}
+
+/* ---------- à revoir ---------- */
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function renderRevoir(){
+  const tb=$('.revt tbody'); tb.innerHTML='';
+  errors.forEach(er=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${esc(er.ex)}</td><td class="good">${esc(er.good)}</td><td class="yours">${esc(er.yours)}</td>`+
+      `<td><a class="revlink" href="#${esc(er.anchor)}">→ ${esc(er.label)}</a></td>`;
+    tb.appendChild(tr);
+  });
+  $('.revempty').style.display=errors.length?'none':'block';
+  $('.tablewrap').style.display=errors.length?'block':'none';
+  const answered=$$('.item.done').length;
+  $('.revsum').textContent = answered ? `★ ${score} bonnes réponses sur ${answered} · ${errors.length} point${errors.length>1?'s':''} à revoir` : '';
+}
+function goTo(id){
+  const el=document.getElementById(id); if(!el) return;
+  el.scrollIntoView({behavior:'smooth',block:id==='bilan'?'start':'center'});
+  el.classList.remove('flashed'); void el.offsetWidth; el.classList.add('flashed');
+}
+renderRevoir();
+
+
+/* ---------- extras Fabrizio ---------- */
+let seq=null;
+function playAll(box,btn){
+  if(seq){ seq.stop=true; seq=null; $$('.playall').forEach(b=>b.classList.remove('on')); try{cur.pause();}catch(e){} return; }
+  const list=$$('.pb',box).filter(b=>b.dataset.a); let i=0; seq={stop:false}; const me=seq; btn.classList.add('on');
+  const next=()=>{ if(me.stop||i>=list.length){ btn.classList.remove('on'); if(seq===me) seq=null; return; }
+    const b=list[i++]; const card=b.closest('.vcard'); b.scrollIntoView({block:'nearest',behavior:'smooth'});
+    play(b.dataset.a,b); cur.onended=()=>{ b.classList.remove('playing'); setTimeout(next,500); }; cur.onerror=()=>setTimeout(next,200); };
+  next();
+}
+document.addEventListener('click',e=>{
+  const t=e.target;
+  const card=t.closest('.vcard');
+  if(card && !t.closest('button') && !t.closest('.vb')){ card.classList.add('flip'); return; }
+  if(t.matches('.vb .back')){ t.closest('.vcard').classList.remove('flip'); return; }
+  if(t.matches('.flipall')){ const on=!t.classList.contains('on'); t.classList.toggle('on',on); $$('.vcard').forEach(c=>c.classList.toggle('flip',on)); return; }
+  if(t.matches('.playall')){ playAll(document.getElementById(t.dataset.box),t); return; }
+  if(t.matches('.hidebtn')){ const tb=document.getElementById(t.dataset.t); const on=!tb.classList.contains('hide'); tb.classList.toggle('hide',on); t.classList.toggle('on',on);
+    $$('.v',tb).forEach(v=>v.classList.remove('show')); t.textContent=on?'👁 Tout montrer':'🙈 Je cache et je récite'; return; }
+  if(t.closest('.hide .v')){ const v=t.closest('.v'); v.classList.add('show'); const b=v.closest('tr').querySelector('.pb'); if(b) play(b.dataset.a,b); return; }
+  if(t.matches('.tlbtn')){ const tl=t.closest('.tlwrap'); const cs=$$('.tlc',tl); const k=cs.filter(c=>c.classList.contains('on')).length;
+    if(k<cs.length){ cs[k].classList.add('on'); const b=$('.pb',cs[k]); if(b) play(b.dataset.a,b); t.textContent = k+1<cs.length ? 'Étape suivante →' : '↺ Recommencer'; }
+    else { cs.forEach(c=>c.classList.remove('on')); t.textContent='▶ Voir l\'histoire étape par étape'; } return; }
+  if(t.matches('.reveal')){ const it=t.closest('.item'); if(!$('textarea',it).value.trim()){ $('textarea',it).focus(); $('textarea',it).placeholder='Écris d\'abord ta traduction…'; return; } it.classList.add('revealed'); playSol(it); return; }
+  if(t.matches('.selfok')||t.matches('.selfko')){ const it=t.closest('.item'); finish(it,t.matches('.selfok'),$('textarea',it).value.trim(),solText(it)); return; }
+  if(t.closest('.wb') && t.tagName==='BUTTON'){ const ta=$('.refl textarea'); const s=ta.selectionStart??ta.value.length; const bef=ta.value.slice(0,s), aft=ta.value.slice(s);
+    const w=t.textContent; const sep=(bef&&!/\s$/.test(bef))?' ':''; ta.value=bef+sep+w+' '+aft; ta.focus(); const p=(bef+sep+w+' ').length; ta.setSelectionRange(p,p); ta.dispatchEvent(new Event('input')); return; }
+  if(t.matches('.copyrefl')){ const v=$('.refl textarea').value.trim(); const m=$('.copied'); if(!v){ m.textContent='Écris d’abord ton texte.'; return; }
+    const ok=()=>m.textContent='✓ Copié ! Tu peux l’envoyer à Irène.';
+    if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(ok,()=>{}); return; }
+});
+const rta=$('.refl textarea');
+if(rta){ try{ const s=load(); if(s.refl) rta.value=s.refl; }catch(e){}
+  const upd=()=>{ const n=(rta.value.trim().match(/\S+/g)||[]).length; $('.wc').textContent=n+' mots'+(n>=120?' ✓':' (objectif : 120 à 150 mots)'); store.refl=rta.value; save(store); };
+  rta.addEventListener('input',upd); upd(); }
+
+/* ---------- mémoire : les réponses restent enregistrées ---------- */
+items.forEach((it,i)=>{ it.dataset.key='q'+i; });
+$$('.item.tr textarea').forEach(ta=>{ ta.addEventListener('input',()=>{ store.drafts=store.drafts||{}; store.drafts[ta.closest('.item').dataset.key]=ta.value; save(store); }); });
+$$('.item.inp input.w').forEach(inpt=>{ inpt.addEventListener('input',()=>{ store.drafts=store.drafts||{}; store.drafts[inpt.closest('.item').dataset.key]=inpt.value; save(store); }); });
+(function restore(){
+  const A=store.ans||{}, D=store.drafts||{};
+  restoring=true;
+  items.forEach(it=>{
+    const k=it.dataset.key, a=A[k];
+    if(D[k]!==undefined){ const f=$('textarea',it)||$('input.w',it); if(f) f.value=D[k]; }
+    if(!a) return;
+    if(it.classList.contains('qcm')){
+      $$('.opt',it).forEach(o=>{ if(o.dataset.v===it.dataset.good) o.classList.add('good'); if(!a.ok && o.dataset.v===a.y) o.classList.add('bad'); });
+    } else if(it.classList.contains('inp')){ const f=$('input.w',it); if(f) f.value=a.y; }
+    else if(it.classList.contains('tiles')){ const b=$('.built',it); if(b){ b.innerHTML=''; const p=$('.pool',it); if(p) p.innerHTML=''; const s=document.createElement('span'); s.className='tile'; s.textContent=a.y; b.appendChild(s);} }
+    else if(it.classList.contains('tr')){ const f=$('textarea',it); if(f) f.value=a.y; it.classList.add('revealed'); }
+    finish(it,a.ok,a.y,solText(it), it.classList.contains('inl')?null:(a.ok?"✓ Juste !":"✗ La bonne réponse :"), null);
+  });
+  restoring=false;
+})();
+const rb=document.getElementById('resetall');
+if(rb) rb.addEventListener('click',()=>{ if(confirmReset()){ try{ localStorage.removeItem(KEY); }catch(e){} location.reload(); } });
+function confirmReset(){ const b=document.getElementById('resetall'); if(b.dataset.armed){ return true; } b.dataset.armed='1'; b.textContent='Clique encore pour tout effacer · Clicca ancora per cancellare tutto'; setTimeout(()=>{ delete b.dataset.armed; b.textContent='↺ Tout recommencer · Ricomincia da capo'; },4000); return false; }
+})();
+</script>
+</body></html>
