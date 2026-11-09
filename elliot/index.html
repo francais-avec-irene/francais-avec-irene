@@ -1,394 +1,412 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Elliot · Le jardin des verbes</title>
+<title>Elliot · Mission Verbes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Press+Start+2P&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>:root{
- --ink:#23324a; --muted:#6b7a90; --bg:#eef8f3; --card:#fff;
- --g1:#37b24d; --g1l:#ebfbee; --g2:#f59f00; --g2l:#fff9db; --g3:#9c36b5; --g3l:#f8f0fc;
- --pink:#e64980; --pinkl:#fff0f6; --blue:#1c7ed6; --bluel:#e7f5ff; --teal:#0ca678;
- --ok:#2b8a3e; --okl:#ebfbee; --ko:#e8590c; --kol:#fff4e6;
+ --bg:#0b0f24; --panel:#151a36; --panel2:#1d2348; --line:#2c3466; --ink:#eef1ff; --muted:#9aa3d1;
+ --cyan:#22d3ee; --mag:#f72585; --lime:#a3e635; --yel:#facc15; --pur:#8b5cf6; --org:#fb923c;
+ --ok:#4ade80; --ko:#fb7185;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:19px;line-height:1.5;
- background:var(--bg);
- background-image:radial-gradient(circle at 10% 20%,rgba(81,207,102,.10) 0 60px,transparent 61px),
-  radial-gradient(circle at 85% 60%,rgba(247,131,172,.10) 0 70px,transparent 71px),
-  radial-gradient(circle at 40% 90%,rgba(77,171,247,.10) 0 50px,transparent 51px);
- background-size:520px 520px;}
-main{max-width:880px;margin:0 auto;padding:62px 14px 60px}
-h1,h2,h3,.gkind,.snum,.st .txt,.ttl,.fw,.fbw,.bin,.final,#score,.rtitle,.bigok,.root,.fx,.hi{font-family:Fredoka,Nunito,sans-serif}
-b{font-weight:800}
+body{margin:0;color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:19px;line-height:1.5;background:var(--bg);
+ background-image:linear-gradient(rgba(34,211,238,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,.05) 1px,transparent 1px);
+ background-size:40px 40px}
+main{max-width:880px;margin:0 auto;padding:70px 14px 60px}
+h1,h2,h3,.st .txt,.ttl,.fw,.fbw,.bin,.rtitle .hp,.bigok,.root,.fx,.gt .txt,.rh .txt,.plan a,.party{font-family:Bungee,Nunito,sans-serif;font-weight:400}
+.pstart,#score,.snum,.gkind,.badge,.plan a span,.rank{font-family:"Press Start 2P",monospace}
+b{font-weight:900}
+a{color:var(--cyan)}
 
-/* barre du haut */
-#top{position:fixed;top:8px;right:10px;z-index:50;display:flex;gap:8px;align-items:center}
-#score{background:#fff;border:3px solid #fcc419;border-radius:999px;padding:4px 16px;font-size:21px;font-weight:600;box-shadow:0 4px 14px rgba(35,50,74,.18)}
-#score.bump{animation:bump .55s}
-@keyframes bump{35%{transform:scale(1.35) rotate(-4deg)}70%{transform:scale(.95)}}
-#enall{border:0;border-radius:999px;background:var(--ink);color:#fff;font:800 13px Nunito;padding:7px 12px;cursor:pointer;opacity:.85}
-body.en-all #enall{background:#fcc419;color:var(--ink)}
+/* HUD */
+#top{position:fixed;top:8px;right:10px;z-index:50;display:flex;gap:8px;align-items:flex-start}
+#score{background:#0b0f24;border:3px solid var(--yel);border-radius:12px;padding:7px 12px 6px;font-size:14px;color:var(--yel);box-shadow:0 0 18px rgba(250,204,21,.35);min-width:128px}
+#score .xl{color:var(--cyan)}
+.xpbar{height:7px;background:#2c3466;border-radius:9px;margin-top:5px;overflow:hidden}
+.xpbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--lime));transition:width .5s}
+#score.bump{animation:bump .5s}
+@keyframes bump{35%{transform:scale(1.25)}}
+#enall{border:2px solid var(--muted);border-radius:10px;background:var(--panel);color:var(--ink);font:900 13px Nunito;padding:8px 11px;cursor:pointer}
+body.en-all #enall{background:var(--cyan);color:#0b0f24;border-color:var(--cyan)}
+#combo{position:fixed;top:72px;right:12px;z-index:49;font:16px "Press Start 2P";color:var(--org);text-shadow:0 0 10px rgba(251,146,60,.8);pointer-events:none;opacity:0}
+#combo.on{animation:combo 1.4s}
+@keyframes combo{0%{opacity:0;transform:scale(.5)}20%{opacity:1;transform:scale(1.25)}80%{opacity:1;transform:scale(1)}100%{opacity:0}}
 
-/* lignes + EN */
+/* lignes */
 .line{margin:6px 0}
 .line .fr{display:flex;align-items:flex-start;gap:8px}
 .line .txt{flex:1}
 .btns{display:inline-flex;gap:5px;flex-shrink:0;margin-top:2px}
-.pb,.enb{border:0;cursor:pointer;border-radius:999px;font:800 12px Nunito;height:30px;min-width:30px;padding:0 8px;line-height:30px}
-.pb{background:var(--g1);color:#fff;font-size:12px;box-shadow:0 2px 0 #2b8a3e}
+.pb,.enb{border:0;cursor:pointer;border-radius:9px;font:900 12px Nunito;height:30px;min-width:30px;padding:0 8px;line-height:30px}
+.pb{background:var(--lime);color:#0b0f24;box-shadow:0 3px 0 #4d7c0f}
+.pb:active{transform:translateY(2px);box-shadow:none}
 .pb.sm{height:25px;min-width:25px;line-height:25px;font-size:10px;padding:0 6px}
-.pb.playing{animation:pulse .8s infinite;background:#fcc419;color:var(--ink);box-shadow:none}
+.pb.playing{background:var(--yel);animation:pulse .7s infinite}
 @keyframes pulse{50%{transform:scale(1.15)}}
-.enb{background:#e9ecf2;color:#6b7a90;letter-spacing:.5px;font-size:11px;height:26px;line-height:26px;margin-top:2px}
+.enb{background:#2c3466;color:var(--muted);font-size:11px;height:26px;line-height:26px;margin-top:2px}
 .demo{pointer-events:none;vertical-align:middle}
-.line.open>.fr .enb,body.en-all .enb{background:var(--ink);color:#fff}
-.en{display:none;color:#6b7a90;font-style:italic;font-size:.86em;margin:2px 0 0 2px;padding-left:10px;border-left:3px solid #d0d7e2}
+.line.open>.fr .enb,body.en-all .enb{background:var(--cyan);color:#0b0f24}
+.en{display:none;color:var(--cyan);font-style:italic;font-size:.86em;margin:2px 0 0 2px;padding-left:10px;border-left:3px solid var(--cyan)}
 .line.open>.en,body.en-all .en{display:block}
 
 /* hero */
-.hero{position:relative;border-radius:28px;overflow:hidden;height:330px;box-shadow:0 12px 30px rgba(35,50,74,.2)}
-.hero>img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.1)}
-.credit{position:absolute;right:10px;bottom:8px;background:rgba(255,255,255,.85);border-radius:8px;font-size:11px;padding:2px 8px;color:#495057}
-.herotxt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.hero h1{margin:0;background:rgba(255,255,255,.93);padding:8px 22px;border-radius:20px;font-size:40px;color:var(--teal);box-shadow:0 6px 18px rgba(0,0,0,.15)}
-.hi{margin-top:10px;background:#fcc419;padding:4px 18px;border-radius:999px;font-size:22px;font-weight:600}
-.frog{font-size:66px;cursor:pointer;animation:hop 2.6s ease-in-out infinite;filter:drop-shadow(0 6px 6px rgba(0,0,0,.25));user-select:none}
-.frog.jump{animation:bigjump .8s}
-@keyframes hop{0%,70%,100%{transform:translateY(0)}80%{transform:translateY(-22px) rotate(-6deg)}90%{transform:translateY(0) scaleY(.9)}}
-@keyframes bigjump{0%{transform:translateY(0)}40%{transform:translateY(-70px) rotate(-360deg) scale(1.2)}100%{transform:translateY(0)}}
+.hero{position:relative;border-radius:20px;overflow:hidden;height:360px;background:radial-gradient(ellipse at 50% 120%,#3b1d7a 0,#151a36 55%,#0b0f24 100%);border:3px solid var(--pur);box-shadow:0 0 30px rgba(139,92,246,.4)}
+.grid-bg{position:absolute;left:-50%;right:-50%;bottom:-10%;height:60%;background-image:linear-gradient(rgba(247,37,133,.5) 2px,transparent 2px),linear-gradient(90deg,rgba(247,37,133,.5) 2px,transparent 2px);background-size:50px 50px;transform:perspective(300px) rotateX(60deg);animation:grid 2s linear infinite;opacity:.6}
+@keyframes grid{to{background-position:0 50px}}
+.herotxt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px}
+.pstart{font-size:12px;color:var(--cyan);letter-spacing:1px}
+.blink{animation:blink 1.1s steps(2) infinite;color:var(--yel)}
+@keyframes blink{50%{opacity:0}}
+.hero h1{margin:0;font-size:46px;line-height:1;color:#fff;text-shadow:3px 3px 0 var(--mag),6px 6px 0 rgba(34,211,238,.6)}
+.hero h1 span{color:var(--yel)}
+.top-wrap{position:relative;height:110px;width:120px;cursor:pointer}
+.spin{position:absolute;left:50%;top:6px;width:96px;height:96px;margin-left:-48px;animation:wobble 2.4s ease-in-out infinite}
+.disc{width:100%;height:100%;border-radius:50%;background:conic-gradient(var(--mag),var(--yel),var(--cyan),var(--pur),var(--mag));box-shadow:0 0 22px rgba(34,211,238,.7),inset 0 0 0 10px rgba(11,15,36,.55),inset 0 0 0 22px rgba(255,255,255,.15);animation:rot .5s linear infinite;position:relative}
+.disc::after{content:"";position:absolute;inset:36px;border-radius:50%;background:#0b0f24;border:3px solid #fff}
+.spin.boost .disc{animation-duration:.12s}
+.spin.boost{animation:dash 1s ease-in-out}
+@keyframes rot{to{transform:rotate(360deg)}}
+@keyframes wobble{0%,100%{transform:translateX(-14px) rotate(-4deg)}50%{transform:translateX(14px) rotate(4deg)}}
+@keyframes dash{25%{transform:translateX(-90px)}60%{transform:translateX(90px)}100%{transform:none}}
+.arena-shadow{position:absolute;bottom:0;left:10px;right:10px;height:12px;border-radius:50%;background:rgba(0,0,0,.5)}
 
-.intro{background:#fff;border-radius:24px;padding:16px 20px;margin:16px 0;box-shadow:0 6px 18px rgba(35,50,74,.08)}
+.intro{background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:14px 18px;margin:16px 0}
 .how{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:10px 0;font-size:16px}
-.how div{background:#f4f8f6;border-radius:14px;padding:6px 10px}
+.how div{background:var(--panel2);border-radius:10px;padding:6px 10px}
 .plan{list-style:none;padding:0;margin:12px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.plan a{display:block;text-decoration:none;color:var(--ink);font-weight:800;background:var(--bluel);border-radius:16px;padding:9px 14px;transition:transform .15s}
-.plan a:hover{transform:translateY(-2px) rotate(-1deg)}
+.plan a{display:block;text-decoration:none;color:var(--ink);background:linear-gradient(90deg,#24124a,#151a36);border:2px solid var(--pur);border-radius:12px;padding:8px 12px;font-size:15px;transition:transform .15s}
+.plan a span{display:block;font-size:9px;color:var(--yel);margin-bottom:4px}
+.plan a:hover{transform:translateY(-2px);box-shadow:0 0 14px rgba(139,92,246,.6)}
 
 /* sections */
-.sec{scroll-margin-top:60px;margin-top:38px}
-.shead{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.snum{flex-shrink:0;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--blue));color:#fff;display:grid;place-items:center;font-size:28px;font-weight:600;box-shadow:0 4px 12px rgba(12,166,120,.35)}
-.shead .line{flex:1;margin:0}
-.st .txt{font-size:28px;font-weight:600;line-height:1.15}
-.sbanner{position:relative;border-radius:22px;overflow:hidden;height:190px;margin-bottom:12px;box-shadow:0 8px 22px rgba(35,50,74,.15)}
-.sbanner img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
-
-.bubble-talk{position:relative;background:#fff;border-radius:22px;padding:10px 16px 10px 70px;margin:10px 0 16px;box-shadow:0 4px 14px rgba(35,50,74,.08)}
-.bubble-talk::before{content:"🐸";position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:40px}
+.sec{scroll-margin-top:60px;margin-top:40px}
+.shead{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-bottom:10px}
+.snum{background:var(--mag);color:#fff;font-size:12px;padding:7px 10px;border-radius:8px;box-shadow:0 0 14px rgba(247,37,133,.6)}
+.shead .line{margin:0;width:100%}
+.st .txt{font-size:28px;line-height:1.15;color:#fff}
+.sbanner{position:relative;border-radius:16px;overflow:hidden;height:150px;margin-bottom:12px;border:3px solid var(--cyan)}
+.sbanner img{width:100%;height:100%;object-fit:cover}
+.credit{position:absolute;right:8px;bottom:6px;background:rgba(11,15,36,.8);border-radius:6px;font-size:11px;padding:2px 8px;color:var(--muted)}
+.talk{position:relative;background:var(--panel2);border:2px solid var(--cyan);border-radius:16px;padding:10px 16px 10px 64px;margin:10px 0 16px}
+.talk::before{content:"🎮";position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:36px}
 
 /* règles */
-.rule{background:#fff;border-radius:24px;margin:16px 0;overflow:hidden;border:3px solid;scroll-margin-top:80px;box-shadow:0 6px 18px rgba(35,50,74,.08)}
+.rule{background:var(--panel);border-radius:18px;margin:16px 0;overflow:hidden;border:3px solid;scroll-margin-top:80px}
 .rule.flash{animation:flash 1.6s}
-@keyframes flash{0%,100%{box-shadow:0 6px 18px rgba(35,50,74,.08)}30%,60%{box-shadow:0 0 0 8px rgba(252,196,25,.7)}}
-.rh{display:flex;align-items:center;gap:10px;padding:8px 16px;color:#fff}
-.rh .line{flex:1;margin:0}
-.rh .txt{font-family:Fredoka;font-size:23px;font-weight:600}
-.rh .enb{background:rgba(255,255,255,.3);color:#fff}
-.rh .en{color:#fff;border-color:rgba(255,255,255,.5)}
-.bag{font-size:34px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.2))}
-.rb{padding:8px 18px 16px}
-.g1{border-color:var(--g1)}.g1 .rh{background:linear-gradient(90deg,#37b24d,#74b816)}
-.g2{border-color:var(--g2)}.g2 .rh{background:linear-gradient(90deg,#f59f00,#f76707)}
-.g3{border-color:var(--g3)}.g3 .rh{background:linear-gradient(90deg,#9c36b5,#e64980)}
-.g4{border-color:var(--blue)}.g4 .rh{background:linear-gradient(90deg,#1c7ed6,#0ca678)}
-.g5{border-color:var(--teal)}.g5 .rh{background:linear-gradient(90deg,#0ca678,#37b24d)}
+@keyframes flash{30%,60%{box-shadow:0 0 0 6px var(--yel),0 0 30px var(--yel)}}
+.rh{display:flex;align-items:center;gap:10px;padding:8px 14px;color:#0b0f24;flex-wrap:wrap}
+.rh .line{flex:1;margin:0;min-width:200px}
+.rh .txt{font-size:20px}
+.rh .enb{background:rgba(11,15,36,.25);color:#0b0f24}
+.rh .en{color:#0b0f24;border-color:#0b0f24}
+.badge{font-size:8px;background:#0b0f24;color:#fff;padding:5px 7px;border-radius:6px}
+.bag{font-size:26px}
+.rb{padding:8px 16px 16px}
+.g1{border-color:var(--lime)}.g1 .rh{background:var(--lime)}
+.g2{border-color:var(--yel)}.g2 .rh{background:var(--yel)}
+.g3{border-color:var(--pur)}.g3 .rh{background:var(--pur);color:#fff}.g3 .rh .enb{color:#fff}.g3 .rh .en{color:#fff;border-color:#fff}
+.g4{border-color:var(--cyan)}.g4 .rh{background:var(--cyan)}
+.g5{border-color:var(--mag)}.g5 .rh{background:var(--mag);color:#fff}.g5 .rh .enb{color:#fff}.g5 .rh .en{color:#fff;border-color:#fff}
 .chips{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}
-.vchip{border:0;border-radius:999px;padding:5px 14px;font:800 17px Nunito;cursor:pointer;transition:transform .15s}
-.vchip:hover{transform:scale(1.08) rotate(-2deg)}
-.c1{background:var(--g1l);color:#2b8a3e}.c2{background:var(--g2l);color:#e67700}
-.ttl{font-size:21px;font-weight:600;margin:10px 0 2px}
-.ent-i{font-family:Nunito;font-size:15px;color:var(--muted);font-weight:400;font-style:italic}
+.vchip{border:2px solid;border-radius:10px;padding:4px 13px;font:900 17px Nunito;cursor:pointer;background:transparent;transition:transform .15s}
+.vchip:hover{transform:scale(1.08)}
+.c1{color:var(--lime);border-color:var(--lime)}.c2{color:var(--yel);border-color:var(--yel)}
+.ttl{font-size:20px;margin:12px 0 2px;color:#fff}
+.ent-i{font-family:Nunito;font-size:15px;color:var(--muted);font-style:italic}
 .conj{border-collapse:separate;border-spacing:0 5px;width:100%;max-width:520px}
-.conj td{padding:5px 10px;background:#f7f9fb}
-.conj td:first-child{border-radius:12px 0 0 12px}
-.conj td:last-child{border-radius:0 12px 12px 0}
+.conj td{padding:5px 10px;background:var(--panel2)}
+.conj td:first-child{border-radius:10px 0 0 10px}
+.conj td:last-child{border-radius:0 10px 10px 0}
 .conj .pr{color:var(--muted);font-weight:800;width:110px}
-.conj .vb{font-size:21px;font-weight:700}
+.conj .vb{font-size:21px;font-weight:800}
 .conj .pbc{width:40px}
-.conj .ent{display:none;font-style:italic;color:var(--muted);font-size:15px}
+.conj .ent{display:none;font-style:italic;color:var(--cyan);font-size:15px}
 body.en-all .conj .ent{display:table-cell}
-.e1{color:var(--g1);background:var(--g1l);border-radius:4px}
-.e2{color:#e67700;background:var(--g2l);border-radius:4px}
-.tip{background:#f8f9fa;border-radius:16px;padding:6px 12px;margin-top:10px;display:flex;gap:6px;align-items:flex-start}
+.e1{color:var(--lime)}.e2{color:var(--yel)}
+.tip{background:var(--panel2);border-radius:12px;padding:6px 12px;margin-top:10px;display:flex;gap:6px;align-items:flex-start}
 .tip .line{flex:1;margin:0}
 .tip.small{font-size:16px;background:none;padding:0}
-.warn{background:var(--kol);border:2px dashed #ffa94d;border-radius:16px;padding:6px 12px;margin:10px 0;display:flex;gap:6px;align-items:flex-start}
+.warn{background:rgba(251,146,60,.12);border:2px dashed var(--org);border-radius:12px;padding:6px 12px;margin:10px 0;display:flex;gap:6px;align-items:flex-start}
 .warn .line{flex:1;margin:0}
 
-/* cartes à retourner */
+/* cartes */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
 .cards.fam{grid-template-columns:repeat(2,1fr)}
 .fcard{perspective:900px;height:250px;cursor:pointer}
 .cards.fam .fcard{height:215px}
-.fin{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.3,1.4,.5,1);transform-style:preserve-3d}
+.fin{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.3,1.4,.5,1);transform-style:preserve-3d}
 .fcard.flip .fin{transform:rotateY(180deg)}
-.ff,.fb{position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:12px;box-shadow:0 6px 16px rgba(35,50,74,.13)}
-.ff{background:linear-gradient(160deg,#fff,#f3f0ff);border:3px solid #d0bfff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.fb{background:#fff;border:3px solid var(--g3);transform:rotateY(180deg);overflow:auto}
-.femo{font-size:52px;line-height:1.1;transition:transform .3s}
-.fcard:hover .femo{transform:scale(1.15) rotate(-6deg)}
-.fw{font-size:25px;font-weight:600;margin-top:4px}
+.ff,.fb{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:12px}
+.ff{background:linear-gradient(160deg,#2a1760,#151a36);border:3px solid var(--pur);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 0 14px rgba(139,92,246,.35)}
+.fcard:hover .ff{box-shadow:0 0 24px rgba(139,92,246,.8)}
+.fb{background:var(--panel2);border:3px solid var(--yel);transform:rotateY(180deg);overflow:auto}
+.femo{font-size:50px;line-height:1.1;transition:transform .3s}
+.fcard:hover .femo{transform:scale(1.15) rotate(-8deg)}
+.fw{font-size:22px;margin-top:6px;color:#fff}
 .fen,.fcat{color:var(--muted);font-style:italic;font-size:15px}
-.turn{position:absolute;right:12px;bottom:8px;color:#b197fc;font-size:20px}
-.fbw{font-size:20px;font-weight:600;color:var(--g3);margin-bottom:4px}
+.turn{position:absolute;right:12px;bottom:8px;color:var(--pur);font-size:20px}
+.fbw{font-size:18px;color:var(--yel);margin-bottom:4px;display:flex;justify-content:space-between;align-items:center;gap:6px}
 .fb ul{list-style:none;padding:0;margin:0}
-.fb li{display:flex;justify-content:space-between;align-items:center;font-weight:700;padding:2px 0;border-bottom:1px dashed #eee;font-size:17px}
-.fcard.fam .ff{background:linear-gradient(160deg,#fff,#ebfbee);border-color:#8ce99a}
-.fcard.fam.t1 .ff{background:linear-gradient(160deg,#fff,#f4fce3);border-color:#a9e34b}
-.fcard.fam.t3 .ff{background:linear-gradient(160deg,#fff,#e6fcf5);border-color:#63e6be}
-.fcard.fam .fb{border-color:var(--teal)}
-.fbw{display:flex;justify-content:space-between;align-items:center;gap:6px}
-.fben{background:var(--bluel);border-radius:12px;padding:3px 10px;margin:4px 0 8px;font-weight:700;font-size:16px}
+.fb li{display:flex;justify-content:space-between;align-items:center;font-weight:800;padding:2px 0;border-bottom:1px dashed var(--line);font-size:17px}
+.fcard.fam .ff{background:linear-gradient(160deg,#3a0f33,#151a36);border-color:var(--mag);box-shadow:0 0 14px rgba(247,37,133,.3)}
+.fcard.fam .fb{border-color:var(--cyan)}
+.fben{background:rgba(34,211,238,.12);color:var(--cyan);border-radius:10px;padding:3px 10px;margin:4px 0 8px;font-weight:800;font-size:16px}
 .fbex{font-size:17px;display:flex;gap:6px;justify-content:space-between;align-items:flex-start}
 
-/* jeux */
-.game{background:#fff;border-radius:26px;padding:12px 16px 16px;margin:20px 0;border:3px dashed #b2f2bb;scroll-margin-top:70px;box-shadow:0 6px 18px rgba(35,50,74,.07)}
+/* missions */
+.game{background:var(--panel);border-radius:20px;padding:12px 16px 16px;margin:22px 0;border:3px solid var(--line);scroll-margin-top:70px;position:relative}
+.game.cleared{border-color:var(--ok);box-shadow:0 0 18px rgba(74,222,128,.3)}
+.game.cleared::after{content:"✔ CLEAR";position:absolute;top:-12px;right:14px;background:var(--ok);color:#0b0f24;font:10px "Press Start 2P";padding:6px 8px;border-radius:6px}
+.game.boss{border-color:var(--mag);box-shadow:0 0 20px rgba(247,37,133,.35)}
 .ghead{display:flex;align-items:center;gap:12px;margin-bottom:6px}
 .ghead>div{flex:1}
-.gnum{flex-shrink:0;width:56px;height:56px;border-radius:18px;background:linear-gradient(135deg,#fff3bf,#ffd8a8);display:grid;place-items:center;font-size:32px;transform:rotate(-6deg)}
-.gkind{font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--pink);font-weight:600}
+.gnum{flex-shrink:0;width:54px;height:54px;border-radius:14px;background:var(--panel2);border:2px solid var(--cyan);display:grid;place-items:center;font-size:30px}
+.gkind{font-size:10px;color:var(--mag);margin-bottom:4px}
+.boss .gkind{color:var(--yel);animation:blink 1s steps(2) infinite}
 .gt{margin:0}
-.gt .txt{font-family:Fredoka;font-size:22px;font-weight:600;line-height:1.2}
+.gt .txt{font-size:20px;line-height:1.2;color:#fff}
 .cons{color:var(--muted);font-weight:700}
 
-.item.qcm,.item.tiles{background:#f8fafc;border-radius:20px;padding:10px 14px;margin:10px 0;border:2px solid transparent;transition:border-color .3s}
+.item.qcm,.item.tiles{background:var(--panel2);border-radius:14px;padding:10px 14px;margin:10px 0;border:2px solid transparent}
 .qrow{display:flex;align-items:center;gap:12px}
-.pic{font-size:38px;flex-shrink:0;min-width:56px;text-align:center}
-.qtxt{flex:1;font-size:20px;font-weight:700}
+.pic{font-size:36px;flex-shrink:0;min-width:56px;text-align:center}
+.qtxt{flex:1;font-size:20px;font-weight:800}
 .hint{color:var(--muted);font-weight:400;font-style:italic;font-size:.85em}
-.blank{display:inline-block;min-width:60px;text-align:center;border-bottom:3px dotted var(--pink);color:var(--pink)}
+.blank{display:inline-block;min-width:60px;text-align:center;border-bottom:3px solid var(--yel);color:var(--yel)}
 .opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
-.opt{border:3px solid #dee2e6;background:#fff;border-radius:16px;padding:7px 18px;font:800 19px Nunito;cursor:pointer;color:var(--ink);transition:transform .15s,background .2s}
-.opt:hover{transform:translateY(-3px);border-color:#74c0fc}
-.opt.good{background:var(--okl);border-color:var(--ok);color:var(--ok);animation:pop .45s}
-.opt.bad{background:var(--kol);border-color:var(--ko);color:var(--ko);text-decoration:line-through}
+.opt{border:2px solid var(--cyan);background:#0b0f24;border-radius:10px;padding:7px 16px;font:900 19px Nunito;cursor:pointer;color:var(--ink);transition:transform .12s;box-shadow:0 4px 0 #0e7490}
+.opt:hover{transform:translateY(-2px)}
+.opt:active{transform:translateY(3px);box-shadow:none}
+.opt.good{background:var(--ok);border-color:var(--ok);color:#0b0f24;box-shadow:0 0 16px rgba(74,222,128,.7);animation:pop .4s}
+.opt.bad{background:transparent;border-color:var(--ko);color:var(--ko);text-decoration:line-through;box-shadow:none}
 .done .opt{pointer-events:none}
-.done .opt:not(.good):not(.bad){opacity:.45}
-@keyframes pop{40%{transform:scale(1.18)}}
-.sol{display:none;margin-top:6px;background:var(--okl);color:var(--ok);font-weight:800;border-radius:14px;padding:5px 12px;align-items:center;gap:8px}
+.done .opt:not(.good):not(.bad){opacity:.35}
+@keyframes pop{40%{transform:scale(1.15)}}
+.sol{display:none;margin-top:6px;background:rgba(74,222,128,.12);color:var(--ok);font-weight:900;border-radius:10px;padding:5px 12px;align-items:center;gap:8px}
 .item.done .sol{display:flex}
 .sol .stxt{flex:1}
-.item.right{border-color:#8ce99a}
-.item.wrong{border-color:#ffc078;animation:shake .45s}
+.item.right{border-color:var(--ok)}
+.item.wrong{border-color:var(--ko);animation:shake .4s}
 @keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
 
-/* étiquettes */
-.built{min-height:52px;border:3px dashed #a5d8ff;border-radius:16px;padding:6px;margin:8px 0;display:flex;flex-wrap:wrap;gap:6px;background:#fff}
-.built:empty::before{content:attr(data-ph);color:#adb5bd;font-style:italic;padding:6px}
+.built{min-height:52px;border:2px dashed var(--cyan);border-radius:12px;padding:6px;margin:8px 0;display:flex;flex-wrap:wrap;gap:6px}
+.built:empty::before{content:attr(data-ph);color:var(--muted);font-style:italic;padding:6px}
 .pool{display:flex;flex-wrap:wrap;gap:7px}
-.tile{border:0;border-radius:14px;background:linear-gradient(180deg,#fff,#e7f5ff);box-shadow:0 3px 0 #a5d8ff;padding:7px 14px;font:800 19px Nunito;color:var(--ink);cursor:pointer;transition:transform .12s}
-.tile:hover{transform:translateY(-2px)}
-.built .tile{background:linear-gradient(180deg,#fff,#fff3bf);box-shadow:0 3px 0 #ffd43b}
-.tbtns{margin-top:6px}
-.undo{border:0;background:none;color:var(--blue);font:800 15px Nunito;cursor:pointer}
-.tiles.done .pool,.tiles.done .tbtns{display:none}
+.tile{border:0;border-radius:8px;background:var(--pur);box-shadow:0 4px 0 #5b21b6;padding:7px 14px;font:900 19px Nunito;color:#fff;cursor:pointer}
+.tile:active{transform:translateY(3px);box-shadow:none}
+.built .tile{background:var(--yel);color:#0b0f24;box-shadow:0 4px 0 #a16207}
+.undo{border:0;background:none;color:var(--cyan);font:800 15px Nunito;cursor:pointer;margin-top:4px}
+.tiles.done .pool,.tiles.done .undo{display:none}
 .tiles.done .tile{pointer-events:none}
 
-/* tri dans les sacs */
+/* arènes */
 .sortpool{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:10px 0 16px;min-height:50px}
-.vsort{border:3px solid #dee2e6;background:#fff;border-radius:999px;padding:7px 18px;font:800 20px Nunito;cursor:pointer;color:var(--ink);transition:transform .2s;animation:float 3s ease-in-out infinite}
-.vsort:nth-child(2n){animation-delay:-1.5s}.vsort:nth-child(3n){animation-delay:-.8s}
-@keyframes float{50%{transform:translateY(-5px)}}
-.vsort.sel{border-color:var(--pink);background:var(--pinkl);transform:scale(1.15);animation:none;box-shadow:0 6px 14px rgba(230,73,128,.3)}
+.vsort{border:2px solid var(--muted);background:#0b0f24;border-radius:999px;padding:7px 18px;font:900 20px Nunito;cursor:pointer;color:var(--ink);transition:transform .2s}
+.vsort.sel{border-color:var(--yel);color:var(--yel);transform:scale(1.15);box-shadow:0 0 18px rgba(250,204,21,.7);animation:spinsel .9s linear infinite}
+@keyframes spinsel{25%{transform:scale(1.15) rotate(-4deg)}75%{transform:scale(1.15) rotate(4deg)}}
 .bins{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.bin{border:3px solid;border-radius:24px 24px 30px 30px;padding:10px 6px 8px;font-size:21px;font-weight:600;cursor:pointer;display:flex;flex-direction:column;align-items:center;min-height:150px;transition:transform .2s;color:var(--ink)}
-.bin span{font-size:38px;line-height:1}
-.bin small{font-family:Nunito;font-size:14px;color:var(--muted);font-weight:700}
-.bin.b1{background:var(--g1l);border-color:var(--g1)}.bin.b2{background:var(--g2l);border-color:var(--g2)}.bin.b3{background:var(--g3l);border-color:var(--g3)}
-.sortpool:has(.sel)~.bins .bin{animation:wiggle 1s ease-in-out infinite}
-@keyframes wiggle{25%{transform:rotate(-2deg)}75%{transform:rotate(2deg)}}
-.bin.gulp{animation:gulp .5s !important}
-@keyframes gulp{40%{transform:scale(1.12)}}
-.bin.nope{animation:shake .45s !important}
+.bin{position:relative;border:3px solid;border-radius:50% 50% 22px 22px/30% 30% 22px 22px;padding:14px 6px 10px;font-size:16px;cursor:pointer;display:flex;flex-direction:column;align-items:center;min-height:160px;background:radial-gradient(ellipse at 50% 30%,#232a57,#0b0f24 70%);color:#fff;transition:transform .2s}
+.bin small{font-family:Nunito;font-size:14px;color:var(--muted);font-weight:800}
+.bin.b1{border-color:var(--lime)}.bin.b2{border-color:var(--yel)}.bin.b3{border-color:var(--pur)}
+.ring{width:54px;height:54px;border-radius:50%;margin-bottom:6px;border:4px dotted currentColor;animation:rot 3s linear infinite}
+.b1 .ring{color:var(--lime)}.b2 .ring{color:var(--yel)}.b3 .ring{color:var(--pur)}
+.sortpool:has(.sel)~.bins .bin{box-shadow:0 0 16px rgba(34,211,238,.45)}
+.bin.gulp{animation:gulp .5s}
+@keyframes gulp{40%{transform:scale(1.1)}}
+.bin.nope{animation:shake .45s}
 .bin .in{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:6px}
-.bin .in span{font:800 14px Nunito;background:#fff;border-radius:999px;padding:2px 9px;line-height:1.5}
-.bin .in span.w{background:#ffe8cc;color:var(--ko)}
+.bin .in span{font:900 14px Nunito;background:var(--panel2);border-radius:999px;padding:2px 9px;line-height:1.5}
+.bin .in span.w{background:rgba(251,113,133,.2);color:var(--ko)}
+.flytop{position:fixed;z-index:93;width:44px;height:44px;border-radius:50%;pointer-events:none;background:conic-gradient(var(--mag),var(--yel),var(--cyan),var(--pur),var(--mag));box-shadow:0 0 16px var(--cyan);transition:left .55s cubic-bezier(.5,-0.3,.6,1.3),top .55s cubic-bezier(.5,-0.3,.6,1.3);animation:rot .2s linear infinite}
 
-/* bulles */
+/* boss : blocs */
 .round{display:none}
 .round.on{display:block}
-.rtitle{display:flex;align-items:center;gap:8px;font-size:21px;font-weight:600}
-.rtitle .line{flex:1;font-family:Nunito;font-weight:700;font-size:19px}
-.pond{position:relative;background:linear-gradient(180deg,#d0ebff,#a5d8ff 60%,#74c0fc);border-radius:26px;padding:22px 10px 26px;display:flex;flex-wrap:wrap;gap:16px 12px;justify-content:center;overflow:hidden;min-height:250px}
-.pond::after{content:"🪷  🐸     🪷";position:absolute;bottom:2px;left:16px;font-size:26px;opacity:.9;pointer-events:none}
-.bub{width:138px;height:138px;border-radius:50%;border:2px solid rgba(255,255,255,.9);cursor:pointer;
- background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.95) 0 10%,rgba(255,255,255,.35) 30%,rgba(208,235,255,.35) 70%,rgba(255,255,255,.6) 100%);
- box-shadow:inset -6px -8px 18px rgba(116,192,252,.45),0 6px 14px rgba(28,126,214,.18);
- font:800 17px Nunito;color:#1864ab;padding:8px;animation:bob 3.2s ease-in-out infinite;animation-delay:var(--d);transform:translateX(var(--x))}
-@keyframes bob{0%,100%{transform:translate(var(--x),0)}50%{transform:translate(calc(var(--x) * -1),-12px)}}
-.bub.popped{animation:popb .45s forwards;pointer-events:none}
-@keyframes popb{40%{transform:scale(1.3);opacity:.9}100%{transform:scale(0);opacity:0}}
-.bub.nope{animation:shake .45s;background:radial-gradient(circle at 30% 28%,#fff 0 10%,rgba(255,192,120,.5) 60%);color:var(--ko)}
-.done-msg .bigok{font-size:26px;font-weight:600;text-align:center;color:var(--teal);padding:20px;animation:pop .6s}
+.rtitle{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rtitle .hp{font-family:"Press Start 2P";font-size:10px;background:var(--mag);color:#fff;padding:6px 8px;border-radius:6px}
+.rtitle .line{flex:1;font-weight:800}
+.pond{background:linear-gradient(180deg,#1b1145,#0b0f24);border:2px solid var(--line);border-radius:16px;padding:20px 10px;display:flex;flex-wrap:wrap;gap:14px;justify-content:center;min-height:230px}
+.bub{width:150px;height:76px;border-radius:8px;border:0;cursor:pointer;color:#fff;font:900 17px Nunito;padding:6px;
+ background:linear-gradient(180deg,#8b5cf6 0 50%,#7c3aed 50%);box-shadow:inset 0 -6px 0 rgba(0,0,0,.3),inset 0 4px 0 rgba(255,255,255,.25),0 0 0 3px #0b0f24,0 0 14px rgba(139,92,246,.5);
+ animation:hover 2.4s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes hover{50%{transform:translateY(-6px)}}
+.bub.popped{animation:smash .45s forwards;pointer-events:none}
+@keyframes smash{30%{transform:scale(1.2) rotate(-6deg);filter:brightness(2)}100%{transform:scale(0) rotate(30deg);opacity:0}}
+.bub.nope{animation:shake .45s;background:linear-gradient(180deg,#e11d48 0 50%,#be123c 50%)}
+.done-msg .bigok{font-size:30px;text-align:center;color:var(--yel);padding:24px;text-shadow:3px 3px 0 var(--mag);animation:pop .6s}
 
 /* effets */
-.star{position:fixed;z-index:90;pointer-events:none;font-size:26px;animation:fly 1.1s ease-out forwards}
-@keyframes fly{0%{transform:translate(0,0) scale(.3);opacity:1}70%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.4) rotate(200deg);opacity:0}}
-.cheer{position:fixed;z-index:91;pointer-events:none;font:700 30px Fredoka;color:var(--pink);text-shadow:0 3px 0 #fff,0 0 12px #fff;animation:cheer 1.2s ease-out forwards}
-@keyframes cheer{0%{transform:translate(-50%,0) scale(.4);opacity:0}25%{transform:translate(-50%,-20px) scale(1.15);opacity:1}100%{transform:translate(-50%,-80px) scale(1);opacity:0}}
-.conf{position:fixed;top:-20px;z-index:95;pointer-events:none;width:10px;height:16px;border-radius:3px;animation:fall linear forwards}
-@keyframes fall{to{transform:translate(var(--sx),105vh) rotate(var(--r));}}
-.gfrog{position:fixed;z-index:92;bottom:-90px;left:50%;font-size:80px;pointer-events:none;animation:gfrog 1.8s ease-in-out forwards}
-@keyframes gfrog{0%{transform:translate(-50%,0)}35%{transform:translate(-50%,-260px) rotate(-20deg)}55%{transform:translate(-50%,-240px) rotate(15deg)}100%{transform:translate(-50%,0)}}
+.star{position:fixed;z-index:90;pointer-events:none;font-size:24px;animation:fly 1s ease-out forwards}
+@keyframes fly{0%{transform:translate(0,0) scale(.3);opacity:1}70%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.3) rotate(200deg);opacity:0}}
+.cheer{position:fixed;z-index:91;pointer-events:none;font:16px "Press Start 2P";color:var(--yel);text-shadow:2px 2px 0 var(--mag);animation:cheer 1.1s ease-out forwards;white-space:nowrap}
+@keyframes cheer{0%{transform:translate(-50%,0) scale(.4);opacity:0}25%{transform:translate(-50%,-20px) scale(1.15);opacity:1}100%{transform:translate(-50%,-80px);opacity:0}}
+.conf{position:fixed;top:-20px;z-index:95;pointer-events:none;width:9px;height:9px;animation:fall linear forwards}
+@keyframes fall{to{transform:translate(var(--sx),105vh) rotate(var(--r))}}
+.lvl{position:fixed;z-index:96;left:50%;top:40%;transform:translate(-50%,-50%);font:clamp(22px,6vw,44px) Bungee;color:var(--yel);text-shadow:4px 4px 0 var(--mag),0 0 30px rgba(250,204,21,.7);pointer-events:none;animation:lvl 1.8s forwards;white-space:nowrap}
+@keyframes lvl{0%{transform:translate(-50%,-50%) scale(.2);opacity:0}20%{transform:translate(-50%,-50%) scale(1.15);opacity:1}80%{opacity:1}100%{transform:translate(-50%,-90%) scale(1);opacity:0}}
 
-/* bravo */
-.bravo{text-align:center;background:linear-gradient(160deg,#fff9db,#fff);border:3px solid #fcc419;border-radius:28px;padding:20px 18px}
-.trophy{font-size:80px;animation:hop 2.4s infinite}
-.bravo h2{margin:0;font-size:40px;color:var(--pink)}
-.final{font-size:30px;font-weight:600;margin:6px 0}
+/* fin */
+.bravo{text-align:center;background:radial-gradient(ellipse at 50% 0,#3b1d7a,#151a36 70%);border:3px solid var(--yel);border-radius:20px;padding:20px 18px;box-shadow:0 0 26px rgba(250,204,21,.3)}
+.trophy{font-size:76px;animation:hover 2s infinite}
+.bravo h2{margin:0;font-size:42px;color:#fff;text-shadow:3px 3px 0 var(--mag)}
+.final{font:20px "Press Start 2P";color:var(--yel);margin:10px 0}
+.rank{font-family:Bungee;font-size:16px;color:var(--cyan);margin-bottom:10px;line-height:1.6}
 .bravo .line{text-align:left}
-.party{border:0;border-radius:999px;background:linear-gradient(90deg,var(--pink),#f76707);color:#fff;font:600 20px Fredoka;padding:10px 24px;margin-top:8px;cursor:pointer;box-shadow:0 6px 16px rgba(230,73,128,.35)}
-.revoir{background:#fff;border-radius:24px;padding:12px 18px;margin-top:16px;border:3px solid #ffd8a8}
-.revoir h3{margin:4px 0 6px;font-size:23px}
+.party{border:0;border-radius:12px;background:var(--mag);color:#fff;font-size:18px;padding:12px 22px;margin-top:10px;cursor:pointer;box-shadow:0 5px 0 #9d174d}
+.party:active{transform:translateY(4px);box-shadow:none}
+.revoir{background:var(--panel);border-radius:18px;padding:12px 18px;margin-top:16px;border:3px solid var(--org)}
+.revoir h3{margin:4px 0 6px;font-size:22px}
 .revlist{list-style:none;padding:0;margin:0}
-.revlist li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 0;border-bottom:1px dashed #eee}
-.revlist .gd{font-weight:800;color:var(--ok)}
+.revlist li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.revlist .gd{font-weight:900;color:var(--ok)}
 .revlist .yr{color:var(--ko);text-decoration:line-through}
-.revlist a{margin-left:auto;text-decoration:none;background:var(--bluel);color:var(--blue);font-weight:800;border-radius:999px;padding:3px 12px;font-size:15px}
-footer{text-align:center;color:var(--muted);font-family:Fredoka;margin-top:30px}
+.revlist a{margin-left:auto;text-decoration:none;background:rgba(34,211,238,.15);color:var(--cyan);font-weight:900;border-radius:999px;padding:3px 12px;font-size:15px}
+footer{text-align:center;color:var(--muted);margin-top:30px;font-size:14px}
 
 @media (max-width:640px){
  body{font-size:17px}
- .hero{height:280px}.hero h1{font-size:30px}
+ .hero{height:320px}.hero h1{font-size:36px}
  .how,.plan{grid-template-columns:1fr}
  .cards{grid-template-columns:repeat(2,1fr)}
  .cards.fam{grid-template-columns:1fr}
- .st .txt{font-size:23px}
- .bins{gap:6px}.bin{font-size:17px;min-height:130px}
- .bub{width:112px;height:112px;font-size:15px}
- .pic{font-size:30px;min-width:40px}
+ .st .txt{font-size:22px}
+ .bins{gap:6px}.bin{font-size:12px;min-height:140px}
+ .bub{width:132px;height:68px;font-size:15px}
+ .pic{font-size:28px;min-width:40px}
  .qtxt{font-size:18px}
+ .trees{grid-template-columns:1fr}
 }
-
-/* c'est ... qui */
+/* c'est qui + familles */
 .story{display:flex;flex-direction:column;gap:8px;margin:6px 0 12px}
-.sline{display:flex;align-items:center;gap:10px;background:#f7f9fb;border-radius:16px;padding:6px 12px}
+.sline{display:flex;align-items:center;gap:10px;background:var(--panel2);border-radius:12px;padding:6px 12px}
 .sline .line{flex:1;margin:0;font-size:20px}
-.sline.q{background:var(--bluel)}
-.sline.a{background:linear-gradient(90deg,#fff3bf,#ffe8cc);border:2px solid #fcc419;font-size:21px}
-.sic{font-size:28px;flex-shrink:0}
-.k1{color:var(--blue)}.k2{color:var(--pink)}.k3{color:var(--teal)}
+.sline.q{border:2px solid var(--line)}
+.sline.a{border:2px solid var(--yel);box-shadow:0 0 12px rgba(250,204,21,.25)}
+.sic{font-size:26px;flex-shrink:0}
+.k1{color:var(--cyan)}.k2{color:var(--mag)}.k3{color:var(--lime)}
 .formula{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:12px 0}
-.fx{border-radius:14px;padding:6px 14px;font-size:20px;font-weight:600;color:#fff}
-.fx.k1{background:var(--blue)}.fx.k2{background:var(--pink)}.fx.k3{background:var(--teal)}
-.plus{font:700 22px Fredoka;color:var(--muted)}
-
-/* familles */
+.fx{border-radius:10px;padding:6px 14px;font-size:17px;color:#0b0f24}
+.fx.k1{background:var(--cyan)}.fx.k2{background:var(--mag);color:#fff}.fx.k3{background:var(--lime)}
+.plus{font:22px Bungee;color:var(--muted)}
 .trees{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
-.tree{border-radius:20px;padding:10px;text-align:center;position:relative}
-.tree.t1{background:#f4fce3}.tree.t2{background:#ebfbee}.tree.t3{background:#e6fcf5}
-.root{display:inline-block;background:#fff;border-radius:999px;padding:3px 16px;font-size:22px;font-weight:600;color:var(--pink);box-shadow:0 3px 0 #fcc2d7;margin-bottom:8px}
-.root::before{content:"💚 "}
+.tree{border-radius:14px;padding:10px;text-align:center;background:var(--panel2);border:2px solid var(--line)}
+.root{display:inline-block;background:var(--mag);color:#fff;border-radius:8px;padding:3px 14px;font-size:20px;margin-bottom:8px}
+.root::before{content:"🔑 "}
 .leaves{display:flex;flex-direction:column;gap:5px}
-.leaves span{background:#fff;border-radius:12px;padding:3px 8px;font-weight:700;font-size:17px}
-.leaves b{color:var(--pink)}
-@media (max-width:640px){ .trees{grid-template-columns:1fr} .sline .line{font-size:18px} }
+.leaves span{background:#0b0f24;border-radius:8px;padding:3px 8px;font-weight:800;font-size:17px}
+.leaves b{color:var(--mag)}
 </style></head>
 <body>
-<div id="top"><button id="enall">EN</button><div id="score">⭐ <span id="sc">0</span> / <span id="tot">0</span></div></div>
+<div id="top"><button id="enall">EN</button><div id="score"><span class="xl">XP</span> <span id="sc">0</span>/<span id="tot">0</span><div class="xpbar"><i id="xpf"></i></div></div></div>
+<div id="combo"></div>
 <main>
 <header class="hero">
-  <img src="img/eau.jpg" alt="">
-  <span class="credit">Claude Monet, <i>Nymphéas</i>, 1906</span>
+  <div class="grid-bg"></div>
   <div class="herotxt">
-    <div class="frog" id="frog">🐸</div>
-    <h1>Le jardin des verbes</h1>
-    <div class="hi">Bonjour Elliot !</div>
+    <div class="pstart">PLAYER 1 · ELLIOT</div>
+    <h1>MISSION<br><span>VERBES</span></h1>
+    <div class="top-wrap"><div class="spin" id="spin"><div class="disc"></div></div><div class="arena-shadow"></div></div>
+    <div class="pstart blink">▶ TOUCHE LA TOUPIE</div>
   </div>
 </header>
 <div class="intro">
-  <div class="line "><div class="fr"><span class="txt">Bonjour Elliot ! Je suis Gaston, la grenouille du jardin de Monet. 🐸</span><span class="btns"><button class="pb" data-a="8776c085f7" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Hello Elliot! I'm Gaston, the frog from Monet's garden.</div></div>
-  <div class="line "><div class="fr"><span class="txt">Aujourd’hui, on revoit les verbes, on joue et tu gagnes des étoiles !</span><span class="btns"><button class="pb" data-a="6afdd2c3fb" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Today we review verbs, we play and you win stars!</div></div>
+  <div class="line "><div class="fr"><span class="txt">Salut Elliot ! Bienvenue dans <b>Mission Verbes</b>. 3 niveaux, 7 missions et un boss final.</span><span class="btns"><button class="pb" data-a="922203c1bf" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Hi Elliot! Welcome to Mission Verbs. 3 levels, 7 missions and a final boss.</div></div>
+  <div class="line "><div class="fr"><span class="txt">Chaque bonne réponse = <b>+1 XP</b>. Enchaîne les bonnes réponses pour faire des <b>COMBOS</b> ! 🔥</span><span class="btns"><button class="pb" data-a="fe3f74fafc" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Each right answer = +1 XP. Get several right in a row to make COMBOS!</div></div>
   <div class="how">
-    <div><button class="pb demo" tabindex="-1">▶</button> = j’écoute</div>
-    <div><button class="enb demo" tabindex="-1">EN</button> = en anglais</div>
-    <div>🃏 = je touche la carte, elle se retourne</div>
-    <div>⭐ = mes étoiles, en haut à droite</div>
+    <div><button class="pb demo" tabindex="-1">▶</button> écouter</div>
+    <div><button class="enb demo" tabindex="-1">EN</button> en anglais</div>
+    <div>🃏 carte = touche pour la retourner</div>
+    <div>⚡ XP = en haut à droite</div>
   </div>
   <ol class="plan">
-    <li><a href="#s1">🎒 Les trois sacs de verbes</a></li>
-    <li><a href="#s2">🎨 C’est Monet qui peint…</a></li>
-    <li><a href="#s3">🌳 Les familles de mots</a></li>
-    <li><a href="#bravo">🏆 Bravo Elliot !</a></li>
+    <li><a href="#s1"><span>NIVEAU 1</span> Les 3 équipes de verbes</a></li>
+    <li><a href="#s2"><span>NIVEAU 2</span> C’est… qui…</a></li>
+    <li><a href="#s3"><span>NIVEAU 3</span> Les familles de mots</a></li>
+    <li><a href="#bravo"><span>FIN</span> 🏆 Le classement</a></li>
   </ol>
 </div>
-<section id="s1" class="sec"><div class="shead"><span class="snum">1</span><div class="line st"><div class="fr"><span class="txt">Les trois sacs de verbes</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">The three bags of verbs</div></div></div>
-<div class="bubble-talk"><div class="line "><div class="fr"><span class="txt">En français, les verbes habitent dans trois sacs. Regarde la fin du verbe : elle te dit dans quel sac il va !</span><span class="btns"><button class="pb" data-a="55f25ac9e1" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">In French, verbs live in three bags. Look at the end of the verb: it tells you which bag it goes in!</div></div></div>
-
+<section id="s1" class="sec"><div class="shead"><span class="snum">NIVEAU 1</span><div class="line st"><div class="fr"><span class="txt">Les 3 équipes de verbes</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">The 3 teams of verbs</div></div></div>
+<div class="talk"><div class="line "><div class="fr"><span class="txt">En français, chaque verbe joue dans une équipe. Regarde la fin du verbe : elle te dit son équipe !</span><span class="btns"><button class="pb" data-a="0c9c5819d5" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">In French, every verb plays in a team. Look at the end of the verb: it tells you its team!</div></div></div>
 <div class="rule g1" id="r-sac1">
-  <div class="rh"><span class="bag">🌱</span><div class="line "><div class="fr"><span class="txt">Sac 1 : les verbes en ‑ER</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Bag 1: verbs ending in -ER</div></div></div>
+  <div class="rh"><span class="bag">🟢</span><div class="line "><div class="fr"><span class="txt">Équipe 1 : les verbes en ‑ER</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Team 1: verbs ending in -ER</div></div><span class="badge">la plus grande</span></div>
   <div class="rb">
-    <div class="line "><div class="fr"><span class="txt">C’est le plus grand sac ! Presque tous les verbes en <b>-er</b> sont ici.</span><span class="btns"><button class="pb" data-a="09a43aea8c" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">It's the biggest bag! Almost all -er verbs are here.</div></div>
-    <div class="chips"><button class="vchip c1" data-a="cc6aa7d336">jouer</button><button class="vchip c1" data-a="ef884f6136">chanter</button><button class="vchip c1" data-a="e13daa1534">danser</button><button class="vchip c1" data-a="d9ea0d366a">regarder</button><button class="vchip c1" data-a="712fb49387">aimer</button><button class="vchip c1" data-a="6c5e2764bb">planter</button></div>
+    <div class="line "><div class="fr"><span class="txt">Presque tous les verbes en <b>-er</b> jouent ici.</span><span class="btns"><button class="pb" data-a="75f3e6167a" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Almost all -er verbs play here.</div></div>
+    <div class="chips"><button class="vchip c1" data-a="cc6aa7d336">jouer</button><button class="vchip c1" data-a="cf1e91555c">gagner</button><button class="vchip c1" data-a="b81a9dfa2a">lancer</button><button class="vchip c1" data-a="d9ea0d366a">regarder</button><button class="vchip c1" data-a="19754e0a4b">tourner</button><button class="vchip c1" data-a="6c5e2764bb">planter</button></div>
     <div class="ttl">jouer <span class="ent-i">(to play)</span></div>
     <table class="conj"><tr><td class="pr">je</td><td class="vb">jou<b class="e1">e</b></td><td class="pbc"><button class="pb sm" data-a="30f8a22984" aria-label="Écouter">▶</button></td><td class="ent">I play</td></tr><tr><td class="pr">tu</td><td class="vb">jou<b class="e1">es</b></td><td class="pbc"><button class="pb sm" data-a="f375255df9" aria-label="Écouter">▶</button></td><td class="ent">you play</td></tr><tr><td class="pr">il / elle</td><td class="vb">jou<b class="e1">e</b></td><td class="pbc"><button class="pb sm" data-a="390847b72c" aria-label="Écouter">▶</button></td><td class="ent">he / she plays</td></tr><tr><td class="pr">nous</td><td class="vb">jou<b class="e1">ons</b></td><td class="pbc"><button class="pb sm" data-a="bc9e1c06c3" aria-label="Écouter">▶</button></td><td class="ent">we play</td></tr><tr><td class="pr">vous</td><td class="vb">jou<b class="e1">ez</b></td><td class="pbc"><button class="pb sm" data-a="c8125dbc20" aria-label="Écouter">▶</button></td><td class="ent">you play</td></tr><tr><td class="pr">ils / elles</td><td class="vb">jou<b class="e1">ent</b></td><td class="pbc"><button class="pb sm" data-a="ec32fce0e5" aria-label="Écouter">▶</button></td><td class="ent">they play</td></tr></table>
-    <div class="tip">🎵 <div class="line "><div class="fr"><span class="txt">Écoute bien : <b>joue</b>, <b>joues</b>, <b>jouent</b>… c’est le même son ! Le <b>-ent</b> ne se prononce pas.</span><span class="btns"><button class="pb" data-a="f4de2674e8" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Listen: joue, joues, jouent… the same sound! The -ent is silent.</div></div></div>
+    <div class="tip">🎧 <div class="line "><div class="fr"><span class="txt"><b>joue</b>, <b>joues</b>, <b>jouent</b> : même son ! Le <b>-ent</b> est muet.</span><span class="btns"><button class="pb" data-a="0b99850bcf" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">joue, joues, jouent: same sound! The -ent is silent.</div></div></div>
+    <div class="tip">🎮 <div class="line "><div class="fr"><span class="txt">Je joue à la Switch avec mon frère. Nous jouons au même niveau.</span><span class="btns"><button class="pb" data-a="a6bd4c8e98" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">I play on the Switch with my brother. We play the same level.</div></div></div>
   </div>
 </div>
-
 <div class="rule g2" id="r-sac2">
-  <div class="rh"><span class="bag">🌻</span><div class="line "><div class="fr"><span class="txt">Sac 2 : les verbes en ‑IR comme finir</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Bag 2: -IR verbs like finir (to finish)</div></div></div>
+  <div class="rh"><span class="bag">🟡</span><div class="line "><div class="fr"><span class="txt">Équipe 2 : les verbes en ‑IR comme finir</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Team 2: -IR verbs like finir (to finish)</div></div></div>
   <div class="rb">
-    <div class="line "><div class="fr"><span class="txt">Avec <b>nous</b>, <b>vous</b> et <b>ils</b>, il y a un petit mot magique : <b class='e2'>-iss-</b> ✨</span><span class="btns"><button class="pb" data-a="dedaeb6ae7" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">With nous, vous and ils, there is a little magic bit: -iss-</div></div>
-    <div class="chips"><button class="vchip c2" data-a="6fdd63c11d">finir</button><button class="vchip c2" data-a="1ed9803ac5">choisir</button><button class="vchip c2" data-a="c5a1594e87">grandir</button><button class="vchip c2" data-a="ce9a6e6337">fleurir</button></div>
+    <div class="line "><div class="fr"><span class="txt">Leur pouvoir spécial : <b class='e2'>-iss-</b> avec <b>nous</b>, <b>vous</b>, <b>ils</b>. ⚡</span><span class="btns"><button class="pb" data-a="fa222831f4" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Their special power: -iss- with nous, vous, ils.</div></div>
+    <div class="chips"><button class="vchip c2" data-a="6fdd63c11d">finir</button><button class="vchip c2" data-a="1ed9803ac5">choisir</button><button class="vchip c2" data-a="ad71058e6e">réussir</button><button class="vchip c2" data-a="c5a1594e87">grandir</button></div>
     <div class="ttl">finir <span class="ent-i">(to finish)</span></div>
     <table class="conj"><tr><td class="pr">je</td><td class="vb">fin<b class="e2">is</b></td><td class="pbc"><button class="pb sm" data-a="b0797eb2ac" aria-label="Écouter">▶</button></td><td class="ent">I finish</td></tr><tr><td class="pr">tu</td><td class="vb">fin<b class="e2">is</b></td><td class="pbc"><button class="pb sm" data-a="685fac22ef" aria-label="Écouter">▶</button></td><td class="ent">you finish</td></tr><tr><td class="pr">il / elle</td><td class="vb">fin<b class="e2">it</b></td><td class="pbc"><button class="pb sm" data-a="e82632c8ce" aria-label="Écouter">▶</button></td><td class="ent">he / she finishes</td></tr><tr><td class="pr">nous</td><td class="vb">fin<b class="e2">issons</b></td><td class="pbc"><button class="pb sm" data-a="d42dc135f7" aria-label="Écouter">▶</button></td><td class="ent">we finish</td></tr><tr><td class="pr">vous</td><td class="vb">fin<b class="e2">issez</b></td><td class="pbc"><button class="pb sm" data-a="f79b33d742" aria-label="Écouter">▶</button></td><td class="ent">you finish</td></tr><tr><td class="pr">ils / elles</td><td class="vb">fin<b class="e2">issent</b></td><td class="pbc"><button class="pb sm" data-a="3722e35a8a" aria-label="Écouter">▶</button></td><td class="ent">they finish</td></tr></table>
-    <div class="tip">🌷 <div class="line "><div class="fr"><span class="txt">Au printemps, les fleurs <b>fleurissent</b> dans le jardin de Monet.</span><span class="btns"><button class="pb" data-a="349f5fd5e0" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">In spring, the flowers bloom in Monet's garden.</div></div></div>
+    <div class="tip">🏁 <div class="line "><div class="fr"><span class="txt">Nous finissons le niveau 5 et nous choisissons un nouveau personnage.</span><span class="btns"><button class="pb" data-a="6317f411ec" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">We finish level 5 and we choose a new character.</div></div></div>
   </div>
 </div>
-
 <div class="rule g3" id="r-sac3">
-  <div class="rh"><span class="bag">🎁</span><div class="line "><div class="fr"><span class="txt">Sac 3 : le sac à surprises</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Bag 3: the surprise bag</div></div></div>
+  <div class="rh"><span class="bag">🟣</span><div class="line "><div class="fr"><span class="txt">Équipe 3 : les irréguliers</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Team 3: the irregular verbs</div></div><span class="badge">mode difficile</span></div>
   <div class="rb">
-    <div class="line "><div class="fr"><span class="txt">Tous les autres verbes ! Ils sont un peu coquins : ils changent beaucoup. On les apprend par cœur.</span><span class="btns"><button class="pb" data-a="67874bc105" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">All the other verbs! They are a bit cheeky: they change a lot. We learn them by heart.</div></div>
-    <div class="warn">⚠️ <div class="line "><div class="fr"><span class="txt"><b>aller</b> finit en -er, mais il est dans le sac à surprises !</span><span class="btns"><button class="pb" data-a="f67d6e0864" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">aller ends in -er, but it's in the surprise bag!</div></div></div>
+    <div class="line "><div class="fr"><span class="txt">Tous les autres verbes ! Ils changent beaucoup : il faut les apprendre par cœur, comme les combos d’un jeu.</span><span class="btns"><button class="pb" data-a="646ea67df6" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">All the other verbs! They change a lot: learn them by heart, like the combos in a game.</div></div>
+    <div class="warn">⚠️ <div class="line "><div class="fr"><span class="txt">Piège : <b>aller</b> finit en -er, mais il est dans l’équipe 3 !</span><span class="btns"><button class="pb" data-a="d5546c43ec" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Trap: aller ends in -er, but it's in team 3!</div></div></div>
     <div class="tip small">🃏 <div class="line "><div class="fr"><span class="txt">Touche une carte pour la retourner.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Tap a card to turn it over.</div></div></div>
-    <div class="cards c3"><div class="fcard"><div class="fin"><div class="ff"><div class="femo">⭐</div><div class="fw">être</div><div class="fen">to be</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">être</div><ul><li>je suis <button class="pb sm" data-a="950155ae8a" aria-label="Écouter">▶</button></li><li>tu es <button class="pb sm" data-a="e648758cfd" aria-label="Écouter">▶</button></li><li>il / elle est <button class="pb sm" data-a="429bdb8b26" aria-label="Écouter">▶</button></li><li>nous sommes <button class="pb sm" data-a="3e495993e0" aria-label="Écouter">▶</button></li><li>vous êtes <button class="pb sm" data-a="0d9bf36a4a" aria-label="Écouter">▶</button></li><li>ils / elles sont <button class="pb sm" data-a="8cd4872f22" aria-label="Écouter">▶</button></li></ul></div></div></div><div class="fcard"><div class="fin"><div class="ff"><div class="femo">🎒</div><div class="fw">avoir</div><div class="fen">to have</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">avoir</div><ul><li>j’ai <button class="pb sm" data-a="4581e010b6" aria-label="Écouter">▶</button></li><li>tu as <button class="pb sm" data-a="1e54f14ee4" aria-label="Écouter">▶</button></li><li>il / elle a <button class="pb sm" data-a="3bc667b1ac" aria-label="Écouter">▶</button></li><li>nous avons <button class="pb sm" data-a="097f11f7a8" aria-label="Écouter">▶</button></li><li>vous avez <button class="pb sm" data-a="2d7f88fc11" aria-label="Écouter">▶</button></li><li>ils / elles ont <button class="pb sm" data-a="5f5caebc72" aria-label="Écouter">▶</button></li></ul></div></div></div><div class="fcard"><div class="fin"><div class="ff"><div class="femo">🚲</div><div class="fw">aller</div><div class="fen">to go</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">aller</div><ul><li>je vais <button class="pb sm" data-a="b9f9b37211" aria-label="Écouter">▶</button></li><li>tu vas <button class="pb sm" data-a="9c5cbc8350" aria-label="Écouter">▶</button></li><li>il / elle va <button class="pb sm" data-a="1b13166114" aria-label="Écouter">▶</button></li><li>nous allons <button class="pb sm" data-a="322b54f6ff" aria-label="Écouter">▶</button></li><li>vous allez <button class="pb sm" data-a="baefebd361" aria-label="Écouter">▶</button></li><li>ils / elles vont <button class="pb sm" data-a="4050bd3cb6" aria-label="Écouter">▶</button></li></ul></div></div></div><div class="fcard"><div class="fin"><div class="ff"><div class="femo">🧁</div><div class="fw">faire</div><div class="fen">to do, to make</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">faire</div><ul><li>je fais <button class="pb sm" data-a="73a86d9c2e" aria-label="Écouter">▶</button></li><li>tu fais <button class="pb sm" data-a="dbe9746cd4" aria-label="Écouter">▶</button></li><li>il / elle fait <button class="pb sm" data-a="a80b3af716" aria-label="Écouter">▶</button></li><li>nous faisons <button class="pb sm" data-a="a2a0f00858" aria-label="Écouter">▶</button></li><li>vous faites <button class="pb sm" data-a="e49c176b8c" aria-label="Écouter">▶</button></li><li>ils / elles font <button class="pb sm" data-a="7d2eab9c67" aria-label="Écouter">▶</button></li></ul></div></div></div><div class="fcard"><div class="fin"><div class="ff"><div class="femo">🍎</div><div class="fw">prendre</div><div class="fen">to take</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">prendre</div><ul><li>je prends <button class="pb sm" data-a="cc44c6d2c5" aria-label="Écouter">▶</button></li><li>tu prends <button class="pb sm" data-a="25417f2873" aria-label="Écouter">▶</button></li><li>il / elle prend <button class="pb sm" data-a="cefd5bc079" aria-label="Écouter">▶</button></li><li>nous prenons <button class="pb sm" data-a="0a7fba3c26" aria-label="Écouter">▶</button></li><li>vous prenez <button class="pb sm" data-a="7712ef265f" aria-label="Écouter">▶</button></li><li>ils / elles prennent <button class="pb sm" data-a="379203f40b" aria-label="Écouter">▶</button></li></ul></div></div></div><div class="fcard"><div class="fin"><div class="ff"><div class="femo">🎨</div><div class="fw">peindre</div><div class="fen">to paint</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">peindre</div><ul><li>je peins <button class="pb sm" data-a="bbd8cbff1a" aria-label="Écouter">▶</button></li><li>tu peins <button class="pb sm" data-a="d8c92e2d22" aria-label="Écouter">▶</button></li><li>il / elle peint <button class="pb sm" data-a="6a9144173b" aria-label="Écouter">▶</button></li><li>nous peignons <button class="pb sm" data-a="df5455f714" aria-label="Écouter">▶</button></li><li>vous peignez <button class="pb sm" data-a="8c8d30673d" aria-label="Écouter">▶</button></li><li>ils / elles peignent <button class="pb sm" data-a="7a87db3552" aria-label="Écouter">▶</button></li></ul></div></div></div></div></div></div><div class="game" id="j1"><div class="ghead"><span class="gnum">🎒</span><div><div class="gkind">Jeu 1</div><div class="line gt"><div class="fr"><span class="txt">Range les verbes dans le bon sac !</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Put the verbs in the right bag!</div></div></div></div><div class="line cons"><div class="fr"><span class="txt">Touche un verbe, puis touche son sac.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Tap a verb, then tap its bag.</div></div><div class="sortpool"><button class="item vsort" data-g="3" data-a="85be86cb21" data-anchor="r-sac3" data-label="Sac 3" data-good="faire → sac 3">faire</button><button class="item vsort" data-g="1" data-a="cea28ca438" data-anchor="r-sac1" data-label="Sac 1" data-good="manger → sac 1">manger</button><button class="item vsort" data-g="1" data-a="e13daa1534" data-anchor="r-sac1" data-label="Sac 1" data-good="danser → sac 1">danser</button><button class="item vsort" data-g="2" data-a="6fdd63c11d" data-anchor="r-sac2" data-label="Sac 2" data-good="finir → sac 2">finir</button><button class="item vsort" data-g="3" data-a="299d26dbcf" data-anchor="r-sac3" data-label="Sac 3" data-good="aller → sac 3">aller</button><button class="item vsort" data-g="2" data-a="1ed9803ac5" data-anchor="r-sac2" data-label="Sac 2" data-good="choisir → sac 2">choisir</button><button class="item vsort" data-g="1" data-a="d9ea0d366a" data-anchor="r-sac1" data-label="Sac 1" data-good="regarder → sac 1">regarder</button><button class="item vsort" data-g="3" data-a="3798c8e570" data-anchor="r-sac3" data-label="Sac 3" data-good="prendre → sac 3">prendre</button><button class="item vsort" data-g="2" data-a="c5a1594e87" data-anchor="r-sac2" data-label="Sac 2" data-good="grandir → sac 2">grandir</button></div><div class="bins">
-  <button class="bin b1" data-g="1"><span>🌱</span>Sac 1<small>-er</small><div class="in"></div></button>
-  <button class="bin b2" data-g="2"><span>🌻</span>Sac 2<small>-ir (finir)</small><div class="in"></div></button>
-  <button class="bin b3" data-g="3"><span>🎁</span>Sac 3<small>surprises</small><div class="in"></div></button>
-</div></div><div class="game" id="j2"><div class="ghead"><span class="gnum">🎯</span><div><div class="gkind">Jeu 2</div><div class="line gt"><div class="fr"><span class="txt">Choisis le bon verbe !</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Choose the right verb!</div></div></div></div><div class="item qcm" data-good="jouons" data-anchor="r-sac1" data-label="Sac 1"><div class="qrow"><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Nous <span class="blank">?</span> au foot. <span class='hint'>(jouer)</span></span><span class="btns"><button class="enb">EN</button></span></div><div class="en">We play football.</div></div></div></div><div class="opts"><button class="opt" data-v="jouez">jouez</button><button class="opt" data-v="jouons">jouons</button><button class="opt" data-v="jouent">jouent</button></div><div class="sol">✓ <span class="stxt">Nous jouons au foot.</span> <button class="pb sm" data-a="5ead5a0516" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="regardes" data-anchor="r-sac1" data-label="Sac 1"><div class="qrow"><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Tu <span class="blank">?</span> les nénuphars. <span class='hint'>(regarder)</span></span><span class="btns"><button class="enb">EN</button></span></div><div class="en">You look at the water lilies.</div></div></div></div><div class="opts"><button class="opt" data-v="regardons">regardons</button><button class="opt" data-v="regardez">regardez</button><button class="opt" data-v="regardes">regardes</button></div><div class="sol">✓ <span class="stxt">Tu regardes les nénuphars.</span> <button class="pb sm" data-a="3e876dbc77" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="finissent" data-anchor="r-sac2" data-label="Sac 2"><div class="qrow"><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Ils <span class="blank">?</span> leurs devoirs. <span class='hint'>(finir)</span></span><span class="btns"><button class="enb">EN</button></span></div><div class="en">They finish their homework.</div></div></div></div><div class="opts"><button class="opt" data-v="finissez">finissez</button><button class="opt" data-v="finissent">finissent</button><button class="opt" data-v="finent">finent</button></div><div class="sol">✓ <span class="stxt">Ils finissent leurs devoirs.</span> <button class="pb sm" data-a="af6c20c24a" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="fleurissent" data-anchor="r-sac2" data-label="Sac 2"><div class="qrow"><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Les fleurs <span class="blank">?</span> au printemps. <span class='hint'>(fleurir)</span></span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Flowers bloom in spring.</div></div></div></div><div class="opts"><button class="opt" data-v="fleurit">fleurit</button><button class="opt" data-v="fleurons">fleurons</button><button class="opt" data-v="fleurissent">fleurissent</button></div><div class="sol">✓ <span class="stxt">Les fleurs fleurissent au printemps.</span> <button class="pb sm" data-a="0a049bb423" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="est" data-anchor="r-sac3" data-label="Sac 3"><div class="qrow"><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Gaston <span class="blank">?</span> content ! <span class='hint'>(être)</span></span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Gaston is happy!</div></div></div></div><div class="opts"><button class="opt" data-v="est">est</button><button class="opt" data-v="es">es</button><button class="opt" data-v="a">a</button></div><div class="sol">✓ <span class="stxt">Gaston est content !</span> <button class="pb sm" data-a="ab6beba888" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="allez" data-anchor="r-sac3" data-label="Sac 3"><div class="qrow"><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Vous <span class="blank">?</span> au parc ? <span class='hint'>(aller)</span></span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Are you going to the park?</div></div></div></div><div class="opts"><button class="opt" data-v="vont">vont</button><button class="opt" data-v="allez">allez</button><button class="opt" data-v="allons">allons</button></div><div class="sol">✓ <span class="stxt">Vous allez au parc ?</span> <button class="pb sm" data-a="902f11e916" aria-label="Écouter">▶</button></div></div></div><div class="game" id="j3"><div class="ghead"><span class="gnum">🐸</span><div><div class="gkind">Jeu 3</div><div class="line gt"><div class="fr"><span class="txt">Qui parle ? Trouve le bon petit mot.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Who is talking? Find the right little word.</div></div></div></div><div class="item qcm" data-good="nous" data-anchor="r-sac2" data-label="Sac 2"><div class="qrow"><div class="pic">🍰</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt"><span class="blank">?</span> finissons le gâteau.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">We finish the cake.</div></div></div></div><div class="opts"><button class="opt" data-v="je">je</button><button class="opt" data-v="nous">nous</button><button class="opt" data-v="vous">vous</button></div><div class="sol">✓ <span class="stxt">Nous finissons le gâteau.</span> <button class="pb sm" data-a="321beecda6" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="vous" data-anchor="r-sac3" data-label="Sac 3"><div class="qrow"><div class="pic">🐱</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt"><span class="blank">?</span> avez un chat ?</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Do you have a cat?</div></div></div></div><div class="opts"><button class="opt" data-v="tu">tu</button><button class="opt" data-v="vous">vous</button><button class="opt" data-v="ils">ils</button></div><div class="sol">✓ <span class="stxt">Vous avez un chat ?</span> <button class="pb sm" data-a="040dabd8b8" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="je" data-anchor="r-sac3" data-label="Sac 3"><div class="qrow"><div class="pic">🎨</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt"><span class="blank">?</span> peins un nénuphar.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">I paint a water lily.</div></div></div></div><div class="opts"><button class="opt" data-v="nous">nous</button><button class="opt" data-v="ils">ils</button><button class="opt" data-v="je">je</button></div><div class="sol">✓ <span class="stxt">Je peins un nénuphar.</span> <button class="pb sm" data-a="de06a5174c" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="ils" data-anchor="r-sac1" data-label="Sac 1"><div class="qrow"><div class="pic">🐦🐦</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt"><span class="blank">?</span> chantent dans l’arbre.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">They sing in the tree.</div></div></div></div><div class="opts"><button class="opt" data-v="il">il</button><button class="opt" data-v="tu">tu</button><button class="opt" data-v="ils">ils</button></div><div class="sol">✓ <span class="stxt">Ils chantent dans l’arbre.</span> <button class="pb sm" data-a="f08ed54eb9" aria-label="Écouter">▶</button></div></div></div></section>
-<section id="s2" class="sec"><div class="shead"><span class="snum">2</span><div class="line st"><div class="fr"><span class="txt">C’est Monet qui peint des nénuphars !</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">It's Monet who paints water lilies!</div></div></div><div class="sbanner"><img src="img/monet.jpg" alt=""><span class="credit">Claude Monet, <i>La Promenade, la femme à l’ombrelle</i>, 1875</span></div>
+    <div class="cards c3"><div class="fcard"><div class="fin"><div class="ff"><div class="femo">🏆</div><div class="fw">être</div><div class="fen">to be</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">être</div><ul><li>je suis <button class="pb sm" data-a="950155ae8a" aria-label="Écouter">▶</button></li><li>tu es <button class="pb sm" data-a="e648758cfd" aria-label="Écouter">▶</button></li><li>il / elle est <button class="pb sm" data-a="429bdb8b26" aria-label="Écouter">▶</button></li><li>nous sommes <button class="pb sm" data-a="3e495993e0" aria-label="Écouter">▶</button></li><li>vous êtes <button class="pb sm" data-a="0d9bf36a4a" aria-label="Écouter">▶</button></li><li>ils / elles sont <button class="pb sm" data-a="8cd4872f22" aria-label="Écouter">▶</button></li></ul></div></div></div><div class="fcard"><div class="fin"><div class="ff"><div class="femo">🎮</div><div class="fw">avoir</div><div class="fen">to have</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">avoir</div><ul><li>j’ai <button class="pb sm" data-a="4581e010b6" aria-label="Écouter">▶</button></li><li>tu as <button class="pb sm" data-a="1e54f14ee4" aria-label="Écouter">▶</button></li><li>il / elle a <button class="pb sm" data-a="3bc667b1ac" aria-label="Écouter">▶</button></li><li>nous avons <button class="pb sm" data-a="097f11f7a8" aria-label="Écouter">▶</button></li><li>vous avez <button class="pb sm" data-a="2d7f88fc11" aria-label="Écouter">▶</button></li><li>ils / elles ont <button class="pb sm" data-a="5f5caebc72" aria-label="Écouter">▶</button></li></ul></div></div></div><div class="fcard"><div class="fin"><div class="ff"><div class="femo">🚀</div><div class="fw">aller</div><div class="fen">to go</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">aller</div><ul><li>je vais <button class="pb sm" data-a="b9f9b37211" aria-label="Écouter">▶</button></li><li>tu vas <button class="pb sm" data-a="9c5cbc8350" aria-label="Écouter">▶</button></li><li>il / elle va <button class="pb sm" data-a="1b13166114" aria-label="Écouter">▶</button></li><li>nous allons <button class="pb sm" data-a="322b54f6ff" aria-label="Écouter">▶</button></li><li>vous allez <button class="pb sm" data-a="baefebd361" aria-label="Écouter">▶</button></li><li>ils / elles vont <button class="pb sm" data-a="4050bd3cb6" aria-label="Écouter">▶</button></li></ul></div></div></div><div class="fcard"><div class="fin"><div class="ff"><div class="femo">🛠️</div><div class="fw">faire</div><div class="fen">to do, to make</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">faire</div><ul><li>je fais <button class="pb sm" data-a="73a86d9c2e" aria-label="Écouter">▶</button></li><li>tu fais <button class="pb sm" data-a="dbe9746cd4" aria-label="Écouter">▶</button></li><li>il / elle fait <button class="pb sm" data-a="a80b3af716" aria-label="Écouter">▶</button></li><li>nous faisons <button class="pb sm" data-a="a2a0f00858" aria-label="Écouter">▶</button></li><li>vous faites <button class="pb sm" data-a="e49c176b8c" aria-label="Écouter">▶</button></li><li>ils / elles font <button class="pb sm" data-a="7d2eab9c67" aria-label="Écouter">▶</button></li></ul></div></div></div><div class="fcard"><div class="fin"><div class="ff"><div class="femo">🕹️</div><div class="fw">prendre</div><div class="fen">to take</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">prendre</div><ul><li>je prends <button class="pb sm" data-a="cc44c6d2c5" aria-label="Écouter">▶</button></li><li>tu prends <button class="pb sm" data-a="25417f2873" aria-label="Écouter">▶</button></li><li>il / elle prend <button class="pb sm" data-a="cefd5bc079" aria-label="Écouter">▶</button></li><li>nous prenons <button class="pb sm" data-a="0a7fba3c26" aria-label="Écouter">▶</button></li><li>vous prenez <button class="pb sm" data-a="7712ef265f" aria-label="Écouter">▶</button></li><li>ils / elles prennent <button class="pb sm" data-a="379203f40b" aria-label="Écouter">▶</button></li></ul></div></div></div><div class="fcard"><div class="fin"><div class="ff"><div class="femo">🎨</div><div class="fw">peindre</div><div class="fen">to paint</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">peindre</div><ul><li>je peins <button class="pb sm" data-a="bbd8cbff1a" aria-label="Écouter">▶</button></li><li>tu peins <button class="pb sm" data-a="d8c92e2d22" aria-label="Écouter">▶</button></li><li>il / elle peint <button class="pb sm" data-a="6a9144173b" aria-label="Écouter">▶</button></li><li>nous peignons <button class="pb sm" data-a="df5455f714" aria-label="Écouter">▶</button></li><li>vous peignez <button class="pb sm" data-a="8c8d30673d" aria-label="Écouter">▶</button></li><li>ils / elles peignent <button class="pb sm" data-a="7a87db3552" aria-label="Écouter">▶</button></li></ul></div></div></div></div></div></div><div class="game" id="j1"><div class="ghead"><span class="gnum">🌀</span><div><div class="gkind">Mission 1</div><div class="line gt"><div class="fr"><span class="txt">Lance chaque verbe dans la bonne arène !</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Launch each verb into the right arena!</div></div></div></div><div class="line cons"><div class="fr"><span class="txt">Touche un verbe, puis touche son arène : 3, 2, 1… lancez !</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Tap a verb, then tap its arena: 3, 2, 1… let it rip!</div></div><div class="sortpool"><button class="item vsort" data-g="3" data-a="85be86cb21" data-anchor="r-sac3" data-label="Équipe 3" data-good="faire → équipe 3">faire</button><button class="item vsort" data-g="1" data-a="b81a9dfa2a" data-anchor="r-sac1" data-label="Équipe 1" data-good="lancer → équipe 1">lancer</button><button class="item vsort" data-g="1" data-a="cf1e91555c" data-anchor="r-sac1" data-label="Équipe 1" data-good="gagner → équipe 1">gagner</button><button class="item vsort" data-g="2" data-a="6fdd63c11d" data-anchor="r-sac2" data-label="Équipe 2" data-good="finir → équipe 2">finir</button><button class="item vsort" data-g="3" data-a="299d26dbcf" data-anchor="r-sac3" data-label="Équipe 3" data-good="aller → équipe 3">aller</button><button class="item vsort" data-g="2" data-a="1ed9803ac5" data-anchor="r-sac2" data-label="Équipe 2" data-good="choisir → équipe 2">choisir</button><button class="item vsort" data-g="1" data-a="d9ea0d366a" data-anchor="r-sac1" data-label="Équipe 1" data-good="regarder → équipe 1">regarder</button><button class="item vsort" data-g="3" data-a="3798c8e570" data-anchor="r-sac3" data-label="Équipe 3" data-good="prendre → équipe 3">prendre</button><button class="item vsort" data-g="2" data-a="ad71058e6e" data-anchor="r-sac2" data-label="Équipe 2" data-good="réussir → équipe 2">réussir</button></div><div class="bins">
+  <button class="bin b1" data-g="1"><span class="ring"></span>ÉQUIPE 1<small>-er</small><div class="in"></div></button>
+  <button class="bin b2" data-g="2"><span class="ring"></span>ÉQUIPE 2<small>-ir (finir)</small><div class="in"></div></button>
+  <button class="bin b3" data-g="3"><span class="ring"></span>ÉQUIPE 3<small>irréguliers</small><div class="in"></div></button>
+</div></div><div class="game" id="j2"><div class="ghead"><span class="gnum">🎯</span><div><div class="gkind">Mission 2</div><div class="line gt"><div class="fr"><span class="txt">Choisis la bonne forme du verbe !</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Choose the right form of the verb!</div></div></div></div><div class="item qcm" data-good="jouons" data-anchor="r-sac1" data-label="Équipe 1"><div class="qrow"><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Nous <span class="blank">?</span> à la Switch. <span class='hint'>(jouer)</span></span><span class="btns"><button class="enb">EN</button></span></div><div class="en">We play on the Switch.</div></div></div></div><div class="opts"><button class="opt" data-v="jouez">jouez</button><button class="opt" data-v="jouons">jouons</button><button class="opt" data-v="jouent">jouent</button></div><div class="sol">✓ <span class="stxt">Nous jouons à la Switch.</span> <button class="pb sm" data-a="f228235964" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="regardes" data-anchor="r-sac1" data-label="Équipe 1"><div class="qrow"><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Tu <span class="blank">?</span> le tournoi sur YouTube. <span class='hint'>(regarder)</span></span><span class="btns"><button class="enb">EN</button></span></div><div class="en">You watch the tournament on YouTube.</div></div></div></div><div class="opts"><button class="opt" data-v="regardons">regardons</button><button class="opt" data-v="regardez">regardez</button><button class="opt" data-v="regardes">regardes</button></div><div class="sol">✓ <span class="stxt">Tu regardes le tournoi sur YouTube.</span> <button class="pb sm" data-a="2d67ddf999" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="finissent" data-anchor="r-sac2" data-label="Équipe 2"><div class="qrow"><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Ils <span class="blank">?</span> le dernier niveau. <span class='hint'>(finir)</span></span><span class="btns"><button class="enb">EN</button></span></div><div class="en">They finish the last level.</div></div></div></div><div class="opts"><button class="opt" data-v="finissez">finissez</button><button class="opt" data-v="finissent">finissent</button><button class="opt" data-v="finent">finent</button></div><div class="sol">✓ <span class="stxt">Ils finissent le dernier niveau.</span> <button class="pb sm" data-a="b1a83dd09a" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="choisis" data-anchor="r-sac2" data-label="Équipe 2"><div class="qrow"><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Je <span class="blank">?</span> ma toupie la plus rapide. <span class='hint'>(choisir)</span></span><span class="btns"><button class="enb">EN</button></span></div><div class="en">I choose my fastest spinning top.</div></div></div></div><div class="opts"><button class="opt" data-v="choisit">choisit</button><button class="opt" data-v="choisissons">choisissons</button><button class="opt" data-v="choisis">choisis</button></div><div class="sol">✓ <span class="stxt">Je choisis ma toupie la plus rapide.</span> <button class="pb sm" data-a="b93ae5bf1a" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="est" data-anchor="r-sac3" data-label="Équipe 3"><div class="qrow"><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Elliot <span class="blank">?</span> le champion ! <span class='hint'>(être)</span></span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Elliot is the champion!</div></div></div></div><div class="opts"><button class="opt" data-v="est">est</button><button class="opt" data-v="es">es</button><button class="opt" data-v="a">a</button></div><div class="sol">✓ <span class="stxt">Elliot est le champion !</span> <button class="pb sm" data-a="fe637c2d0a" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="allez" data-anchor="r-sac3" data-label="Équipe 3"><div class="qrow"><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Vous <span class="blank">?</span> au tournoi samedi ? <span class='hint'>(aller)</span></span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Are you going to the tournament on Saturday?</div></div></div></div><div class="opts"><button class="opt" data-v="vont">vont</button><button class="opt" data-v="allez">allez</button><button class="opt" data-v="allons">allons</button></div><div class="sol">✓ <span class="stxt">Vous allez au tournoi samedi ?</span> <button class="pb sm" data-a="a161dcbaa0" aria-label="Écouter">▶</button></div></div></div><div class="game" id="j3"><div class="ghead"><span class="gnum">🎙️</span><div><div class="gkind">Mission 3</div><div class="line gt"><div class="fr"><span class="txt">Qui parle ? Trouve le bon pronom.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Who is talking? Find the right pronoun.</div></div></div></div><div class="item qcm" data-good="nous" data-anchor="r-sac2" data-label="Équipe 2"><div class="qrow"><div class="pic">🏁</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt"><span class="blank">?</span> finissons la partie.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">We finish the game.</div></div></div></div><div class="opts"><button class="opt" data-v="je">je</button><button class="opt" data-v="nous">nous</button><button class="opt" data-v="vous">vous</button></div><div class="sol">✓ <span class="stxt">Nous finissons la partie.</span> <button class="pb sm" data-a="968c7412cf" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="vous" data-anchor="r-sac3" data-label="Équipe 3"><div class="qrow"><div class="pic">🎮</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt"><span class="blank">?</span> avez la nouvelle console ?</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Do you have the new console?</div></div></div></div><div class="opts"><button class="opt" data-v="tu">tu</button><button class="opt" data-v="vous">vous</button><button class="opt" data-v="ils">ils</button></div><div class="sol">✓ <span class="stxt">Vous avez la nouvelle console ?</span> <button class="pb sm" data-a="a075e6425c" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="je" data-anchor="r-sac3" data-label="Équipe 3"><div class="qrow"><div class="pic">🕹️</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt"><span class="blank">?</span> prends la manette.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">I take the controller.</div></div></div></div><div class="opts"><button class="opt" data-v="nous">nous</button><button class="opt" data-v="ils">ils</button><button class="opt" data-v="je">je</button></div><div class="sol">✓ <span class="stxt">Je prends la manette.</span> <button class="pb sm" data-a="490d6b3b54" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="ils" data-anchor="r-sac1" data-label="Équipe 1"><div class="qrow"><div class="pic">🌀🌀</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt"><span class="blank">?</span> lancent leurs Beyblades.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">They launch their Beyblades.</div></div></div></div><div class="opts"><button class="opt" data-v="il">il</button><button class="opt" data-v="tu">tu</button><button class="opt" data-v="ils">ils</button></div><div class="sol">✓ <span class="stxt">Ils lancent leurs Beyblades.</span> <button class="pb sm" data-a="02529e810f" aria-label="Écouter">▶</button></div></div></div></section>
+<section id="s2" class="sec"><div class="shead"><span class="snum">NIVEAU 2</span><div class="line st"><div class="fr"><span class="txt">C’est… qui… : montre le joueur !</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">C'est… qui…: point out the player!</div></div></div><div class="sbanner"><img src="img/eau.jpg" alt=""><span class="credit">Claude Monet, <i>Nymphéas</i>, 1906</span></div>
 <div class="rule g4" id="r-qui">
-  <div class="rh"><span class="bag">🎨</span><div class="line "><div class="fr"><span class="txt">Pour montrer la personne : c’est… qui…</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">To point out the person: it's… who…</div></div></div>
+  <div class="rh"><span class="bag">🎯</span><div class="line "><div class="fr"><span class="txt">Pour montrer la personne : c’est… qui…</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">To point out the person: it's… who…</div></div></div>
   <div class="rb">
     <div class="story">
-      <div class="sline"><span class="sic">📖</span><div class="line "><div class="fr"><span class="txt">Monet peint des nénuphars.</span><span class="btns"><button class="pb" data-a="3efe0cc443" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Monet paints water lilies.</div></div></div>
+      <div class="sline"><span class="sic">🎨</span><div class="line "><div class="fr"><span class="txt">Monet peint des nénuphars.</span><span class="btns"><button class="pb" data-a="3efe0cc443" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Monet paints water lilies.</div></div></div>
       <div class="sline q"><span class="sic">❓</span><div class="line "><div class="fr"><span class="txt"><b>Qui</b> peint des nénuphars ?</span><span class="btns"><button class="pb" data-a="041f2a5026" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Who paints water lilies?</div></div></div>
       <div class="sline a"><span class="sic">👉</span><div class="line "><div class="fr"><span class="txt"><b class='k1'>C’est</b> <b class='k2'>Monet</b> <b class='k1'>qui</b> peint des nénuphars !</span><span class="btns"><button class="pb" data-a="1ef3572359" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">It's Monet who paints water lilies!</div></div></div>
     </div>
     <div class="formula"><span class="fx k1">C’est</span><span class="plus">+</span><span class="fx k2">👤 la personne</span><span class="plus">+</span><span class="fx k1">qui</span><span class="plus">+</span><span class="fx k3">le verbe</span></div>
-    <div class="line "><div class="fr"><span class="txt">On dit <b>c’est… qui</b> pour bien montrer la personne : c’est <b>lui</b>, pas un autre ! 👆</span><span class="btns"><button class="pb" data-a="3f5acf3c5a" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">We say c'est… qui to really point out the person: it's HIM, not someone else!</div></div>
-    <div class="tip">⭐ <div class="line "><div class="fr"><span class="txt">Plusieurs personnes ? On dit <b>ce sont</b> : <b>Ce sont</b> les enfants <b>qui</b> jouent.</span><span class="btns"><button class="pb" data-a="5db4045cbf" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Several people? We say ce sont: It's the children who are playing.</div></div></div>
+    <div class="story">
+      <div class="sline"><span class="sic">🏆</span><div class="line "><div class="fr"><span class="txt">Elliot gagne le tournoi.</span><span class="btns"><button class="pb" data-a="a338dfc891" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Elliot wins the tournament.</div></div></div>
+      <div class="sline a"><span class="sic">👉</span><div class="line "><div class="fr"><span class="txt"><b class='k1'>C’est</b> <b class='k2'>Elliot</b> <b class='k1'>qui</b> gagne le tournoi !</span><span class="btns"><button class="pb" data-a="199c34fffa" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">It's Elliot who wins the tournament!</div></div></div>
+    </div>
+    <div class="line "><div class="fr"><span class="txt">On dit <b>c’est… qui</b> pour bien montrer la personne : c’est <b>lui</b>, pas un autre !</span><span class="btns"><button class="pb" data-a="eb018074f9" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">We say c'est… qui to really point out the person: it's HIM, not someone else!</div></div>
+    <div class="tip">👥 <div class="line "><div class="fr"><span class="txt">Plusieurs personnes ? <b>Ce sont</b> mes amis <b>qui</b> jouent avec moi.</span><span class="btns"><button class="pb" data-a="4f4c018304" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Several people? It's my friends who play with me.</div></div></div>
   </div>
-</div><div class="game" id="j4"><div class="ghead"><span class="gnum">🔍</span><div><div class="gkind">Jeu 4</div><div class="line gt"><div class="fr"><span class="txt">Devine qui c’est !</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Guess who it is!</div></div></div></div><div class="item qcm" data-good="le poisson" data-anchor="r-qui" data-label="C’est… qui…"><div class="qrow"><div class="pic">🐟💧</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Qui nage dans l’étang ?</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Who swims in the pond?</div></div></div></div><div class="opts"><button class="opt" data-v="la vache">la vache</button><button class="opt" data-v="le poisson">le poisson</button><button class="opt" data-v="l’oiseau">l’oiseau</button></div><div class="sol">✓ <span class="stxt">C’est le poisson qui nage dans l’étang.</span> <button class="pb sm" data-a="51a72ddfc4" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="la grenouille" data-anchor="r-qui" data-label="C’est… qui…"><div class="qrow"><div class="pic">🐸🪷</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Qui saute sur le nénuphar ?</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Who jumps on the water lily?</div></div></div></div><div class="opts"><button class="opt" data-v="la grenouille">la grenouille</button><button class="opt" data-v="le poisson">le poisson</button><button class="opt" data-v="le chat">le chat</button></div><div class="sol">✓ <span class="stxt">C’est la grenouille qui saute sur le nénuphar.</span> <button class="pb sm" data-a="d5c08d40f9" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="l’oiseau" data-anchor="r-qui" data-label="C’est… qui…"><div class="qrow"><div class="pic">🐦🎶</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Qui chante dans l’arbre ?</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Who sings in the tree?</div></div></div></div><div class="opts"><button class="opt" data-v="la vache">la vache</button><button class="opt" data-v="l’oiseau">l’oiseau</button><button class="opt" data-v="la grenouille">la grenouille</button></div><div class="sol">✓ <span class="stxt">C’est l’oiseau qui chante dans l’arbre.</span> <button class="pb sm" data-a="7b8f38d43f" aria-label="Écouter">▶</button></div></div></div><div class="game" id="j5"><div class="ghead"><span class="gnum">🧩</span><div><div class="gkind">Jeu 5</div><div class="line gt"><div class="fr"><span class="txt">Construis la réponse avec les étiquettes.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Build the answer with the labels.</div></div></div></div><div class="item tiles" data-good="C’est le jardinier qui arrose les fleurs" data-anchor="r-qui" data-label="C’est… qui…"><div class="qrow"><div class="pic">👨‍🌾💦</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Le jardinier arrose les fleurs. → Qui arrose les fleurs ?</span><span class="btns"><button class="pb" data-a="6469c4d05f" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">The gardener waters the flowers. → Who waters the flowers?</div></div></div></div><div class="built" data-ph="Touche les étiquettes dans l’ordre…"></div><div class="pool"><button class="tile">C’est</button><button class="tile">arrose</button><button class="tile">qui</button><button class="tile">le jardinier</button><button class="tile">les fleurs</button></div><div class="tbtns"><button class="undo">↺ Recommencer</button></div><div class="sol">✓ <span class="stxt">C’est le jardinier qui arrose les fleurs !</span> <button class="pb sm" data-a="fdb0d1f9eb" aria-label="Écouter">▶</button></div></div><div class="item tiles" data-good="C’est la vache qui mange de l’herbe" data-anchor="r-qui" data-label="C’est… qui…"><div class="qrow"><div class="pic">🐄🌿</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">La vache mange de l’herbe. → Qui mange de l’herbe ?</span><span class="btns"><button class="pb" data-a="ada4aea09b" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">The cow eats grass. → Who eats grass?</div></div></div></div><div class="built" data-ph="Touche les étiquettes dans l’ordre…"></div><div class="pool"><button class="tile">la vache</button><button class="tile">de l’herbe</button><button class="tile">qui</button><button class="tile">C’est</button><button class="tile">mange</button></div><div class="tbtns"><button class="undo">↺ Recommencer</button></div><div class="sol">✓ <span class="stxt">C’est la vache qui mange de l’herbe !</span> <button class="pb sm" data-a="4a8344a8b7" aria-label="Écouter">▶</button></div></div><div class="item tiles" data-good="C’est Elliot qui joue au foot" data-anchor="r-qui" data-label="C’est… qui…"><div class="qrow"><div class="pic">⚽</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Elliot joue au foot. → Qui joue au foot ?</span><span class="btns"><button class="pb" data-a="fa243d5bd0" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Elliot plays football. → Who plays football?</div></div></div></div><div class="built" data-ph="Touche les étiquettes dans l’ordre…"></div><div class="pool"><button class="tile">au foot</button><button class="tile">C’est</button><button class="tile">Elliot</button><button class="tile">qui</button><button class="tile">joue</button></div><div class="tbtns"><button class="undo">↺ Recommencer</button></div><div class="sol">✓ <span class="stxt">C’est Elliot qui joue au foot !</span> <button class="pb sm" data-a="81fb63aab0" aria-label="Écouter">▶</button></div></div></div></section>
-<section id="s3" class="sec"><div class="shead"><span class="snum">3</span><div class="line st"><div class="fr"><span class="txt">Les familles de mots</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Word families</div></div></div><div class="sbanner"><img src="img/choisir.jpg" alt=""><span class="credit">Claude Monet, <i>Les Coquelicots</i>, 1873</span></div>
+</div><div class="game" id="j4"><div class="ghead"><span class="gnum">🔍</span><div><div class="gkind">Mission 4</div><div class="line gt"><div class="fr"><span class="txt">Qui fait ça ? Regarde l’image !</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Who does that? Look at the picture!</div></div></div></div><div class="item qcm" data-good="le dragon" data-anchor="r-qui" data-label="C’est… qui…"><div class="qrow"><div class="pic">🐉🔥</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Qui crache du feu ?</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Who breathes fire?</div></div></div></div><div class="opts"><button class="opt" data-v="le chevalier">le chevalier</button><button class="opt" data-v="le dragon">le dragon</button><button class="opt" data-v="le robot">le robot</button></div><div class="sol">✓ <span class="stxt">C’est le dragon qui crache du feu.</span> <button class="pb sm" data-a="bf52b9a74b" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="le chevalier" data-anchor="r-qui" data-label="C’est… qui…"><div class="qrow"><div class="pic">🛡️🏰</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Qui protège le château ?</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Who protects the castle?</div></div></div></div><div class="opts"><button class="opt" data-v="le chevalier">le chevalier</button><button class="opt" data-v="le fantôme">le fantôme</button><button class="opt" data-v="le dragon">le dragon</button></div><div class="sol">✓ <span class="stxt">C’est le chevalier qui protège le château.</span> <button class="pb sm" data-a="f9d92b3e50" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="la joueuse" data-anchor="r-qui" data-label="C’est… qui…"><div class="qrow"><div class="pic">⚽🥅</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Qui marque le but ?</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Who scores the goal?</div></div></div></div><div class="opts"><button class="opt" data-v="le gardien">le gardien</button><button class="opt" data-v="la joueuse">la joueuse</button><button class="opt" data-v="l’arbitre">l’arbitre</button></div><div class="sol">✓ <span class="stxt">C’est la joueuse qui marque le but.</span> <button class="pb sm" data-a="112ad228dc" aria-label="Écouter">▶</button></div></div></div><div class="game" id="j5"><div class="ghead"><span class="gnum">🧩</span><div><div class="gkind">Mission 5</div><div class="line gt"><div class="fr"><span class="txt">Construis la réponse avec les blocs.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Build the answer with the blocks.</div></div></div></div><div class="item tiles" data-good="C’est Monet qui peint des nénuphars" data-anchor="r-qui" data-label="C’est… qui…"><div class="qrow"><div class="pic">🎨</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Monet peint des nénuphars. → Qui peint des nénuphars ?</span><span class="btns"><button class="pb" data-a="43b16b8f55" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Monet paints water lilies. → Who paints water lilies?</div></div></div></div><div class="built" data-ph="Touche les étiquettes dans l’ordre…"></div><div class="pool"><button class="tile">C’est</button><button class="tile">peint</button><button class="tile">qui</button><button class="tile">Monet</button><button class="tile">des nénuphars</button></div><div class="tbtns"><button class="undo">↺ Recommencer</button></div><div class="sol">✓ <span class="stxt">C’est Monet qui peint des nénuphars !</span> <button class="pb sm" data-a="9e4b6841e7" aria-label="Écouter">▶</button></div></div><div class="item tiles" data-good="C’est le champion qui lance sa toupie" data-anchor="r-qui" data-label="C’est… qui…"><div class="qrow"><div class="pic">🌀</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Le champion lance sa toupie. → Qui lance sa toupie ?</span><span class="btns"><button class="pb" data-a="5ad23fbf6a" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">The champion launches his top. → Who launches his top?</div></div></div></div><div class="built" data-ph="Touche les étiquettes dans l’ordre…"></div><div class="pool"><button class="tile">le champion</button><button class="tile">sa toupie</button><button class="tile">qui</button><button class="tile">C’est</button><button class="tile">lance</button></div><div class="tbtns"><button class="undo">↺ Recommencer</button></div><div class="sol">✓ <span class="stxt">C’est le champion qui lance sa toupie !</span> <button class="pb sm" data-a="da9ab2d821" aria-label="Écouter">▶</button></div></div><div class="item tiles" data-good="C’est Elliot qui joue à la Switch" data-anchor="r-qui" data-label="C’est… qui…"><div class="qrow"><div class="pic">🎮</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Elliot joue à la Switch. → Qui joue à la Switch ?</span><span class="btns"><button class="pb" data-a="c54ce5139a" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Elliot plays on the Switch. → Who plays on the Switch?</div></div></div></div><div class="built" data-ph="Touche les étiquettes dans l’ordre…"></div><div class="pool"><button class="tile">à la Switch</button><button class="tile">C’est</button><button class="tile">Elliot</button><button class="tile">qui</button><button class="tile">joue</button></div><div class="tbtns"><button class="undo">↺ Recommencer</button></div><div class="sol">✓ <span class="stxt">C’est Elliot qui joue à la Switch !</span> <button class="pb sm" data-a="f88b543802" aria-label="Écouter">▶</button></div></div></div></section>
+<section id="s3" class="sec"><div class="shead"><span class="snum">NIVEAU 3</span><div class="line st"><div class="fr"><span class="txt">Les familles de mots</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Word families</div></div></div>
 <div class="rule g5" id="r-fam">
-  <div class="rh"><span class="bag">🌳</span><div class="line "><div class="fr"><span class="txt">Des mots de la même famille</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Words from the same family</div></div></div>
+  <div class="rh"><span class="bag">🧬</span><div class="line "><div class="fr"><span class="txt">Des mots de la même famille</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Words from the same family</div></div></div>
   <div class="rb">
-    <div class="line "><div class="fr"><span class="txt">Les mots d’une même famille ont le même petit cœur 💚. On l’appelle <b>le radical</b>.</span><span class="btns"><button class="pb" data-a="ab8e07e43b" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Words in the same family share the same little heart. It's called the root (le radical).</div></div>
+    <div class="line "><div class="fr"><span class="txt">Les mots d’une famille ont le même code de départ. On l’appelle <b>le radical</b>. 🔑</span><span class="btns"><button class="pb" data-a="408f7969fd" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">Words in a family share the same starting code. It's called the root (le radical).</div></div>
     <div class="trees">
       <div class="tree t1"><div class="root">herb-</div><div class="leaves"><span>l’<b>herb</b>e</span><span><b>herb</b>ivore</span><span>l’<b>herb</b>oriste</span><span>l’<b>herb</b>oristerie</span></div></div>
       <div class="tree t2"><div class="root">jardin-</div><div class="leaves"><span>le <b>jardin</b></span><span>le <b>jardin</b>ier</span><span>la <b>jardin</b>ière</span><span>la <b>jardin</b>erie</span></div></div>
       <div class="tree t3"><div class="root">plant-</div><div class="leaves"><span>une <b>plant</b>e</span><span><b>plant</b>er</span></div></div>
     </div>
-    <div class="tip small">🃏 <div class="line "><div class="fr"><span class="txt">Touche les cartes : derrière, il y a l’anglais et une phrase à écouter.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Tap the cards: on the back there's the English and a sentence to listen to.</div></div></div>
+    <div class="tip small">🃏 <div class="line "><div class="fr"><span class="txt">Touche les cartes pour débloquer l’anglais et la phrase.</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Tap the cards to unlock the English and the sentence.</div></div></div>
   </div>
 </div>
-<div class="cards fam"><div class="fcard fam t1"><div class="fin"><div class="ff"><div class="femo">🌿</div><div class="fw">l’herbe</div><div class="fcat">nom féminin</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">l’herbe <button class="pb sm" data-a="02c4f17d44" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 grass · herb</div><div class="fbex">La vache mange de l’herbe. <button class="pb sm" data-a="45376eaa49" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t1"><div class="fin"><div class="ff"><div class="femo">🐄</div><div class="fw">herbivore</div><div class="fcat">adjectif</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">herbivore <button class="pb sm" data-a="04ce36d525" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 herbivorous, plant-eating</div><div class="fbex">La vache est herbivore : elle mange seulement des plantes. <button class="pb sm" data-a="540bda3c92" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t1"><div class="fin"><div class="ff"><div class="femo">🧑‍⚕️</div><div class="fw">l’herboriste</div><div class="fcat">nom</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">l’herboriste <button class="pb sm" data-a="40015cfe1f" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 herbalist</div><div class="fbex">L’herboriste vend des plantes pour soigner le rhume. <button class="pb sm" data-a="b6e16a0868" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t1"><div class="fin"><div class="ff"><div class="femo">🏪</div><div class="fw">l’herboristerie</div><div class="fcat">nom féminin</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">l’herboristerie <button class="pb sm" data-a="3aa77c592e" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 herbalist's shop</div><div class="fbex">On achète de la camomille à l’herboristerie. <button class="pb sm" data-a="d4a69c4c6d" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t2"><div class="fin"><div class="ff"><div class="femo">🏡</div><div class="fw">le jardin</div><div class="fcat">nom masculin</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">le jardin <button class="pb sm" data-a="5e35744d8b" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 garden</div><div class="fbex">Le jardin de Monet est à Giverny. <button class="pb sm" data-a="bd9a532e92" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t2"><div class="fin"><div class="ff"><div class="femo">👨‍🌾</div><div class="fw">le jardinier · la jardinière</div><div class="fcat">nom</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">le jardinier · la jardinière <button class="pb sm" data-a="c70dff8257" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 gardener</div><div class="fbex">Le jardinier arrose les fleurs. <button class="pb sm" data-a="9b7c113b72" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t2"><div class="fin"><div class="ff"><div class="femo">🪴</div><div class="fw">la jardinière</div><div class="fcat">nom féminin</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">la jardinière <button class="pb sm" data-a="3da922e96c" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 window box, planter</div><div class="fbex">Il y a des fleurs rouges dans la jardinière. <button class="pb sm" data-a="cdffaa3782" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t2"><div class="fin"><div class="ff"><div class="femo">🛒</div><div class="fw">la jardinerie</div><div class="fcat">nom féminin</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">la jardinerie <button class="pb sm" data-a="a49f9d1853" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 garden centre</div><div class="fbex">On achète des graines à la jardinerie. <button class="pb sm" data-a="bed2387308" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t3"><div class="fin"><div class="ff"><div class="femo">🌱</div><div class="fw">une plante</div><div class="fcat">nom féminin</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">une plante <button class="pb sm" data-a="d4b8243c9b" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 a plant</div><div class="fbex">Cette plante a besoin d’eau. <button class="pb sm" data-a="90263d9dc3" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t3"><div class="fin"><div class="ff"><div class="femo">🕳️</div><div class="fw">planter</div><div class="fcat">verbe · sac 1</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">planter <button class="pb sm" data-a="6c5e2764bb" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 to plant</div><div class="fbex">Nous plantons un arbre dans le jardin. <button class="pb sm" data-a="1ef487c7ac" aria-label="Écouter">▶</button></div></div></div></div></div><div class="game" id="j6"><div class="ghead"><span class="gnum">🤔</span><div><div class="gkind">Jeu 6</div><div class="line gt"><div class="fr"><span class="txt">Qui suis-je ? Devine le mot !</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Who am I? Guess the word!</div></div></div></div><div class="item qcm" data-good="le jardinier" data-anchor="r-fam" data-label="Les familles de mots"><div class="qrow"><div class="pic">👨‍🌾</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Je travaille dans le jardin : je plante et j’arrose. Je suis…</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">I work in the garden: I plant and I water. I am…</div></div></div></div><div class="opts"><button class="opt" data-v="le jardinier">le jardinier</button><button class="opt" data-v="la jardinerie">la jardinerie</button><button class="opt" data-v="l’herbe">l’herbe</button></div><div class="sol">✓ <span class="stxt">Je suis le jardinier.</span> <button class="pb sm" data-a="37159ffc26" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="herbivore" data-anchor="r-fam" data-label="Les familles de mots"><div class="qrow"><div class="pic">🐄</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Je mange seulement de l’herbe et des plantes. Je suis…</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">I only eat grass and plants. I am…</div></div></div></div><div class="opts"><button class="opt" data-v="jardinier">jardinier</button><button class="opt" data-v="herbivore">herbivore</button><button class="opt" data-v="herboriste">herboriste</button></div><div class="sol">✓ <span class="stxt">Je suis herbivore.</span> <button class="pb sm" data-a="ec90d73097" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="la jardinerie" data-anchor="r-fam" data-label="Les familles de mots"><div class="qrow"><div class="pic">🛒</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Je suis un grand magasin : on achète des fleurs et des graines chez moi. Je suis…</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">I'm a big shop: you buy flowers and seeds at my place. I am…</div></div></div></div><div class="opts"><button class="opt" data-v="la jardinerie">la jardinerie</button><button class="opt" data-v="le jardinier">le jardinier</button><button class="opt" data-v="la plante">la plante</button></div><div class="sol">✓ <span class="stxt">Je suis la jardinerie.</span> <button class="pb sm" data-a="1eb80b5424" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="l’herboriste" data-anchor="r-fam" data-label="Les familles de mots"><div class="qrow"><div class="pic">🍵</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Je vends des plantes pour soigner le rhume. Je suis…</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">I sell plants to treat colds. I am…</div></div></div></div><div class="opts"><button class="opt" data-v="l’herbivore">l’herbivore</button><button class="opt" data-v="la jardinière">la jardinière</button><button class="opt" data-v="l’herboriste">l’herboriste</button></div><div class="sol">✓ <span class="stxt">Je suis l’herboriste.</span> <button class="pb sm" data-a="3dc4f1af63" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="planter" data-anchor="r-fam" data-label="Les familles de mots"><div class="qrow"><div class="pic">🌱</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Je suis un verbe : je mets une graine dans la terre. Je suis…</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">I'm a verb: I put a seed in the soil. I am…</div></div></div></div><div class="opts"><button class="opt" data-v="la plante">la plante</button><button class="opt" data-v="planter">planter</button><button class="opt" data-v="le jardin">le jardin</button></div><div class="sol">✓ <span class="stxt">Je suis le verbe planter.</span> <button class="pb sm" data-a="b33e65cfe3" aria-label="Écouter">▶</button></div></div></div><div class="game" id="j7"><div class="ghead"><span class="gnum">🫧</span><div><div class="gkind">Jeu 7</div><div class="line gt"><div class="fr"><span class="txt">Les bulles magiques : éclate les bulles de la bonne famille !</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Magic bubbles: pop the bubbles of the right family!</div></div></div></div><div class="round on" data-fam="jardin"><div class="rtitle">🏡 <div class="line "><div class="fr"><span class="txt">Famille <b>JARDIN</b> : éclate les 4 bonnes bulles !</span><span class="btns"><button class="pb" data-a="ca7d7d7a96" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">The jardin family: pop the 4 right bubbles!</div></div></div><div class="pond"><button class="bub item" data-ok="1" data-a="de68ad786a" data-anchor="r-fam" data-label="Les familles de mots" data-good="le jardinier → famille jardin" style="--d:0.00s;--x:-8px">le jardinier</button><button class="bub" data-ok="0" data-a="02c4f17d44" data-anchor="r-fam" data-label="Les familles de mots" data-good="l’herbe → famille jardin" style="--d:0.37s;--x:-2px">l’herbe</button><button class="bub" data-ok="0" data-a="6c5e2764bb" data-anchor="r-fam" data-label="Les familles de mots" data-good="planter → famille jardin" style="--d:0.74s;--x:-2px">planter</button><button class="bub" data-ok="0" data-a="04ce36d525" data-anchor="r-fam" data-label="Les familles de mots" data-good="herbivore → famille jardin" style="--d:1.11s;--x:-7px">herbivore</button><button class="bub item" data-ok="1" data-a="3da922e96c" data-anchor="r-fam" data-label="Les familles de mots" data-good="la jardinière → famille jardin" style="--d:1.48s;--x:7px">la jardinière</button><button class="bub item" data-ok="1" data-a="5e35744d8b" data-anchor="r-fam" data-label="Les familles de mots" data-good="le jardin → famille jardin" style="--d:1.85s;--x:4px">le jardin</button><button class="bub item" data-ok="1" data-a="a49f9d1853" data-anchor="r-fam" data-label="Les familles de mots" data-good="la jardinerie → famille jardin" style="--d:2.22s;--x:4px">la jardinerie</button></div></div><div class="round" data-fam="herbe"><div class="rtitle">🌿 <div class="line "><div class="fr"><span class="txt">Famille <b>HERBE</b> : éclate les 4 bonnes bulles !</span><span class="btns"><button class="pb" data-a="c180cfae1a" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">The herbe family: pop the 4 right bubbles!</div></div></div><div class="pond"><button class="bub" data-ok="0" data-a="d4b8243c9b" data-anchor="r-fam" data-label="Les familles de mots" data-good="une plante → famille herbe" style="--d:0.00s;--x:2px">une plante</button><button class="bub" data-ok="0" data-a="a49f9d1853" data-anchor="r-fam" data-label="Les familles de mots" data-good="la jardinerie → famille herbe" style="--d:0.37s;--x:-6px">la jardinerie</button><button class="bub item" data-ok="1" data-a="40015cfe1f" data-anchor="r-fam" data-label="Les familles de mots" data-good="l’herboriste → famille herbe" style="--d:0.74s;--x:1px">l’herboriste</button><button class="bub item" data-ok="1" data-a="04ce36d525" data-anchor="r-fam" data-label="Les familles de mots" data-good="herbivore → famille herbe" style="--d:1.11s;--x:2px">herbivore</button><button class="bub" data-ok="0" data-a="5e35744d8b" data-anchor="r-fam" data-label="Les familles de mots" data-good="le jardin → famille herbe" style="--d:1.48s;--x:-8px">le jardin</button><button class="bub item" data-ok="1" data-a="02c4f17d44" data-anchor="r-fam" data-label="Les familles de mots" data-good="l’herbe → famille herbe" style="--d:1.85s;--x:5px">l’herbe</button><button class="bub item" data-ok="1" data-a="3aa77c592e" data-anchor="r-fam" data-label="Les familles de mots" data-good="l’herboristerie → famille herbe" style="--d:2.22s;--x:-5px">l’herboristerie</button></div></div><div class="round done-msg"><div class="bigok">🎉 Toutes les bulles sont éclatées !</div></div></div></section>
+<div class="cards fam"><div class="fcard fam t1"><div class="fin"><div class="ff"><div class="femo">🌿</div><div class="fw">l’herbe</div><div class="fcat">nom féminin</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">l’herbe <button class="pb sm" data-a="02c4f17d44" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 grass · herb</div><div class="fbex">Dans le jeu, le héros se cache dans les hautes herbes. <button class="pb sm" data-a="5b2467a3f0" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t1"><div class="fin"><div class="ff"><div class="femo">🦕</div><div class="fw">herbivore</div><div class="fcat">adjectif</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">herbivore <button class="pb sm" data-a="04ce36d525" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 herbivorous, plant-eating</div><div class="fbex">Ce dinosaure est herbivore : il mange seulement des plantes. <button class="pb sm" data-a="4190c7fc05" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t1"><div class="fin"><div class="ff"><div class="femo">🧪</div><div class="fw">l’herboriste</div><div class="fcat">nom</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">l’herboriste <button class="pb sm" data-a="40015cfe1f" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 herbalist</div><div class="fbex">L’herboriste prépare des potions avec des plantes. <button class="pb sm" data-a="028eca389a" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t1"><div class="fin"><div class="ff"><div class="femo">🏪</div><div class="fw">l’herboristerie</div><div class="fcat">nom féminin</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">l’herboristerie <button class="pb sm" data-a="3aa77c592e" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 herbalist's shop</div><div class="fbex">On achète de la camomille à l’herboristerie. <button class="pb sm" data-a="d4a69c4c6d" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t2"><div class="fin"><div class="ff"><div class="femo">🏡</div><div class="fw">le jardin</div><div class="fcat">nom masculin</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">le jardin <button class="pb sm" data-a="5e35744d8b" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 garden</div><div class="fbex">Le jardin de Monet est à Giverny. <button class="pb sm" data-a="bd9a532e92" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t2"><div class="fin"><div class="ff"><div class="femo">🧑‍🌾</div><div class="fw">le jardinier · la jardinière</div><div class="fcat">nom</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">le jardinier · la jardinière <button class="pb sm" data-a="c70dff8257" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 gardener</div><div class="fbex">Le jardinier arrose les fleurs. <button class="pb sm" data-a="9b7c113b72" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t2"><div class="fin"><div class="ff"><div class="femo">🪴</div><div class="fw">la jardinière</div><div class="fcat">nom féminin</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">la jardinière <button class="pb sm" data-a="3da922e96c" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 window box, planter</div><div class="fbex">Il y a des fleurs rouges dans la jardinière. <button class="pb sm" data-a="cdffaa3782" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t2"><div class="fin"><div class="ff"><div class="femo">🛒</div><div class="fw">la jardinerie</div><div class="fcat">nom féminin</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">la jardinerie <button class="pb sm" data-a="a49f9d1853" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 garden centre</div><div class="fbex">On achète des graines à la jardinerie. <button class="pb sm" data-a="bed2387308" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t3"><div class="fin"><div class="ff"><div class="femo">🌱</div><div class="fw">une plante</div><div class="fcat">nom féminin</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">une plante <button class="pb sm" data-a="d4b8243c9b" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 a plant</div><div class="fbex">Dans mon jeu, je fais pousser une plante magique. <button class="pb sm" data-a="e69d40e4e5" aria-label="Écouter">▶</button></div></div></div></div><div class="fcard fam t3"><div class="fin"><div class="ff"><div class="femo">⛏️</div><div class="fw">planter</div><div class="fcat">verbe · équipe 1</div><div class="turn">↻</div></div><div class="fb"><div class="fbw">planter <button class="pb sm" data-a="6c5e2764bb" aria-label="Écouter">▶</button></div><div class="fben">🇬🇧 to plant</div><div class="fbex">Nous plantons des arbres sur notre île. <button class="pb sm" data-a="b7aadc5967" aria-label="Écouter">▶</button></div></div></div></div></div><div class="game" id="j6"><div class="ghead"><span class="gnum">🤔</span><div><div class="gkind">Mission 6</div><div class="line gt"><div class="fr"><span class="txt">Qui suis-je ? Devine le mot !</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Who am I? Guess the word!</div></div></div></div><div class="item qcm" data-good="le jardinier" data-anchor="r-fam" data-label="Les familles de mots"><div class="qrow"><div class="pic">🧑‍🌾</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Je travaille dans le jardin : je plante et j’arrose. Je suis…</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">I work in the garden: I plant and I water. I am…</div></div></div></div><div class="opts"><button class="opt" data-v="le jardinier">le jardinier</button><button class="opt" data-v="la jardinerie">la jardinerie</button><button class="opt" data-v="l’herbe">l’herbe</button></div><div class="sol">✓ <span class="stxt">Je suis le jardinier.</span> <button class="pb sm" data-a="37159ffc26" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="herbivore" data-anchor="r-fam" data-label="Les familles de mots"><div class="qrow"><div class="pic">🦕</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Je mange seulement de l’herbe et des plantes. Je suis…</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">I only eat grass and plants. I am…</div></div></div></div><div class="opts"><button class="opt" data-v="jardinier">jardinier</button><button class="opt" data-v="herbivore">herbivore</button><button class="opt" data-v="herboriste">herboriste</button></div><div class="sol">✓ <span class="stxt">Je suis herbivore.</span> <button class="pb sm" data-a="ec90d73097" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="la jardinerie" data-anchor="r-fam" data-label="Les familles de mots"><div class="qrow"><div class="pic">🛒</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Je suis un grand magasin : on achète des fleurs et des graines chez moi. Je suis…</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">I'm a big shop: you buy flowers and seeds at my place. I am…</div></div></div></div><div class="opts"><button class="opt" data-v="la jardinerie">la jardinerie</button><button class="opt" data-v="le jardinier">le jardinier</button><button class="opt" data-v="la plante">la plante</button></div><div class="sol">✓ <span class="stxt">Je suis la jardinerie.</span> <button class="pb sm" data-a="1eb80b5424" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="l’herboriste" data-anchor="r-fam" data-label="Les familles de mots"><div class="qrow"><div class="pic">🧪</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Je prépare des potions et des tisanes avec des plantes. Je suis…</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">I make potions and herbal teas with plants. I am…</div></div></div></div><div class="opts"><button class="opt" data-v="l’herbivore">l’herbivore</button><button class="opt" data-v="la jardinière">la jardinière</button><button class="opt" data-v="l’herboriste">l’herboriste</button></div><div class="sol">✓ <span class="stxt">Je suis l’herboriste.</span> <button class="pb sm" data-a="3dc4f1af63" aria-label="Écouter">▶</button></div></div><div class="item qcm" data-good="planter" data-anchor="r-fam" data-label="Les familles de mots"><div class="qrow"><div class="pic">🌱</div><div class="qtxt"><div class="line "><div class="fr"><span class="txt">Je suis un verbe : je mets une graine dans la terre. Je suis…</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">I'm a verb: I put a seed in the soil. I am…</div></div></div></div><div class="opts"><button class="opt" data-v="la plante">la plante</button><button class="opt" data-v="planter">planter</button><button class="opt" data-v="le jardin">le jardin</button></div><div class="sol">✓ <span class="stxt">Je suis le verbe planter.</span> <button class="pb sm" data-a="b33e65cfe3" aria-label="Écouter">▶</button></div></div></div><div class="game boss" id="j7"><div class="ghead"><span class="gnum">👾</span><div><div class="gkind">BOSS FINAL</div><div class="line gt"><div class="fr"><span class="txt">Casse les blocs de la bonne famille !</span><span class="btns"><button class="enb">EN</button></span></div><div class="en">Smash the blocks of the right family!</div></div></div></div><div class="round on" data-fam="jardin"><div class="rtitle"><span class="hp">VAGUE 1/2</span><div class="line "><div class="fr"><span class="txt">Famille <b>JARDIN</b> : casse les 4 bons blocs !</span><span class="btns"><button class="pb" data-a="ca7d7d7a96" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">The jardin family: smash the 4 right blocks!</div></div></div><div class="pond"><button class="bub item" data-ok="1" data-a="de68ad786a" data-anchor="r-fam" data-label="Les familles de mots" data-good="le jardinier → famille jardin" style="--d:0.00s">le jardinier</button><button class="bub" data-ok="0" data-a="02c4f17d44" data-anchor="r-fam" data-label="Les familles de mots" data-good="l’herbe → famille jardin" style="--d:0.37s">l’herbe</button><button class="bub" data-ok="0" data-a="6c5e2764bb" data-anchor="r-fam" data-label="Les familles de mots" data-good="planter → famille jardin" style="--d:0.74s">planter</button><button class="bub" data-ok="0" data-a="04ce36d525" data-anchor="r-fam" data-label="Les familles de mots" data-good="herbivore → famille jardin" style="--d:1.11s">herbivore</button><button class="bub item" data-ok="1" data-a="3da922e96c" data-anchor="r-fam" data-label="Les familles de mots" data-good="la jardinière → famille jardin" style="--d:1.48s">la jardinière</button><button class="bub item" data-ok="1" data-a="5e35744d8b" data-anchor="r-fam" data-label="Les familles de mots" data-good="le jardin → famille jardin" style="--d:1.85s">le jardin</button><button class="bub item" data-ok="1" data-a="a49f9d1853" data-anchor="r-fam" data-label="Les familles de mots" data-good="la jardinerie → famille jardin" style="--d:2.22s">la jardinerie</button></div></div><div class="round" data-fam="herbe"><div class="rtitle"><span class="hp">VAGUE 2/2</span><div class="line "><div class="fr"><span class="txt">Famille <b>HERBE</b> : casse les 4 bons blocs !</span><span class="btns"><button class="pb" data-a="c180cfae1a" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">The herbe family: smash the 4 right blocks!</div></div></div><div class="pond"><button class="bub item" data-ok="1" data-a="3aa77c592e" data-anchor="r-fam" data-label="Les familles de mots" data-good="l’herboristerie → famille herbe" style="--d:0.00s">l’herboristerie</button><button class="bub item" data-ok="1" data-a="40015cfe1f" data-anchor="r-fam" data-label="Les familles de mots" data-good="l’herboriste → famille herbe" style="--d:0.37s">l’herboriste</button><button class="bub" data-ok="0" data-a="5e35744d8b" data-anchor="r-fam" data-label="Les familles de mots" data-good="le jardin → famille herbe" style="--d:0.74s">le jardin</button><button class="bub item" data-ok="1" data-a="04ce36d525" data-anchor="r-fam" data-label="Les familles de mots" data-good="herbivore → famille herbe" style="--d:1.11s">herbivore</button><button class="bub item" data-ok="1" data-a="02c4f17d44" data-anchor="r-fam" data-label="Les familles de mots" data-good="l’herbe → famille herbe" style="--d:1.48s">l’herbe</button><button class="bub" data-ok="0" data-a="d4b8243c9b" data-anchor="r-fam" data-label="Les familles de mots" data-good="une plante → famille herbe" style="--d:1.85s">une plante</button><button class="bub" data-ok="0" data-a="a49f9d1853" data-anchor="r-fam" data-label="Les familles de mots" data-good="la jardinerie → famille herbe" style="--d:2.22s">la jardinerie</button></div></div><div class="round done-msg"><div class="bigok">💥 BOSS VAINCU !</div></div></div></section>
 
 <section id="bravo" class="sec">
   <div class="bravo">
+    <div class="pstart">MISSION ACCOMPLIE</div>
     <div class="trophy">🏆</div>
-    <h2>Bravo Elliot !</h2>
-    <div class="final"><span id="fsc">0</span> ⭐ / <span class="tot2"></span></div>
-    <div class="line "><div class="fr"><span class="txt">Tu as revu les trois sacs de verbes, la phrase « c’est… qui… » et les familles de mots. Super travail !</span><span class="btns"><button class="pb" data-a="2a39e0c1f8" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">You reviewed the three bags of verbs, the c'est… qui… sentence and word families. Great work!</div></div>
-    <button class="party">🎉 Encore des confettis !</button>
+    <h2>GG Elliot !</h2>
+    <div class="final">⚡ <span id="fsc">0</span> / <span class="tot2"></span> XP</div>
+    <div class="rank" id="rank"></div>
+    <div class="line "><div class="fr"><span class="txt">Tu as revu les 3 équipes de verbes, la phrase « c’est… qui… » et les familles de mots. Bien joué !</span><span class="btns"><button class="pb" data-a="b3a1ac9fa9" aria-label="Écouter">▶</button><button class="enb">EN</button></span></div><div class="en">You reviewed the 3 teams of verbs, the c'est… qui… sentence and word families. Well played!</div></div>
+    <button class="party">🎆 Feu d’artifice !</button>
   </div>
   <div class="revoir">
-    <h3>📌 Mes petits points à revoir</h3>
-    <p class="revempty">Pour l’instant, rien à revoir. Continue comme ça ! 🐸</p>
+    <h3>🔁 À revoir</h3>
+    <p class="revempty">Rien à revoir pour l’instant : zéro erreur ! 🔥</p>
     <ul class="revlist"></ul>
   </div>
 </section>
@@ -412,9 +430,9 @@ let ac=null;
 function tone(ok){
   try{
     ac=ac||new (window.AudioContext||window.webkitAudioContext)();
-    const notes = ok ? [784,988,1319] : [330,262];
-    notes.forEach((f,i)=>{ const o=ac.createOscillator(), g=ac.createGain(); o.type=ok?'triangle':'sine'; o.frequency.value=f;
-      const t=ac.currentTime+i*0.09; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(ok?.12:.08,t+.02); g.gain.exponentialRampToValueAtTime(.001,t+.28);
+    const notes = ok ? [660,880,1320] : [220,165];
+    notes.forEach((f,i)=>{ const o=ac.createOscillator(), g=ac.createGain(); o.type=ok?'square':'square'; o.frequency.value=f;
+      const t=ac.currentTime+i*0.09; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(ok?.06:.05,t+.02); g.gain.exponentialRampToValueAtTime(.001,t+.28);
       o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t+.3); });
   }catch(e){}
 }
@@ -423,42 +441,44 @@ function tone(ok){
 const items=$$('.item');
 let score=0; const errors=[];
 $('#tot').textContent=items.length; $$('.tot2').forEach(x=>x.textContent=items.length);
-function bump(){ $('#sc').textContent=score; $('#fsc').textContent=score; const s=$('#score'); s.classList.remove('bump'); void s.offsetWidth; s.classList.add('bump'); }
+let combo=0;
+function bump(){ $('#sc').textContent=score; $('#fsc').textContent=score; $('#xpf').style.width=(100*score/items.length)+'%'; rank(); const s=$('#score'); s.classList.remove('bump'); void s.offsetWidth; s.classList.add('bump'); }
 function stars(el){
   const r=el.getBoundingClientRect(); const cx=r.left+Math.min(r.width,240)/2, cy=Math.max(r.top+22,60);
-  const sym=['★','✦','⭐','✧','★','🌸','★','✦','⭐','✧','★','🍀'];
+  const sym=['■','◆','★','■','◆','⚡','■','◆','★','■','◆','✦'];
   sym.forEach((c,i)=>{ const s=document.createElement('span'); s.className='star'; s.textContent=c;
     const a=(Math.PI*2)*(i/sym.length)+Math.random()*.5, d=60+Math.random()*70;
     s.style.left=cx+'px'; s.style.top=cy+'px';
     s.style.setProperty('--dx',Math.cos(a)*d+'px'); s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');
-    s.style.color=['#fab005','#e64980','#9c36b5','#37b24d','#1c7ed6','#f76707'][i%6];
+    s.style.color=['#facc15','#f72585','#8b5cf6','#a3e635','#22d3ee','#fb923c'][i%6];
     document.body.appendChild(s); setTimeout(()=>s.remove(),1200); });
-  const words=['Bravo !','Super !','Génial !','Youpi !','Top !','Excellent !','Trop fort !'];
-  const w=document.createElement('div'); w.className='cheer'; w.textContent=words[Math.floor(Math.random()*words.length)];
+  const words=['+1 XP','NICE !','SUPER !','GG !','PARFAIT !','TOP !'];
+  const w=document.createElement('div'); w.className='cheer'; w.textContent=combo>=3?('COMBO x'+combo+' 🔥'):words[Math.floor(Math.random()*words.length)];
   w.style.left=cx+'px'; w.style.top=(cy-10)+'px'; document.body.appendChild(w); setTimeout(()=>w.remove(),1300);
 }
 function confetti(n){
-  const col=['#fab005','#e64980','#9c36b5','#37b24d','#1c7ed6','#f76707','#0ca678'];
+  const col=['#facc15','#f72585','#8b5cf6','#a3e635','#22d3ee','#fb923c','#4ade80'];
   for(let i=0;i<(n||90);i++){ const c=document.createElement('div'); c.className='conf';
     c.style.left=Math.random()*100+'vw'; c.style.background=col[i%col.length];
     c.style.setProperty('--sx',(Math.random()*160-80)+'px'); c.style.setProperty('--r',(Math.random()*900)+'deg');
     c.style.animationDuration=(1.8+Math.random()*1.8)+'s'; c.style.animationDelay=(Math.random()*.6)+'s';
-    if(i%4===0) c.style.borderRadius='50%';
     document.body.appendChild(c); setTimeout(()=>c.remove(),4500); }
 }
-function bigFrog(){ const f=document.createElement('div'); f.className='gfrog'; f.textContent='🐸'; document.body.appendChild(f); setTimeout(()=>f.remove(),1900); }
+function bigFrog(txt){ const f=document.createElement('div'); f.className='lvl'; f.textContent=txt||'MISSION CLEAR !'; document.body.appendChild(f); setTimeout(()=>f.remove(),1900); }
+function rank(){ const p=score/items.length; const r=$('#rank'); if(!r) return; r.textContent = p>=.9?'RANG : LÉGENDE 👑':p>=.7?'RANG : CHAMPION 🥇':p>=.4?'RANG : PRO 🥈':'RANG : ROOKIE 🥉'; }
+function comboShow(){ const c=$('#combo'); c.textContent='COMBO x'+combo+' 🔥'; c.classList.remove('on'); void c.offsetWidth; c.classList.add('on'); }
 
 function finish(item,ok,yours,good){
   item.classList.add('done', ok?'right':'wrong');
   tone(ok);
-  if(ok){ score++; bump(); stars(item); }
-  else errors.push({good:good, yours:yours, anchor:item.dataset.anchor, label:item.dataset.label});
+  if(ok){ combo++; score++; bump(); stars(item); if(combo>=3) comboShow(); }
+  else { combo=0; } if(!ok) errors.push({good:good, yours:yours, anchor:item.dataset.anchor, label:item.dataset.label});
   renderRevoir();
   checkGameDone(item);
 }
 function checkGameDone(item){
   const g=item.closest('.game'); if(!g || g.dataset.fin) return;
-  const its=$$('.item',g); if(its.every(i=>i.classList.contains('done'))){ g.dataset.fin=1; setTimeout(()=>{ confetti(70); bigFrog(); },700); }
+  const its=$$('.item',g); if(its.every(i=>i.classList.contains('done'))){ g.dataset.fin=1; g.classList.add('cleared'); setTimeout(()=>{ confetti(70); bigFrog(g.classList.contains('boss')?'BOSS VAINCU !':'MISSION CLEAR !'); },700); }
   if(items.every(i=>i.classList.contains('done'))) setTimeout(()=>{ confetti(160); },1500);
 }
 function solPlay(item,delay){ const b=$('.sol .pb',item); if(b) setTimeout(()=>play(b.dataset.a,b),delay); }
@@ -466,14 +486,14 @@ function solPlay(item,delay){ const b=$('.sol .pb',item); if(b) setTimeout(()=>p
 /* ---------- clics ---------- */
 let selected=null;
 document.addEventListener('click',e=>{
-  const t=e.target.closest('button,a,.fcard,#frog'); if(!t) return;
-  if(t.id==='frog'){ t.classList.remove('jump'); void t.offsetWidth; t.classList.add('jump'); stars(t); tone(true); return; }
+  const t=e.target.closest('button,a,.fcard,.top-wrap'); if(!t) return;
+  if(t.matches('.top-wrap')){ const s=$('#spin'); s.classList.remove('boost'); void s.offsetWidth; s.classList.add('boost'); tone(true); setTimeout(()=>s.classList.remove('boost'),1000); return; }
   if(t.matches('.pb')){ e.stopPropagation(); play(t.dataset.a,t); return; }
   if(t.matches('.enb')){ const l=t.closest('.line'); if(l) l.classList.toggle('open'); return; }
   if(t.id==='enall'){ document.body.classList.toggle('en-all'); return; }
   if(t.matches('.vchip')){ play(t.dataset.a,null); return; }
   if(t.matches('.fcard')){ t.classList.toggle('flip'); return; }
-  if(t.matches('.party')){ confetti(160); bigFrog(); tone(true); return; }
+  if(t.matches('.party')){ confetti(180); bigFrog('GG ELLIOT !'); tone(true); return; }
   if(t.matches('.revgo')){ e.preventDefault(); const el=document.getElementById(t.getAttribute('href').slice(1));
     if(el){ el.scrollIntoView({behavior:'smooth',block:'start'}); el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); } return; }
 
@@ -514,8 +534,9 @@ document.addEventListener('click',e=>{
     const sp=document.createElement('span'); sp.textContent=v.textContent; right.querySelector('.in').appendChild(sp);
     if(!ok){ sp.className='w'; t.classList.remove('nope'); void t.offsetWidth; t.classList.add('nope'); }
     right.classList.remove('gulp'); void right.offsetWidth; right.classList.add('gulp');
+    flyTop(v,right);
     v.style.display='none';
-    finish(v,ok,v.textContent+' → sac '+t.dataset.g, v.dataset.good);
+    finish(v,ok,v.textContent+' → équipe '+t.dataset.g, v.dataset.good);
     if(ok) stars(right);
     return;
   }
@@ -534,12 +555,19 @@ document.addEventListener('click',e=>{
       t.classList.remove('nope'); void t.offsetWidth; t.classList.add('nope'); tone(false);
       if(!t.dataset.counted){ t.dataset.counted=1;
         const fam=t.closest('.round').dataset.fam;
-        errors.push({good:'« '+t.textContent+' » n’est pas dans la famille '+fam, yours:'', anchor:'r-fam', label:'Les familles de mots'}); renderRevoir(); }
+        combo=0; errors.push({good:'« '+t.textContent+' » n’est pas dans la famille '+fam, yours:'', anchor:'r-fam', label:'Les familles de mots'}); renderRevoir(); }
     }
     return;
   }
 });
 
+function flyTop(from,to){
+  const a=from.getBoundingClientRect(), b=to.getBoundingClientRect();
+  const d=document.createElement('div'); d.className='flytop'; d.style.left=(a.left+a.width/2-22)+'px'; d.style.top=(a.top+a.height/2-22)+'px';
+  document.body.appendChild(d); requestAnimationFrame(()=>requestAnimationFrame(()=>{ d.style.left=(b.left+b.width/2-22)+'px'; d.style.top=(b.top+30)+'px'; }));
+  setTimeout(()=>d.remove(),650);
+}
+rank();
 /* ---------- à revoir ---------- */
 function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function renderRevoir(){
