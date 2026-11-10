@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ezra · L'impératif</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:ital,wght@0,500;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --or:#ff7a1a;--or-d:#e85d04;--or-l:#fff1e4;--or-ll:#fff8f1;
+  --night:#1a1440;--night2:#2a1f66;--pur:#6c3bff;--pur-l:#efe9ff;
+  --cy:#19c3ff;--cy-l:#e4f7ff;--gold:#ffc93c;--pink:#ff2e63;
+  --ink:#1d1838;--soft:#5b5677;--muted:#8d88a6;--line:#f1dcc8;
+  --ok:#1fae6a;--ok-l:#e3f7ec;--ko:#ef476f;--ko-l:#fde8ee;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--or-ll);color:var(--ink);font:17px/1.55 Nunito,system-ui,sans-serif;-webkit-text-size-adjust:100%}
+h1,h2,h3,.disp,.btn,.score{font-family:"Lilita One",Nunito,sans-serif;font-weight:400;letter-spacing:.01em}
+.en{display:block;color:var(--muted);font-style:italic;font-size:.88em;font-weight:500}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+b{font-weight:800}
+.k{color:var(--or-d);font-weight:800}
+
+/* Barre du haut */
+.top{position:sticky;top:0;z-index:30;background:rgba(26,20,64,.96);backdrop-filter:blur(8px)}
+.top .wrap{display:flex;align-items:center;gap:10px;padding-top:8px;padding-bottom:8px}
+.nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;color:#d9d4ff;font:700 13px Nunito;padding:5px 11px;border-radius:99px;border:1.5px solid rgba(255,255,255,.18)}
+.nav a.done{background:var(--or);border-color:var(--or);color:#fff}
+.score{white-space:nowrap;background:linear-gradient(90deg,var(--or),var(--gold));color:var(--night);padding:6px 14px;border-radius:99px;font-size:17px;box-shadow:0 0 0 3px rgba(255,122,26,.25)}
+.score.pop{animation:pop .45s}
+@keyframes pop{40%{transform:scale(1.25)}}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;min-height:400px;display:flex;align-items:flex-end;background:var(--or)}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hero .in{position:relative;z-index:1;padding:22px 16px;max-width:860px;margin:0 auto;width:100%}
+.hcard{display:inline-block;background:rgba(26,20,64,.9);color:#fff;border-radius:20px;padding:12px 16px;max-width:470px;border:3px solid #fff}
+.tag{display:inline-block;background:var(--or);color:#fff;font:800 11px Nunito;letter-spacing:.14em;text-transform:uppercase;padding:4px 11px;border-radius:99px}
+.hero h1{font-size:clamp(28px,6.5vw,46px);line-height:1.02;margin:8px 0 4px}
+.hero h1 span{color:var(--gold)}
+.hero p{margin:0;color:#e9e5ff;font-size:15px}
+.hero p i{color:#b9b2e6}
+.stripe{height:7px;background:repeating-linear-gradient(90deg,var(--or) 0 26px,var(--night) 26px 52px,var(--gold) 52px 78px,var(--pur) 78px 104px)}
+
+/* Intro mission */
+.mission{display:flex;gap:14px;align-items:center;background:#fff;border:2.5px solid var(--or);border-radius:20px;padding:14px 16px;margin:20px 0 0;box-shadow:0 6px 0 var(--or)}
+.mission .ico{font-size:34px;flex:none}
+.mission p{margin:0}
+
+/* Sections */
+.sec{margin:34px 0 0;scroll-margin-top:64px}
+.shead{display:flex;align-items:center;gap:12px;margin:0 0 14px}
+.shead .n{width:46px;height:46px;flex:none;border-radius:14px;background:var(--night);color:var(--gold);display:grid;place-items:center;font:28px "Lilita One";transform:rotate(-6deg);box-shadow:4px 4px 0 var(--or)}
+.shead h2{margin:0;font-size:28px;line-height:1.05;color:var(--night)}
+.shead .en{font-size:14px}
+
+/* Cartes de règle */
+.rule{background:#fff;border-radius:20px;border:2px solid var(--line);margin:0 0 16px;overflow:hidden;scroll-margin-top:70px;box-shadow:0 4px 14px rgba(232,93,4,.07)}
+.rule.flash{animation:flash 1.6s}
+@keyframes flash{0%,60%{box-shadow:0 0 0 5px var(--gold)}}
+.rule .rh{display:flex;gap:10px;align-items:center;padding:11px 16px;color:#fff}
+.rule .rh .lv{font:800 11px Nunito;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.25);padding:3px 9px;border-radius:99px;flex:none}
+.rule .rh h3{margin:0;font-size:21px;line-height:1.1}
+.rule .rh .en{color:rgba(255,255,255,.85);font-size:13px}
+.rule .rb{padding:14px 16px 16px}
+.rule .rb>p{margin:0 0 10px}
+.ex-line{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:14px;background:var(--or-ll);border:1.5px solid #ffe2c8;margin:8px 0}
+.ex-line .t{flex:1}
+.ex-line .fr{font-weight:800;font-size:18px}
+.ex-line .fr s{color:var(--muted);font-weight:600;text-decoration-thickness:2px}
+.arrow{color:var(--or);font-weight:800;margin:0 4px}
+.say{flex:none;width:42px;height:42px;border-radius:50%;border:0;background:var(--or);color:#fff;font-size:18px;cursor:pointer;box-shadow:0 3px 0 var(--or-d);display:grid;place-items:center}
+.say.on{background:var(--pur);box-shadow:0 3px 0 #4a22c9;animation:pulse 1s infinite}
+@keyframes pulse{50%{transform:scale(1.1)}}
+.persons{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.pc{border-radius:16px;padding:10px 8px;text-align:center;color:#fff}
+.pc .who{font:800 12px Nunito;letter-spacing:.1em;text-transform:uppercase;opacity:.9}
+.pc .v{font:21px "Lilita One";margin:2px 0;white-space:nowrap}
+.pc .en{color:rgba(255,255,255,.85);font-size:12.5px}
+.p-tu{background:var(--or)}.p-nous{background:var(--pur)}.p-vous{background:var(--cy)}
+.box-in{border:2.5px dashed var(--or);border-radius:16px;padding:10px 14px;margin:10px 0 4px;background:#fff}
+.box-in b{color:var(--or-d)}
+.formula{display:inline-block;background:var(--night);color:#fff;border-radius:99px;padding:6px 14px;font-weight:800;margin:4px 0}
+.formula em{color:var(--gold);font-style:normal}
+.recap{background:linear-gradient(135deg,var(--night),var(--night2));color:#fff;border-radius:20px;padding:16px;margin:18px 0 0}
+.recap h3{margin:0 0 8px;color:var(--gold);font-size:22px}
+.recap table{width:100%;border-collapse:separate;border-spacing:0 6px}
+.recap td{background:rgba(255,255,255,.08);padding:8px 10px;font-size:15px}
+.recap td:first-child{border-radius:10px 0 0 10px;font-weight:800;color:var(--gold);white-space:nowrap}
+.recap td:last-child{border-radius:0 10px 10px 0}
+.recap .en{color:#b9b2e6}
+
+figure.photo{margin:14px 0 0;border-radius:20px;overflow:hidden;border:4px solid #fff;box-shadow:0 0 0 2.5px var(--or);position:relative}
+figure.photo img{display:block;width:100%;height:190px;object-fit:cover}
+figure.photo figcaption{position:absolute;left:10px;bottom:10px;background:rgba(26,20,64,.85);color:#fff;font-weight:700;font-size:13.5px;padding:5px 11px;border-radius:99px}
+
+/* Exercices */
+const norm=s=>String(s).toLowerCase().replace(/[’`´]/g,"'").replace(/[!.\s]+$/,"").replace(/\s+/g," ").trim();
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+.exo{background:#fff;border-radius:22px;overflow:hidden;margin:22px 0 0;border:2px solid var(--line);scroll-margin-top:64px;box-shadow:0 6px 0 #ffe0c4}
+.exo .hd{display:flex;gap:12px;align-items:center;padding:14px 16px;color:#fff}
+.exo .hd .num{font:44px/1 "Lilita One";flex:none;text-shadow:3px 3px 0 rgba(0,0,0,.15)}
+.exo .hd .lab{font:800 11px Nunito;letter-spacing:.14em;text-transform:uppercase;opacity:.95}
+.exo .hd h3{margin:2px 0 0;font:800 17px/1.3 Nunito}
+.exo .hd .en{color:rgba(255,255,255,.9);font-size:14px}
+.engine{padding:14px 16px 18px}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:800;font-size:13.5px;color:var(--soft);flex-wrap:wrap}
+.dots{display:flex;gap:5px}
+.dots i{width:11px;height:11px;border-radius:50%;background:#eee6dd;display:block}
+.dots i.ok{background:var(--ok)}.dots i.ko{background:var(--ko)}
+.dots i.cur{box-shadow:0 0 0 2.5px var(--or)}
+.who-tag{display:inline-block;font:800 12px Nunito;letter-spacing:.08em;text-transform:uppercase;color:#fff;padding:3px 10px;border-radius:99px;margin:12px 0 0}
+.qtext{font-size:21px;font-weight:800;margin:10px 0 2px;line-height:1.35}
+.from{font-size:15px;color:var(--soft);margin:12px 0 0}
+.from b{color:var(--or-d)}
+.gap{display:inline-block;min-width:74px;border-bottom:3px solid var(--or);color:var(--or);text-align:center;padding:0 6px}
+.gap.ok{color:var(--ok);border-color:var(--ok)}
+.inf{display:inline-block;margin-left:8px;font-size:14px;font-weight:700;color:#fff;background:var(--night);padding:2px 10px;border-radius:99px;vertical-align:middle}
+.opts{display:grid;gap:9px;margin:14px 0 4px}
+.opts.two{grid-template-columns:1fr 1fr}
+.opt{font:800 17px Nunito;text-align:left;padding:12px 14px;border-radius:14px;border:2.5px solid #f3d9c2;background:#fff;color:var(--ink);cursor:pointer;transition:transform .12s}
+.opt small{display:block;font-weight:500;font-style:italic;color:var(--muted);font-size:13px}
+.opt:hover:not(:disabled){border-color:var(--or);transform:translateY(-2px)}
+.opt.ok{background:var(--ok-l);border-color:var(--ok)}
+.opt.ko{background:var(--ko-l);border-color:var(--ko)}
+.opt:disabled{cursor:default}
+/* Toupies */
+.arena{position:relative;margin:16px 0 6px;padding:22px 8px 16px;border-radius:50%/30%;background:radial-gradient(ellipse at center,#2a1f66 0%,#1a1440 70%);box-shadow:inset 0 0 0 6px var(--or),inset 0 0 30px rgba(0,0,0,.5);display:flex;justify-content:space-around;gap:6px}
+.top-btn{border:0;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;color:#fff;font:800 16px Nunito;padding:4px;min-width:0}
+.top-btn svg{width:88px;height:88px;filter:drop-shadow(0 6px 6px rgba(0,0,0,.4));animation:wobble 2.4s ease-in-out infinite}
+.top-btn:nth-child(2) svg{animation-delay:-.8s}.top-btn:nth-child(3) svg{animation-delay:-1.6s}
+@keyframes wobble{0%,100%{transform:rotate(-6deg) translateY(0)}50%{transform:rotate(6deg) translateY(-4px)}}
+.top-btn span{background:rgba(255,255,255,.12);padding:4px 10px;border-radius:99px;border:2px solid rgba(255,255,255,.25)}
+.top-btn.win svg{animation:spinwin .9s linear infinite}
+.top-btn.win span{background:var(--ok);border-color:var(--ok)}
+.top-btn.lose{opacity:.35}
+.top-btn.lose svg{animation:out .6s forwards}
+.top-btn.bad span{background:var(--ko);border-color:var(--ko)}
+@keyframes spinwin{to{transform:rotate(360deg)}}
+@keyframes out{to{transform:translateY(14px) rotate(70deg)}}
+.top-btn:disabled{cursor:default}
+/* Saisie */
+.inp{display:flex;gap:8px;margin:14px 0 6px}
+.inp input{flex:1;min-width:0;font:800 19px Nunito;padding:11px 14px;border-radius:14px;border:2.5px solid #f3d9c2;outline:none}
+.inp input:focus{border-color:var(--or)}
+.inp input.ok{border-color:var(--ok);background:var(--ok-l)}
+.inp input.ko{border-color:var(--ko);background:var(--ko-l)}
+/* Tuiles */
+.tiles{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;padding:8px;border-radius:14px;margin:10px 0}
+.tiles.pool:empty{display:none}
+.tiles.ans{background:var(--or-ll);border:2.5px dashed var(--or)}
+.tile{font:800 17px Nunito;padding:8px 13px;border-radius:12px;border:0;background:var(--night);color:#fff;cursor:pointer;box-shadow:0 3px 0 var(--or)}
+.tiles.ans .tile{background:var(--or);box-shadow:0 3px 0 var(--or-d)}
+.tile:disabled{cursor:default}
+/* Écoute */
+.big-say{display:flex;align-items:center;gap:12px;margin:14px 0 4px;background:var(--night);color:#fff;border-radius:18px;padding:12px 14px;border:0;width:100%;cursor:pointer;font:800 17px Nunito;text-align:left}
+.big-say .ic{width:52px;height:52px;border-radius:50%;background:var(--or);display:grid;place-items:center;font-size:24px;flex:none;box-shadow:0 0 0 5px rgba(255,122,26,.3)}
+.big-say.on .ic{animation:pulse 1s infinite}
+/* Boutons */
+.row{display:flex;justify-content:space-between;gap:10px;margin-top:12px;align-items:center}
+.btn{font-size:17px;border:0;border-radius:14px;padding:11px 18px;background:var(--or);color:#fff;cursor:pointer;box-shadow:0 4px 0 var(--or-d);text-decoration:none;display:inline-block}
+.btn.ghost{background:#fff;color:var(--night);box-shadow:0 0 0 2px var(--night) inset}
+.btn:disabled{opacity:.5;cursor:default}
+/* Feedback */
+.fb{border-radius:16px;padding:12px 14px;margin:12px 0 0}
+.fb.ok{background:var(--ok-l);border:2px solid var(--ok)}
+.fb.ko{background:var(--ko-l);border:2px solid var(--ko)}
+.fb .head{font:20px "Lilita One";margin-bottom:6px}
+.fb.ok .head{color:var(--ok)}.fb.ko .head{color:var(--ko)}
+.fb .head .en{display:inline;margin-left:6px;font-family:Nunito;font-size:14px}
+.fb .full{display:flex;gap:10px;align-items:center}
+.fb .full .t{flex:1;font-weight:800}
+.fb .note{margin-top:6px;font-size:15px}
+.rl{display:inline-block;margin-top:8px;font-weight:800;color:var(--pur);text-decoration:none;border-bottom:2px solid var(--pur)}
+/* Étoiles */
+.star{position:fixed;pointer-events:none;z-index:99;font-size:22px;animation:star 1.1s ease-out forwards}
+@keyframes star{0%{transform:translate(0,0) scale(.4) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.2) rotate(200deg);opacity:0}}
+/* Bilan */
+.bilan{background:linear-gradient(135deg,var(--night),var(--night2));color:#fff;border-radius:22px;padding:20px 18px;text-align:center}
+.bilan .big{font:72px/1 "Lilita One";color:var(--gold);text-shadow:4px 4px 0 var(--or)}
+.bilan .en{color:#b9b2e6}
+.bars{margin:16px 0 0;text-align:left}
+.barrow{display:grid;grid-template-columns:1fr 1.2fr auto;gap:10px;align-items:center;font-size:14px;font-weight:700;margin:7px 0}
+.track{height:12px;background:rgba(255,255,255,.12);border-radius:99px;overflow:hidden}
+.track span{display:block;height:100%;background:linear-gradient(90deg,var(--or),var(--gold));border-radius:99px;transition:width .5s}
+.barrow em{font-style:normal;color:var(--gold)}
+.revoir{margin:18px 0 0}
+.rgroup{background:#fff;border:2px solid var(--line);border-radius:18px;padding:12px 14px;margin:0 0 12px}
+.rgroup h4{margin:0 0 8px;font:20px "Lilita One";color:var(--night)}
+.ritem{border-top:1.5px dashed #f3d9c2;padding:9px 0}
+.ritem:first-of-type{border-top:0}
+.ritem .you{font-size:14px;color:var(--soft)}
+.ritem .you s{color:var(--ko)}
+.ritem .good{display:flex;gap:10px;align-items:center;margin:4px 0}
+.ritem .good .t{flex:1;font-weight:800}
+.empty{color:var(--soft);background:#fff;border-radius:16px;padding:14px;border:2px dashed var(--line)}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:30px 0 40px}
+@media (max-width:520px){
+  .opts.two{grid-template-columns:1fr}
+  .top-btn svg{width:74px;height:74px}
+  .top-btn{font-size:14px}
+  .hero{min-height:360px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="img/manette-orange.jpg" alt="Une manette de jeu sur fond orange">
+  <div class="in">
+    <div class="hcard">
+      <span class="tag">Mission grammaire · Ezra</span>
+      <h1>L'impératif : <span>donne des ordres&nbsp;!</span></h1>
+      <p>Cours&nbsp;! Construis&nbsp;! Lance ta toupie&nbsp;!<i> · Run! Build! Launch your top!</i></p>
+    </div>
+  </div>
+</header>
+<div class="stripe"></div>
+
+<div class="top"><div class="wrap">
+  <nav class="nav" id="nav"></nav>
+  <div class="score" id="score">⭐ 0</div>
+</div></div>
+
+<main class="wrap">
+
+<div class="mission">
+  <div class="ico">🎮</div>
+  <p><b>Ezra, ta mission :</b> apprendre à donner des ordres en français, comme un vrai chef d'équipe dans un jeu. Lis la règle, écoute les phrases 🔊, puis gagne un maximum d'étoiles&nbsp;!
+  <span class="en">Your mission: learn to give orders in French, like a real team leader in a game. Read the rule, listen to the sentences, then win as many stars as you can!</span></p>
+</div>
+
+<section class="sec" id="regle">
+  <div class="shead"><div class="n">1</div><div><h2>La règle</h2><span class="en">The rule</span></div></div>
+
+  <article class="rule" id="r-ordre">
+    <div class="rh" style="background:linear-gradient(120deg,#ff7a1a,#ffb703)"><span class="lv">Niveau 1</span><div><h3>À quoi sert l'impératif&nbsp;?</h3><span class="en">What is the imperative for?</span></div></div>
+    <div class="rb">
+      <p>On utilise l'impératif pour <b class="k">donner un ordre</b> ou <b class="k">un conseil</b>.
+      <span class="en">We use the imperative to give an order or a piece of advice.</span></p>
+      <div class="ex-line"><div class="t"><div class="fr">Cours&nbsp;!</div><span class="en">Run!</span></div><button type="button" class="say" data-say="Cours !" aria-label="Écouter">🔊</button></div>
+      <div class="ex-line"><div class="t"><div class="fr">Construis un mur&nbsp;!</div><span class="en">Build a wall!</span></div><button type="button" class="say" data-say="Construis un mur !" aria-label="Écouter">🔊</button></div>
+      <div class="ex-line"><div class="t"><div class="fr">Lance ta toupie&nbsp;!</div><span class="en">Launch your spinning top!</span></div><button type="button" class="say" data-say="Lance ta toupie !" aria-label="Écouter">🔊</button></div>
+    </div>
+  </article>
+
+  <article class="rule" id="r-personnes">
+    <div class="rh" style="background:linear-gradient(120deg,#6c3bff,#ff7a1a)"><span class="lv">Niveau 2</span><div><h3>Pas de sujet : tu, nous, vous</h3><span class="en">No subject: tu, nous, vous</span></div></div>
+    <div class="rb">
+      <p>À l'impératif, il y a <b class="k">seulement 3 personnes</b> et <b class="k">pas de sujet</b> : on enlève « tu », « nous », « vous ».
+      <span class="en">In the imperative there are only 3 persons and no subject: we remove “tu”, “nous”, “vous”.</span></p>
+      <div class="persons">
+        <div class="pc p-tu"><div class="who">tu</div><div class="v">Cours&nbsp;!</div><span class="en">Run! (one friend)</span></div>
+        <div class="pc p-nous"><div class="who">nous</div><div class="v">Courons&nbsp;!</div><span class="en">Let's run!</span></div>
+        <div class="pc p-vous"><div class="who">vous</div><div class="v">Courez&nbsp;!</div><span class="en">Run! (the team)</span></div>
+      </div>
+      <div class="ex-line"><div class="t"><div class="fr"><s>Tu</s> cours <span class="arrow">→</span> Cours&nbsp;!</div><span class="en">You run → Run!</span></div><button type="button" class="say" data-say="Cours ! Courons ! Courez !" aria-label="Écouter">🔊</button></div>
+      <div class="box-in">💡 <b>nous</b> = <b>Let's…</b> en anglais : <b>Courons&nbsp;!</b> = <i>Let's run!</i></div>
+    </div>
+  </article>
+
+  <article class="rule" id="r-er">
+    <div class="rh" style="background:linear-gradient(120deg,#ff5e00,#ff2e63)"><span class="lv">Niveau 3</span><div><h3>Verbes en -ER : le « s » disparaît</h3><span class="en">-ER verbs: the “s” disappears</span></div></div>
+    <div class="rb">
+      <p>Avec <b>tu</b>, les verbes en <b class="k">-ER</b> perdent leur <b class="k">s</b>.
+      <span class="en">With “tu”, -ER verbs lose their “s”.</span></p>
+      <span class="formula">tu saute<em>s</em> → <em>Saute&nbsp;!</em></span>
+      <div class="ex-line"><div class="t"><div class="fr"><s>Tu</s> saute<s>s</s> <span class="arrow">→</span> Saute&nbsp;!</div><span class="en">Jump!</span></div><button type="button" class="say" data-say="Saute !" aria-label="Écouter">🔊</button></div>
+      <div class="ex-line"><div class="t"><div class="fr"><s>Tu</s> joue<s>s</s> <span class="arrow">→</span> Joue avec moi&nbsp;!</div><span class="en">Play with me!</span></div><button type="button" class="say" data-say="Joue avec moi !" aria-label="Écouter">🔊</button></div>
+      <div class="ex-line"><div class="t"><div class="fr"><s>Tu</s> lance<s>s</s> <span class="arrow">→</span> Lance ta toupie&nbsp;!</div><span class="en">Launch your top!</span></div><button type="button" class="say" data-say="Lance ta toupie !" aria-label="Écouter">🔊</button></div>
+      <div class="ex-line"><div class="t"><div class="fr">Jouons&nbsp;! · Jouez&nbsp;!</div><span class="en">Let's play! · Play! (the team)</span></div><button type="button" class="say" data-say="Jouons ! Jouez !" aria-label="Écouter">🔊</button></div>
+    </div>
+  </article>
+
+  <article class="rule" id="r-autres">
+    <div class="rh" style="background:linear-gradient(120deg,#19c3ff,#6c3bff)"><span class="lv">Niveau 4</span><div><h3>Les autres verbes : comme au présent</h3><span class="en">Other verbs: like the present tense</span></div></div>
+    <div class="rb">
+      <p>Les autres verbes <b class="k">gardent leur s</b> : c'est le présent, sans le sujet.
+      <span class="en">Other verbs keep their “s”: it's the present tense, without the subject.</span></p>
+      <div class="ex-line"><div class="t"><div class="fr"><s>Tu</s> prends <span class="arrow">→</span> Prends la potion&nbsp;!</div><span class="en">Take the potion!</span></div><button type="button" class="say" data-say="Prends la potion !" aria-label="Écouter">🔊</button></div>
+      <div class="ex-line"><div class="t"><div class="fr"><s>Tu</s> construis <span class="arrow">→</span> Construis une tour&nbsp;!</div><span class="en">Build a tower!</span></div><button type="button" class="say" data-say="Construis une tour !" aria-label="Écouter">🔊</button></div>
+      <div class="ex-line"><div class="t"><div class="fr"><s>Tu</s> choisis <span class="arrow">→</span> Choisis ta toupie&nbsp;!</div><span class="en">Choose your top!</span></div><button type="button" class="say" data-say="Choisis ta toupie !" aria-label="Écouter">🔊</button></div>
+      <div class="ex-line"><div class="t"><div class="fr"><s>Tu</s> fais <span class="arrow">→</span> Fais attention&nbsp;!</div><span class="en">Be careful!</span></div><button type="button" class="say" data-say="Fais attention !" aria-label="Écouter">🔊</button></div>
+      <div class="box-in">⚡ <b>faire</b> : Fais&nbsp;! · Faisons&nbsp;! · <b>Faites&nbsp;!</b> <span class="en">Careful: “Faites”, not “faisez”.</span></div>
+    </div>
+  </article>
+
+  <article class="rule" id="r-aller">
+    <div class="rh" style="background:linear-gradient(120deg,#22b573,#19c3ff)"><span class="lv">Bonus</span><div><h3>Le verbe aller : Va&nbsp;!</h3><span class="en">The verb “aller”: Go!</span></div></div>
+    <div class="rb">
+      <p><b>aller</b> fait comme les verbes en -ER : <b class="k">pas de s</b> avec tu.
+      <span class="en">“aller” works like -ER verbs: no “s” with “tu”.</span></p>
+      <div class="ex-line"><div class="t"><div class="fr"><s>Tu</s> va<s>s</s> <span class="arrow">→</span> Va à gauche&nbsp;!</div><span class="en">Go left!</span></div><button type="button" class="say" data-say="Va à gauche !" aria-label="Écouter">🔊</button></div>
+      <div class="ex-line"><div class="t"><div class="fr">Va&nbsp;! · Allons&nbsp;! · Allez&nbsp;!</div><span class="en">Go! · Let's go! · Go! (the team)</span></div><button type="button" class="say" data-say="Va ! Allons ! Allez !" aria-label="Écouter">🔊</button></div>
+    </div>
+  </article>
+
+  <article class="rule" id="r-neg">
+    <div class="rh" style="background:linear-gradient(120deg,#ef476f,#ff7a1a)"><span class="lv">Boss final</span><div><h3>Le négatif : Ne… pas</h3><span class="en">The negative: Ne… pas (Don't…)</span></div></div>
+    <div class="rb">
+      <p>Pour dire « <i>Don't…</i> », on met le verbe <b class="k">entre ne et pas</b>.
+      <span class="en">To say “Don't…”, put the verb between “ne” and “pas”.</span></p>
+      <span class="formula"><em>Ne</em> + verbe + <em>pas</em></span>
+      <div class="ex-line"><div class="t"><div class="fr">Ne saute pas&nbsp;!</div><span class="en">Don't jump!</span></div><button type="button" class="say" data-say="Ne saute pas !" aria-label="Écouter">🔊</button></div>
+      <div class="ex-line"><div class="t"><div class="fr">Ne cours pas&nbsp;!</div><span class="en">Don't run!</span></div><button type="button" class="say" data-say="Ne cours pas !" aria-label="Écouter">🔊</button></div>
+      <div class="ex-line"><div class="t"><div class="fr">N'attaque pas&nbsp;!</div><span class="en">Don't attack! (ne → n' before a vowel)</span></div><button type="button" class="say" data-say="N&#x27;attaque pas !" aria-label="Écouter">🔊</button></div>
+    </div>
+  </article>
+
+  <div class="recap">
+    <h3>À retenir</h3>
+    <table>
+      <tr><td>Ordre</td><td>Pas de sujet : tu, nous, vous <span class="en">No subject</span></td></tr>
+      <tr><td>-ER + tu</td><td>pas de s : Saute&nbsp;! Joue&nbsp;! Va&nbsp;! <span class="en">no “s”</span></td></tr>
+      <tr><td>Autres</td><td>comme au présent : Cours&nbsp;! Prends&nbsp;! Fais&nbsp;! <span class="en">like the present</span></td></tr>
+      <tr><td>nous</td><td>Jouons&nbsp;! = Let's play!</td></tr>
+      <tr><td>Négatif</td><td>Ne saute pas&nbsp;! = Don't jump!</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="sec" id="exos">
+  <div class="shead"><div class="n">2</div><div><h2>À toi de jouer&nbsp;!</h2><span class="en">Your turn to play!</span></div></div>
+  <div id="exercises"></div>
+</section>
+
+<section class="sec" id="bilan">
+  <div class="shead"><div class="n">3</div><div><h2>Ton score</h2><span class="en">Your score</span></div></div>
+  <div class="bilan">
+    <div class="big" id="bigPts">0</div>
+    <div id="bigTxt"></div>
+    <div class="bars" id="bars"></div>
+  </div>
+  <div class="shead" style="margin-top:26px"><div class="n">⟲</div><div><h2>À revoir</h2><span class="en">To review</span></div></div>
+  <div class="revoir" id="revoir"></div>
+  <div class="row" style="justify-content:center;margin-top:16px"><button type="button" class="btn ghost" id="reset">Recommencer la mission</button></div>
+</section>
+
+</main>
+<footer>Le français avec Irène</footer>
+
+<script>
+const DATA={"rules": {"r-ordre": "À quoi sert l'impératif ?", "r-personnes": "Pas de sujet : tu, nous, vous", "r-er": "Verbes en -ER : le « s » disparaît", "r-autres": "Les autres verbes : comme au présent", "r-aller": "Le verbe aller : Va !", "r-neg": "Le négatif : Ne… pas"}, "ruleAudio": ["Cours !", "Construis un mur !", "Lance ta toupie !", "Cours ! Courons ! Courez !", "Saute !", "Joue avec moi !", "Lance ta toupie !", "Jouons ! Jouez !", "Prends la potion !", "Construis une tour !", "Choisis ta toupie !", "Fais attention !", "Fais ! Faisons ! Faites !", "Va à gauche !", "Va ! Allons ! Allez !", "Ne saute pas !", "Ne cours pas !", "N'attaque pas !"], "ex": [{"id": "e1", "short": "Ordre ou pas ?", "title": "Ordre ou pas ?", "label": "Échauffement", "type": "qcm", "consigne": "Ezra, lis la phrase : est-ce un ordre ?", "consigneEn": "Ezra, read the sentence: is it an order?", "grad": "linear-gradient(120deg,#ff7a1a,#ffb703)", "items": [{"q": "Cours vers la zone !", "en": "Run to the zone!", "o": ["🎯 Ordre", "💬 Pas un ordre"], "oen": ["Order", "Not an order"], "a": 0, "full": "Cours vers la zone !", "good": "Ordre : pas de sujet, un point d'exclamation.", "goodEn": "Order: no subject.", "rule": "r-ordre"}, {"q": "Tu cours très vite.", "en": "You run very fast.", "o": ["🎯 Ordre", "💬 Pas un ordre"], "oen": ["Order", "Not an order"], "a": 1, "full": "Tu cours très vite.", "good": "Pas un ordre : il y a le sujet « tu ».", "goodEn": "Not an order: there is a subject, “tu”.", "rule": "r-personnes"}, {"q": "Lançons nos toupies !", "en": "Let's launch our tops!", "o": ["🎯 Ordre", "💬 Pas un ordre"], "oen": ["Order", "Not an order"], "a": 0, "full": "Lançons nos toupies !", "good": "Ordre avec « nous » : Lançons !", "goodEn": "An order with “nous”: Let's launch!", "rule": "r-personnes"}, {"q": "Nous jouons au rugby le samedi.", "en": "We play rugby on Saturdays.", "o": ["🎯 Ordre", "💬 Pas un ordre"], "oen": ["Order", "Not an order"], "a": 1, "full": "Nous jouons au rugby le samedi.", "good": "Pas un ordre : il y a le sujet « nous ».", "goodEn": "Not an order: there is a subject, “nous”.", "rule": "r-personnes"}, {"q": "Prends le coffre !", "en": "Take the chest!", "o": ["🎯 Ordre", "💬 Pas un ordre"], "oen": ["Order", "Not an order"], "a": 0, "full": "Prends le coffre !", "good": "Ordre : Prends !", "goodEn": "Order: Take!", "rule": "r-ordre"}, {"q": "Vous aimez la guitare.", "en": "You like the guitar.", "o": ["🎯 Ordre", "💬 Pas un ordre"], "oen": ["Order", "Not an order"], "a": 1, "full": "Vous aimez la guitare.", "good": "Pas un ordre : il y a le sujet « vous ».", "goodEn": "Not an order: there is a subject, “vous”.", "rule": "r-personnes"}]}, {"id": "e2", "short": "Le bon ordre", "title": "Choisis le bon ordre", "label": "Choix", "type": "qcm", "photo": ["img/manette-orange.jpg", "Prêt ? Choisis vite ! · Ready? Choose fast!"], "consigne": "Regarde la personne (tu, nous ou vous) et choisis le bon verbe.", "consigneEn": "Look at the person (tu, nous or vous) and choose the right verb.", "grad": "linear-gradient(120deg,#6c3bff,#ff7a1a)", "items": [{"p": "tu", "q": "La tempête arrive ! ___ vite !", "en": "The storm is coming! Run fast!", "o": ["Cours", "Courons", "Courez"], "a": 0, "full": "La tempête arrive ! Cours vite !", "good": "La tempête arrive ! Cours vite !", "rule": "r-autres"}, {"p": "nous", "q": "Allez, l'équipe ! ___ un grand mur !", "en": "Come on, team! Let's build a big wall!", "o": ["Construis", "Construisons", "Construisez"], "a": 1, "full": "Allez, l'équipe ! Construisons un grand mur !", "good": "Allez, l'équipe ! Construisons un grand mur !", "rule": "r-personnes"}, {"p": "vous", "q": "Tous les joueurs, ___ vos toupies !", "en": "All players, launch your tops!", "o": ["Lance", "Lançons", "Lancez"], "a": 2, "full": "Tous les joueurs, lancez vos toupies !", "good": "Tous les joueurs, lancez vos toupies !", "rule": "r-personnes"}, {"p": "tu", "q": "Ezra, ___ le coffre doré !", "en": "Ezra, pick up the golden chest!", "o": ["Ramasse", "Ramasses", "Ramasser"], "a": 0, "full": "Ezra, ramasse le coffre doré !", "good": "Ezra, ramasse le coffre doré !", "rule": "r-er"}, {"p": "tu", "q": "___ à gauche, l'ennemi est à droite !", "en": "Go left, the enemy is on the right!", "o": ["Va", "Vas", "Aller"], "a": 0, "full": "Va à gauche, l'ennemi est à droite !", "good": "Va à gauche, l'ennemi est à droite !", "rule": "r-aller"}, {"p": "nous", "q": "On a gagné ! ___ de la guitare pour fêter ça !", "en": "We won! Let's play the guitar to celebrate!", "o": ["Joue", "Jouons", "Jouez"], "a": 1, "full": "On a gagné ! Jouons de la guitare pour fêter ça !", "good": "On a gagné ! Jouons de la guitare pour fêter ça !", "rule": "r-er"}]}, {"id": "e3", "short": "Écris l'ordre", "title": "Écris l'ordre", "label": "À toi d'écrire", "type": "type", "photo": ["img/scrum.jpg", "Passe le ballon ! · Pass the ball!"], "consigne": "Écris le verbe à l'impératif, avec « tu ».", "consigneEn": "Write the verb in the imperative, with “tu”.", "grad": "linear-gradient(120deg,#ff5e00,#ff2e63)", "items": [{"inf": "sauter", "q": "___ maintenant !", "en": "Jump now!", "ans": "Saute", "full": "Saute maintenant !", "good": "Saute maintenant !", "rule": "r-er"}, {"inf": "regarder", "q": "___ la carte !", "en": "Look at the map!", "ans": "Regarde", "full": "Regarde la carte !", "good": "Regarde la carte !", "rule": "r-er"}, {"inf": "lancer", "q": "___ ta toupie : trois, deux, un, go !", "en": "Launch your top: three, two, one, go!", "ans": "Lance", "full": "Lance ta toupie : trois, deux, un, go !", "good": "Lance ta toupie : trois, deux, un, go !", "rule": "r-er"}, {"inf": "prendre", "q": "___ la potion !", "en": "Take the potion!", "ans": "Prends", "full": "Prends la potion !", "good": "Prends la potion !", "rule": "r-autres"}, {"inf": "passer", "q": "___ le ballon à Tom !", "en": "Pass the ball to Tom!", "ans": "Passe", "full": "Passe le ballon à Tom !", "good": "Passe le ballon à Tom !", "rule": "r-er"}, {"inf": "faire", "q": "___ attention, la zone se ferme !", "en": "Be careful, the zone is closing!", "ans": "Fais", "full": "Fais attention, la zone se ferme !", "good": "Fais attention, la zone se ferme !", "rule": "r-autres"}]}, {"id": "e4", "short": "Combat de toupies", "title": "Combat de toupies", "label": "Arène", "type": "spin", "photo": ["img/toupie.jpg", "Trois, deux, un… Lance ! · Three, two, one… Launch!"], "consigne": "Touche la bonne toupie pour gagner le combat !", "consigneEn": "Tap the right spinning top to win the battle!", "grad": "linear-gradient(120deg,#19c3ff,#6c3bff)", "items": [{"from": "Lance ta toupie !", "p": "vous", "q": "___ vos toupies !", "en": "Launch your tops!", "o": ["Lances", "Lancez", "Lancer"], "a": 1, "full": "Lancez vos toupies !", "good": "Lancez vos toupies !", "rule": "r-personnes"}, {"from": "Attaque !", "p": "nous", "q": "___ !", "en": "Let's attack!", "o": ["Attaquons", "Attaquez", "Attaque"], "a": 0, "full": "Attaquons !", "good": "Attaquons !", "rule": "r-personnes"}, {"from": "Tourne plus vite !", "p": "vous", "q": "___ plus vite !", "en": "Spin faster!", "o": ["Tournes", "Tourner", "Tournez"], "a": 2, "full": "Tournez plus vite !", "good": "Tournez plus vite !", "rule": "r-personnes"}, {"from": "Choisis ta toupie !", "p": "vous", "q": "___ vos toupies !", "en": "Choose your tops!", "o": ["Choisissez", "Choisis", "Choisir"], "a": 0, "full": "Choisissez vos toupies !", "good": "Choisissez vos toupies !", "rule": "r-autres"}, {"from": "Va dans l'arène !", "p": "nous", "q": "___ dans l'arène !", "en": "Let's go into the arena!", "o": ["Va", "Allez", "Allons"], "a": 2, "full": "Allons dans l'arène !", "good": "Allons dans l'arène !", "rule": "r-aller"}, {"from": "Fais un super combat !", "p": "vous", "q": "___ un super combat !", "en": "Have a great battle!", "o": ["Faisez", "Faites", "Fais"], "a": 1, "full": "Faites un super combat !", "good": "Faites un super combat !", "rule": "r-autres"}]}, {"id": "e5", "short": "Ne… pas !", "title": "Ne… pas !", "label": "Remets dans l'ordre", "type": "order", "consigne": "Touche les mots dans le bon ordre pour faire une phrase négative.", "consigneEn": "Tap the words in the right order to make a negative sentence.", "grad": "linear-gradient(120deg,#ef476f,#ff7a1a)", "items": [{"tiles": ["Ne", "saute", "pas", "!"], "en": "Don't jump!", "full": "Ne saute pas !", "good": "Ne saute pas !", "rule": "r-neg"}, {"tiles": ["Ne", "cours", "pas", "dans la tempête", "!"], "en": "Don't run into the storm!", "full": "Ne cours pas dans la tempête !", "good": "Ne cours pas dans la tempête !", "rule": "r-neg"}, {"tiles": ["Ne", "lance", "pas", "ta toupie", "trop fort", "!"], "en": "Don't launch your top too hard!", "full": "Ne lance pas ta toupie trop fort !", "good": "Ne lance pas ta toupie trop fort !", "rule": "r-neg"}, {"tiles": ["N'", "attaque", "pas", "ton ami", "!"], "en": "Don't attack your friend!", "full": "N'attaque pas ton ami !", "good": "N'attaque pas ton ami !", "rule": "r-neg"}]}, {"id": "e6", "short": "Écoute le coach", "title": "Écoute le coach", "label": "Écoute", "type": "listen", "photo": ["img/guitares.jpg", "Écoute bien ! · Listen carefully!"], "consigne": "Écoute le coach et choisis la bonne traduction.", "consigneEn": "Listen to the coach and choose the right translation.", "grad": "linear-gradient(120deg,#22b573,#19c3ff)", "items": [{"full": "Construisez un mur !", "o": ["Build a wall! (to several people)", "Let's build a wall!", "Don't build a wall!"], "a": 0, "good": "Construisez un mur !", "rule": "r-personnes"}, {"full": "Ne regarde pas l'écran !", "o": ["Look at the screen!", "Don't look at the screen!", "Let's look at the screen!"], "a": 1, "good": "Ne regarde pas l'écran !", "rule": "r-neg"}, {"full": "Allons dans la zone !", "o": ["Go to the zone!", "Don't go to the zone!", "Let's go to the zone!"], "a": 2, "good": "Allons dans la zone !", "rule": "r-aller"}, {"full": "Passe le ballon !", "o": ["Pass the ball!", "You pass the ball.", "Let's pass the ball!"], "a": 0, "good": "Passe le ballon !", "rule": "r-er"}, {"full": "Ne jouez pas trop longtemps !", "o": ["Play for a long time!", "Don't play for too long!", "Let's play for a long time!"], "a": 1, "good": "Ne jouez pas trop longtemps !", "rule": "r-neg"}]}]};
+const AUDIO={"Cours !": "audio/8abd78684f.mp3", "Construis un mur !": "audio/420ca9065d.mp3", "Lance ta toupie !": "audio/e6f12b28ad.mp3", "Cours ! Courons ! Courez !": "audio/c516810cc9.mp3", "Saute !": "audio/f7aef1ac19.mp3", "Joue avec moi !": "audio/0cb8dec32d.mp3", "Jouons ! Jouez !": "audio/4fa0d7ca3e.mp3", "Prends la potion !": "audio/0a8648d3d9.mp3", "Construis une tour !": "audio/4ac62aa205.mp3", "Choisis ta toupie !": "audio/c880547d79.mp3", "Fais attention !": "audio/9e0be69e1b.mp3", "Fais ! Faisons ! Faites !": "audio/8283e51866.mp3", "Va à gauche !": "audio/8ff2afcab5.mp3", "Va ! Allons ! Allez !": "audio/2d7b07f2c3.mp3", "Ne saute pas !": "audio/92c7c2f76e.mp3", "Ne cours pas !": "audio/68d7db887f.mp3", "N'attaque pas !": "audio/e2f6942196.mp3", "Cours vers la zone !": "audio/4deb5d7924.mp3", "Tu cours très vite.": "audio/28e6a17a8d.mp3", "Lançons nos toupies !": "audio/4e3dbddae4.mp3", "Nous jouons au rugby le samedi.": "audio/7ef5975063.mp3", "Prends le coffre !": "audio/d4d5102322.mp3", "Vous aimez la guitare.": "audio/5bc04fe7a8.mp3", "La tempête arrive ! Cours vite !": "audio/daca18e214.mp3", "Allez, l'équipe ! Construisons un grand mur !": "audio/8b8cfd817c.mp3", "Tous les joueurs, lancez vos toupies !": "audio/2c77963f0d.mp3", "Ezra, ramasse le coffre doré !": "audio/991c440fc7.mp3", "Va à gauche, l'ennemi est à droite !": "audio/9ca11343be.mp3", "On a gagné ! Jouons de la guitare pour fêter ça !": "audio/5080d5c4d2.mp3", "Saute maintenant !": "audio/8ab0fc0abb.mp3", "Regarde la carte !": "audio/7fc7cc03f3.mp3", "Lance ta toupie : trois, deux, un, go !": "audio/d34d3abc57.mp3", "Passe le ballon à Tom !": "audio/e76d8c102a.mp3", "Fais attention, la zone se ferme !": "audio/cf04b1403f.mp3", "Lancez vos toupies !": "audio/23d9045b15.mp3", "Attaquons !": "audio/2a6f3ca23c.mp3", "Attaque !": "audio/b7fb75d54a.mp3", "Tournez plus vite !": "audio/5d3fe3f682.mp3", "Tourne plus vite !": "audio/54c6f79376.mp3", "Choisissez vos toupies !": "audio/b2c8afb4fc.mp3", "Allons dans l'arène !": "audio/6ebd9cb5cf.mp3", "Va dans l'arène !": "audio/536e52b64c.mp3", "Faites un super combat !": "audio/2d3b33176b.mp3", "Fais un super combat !": "audio/7e23cd458f.mp3", "Ne cours pas dans la tempête !": "audio/1a37ec4930.mp3", "Ne lance pas ta toupie trop fort !": "audio/5fc817c752.mp3", "N'attaque pas ton ami !": "audio/01ad66c586.mp3", "Construisez un mur !": "audio/589139b154.mp3", "Ne regarde pas l'écran !": "audio/946cc2ef0e.mp3", "Allons dans la zone !": "audio/adaeb0cddc.mp3", "Passe le ballon !": "audio/de807f2ab9.mp3", "Ne jouez pas trop longtemps !": "audio/ded3ba34a0.mp3"};
+(function(){
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])).replace(/ ([!?:;])/g,"\u00a0$1");
+
+/* Audio */
+let cur=null,curBtn=null;
+function play(text,btn){
+  const f=AUDIO[text];if(!f)return;
+  if(cur){cur.pause();if(curBtn)curBtn.classList.remove("on")}
+  cur=new Audio(f);curBtn=btn||null;if(btn)btn.classList.add("on");
+  cur.onended=()=>{if(btn)btn.classList.remove("on")};
+  cur.play().catch(()=>{if(btn)btn.classList.remove("on")});
+}
+const escA=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const sayBtn=t=>AUDIO[t]?`<button type="button" class="say" data-say="${escA(t)}" aria-label="Écouter">🔊</button>`:"";
+document.addEventListener("click",e=>{const b=e.target.closest(".say");if(b)play(b.dataset.say,b)});
+
+/* Étoiles */
+function stars(el){
+  const r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+  const sym=["⭐","✨","🧡","⭐","✨","⭐","🔥","✨"];
+  for(let k=0;k<12;k++){
+    const s=document.createElement("span");s.className="star";s.textContent=sym[k%sym.length];
+    const a=Math.PI*2*k/12,d=60+Math.random()*50;
+    s.style.left=cx+"px";s.style.top=cy+"px";
+    s.style.setProperty("--dx",Math.cos(a)*d+"px");s.style.setProperty("--dy",Math.sin(a)*d+"px");
+    document.body.appendChild(s);setTimeout(()=>s.remove(),1200);
+  }
+}
+
+/* Sauvegarde */
+const KEY="ezra-imperatif-v1";
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){S={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+/* Score + bilan */
+const TOTAL=DATA.ex.reduce((n,x)=>n+x.items.length,0);
+let lastPts=null;
+function refresh(){
+  let pts=0,bars="";const byRule={};
+  DATA.ex.forEach((x,k)=>{
+    let p=0,done=0;
+    x.items.forEach((it,i)=>{const r=S[x.id+"_"+i];if(!r)return;done++;if(r.ok)p++;else (byRule[it.rule]=byRule[it.rule]||[]).push([x,k,it,r])});
+    pts+=p;
+    bars+=`<div class="barrow"><span>${k+1}. ${esc(x.short)}</span><div class="track"><span style="width:${p/x.items.length*100}%"></span></div><em>${p} / ${x.items.length}</em></div>`;
+    const a=document.querySelector(`.nav a[href="#${x.id}"]`);if(a)a.classList.toggle("done",done===x.items.length);
+  });
+  const sc=$("#score");sc.textContent=`⭐ ${pts} / ${TOTAL}`;
+  if(lastPts!==null&&pts>lastPts){sc.classList.remove("pop");void sc.offsetWidth;sc.classList.add("pop")}
+  lastPts=pts;
+  $("#bigPts").textContent=pts;
+  $("#bigTxt").innerHTML=`étoiles sur ${TOTAL}<span class="en">stars out of ${TOTAL}</span>`;
+  $("#bars").innerHTML=bars;
+  let html="";
+  Object.keys(DATA.rules).forEach(rid=>{
+    const L=byRule[rid];if(!L)return;
+    html+=`<div class="rgroup"><h4>${esc(DATA.rules[rid])}</h4>`+L.map(([x,k,it,r])=>`<div class="ritem">
+      <div class="you">Exercice ${k+1} · Ta réponse : <s>${esc(r.pick)}</s></div>
+      <div class="good"><div class="t">${esc(it.good)}${it.en?`<span class="en">${esc(it.en)}</span>`:""}</div>${sayBtn(it.full)}</div></div>`).join("")+
+      `<a class="rl" href="#${rid}">↑ Revoir la règle · Review the rule</a></div>`;
+  });
+  $("#revoir").innerHTML=html||`<p class="empty">Rien à revoir pour l'instant ! Tes erreurs apparaîtront ici. <span class="en">Nothing to review yet! Your mistakes will appear here.</span></p>`;
+}
+function record(x,i,ok,pick){S[x.id+"_"+i]={ok,pick};save();refresh()}
+
+/* Lien vers la règle : petit flash */
+document.addEventListener("click",e=>{const a=e.target.closest('a[href^="#r-"]');if(!a)return;const t=document.querySelector(a.getAttribute("href"));if(t){t.classList.remove("flash");void t.offsetWidth;t.classList.add("flash")}});
+
+/* Navigation */
+$("#nav").innerHTML=`<a href="#regle">Règle</a>`+DATA.ex.map((x,k)=>`<a href="#${x.id}">${k+1}</a>`).join("")+`<a href="#bilan">Score</a>`;
+
+const PCOL={tu:"var(--or)",nous:"var(--pur)",vous:"var(--cy)"};
+const PEN={tu:"tu · one friend",nous:"nous · let's",vous:"vous · the team"};
+const TOP=(c1,c2)=>{const pts=[];for(let n=0;n<16;n++){const r=n%2?24:40,a=Math.PI*2*n/16;pts.push((r*Math.cos(a)).toFixed(1)+","+(r*Math.sin(a)).toFixed(1))}
+return `<svg viewBox="0 0 100 100"><ellipse cx="50" cy="91" rx="26" ry="5" fill="rgba(0,0,0,.4)"/><path d="M50 93 L38 62 H62 Z" fill="#d9d4f5"/><g transform="translate(50 58) scale(1 .5)"><circle r="40" fill="${c2}"/></g><g transform="translate(50 52) scale(1 .5)"><polygon points="${pts.join(" ")}" fill="${c1}" stroke="#fff" stroke-width="2.5"/><circle r="20" fill="${c2}"/><circle r="11" fill="#fff"/><circle r="5" fill="${c1}"/></g></svg>`};
+const TOPCOL=[["#ff7a1a","#c94b00"],["#19c3ff","#0b78a8"],["#ffc93c","#c99300"]];
+
+/* Exercices */
+const norm=s=>String(s).toLowerCase().replace(/[’`´]/g,"'").replace(/[!.\s]+$/,"").replace(/\s+/g," ").trim();
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const host=$("#exercises");
+DATA.ex.forEach((x,k)=>{
+  if(x.photo){const f=document.createElement("figure");f.className="photo";f.innerHTML=`<img src="${x.photo[0]}" alt=""><figcaption>${esc(x.photo[1])}</figcaption>`;host.appendChild(f)}
+  const sec=document.createElement("section");sec.className="exo";sec.id=x.id;
+  sec.innerHTML=`<div class="hd" style="background:${x.grad}"><div class="num">${k+1}</div><div><div class="lab">${esc(x.label)}</div><h3>${esc(x.consigne)}</h3><span class="en">${esc(x.consigneEn)}</span></div></div><div class="engine"></div>`;
+  host.appendChild(sec);
+  engine(x,k,sec.querySelector(".engine"));
+});
+
+function dotsHTML(x,i){return `<div class="dots">${x.items.map((_,j)=>{const r=S[x.id+"_"+j];return `<i class="${r?(r.ok?"ok":"ko"):""} ${j===i?"cur":""}"></i>`}).join("")}</div>`}
+
+function engine(x,k,el){
+  const first=()=>{const j=x.items.findIndex((_,j)=>!S[x.id+"_"+j]);return j<0?x.items.length:j};
+  let i=first();
+  function draw(){
+    if(i>=x.items.length){
+      const ok=x.items.filter((_,j)=>S[x.id+"_"+j]&&S[x.id+"_"+j].ok).length;
+      const nx=DATA.ex[k+1];
+      el.innerHTML=`<div class="qhead"><span>Résultat : ${ok} sur ${x.items.length} ⭐ <span class="en" style="display:inline">Score: ${ok} out of ${x.items.length}</span></span>${dotsHTML(x,-1)}</div>
+        <div class="row"><button type="button" class="btn ghost re">Revoir</button><a class="btn" href="#${nx?nx.id:"bilan"}">${nx?"Exercice suivant →":"Voir mon score →"}</a></div>`;
+      el.querySelector(".re").onclick=()=>{i=0;draw()};return;
+    }
+    const it=x.items[i],st=S[x.id+"_"+i];
+    const head=`<div class="qhead"><span>Question ${i+1} sur ${x.items.length}</span>${dotsHTML(x,i)}</div>`;
+    const who=it.p?`<span class="who-tag" style="background:${PCOL[it.p]}">${it.p} · ${PEN[it.p].split(" · ")[1]}</span>`:"";
+    const gapQ=q=>esc(q).replace("___",'<span class="gap">?</span>');
+    let body="";
+    if(x.type==="qcm"){
+      body=`${who}<p class="qtext">${gapQ(it.q)}</p><span class="en">${esc(it.en)}</span>
+        <div class="opts ${it.o.length===2?"two":""}">${it.o.map((o,j)=>`<button type="button" class="opt" data-j="${j}">${esc(o)}${it.oen?`<small>${esc(it.oen[j])}</small>`:""}</button>`).join("")}</div>`;
+    }else if(x.type==="spin"){
+      body=`<p class="from">Avec tu : <b>${esc(it.from)}</b> ${sayBtn(it.from).replace('class="say"','class="say" style="display:inline-grid;width:32px;height:32px;font-size:14px;vertical-align:middle;margin-left:4px"')}</p>${who}<p class="qtext">${gapQ(it.q)}</p>
+        <div class="arena">${it.o.map((o,j)=>`<button type="button" class="top-btn opt2" data-j="${j}">${TOP(...TOPCOL[j])}<span>${esc(o)}</span></button>`).join("")}</div>`;
+    }else if(x.type==="type"){
+      body=`<p class="qtext">${gapQ(it.q)}<span class="inf">${esc(it.inf)}</span></p><span class="en">${esc(it.en)}</span>
+        <div class="inp"><input type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Écris le verbe…"><button type="button" class="btn chk">OK</button></div>`;
+    }else if(x.type==="order"){
+      body=`<span class="en" style="margin-top:12px;font-size:1em">🇬🇧 ${esc(it.en)}</span><div class="tiles ans"></div><div class="tiles pool"></div><div class="row" style="margin-top:0"><button type="button" class="btn ghost clr">Effacer</button><button type="button" class="btn chk" disabled>Vérifier</button></div>`;
+    }else if(x.type==="listen"){
+      body=`<button type="button" class="big-say"><span class="ic">🔊</span><span>Écoute le coach<span class="en" style="color:#b9b2e6">Listen to the coach</span></span></button>
+        <div class="opts">${it.o.map((o,j)=>`<button type="button" class="opt" data-j="${j}">${esc(o)}</button>`).join("")}</div>`;
+    }
+    el.innerHTML=head+body+`<div class="fbz"></div>`;
+
+    const finish=(ok,pick,fresh)=>{
+      if(fresh)record(x,i,ok,pick);
+      const g=el.querySelector(".gap");if(g){const m=it.ans||(it.o?it.o[it.a]:"");g.textContent=m;g.classList.add("ok")}
+      const rname=DATA.rules[it.rule];
+      el.querySelector(".fbz").innerHTML=`<div class="fb ${ok?"ok":"ko"}"><div class="head">${ok?["Bravo !","Super !","Génial !","Top !"][i%4]:"Pas tout à fait…"}<span class="en">${ok?["Well done!","Great!","Awesome!","Brilliant!"][i%4]:"Not quite…"}</span></div>
+        <div class="full"><div class="t">${esc(it.good)}${it.goodEn?`<span class="en">${esc(it.goodEn)}</span>`:(it.en?`<span class="en">${esc(it.en)}</span>`:"")}</div>${sayBtn(it.full)}</div>
+        ${ok?"":`<a class="rl" href="#${it.rule}">↑ Revoir : ${esc(rname)}</a>`}</div>
+        <div class="row">${i>0?'<button type="button" class="btn ghost prev">← Avant</button>':"<span></span>"}<button type="button" class="btn next">${i===x.items.length-1?"Résultat ⭐":"Suivante →"}</button></div>`;
+      el.querySelector(".next").onclick=()=>{i++;draw();el.closest(".exo").scrollIntoView({behavior:"smooth",block:"start"})};
+      const p=el.querySelector(".prev");if(p)p.onclick=()=>{i--;draw()};
+      if(fresh){
+        if(ok)stars(el.querySelector(".fb"));
+        setTimeout(()=>play(it.full,el.querySelector(".fb .say")),ok?350:150);
+      }
+    };
+
+    if(x.type==="qcm"||x.type==="listen"){
+      const pick=(j,fresh)=>{
+        const ok=j===it.a;
+        el.querySelectorAll(".opt").forEach(b=>{b.disabled=true;const bj=+b.dataset.j;if(bj===it.a)b.classList.add("ok");else if(bj===j)b.classList.add("ko")});
+        finish(ok,it.o[j].replace(/^[^A-Za-zÀ-ÿ]+/,""),fresh);
+      };
+      el.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pick(+b.dataset.j,true));
+      if(x.type==="listen"){const bs=el.querySelector(".big-say");bs.onclick=()=>play(it.full,bs);if(!st)setTimeout(()=>play(it.full,bs),300)}
+      if(st){const j=st.ok?it.a:Math.max(0,it.o.findIndex(o=>o.replace(/^[^A-Za-zÀ-ÿ]+/,"")===st.pick));pick(j,false)}
+    }
+    if(x.type==="spin"){
+      const pick=(j,fresh)=>{
+        const ok=j===it.a;
+        el.querySelectorAll(".top-btn").forEach(b=>{b.disabled=true;const bj=+b.dataset.j;if(bj===it.a)b.classList.add("win");else{b.classList.add("lose");if(bj===j)b.classList.add("bad")}});
+        finish(ok,it.o[j],fresh);
+      };
+      el.querySelectorAll(".top-btn").forEach(b=>b.onclick=()=>pick(+b.dataset.j,true));
+      if(st)pick(st.ok?it.a:Math.max(0,it.o.indexOf(st.pick)),false);
+    }
+    if(x.type==="type"){
+      const inp=el.querySelector("input"),chk=el.querySelector(".chk");
+      const check=(val,fresh)=>{
+        if(!norm(val))return;
+        const ok=norm(val)===norm(it.ans);
+        inp.value=val;inp.disabled=true;chk.disabled=true;inp.classList.add(ok?"ok":"ko");
+        finish(ok,val,fresh);
+      };
+      chk.onclick=()=>check(inp.value,true);
+      inp.onkeydown=e=>{if(e.key==="Enter")check(inp.value,true)};
+      if(st)check(st.pick,false);
+    }
+    if(x.type==="order"){
+      const ans=el.querySelector(".ans"),pool=el.querySelector(".pool"),chk=el.querySelector(".chk");
+      let chosen=[];const order=shuffle(it.tiles.map((t,j)=>j));
+      const join=a=>a.map(j=>it.tiles[j]).join(" ").replace("N' ","N'").replace(" !"," !");
+      function paint(lock){
+        ans.innerHTML=chosen.map((j,p)=>`<button type="button" class="tile" data-p="${p}" ${lock?"disabled":""}>${esc(it.tiles[j])}</button>`).join("");
+        pool.innerHTML=order.filter(j=>!chosen.includes(j)).map(j=>`<button type="button" class="tile" data-j="${j}" ${lock?"disabled":""}>${esc(it.tiles[j])}</button>`).join("");
+        chk.disabled=lock||chosen.length!==it.tiles.length;
+        if(lock)return;
+        pool.querySelectorAll(".tile").forEach(b=>b.onclick=()=>{chosen.push(+b.dataset.j);paint()});
+        ans.querySelectorAll(".tile").forEach(b=>b.onclick=()=>{chosen.splice(+b.dataset.p,1);paint()});
+      }
+      el.querySelector(".clr").onclick=()=>{chosen=[];paint()};
+      const check=fresh=>{
+        const val=join(chosen);const ok=chosen.every((j,p)=>it.tiles[j]===it.tiles[p]);
+        paint(true);el.querySelector(".clr").parentNode.style.display="none";finish(ok,val,fresh);
+      };
+      chk.onclick=()=>check(true);
+      if(st){chosen=it.tiles.map((_,j)=>j);if(!st.ok){/* montrer la phrase juste */}paint(true);el.querySelector(".clr").parentNode.style.display="none";finish(st.ok,st.pick,false)}else paint();
+    }
+  }
+  draw();
+}
+
+$("#reset").onclick=()=>{S={};save();location.hash="";location.reload()};
+refresh();
+})();
+</script>
+</body>
+</html>
