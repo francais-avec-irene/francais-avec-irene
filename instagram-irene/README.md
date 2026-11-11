@@ -31,7 +31,7 @@ Pubblico: italiani di 30-40 anni. Rivolgersi sempre al plurale, valido per tutti
 | 11/11 (mer.) | Post « Mi manchi » (5 slide, foto piena viola) | `post/2026-11-11_mi-manchi/` |
 | 14/11 (sab.) | Post « 5 espressioni con gli animali » (7 slide, foto piena verde) | `post/2026-11-14_espressioni-animali/` |
 | — | Reel livello 1-3 « Falsi amici » (pubblicato) | `reel/livello-1-3_falsi-amici/` |
-| — | Reel livello 4 « LE o LA? » (13 schermate) | `reel/livello-4_le-o-la/` |
+| 11/11 | Reel livello 4 « LE o LA? »: video finale montato con la voce di Irene (`Reel_livello4_LE_o_LA.mp4`), schermate e conto alla rovescia 3-2-1 | `reel/livello-4_le-o-la/` |
 
 Modelli originali di Irene: `originali-irene/`.
 
@@ -57,3 +57,7 @@ Couple au Trocadéro (2013) · Paris Gay Pride 2013 026 e 042 · Marche des Fier
 ## Script
 
 `script/` contiene i programmi che generano le immagini (rendering HTML → PNG con Chrome) e la ricerca foto su Wikimedia Commons.
+
+## Montaggio dei reel
+
+Irene registra la voce (m4a) leggendo il testo con pause di 3 secondi dopo ogni domanda. Il video si monta con `script/monta_reel_livello4.py`: schermate al ritmo della voce, conto alla rovescia 3-2-1 durante la pausa, suoni da videogioco (moneta, tic, risposta giusta, power-up, boss, vittoria).

@@ -59,6 +59,13 @@ FR['13_fine']=wrap(f'''<div style="position:absolute;left:0;right:0;top:200px;te
 <div style="margin-top:40px;font-family:{F};font-weight:500;font-size:50px;color:rgba(255,255,255,.85)">Scrivetelo nei commenti<br>e salvate il reel per ripassare</div>
 <div style="margin:90px auto 0;display:inline-block;padding:34px 50px;border-radius:30px;background:{PINK};color:#fff;font-family:{PX};font-size:36px;line-height:1.5;box-shadow:0 14px 0 #A01E62,0 0 50px {PINK}">SEGUITEMI ▶<br>LIVELLO 5</div></div>
 <div style="position:absolute;left:0;right:0;bottom:150px;display:flex;justify-content:center"><img src="logo.png" style="width:150px;height:150px;border-radius:50%;box-shadow:0 0 0 6px #fff"></div>{foot()}''')
+qkeys=[k for k in FR if 'domanda' in k]
+for k in qkeys:
+    for num,frac in [(3,66),(2,33),(1,6)]:
+        h=FR[k].replace('<div style="width:100%;height:100%;background:linear-gradient(90deg,'+GRN+','+YEL+')">',f'<div style="width:{frac}%;height:100%;background:linear-gradient(90deg,{GRN},{YEL if num>1 else "#FF3B3B"})">',1)
+        ov=f'<div style="position:absolute;left:0;right:0;top:470px;text-align:center;font-family:{PX};font-size:300px;color:#fff;text-shadow:0 0 50px {YEL if num>1 else "#FF3B3B"},0 12px 0 rgba(0,0,0,.55)">{num}</div>'
+        i=h.rfind('</div></body>')
+        FR[f'{k}_t{num}']=h[:i]+ov+h[i:]
 async def main():
     async with async_playwright() as pw:
         b=await pw.chromium.launch(executable_path='/usr/bin/google-chrome')
