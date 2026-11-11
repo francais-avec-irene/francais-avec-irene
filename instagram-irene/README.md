@@ -86,3 +86,11 @@ Ogni foto si usa una sola volta in tutto il profilo (post e reel). Prima di sceg
 ## Hashtag post « Segni zodiacali »
 
 #segnizodiacali #oroscopo #zodiaco #astrologia #francese #imparareilfrancese #francesepergliitaliani #linguafrancese #lezionidifrancese #parlarefrancese #pronunciafrancese #francesefacile #parolefrancesi #learnfrench #horoscope
+
+## Hashtag post « Mi manchi » (mer. 11/11)
+
+#mimanchi #tumemanques #amore #francese #imparareilfrancese #francesepergliitaliani #linguafrancese #lezionidifrancese #parlarefrancese #frasidamore #francesefacile #parigi #amoreinfrancese #lovewins #learnfrench
+
+## Hashtag post « Espressioni con gli animali » (sab. 14/11)
+
+#espressionifrancesi #modididire #animali #francese #imparareilfrancese #francesepergliitaliani #linguafrancese #lezionidifrancese #parlarefrancese #francesefacile #parolefrancesi #culturafrancese #frenchidioms #learnfrench #francia
