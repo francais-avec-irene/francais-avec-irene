@@ -1,5 +1,7 @@
 # Instagram Irene · Francese per italiani
 
+**Dal 16 novembre 2026 ogni settimana segue `prompt_piano_editoriale.txt`** (lun A1 carosello · mar B1 reel · mer C1 · gio A1 · ven B1 reel · sab C1 · dom sfida; rubrica « Les erreurs typiquement italiennes »; grafiche sempre diverse). Piano della settimana 16-22 novembre: doc claude.ai « Piano editoriale Instagram · 16-22 novembre 2026 » (https://claude.ai/artifact/PZLZjt9eHedUeKP5Gp16bC).
+
 Cartella di lavoro del profilo Instagram « Irene - Francese per italiani » (francese.con…).
 Pubblico: italiani di 30-40 anni. Rivolgersi sempre al plurale, valido per tutti (« Siete pronti? »).
 
@@ -100,3 +102,19 @@ Ogni foto si usa una sola volta in tutto il profilo (post e reel). Prima di sceg
 ## Hashtag post « Brindisi »
 
 #brindisi #sante #tchintchin #champagne #vinofrancese #francese #imparareilfrancese #francesepergliitaliani #linguafrancese #lezionidifrancese #parlarefrancese #francesefacile #aperitivo #culturafrancese #learnfrench
+
+## Settimana 16-22 novembre 2026
+
+| Giorno | Contenuto | Stato |
+|---|---|---|
+| Lun 16 | A1 · Le lettere fantasma (tipografico, nero/rosa neon) | immagini pronte: `post/2026-11-16_lettere-fantasma/` |
+| Mar 17 | Reel livello 5 · pendant, pour, depuis (Erreurs typiquement italiennes #1) | schermate pronte, manca l'audio di Irene: `reel/livello-5_pendant-pour-depuis/` |
+| Mer 18 | C1 · Je pense qu'il EST (#2) | testo nel doc |
+| Gio 19 | A1 · 70, 80, 90 | testo nel doc |
+| Ven 20 | Reel livello 6 · C'est o il est (#3) | copione nel doc |
+| Sab 21 | C1 · Il francese parlato | testo nel doc |
+| Dom 22 | Sfida della domenica | testo nel doc |
+
+Argomenti già trattati (non ripetere): falsi amici, ti amo, mi manchi, pain au chocolat/chocolatine, segni zodiacali, brindisi, espressioni con animali, genere LE/LA, lettere mute finali, pendant/pour/depuis, indicativo dopo penser/croire, numeri 70-99, c'est/il est, francese parlato (on, ne, contrazioni).
+
+Foto aggiunte (già usate): rue Montorgueil, Gare de Lyon hall départs (TGV), Bibliothèque Sainte-Geneviève salle de lecture.
