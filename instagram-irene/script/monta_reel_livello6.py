@@ -3,16 +3,17 @@ SR=48000
 SRC='/mnt/user-data/uploads/4d9211c7-c_est_ou_il_est.m4a'
 subprocess.run(['ffmpeg','-v','error','-y','-i',SRC,'-af','highpass=f=80,lowpass=f=12000,afftdn=nf=-30,acompressor=threshold=-26dB:ratio=3:attack=10:release=150:makeup=4,loudnorm=I=-15:TP=-1.5:LRA=9','-ac','1','-ar',str(SR),'-f','s16le','v6p.raw'],check=True)
 v=np.frombuffer(open('v6p.raw','rb').read(),dtype=np.int16).astype(np.float32)
-keep=[(0,61.6),(69.1,136.5),(140.9,len(v)/SR)]
+keep=[(0,61.6),(69.1,77.6),(80.4,136.5),(140.9,len(v)/SR)]
 def fade(x):
     n=min(len(x),int(.02*SR)); x=x.copy(); x[:n]*=np.linspace(0,1,n); x[-n:]*=np.linspace(1,0,n); return x
 voice=np.concatenate([fade(v[int(a*SR):int(b*SR)]) for a,b in keep])
 w=wave.open('voce6.wav','wb'); w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes(voice.astype(np.int16).tobytes()); w.close()
 TOT=len(voice)/SR
 def nt(t):
-    if t<=61.6: return t
-    if t<136.5: return t-7.5
-    return t-11.9
+    off=0
+    for (a,b),(c,d) in zip(keep,keep[1:]):
+        if t>=c: off+=c-b
+    return t-off
 def tone(freqs,dur,vol=.5):
     out=[]
     for f in freqs:
