@@ -30,6 +30,7 @@ Pubblico: italiani di 30-40 anni. Rivolgersi sempre al plurale, valido per tutti
 |---|---|---|
 | 11/11 (mer.) | Post « Mi manchi » (5 slide, foto piena viola) | `post/2026-11-11_mi-manchi/` |
 | 14/11 (sab.) | Post « 5 espressioni con gli animali » (7 slide, foto piena verde) | `post/2026-11-14_espressioni-animali/` |
+| 12/11 (gio.) | Post « Pain au chocolat o chocolatine? » (5 slide, foto piena blu) | `post/2026-11-12_pain-au-chocolat/` |
 | — | Reel livello 1-3 « Falsi amici » (pubblicato) | `reel/livello-1-3_falsi-amici/` |
 | 11/11 | Reel livello 4 « LE o LA? »: video finale montato con la voce di Irene (`Reel_livello4_LE_o_LA.mp4`), schermate e conto alla rovescia 3-2-1 | `reel/livello-4_le-o-la/` |
 
@@ -65,3 +66,16 @@ Irene registra la voce (m4a) leggendo il testo con pause di 3 secondi dopo ogni 
 Audio: la voce di Irene va pulita e alzata (highpass 80 Hz, riduzione rumore leggera, compressore, loudnorm a -15 LUFS); effetti sonori dolci (onde sinusoidali) a volume basso, circa 20 dB sotto la voce. Le registrazioni originali sono molto basse (circa -40 dB di media).
 
 Se le pause dopo le domande sono troppo corte, lo script allunga il silenzio a circa 2,7 s per far stare il conto alla rovescia 3-2-1.
+
+## Foto già usate (NON riusarle)
+
+Ogni foto si usa una sola volta in tutto il profilo (post e reel). Prima di sceglierne una, controllare questa lista e aggiungere le nuove.
+
+- Post « Mi manchi »: Trocadéro (amici), Paris Pride 2013 026 (due uomini), Marche des Fiertés 2010 (due ragazze), Danse au bord de la Seine, Paris Pride 2013 042 (abbraccio)
+- Post « Animali »: gallo (Rooster portrait France), gatto rosso, coniglio, anatra nella neve, Blue Cochin hen, Poule Sebright Tours, Sacré-Cœur con folla
+- Reel livello 4: Promenade des Anglais Nizza, Tulipes Tuileries, Saint-Vincent-de-Paul in primavera, macarons Ladurée, Danse au bord de la Seine (ERRORE: già usata in « Mi manchi », non ripetere)
+- Post « Pain au chocolat »: Macaroon Boutique chocolate croissants, boulangerie rue des Rosiers (Marais), miroir d'eau Bordeaux, Grand-Place Bruxelles di notte, Pain au chocolat Luc Viatour
+
+## Hashtag post « Pain au chocolat »
+
+#painauchocolat #chocolatine #francese #imparareilfrancese #francesepergliitaliani #linguafrancese #lezionidifrancese #parlarefrancese #francesefacile #culturafrancese #boulangerie #parigi #bordeaux #colazione #learnfrench
