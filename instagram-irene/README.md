@@ -108,13 +108,13 @@ Ogni foto si usa una sola volta in tutto il profilo (post e reel). Prima di sceg
 | Giorno | Contenuto | Stato |
 |---|---|---|
 | Lun 16 | A1 · Le lettere fantasma (tipografico, nero/rosa neon) | immagini pronte: `post/2026-11-16_lettere-fantasma/` |
-| Mar 17 | Reel livello 5 · pendant, pour, depuis (Erreurs typiquement italiennes #1) | schermate pronte, manca l'audio di Irene: `reel/livello-5_pendant-pour-depuis/` |
+| Mar 17 | Reel livello 5 · pendant, pour, depuis (Erreurs typiquement italiennes #1) | VIDEO PRONTO (127 s): `reel/livello-5_pendant-pour-depuis/Reel_livello5_pendant_pour_depuis.mp4` |
 | Mer 18 | C1 · Je pense qu'il EST (#2) | testo nel doc |
 | Gio 19 | A1 · 70, 80, 90 | testo nel doc |
-| Ven 20 | Reel livello 6 · C'est o il est (#3) | copione nel doc |
+| Ven 20 | Reel livello 6 · C'est o il est (#3) | VIDEO PRONTO (134 s, ripetizioni tagliate): `reel/livello-6_cest-ilest/Reel_livello6_cest_ou_il_est.mp4` |
 | Sab 21 | C1 · Il francese parlato | testo nel doc |
 | Dom 22 | Sfida della domenica | testo nel doc |
 
 Argomenti già trattati (non ripetere): falsi amici, ti amo, mi manchi, pain au chocolat/chocolatine, segni zodiacali, brindisi, espressioni con animali, genere LE/LA, lettere mute finali, pendant/pour/depuis, indicativo dopo penser/croire, numeri 70-99, c'est/il est, francese parlato (on, ne, contrazioni).
 
-Foto aggiunte (già usate): rue Montorgueil, Gare de Lyon hall départs (TGV), Bibliothèque Sainte-Geneviève salle de lecture.
+Foto aggiunte (già usate): Fête de la musique 2008 (band in strada), vetrina di Natale Galeries Lafayette (Noël à Paris 049), Pont Neuf dal quai des Grands-Augustins, rue Montorgueil, Gare de Lyon hall départs (TGV), Bibliothèque Sainte-Geneviève salle de lecture.
