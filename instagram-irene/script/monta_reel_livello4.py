@@ -1,6 +1,6 @@
 import numpy as np, wave, subprocess
 SR=48000
-def tone(freqs,dur,vol=.5,shape='sq'):
+def tone(freqs,dur,vol=.5,shape='sin'):
     out=[]
     for f in freqs:
         t=np.arange(int(SR*dur))/SR

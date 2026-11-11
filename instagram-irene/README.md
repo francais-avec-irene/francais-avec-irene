@@ -61,3 +61,5 @@ Couple au Trocadéro (2013) · Paris Gay Pride 2013 026 e 042 · Marche des Fier
 ## Montaggio dei reel
 
 Irene registra la voce (m4a) leggendo il testo con pause di 3 secondi dopo ogni domanda. Il video si monta con `script/monta_reel_livello4.py`: schermate al ritmo della voce, conto alla rovescia 3-2-1 durante la pausa, suoni da videogioco (moneta, tic, risposta giusta, power-up, boss, vittoria).
+
+Audio: la voce di Irene va pulita e alzata (highpass 80 Hz, riduzione rumore leggera, compressore, loudnorm a -15 LUFS); effetti sonori dolci (onde sinusoidali) a volume basso, circa 20 dB sotto la voce. Le registrazioni originali sono molto basse (circa -40 dB di media).
