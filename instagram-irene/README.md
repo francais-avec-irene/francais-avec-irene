@@ -31,6 +31,7 @@ Pubblico: italiani di 30-40 anni. Rivolgersi sempre al plurale, valido per tutti
 | 11/11 (mer.) | Post « Mi manchi » (5 slide, foto piena viola) | `post/2026-11-11_mi-manchi/` |
 | 14/11 (sab.) | Post « 5 espressioni con gli animali » (7 slide, foto piena verde) | `post/2026-11-14_espressioni-animali/` |
 | 12/11 (gio.) | Post « Pain au chocolat o chocolatine? » (5 slide, foto piena blu) | `post/2026-11-12_pain-au-chocolat/` |
+| 13/11 (ven.) | Post « I segni zodiacali in francese » (7 slide, foto piena notte stellata oro/rosa/lilla) | `post/2026-11-13_segni-zodiacali/` |
 | — | Reel livello 1-3 « Falsi amici » (pubblicato) | `reel/livello-1-3_falsi-amici/` |
 | 11/11 | Reel livello 4 « LE o LA? »: video finale montato con la voce di Irene (`Reel_livello4_LE_o_LA.mp4`), schermate e conto alla rovescia 3-2-1 | `reel/livello-4_le-o-la/` |
 
@@ -76,6 +77,12 @@ Ogni foto si usa una sola volta in tutto il profilo (post e reel). Prima di sceg
 - Reel livello 4: Promenade des Anglais Nizza, Tulipes Tuileries, Saint-Vincent-de-Paul in primavera, macarons Ladurée, Danse au bord de la Seine (ERRORE: già usata in « Mi manchi », non ripetere)
 - Post « Pain au chocolat »: Macaroon Boutique chocolate croissants, boulangerie rue des Rosiers (Marais), miroir d'eau Bordeaux, Grand-Place Bruxelles di notte, Pain au chocolat Luc Viatour
 
+- Post « Segni zodiacali »: Tour Eiffel illuminata con le stelle europee, montone Portland, cielo stellato sulle Alpi, Fontaine des Mers (Concorde), mercato del pesce del Vieux-Port di Marsiglia, gardians e taureau (Saintes-Maries-de-la-Mer)
+
 ## Hashtag post « Pain au chocolat »
 
 #painauchocolat #chocolatine #francese #imparareilfrancese #francesepergliitaliani #linguafrancese #lezionidifrancese #parlarefrancese #francesefacile #culturafrancese #boulangerie #parigi #bordeaux #colazione #learnfrench
+
+## Hashtag post « Segni zodiacali »
+
+#segnizodiacali #oroscopo #zodiaco #astrologia #francese #imparareilfrancese #francesepergliitaliani #linguafrancese #lezionidifrancese #parlarefrancese #pronunciafrancese #francesefacile #parolefrancesi #learnfrench #horoscope
