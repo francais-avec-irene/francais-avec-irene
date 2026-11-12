@@ -109,14 +109,18 @@ Ogni foto si usa una sola volta in tutto il profilo (post e reel). Prima di sceg
 |---|---|---|
 | Lun 16 | A1 · Le lettere fantasma (tipografico, nero/rosa neon) | immagini pronte: `post/2026-11-16_lettere-fantasma/` |
 | Mar 17 | Reel livello 5 · pendant, pour, depuis (Erreurs typiquement italiennes #1) | VIDEO PRONTO (127 s): `reel/livello-5_pendant-pour-depuis/Reel_livello5_pendant_pour_depuis.mp4` |
-| Mer 18 | C1 · Je pense qu'il EST (#2) | testo nel doc |
-| Gio 19 | A1 · 70, 80, 90 | testo nel doc |
+| Mer 18 | C1 · Je pense qu'il EST (#2) · palette petrolio/verde/corallo | immagini pronte: `post/2026-11-18_je-pense-quil-est/` |
+| Gio 19 | A1 · 70, 80, 90 · palette mandarino/rosso/ambra | immagini pronte: `post/2026-11-19_numeri-70-80-90/` |
 | Ven 20 | Reel livello 6 · C'est o il est (#3) | VIDEO PRONTO (131 s, ripetizioni tagliate tenendo l'ultima versione): `reel/livello-6_cest-ilest/Reel_livello6_cest_ou_il_est.mp4` |
-| Sab 21 | C1 · Il francese parlato | testo nel doc |
-| Dom 22 | Sfida della domenica | testo nel doc |
+| Sab 21 | C1 · Il francese parlato · palette ciliegia/blu/terracotta | immagini pronte: `post/2026-11-21_francese-parlato/` |
+| Dom 22 | Sfida della domenica | rimandata alla settimana dopo (scelta di Irene) |
 
 Argomenti già trattati (non ripetere): falsi amici, ti amo, mi manchi, pain au chocolat/chocolatine, segni zodiacali, brindisi, espressioni con animali, genere LE/LA, lettere mute finali, pendant/pour/depuis, indicativo dopo penser/croire, numeri 70-99, c'est/il est, francese parlato (on, ne, contrazioni).
 
 Foto aggiunte (già usate): Fête de la musique 2008 (band in strada), vetrina di Natale Galeries Lafayette (Noël à Paris 049), Pont Neuf dal quai des Grands-Augustins, rue Montorgueil, Gare de Lyon hall départs (TGV), Bibliothèque Sainte-Geneviève salle de lecture.
 
 **Regola di montaggio:** quando Irene ripete una frase durante la registrazione, si tiene SEMPRE l'ultima versione (quella corretta) e si tagliano le precedenti. Controllare tutta la registrazione a finestre brevi, perché la trascrizione automatica tende a nascondere le ripetizioni.
+
+Foto usate nei post del 18, 19 e 21 novembre: terrasse Les Deux Magots, interno del Café de Flore, angolo del Café de Flore, place Saint-André-des-Arts, terrasse au soleil (colonnes), sedie colorate di caffè sotto la pioggia, albicocche al mercato Bastille (venditore), pesche al mercato Bastille, pomodori al mercato d'Aligre, banco di frutta al mercato Bastille, Ouchy (Lausanne) col lago e le Alpi, banco del mercato con PHARMACIE, Bassin de la Villette (terrasse « atmosphère »), Grand Rex di notte, Jardin du Luxembourg (due amiche sulla panchina), Paris Plages, passerella del Canal Saint-Martin, baguettes de campagne.
+
+**Regola colori (12 novembre 2026)**: ogni post ha una palette nuova e, dentro lo stesso post, lo sfondo alterna 2-3 colori diversi da una slide all'altra. Palette già usate: viola, verde lime, blu, rosa, notte oro, nero/rosa neon, petrolio/corallo, mandarino/ambra, ciliegia/blu/terracotta.

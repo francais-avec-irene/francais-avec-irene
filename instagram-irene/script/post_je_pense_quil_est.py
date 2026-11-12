@@ -1,0 +1,13 @@
+import asyncio; from render import *
+P=dict(a1='#FF8A6B',a2='#FFE2A8',a3='#7FE6D3',ink='#06232A')
+k=kit(P); h,p,ex,tag,pill,pills,hl,num,c=k['h'],k['p'],k['ex'],k['tag'],k['pill'],k['pills'],k['hl'],k['num'],k['c']
+TE=('#0E5A66','#062A33','rgba(14,90,102,.55)'); PE=('#0F5B4E','#062B25','rgba(15,91,78,.55)'); CO=('#9A3F2C','#2E0E07','rgba(154,63,44,.52)')
+SL=[
+ ('m_magots.jpg','top:0;height:900px;object-position:50% 50%',[tag('C1 · ERRORE TIPICO'),h('« Je pense<br>qu\'il <s>soit</s>… »',100),p('Il congiuntivo che gli italiani mettono <b>ovunque</b>.',40),pills(pill('Je pense qu\'il EST ✔',P['a2'],-2,48))],'1/6 · scorri →',TE),
+ ('m_flore_int.jpg','top:0;height:880px;object-position:50% 50%',[num('L\'ERRORE'),h('Penso che '+hl('sia')+'…',96),p('In italiano: <b>penso, credo, mi sembra che</b> + congiuntivo.'),p('In francese: <b>je pense que, je crois que, je trouve que, il me semble que</b> + '+c('INDICATIVO')+'.'),ex('Je pense qu\'il <u>a</u> raison.','Penso che abbia ragione.')],'2/6 · scorri →',PE),
+ ('m_flore_coin.jpg','top:0;height:950px;object-position:50% 45%',[num('PERCHÉ?'),h('Pensare = '+hl('affermare'),92),p('In francese il congiuntivo segnala <b>dubbio, volontà o sentimento</b>.'),p('Quando dite quello che pensate, lo presentate come vero: '+c('indicativo')+'.'),ex('Je crois qu\'elle <u>viendra</u>.','Credo che verrà.')],'3/6 · scorri →',CO),
+ ('m_standre.jpg','top:0;height:880px;object-position:50% 50%',[num('LA SVOLTA'),h('Dubbio? '+hl('Congiuntivo!'),92),p('<b>Negazione</b> o <b>domanda con inversione</b> = dubbio = congiuntivo.'),ex('Je ne pense pas qu\'il <u>ait</u> raison.','Non penso che abbia ragione.',42),ex('Penses-tu qu\'il <u>ait</u> raison ?',None,42),p('Ma senza inversione: <b>Tu penses qu\'il a raison ?</b>',34)],'4/6 · scorri →',TE),
+ ('m_terrasse_soleil.jpg','top:0;height:820px;object-position:50% 50%',[num('LA SFUMATURA'),h('Il '+hl('me')+' semble…',96),p('<b>il me semble que</b> + indicativo = « je pense »'),ex('Il me semble qu\'il <u>est</u> fatigué.','Mi sembra che sia stanco.',42),p('<b>il semble que</b> + congiuntivo = apparenza, incertezza'),ex('Il semble qu\'il <u>soit</u> fatigué.','Sembra che sia stanco.',42)],'5/6 · scorri →',PE),
+ ('m_chaises.jpg','top:0;height:950px;object-position:50% 50%',[h('Tocca '+hl('a voi')+'!',110),p('Traducete in francese nei commenti:',40),f'<p style="margin:0;font-family:{F};font-weight:800;font-style:italic;font-size:50px;line-height:1.2;color:{P["a2"]};transform:rotate(-1deg)">« Credo che tu abbia ragione, ma non penso che sia facile. »</p>',p('La soluzione domani nelle Stories ★',34)],None,CO),
+]
+asyncio.run(render('je_pense_quil_est',P,SL,'ERREURS<br>TYPIQUEMENT ITALIENNES #2'))
