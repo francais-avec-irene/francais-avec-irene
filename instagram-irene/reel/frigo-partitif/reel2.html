@@ -51,7 +51,7 @@ body{width:1080px;height:1920px;overflow:hidden;background:#000;font-family:Popp
 .introT{font:800 104px Poppins;color:#fff;line-height:1.05;text-shadow:0 8px 30px rgba(0,0,0,.45)}
 .introS{display:inline-block;margin-top:34px;background:#ffd166;color:#2a1a3a;font:800 52px Poppins;padding:14px 36px;border-radius:999px}
 .rchips{display:flex;flex-wrap:wrap;justify-content:center;gap:24px;padding:0 60px}
-.rc{font:800 84px Poppins;color:#fff;padding:18px 44px;border-radius:999px;transform:scale(0);box-shadow:0 16px 30px rgba(0,0,0,.3)}
+.rc{font:800 74px Poppins;color:#fff;padding:18px 44px;border-radius:999px;transform:scale(0);box-shadow:0 16px 30px rgba(0,0,0,.3)}
 #heart{position:absolute;left:0;right:0;top:330px;text-align:center;font-size:300px;font-family:'Noto Color Emoji';opacity:0}
 #flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
 </style></head><body><div id="stage">
@@ -68,12 +68,15 @@ body{width:1080px;height:1920px;overflow:hidden;background:#000;font-family:Popp
   </div>
   <div class="inside" id="frin"><div class="glow"></div>
    <div class="shelf" style="top:170px"></div><div class="shelf" style="top:340px"></div>
-   <div class="item" id="i_yaourt" style="left:30px;top:24px;font-size:96px">🥣<span class="tagf">les yaourts</span></div>
-   <div class="item" id="i_jambon" style="left:300px;top:24px;font-size:104px">🍖<span class="tagf">le jambon</span></div>
-   <div class="item" id="i_conf" style="left:30px;top:196px;font-size:104px">🍓<span class="tagf">la confiture</span></div>
-   <div class="item" id="i_ananas" style="left:300px;top:190px;font-size:110px">🍍<span class="tagf">l'ananas</span></div>
-   <div class="ghost" id="g_lait" style="left:28px;top:362px;width:200px;height:140px"><span>🥛</span></div>
-   <div class="ghost" id="g_oeufs" style="left:280px;top:362px;width:200px;height:140px"><span>🥚</span></div>
+   <div class="item" id="i_fromage" style="left:22px;top:30px;font-size:92px">🧀<span class="tagf">le fromage</span></div>
+   <div class="item" id="i_creme" style="left:186px;top:30px;font-size:92px">🍶<span class="tagf">la crème</span></div>
+   <div class="item" id="i_yaourt" style="left:352px;top:30px;font-size:92px">🥣<span class="tagf">les yaourts</span></div>
+   <div class="item" id="i_jambon" style="left:22px;top:202px;font-size:92px">🍖<span class="tagf">le jambon</span></div>
+   <div class="item" id="i_conf" style="left:186px;top:202px;font-size:92px">🍓<span class="tagf">la confiture</span></div>
+   <div class="item" id="i_ananas" style="left:352px;top:196px;font-size:96px">🍍<span class="tagf">l'ananas</span></div>
+   <div class="item" id="i_tomates" style="left:22px;top:372px;font-size:92px">🍅<span class="tagf">les tomates</span></div>
+   <div class="ghost" id="g_lait" style="left:180px;top:362px;width:150px;height:140px"><span>🥛</span></div>
+   <div class="ghost" id="g_oeufs" style="left:346px;top:362px;width:150px;height:140px"><span>🥚</span></div>
   </div>
   <div class="door" id="fzdoor"><div class="handle"></div></div>
   <div class="door" id="frdoor"><div class="handle"></div><div class="badge">LE FRIGO</div></div>
@@ -83,7 +86,7 @@ body{width:1080px;height:1920px;overflow:hidden;background:#000;font-family:Popp
 <div id="cart">🛒</div><div id="drop"></div>
 <div id="heart">🧀</div>
 <div id="big"></div>
-<img id="logo" src="logo.png"><div id="title"></div><div id="score">★ 0/13</div>
+<img id="logo" src="logo.png"><div id="title"></div><div id="score">★ 0/11</div>
 <div id="chip"></div>
 <div id="ring"><svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="62" stroke="rgba(255,255,255,.35)" stroke-width="14" fill="rgba(42,26,58,.55)"/><circle id="arc" cx="75" cy="75" r="62" stroke="#ffd166" stroke-width="14" fill="none" stroke-linecap="round" stroke-dasharray="390" stroke-dashoffset="0"/></svg><div class="num" id="rnum">2</div></div>
 <div id="card"><div id="sent"></div></div>
@@ -96,28 +99,23 @@ const COL={du:'#3a7bd5','de la':'#e2556f',"de l'":'#8e5bd6',des:'#f08c2e',de:'#d
 // segments
 const S=[];let T=0;
 function add(o,d){o.t0=T;o.t1=T+d;T+=d;S.push(o)}
-add({k:'intro',bg:0},7);
-const Q=[
- {bg:1,s:"Je voudrais [du] pain, s'il vous plaît.",it:"Vorrei del pane, per favore.",e:'🥖'},
- {bg:2,s:"Ce soir, je mange [des] pâtes.",it:"Stasera mangio la pasta.",e:'🍝',chip:"🇮🇹 la pasta  →  🇫🇷 des pâtes !"},
- {bg:3,s:"Pour l'apéritif, je prends [de la] salade et [du] fromage.",it:"Per l'aperitivo prendo dell'insalata e del formaggio.",e:'🧀',hold:5.4},
- {bg:4,s:"Il fait chaud, j'achète [de l']eau.",it:"Fa caldo, compro dell'acqua.",e:'💧'},
- {bg:5,s:"Je mets [des] tomates dans mon panier.",it:"Metto dei pomodori nel cestino.",e:'🍅'},
-];
-Q.forEach((q,i)=>add(Object.assign({k:'q',scene:'m',n:i+1},q),CD+(q.hold||HOLD)));
-add({k:'rule',bg:5},6);
-add({k:'open',s:"Je rentre à la maison et j'ouvre mon frigo… Qu'est-ce qu'il y a ?",it:"Torno a casa e apro il frigo… Cosa c'è?"},6.5);
+add({k:'intro'},6.5);
+add({k:'open',s:"J'ouvre mon frigo… Qu'est-ce qu'il y a ?",it:"Apro il mio frigo… Cosa c'è?"},5);
 const F=[
- {s:"Il y a [des] yaourts…",it:"Ci sono degli yogurt…",item:'i_yaourt'},
+ {s:"Il y a [du] fromage…",it:"C'è del formaggio…",item:'i_fromage'},
+ {s:"…[de la] crème fraîche…",it:"…della panna…",item:'i_creme'},
+ {s:"…[des] yaourts…",it:"…degli yogurt…",item:'i_yaourt'},
  {s:"…[du] jambon…",it:"…del prosciutto…",item:'i_jambon'},
  {s:"…[de la] confiture de fraises…",it:"…della marmellata di fragole…",item:'i_conf'},
- {s:"…et [de l']ananas !",it:"…e dell'ananas!",item:'i_ananas'},
+ {s:"…[de l']ananas…",it:"…dell'ananas…",item:'i_ananas'},
+ {s:"…et [des] tomates !",it:"…e dei pomodori!",item:'i_tomates'},
 ];
-F.forEach((q,i)=>add(Object.assign({k:'q',scene:'f',n:6+i},q),CD+HOLD));
-add({k:'q',scene:'f',n:10,pre:2,pres:"Et dans le congélateur ?",preit:"E nel congelatore?",s:"[De la] glace à la vanille !",it:"Del gelato alla vaniglia!",item:'i_glace',freezer:1},2+CD+HOLD);
-add({k:'q',scene:'f',n:11,pre:2.2,pres:"Mais… où est le lait ?",preit:"Ma… dov'è il latte?",s:"Il n'y a pas [de] lait !",it:"Non c'è latte!",ghost:'g_lait',chip:"Après la négation → de",shake:1},2.2+CD+HOLD+.6);
-add({k:'q',scene:'f',n:12,s:"Et je n'ai plus [d']œufs !",it:"E non ho più uova!",ghost:'g_oeufs',chip:"Devant une voyelle : de → d'",shake:1},CD+HOLD+.4);
-add({k:'q',scene:'f',n:13,s:"J'aime [le] fromage !",it:"Amo il formaggio!",heart:1,chip:"aimer · adorer · détester → le, la, les",hold:5.4},CD+5.4+.6);
+F.forEach((q,i)=>add(Object.assign({k:'q',scene:'f',n:1+i},q),CD+HOLD));
+add({k:'rule'},5.5);
+add({k:'q',scene:'f',n:8,pre:2,pres:"Et dans le congélateur ?",preit:"E nel congelatore?",s:"[De la] glace à la vanille !",it:"Del gelato alla vaniglia!",item:'i_glace',freezer:1},2+CD+HOLD);
+add({k:'q',scene:'f',n:9,pre:2.2,pres:"Mais… où est le lait ?",preit:"Ma… dov'è il latte?",s:"Il n'y a pas [de] lait !",it:"Non c'è latte!",ghost:'g_lait',chip:"Après la négation → de",shake:1},2.2+CD+HOLD+.6);
+add({k:'q',scene:'f',n:10,s:"Et je n'ai plus [d']œufs !",it:"E non ho più uova!",ghost:'g_oeufs',chip:"Devant une voyelle : de → d'",shake:1},CD+HOLD+.4);
+add({k:'q',scene:'f',n:11,s:"J'aime [le] fromage !",it:"Amo il formaggio!",heart:1,chip:"aimer · adorer · détester → le, la, les",hold:5.4},CD+5.4+.6);
 add({k:'outro'},7);
 const DUR=T;
 // helpers
@@ -135,30 +133,30 @@ function render(t){
  const seg=S.find(s=>t>=s.t0&&t<s.t1)||S[S.length-1];const lt=t-seg.t0,d=seg.t1-seg.t0;
  // fond marché
  for(let i=0;i<6;i++){const m=$('m'+i);m.style.opacity=0}
- const kitchenOn=['open','q-f','outro'].includes(seg.k==='q'?'q-'+seg.scene:seg.k);
+ const kitchenOn=true;
  let kOp=kitchenOn?1:0;
- if(seg.k==='open')kOp=ez(lt/.8);
+ 
  $('kitchen').style.opacity=kOp;
- if(!kitchenOn||seg.k==='open'){const bg=seg.k==='open'?5:seg.bg;const m=$('m'+bg);m.style.opacity=1;
+ if(false){const bg=seg.k==='open'?5:seg.bg;const m=$('m'+bg);m.style.opacity=1;
   const z=1.06+.10*cl((t-seg.t0)/d);const im=m.querySelector('img');im.style.transform=`translate(-50%,-50%) scale(${z}) translateX(${(bg%2?-1:1)*20*cl(lt/d)}px)`;
   // fondu d'entrée
   if(seg.k==='q'&&lt<.5){const prev=S[S.indexOf(seg)-1];if(prev&&prev.bg!==undefined&&prev.bg!==seg.bg){const pm=$('m'+(prev.k==='intro'?0:prev.bg));pm.style.opacity=1-lt/.5;m.style.opacity=lt/.5}}}
  // titre / score
  const answered=S.filter(s=>s.k==='q'&&t>=s.t0+(s.pre||0)+CD).length;
- $('score').textContent='★ '+answered+'/13';
- $('title').textContent=(seg.k==='intro'||(seg.k==='q'&&seg.scene==='m')||seg.k==='rule')?'🛒 AU MARCHÉ':(seg.k==='outro'?'🏆 TON SCORE':'🧊 LE FRIGO D\'UNE FRANÇAISE');
+ $('score').textContent='★ '+answered+'/11';
+ $('title').textContent=seg.k==='outro'?'🏆 TON SCORE':'🧊 LE FRIGO D\'UNE FRANÇAISE';
  // remise à zéro
  $('chip').style.transform='translateX(-50%) scale(0)';$('big').style.top='300px';$('ring').style.opacity=0;$('drop').style.opacity=0;$('big').style.opacity=0;$('heart').style.opacity=0;$('flash').style.opacity=0;
  $('cart').style.opacity=0;
  // frigo
  const fr=$('fridge');fr.style.opacity=kitchenOn?1:0;
- const openAt=S.find(s=>s.k==='open');const ot=t-(openAt.t0+1.2);
- let doorA=-112*ez(ot/1.1);if(t<openAt.t0+1.2)doorA=0;
+ const openAt=S.find(s=>s.k==='open');const ot=t-(openAt.t0+.4);
+ let doorA=-112*ez(ot/1.1);if(t<openAt.t0+.4)doorA=0;
  const fz=S.find(s=>s.freezer);let fzA=0;if(t>fz.t0+.4)fzA=-112*ez((t-fz.t0-.4)/1);
  const hq=S.find(s=>s.heart);let closeK=0;if(t>hq.t0)closeK=ez((t-hq.t0)/.8);
  $('frdoor').style.transform=`perspective(1600px) rotateY(${doorA*(1-closeK)}deg)`;$('fzdoor').style.transform=`perspective(1600px) rotateY(${fzA*(1-closeK)}deg)`;
  $('frin').querySelector('.glow').style.opacity=cl(ot/1.1)*(1-closeK);$('fzin').querySelector('.glow').style.opacity=cl((t-fz.t0-.4))*(1-closeK);
- const fs=1-.12*closeK;fr.style.transform=`translateY(${(seg.k==='open'?(1-ez(lt/.9))*500:0)}px) scale(${fs})`;
+ const fs=1-.12*closeK;fr.style.transform=`translateY(${(seg.k==='intro'?(1-ez(lt/1))*600:0)}px) scale(${fs})`;
  fr.style.filter=closeK?`blur(${closeK*6}px) brightness(${1-.3*closeK})`:'none';
  // objets du frigo : apparaissent à la révélation et restent
  S.filter(s=>s.item).forEach(s=>{const rt=s.t0+(s.pre||0)+CD;$(s.item).style.transform=`scale(${pop(t,rt,.55)})`});
@@ -167,8 +165,8 @@ function render(t){
  // contenu
  let sub='';
  if(seg.k==='intro'){
-  $('big').style.opacity=ez(lt/.6);$('big').innerHTML=`<div class="introT" style="transform:scale(${.85+.15*back(lt/.7)})">Du, de la,<br>de l', des ?</div><div class="introS" style="transform:scale(${pop(t,seg.t0+1.2)})">⏱ 2 secondes pour trouver !</div>`;
-  setCard('',0);sub='Du, de la, de l\', des? Avete 2 secondi per trovare!';
+  $('big').style.top='1110px';$('big').style.opacity=ez((lt-.8)/.5);$('big').innerHTML=`<div class="introT" style="font-size:78px;color:#2a1a3a;text-shadow:none;transform:scale(${.85+.15*back((lt-.8)/.7)})">Qu'est-ce qu'il y a dans<br>le frigo d'une Française ?</div><div class="introS" style="transform:scale(${pop(t,seg.t0+2)})">Du, de la, de l', des ? ⏱ 2 secondes !</div>`;
+  setCard('',0);sub=lt>1.2?'Cosa c\'è nel frigo di una francese? Du, de la, de l\', des? 2 secondi!':'';
  } else if(seg.k==='q'){
   const pre=seg.pre||0,q0=seg.t0+pre,rt=q0+CD;
   if(lt<pre){setCard(`<span style="color:#c2416a">${seg.pres}</span>`,ez(lt/.4));sub=seg.preit}
@@ -187,14 +185,14 @@ function render(t){
   }
  } else if(seg.k==='rule'){
   setCard('',0);const ch=[['Du','#3a7bd5'],['De la','#e2556f'],["De l'",'#8e5bd6'],['Des','#f08c2e']];
-  $('big').style.opacity=1;$('big').style.top='420px';
-  $('big').innerHTML=`<div class="rchips">${ch.map((c,i)=>`<span class="rc" style="background:${c[1]};transform:scale(${pop(t,seg.t0+.2+i*.35)}) rotate(${(i%2?3:-3)}deg)">${c[0]}</span>`).join('')}</div><div class="introS" style="margin-top:60px;transform:scale(${pop(t,seg.t0+1.8)})">Obligatoires en français !</div>`;
+  $('big').style.opacity=1;$('big').style.top='1050px';
+  $('big').innerHTML=`<div class="rchips">${ch.map((c,i)=>`<span class="rc" style="background:${c[1]};transform:scale(${pop(t,seg.t0+.2+i*.35)}) rotate(${(i%2?3:-3)}deg)">${c[0]}</span>`).join('')}</div><div class="introS" style="margin-top:40px;transform:scale(${pop(t,seg.t0+1.8)})">Obligatoires en français !</div>`;
   sub='In francese sono obbligatori!';
  } else if(seg.k==='open'){
   setCard(seg.s,ez((lt-.6)/.4));sub=lt>.8?seg.it:'';$('sent').style.fontSize='50px';
  } else if(seg.k==='outro'){
   setCard('',0);$('big').style.top='560px';$('big').style.opacity=ez(lt/.5);
-  $('big').innerHTML=`<div class="introT" style="font-size:96px">Combien de<br>bonnes réponses ?</div><div class="introS" style="transform:scale(${pop(t,seg.t0+.8)});font-size:58px">★ … / 13</div><div class="introS" style="background:#fff;color:#c2416a;font-size:44px;transform:scale(${pop(t,seg.t0+1.5)})">Écrivez votre score en commentaire 👇</div>`;
+  $('big').innerHTML=`<div class="introT" style="font-size:96px">Combien de<br>bonnes réponses ?</div><div class="introS" style="transform:scale(${pop(t,seg.t0+.8)});font-size:58px">★ … / 11</div><div class="introS" style="background:#fff;color:#c2416a;font-size:44px;transform:scale(${pop(t,seg.t0+1.5)})">Écrivez votre score en commentaire 👇</div>`;
   sub='Quante risposte giuste? Scrivete il vostro punteggio nei commenti!';
  }
  if(seg.k!=='open')$('sent').style.fontSize='';
