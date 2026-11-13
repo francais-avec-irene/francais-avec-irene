@@ -121,11 +121,10 @@ const ob=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)
 const ee=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 function rnd(i){const x=Math.sin(i*12.9898+78.233)*43758.5453;return x-Math.floor(x)}
 function pw(x,A,B){if(x<=A[0])return B[0]+(x-A[0]);for(let i=1;i<A.length;i++)if(x<=A[i])return B[i-1]+(x-A[i-1])*(B[i]-B[i-1])/(A[i]-A[i-1]);return B[B.length-1]+(x-A[A.length-1])}
-const SO=[0,.45,.8,2.3,2.55,4.0,7.45,9.75,10],SN=[0,.7,1.0,3.6,4.8,6.6,11.8,15.2,15.6];
-const HO=[0,1.75,2.15,3.2],HN=[0,2.6,3.1,4.5];
-const EO=[0,1.2,1.6,2.6,2.95,6.2],EN=[0,2.4,2.9,4.4,4.8,9.0];
-const sn=x=>pw(x,SO,SN);
-const S0=4.5, SL=15.6, HOOKW=["Un","Italien","a dit","ça","en","France…"];
+const TL={"S0": 3.6, "SO": [0, 0.45, 0.8, 2.3, 2.55, 4.0, 5.2, 7.45, 9.75, 10], "scenes": [{"start": 3.6, "dur": 16.5, "SN": [0, 0.7, 1.0, 4.449999999999999, 5.1499999999999995, 6.949999999999999, 9.45, 12.95, 16.1, 16.5]}, {"start": 20.1, "dur": 15.68, "SN": [0, 0.7, 1.0, 3.4499999999999993, 4.1499999999999995, 5.949999999999999, 8.8, 11.950000000000001, 15.28, 15.68]}, {"start": 35.78, "dur": 18.449999999999996, "SN": [0, 0.7, 1.0, 4.18, 4.88, 6.68, 10.100000000000001, 14.72, 18.049999999999997, 18.449999999999996]}], "END": 54.23, "EO": [0, 1.2, 1.6, 2.6, 2.95, 6.2], "EN": [0, 2.0, 2.4, 5.3, 5.7, 9.0], "HO": [0, 1.75, 2.15, 3.2], "HN": [0, 2.0, 2.5, 3.6], "DUR": 63.23};
+const SO=TL.SO,HO=TL.HO,HN=TL.HN,EO=TL.EO,EN=TL.EN,SCN=TL.scenes;
+const snk=(k,x)=>pw(x,SO,SCN[k].SN);
+const S0=TL.S0, HOOKW=["Un","Italien","a dit","ça","en","France…"];
 const SC=[
  {tag:"GAFFE #1",place:"📍 À l'hôtel",pre:"Bonjour, j'ai réservé une ",w:"caméra",post:" pour deux nuits !",icon:'📹<b>??</b>',
   l1:"Une caméra, ça filme ! 🎥",l2:"À l'hôtel, on réserve une chambre.",sub:"Una caméra è una videocamera! In albergo si prenota una chambre.",
@@ -137,7 +136,8 @@ const SC=[
   l1:"Morbide = sombre, malsain 💀",l2:"Pour un coussin : doux, moelleux.",sub:"Morbide = morboso! Per un cuscino si dice: doux, moelleux.",
   big:"il est tellement doux !",it:"= è così morbido!"}
 ];
-const END=S0+3*SL, DUR=END+9.0;
+const END=TL.END, DUR=TL.DUR;
+function sceneAt(t){for(let k=0;k<3;k++)if(t>=SCN[k].start&&t<SCN[k].start+SCN[k].dur)return k;return 3}
 // glitch bars
 const G=$('#glitch');for(let i=0;i<10;i++){const d=document.createElement('div');d.className='gb';G.appendChild(d)}
 const GB=[...document.querySelectorAll('.gb')];
@@ -158,7 +158,7 @@ function glitch(t,t0,len){const p=(t-t0)/len;const on=p>=0&&p<=1;
   b.style.background=['#FF3DA5','#3DF5FF','#ffffff','#5BFF8A'][(i+k)%4];b.style.transform=`translateX(${(rnd(k+i*5)-.5)*300}px)`;
   b.style.opacity=(.3+rnd(k*3+i)*.6)*Math.sin(Math.PI*p)});return on?Math.sin(Math.PI*p):0}
 function setPh(t){
- const ranges=[[-1,S0+.15],[S0,S0+SL+.15],[S0+SL,S0+2*SL+.15],[S0+2*SL,END+.15],[END,DUR+1]];
+ const ranges=[[-1,S0+.15],[SCN[0].start,SCN[1].start+.15],[SCN[1].start,SCN[2].start+.15],[SCN[2].start,END+.15],[END,DUR+1]];
  ranges.forEach((r,i)=>{const el=$('#ph'+i);const vis=t>=r[0]&&t<r[1];el.style.opacity=vis?1:0;
   if(vis){const lt=t-Math.max(0,r[0]);const punch=1.35-0.3*oc(seg(lt,0,.45));const kb=1+0.08*seg(lt,0,r[1]-r[0]);
    const blur=i==0||i==4?6:0;el.firstChild.style.transform=`translate(-50%,-50%) scale(${punch*kb})`;el.style.filter=`blur(${blur}px) saturate(1.15)`}})}
@@ -179,8 +179,8 @@ function render(t){
   }gl=Math.max(gl,glitch(t,S0-.45,.55));
  }
  // SCENES
- const si=Math.floor((t-S0)/SL);const sc=$('#scene');
- if(t>=S0&&si<3){sc.style.display='block';const d=SC[si];const B0=S0+si*SL;const lt=pw(t-B0,SN,SO);
+ const si=sceneAt(t);const sc=$('#scene');
+ if(t>=S0&&si<3){sc.style.display='block';const d=SC[si];const B0=SCN[si].start;const SN=SCN[si].SN,SL=SCN[si].dur;const sn=x=>pw(x,SO,SN);const lt=pw(t-B0,SN,SO);
   if(si!=lastScene){$('#gtag').textContent=d.tag;$('#place').textContent=d.place;$('#icon').innerHTML=d.icon;
    $('#explain .l1').textContent=d.l1;$('#explain .l2').textContent=d.l2;$('#correct .big').textContent=d.big;$('#correct .it').textContent=d.it;
    $('#sub span').textContent=d.sub;lastScene=si}
@@ -229,9 +229,9 @@ function render(t){
   gl=Math.max(gl,glitch(t,B0+SL-.4,.5));
  } else {sc.style.display='none';$('#dim').style.opacity=t>=END?.4:0}
  // HUD
- let score=0;for(let k=0;k<3;k++){const tc=S0+k*SL+sn(7.6);if(t>tc){score+=Math.round(10*cl((t-tc)/.5))}}
+ let score=0;for(let k=0;k<3;k++){const tc=SCN[k].start+snk(k,7.6);if(t>tc){score+=Math.round(10*cl((t-tc)/.5))}}
  $('#score').textContent='SCORE '+String(score).padStart(3,'0');
- document.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('on',t>S0+k*SL+sn(7.6)));
+ document.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('on',t>SCN[k].start+snk(k,7.6)));
  $('#hud').style.opacity=seg(t,S0-.2,S0+.2);
  // END
  const E=$('#end');if(t>=END){E.style.opacity=1;const lt=pw(t-END,EN,EO);

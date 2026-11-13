@@ -1,5 +1,5 @@
 import numpy as np, wave
-SR=44100; DUR=60.4; out=np.zeros(int(SR*DUR))
+SR=44100; DUR=64.0; out=np.zeros(int(SR*DUR))
 def add(t,sig):
     i=int(t*SR); n=min(len(sig),len(out)-i); out[i:i+n]+=sig[:n]
 def mix(*s):
@@ -28,16 +28,16 @@ def pw(x,A,B):
     for i in range(1,len(A)):
         if x<=A[i]: return B[i-1]+(x-A[i-1])*(B[i]-B[i-1])/(A[i]-A[i-1])
     return B[-1]+(x-A[-1])
-SO=[0,.45,.8,2.3,2.55,4.0,7.45,9.75,10];SN=[0,.7,1.0,3.6,4.8,6.6,11.8,15.2,15.6]
-HO=[0,1.75,2.15,3.2];HN=[0,2.6,3.1,4.5];EO=[0,1.2,1.6,2.6,2.95,6.2];EN=[0,2.4,2.9,4.4,4.8,9.0]
-S0,SL=4.5,15.6
+import json
+T=json.load(open('/home/claude/voice/timeline.json'))
+SO=T['SO'];HO=T['HO'];HN=T['HN'];EO=T['EO'];EN=T['EN'];S0=T['S0']
 _add=add
 add(0,whoosh())
 for i in range(6): add(pw(.15+i*.24,HO,HN),pop()*.7)
 add(pw(1.75,HO,HN),sweep(300,700,.25,.12)); add(S0-.45,noise(.5,.15)*.6)
 for si in range(3):
-    b0=S0+si*SL
-    def add(x,sig,b0=b0): _add(b0+pw(x,SO,SN),sig)
+    b0=T['scenes'][si]['start'];SN=T['scenes'][si]['SN']
+    def add(x,sig,b0=b0,SN=SN): _add(b0+pw(x,SO,SN),sig)
     b=0
     add(b+.05,whoosh()); add(b+.45,pop())
     for k in range(int((2.3-.75)/.045)): add(b+.75+k*.045,blip()*.35)
@@ -47,7 +47,7 @@ for si in range(3):
     elif si==0: add(b+2.9,sweep(500,1500,.3,.15)*.6)
     else: add(b+2.85,whoosh()); add(b+3.15,noise(.3,.08)*.7)
     add(b+4.0,whoosh()*.7); add(b+7.45,ding()); add(b+7.6,coin()*.8); add(b+9.6,noise(.45,.12)*.6)
-E=S0+3*SL
+E=T['END']
 add=lambda x,sig:_add(E+pw(x,EO,EN),sig)
 E=0
 for k in range(3): add(E+.15+k*.28,ding()*.6)
