@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Giulia au restaurant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--sea:#06b6d4;--sea2:#0e7490;--sun:#facc15;--coral:#fb7185;--violet:#8b5cf6;--mint:#34d399;--orange:#fb923c;--pink:#ec4899;--ink:#1e1b4b;--ok:#10b981;--ko:#f43f5e}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:'Nunito',sans-serif;color:var(--ink);background:linear-gradient(180deg,#e0f7fa 0%,#fef9c3 35%,#fce7f3 70%,#ede9fe 100%);min-height:100vh;font-size:17px}
+h1,h2,h3,.f{font-family:'Fredoka',sans-serif}
+.it{display:block;font-style:italic;color:#7c3aed;font-size:.86em;font-weight:600}.noit .it{display:none}
+.top{position:fixed;top:10px;right:10px;z-index:60;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.chip{background:#fff;border-radius:999px;padding:6px 14px;font-family:'Fredoka';font-weight:600;box-shadow:0 4px 14px rgba(139,92,246,.25);display:flex;gap:6px;align-items:center;border:2.5px solid var(--sun)}
+.chip.sc{border-color:var(--pink)}.chip button{all:unset;cursor:pointer}
+#tbar{position:fixed;left:0;top:0;height:6px;background:linear-gradient(90deg,var(--mint),var(--sea),var(--violet),var(--pink));z-index:70;transition:width 1s linear}
+.bump{animation:bump .5s}@keyframes bump{40%{transform:scale(1.2)}}
+.hero{position:relative;padding:70px 16px 30px;text-align:center;overflow:hidden}
+.stage{perspective:1200px;height:260px;margin:0 auto;width:220px}
+.ring{position:relative;width:220px;height:260px;transform-style:preserve-3d;animation:spin 18s linear infinite}
+.ring img{position:absolute;inset:0;width:220px;height:260px;object-fit:cover;border-radius:22px;border:5px solid #fff;box-shadow:0 10px 25px rgba(0,0,0,.2)}
+@keyframes spin{to{transform:rotateY(-360deg)}}
+.hero h1{font-size:2.6rem;margin:26px 0 4px;background:linear-gradient(90deg,var(--pink),var(--violet),var(--sea),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin:0 auto;max-width:620px;font-weight:600}
+.notes{position:absolute;font-size:2rem;animation:float 6s ease-in-out infinite;opacity:.8}@keyframes float{50%{transform:translateY(-18px) rotate(10deg)}}
+.map{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:20px auto 0;max-width:900px}
+.map a{text-decoration:none;color:#fff;font-family:'Fredoka';font-weight:600;padding:9px 16px;border-radius:16px;box-shadow:0 4px 0 rgba(0,0,0,.15);transition:transform .2s;position:relative}
+.map a:hover{transform:translateY(-3px) rotate(-2deg)}.map a .done{position:absolute;top:-8px;right:-8px;background:#fff;border-radius:50%;width:24px;height:24px;display:none;place-items:center;font-size:.8rem}.map a.ok .done{display:grid}
+main{max-width:980px;margin:0 auto;padding:0 14px 60px}
+.sec{background:rgba(255,255,255,.88);border-radius:30px;padding:22px;margin-top:30px;box-shadow:0 10px 30px rgba(30,27,75,.08);scroll-margin-top:60px;border:3px solid #fff}
+.sh{display:flex;gap:12px;align-items:center;margin-bottom:6px}.badge{font-size:1.8rem;width:58px;height:58px;border-radius:18px;display:grid;place-items:center;flex:none;color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.12)}
+.sh h2{margin:0;font-size:1.6rem}.lead{margin:4px 0 14px;font-weight:600}
+.au{all:unset;cursor:pointer;width:38px;height:38px;border-radius:50%;background:var(--violet);color:#fff;display:inline-grid;place-items:center;flex:none;box-shadow:0 3px 0 rgba(0,0,0,.15)}
+.au svg{width:20px;height:20px}.au.on{background:var(--pink);animation:pulse .6s infinite}@keyframes pulse{50%{transform:scale(1.12)}}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.card{height:220px;perspective:900px;cursor:pointer;scroll-margin-top:90px}.card .in{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.3,1.4,.5,1);transform-style:preserve-3d}
+.card.fl .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:22px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.face img{width:100%;height:100%;object-fit:cover}.q{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:#fff;border-radius:999px;padding:3px 12px;font-family:'Fredoka';font-weight:600;font-size:.85rem;white-space:nowrap}
+.back{transform:rotateY(180deg);background:linear-gradient(150deg,#fff,#fef3c7 50%,#fce7f3);padding:12px;display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center;text-align:center;border:3px solid var(--sun)}
+.back .w{font-family:'Fredoka';font-size:1.35rem;font-weight:700;color:var(--sea2)}.back .s{font-size:.82rem;font-weight:700}
+.row{display:flex;gap:6px;align-items:center}
+/* memory */
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:640px;margin:0 auto}
+.tile{aspect-ratio:1;perspective:700px;cursor:pointer}.tile .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}.tile.fl .in,.tile.mt .in{transform:rotateY(180deg)}
+.tile .fc{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:grid;place-items:center;overflow:hidden}
+.tile .fc.b{background:conic-gradient(from 45deg,var(--sea),var(--violet),var(--pink),var(--orange),var(--sun),var(--mint),var(--sea));font-size:2rem;color:#fff}
+.tile .fc.f{transform:rotateY(180deg);background:#fff;border:3px solid var(--violet);font-family:'Fredoka';font-weight:700;font-size:1.05rem;text-align:center;padding:6px;color:var(--ink)}
+.tile .fc.f img{width:100%;height:100%;object-fit:cover}.tile.mt .fc.f{border-color:var(--ok);box-shadow:0 0 0 4px #a7f3d0}
+.tile.mt{animation:pop .5s}@keyframes pop{50%{transform:scale(1.08)}}
+/* left right */
+.lr{text-align:center}.lrimg{width:300px;max-width:85%;height:220px;border-radius:26px;object-fit:cover;border:6px solid #fff;box-shadow:0 10px 24px rgba(0,0,0,.15);animation:spinIn .6s cubic-bezier(.3,1.5,.5,1)}
+@keyframes spinIn{from{transform:rotate(-200deg) scale(.2);opacity:0}}
+.lrb{display:flex;gap:14px;justify-content:center;margin-top:16px}
+.big{font-family:'Fredoka';font-weight:700;font-size:1.25rem;border:none;border-radius:20px;padding:16px 22px;min-width:180px;cursor:pointer;color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.18);transition:transform .15s}
+.big:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.18)}.big.l{background:var(--sea)}.big.r{background:var(--coral)}
+.big.okb{background:var(--ok)!important;animation:pop .4s}.big.kob{background:#94a3b8!important;animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.prog{display:flex;gap:6px;justify-content:center;margin:10px 0}.prog i{width:14px;height:14px;border-radius:50%;background:#e2e8f0}.prog i.g{background:var(--ok)}.prog i.b{background:var(--ko)}.prog i.c{background:var(--sun);transform:scale(1.3)}
+.fb{min-height:52px;margin-top:10px;font-weight:800}
+/* chat */
+.chat{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:80%;padding:10px 14px;border-radius:20px;animation:up .4s;font-weight:700}@keyframes up{from{transform:translateY(14px);opacity:0}}
+.msg.w{align-self:flex-start;background:#fff;border:2px solid #c7d2fe;border-bottom-left-radius:4px}.msg.g{align-self:flex-end;background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;border-bottom-right-radius:4px}
+.msg.g .it{color:#fde68a}.msg .who{font-family:'Fredoka';font-size:.8rem;opacity:.8;display:block}
+.typing{align-self:flex-start;background:#fff;border-radius:18px;padding:10px 16px}.typing span{display:inline-block;width:8px;height:8px;border-radius:50%;background:#a5b4fc;margin:0 2px;animation:dot 1s infinite}.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes dot{50%{transform:translateY(-6px)}}
+.choices{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.ch{font:inherit;font-weight:700;border:2.5px solid var(--violet);background:#fff;border-radius:18px;padding:9px 14px;cursor:pointer;text-align:right;color:var(--ink)}
+.ch:hover{background:#f5f3ff}.ch.x{border-color:var(--ko);background:#ffe4e6;text-decoration:line-through;animation:shake .4s}
+/* build */
+.bq{background:#fff;border-radius:20px;padding:14px;margin-bottom:14px;border:3px dashed #fbcfe8;scroll-margin-top:90px}
+.slot{min-height:54px;border-radius:14px;background:#fdf4ff;padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;border:2px solid #f0abfc}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.tk{font-family:'Fredoka';font-weight:600;font-size:1.05rem;border:none;border-radius:12px;padding:8px 13px;cursor:pointer;color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.15);animation:wobble 2.5s ease-in-out infinite}
+.tk:nth-child(5n+1){background:var(--sea)}.tk:nth-child(5n+2){background:var(--orange)}.tk:nth-child(5n+3){background:var(--violet)}.tk:nth-child(5n+4){background:var(--mint)}.tk:nth-child(5n){background:var(--coral)}
+.slot .tk{animation:none}@keyframes wobble{50%{transform:rotate(2deg)}}
+.bq.ok .slot{background:#d1fae5;border-color:var(--ok)}.bq.ko .slot{animation:shake .4s}
+.bbtns{display:flex;gap:8px;margin-top:10px}.sm{font-family:'Fredoka';font-weight:600;border:none;border-radius:12px;padding:7px 14px;cursor:pointer;background:#e0e7ff;color:var(--ink)}.sm.go{background:var(--pink);color:#fff}
+.sol{display:none;margin-top:8px;font-weight:800;color:var(--sea2)}.bq.done .sol{display:flex}
+/* pc */
+.rule{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.formula{font-family:'Fredoka';font-size:1.3rem;font-weight:700;text-align:center;background:linear-gradient(135deg,#fef3c7,#fce7f3);border-radius:20px;padding:14px;border:3px solid var(--sun)}
+.formula b{color:var(--pink)}.avt{background:#fff;border-radius:20px;padding:8px 12px;border:3px solid #c7d2fe}
+.avt .row{justify-content:space-between;padding:4px 0;border-bottom:1px dashed #e0e7ff}.avt .row:last-child{border:none}
+.avt b{font-family:'Fredoka';color:var(--violet)}
+.pcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;margin-top:16px}
+.pq{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.08);scroll-margin-top:90px}.pq img{width:100%;height:130px;object-fit:cover}
+.pq .bd{padding:12px}.pq p{margin:0 0 8px;font-weight:800;font-size:1.05rem}.gap{display:inline-block;min-width:60px;border-bottom:3px solid var(--violet);text-align:center;color:var(--violet)}
+.pq .opts{display:flex;gap:8px}.pq .opts button{flex:1;font-family:'Fredoka';font-weight:700;font-size:1.05rem;border:none;border-radius:14px;padding:9px;cursor:pointer;color:#fff;background:var(--sea)}
+.pq .opts button:nth-child(2){background:var(--orange)}.pq .opts button:disabled{opacity:.45}.pq .opts button.okb{opacity:1;background:var(--ok)}.pq .opts button.kob{opacity:1;background:var(--ko)}
+.ans{display:none;gap:8px;align-items:center;margin-top:8px;background:#ecfeff;border-radius:14px;padding:8px}.done>.bd .ans,.done .ans{display:flex}
+/* review */
+.rev .ri{background:#fff1f2;border-left:5px solid var(--coral);border-radius:14px;padding:8px 12px;margin-top:8px;font-weight:700}.rev a{color:var(--violet)}
+.reset{font-family:'Fredoka';font-weight:600;border:2.5px solid var(--ko);color:var(--ko);background:#fff;border-radius:999px;padding:8px 18px;cursor:pointer;margin-top:14px}.reset.cf{background:var(--ko);color:#fff}
+.end{text-align:center;font-family:'Fredoka';font-size:1.3rem}
+.fx{position:fixed;pointer-events:none;z-index:80;animation:fly 1.2s ease-out forwards}
+@keyframes fly{0%{opacity:0;transform:translate(0,0) scale(.3) rotate(0)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(var(--r))}}
+.cred{font-size:.7rem;color:#64748b;margin-top:30px}.cred a{color:#64748b}
+.flash{animation:flash 1.4s}@keyframes flash{30%{box-shadow:0 0 0 7px #f9a8d4}}
+@media(max-width:700px){.hero h1{font-size:1.9rem}.stage,.ring,.ring img{width:160px;height:200px}.stage{height:200px}.rule{grid-template-columns:1fr}.big{min-width:140px;font-size:1.05rem;padding:14px}.mem{grid-template-columns:repeat(3,1fr)}.top{top:auto;bottom:10px}}
+</style></head><body>
+<div id="tbar"></div>
+<div class="top"><div class="chip">⏳ <span id="tm">30:00</span></div><div class="chip sc">💖 <span id="sc">0</span> / 29</div><div class="chip"><button id="ittog" title="Traduzione">🇮🇹 <span id="itl">IT</span></button></div></div>
+<header class="hero"><span class="notes" style="left:8%;top:60px">🎵</span><span class="notes" style="right:10%;top:90px;animation-delay:1s">🎶</span><span class="notes" style="left:14%;top:300px;animation-delay:2s">☀️</span><span class="notes" style="right:14%;top:320px;animation-delay:3s">🌊</span>
+<div class="stage"><div class="ring" id="ring"></div></div>
+<h1>Giulia au restaurant</h1><p>Apprends les mots de la table, commande au restaurant et découvre le passé composé… en jouant !<span class="it">Impara le parole della tavola, ordina al ristorante e scopri il passé composé… giocando!</span></p>
+<nav class="map" id="map"></nav></header>
+<main id="main"></main>
+<script>
+var D={"cards": [{"id": "assiette", "img": "plate_0", "fr": "les assiettes", "it": "i piatti (le stoviglie)", "s": "Les assiettes sont sur la table.", "sit": "I piatti sono sul tavolo.", "a": "bae64c1e65", "as_": "f1c87a810e"}, {"id": "verre", "img": "glass_3", "fr": "le verre", "it": "il bicchiere", "s": "Je voudrais un verre d'eau.", "sit": "Vorrei un bicchiere d'acqua.", "a": "a8a65e9a1c", "as_": "cc100cddb7"}, {"id": "fourchette", "img": "fourchette", "fr": "la fourchette", "it": "la forchetta", "s": "On mange les pâtes avec une fourchette.", "sit": "Si mangia la pasta con la forchetta.", "a": "0986b706f5", "as_": "34e8f3bc51"}, {"id": "couteau", "img": "couteau", "fr": "le couteau", "it": "il coltello", "s": "Le couteau est à droite de l'assiette.", "sit": "Il coltello è a destra del piatto.", "a": "ee1a1c9323", "as_": "833ba91ac0"}, {"id": "serviette", "img": "napkin_1", "fr": "la serviette", "it": "il tovagliolo", "s": "La serviette est jolie !", "sit": "Il tovagliolo è carino!", "a": "f083ca9a4c", "as_": "0f8ab340bb"}, {"id": "nappe", "img": "nappe_0", "fr": "la nappe", "it": "la tovaglia", "s": "La nappe est rouge.", "sit": "La tovaglia è rossa.", "a": "2e614d9b7e", "as_": "57d4c6e437"}, {"id": "viande", "img": "meat_1", "fr": "la viande", "it": "la carne", "s": "Je ne mange pas de viande le soir.", "sit": "Non mangio carne la sera.", "a": "d8f9e44f1b", "as_": "3330de342f"}, {"id": "plat", "img": "plats_1", "fr": "le plat", "it": "il piatto (la pietanza)", "s": "Ce plat est délicieux !", "sit": "Questo piatto è delizioso!", "a": "c32e52f110", "as_": "95ba7bbf16"}, {"id": "poulet", "img": "chicken_3", "fr": "le poulet", "it": "il pollo", "s": "Je voudrais du poulet, s'il vous plaît.", "sit": "Vorrei del pollo, per favore.", "a": "7c395ee14d", "as_": "e9160535c0"}, {"id": "pates", "img": "pasta_1", "fr": "les pâtes", "it": "la pasta", "s": "Je voudrais des pâtes.", "sit": "Vorrei della pasta.", "a": "e8ee89d725", "as_": "3ae92b6421"}, {"id": "salade", "img": "salad_1", "fr": "la salade", "it": "l'insalata", "s": "Je voudrais de la salade.", "sit": "Vorrei dell'insalata.", "a": "7d1a186544", "as_": "ccd9e0d4c7"}, {"id": "glace", "img": "gelato_0", "fr": "la glace", "it": "il gelato", "s": "Je prendrais une glace aux trois parfums.", "sit": "Prenderei un gelato ai tre gusti.", "a": "04975021a1", "as_": "2426af6f6f"}, {"id": "dessert", "img": "dessert_0", "fr": "le dessert", "it": "il dolce, il dessert", "s": "Comme dessert, je prendrais de la glace.", "sit": "Come dolce, prenderei del gelato.", "a": "17632c44f8", "as_": "b4143ba883"}], "memory": ["verre", "fourchette", "couteau", "serviette", "nappe", "glace"], "lr": [{"w": "couteau", "img": "couteau", "good": "le couteau", "bad": "la fourchette", "a": "ee1a1c9323", "it": "il coltello"}, {"w": "nappe", "img": "nappe_0", "good": "la nappe", "bad": "le nappe", "a": "2e614d9b7e", "it": "la tovaglia"}, {"w": "verre", "img": "glass_3", "good": "le verre", "bad": "la verre", "a": "a8a65e9a1c", "it": "il bicchiere"}, {"w": "serviette", "img": "napkin_1", "good": "la serviette", "bad": "la nappe", "a": "f083ca9a4c", "it": "il tovagliolo"}, {"w": "fourchette", "img": "fourchette", "good": "la fourchette", "bad": "le couteau", "a": "0986b706f5", "it": "la forchetta"}, {"w": "viande", "img": "meat_1", "good": "la viande", "bad": "le poulet", "a": "d8f9e44f1b", "it": "la carne"}, {"w": "pates", "img": "pasta_1", "good": "les pâtes", "bad": "la salade", "a": "e8ee89d725", "it": "la pasta"}, {"w": "assiette", "img": "plate_0", "good": "les assiettes", "bad": "les verres", "a": "bae64c1e65", "it": "i piatti (le stoviglie)"}], "chat": [{"q": "Bonjour ! Qu'est-ce que vous désirez ?", "qit": "Buongiorno! Cosa desidera?", "q_a": "9f0dbdbc7d", "opts": ["Je voudrais du poulet, s'il vous plaît.", "Je voudrais de la poulet.", "Je voudrais le poulet du."], "good": 0, "a": "e9160535c0", "it": "Vorrei del pollo, per favore.", "w": "poulet"}, {"q": "Et avec le poulet ?", "qit": "E con il pollo?", "q_a": "61917c703e", "opts": ["Je voudrais du pâtes.", "Je voudrais des pâtes.", "Je voudrais de les pâtes."], "good": 1, "a": "3ae92b6421", "it": "Vorrei della pasta.", "w": "pates"}, {"q": "Une petite entrée ?", "qit": "Un piccolo antipasto?", "q_a": "df46ad06c5", "opts": ["Oui, je voudrais des salade.", "Oui, je voudrais du salade.", "Oui, je voudrais de la salade."], "good": 2, "a": "129564520a", "it": "Sì, vorrei dell'insalata.", "w": "salade"}, {"q": "Il vous manque quelque chose ?", "qit": "Le manca qualcosa?", "q_a": "b30f846cae", "opts": ["Je voudrais un verre d'eau, s'il vous plaît.", "Je voudrais une verre d'eau.", "Je voudrais un verres d'eau."], "good": 0, "a": "5c68a93d4b", "it": "Vorrei un bicchiere d'acqua, per favore.", "w": "verre"}, {"q": "Et comme dessert ?", "qit": "E come dolce?", "q_a": "2ce36f7f9c", "opts": ["Comme dessert, je prendrais un glace.", "Comme dessert, je prendrais une glace aux trois parfums.", "Comme dessert, je prends de glace."], "good": 1, "a": "9ace35ceca", "it": "Come dolce, prenderei un gelato ai tre gusti.", "w": "glace"}], "build": [{"s": "Je voudrais des pâtes.", "it": "Vorrei della pasta.", "t": ["Je", "voudrais", "des", "pâtes."], "a": "3ae92b6421", "w": "pates"}, {"s": "Comme dessert, je prendrais de la glace.", "it": "Come dolce, prenderei del gelato.", "t": ["Comme", "dessert,", "je", "prendrais", "de", "la", "glace."], "a": "b4143ba883", "w": "dessert"}, {"s": "Je prendrais une glace aux trois parfums.", "it": "Prenderei un gelato ai tre gusti.", "t": ["Je", "prendrais", "une", "glace", "aux", "trois", "parfums."], "a": "2426af6f6f", "w": "glace"}, {"s": "Le serveur met la nappe sur la table.", "it": "Il cameriere mette la tovaglia sul tavolo.", "t": ["Le", "serveur", "met", "la", "nappe", "sur", "la", "table."], "a": "66df26f628", "w": "nappe"}], "pc": [{"s": "Ils ___ traversé la forêt.", "o": ["ont", "a"], "good": 0, "full": "Ils ont traversé la forêt.", "a": "e79ec3387f", "it": "Hanno attraversato la foresta.", "img": "dance_0"}, {"s": "Elle a ___ avec ses amis.", "o": ["dîner", "dîné"], "good": 1, "full": "Elle a dîné avec ses amis.", "a": "09665d2025", "it": "Ha cenato con i suoi amici.", "img": "plats_1"}, {"s": "Elle ___ rencontré le professeur.", "o": ["ont", "a"], "good": 1, "full": "Elle a rencontré le professeur.", "a": "474a83ad33", "it": "Ha incontrato il professore.", "img": "dance_7"}, {"s": "Il a ___ Giulia au restaurant.", "o": ["invité", "inviter"], "good": 0, "full": "Il a invité Giulia au restaurant.", "a": "7421e679d5", "it": "Ha invitato Giulia al ristorante.", "img": "nappe_0"}, {"s": "Le réveil ___ sonné.", "o": ["a", "ont"], "good": 0, "full": "Le réveil a sonné.", "a": "77a747020f", "it": "La sveglia è suonata.", "img": "dance_5"}, {"s": "Giulia a ___ toute la soirée !", "o": ["danser", "dansé"], "good": 1, "full": "Giulia a dansé toute la soirée !", "a": "af1a16a1dc", "it": "Giulia ha ballato tutta la serata!", "img": "dance2_5"}], "av": [{"fr": "j'ai dansé", "it": "ho ballato", "a": "ee2a7c95b4"}, {"fr": "tu as dansé", "it": "hai ballato", "a": "cf051249c0"}, {"fr": "il / elle a dansé", "it": "ha ballato", "a": "d4108fe958"}, {"fr": "nous avons dansé", "it": "abbiamo ballato", "a": "9d63ce104d"}, {"fr": "vous avez dansé", "it": "avete ballato", "a": "8ace766754"}, {"fr": "ils / elles ont dansé", "it": "hanno ballato", "a": "d990c6e1f7"}], "expc": [{"fr": "danser → dansé", "a": "1d1f6fcc23"}, {"fr": "dîner → dîné", "a": "e15854151e"}, {"fr": "rencontrer → rencontré", "a": "7423c79019"}, {"fr": "sonner → sonné", "a": "6c61fa8968"}], "dance": ["dance_0", "dance_1", "dance_5", "dance_7", "dance2_5"], "total": 29, "credits": ["File:A contemporary dance performance, Rage Box Contemporary Dance Center.jpg", "File:Bend and Snap, contemporary dance performance at Nazareth College Arts Center, Rochester, New York - 20090925.jpg", "File:Wasatch Contemporary Dance Company (40285736230).jpg", "File:Recueil. Stages, spectacle du London contemporary dance theatre. Photographies - Birgit - btv1b10613253t (08 of 13).jpg", "File:Modern dancer 1.jpg", "File:DFC 3512 Juicy grilled steak topped with herb butter served with mashed potatoes fresh greens and a side of gravy.jpg", "File:Sake Glazed Roast Chicken.jpg", "File:Espaguetis carbonara.jpg", "File:Fresh salad with arugula, cabbage and tomato in a glass bowl.jpg", "File:Forte's Ice Cream in three tubs.jpg", "File:Piece of chocolate cake on a white plate decorated with chocolate sauce.jpg", "File:Jordanian Traditional Mansaf, Petra Restaurant, 2026 (01).jpg", "File:Full Argentine meal with hamburgers, chicken burger-style sandwiches, french fries, and pickled gherkins on a set dinner table.jpg", "File:Waiter serves water in a glass at a restaurant.jpg", "File:Feldbesteck Bundeswehr TSR 81.jpg", "File:Brede-LilleBrede-napkin.jpg", "File:HK 海怡半島 South Horizons 住戶俱樂部 Residents Club Dinner 寶湖酒家 Treasure Lake Restaurant red tablecloth n setting Wall TV set Jan-2013.JPG"]};
+(function(){
+var KEY='giulia-restaurant-v1',st;try{st=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){st={}}
+['fl','mem','lr','chat','build','pc','bad'].forEach(function(k){st[k]=st[k]||{}});st.t=st.t||0;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+function $(s,r){return (r||document).querySelector(s)}function $$(s,r){return [].slice.call((r||document).querySelectorAll(s))}
+function el(h){var d=document.createElement('div');d.innerHTML=h.trim();return d.firstChild}
+var SPK='<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+function au(k){return '<button class="au" data-a="'+k+'" aria-label="Écouter">'+SPK+'</button>'}
+var cur=null,cb=null;function play(k,b){if(cur){cur.pause();if(cb)cb.classList.remove('on')}cur=new Audio('audio/'+k+'.mp3');cb=b||null;if(b)b.classList.add('on');cur.onended=function(){if(b)b.classList.remove('on')};cur.play().catch(function(){})}
+document.addEventListener('click',function(e){var b=e.target.closest('.au');if(b){e.stopPropagation();play(b.getAttribute('data-a'),b)}},true);
+/* effects: alternate hearts, confetti, stars */
+var fxn=0;function fx(node){var r=node.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,kind=fxn++%3;
+ var sets=[['💖','💗','💕','❤️','💜'],['🎉','🎊','✨','🟡','🔷','🟣'],['⭐','🌟','✨','💫']];
+ for(var i=0;i<14;i++){var s=document.createElement('span');s.className='fx';s.textContent=sets[kind][i%sets[kind].length];var a=Math.random()*Math.PI*2,d=60+Math.random()*90;
+  s.style.left=x+'px';s.style.top=y+'px';s.style.fontSize=(16+Math.random()*16)+'px';s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');s.style.setProperty('--r',(Math.random()*360-180)+'deg');
+  document.body.appendChild(s);setTimeout(function(n){return function(){n.remove()}}(s),1250)}}
+function score(){var n=0;['mem','lr','chat','build','pc'].forEach(function(g){for(var k in st[g])if(st[g][k]===1||st[g][k]===true||(st[g][k]&&st[g][k].ok))n++});$('#sc').textContent=n;var c=$('.chip.sc');c.classList.remove('bump');void c.offsetWidth;c.classList.add('bump');updMap()}
+function bad(id,label,fr,anchor){st.bad[id]={l:label,fr:fr,t:anchor};save();rev()}
+/* IT toggle */
+function setIt(v){document.body.classList.toggle('noit',!v);st.noit=!v;save()}$('#ittog').onclick=function(){setIt(document.body.classList.contains('noit'))};setIt(!st.noit);
+/* timer */
+var T=1800;function tick(){var left=Math.max(0,T-st.t),m=Math.floor(left/60),s=left%60;$('#tm').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;$('#tbar').style.width=(100*left/T)+'%'}
+tick();setInterval(function(){if(document.visibilityState==='visible'&&st.t<T){st.t++;tick();if(st.t%5==0)save()}},1000);
+/* hero ring */
+var ring=$('#ring'),n=D.dance.length;D.dance.forEach(function(d,i){var im=document.createElement('img');im.src='img/'+d+'.jpg';im.style.transform='rotateY('+(360/n*i)+'deg) translateZ(260px)';ring.appendChild(im)});
+var main=$('#main');
+var SECS=[['cartes','🃏','Les mots de la table','var(--sea)'],['memory','🧠','Memory','var(--violet)'],['lr','⬅️➡️','Gauche ou droite ?','var(--orange)'],['resto','🍝','Au restaurant','var(--pink)'],['phrases','🧩','Construis la phrase','var(--mint)'],['pc','💃','Le passé composé','var(--coral)'],['revoir','📌','À revoir','#64748b']];
+var map=$('#map');SECS.forEach(function(s){var a=el('<a href="#'+s[0]+'" style="background:'+s[3]+'" data-s="'+s[0]+'">'+s[1]+' '+s[2]+'<span class="done">✅</span></a>');map.appendChild(a)});
+function sec(id,ic,t,col,lead,leadit){return el('<section class="sec" id="'+id+'"><div class="sh"><span class="badge" style="background:'+col+'">'+ic+'</span><h2>'+t+'</h2></div><p class="lead">'+lead+'<span class="it">'+leadit+'</span></p><div class="body"></div></section>')}
+function updMap(){var c={memory:[D.memory.length,'mem'],lr:[D.lr.length,'lr'],resto:[D.chat.length,'chat'],phrases:[D.build.length,'build'],pc:[D.pc.length,'pc']};
+ for(var k in c){var g=st[c[k][1]],done=Object.keys(g).length>=c[k][0];var a=$('#map a[data-s="'+k+'"]');if(a)a.classList.toggle('ok',done)}
+ var a0=$('#map a[data-s="cartes"]');if(a0)a0.classList.toggle('ok',Object.keys(st.fl).length>=D.cards.length)}
+/* 1 cards */
+var S=sec('cartes','🃏','Les mots de la table','var(--sea)','Clique sur chaque carte pour la retourner, écoute et répète le mot.','Clicca su ogni carta per girarla, ascolta e ripeti la parola.');main.appendChild(S);
+var g=el('<div class="cards"></div>');S.querySelector('.body').appendChild(g);
+D.cards.forEach(function(c){var d=el('<div class="card" id="card-'+c.id+'"><div class="in"><div class="face"><img src="img/'+c.img+'.jpg" alt="" loading="lazy"><span class="q">Qu\'est-ce que c\'est ? 🤔</span></div><div class="face back"><div class="row">'+au(c.a)+'<span class="w">'+c.fr+'</span></div><span class="it">'+c.it+'</span><div class="row">'+au(c.as_)+'<span class="s">'+c.s+'</span></div><span class="it">'+c.sit+'</span></div></div></div>');
+ if(st.fl[c.id])d.classList.add('fl');d.onclick=function(){var f=!d.classList.contains('fl');d.classList.toggle('fl');if(f){st.fl[c.id]=1;save();updMap();setTimeout(function(){play(c.a)},350)}};g.appendChild(d)});
+var CB={};D.cards.forEach(function(c){CB[c.id]=c});
+/* 2 memory */
+S=sec('memory','🧠','Memory','var(--violet)','Retrouve les paires : une photo et son mot. Retourne deux cartes à la fois.','Trova le coppie: una foto e la sua parola. Gira due carte alla volta.');main.appendChild(S);
+var mg=el('<div class="mem"></div>');S.querySelector('.body').appendChild(mg);
+var tiles=[];D.memory.forEach(function(w){tiles.push({w:w,t:'i'});tiles.push({w:w,t:'w'})});
+var order=st.memOrder;if(!order||order.length!==tiles.length){order=tiles.map(function(_,i){return i}).sort(function(){return Math.random()-.5});st.memOrder=order;save()}
+var open=[],lock=false,mtries=st.memTries||{};
+order.forEach(function(i){var t=tiles[i],c=CB[t.w];var face=t.t==='i'?'<img src="img/'+c.img+'.jpg" alt="">':c.fr;
+ var d=el('<div class="tile" data-w="'+t.w+'"><div class="in"><div class="fc b">✿</div><div class="fc f">'+face+'</div></div></div>');if(st.mem[t.w])d.classList.add('mt');
+ d.onclick=function(){if(lock||d.classList.contains('mt')||d.classList.contains('fl'))return;d.classList.add('fl');open.push(d);
+  if(open.length===2){lock=true;var a=open[0],b=open[1];if(a.getAttribute('data-w')===b.getAttribute('data-w')){setTimeout(function(){a.classList.add('mt');b.classList.add('mt');a.classList.remove('fl');b.classList.remove('fl');st.mem[t.w]=1;save();score();fx(b);play(c.a);open=[];lock=false},450)}
+   else{setTimeout(function(){a.classList.remove('fl');b.classList.remove('fl');open=[];lock=false},1000)}}};mg.appendChild(d)});
+/* 3 left right */
+S=sec('lr','⬅️➡️','Gauche ou droite ?','var(--orange)','Regarde la photo et choisis le bon mot : à gauche ou à droite ? (Tu peux aussi utiliser les flèches du clavier.)','Guarda la foto e scegli la parola giusta: a sinistra o a destra? (Puoi usare anche le frecce della tastiera.)');main.appendChild(S);
+var LB=S.querySelector('.body');LB.innerHTML='<div class="lr"><div class="prog" id="lrprog"></div><img class="lrimg" id="lrimg" alt=""><div class="lrb"><button class="big l" id="lrl"></button><button class="big r" id="lrr"></button></div><div class="fb" id="lrfb"></div></div>';
+var lrSides=st.lrSides||D.lr.map(function(){return Math.random()<.5});st.lrSides=lrSides;
+function lrIdx(){for(var i=0;i<D.lr.length;i++)if(!(i in st.lr))return i;return -1}
+function lrShow(){var i=lrIdx(),P=$('#lrprog');P.innerHTML=D.lr.map(function(_,j){return '<i class="'+(j in st.lr?(st.lr[j]?'g':'b'):(j===i?'c':''))+'"></i>'}).join('');
+ if(i<0){$('#lrimg').style.display='none';$('.lrb',LB).style.display='none';$('#lrfb').innerHTML='🏆 Jeu terminé ! · <span class="it" style="display:inline">Gioco finito!</span>';return}
+ var q=D.lr[i],im=$('#lrimg');im.style.animation='none';void im.offsetWidth;im.style.animation='';im.src='img/'+q.img+'.jpg';
+ var l=$('#lrl'),r=$('#lrr');[l,r].forEach(function(b){b.className=b.className.replace(/ okb| kob/g,'');b.disabled=false});
+ var gl=lrSides[i];l.textContent=gl?q.good:q.bad;r.textContent=gl?q.bad:q.good;l.onclick=function(){lrAns(i,gl,l)};r.onclick=function(){lrAns(i,!gl,r)}}
+function lrAns(i,ok,b){if(i in st.lr)return;st.lr[i]=ok;save();$$('.big',LB).forEach(function(x){x.disabled=true});var q=D.lr[i];
+ if(ok){b.classList.add('okb');fx(b);score()}else{b.classList.add('kob');bad('lr'+i,'Gauche ou droite','📷 '+q.good,'card-'+q.w)}
+ $('#lrfb').innerHTML=(ok?'✅ ':'👉 ')+q.good+' <span class="it" style="display:inline">('+q.it+')</span>';play(q.a);setTimeout(function(){$('#lrfb').innerHTML='';lrShow()},2100)}
+document.addEventListener('keydown',function(e){var r=$('#lr').getBoundingClientRect();if(r.top>innerHeight||r.bottom<0)return;if(e.key==='ArrowLeft')$('#lrl').click();if(e.key==='ArrowRight')$('#lrr').click()});
+lrShow();
+/* 4 chat */
+S=sec('resto','🍝','Au restaurant','var(--pink)','Tu es au restaurant avec tes amis. Réponds au serveur : choisis la bonne phrase !','Sei al ristorante con i tuoi amici. Rispondi al cameriere: scegli la frase giusta!');main.appendChild(S);
+var CH=el('<div class="chat"></div>');S.querySelector('.body').appendChild(CH);
+function wmsg(q){return '<div class="msg w"><span class="who">🧑‍🍳 Le serveur</span>'+q.q+' '+au(q.q_a)+'<span class="it">'+q.qit+'</span></div>'}
+function gmsg(q){return '<div class="msg g"><span class="who">💃 Giulia</span>'+q.opts[q.good]+'<span class="it">'+q.it+'</span></div>'}
+function chatRender(){CH.innerHTML='';var i=0;for(;i<D.chat.length;i++){if(!(i in st.chat))break;CH.insertAdjacentHTML('beforeend',wmsg(D.chat[i])+gmsg(D.chat[i]))}
+ if(i>=D.chat.length){CH.insertAdjacentHTML('beforeend','<div class="msg w"><span class="who">🧑‍🍳 Le serveur</span>Très bien ! Bon appétit ! 😋<span class="it">Benissimo! Buon appetito!</span></div>');return}
+ var q=D.chat[i],t=el('<div class="typing"><span></span><span></span><span></span></div>');CH.appendChild(t);
+ setTimeout(function(){t.remove();CH.insertAdjacentHTML('beforeend',wmsg(q));var box=el('<div class="choices"></div>');var tries=0;
+  q.opts.forEach(function(o,j){var b=el('<button class="ch">'+o+'</button>');b.onclick=function(){if(j===q.good){if(!(i in st.chat)){st.chat[i]=tries===0?1:0;save();score()}if(tries===0)fx(b);else bad('chat'+i,'Au restaurant',q.opts[q.good],'card-'+q.w);play(q.a);setTimeout(chatRender,1500);box.querySelectorAll('.ch').forEach(function(x){x.disabled=true});b.style.background='#d1fae5';b.style.borderColor='#10b981'}else{tries++;b.classList.add('x');b.disabled=true}};box.appendChild(b)});CH.appendChild(box)},900)}
+chatRender();
+/* 5 build */
+S=sec('phrases','🧩','Construis la phrase','var(--mint)','Clique sur les mots dans le bon ordre pour construire la phrase.','Clicca sulle parole nell\'ordine giusto per costruire la frase.');main.appendChild(S);
+var BB=S.querySelector('.body');
+D.build.forEach(function(q,i){var box=el('<div class="bq" id="b'+i+'"><div class="slot"></div><div class="tiles"></div><div class="bbtns"><button class="sm go">Vérifier ✔</button><button class="sm">Effacer ↺</button></div><div class="sol">'+au(q.a)+'<span>'+q.s+'<span class="it">'+q.it+'</span></span></div></div>');BB.appendChild(box);
+ var slot=$('.slot',box),tl=$('.tiles',box),sh=q.t.map(function(_,k){return k});var seed=i*7+3;sh.sort(function(a,b){return ((a*seed+11)%7)-((b*seed+11)%7)});
+ function fill(){tl.innerHTML='';slot.innerHTML='';sh.forEach(function(k){var b=el('<button class="tk">'+q.t[k]+'</button>');b.onclick=function(){if(box.classList.contains('done'))return;(b.parentNode===tl?slot:tl).appendChild(b)};tl.appendChild(b)})}
+ fill();
+ if(i in st.build){box.classList.add('done',st.build[i]?'ok':'x');slot.innerHTML=q.t.map(function(w){return '<button class="tk">'+w+'</button>'}).join('');tl.innerHTML=''}
+ var tries=0;$('.go',box).onclick=function(){if(box.classList.contains('done'))return;var s=$$('.tk',slot).map(function(b){return b.textContent}).join(' ');
+  if(s===q.t.join(' ')){st.build[i]=tries===0?1:0;save();box.classList.add('done','ok');fx(box);score();play(q.a)}
+  else if($$('.tk',tl).length===0){tries++;box.classList.add('ko');setTimeout(function(){box.classList.remove('ko')},500);if(tries>=2){st.build[i]=0;save();box.classList.add('done');slot.innerHTML=q.t.map(function(w){return '<button class="tk">'+w+'</button>'}).join('');tl.innerHTML='';bad('build'+i,'Construis la phrase',q.s,'b'+i);play(q.a);score()}}};
+ $$('.sm',box)[1].onclick=function(){if(!box.classList.contains('done'))fill()}});
+/* 6 passé composé */
+S=sec('pc','💃','Le passé composé','var(--coral)','Pour raconter ce que tu as fait hier, on utilise le passé composé. C\'est facile !','Per raccontare quello che hai fatto ieri, si usa il passé composé. È facile!');main.appendChild(S);
+var PB=S.querySelector('.body');
+PB.appendChild(el('<div class="rule"><div><div class="formula">avoir + <b>verbe en -é</b><br>danser → <b>dansé</b> 💃</div><div style="margin-top:10px">'+D.expc.map(function(x){return '<div class="row" style="margin:6px 0">'+au(x.a)+'<b class="f">'+x.fr+'</b></div>'}).join('')+'</div></div><div class="avt">'+D.av.map(function(x){return '<div class="row"><span>'+au(x.a)+' <b>'+x.fr+'</b></span><span class="it" style="display:inline">'+x.it+'</span></div>'}).join('')+'</div></div>'));
+PB.appendChild(el('<p class="lead" style="margin-top:18px">🎬 Le film de Giulia : choisis la bonne forme !<span class="it">Il film di Giulia: scegli la forma giusta!</span></p>'));
+var pg=el('<div class="pcg"></div>');PB.appendChild(pg);
+D.pc.forEach(function(q,i){var d=el('<div class="pq" id="pc'+i+'"><img src="img/'+q.img+'.jpg" alt=""><div class="bd"><p>'+q.s.replace('___','<span class="gap">?</span>')+'</p><div class="opts">'+q.o.map(function(o,j){return '<button data-j="'+j+'">'+o+'</button>'}).join('')+'</div><div class="ans">'+au(q.a)+'<span><b>'+q.full+'</b><span class="it">'+q.it+'</span></span></div></div></div>');pg.appendChild(d);
+ function show(j,auto){var ok=j===q.good;d.classList.add('done');$$('button[data-j]',d).forEach(function(b,k){b.disabled=true;if(k===j)b.classList.add(ok?'okb':'kob');if(k===q.good)b.classList.add('okb')});$('.gap',d).textContent=q.o[q.good];if(auto)play(q.a)}
+ if(i in st.pc)show(st.pc[i].j,false);
+ $$('button[data-j]',d).forEach(function(b){b.onclick=function(){var j=+b.getAttribute('data-j');if(i in st.pc)return;var ok=j===q.good;st.pc[i]={j:j,ok:ok};save();if(ok){fx(b)}else bad('pc'+i,'Passé composé',q.full,'pc'+i);show(j,true);score()}})});
+/* review */
+S=sec('revoir','📌','À revoir','#64748b','Voici les mots et les phrases à revoir. Clique pour retourner à la carte.','Ecco le parole e le frasi da ripassare. Clicca per tornare alla carta.');S.classList.add('rev');main.appendChild(S);
+var RB=S.querySelector('.body');
+function rev(){var ks=Object.keys(st.bad);RB.innerHTML=ks.length?ks.map(function(k){var b=st.bad[k];return '<div class="ri">'+b.l+' · '+b.fr+' · <a href="#'+b.t+'" data-f="'+b.t+'">Revoir →</a></div>'}).join(''):'<p class="end">Rien à revoir : bravo ! 🌈</p>';
+ RB.appendChild(el('<button class="reset">Recommencer ↺</button>'));var rs=$('.reset',RB),arm=false;rs.onclick=function(){if(!arm){arm=true;rs.classList.add('cf');rs.textContent='Clique encore pour tout effacer';return}try{localStorage.removeItem(KEY)}catch(e){}location.reload()}}
+rev();
+document.addEventListener('click',function(e){var a=e.target.closest('a[data-f]');if(!a)return;var t=document.getElementById(a.getAttribute('data-f'));if(t)setTimeout(function(){t.classList.remove('flash');void t.offsetWidth;t.classList.add('flash');if(t.classList.contains('card'))t.classList.add('fl')},400)});
+main.appendChild(el('<footer class="cred">Photos : Wikimedia Commons — '+D.credits.map(function(t){return '<a href="https://commons.wikimedia.org/wiki/'+encodeURIComponent(t.replace(/ /g,'_'))+'" target="_blank" rel="noopener">'+t.slice(5)+'</a>'}).join(' · ')+'</footer>'));
+score();
+})();
+</script></body></html>
