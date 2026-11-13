@@ -124,3 +124,8 @@ Foto aggiunte (già usate): Fête de la musique 2008 (band in strada), vetrina d
 Foto usate nei post del 18, 19 e 21 novembre: terrasse Les Deux Magots, interno del Café de Flore, angolo del Café de Flore, place Saint-André-des-Arts, terrasse au soleil (colonnes), sedie colorate di caffè sotto la pioggia, albicocche al mercato Bastille (venditore), pesche al mercato Bastille, pomodori al mercato d'Aligre, banco di frutta al mercato Bastille, Ouchy (Lausanne) col lago e le Alpi, banco del mercato con PHARMACIE, Bassin de la Villette (terrasse « atmosphère »), Grand Rex di notte, Jardin du Luxembourg (due amiche sulla panchina), Paris Plages, passerella del Canal Saint-Martin, baguettes de campagne.
 
 **Regola colori (12 novembre 2026)**: ogni post ha una palette nuova e, dentro lo stesso post, lo sfondo alterna 2-3 colori diversi da una slide all'altra. Palette già usate: viola, verde lime, blu, rosa, notte oro, nero/rosa neon, petrolio/corallo, mandarino/ambra, ciliegia/blu/terracotta.
+
+## Reel « Un Italien a dit ça en France… 😳 » (13/11/2026)
+
+Cartella `reel/gaffe-italien-en-france/`. Stile neon (viola, rosa, ciano, verde per le risposte giuste), 39 s, 3 gaffe: caméra → chambre, salir → monter, morbide → doux. Animazione HTML (`reel.html`, funzione `render(t)`) resa in MP4 con `render.py`; effetti sonori sintetici con `sfx.py`. Manca la voce di Irene.
+Foto (Unsplash): amici al tramonto (photo-1511632765486), insegna HOTEL notturna (photo-1517840901100), interno autobus (photo-1494515843206), divano arancio con cuscino rosa (photo-1567016432779). Da aggiungere alla lista « Foto già usate ».
