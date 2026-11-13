@@ -1,0 +1,188 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,800;1,500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1080px;height:1920px;overflow:hidden;background:#000;font-family:Poppins,sans-serif}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden}
+.layer{position:absolute;inset:0}
+.mk{position:absolute;inset:0;opacity:0;overflow:hidden}
+.mk img{position:absolute;left:50%;top:50%;width:auto;height:100%;min-width:100%;object-fit:cover;transform-origin:center}
+.mk::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,10,30,.55) 0%,rgba(40,10,30,.05) 30%,rgba(40,10,30,.15) 50%,rgba(40,10,30,.8) 100%)}
+#kitchen{opacity:0;background:
+ radial-gradient(circle at 50% 35%,rgba(255,255,255,.55),rgba(255,255,255,0) 55%),
+ repeating-linear-gradient(0deg,transparent 0 118px,rgba(255,255,255,.45) 118px 122px),
+ repeating-linear-gradient(90deg,transparent 0 118px,rgba(255,255,255,.45) 118px 122px),
+ linear-gradient(180deg,#9fdccd,#7cc9b8)}
+#floor{position:absolute;left:0;right:0;bottom:0;height:640px;background:linear-gradient(180deg,#f3d9c2,#e7c3a3)}
+/* frigo */
+#fridge{position:absolute;left:250px;top:250px;width:580px;height:800px;opacity:0}
+.fbody{position:absolute;inset:0;border-radius:70px 70px 40px 40px;background:linear-gradient(90deg,#f08aa9,#f6a6bd 45%,#e9789b);box-shadow:0 40px 60px rgba(70,20,40,.35)}
+.inside{position:absolute;border-radius:24px;background:linear-gradient(180deg,#ffffff,#e9f6ff);overflow:hidden;box-shadow:inset 0 0 40px rgba(120,170,200,.45)}
+#fzin{left:34px;top:34px;width:512px;height:186px}
+#frin{left:34px;top:250px;width:512px;height:516px}
+.inside .glow{position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(255,250,210,.95),rgba(255,250,210,0) 70%);opacity:0}
+.shelf{position:absolute;left:10px;right:10px;height:10px;border-radius:5px;background:rgba(150,200,230,.7);box-shadow:0 3px 6px rgba(0,0,0,.08)}
+.door{position:absolute;border-radius:28px;background:linear-gradient(90deg,#f6a6bd,#f39ab4 60%,#e9789b);transform-origin:left center;box-shadow:inset -6px 0 0 rgba(0,0,0,.06),0 10px 20px rgba(70,20,40,.25)}
+.door .handle{position:absolute;right:28px;width:22px;border-radius:11px;background:linear-gradient(90deg,#fff,#e9e3ea);box-shadow:0 3px 6px rgba(0,0,0,.2)}
+#fzdoor{left:28px;top:28px;width:524px;height:198px}#fzdoor .handle{top:110px;height:70px}
+#frdoor{left:28px;top:244px;width:524px;height:528px}#frdoor .handle{top:30px;height:150px}
+.door .badge{position:absolute;left:40px;bottom:36px;font:800 26px Poppins;color:#fff;letter-spacing:3px;opacity:.9}
+.item{position:absolute;font-size:118px;line-height:1;transform:scale(0);filter:drop-shadow(0 8px 6px rgba(0,0,0,.18));text-align:center;font-family:'Noto Color Emoji'}
+.tagf{position:absolute;left:50%;top:100%;transform:translateX(-50%);font:800 24px Poppins;color:#7a2d4a;background:#fff;border-radius:999px;padding:2px 14px;white-space:nowrap;box-shadow:0 3px 8px rgba(0,0,0,.12)}
+.ghost{position:absolute;border:6px dashed #e2556f;border-radius:26px;opacity:0;display:flex;align-items:center;justify-content:center;font-size:90px;font-family:'Noto Color Emoji';background:rgba(255,230,235,.6)}.ghost::before{content:'';position:absolute;inset:0;background:inherit}.ghost span{opacity:.28;filter:grayscale(1)}.ghost::after{content:'✕';position:absolute;font:800 110px Poppins;color:#d7263d}
+.frost{position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;opacity:0;box-shadow:0 0 12px #fff}
+/* ui */
+#logo{position:absolute;left:54px;top:70px;width:138px;height:138px;border-radius:50%;box-shadow:0 0 0 6px #fff,0 10px 26px rgba(0,0,0,.35);object-fit:cover}
+#title{position:absolute;left:50%;top:96px;transform:translateX(-50%);background:#fff;color:#c2416a;font:800 34px Poppins;padding:14px 30px;border-radius:999px;letter-spacing:1px;white-space:nowrap;box-shadow:0 10px 26px rgba(0,0,0,.25)}
+#score{position:absolute;right:54px;top:100px;background:#2a1a3a;color:#ffd166;font:800 36px Poppins;padding:10px 24px;border-radius:999px;box-shadow:0 10px 26px rgba(0,0,0,.3)}
+#card{position:absolute;left:60px;right:60px;top:1110px;background:#fffaf5;border-radius:48px;padding:44px 50px;box-shadow:0 26px 60px rgba(40,10,30,.4);transform-origin:center bottom}
+#sent{font:800 64px Poppins;line-height:1.22;color:#2a1a3a;text-align:center}
+.bl{display:inline-block;min-width:150px;border-bottom:8px solid #c2416a;text-align:center;color:transparent;margin:0 6px;transform-origin:center bottom}
+.bl.on{color:#fff;border-bottom-color:transparent;border-radius:22px;padding:0 18px}
+#sub{position:absolute;left:90px;right:90px;top:1460px;text-align:center}
+#sub span{display:inline-block;background:rgba(20,10,25,.82);color:#fff;font:italic 500 40px Poppins;padding:12px 26px;border-radius:24px;line-height:1.3}
+#chip{position:absolute;left:50%;top:960px;transform:translateX(-50%) scale(0);background:#ffd166;color:#2a1a3a;font:800 40px Poppins;padding:16px 34px;border-radius:999px;white-space:nowrap;box-shadow:0 14px 30px rgba(0,0,0,.3)}
+#ring{position:absolute;right:70px;top:960px;width:150px;height:150px;opacity:0}
+#ring svg{width:150px;height:150px;transform:rotate(-90deg)}
+#ring .num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:800 68px Poppins;color:#fff;text-shadow:0 4px 12px rgba(0,0,0,.4)}
+#cart{position:absolute;left:0;top:640px;font-size:250px;line-height:1;font-family:'Noto Color Emoji';filter:drop-shadow(0 16px 14px rgba(0,0,0,.35))}
+#drop{position:absolute;font-size:150px;font-family:'Noto Color Emoji';line-height:1;opacity:0;filter:drop-shadow(0 10px 10px rgba(0,0,0,.3))}
+#big{position:absolute;left:0;right:0;top:300px;text-align:center;opacity:0}
+.introT{font:800 104px Poppins;color:#fff;line-height:1.05;text-shadow:0 8px 30px rgba(0,0,0,.45)}
+.introS{display:inline-block;margin-top:34px;background:#ffd166;color:#2a1a3a;font:800 52px Poppins;padding:14px 36px;border-radius:999px}
+.rchips{display:flex;flex-wrap:wrap;justify-content:center;gap:24px;padding:0 60px}
+.rc{font:800 74px Poppins;color:#fff;padding:18px 44px;border-radius:999px;transform:scale(0);box-shadow:0 16px 30px rgba(0,0,0,.3)}
+#heart{position:absolute;left:0;right:0;top:330px;text-align:center;font-size:300px;font-family:'Noto Color Emoji';opacity:0}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+</style></head><body><div id="stage">
+<div class="mk" id="m0"><img src="s_rue.jpg"></div>
+<div class="mk" id="m1"><img src="s_baguettes.jpg"></div>
+<div class="mk" id="m2"><img src="s_rue.jpg"></div>
+<div class="mk" id="m3"><img src="g_etal.jpg"></div>
+<div class="mk" id="m4"><img src="g_marche_bleu.jpg"></div>
+<div class="mk" id="m5"><img src="g_tomates.jpg"></div>
+<div class="layer" id="kitchen"><div id="floor"></div>
+ <div id="fridge"><div class="fbody"></div>
+  <div class="inside" id="fzin"><div class="glow"></div>
+   <div class="item" id="i_glace" style="left:198px;top:30px">🍦<span class="tagf">la glace</span></div>
+  </div>
+  <div class="inside" id="frin"><div class="glow"></div>
+   <div class="shelf" style="top:170px"></div><div class="shelf" style="top:340px"></div>
+   <div class="item" id="i_fromage" style="left:22px;top:30px;font-size:92px">🧀<span class="tagf">le fromage</span></div>
+   <div class="item" id="i_creme" style="left:186px;top:30px;font-size:92px">🍶<span class="tagf">la crème</span></div>
+   <div class="item" id="i_yaourt" style="left:352px;top:30px;font-size:92px">🥣<span class="tagf">les yaourts</span></div>
+   <div class="item" id="i_jambon" style="left:22px;top:202px;font-size:92px">🍖<span class="tagf">le jambon</span></div>
+   <div class="item" id="i_conf" style="left:186px;top:202px;font-size:92px">🍓<span class="tagf">la confiture</span></div>
+   <div class="item" id="i_ananas" style="left:352px;top:196px;font-size:96px">🍍<span class="tagf">l'ananas</span></div>
+   <div class="item" id="i_tomates" style="left:22px;top:372px;font-size:92px">🍅<span class="tagf">les tomates</span></div>
+   <div class="ghost" id="g_lait" style="left:180px;top:362px;width:150px;height:140px"><span>🥛</span></div>
+   <div class="ghost" id="g_oeufs" style="left:346px;top:362px;width:150px;height:140px"><span>🥚</span></div>
+  </div>
+  <div class="door" id="fzdoor"><div class="handle"></div></div>
+  <div class="door" id="frdoor"><div class="handle"></div><div class="badge">LE FRIGO</div></div>
+  <div class="frost" id="fr0"></div><div class="frost" id="fr1"></div><div class="frost" id="fr2"></div><div class="frost" id="fr3"></div><div class="frost" id="fr4"></div><div class="frost" id="fr5"></div>
+ </div>
+</div>
+<div id="cart">🛒</div><div id="drop"></div>
+<div id="heart">🧀</div>
+<div id="big"></div>
+<img id="logo" src="logo.png"><div id="title"></div><div id="score">★ 0/11</div>
+<div id="chip"></div>
+<div id="ring"><svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="62" stroke="rgba(255,255,255,.35)" stroke-width="14" fill="rgba(42,26,58,.55)"/><circle id="arc" cx="75" cy="75" r="62" stroke="#ffd166" stroke-width="14" fill="none" stroke-linecap="round" stroke-dasharray="390" stroke-dashoffset="0"/></svg><div class="num" id="rnum">2</div></div>
+<div id="card"><div id="sent"></div></div>
+<div id="sub"><span id="subt"></span></div>
+<div id="flash"></div>
+</div>
+<script>
+const CD=2.5, HOLD=4.6;
+const COL={du:'#3a7bd5','de la':'#e2556f',"de l'":'#8e5bd6',des:'#f08c2e',de:'#d7263d',"d'":'#d7263d',le:'#2a9d68'};
+// segments (calés sur la voix)
+const S=[{"k": "intro", "chipAt": 5.1, "subAt": 0.9, "t0": 0.0, "t1": 12.0}, {"k": "open", "doorAt": 0.3, "s": "J'ouvre mon frigo… Qu'est-ce qu'il y a ?", "it": "Apro il mio frigo… Cosa c'è?", "t0": 12.0, "t1": 16.3}, {"k": "q", "scene": "f", "n": 1, "s": "Il y a [du] fromage…", "it": "C'è del formaggio…", "item": "i_fromage", "pre": 0, "cd": 2.5, "lead": 0.71, "t0": 16.3, "t1": 22.0}, {"k": "q", "scene": "f", "n": 2, "s": "…[de la] crème fraîche…", "it": "…della panna…", "item": "i_creme", "pre": 0, "cd": 2.5, "lead": 0.1, "t0": 22.0, "t1": 27.55}, {"k": "q", "scene": "f", "n": 3, "s": "…[des] yaourts…", "it": "…degli yogurt…", "item": "i_yaourt", "pre": 0, "cd": 2.5, "lead": 0.1, "t0": 27.55, "t1": 32.4}, {"k": "q", "scene": "f", "n": 4, "s": "…[du] jambon…", "it": "…del prosciutto…", "item": "i_jambon", "pre": 0, "cd": 2.5, "lead": 0.11, "t0": 32.4, "t1": 37.2}, {"k": "q", "scene": "f", "n": 5, "s": "…[de la] confiture de fraises…", "it": "…della marmellata di fragole…", "item": "i_conf", "pre": 0, "cd": 2.5, "lead": 0.07, "t0": 37.2, "t1": 42.75}, {"k": "q", "scene": "f", "n": 6, "s": "…[de l']ananas…", "it": "…dell'ananas…", "item": "i_ananas", "pre": 0, "cd": 2.5, "lead": 0.08, "t0": 42.75, "t1": 47.25}, {"k": "q", "scene": "f", "n": 7, "s": "…et [des] tomates !", "it": "…e dei pomodori!", "item": "i_tomates", "pre": 0, "cd": 2.5, "lead": 0.4, "t0": 47.25, "t1": 52.05}, {"k": "rule", "chips": [0.1, 1.2, 1.75, 2.85], "banner": 3.75, "t0": 52.05, "t1": 58.85}, {"k": "q", "scene": "f", "n": 8, "pres": "Et dans le congélateur ?", "preit": "E nel congelatore?", "s": "[De la] glace à la vanille !", "it": "Del gelato alla vaniglia!", "item": "i_glace", "freezer": 1, "pre": 2.05, "cd": 2.5, "lead": 0.07, "t0": 58.85, "t1": 66.15}, {"k": "q", "scene": "f", "n": 9, "pres": "Mais… où est le lait ?", "preit": "Ma… dov'è il latte?", "s": "Il n'y a pas [de] lait !", "it": "Non c'è latte!", "ghost": "g_lait", "chip": "Après la négation → de", "shake": 1, "pre": 2.35, "cd": 2.5, "lead": 1.06, "t0": 66.15, "t1": 74.6}, {"k": "q", "scene": "f", "n": 10, "s": "Et je n'ai plus [d']œufs !", "it": "E non ho più uova!", "ghost": "g_oeufs", "chip": "Devant une voyelle : de → d'", "shake": 1, "pre": 0, "cd": 2.5, "lead": 0.93, "t0": 74.6, "t1": 80.45}, {"k": "q", "scene": "f", "n": 11, "s": "J'aime [le] fromage !", "it": "Amo il formaggio!", "heart": 1, "chip": "aimer · adorer · détester → le, la, les", "pre": 0, "cd": 2.5, "lead": 0.81, "t0": 80.45, "t1": 87.45}, {"k": "outro", "t0": 87.45, "t1": 94.45}];
+const T=S[S.length-1].t1;
+const DUR=T;
+function rtOf(s){return s.t0+(s.pre||0)+s.cd+(s.lead||0)}
+// helpers
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ez=x=>{x=cl(x);return x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2};
+const back=x=>{x=cl(x);const c=1.70158,c3=c+1;return 1+c3*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const pop=(t,t0,d=.45)=>t<t0?0:back((t-t0)/d);
+function sentHTML(s,rev){let i=0;return s.replace(/\[(.*?)\]/g,(m,w)=>{const key=w.toLowerCase();const c=COL[key]||'#c2416a';const r=rev[i++]||0;
+ if(r<=0)return `<span class="bl">${w}</span>`;return `<span class="bl on" style="background:${c};transform:scale(${r})">${w}</span>`})}
+let lastSent='';
+function setCard(html,show){const el=$('sent');if(html!==lastSent){el.innerHTML=html;lastSent=html}
+ $('card').style.opacity=show;$('card').style.transform=`translateY(${(1-show)*80}px) scale(${.92+.08*show})`}
+function render(t){
+ const seg=S.find(s=>t>=s.t0&&t<s.t1)||S[S.length-1];const lt=t-seg.t0,d=seg.t1-seg.t0;
+ // fond marché
+ for(let i=0;i<6;i++){const m=$('m'+i);m.style.opacity=0}
+ const kitchenOn=true;
+ let kOp=kitchenOn?1:0;
+ 
+ $('kitchen').style.opacity=kOp;
+ if(false){const bg=seg.k==='open'?5:seg.bg;const m=$('m'+bg);m.style.opacity=1;
+  const z=1.06+.10*cl((t-seg.t0)/d);const im=m.querySelector('img');im.style.transform=`translate(-50%,-50%) scale(${z}) translateX(${(bg%2?-1:1)*20*cl(lt/d)}px)`;
+  // fondu d'entrée
+  if(seg.k==='q'&&lt<.5){const prev=S[S.indexOf(seg)-1];if(prev&&prev.bg!==undefined&&prev.bg!==seg.bg){const pm=$('m'+(prev.k==='intro'?0:prev.bg));pm.style.opacity=1-lt/.5;m.style.opacity=lt/.5}}}
+ // titre / score
+ const answered=S.filter(s=>s.k==='q'&&t>=rtOf(s)).length;
+ $('score').textContent='★ '+answered+'/11';
+ $('title').textContent=seg.k==='outro'?'🏆 TON SCORE':'🧊 LE FRIGO D\'UNE FRANÇAISE';
+ // remise à zéro
+ $('chip').style.transform='translateX(-50%) scale(0)';$('big').style.top='300px';$('ring').style.opacity=0;$('drop').style.opacity=0;$('big').style.opacity=0;$('heart').style.opacity=0;$('flash').style.opacity=0;
+ $('cart').style.opacity=0;
+ // frigo
+ const fr=$('fridge');fr.style.opacity=kitchenOn?1:0;
+ const openAt=S.find(s=>s.k==='open');const ot=t-(openAt.t0+openAt.doorAt);
+ let doorA=-112*ez(ot/1.1);if(t<openAt.t0+openAt.doorAt)doorA=0;
+ const fz=S.find(s=>s.freezer);let fzA=0;if(t>fz.t0+.15)fzA=-112*ez((t-fz.t0-.15)/1);
+ const hq=S.find(s=>s.heart);let closeK=0;if(t>hq.t0)closeK=ez((t-hq.t0)/.8);
+ $('frdoor').style.transform=`perspective(1600px) rotateY(${doorA*(1-closeK)}deg)`;$('fzdoor').style.transform=`perspective(1600px) rotateY(${fzA*(1-closeK)}deg)`;
+ $('frin').querySelector('.glow').style.opacity=cl(ot/1.1)*(1-closeK);$('fzin').querySelector('.glow').style.opacity=cl((t-fz.t0-.15))*(1-closeK);
+ const fs=1-.12*closeK;fr.style.transform=`translateY(${(seg.k==='intro'?(1-ez(lt/1))*600:0)}px) scale(${fs})`;
+ fr.style.filter=closeK?`blur(${closeK*6}px) brightness(${1-.3*closeK})`:'none';
+ // objets du frigo : apparaissent à la révélation et restent
+ S.filter(s=>s.item).forEach(s=>{const rt=rtOf(s);$(s.item).style.transform=`scale(${pop(t,rt,.55)})`});
+ S.filter(s=>s.ghost).forEach(s=>{const rt=rtOf(s);const g=$(s.ghost);const o=t<rt-.3?0:cl((t-rt+.3)/.4);const sh=(t>rt&&t<rt+1.2)?Math.sin((t-rt)*40)*10*(1-(t-rt)/1.2):0;g.style.opacity=o;g.style.transform=`translateX(${sh}px)`});
+ for(let i=0;i<6;i++){const f=$('fr'+i);const ft=t-fz.t0-.35;if(ft>0&&ft<2.2){const p=ft/2.2;f.style.opacity=(1-p)*.9;f.style.left=(120+i*60+Math.sin(i*2+ft*3)*20)+'px';f.style.top=(200-p*170-i*6)+'px'}else f.style.opacity=0}
+ // contenu
+ let sub='';
+ if(seg.k==='intro'){
+  $('big').style.top='1110px';$('big').style.opacity=ez((lt-.6)/.4);$('big').innerHTML=`<div class="introT" style="font-size:78px;color:#2a1a3a;text-shadow:none;transform:scale(${.85+.15*back((lt-.8)/.7)})">Qu'est-ce qu'il y a dans<br>le frigo d'une Française ?</div><div class="introS" style="transform:scale(${pop(t,seg.t0+seg.chipAt)})">Du, de la, de l', des ? ⏱ 2 secondes !</div>`;
+  setCard('',0);sub=lt>seg.subAt?'Cosa c\'è nel frigo di una francese? Du, de la, de l\', des? 2 secondi!':'';
+ } else if(seg.k==='q'){
+  const pre=seg.pre||0,q0=seg.t0+pre,rt=rtOf(seg),cd=seg.cd;
+  if(lt<pre){setCard(`<span style="color:#c2416a">${seg.pres}</span>`,ez(lt/.4));sub=seg.preit}
+  else{
+   const n=(seg.s.match(/\[/g)||[]).length;const rev=[];for(let i=0;i<n;i++)rev.push(pop(t,rt+i*.6,.5));
+   const shake=seg.shake&&t>rt&&t<rt+.6?Math.sin((t-rt)*50)*8:0;
+   setCard(sentHTML(seg.s,rev),ez((t-q0)/.4));$('card').style.transform+=` translateX(${shake}px)`;
+   if(t<q0+cd){$('ring').style.opacity=ez((t-q0)/.3);const p=(t-q0)/cd;$('arc').style.strokeDashoffset=390*p;$('rnum').textContent=Math.max(1,Math.ceil(cd-(t-q0)))}else if(t<rt){}
+   else{if(t<rt+.35){$('flash').style.opacity=.35*(1-(t-rt)/.35)}sub=seg.it}
+   if(seg.chip&&t>rt+.9){$('chip').textContent=seg.chip;$('chip').style.transform=`translateX(-50%) scale(${pop(t,rt+.9)}) rotate(-2deg)`}
+   if(seg.scene==='m'){$('cart').style.opacity=1;$('cart').style.top='700px';$('cart').style.transform=`translateX(${70+Math.sin(t*2)*6}px) rotate(${Math.sin(t*3)*2}deg)`;
+    const dt=t-rt-.3;if(dt>0&&dt<1.2){const p=ez(dt/.9);$('drop').textContent=seg.e;$('drop').style.opacity=dt<1?1:1-(dt-1)/.2;$('drop').style.left=(640-p*400)+'px';$('drop').style.top=(260+p*500-Math.sin(p*3.14)*220)+'px';$('drop').style.transform=`rotate(${p*-40}deg) scale(${1-p*.35})`}
+    if(t>rt+.3&&t<rt+1.6){const b=Math.sin((t-rt-1.2)*18)*cl(1-Math.abs(t-rt-1.3)*4)*12;$('cart').style.transform+=` translateY(${b}px)`}}
+   if(seg.heart){$('heart').style.opacity=cl((t-seg.t0)/.6);$('heart').style.transform=`scale(${.6+.4*back((t-seg.t0)/.8)})`;
+    if(t>rt){$('heart').textContent='🧀❤️'}else $('heart').textContent='🧀'}
+  }
+ } else if(seg.k==='rule'){
+  setCard('',0);const ch=[['Du','#3a7bd5'],['De la','#e2556f'],["De l'",'#8e5bd6'],['Des','#f08c2e']];
+  $('big').style.opacity=1;$('big').style.top='1050px';
+  $('big').innerHTML=`<div class="rchips">${ch.map((c,i)=>`<span class="rc" style="background:${c[1]};transform:scale(${pop(t,seg.t0+seg.chips[i])}) rotate(${(i%2?3:-3)}deg)">${c[0]}</span>`).join('')}</div><div class="introS" style="margin-top:40px;transform:scale(${pop(t,seg.t0+seg.banner)})">Obligatoires en français !</div>`;
+  sub='In francese sono obbligatori!';
+ } else if(seg.k==='open'){
+  setCard(seg.s,ez(lt/.4));sub=lt>.2?seg.it:'';$('sent').style.fontSize='50px';
+ } else if(seg.k==='outro'){
+  setCard('',0);$('big').style.top='560px';$('big').style.opacity=ez(lt/.5);
+  $('big').innerHTML=`<div class="introT" style="font-size:96px">Combien de<br>bonnes réponses ?</div><div class="introS" style="transform:scale(${pop(t,seg.t0+.8)});font-size:58px">★ … / 11</div><div class="introS" style="background:#fff;color:#c2416a;font-size:44px;transform:scale(${pop(t,seg.t0+1.5)})">Écrivez votre score en commentaire 👇</div>`;
+  sub='Quante risposte giuste? Scrivete il vostro punteggio nei commenti!';
+ }
+ if(seg.k!=='open')$('sent').style.fontSize='';
+ if(!(seg.k==='outro'||seg.k==='rule'||seg.k==='intro')||true){}
+ $('sub').style.opacity=sub?1:0;$('subt').textContent=sub;
+ if(seg.k==='rule'||seg.k==='outro'||seg.k==='intro'){$('sub').style.top='1500px'}else $('sub').style.top=($('card').offsetTop+$('card').offsetHeight+40)+'px';
+}
+window.DUR=DUR;window.render=render;window.SEGS=S.map(s=>({k:s.k,t0:+s.t0.toFixed(2),n:s.n||'',s:s.s||s.pres||''}));
+render(0);
+</script></body></html>
