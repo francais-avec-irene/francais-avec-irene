@@ -1,5 +1,5 @@
 import numpy as np, wave
-SR=44100; DUR=39.4; out=np.zeros(int(SR*DUR))
+SR=44100; DUR=60.4; out=np.zeros(int(SR*DUR))
 def add(t,sig):
     i=int(t*SR); n=min(len(sig),len(out)-i); out[i:i+n]+=sig[:n]
 def mix(*s):
@@ -23,14 +23,24 @@ buzz=lambda: mix(tone(110,.45,.01,.3,'sq')*.9,tone(116,.45,.01,.3,'sq')*.6)
 def siren(d=1.0):
     n=int(d*SR);t=np.arange(n)/SR;f=700+200*np.sign(np.sin(2*np.pi*3*t));return tone(f,d,.02,10)*np.minimum(1,(d-t)/.15)*.35
 thud=lambda: mix(sweep(180,50,.25,.12)*1.2,noise(.15,.05))
-S0,SL=3.2,10
+import bisect
+def pw(x,A,B):
+    for i in range(1,len(A)):
+        if x<=A[i]: return B[i-1]+(x-A[i-1])*(B[i]-B[i-1])/(A[i]-A[i-1])
+    return B[-1]+(x-A[-1])
+SO=[0,.45,.8,2.3,2.55,4.0,7.45,9.75,10];SN=[0,.7,1.0,3.6,4.8,6.6,11.8,15.2,15.6]
+HO=[0,1.75,2.15,3.2];HN=[0,2.6,3.1,4.5];EO=[0,1.2,1.6,2.6,2.95,6.2];EN=[0,2.4,2.9,4.4,4.8,9.0]
+S0,SL=4.5,15.6
+_add=add
 add(0,whoosh())
-for i in range(6): add(.15+i*.24,pop()*.7)
-add(1.75,sweep(300,700,.25,.12)); add(2.75,noise(.5,.15)*.6)
+for i in range(6): add(pw(.15+i*.24,HO,HN),pop()*.7)
+add(pw(1.75,HO,HN),sweep(300,700,.25,.12)); add(S0-.45,noise(.5,.15)*.6)
 for si in range(3):
-    b=S0+si*SL
+    b0=S0+si*SL
+    def add(x,sig,b0=b0): _add(b0+pw(x,SO,SN),sig)
+    b=0
     add(b+.05,whoosh()); add(b+.45,pop())
-    for k in range(int((2.3-.75)/.075)): add(b+.75+k*.075,blip()*.35)
+    for k in range(int((2.3-.75)/.045)): add(b+.75+k*.045,blip()*.35)
     add(b+2.55,buzz()); add(b+2.6,siren(1.1))
     if si==1:
         for k in range(5): add(b+2.75+k*.07,thud()*.7)
@@ -38,6 +48,8 @@ for si in range(3):
     else: add(b+2.85,whoosh()); add(b+3.15,noise(.3,.08)*.7)
     add(b+4.0,whoosh()*.7); add(b+7.45,ding()); add(b+7.6,coin()*.8); add(b+9.6,noise(.45,.12)*.6)
 E=S0+3*SL
+add=lambda x,sig:_add(E+pw(x,EO,EN),sig)
+E=0
 for k in range(3): add(E+.15+k*.28,ding()*.6)
 add(E+1.2,sweep(300,900,.3,.15)); add(E+1.25,ding()*.5); add(E+2.6,coin())
 out=out/np.max(np.abs(out))*10**(-14/20)

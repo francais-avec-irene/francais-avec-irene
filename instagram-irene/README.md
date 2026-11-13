@@ -127,5 +127,5 @@ Foto usate nei post del 18, 19 e 21 novembre: terrasse Les Deux Magots, interno 
 
 ## Reel « Un Italien a dit ça en France… 😳 » (13/11/2026)
 
-Cartella `reel/gaffe-italien-en-france/`. Stile neon (viola, rosa, ciano, verde per le risposte giuste), 39 s, 3 gaffe: caméra → chambre, salir → monter, morbide → doux. Animazione HTML (`reel.html`, funzione `render(t)`) resa in MP4 con `render.py`; effetti sonori sintetici con `sfx.py`. Manca la voce di Irene.
+Cartella `reel/gaffe-italien-en-france/`. Stile neon (viola, rosa, ciano, verde per le risposte giuste), 60 s (v2 rallentata: Irene trovava la v1 da 39 s troppo veloce per leggere), 3 gaffe: caméra → chambre, salir → monter, morbide → doux. Animazione HTML (`reel.html`, funzione `render(t)`) resa in MP4 con `render.py`; effetti sonori sintetici con `sfx.py`. Manca la voce di Irene.
 Foto (Unsplash): amici al tramonto (photo-1511632765486), insegna HOTEL notturna (photo-1517840901100), interno autobus (photo-1494515843206), divano arancio con cuscino rosa (photo-1567016432779). Da aggiungere alla lista « Foto già usate ».

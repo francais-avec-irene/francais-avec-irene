@@ -120,7 +120,12 @@ const oc=x=>1-Math.pow(1-x,3);
 const ob=x=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
 const ee=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 function rnd(i){const x=Math.sin(i*12.9898+78.233)*43758.5453;return x-Math.floor(x)}
-const S0=3.2, SL=10, HOOKW=["Un","Italien","a dit","ça","en","France…"];
+function pw(x,A,B){if(x<=A[0])return B[0]+(x-A[0]);for(let i=1;i<A.length;i++)if(x<=A[i])return B[i-1]+(x-A[i-1])*(B[i]-B[i-1])/(A[i]-A[i-1]);return B[B.length-1]+(x-A[A.length-1])}
+const SO=[0,.45,.8,2.3,2.55,4.0,7.45,9.75,10],SN=[0,.7,1.0,3.6,4.8,6.6,11.8,15.2,15.6];
+const HO=[0,1.75,2.15,3.2],HN=[0,2.6,3.1,4.5];
+const EO=[0,1.2,1.6,2.6,2.95,6.2],EN=[0,2.4,2.9,4.4,4.8,9.0];
+const sn=x=>pw(x,SO,SN);
+const S0=4.5, SL=15.6, HOOKW=["Un","Italien","a dit","ça","en","France…"];
 const SC=[
  {tag:"GAFFE #1",place:"📍 À l'hôtel",pre:"Bonjour, j'ai réservé une ",w:"caméra",post:" pour deux nuits !",icon:'📹<b>??</b>',
   l1:"Une caméra, ça filme ! 🎥",l2:"À l'hôtel, on réserve une chambre.",sub:"Una caméra è una videocamera! In albergo si prenota una chambre.",
@@ -132,7 +137,7 @@ const SC=[
   l1:"Morbide = sombre, malsain 💀",l2:"Pour un coussin : doux, moelleux.",sub:"Morbide = morboso! Per un cuscino si dice: doux, moelleux.",
   big:"il est tellement doux !",it:"= è così morbido!"}
 ];
-const END=S0+3*SL, DUR=END+6.2;
+const END=S0+3*SL, DUR=END+9.0;
 // glitch bars
 const G=$('#glitch');for(let i=0;i<10;i++){const d=document.createElement('div');d.className='gb';G.appendChild(d)}
 const GB=[...document.querySelectorAll('.gb')];
@@ -165,17 +170,17 @@ function render(t){
  // HOOK
  const hookOn=t<S0;
  $('#hook').style.display=$('#hookemo').style.display=$('#hooktag').style.display=hookOn?'block':'none';
- if(hookOn){
+ if(hookOn){const t0=t;{const t=pw(t0,HN,HO);
   $('#hooktag').style.transform=`translateX(-50%) translateY(${(1-oc(seg(t,0,.3)))*-80}px)`;$('#hooktag').style.opacity=seg(t,0,.25);
   HW.forEach((w,i)=>{const p=seg(t,.15+i*.24,.15+i*.24+.3);w.style.opacity=p>0?1:0;w.style.transform=`scale(${p>0?ob(p)*(i==3?1.15:1):0}) rotate(${i==3?-6:0}deg)`});
   const pe=seg(t,1.75,2.15);$('#hookemo').style.transform=`scale(${pe>0?ob(pe):0}) rotate(${Math.sin(t*14)*8*pe}deg)`;
   if(t<.12)flash=1-t/.12;
   shake+=t>1.75&&t<2.1?14:0;
-  gl=Math.max(gl,glitch(t,S0-.45,.55));
+  }gl=Math.max(gl,glitch(t,S0-.45,.55));
  }
  // SCENES
  const si=Math.floor((t-S0)/SL);const sc=$('#scene');
- if(t>=S0&&si<3){sc.style.display='block';const d=SC[si];const lt=t-S0-si*SL;
+ if(t>=S0&&si<3){sc.style.display='block';const d=SC[si];const B0=S0+si*SL;const lt=pw(t-B0,SN,SO);
   if(si!=lastScene){$('#gtag').textContent=d.tag;$('#place').textContent=d.place;$('#icon').innerHTML=d.icon;
    $('#explain .l1').textContent=d.l1;$('#explain .l2').textContent=d.l2;$('#correct .big').textContent=d.big;$('#correct .it').textContent=d.it;
    $('#sub span').textContent=d.sub;lastScene=si}
@@ -208,7 +213,7 @@ function render(t){
   const SP=$('#split');const spOn=si==2&&lt>2.85&&lt<4.05;SP.style.opacity=spOn?1:0;
   SP.children[0].style.transform=`translateX(${(1-oc(seg(lt,2.85,3.15)))*-600}px)`;SP.children[1].style.transform=`translateX(${(1-oc(seg(lt,3.15,3.45)))*600}px)`;
   SP.children[1].style.filter=(lt>3.15&&lt<3.4)?'hue-rotate(90deg) contrast(1.6)':'none';
-  if(si==2&&lt>3.13&&lt<3.4)gl=Math.max(gl,glitch(t,S0+si*SL+3.13,.27));
+  if(si==2&&lt>3.13&&lt<3.4)gl=Math.max(gl,glitch(t,B0+sn(3.13),.35));
   // explanation 4.0-7.4
   const px1=seg(lt,4.0,4.35);const ex=$('#explain');const exOn=lt>4.0&&lt<7.45;ex.style.opacity=exOn?1:0;
   ex.style.transform=`translateY(${(1-oc(px1))*240}px) scale(${.9+.1*oc(px1)})`;
@@ -219,22 +224,22 @@ function render(t){
   const pc=seg(lt,7.45,7.85);const co=$('#correct');const coOn=lt>7.45&&lt<9.75;co.style.opacity=coOn?1:0;
   co.style.transform=`scale(${coOn?ob(pc):0})`;co.querySelector('.big').style.textShadow=`0 0 ${20+12*Math.sin(lt*8)}px #5BFF8A,0 0 50px #00d65c,0 0 90px #00a347`;
   if(lt>7.45&&lt<7.6){flash=.5;flashCol='#5BFF8A'}
-  confetti(t,S0+si*SL+7.5,540,1150,70,si*100+1);confetti(t,S0+si*SL+7.7,200,900,30,si*100+300);confetti(t,S0+si*SL+7.7,880,900,30,si*100+600);
+  confetti(t,B0+sn(7.5),540,1150,70,si*100+1);confetti(t,B0+sn(7.7),200,900,30,si*100+300);confetti(t,B0+sn(7.7),880,900,30,si*100+600);
   const p10=seg(lt,7.6,8.8);$('#plus').style.opacity=(lt>7.6&&lt<8.8)?1-p10:0;$('#plus').style.transform=`translateY(${-p10*120}px) scale(${1+.4*Math.sin(p10*3)})`;
-  gl=Math.max(gl,glitch(t,S0+si*SL+SL-.4,.5));
+  gl=Math.max(gl,glitch(t,B0+SL-.4,.5));
  } else {sc.style.display='none';$('#dim').style.opacity=t>=END?.4:0}
  // HUD
- let score=0;for(let k=0;k<3;k++){const tc=S0+k*SL+7.6;if(t>tc){score+=Math.round(10*cl((t-tc)/.5))}}
+ let score=0;for(let k=0;k<3;k++){const tc=S0+k*SL+sn(7.6);if(t>tc){score+=Math.round(10*cl((t-tc)/.5))}}
  $('#score').textContent='SCORE '+String(score).padStart(3,'0');
- document.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('on',t>S0+k*SL+7.6));
+ document.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('on',t>S0+k*SL+sn(7.6)));
  $('#hud').style.opacity=seg(t,S0-.2,S0+.2);
  // END
- const E=$('#end');if(t>=END){E.style.opacity=1;const lt=t-END;
+ const E=$('#end');if(t>=END){E.style.opacity=1;const lt=pw(t-END,EN,EO);
   ['#r0','#r1','#r2'].forEach((r,k)=>{const p=seg(lt,.15+k*.28,.5+k*.28);const el=$(r);el.style.top=(420+k*150)+'px';el.style.opacity=p>0?1:0;el.style.transform=`translateX(${(1-ob(p))*-900}px)`;
    if(lt>.15+k*.28&&lt<.3+k*.28){flash=.25;flashCol='#5BFF8A'}});
   const pq=seg(lt,1.2,1.6);$('#q').style.opacity=pq>0?1:0;$('#q').style.transform=`scale(${pq>0?ob(pq):0})`;
   const p2=seg(lt,2.6,2.95);const P2=$('#p2');P2.style.opacity=p2>0?1:0;P2.style.transform=`translateX(-50%) scale(${p2>0?ob(p2)*(1+.07*Math.sin(lt*7)):0}) rotate(-3deg)`;
-  confetti(t,END+1.25,540,1150,60,999);
+  confetti(t,END+pw(1.25,EO,EN),540,1150,60,999);
   $('#sub span').textContent="E voi, che gaffe avete già fatto? Scrivetela nei commenti!";$('#sub').style.opacity=lt>1.4?1:0;$('#sub').style.top='1440px';
  } else {E.style.opacity=0;$('#sub').style.top='1400px'}
  // global fx
