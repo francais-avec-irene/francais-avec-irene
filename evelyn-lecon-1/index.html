@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Je suis contente ! · Le verbe être</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF5EC; --card:#FFFDF8; --ink:#3B3445; --soft:#7A7085;
+  --coral:#EE8B7A; --coral-l:#FCE6E1;
+  --mint:#5FB99C; --mint-l:#DFF3EC;
+  --lav:#9585D3; --lav-l:#ECE8FA;
+  --sun:#F2C14E; --sun-l:#FDF3D7;
+  --sky:#6AA9D8; --sky-l:#E2F0FA;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:24px;line-height:1.45;font-weight:700}
+h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
+.en{color:var(--soft);font-style:italic;font-weight:600;font-size:.85em}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 80px}
+
+/* score */
+#score{position:fixed;top:12px;right:12px;z-index:50;background:var(--card);border:3px solid var(--sun);border-radius:999px;padding:6px 18px;font-family:Fredoka;font-size:26px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+
+/* header */
+header{padding:26px 0 10px}
+.tag{display:inline-block;background:var(--lav-l);color:var(--lav);border-radius:999px;padding:4px 16px;font-size:18px;letter-spacing:.06em}
+header h1{font-size:46px;margin:10px 0 2px;color:var(--coral)}
+header p{margin:0}
+
+/* nav */
+nav{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 22px}
+nav button{flex:1 1 140px;min-height:62px;border:3px solid transparent;border-radius:20px;font:inherit;font-size:20px;cursor:pointer;background:var(--card);color:var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+nav button small{display:block;font-size:15px;color:var(--soft);font-style:italic}
+nav button.on{border-color:var(--coral);background:var(--coral-l)}
+.screen{display:none}
+.screen.on{display:block}
+
+/* rule blocks */
+.block{background:var(--card);border-radius:26px;padding:22px 24px;margin:0 0 26px;border-top:10px solid var(--c,var(--coral));box-shadow:0 2px 8px rgba(0,0,0,.05);scroll-margin-top:80px}
+.block h2{font-size:32px;color:var(--c,var(--coral));margin-bottom:6px}
+.block h2 .en{font-size:22px;display:block}
+.say{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:2px dashed #EEE6DA}
+.say:last-child{border-bottom:none}
+.say .fr{font-size:28px}
+.say .fr b{color:var(--c,var(--coral))}
+.play{flex:0 0 56px;height:56px;border-radius:50%;border:none;background:var(--c-l,var(--coral-l));font-size:26px;cursor:pointer}
+.play:active{transform:scale(.94)}
+.verbs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.verb{display:flex;align-items:center;gap:12px;background:var(--mint-l);border-radius:18px;padding:10px 14px}
+.verb .fr{font-size:30px}
+.verb .fr b{color:#2F8A6D}
+.tip{background:var(--sun-l);border-radius:18px;padding:14px 18px;margin-top:14px;font-size:22px}
+.tip.lav{background:var(--lav-l)}
+.feel{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.feel .card{background:var(--sky-l);border-radius:22px;padding:12px;text-align:center}
+.feel img{width:100%;border-radius:16px;display:block;margin-bottom:8px}
+.feel .fr{font-size:28px}
+.feel .row{display:flex;align-items:center;justify-content:center;gap:10px}
+.sandwich{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0 6px}
+.sandwich span{font-family:Fredoka;font-size:36px;padding:8px 20px;border-radius:18px}
+.sandwich .bread{background:#F6D9A8}
+.sandwich .fill{background:var(--mint-l);color:#2F8A6D}
+.sandwich .plain{background:transparent;padding:8px 4px}
+.big-q{font-family:Fredoka;font-size:30px;text-align:center;background:var(--coral-l);border-radius:20px;padding:16px;margin-top:16px}
+
+/* exercises */
+.ex{background:var(--card);border-radius:26px;padding:22px 24px;margin:0 0 28px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:12px solid var(--c)}
+.ex h2{font-size:30px;color:var(--c)}
+.ex .consigne{margin:4px 0 14px}
+.dots{display:flex;gap:8px;margin:6px 0 16px;flex-wrap:wrap}
+.dots i{width:22px;height:22px;border-radius:50%;background:#EDE6DC;display:block}
+.dots i.ok{background:var(--mint)}
+.dots i.ko{background:var(--coral)}
+.dots i.cur{outline:4px solid var(--sun)}
+.q{text-align:center}
+.q img{max-width:420px;width:100%;border-radius:20px;display:block;margin:0 auto 12px}
+.q .sentence{font-size:34px;margin:8px 0 4px;font-family:Fredoka;font-weight:500}
+.q .sentence u{text-decoration:none;display:inline-block;min-width:80px;border-bottom:4px solid var(--c);color:var(--c)}
+.opts{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:18px 0 8px}
+.opt{min-width:170px;min-height:84px;font:inherit;font-family:Fredoka;font-size:34px;border-radius:24px;border:4px solid var(--c);background:#fff;color:var(--ink);cursor:pointer;padding:6px 22px}
+.opt:active{transform:scale(.97)}
+.opt.good{background:var(--mint-l);border-color:var(--mint)}
+.opt.bad{background:var(--coral-l);border-color:var(--coral);animation:shake .4s}
+.opt:disabled{cursor:default}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.feedback{min-height:70px;font-size:26px;margin-top:8px}
+.next{font:inherit;font-size:26px;background:var(--c);color:#fff;border:none;border-radius:999px;padding:12px 34px;cursor:pointer;margin-top:6px}
+.done{font-family:Fredoka;font-size:30px;color:#2F8A6D;text-align:center;padding:20px}
+
+/* pause */
+.pause{text-align:center;background:linear-gradient(160deg,#E9E4F8,#DFF0EA);border-radius:30px;padding:46px 20px}
+.pause .moon{font-size:90px}
+.pause button{font:inherit;font-size:28px;background:var(--lav);color:#fff;border:none;border-radius:999px;padding:16px 40px;cursor:pointer;margin-top:16px}
+
+/* phrases */
+.ph{background:var(--card);border-radius:26px;padding:20px 22px;margin:0 0 20px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:12px solid var(--sun)}
+.ph .num{font-family:Fredoka;color:var(--sun);font-size:24px}
+.ph .eng{font-size:30px;margin:2px 0 12px}
+.ph .answer{display:none;align-items:center;gap:14px;background:var(--sun-l);border-radius:18px;padding:12px 16px;margin-bottom:12px}
+.ph .answer .fr{font-size:30px}
+.ph.shown .answer{display:flex}
+.ph .btns{display:flex;gap:12px;flex-wrap:wrap}
+.ph .btns button{font:inherit;font-size:22px;border-radius:999px;border:3px solid var(--sun);background:#fff;padding:10px 22px;cursor:pointer;min-height:56px}
+.ph .btns button.said{background:var(--mint-l);border-color:var(--mint)}
+
+/* revoir */
+.rv{background:var(--card);border-radius:22px;padding:16px 20px;margin-bottom:16px;border-left:10px solid var(--coral)}
+.rv .fr{font-size:28px}
+.rv a{display:inline-block;margin-top:8px;color:var(--lav);font-size:22px}
+.reset{font:inherit;font-size:18px;background:none;border:2px solid #D8CFC3;color:var(--soft);border-radius:999px;padding:8px 20px;cursor:pointer;margin-top:24px}
+
+/* stars */
+.star{position:fixed;pointer-events:none;z-index:99;font-size:34px;animation:fly 1.1s ease-out forwards}
+@keyframes fly{0%{opacity:1;transform:translate(0,0) scale(.6) rotate(0)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.3) rotate(160deg)}}
+
+@media (max-width:560px){
+  body{font-size:21px}
+  header{padding-top:70px}
+  header h1{font-size:36px}
+  .verbs,.feel{grid-template-columns:1fr}
+  .opt{min-width:130px;font-size:28px}
+  .q .sentence{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div id="score">⭐ <span id="sc">0</span> / 22</div>
+<div class="wrap">
+
+<header>
+  <span class="tag">LEÇON 1 · LE VERBE ÊTRE</span>
+  <h1>Je suis contente !</h1>
+  <p>Le verbe être et les émotions <span class="en">· The verb "to be" and feelings</span></p>
+</header>
+
+<nav id="nav">
+  <button data-s="regle">1. La règle<small>The rule</small></button>
+  <button data-s="ex">2. Exercices<small>Exercises</small></button>
+  <button data-s="pause">😌 Pause<small>Eye break</small></button>
+  <button data-s="phrases">3. Mes phrases<small>My sentences</small></button>
+  <button data-s="revoir">À revoir<small>To review</small></button>
+</nav>
+
+<!-- ============ RÈGLE ============ -->
+<section class="screen" id="s-regle">
+  <p>Evelyn, écoute et répète. <span class="en">· Evelyn, listen and repeat.</span> <button class="play" data-a="c_regle" style="width:46px;height:46px;font-size:20px;vertical-align:middle">🔊</button></p>
+
+  <div class="block" id="r-etre" style="--c:#2F8A6D;--c-l:var(--mint-l)">
+    <h2>Le verbe être <span class="en">The verb "to be"</span></h2>
+    <p>On utilise <b>être</b> pour dire comment on est. <br><span class="en">We use "être" to say how we are.</span></p>
+    <div class="verbs">
+      <div class="verb"><button class="play" data-a="v1">🔊</button><div><div class="fr">je <b>suis</b></div><div class="en">I am</div></div></div>
+      <div class="verb"><button class="play" data-a="v5">🔊</button><div><div class="fr">nous <b>sommes</b></div><div class="en">we are</div></div></div>
+      <div class="verb"><button class="play" data-a="v2">🔊</button><div><div class="fr">tu <b>es</b></div><div class="en">you are</div></div></div>
+      <div class="verb"><button class="play" data-a="v6">🔊</button><div><div class="fr">vous <b>êtes</b></div><div class="en">you are (polite / many people)</div></div></div>
+      <div class="verb"><button class="play" data-a="v3">🔊</button><div><div class="fr">il <b>est</b></div><div class="en">he is</div></div></div>
+      <div class="verb"><button class="play" data-a="v7">🔊</button><div><div class="fr">ils <b>sont</b></div><div class="en">they are (boys)</div></div></div>
+      <div class="verb"><button class="play" data-a="v4">🔊</button><div><div class="fr">elle <b>est</b></div><div class="en">she is</div></div></div>
+      <div class="verb"><button class="play" data-a="v8">🔊</button><div><div class="fr">elles <b>sont</b></div><div class="en">they are (girls)</div></div></div>
+    </div>
+    <div class="tip">👦 <b>il</b> = un garçon <span class="en">a boy</span> · 👧 <b>elle</b> = une fille <span class="en">a girl</span><br>
+    👦👦 <b>ils</b> = des garçons, ou des garçons et des filles <span class="en">boys, or boys and girls</span><br>
+    👧👧 <b>elles</b> = des filles <span class="en">girls</span></div>
+  </div>
+
+  <div class="block" id="r-emotions" style="--c:#4A8CC4;--c-l:var(--sky-l)">
+    <h2>Tu te sens comment ? <span class="en">How do you feel?</span></h2>
+    <div class="feel">
+      <div class="card"><img src="img/content.jpg" alt=""><div class="row"><button class="play" data-a="e_content">🔊</button><div><div class="fr">Léo est <b>content</b>.</div><div class="en">Léo is happy.</div></div></div></div>
+      <div class="card"><img src="img/triste.jpg" alt=""><div class="row"><button class="play" data-a="e_triste">🔊</button><div><div class="fr">Bastien est <b>triste</b>.</div><div class="en">Bastien is sad.</div></div></div></div>
+      <div class="card"><img src="img/fache.jpg" alt=""><div class="row"><button class="play" data-a="e_fache">🔊</button><div><div class="fr">Marie est <b>fâchée</b>.</div><div class="en">Marie is angry.</div></div></div></div>
+      <div class="card"><img src="img/malade.jpg" alt=""><div class="row"><button class="play" data-a="e_malade">🔊</button><div><div class="fr">Marie est <b>malade</b>.</div><div class="en">Marie is ill.</div></div></div></div>
+      <div class="card"><img src="img/fatigue.jpg" alt=""><div class="row"><button class="play" data-a="e_fatigue">🔊</button><div><div class="fr">Madame Legrand est <b>fatiguée</b>.</div><div class="en">Mrs Legrand is tired.</div></div></div></div>
+      <div class="card"><img src="img/peur.jpg" alt=""><div class="row"><button class="play" data-a="e_peur">🔊</button><div><div class="fr">Maggie <b>a peur</b>.</div><div class="en">Maggie is scared.</div></div></div></div>
+    </div>
+    <div class="tip">⚠️ <b>peur</b> va avec <b>avoir</b> : j'<b>ai</b> peur, elle <b>a</b> peur.<br><span class="en">"peur" goes with "avoir" (to have): I am scared, she is scared.</span></div>
+    <div class="big-q"><button class="play" data-a="q_question" style="vertical-align:middle">🔊</button> Tu te sens comment aujourd'hui ?<br><span class="en">How do you feel today?</span></div>
+  </div>
+
+  <div class="block" id="r-fille" style="--c:#C76F9E;--c-l:#F8E3EE">
+    <h2>Garçon ou fille ? <span class="en">Boy or girl?</span></h2>
+    <p>Pour une fille, on ajoute souvent un <b>e</b>. <br><span class="en">For a girl, we often add an "e".</span></p>
+    <div class="say"><button class="play" data-a="f1">🔊</button><div><div class="fr">Léo est content. Evelyn est content<b>e</b>.</div><div class="en">Léo is happy. Evelyn is happy.</div></div></div>
+    <div class="say"><button class="play" data-a="f2">🔊</button><div><div class="fr">Papa est fâché. Maman est fâché<b>e</b>.</div><div class="en">Dad is angry. Mum is angry.</div></div></div>
+    <div class="say"><button class="play" data-a="f3">🔊</button><div><div class="fr">Mon frère est fatigué. Ma sœur est fatigué<b>e</b>.</div><div class="en">My brother is tired. My sister is tired.</div></div></div>
+    <div class="tip lav"><b>triste</b> et <b>malade</b> finissent déjà par e : pas de changement ! <br><span class="en">"triste" and "malade" already end in e: no change!</span></div>
+    <div class="say"><button class="play" data-a="f4">🔊</button><div><div class="fr">Il est triste. Elle est triste.</div><div class="en">He is sad. She is sad.</div></div></div>
+    <div class="say"><button class="play" data-a="f5">🔊</button><div><div class="fr">Il est malade. Elle est malade.</div><div class="en">He is ill. She is ill.</div></div></div>
+    <div class="big-q" style="background:#F8E3EE">👧 Evelyn, tu es une fille : <b>Je suis contente !</b><br><span class="en">Evelyn, you are a girl: I am happy!</span></div>
+  </div>
+
+  <div class="block" id="r-sandwich" style="--c:#D9822B;--c-l:var(--sun-l)">
+    <h2>Ne … pas : le sandwich <span class="en">The "not" sandwich</span></h2>
+    <p>Pour dire <b>non</b>, on met le verbe entre <b>ne</b> et <b>pas</b>, comme dans un sandwich. <br><span class="en">To say "not", we put the verb between "ne" and "pas", like in a sandwich.</span></p>
+    <div class="sandwich"><span class="plain">Je</span><span class="bread">ne</span><span class="fill">suis</span><span class="bread">pas</span><span class="plain">triste.</span></div>
+    <div class="say"><button class="play" data-a="n1">🔊</button><div><div class="fr">Je suis triste. → Je <b>ne</b> suis <b>pas</b> triste.</div><div class="en">I am sad. → I am not sad.</div></div></div>
+    <div class="tip">Devant une voyelle (a, e, i, o, u), <b>ne</b> devient <b>n'</b>. <br><span class="en">Before a vowel (a, e, i, o, u), "ne" becomes "n'".</span>
+    <div class="sandwich"><span class="plain">Il</span><span class="bread">n'</span><span class="fill">est</span><span class="bread">pas</span><span class="plain">fatigué.</span></div></div>
+    <div class="say"><button class="play" data-a="n2">🔊</button><div><div class="fr">Tu es malade. → Tu <b>n'</b>es <b>pas</b> malade.</div><div class="en">You are ill. → You are not ill.</div></div></div>
+    <div class="say"><button class="play" data-a="n3">🔊</button><div><div class="fr">Il est fatigué. → Il <b>n'</b>est <b>pas</b> fatigué.</div><div class="en">He is tired. → He is not tired.</div></div></div>
+    <div class="say"><button class="play" data-a="n4">🔊</button><div><div class="fr">Mon grand-père <b>n'</b>est <b>pas</b> content.</div><div class="en">My grandpa is not happy.</div></div></div>
+  </div>
+
+  <div class="block" id="r-tres" style="--c:#8B76D0;--c-l:var(--lav-l)">
+    <h2>Très <span class="en">Very</span></h2>
+    <div class="say"><button class="play" data-a="t1">🔊</button><div><div class="fr">Je suis <b>très</b> contente !</div><div class="en">I am very happy!</div></div></div>
+  </div>
+</section>
+
+<!-- ============ EXERCICES ============ -->
+<section class="screen" id="s-ex">
+  <div class="ex" id="ex1" style="--c:#2F8A6D">
+    <h2>1 · Le bon verbe <span class="en">The right verb</span></h2>
+    <p class="consigne">Evelyn, écoute et choisis le bon verbe. <button class="play" data-a="c_ex1" style="width:44px;height:44px;font-size:20px;vertical-align:middle">🔊</button><br><span class="en">Evelyn, listen and choose the right verb.</span></p>
+    <div class="dots"></div><div class="body"></div>
+  </div>
+  <div class="ex" id="ex2" style="--c:#4A8CC4">
+    <h2>2 · Vrai ou faux ? <span class="en">True or false?</span></h2>
+    <p class="consigne">Evelyn, regarde, écoute et réponds. <button class="play" data-a="c_ex2" style="width:44px;height:44px;font-size:20px;vertical-align:middle">🔊</button><br><span class="en">Evelyn, look, listen and answer.</span></p>
+    <div class="dots"></div><div class="body"></div>
+  </div>
+  <div class="ex" id="ex3" style="--c:#D9822B">
+    <h2>3 · Le sandwich <span class="en">The sandwich</span></h2>
+    <p class="consigne">Evelyn, choisis le bon sandwich : <b>ne … pas</b> ou <b>n' … pas</b> ? <button class="play" data-a="c_ex3" style="width:44px;height:44px;font-size:20px;vertical-align:middle">🔊</button><br><span class="en">Evelyn, choose the right sandwich.</span></p>
+    <div class="dots"></div><div class="body"></div>
+  </div>
+</section>
+
+<!-- ============ PAUSE ============ -->
+<section class="screen" id="s-pause">
+  <div class="pause">
+    <div class="moon">🌙</div>
+    <h2 style="font-size:36px">Pause pour les yeux</h2>
+    <p class="en" style="font-size:24px">Eye break</p>
+    <p>Evelyn, ferme les yeux et écoute.<br><span class="en">Evelyn, close your eyes and listen.</span></p>
+    <button id="pauseBtn">▶ Commencer · Start</button>
+  </div>
+</section>
+
+<!-- ============ PHRASES ============ -->
+<section class="screen" id="s-phrases">
+  <p>Evelyn, lis la phrase en anglais et dis-la en français. Puis écoute. <button class="play" data-a="c_phr" style="width:44px;height:44px;font-size:20px;vertical-align:middle">🔊</button><br><span class="en">Evelyn, read the English sentence and say it in French. Then listen.</span></p>
+  <div id="phList"></div>
+</section>
+
+<!-- ============ À REVOIR ============ -->
+<section class="screen" id="s-revoir">
+  <h2 style="font-size:34px;color:var(--coral);margin-bottom:6px">À revoir <span class="en">To review</span></h2>
+  <p>Evelyn, voici les phrases à revoir. Clique pour relire la règle. <br><span class="en">Evelyn, here are the sentences to review. Click to read the rule again.</span></p>
+  <div id="rvList"></div>
+  <button class="reset" id="reset">↺ Recommencer la leçon · Start the lesson again</button>
+</section>
+
+</div>
+
+<script>
+const EX = {
+  ex1: {type:'choice', items:[
+    {s:'Je ___ contente.', o:['es','suis','est'], a:'suis', au:'x1_1', en:'I am happy.', r:'r-etre'},
+    {s:'Tu ___ fatigué ?', o:['es','est','suis'], a:'es', au:'x1_2', en:'Are you tired?', r:'r-etre'},
+    {s:'Léo ___ content.', o:['sont','est','es'], a:'est', au:'x1_3', en:'Léo is happy.', r:'r-etre'},
+    {s:'Ma grand-mère ___ fatiguée.', o:['est','es'], a:'est', au:'x1_4', en:'My grandma is tired.', r:'r-etre'},
+    {s:'Nous ___ contents.', o:['sont','êtes','sommes'], a:'sommes', au:'x1_5', en:'We are happy.', r:'r-etre'},
+    {s:'Mon frère ___ triste.', o:['suis','est'], a:'est', au:'x1_6', en:'My brother is sad.', r:'r-etre'},
+    {s:'Elles ___ malades.', o:['sont','est'], a:'sont', au:'x1_7', en:'They (girls) are ill.', r:'r-etre'},
+    {s:'Je ne ___ pas fâchée.', o:['est','suis'], a:'suis', au:'x1_8', en:'I am not angry.', r:'r-etre'}
+  ]},
+  ex2: {type:'tf', items:[
+    {img:'content', s:'Léo est content.', a:'Vrai', au:'x2_1', fix:'Léo est content.', en:'Léo is happy.', r:'r-emotions'},
+    {img:'triste', s:'Bastien est content.', a:'Faux', au:'x2_2', fix:'Bastien est triste.', en:'Bastien is sad.', r:'r-emotions'},
+    {img:'malade', s:'Marie est malade.', a:'Vrai', au:'x2_3', fix:'Marie est malade.', en:'Marie is ill.', r:'r-emotions'},
+    {img:'fatigue', s:'Madame Legrand n\'est pas fatiguée.', a:'Faux', au:'x2_4', fix:'Madame Legrand est fatiguée.', en:'Mrs Legrand is tired.', r:'r-sandwich'},
+    {img:'peur', s:'Maggie a peur.', a:'Vrai', au:'x2_5', fix:'Maggie a peur.', en:'Maggie is scared.', r:'r-emotions'},
+    {img:'fache', s:'Marie n\'est pas fâchée.', a:'Faux', au:'x2_6', fix:'Marie est fâchée.', en:'Marie is angry.', r:'r-sandwich', note:'Marie est à droite. · Marie is on the right.'},
+    {img:'triste', s:'Bastien n\'est pas content.', a:'Vrai', au:'x2_7', fix:'Bastien n\'est pas content.', en:'Bastien is not happy.', r:'r-sandwich'},
+    {img:'content', s:'Léo n\'est pas triste.', a:'Vrai', au:'x2_8', fix:'Léo n\'est pas triste.', en:'Léo is not sad.', r:'r-sandwich'}
+  ]},
+  ex3: {type:'sand', items:[
+    {p:['Je','suis','triste.'], a:'ne … pas', full:'Je ne suis pas triste.', au:'x3_1', en:'I am not sad.', r:'r-sandwich'},
+    {p:['Il','est','fatigué.'], a:'n\' … pas', full:'Il n\'est pas fatigué.', au:'x3_2', en:'He is not tired.', r:'r-sandwich'},
+    {p:['Tu','es','malade.'], a:'n\' … pas', full:'Tu n\'es pas malade.', au:'x3_3', en:'You are not ill.', r:'r-sandwich'},
+    {p:['Nous','sommes','fâchés.'], a:'ne … pas', full:'Nous ne sommes pas fâchés.', au:'x3_4', en:'We are not angry.', r:'r-sandwich'},
+    {p:['Elle','est','contente.'], a:'n\' … pas', full:'Elle n\'est pas contente.', au:'x3_5', en:'She is not happy.', r:'r-sandwich'},
+    {p:['Ils','sont','tristes.'], a:'ne … pas', full:'Ils ne sont pas tristes.', au:'x3_6', en:'They are not sad.', r:'r-sandwich'}
+  ]}
+};
+const PH = [
+  {en:'My grandpa is not happy.', fr:'Mon grand-père n\'est pas content.', au:'p1'},
+  {en:'He is not tired.', fr:'Il n\'est pas fatigué.', au:'p2'},
+  {en:'I am very happy.', fr:'Je suis très contente.', au:'p3'},
+  {en:'My sister is ill.', fr:'Ma sœur est malade.', au:'p4'},
+  {en:'My mum is tired.', fr:'Ma mère est fatiguée.', au:'p5'},
+  {en:'We are not sad.', fr:'Nous ne sommes pas tristes.', au:'p6'},
+  {en:'My brother is angry.', fr:'Mon frère est fâché.', au:'p7'},
+  {en:'Are you sad?', fr:'Tu es triste ?', au:'p8'},
+  {en:'And you? How do you feel today?', fr:'Je suis contente. Je ne suis pas fatiguée.', au:'p9', hint:'Par exemple · For example'}
+];
+const RULE_NAMES = {'r-etre':'Le verbe être','r-emotions':'Tu te sens comment ?','r-fille':'Garçon ou fille ?','r-sandwich':'Ne … pas : le sandwich'};
+
+/* ---------- state ---------- */
+const KEY = 'evelyn-lecon1-etre-v1';
+let st;
+try { st = JSON.parse(localStorage.getItem(KEY)); } catch(e) { st = null; }
+if (!st) st = {screen:'regle', ex:{ex1:[],ex2:[],ex3:[]}, idx:{ex1:0,ex2:0,ex3:0}, said:{}, shown:{}};
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch(e) {} }
+
+/* ---------- audio ---------- */
+let cur = null;
+function play(k){ try { if (cur) { cur.pause(); } cur = new Audio('audio/' + k + '.mp3'); cur.play().catch(()=>{}); } catch(e) {} }
+document.addEventListener('click', e => { const b = e.target.closest('.play'); if (b) play(b.dataset.a); });
+
+/* ---------- stars + chime ---------- */
+let actx = null;
+function chime(){
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    [659, 880, 1175].forEach((f, i) => {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = 'sine'; o.frequency.value = f; o.connect(g); g.connect(actx.destination);
+      const t = actx.currentTime + i * 0.09;
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.12, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.35);
+      o.start(t); o.stop(t + 0.4);
+    });
+  } catch(e) {}
+}
+function stars(el){
+  const r = el.getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
+  const set = ['⭐','✨','🌟','💫'];
+  for (let i = 0; i < 10; i++) {
+    const s = document.createElement('span'); s.className = 'star'; s.textContent = set[i % 4];
+    const ang = Math.random() * Math.PI * 2, d = 90 + Math.random() * 90;
+    s.style.left = cx + 'px'; s.style.top = cy + 'px';
+    s.style.setProperty('--dx', Math.cos(ang) * d + 'px'); s.style.setProperty('--dy', Math.sin(ang) * d + 'px');
+    document.body.appendChild(s); setTimeout(() => s.remove(), 1200);
+  }
+  chime();
+}
+
+/* ---------- score ---------- */
+function score(){
+  let n = 0;
+  for (const k in st.ex) st.ex[k].forEach(r => { if (r && r.first) n++; });
+  document.getElementById('sc').textContent = n;
+}
+
+/* ---------- navigation ---------- */
+function show(s, anchor){
+  st.screen = s; save();
+  document.querySelectorAll('.screen').forEach(x => x.classList.toggle('on', x.id === 's-' + s));
+  document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.s === s));
+  if (s === 'revoir') renderRevoir();
+  if (anchor) setTimeout(() => document.getElementById(anchor).scrollIntoView(), 50);
+  else window.scrollTo(0, 0);
+}
+document.querySelectorAll('#nav button').forEach(b => b.onclick = () => show(b.dataset.s));
+
+/* ---------- exercises ---------- */
+function esc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+function renderEx(id){
+  const box = document.getElementById(id), data = EX[id], res = st.ex[id];
+  let i = st.idx[id];
+  const dots = box.querySelector('.dots');
+  dots.innerHTML = data.items.map((_, j) => `<i class="${res[j] ? (res[j].first ? 'ok' : 'ko') : ''} ${j === i && i < data.items.length ? 'cur' : ''}"></i>`).join('');
+  const body = box.querySelector('.body');
+  if (i >= data.items.length) { body.innerHTML = `<div class="done">🎉 Bravo, Evelyn ! <span class="en">Well done!</span></div>`; return; }
+  const it = data.items[i], r = res[i];
+  let q = '', opts = [];
+  if (data.type === 'choice') {
+    q = `<div class="sentence">${esc(it.s).replace('___', '<u>' + (r ? it.a : '?') + '</u>')}</div>`;
+    opts = it.o;
+  } else if (data.type === 'tf') {
+    q = `<img src="img/${it.img}.jpg" alt="">${it.note ? `<div class="en">${it.note}</div>` : ''}<div class="sentence">${esc(it.s)}</div>`;
+    opts = ['Vrai', 'Faux'];
+  } else {
+    const g = r ? it.a.split(' … ') : ['?', '?'];
+    q = `<div class="sentence">${it.p[0]} <u>${g[0]}</u> ${it.p[1]} <u>${g[1]}</u> ${it.p[2]}</div>`;
+    opts = ['ne … pas', 'n\' … pas'];
+  }
+  const lab = o => data.type === 'tf' ? (o === 'Vrai' ? '✅ Vrai' : '❌ Faux') : o;
+  body.innerHTML = `<div class="q">
+    <button class="play" data-a="${it.au}" style="margin:0 auto 6px;display:block">🔊</button>
+    ${q}
+    <div class="opts">${opts.map(o => `<button class="opt" data-o="${esc(o)}">${lab(o)}</button>`).join('')}</div>
+    <div class="feedback"></div></div>`;
+  if (data.type !== 'sand' && !r) setTimeout(() => play(it.au), 250);
+  const fb = body.querySelector('.feedback');
+  const finish = () => {
+    body.querySelectorAll('.opt').forEach(b => { b.disabled = true; if (b.dataset.o === it.a) b.classList.add('good'); });
+    const full = data.type === 'choice' ? it.s.replace('___', it.a) : data.type === 'tf' ? it.fix : it.full;
+    fb.innerHTML = `<div>${esc(full)} <span class="en">· ${it.en}</span></div><button class="next">Suivant · Next ➜</button>`;
+    fb.querySelector('.next').onclick = () => { st.idx[id]++; save(); renderEx(id); };
+  };
+  if (r && r.done) { finish(); return; }
+  body.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+    const ok = b.dataset.o === it.a;
+    if (!res[i]) res[i] = {first: ok};
+    if (ok) {
+      res[i].done = true; save(); score(); stars(b);
+      if (data.type === 'sand') play(it.au);
+      if (data.type === 'choice') body.querySelector('.sentence u').textContent = it.a;
+      if (data.type === 'sand') { const u = body.querySelectorAll('.sentence u'), g = it.a.split(' … '); u[0].textContent = g[0]; u[1].textContent = g[1]; }
+      finish();
+    } else {
+      b.classList.remove('bad'); void b.offsetWidth; b.classList.add('bad'); save();
+      fb.innerHTML = `<div class="en">Essaie encore ! · Try again!</div>`;
+    }
+  });
+}
+
+/* ---------- phrases ---------- */
+function renderPh(){
+  document.getElementById('phList').innerHTML = PH.map((p, i) => `
+    <div class="ph ${st.shown[i] ? 'shown' : ''}" data-i="${i}">
+      <div class="num">${i + 1}${p.hint ? ' · ' + p.hint : ''}</div>
+      <div class="eng">🇬🇧 ${p.en}</div>
+      <div class="answer"><button class="play" data-a="${p.au}">🔊</button><div class="fr">🇫🇷 ${esc(p.fr)}</div></div>
+      <div class="btns">
+        <button class="see">👂 Écoute la réponse · Listen</button>
+        <button class="said-b ${st.said[i] ? 'said' : ''}">${st.said[i] ? '⭐ Je l\'ai dit !' : '🗣️ Je l\'ai dit ! · I said it!'}</button>
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('.ph').forEach(el => {
+    const i = +el.dataset.i;
+    el.querySelector('.see').onclick = () => { st.shown[i] = true; save(); el.classList.add('shown'); play(PH[i].au); };
+    el.querySelector('.said-b').onclick = e => { if (!st.said[i]) { st.said[i] = true; save(); stars(e.target); e.target.classList.add('said'); e.target.textContent = '⭐ Je l\'ai dit !'; } };
+  });
+}
+
+/* ---------- à revoir ---------- */
+function renderRevoir(){
+  const out = [];
+  ['ex1','ex2','ex3'].forEach(id => st.ex[id].forEach((r, j) => {
+    if (r && !r.first) {
+      const it = EX[id].items[j];
+      const full = id === 'ex1' ? it.s.replace('___', it.a) : id === 'ex2' ? it.fix : it.full;
+      out.push(`<div class="rv"><div class="fr">${esc(full)}</div><div class="en">${it.en}</div>
+        <a href="#${it.r}" data-r="${it.r}">📖 Revoir la règle : ${RULE_NAMES[it.r]} · See the rule</a></div>`);
+    }
+  }));
+  const box = document.getElementById('rvList');
+  const started = Object.values(st.ex).some(a => a.length);
+  box.innerHTML = out.length ? out.join('') : `<div class="done">${started ? '🌟 Bravo, Evelyn ! Rien à revoir. <span class="en">Nothing to review!</span>' : '<span class="en">Fais d\'abord les exercices. · Do the exercises first.</span>'}</div>`;
+  box.querySelectorAll('a[data-r]').forEach(a => a.onclick = e => { e.preventDefault(); show('regle', a.dataset.r); });
+}
+
+/* ---------- pause ---------- */
+document.getElementById('pauseBtn').onclick = () => play('pause');
+
+document.getElementById('reset').onclick = () => {
+  if (confirm('Recommencer ? · Start again?')) { try { localStorage.removeItem(KEY); } catch(e) {} location.reload(); }
+};
+
+/* ---------- init ---------- */
+['ex1','ex2','ex3'].forEach(renderEx);
+renderPh(); score(); show(st.screen || 'regle');
+</script>
+</body>
+</html>
