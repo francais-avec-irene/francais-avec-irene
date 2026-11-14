@@ -211,10 +211,10 @@ nav button.on{border-color:var(--coral);background:var(--coral-l)}
       <div class="card"><img src="img/triste.jpg" alt="" style="object-position:50% 30%"><div class="txt"><div class="row"><button class="play sm" data-a="e_triste">🔊</button><div class="fr">Elle est <b>triste</b>.</div></div><div class="en">She is sad.</div></div></div>
       <div class="card"><img src="img/fachee.jpg" alt="" style="object-position:58% 30%"><div class="txt"><div class="row"><button class="play sm" data-a="e_fachee">🔊</button><div class="fr">Elle est <b>fâchée</b>.</div></div><div class="en">She is angry.</div></div></div>
       <div class="card"><img src="img/malade.jpg" alt="" style="object-position:50% 35%"><div class="txt"><div class="row"><button class="play sm" data-a="e_malade">🔊</button><div class="fr">Il est <b>malade</b>.</div></div><div class="en">He is ill.</div></div></div>
-      <div class="card"><img src="img/fatiguee.jpg" alt="" style="object-position:50% 45%"><div class="txt"><div class="row"><button class="play sm" data-a="e_fatiguee">🔊</button><div class="fr">Elle est <b>fatiguée</b>.</div></div><div class="en">She is tired.</div></div></div>
-      <div class="card"><img src="img/peur.jpg" alt="" style="object-position:45% 50%"><div class="txt"><div class="row"><button class="play sm" data-a="e_peur">🔊</button><div class="fr">Il <b>a peur</b>.</div></div><div class="en">He is scared.</div></div></div>
+      <div class="card"><img src="img/fatiguee.jpg" alt="" style="object-position:50% 40%"><div class="txt"><div class="row"><button class="play sm" data-a="e_fatiguee">🔊</button><div class="fr">Elle est <b>fatiguée</b>.</div></div><div class="en">She is tired.</div></div></div>
+      <div class="card"><img src="img/peur.jpg" alt="" style="object-position:50% 20%"><div class="txt"><div class="row"><button class="play sm" data-a="e_peur">🔊</button><div class="fr">Elle <b>a peur</b>.</div></div><div class="en">She is scared.</div></div></div>
     </div>
-    <div class="tip">⚠️ <b>peur</b> va avec <b>avoir</b> : j'<b>ai</b> peur, il <b>a</b> peur.<br><span class="en">"peur" goes with "avoir" (to have): I am scared, he is scared.</span></div>
+    <div class="tip">⚠️ <b>peur</b> va avec <b>avoir</b> : j'<b>ai</b> peur, elle <b>a</b> peur.<br><span class="en">"peur" goes with "avoir" (to have): I am scared, she is scared.</span></div>
     <div class="big-q"><button class="play sm" data-a="q_question" style="vertical-align:middle">🔊</button> Tu te sens comment aujourd'hui ?<br><span class="en">How do you feel today?</span></div>
     </div>
   </div>
@@ -324,7 +324,7 @@ const EX = {
     {img:'triste', s:'Elle est contente.', a:'Faux', au:'x2_2', fix:'Elle est triste.', en:'She is sad.', r:'r-emotions'},
     {img:'malade', s:'Il est malade.', a:'Vrai', au:'x2_3', fix:'Il est malade.', en:'He is ill.', r:'r-emotions'},
     {img:'fatiguee', s:'Elle n\'est pas fatiguée.', a:'Faux', au:'x2_4', fix:'Elle est fatiguée.', en:'She is tired.', r:'r-sandwich'},
-    {img:'peur', pos:'45% 50%', s:'Il a peur.', a:'Vrai', au:'x2_5', fix:'Il a peur.', en:'He is scared.', r:'r-emotions'},
+    {img:'peur', pos:'50% 20%', s:'Elle a peur.', a:'Vrai', au:'x2_5', fix:'Elle a peur.', en:'She is scared.', r:'r-emotions'},
     {img:'fachee', pos:'64% 30%', s:'Elle n\'est pas fâchée.', a:'Faux', au:'x2_6', fix:'Elle est fâchée.', en:'She is angry.', r:'r-sandwich'},
     {img:'triste', s:'Elle n\'est pas contente.', a:'Vrai', au:'x2_7', fix:'Elle n\'est pas contente.', en:'She is not happy.', r:'r-sandwich'},
     {img:'grandpere', s:'Le grand-père est triste.', a:'Faux', au:'x2_8', fix:'Le grand-père est content.', en:'The grandpa is happy.', r:'r-emotions'}
@@ -352,7 +352,7 @@ const PH = [
 const RULE_NAMES = {'r-etre':'Le verbe être','r-emotions':'Tu te sens comment ?','r-fille':'Garçon ou fille ?','r-sandwich':'Ne … pas : le sandwich'};
 
 /* ---------- state ---------- */
-const KEY = 'evelyn-lecon1-etre-v2';
+const KEY = 'evelyn-lecon1-etre-v3';
 let st;
 try { st = JSON.parse(localStorage.getItem(KEY)); } catch(e) { st = null; }
 if (!st) st = {screen:'regle', ex:{ex1:[],ex2:[],ex3:[]}, idx:{ex1:0,ex2:0,ex3:0}, said:{}, shown:{}};
