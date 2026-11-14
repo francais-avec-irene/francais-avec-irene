@@ -5,100 +5,125 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Je suis contente ! · Le verbe être</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#FBF5EC; --card:#FFFDF8; --ink:#3B3445; --soft:#7A7085;
-  --coral:#EE8B7A; --coral-l:#FCE6E1;
-  --mint:#5FB99C; --mint-l:#DFF3EC;
-  --lav:#9585D3; --lav-l:#ECE8FA;
-  --sun:#F2C14E; --sun-l:#FDF3D7;
-  --sky:#6AA9D8; --sky-l:#E2F0FA;
+  --bg:#FBF4EA; --card:#FFFCF7; --ink:#3A3344; --soft:#7B7088;
+  --coral:#E9806E; --coral-l:#FCE5DF;
+  --mint:#4FAE8E; --mint-d:#2E8A6C; --mint-l:#DDF2EA;
+  --lav:#8C7BD1; --lav-l:#ECE8FA;
+  --sun:#F0BC48; --sun-l:#FDF2D5;
+  --sky:#5E9FD3; --sky-d:#3B7DB6; --sky-l:#E1EFFA;
+  --rose:#C9699B; --rose-l:#F9E3EE;
+  --orange:#D9822B;
+  --shadow:0 10px 28px rgba(80,55,40,.10), 0 2px 6px rgba(80,55,40,.06);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:24px;line-height:1.45;font-weight:700}
+body{margin:0;color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:24px;line-height:1.45;font-weight:700;
+  background:
+    radial-gradient(600px 400px at 0% 0%, #FDE3D6 0, transparent 70%),
+    radial-gradient(500px 400px at 100% 20%, #E3EEFA 0, transparent 70%),
+    radial-gradient(600px 500px at 50% 100%, #E6F4EC 0, transparent 70%),
+    var(--bg);
+  background-attachment:fixed}
 h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
 .en{color:var(--soft);font-style:italic;font-weight:600;font-size:.85em}
-.wrap{max-width:860px;margin:0 auto;padding:0 18px 80px}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 90px}
 
-/* score */
-#score{position:fixed;top:12px;right:12px;z-index:50;background:var(--card);border:3px solid var(--sun);border-radius:999px;padding:6px 18px;font-family:Fredoka;font-size:26px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+#score{position:fixed;top:14px;right:14px;z-index:50;background:#fff;border:3px solid var(--sun);border-radius:999px;padding:6px 20px;font-family:Fredoka;font-size:26px;box-shadow:var(--shadow)}
 
-/* header */
-header{padding:26px 0 10px}
-.tag{display:inline-block;background:var(--lav-l);color:var(--lav);border-radius:999px;padding:4px 16px;font-size:18px;letter-spacing:.06em}
-header h1{font-size:46px;margin:10px 0 2px;color:var(--coral)}
-header p{margin:0}
+/* HERO */
+.hero{position:relative;margin:22px 0 10px;border-radius:34px;overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-columns:1.1fr 1fr;background:linear-gradient(135deg,#FFF6EE,#FCE5DF)}
+.hero img{width:100%;height:340px;object-fit:cover;object-position:50% 30%;display:block;order:2}
+.hero .title{padding:34px 26px 30px 34px;align-self:center;order:1}
+.tag{display:inline-block;background:var(--lav-l);color:var(--lav);border-radius:999px;padding:3px 14px;font-size:16px;letter-spacing:.08em}
+.hero h1{font-size:46px;color:var(--coral);line-height:1.1;margin:6px 0 2px}
+.hero p{margin:0;font-size:20px}
 
-/* nav */
-nav{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 22px}
-nav button{flex:1 1 140px;min-height:62px;border:3px solid transparent;border-radius:20px;font:inherit;font-size:20px;cursor:pointer;background:var(--card);color:var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+nav{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 26px}
+nav button{flex:1 1 140px;min-height:66px;border:3px solid transparent;border-radius:22px;font:inherit;font-size:20px;cursor:pointer;background:#fff;color:var(--ink);box-shadow:0 3px 10px rgba(80,55,40,.07);transition:transform .15s}
+nav button:hover{transform:translateY(-2px)}
 nav button small{display:block;font-size:15px;color:var(--soft);font-style:italic}
 nav button.on{border-color:var(--coral);background:var(--coral-l)}
 .screen{display:none}
-.screen.on{display:block}
+.screen.on{display:block;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
 
-/* rule blocks */
-.block{background:var(--card);border-radius:26px;padding:22px 24px;margin:0 0 26px;border-top:10px solid var(--c,var(--coral));box-shadow:0 2px 8px rgba(0,0,0,.05);scroll-margin-top:80px}
-.block h2{font-size:32px;color:var(--c,var(--coral));margin-bottom:6px}
-.block h2 .en{font-size:22px;display:block}
-.say{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:2px dashed #EEE6DA}
+.intro{display:flex;align-items:center;gap:12px;margin:0 0 20px}
+
+/* RULE BLOCKS */
+.block{background:var(--card);border-radius:30px;margin:0 0 30px;box-shadow:var(--shadow);overflow:hidden;scroll-margin-top:80px}
+.banner{position:relative;height:220px}
+.banner img{width:100%;height:100%;object-fit:cover;display:block}
+.banner .pill{position:absolute;left:20px;bottom:18px;background:var(--c);color:#fff;border-radius:20px;padding:8px 22px;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.banner .pill h2{font-size:32px;line-height:1.1}
+.banner .pill .en{color:#fff;opacity:.92;font-size:18px;display:block}
+.banner .cap{position:absolute;right:16px;top:16px;background:rgba(255,252,247,.94);border-radius:16px;padding:6px 14px;font-size:20px;display:flex;align-items:center;gap:8px}
+.inner{padding:22px 26px 26px}
+.say{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:2px dashed #EFE6DA}
 .say:last-child{border-bottom:none}
 .say .fr{font-size:28px}
-.say .fr b{color:var(--c,var(--coral))}
-.play{flex:0 0 56px;height:56px;border-radius:50%;border:none;background:var(--c-l,var(--coral-l));font-size:26px;cursor:pointer}
+.say .fr b{color:var(--c)}
+.play{flex:0 0 56px;height:56px;border-radius:50%;border:none;background:var(--c-l,var(--coral-l));font-size:26px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.08)}
 .play:active{transform:scale(.94)}
+.play.sm{flex-basis:46px;width:46px;height:46px;font-size:20px}
 .verbs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.verb{display:flex;align-items:center;gap:12px;background:var(--mint-l);border-radius:18px;padding:10px 14px}
+.verb{display:flex;align-items:center;gap:12px;background:var(--mint-l);border-radius:20px;padding:10px 14px}
 .verb .fr{font-size:30px}
-.verb .fr b{color:#2F8A6D}
-.tip{background:var(--sun-l);border-radius:18px;padding:14px 18px;margin-top:14px;font-size:22px}
-.tip.lav{background:var(--lav-l)}
-.feel{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.feel .card{background:var(--sky-l);border-radius:22px;padding:12px;text-align:center}
-.feel img{width:100%;border-radius:16px;display:block;margin-bottom:8px}
-.feel .fr{font-size:28px}
-.feel .row{display:flex;align-items:center;justify-content:center;gap:10px}
+.verb .fr b{color:var(--mint-d)}
+.tip{background:var(--sun-l);border-radius:20px;padding:14px 18px;margin-top:16px;font-size:22px;border-left:8px solid var(--sun)}
+.tip.lav{background:var(--lav-l);border-left-color:var(--lav)}
+.feel{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.feel .card{position:relative;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 4px 14px rgba(80,55,40,.09);text-align:center;transition:transform .2s}
+.feel .card:hover{transform:translateY(-3px)}
+.feel .card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.feel .card .txt{padding:10px 8px 14px}
+.feel .card .fr{font-size:25px}
+.feel .card .fr b{color:var(--sky-d)}
+.feel .row{display:block}
+.feel .card .play{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.92)}
 .sandwich{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0 6px}
 .sandwich span{font-family:Fredoka;font-size:36px;padding:8px 20px;border-radius:18px}
-.sandwich .bread{background:#F6D9A8}
-.sandwich .fill{background:var(--mint-l);color:#2F8A6D}
+.sandwich .bread{background:#F6D9A8;box-shadow:inset 0 -4px 0 #E8C084}
+.sandwich .fill{background:var(--mint-l);color:var(--mint-d)}
 .sandwich .plain{background:transparent;padding:8px 4px}
-.big-q{font-family:Fredoka;font-size:30px;text-align:center;background:var(--coral-l);border-radius:20px;padding:16px;margin-top:16px}
+.big-q{font-family:Fredoka;font-size:30px;text-align:center;background:var(--coral-l);border-radius:24px;padding:18px;margin-top:18px}
 
-/* exercises */
-.ex{background:var(--card);border-radius:26px;padding:22px 24px;margin:0 0 28px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:12px solid var(--c)}
+/* EXERCISES */
+.ex{background:var(--card);border-radius:30px;padding:24px 26px;margin:0 0 30px;box-shadow:var(--shadow);border-top:12px solid var(--c)}
 .ex h2{font-size:30px;color:var(--c)}
-.ex .consigne{margin:4px 0 14px}
+.ex .consigne{margin:6px 0 14px}
 .dots{display:flex;gap:8px;margin:6px 0 16px;flex-wrap:wrap}
-.dots i{width:22px;height:22px;border-radius:50%;background:#EDE6DC;display:block}
+.dots i{width:22px;height:22px;border-radius:50%;background:#EDE5DA;display:block}
 .dots i.ok{background:var(--mint)}
 .dots i.ko{background:var(--coral)}
 .dots i.cur{outline:4px solid var(--sun)}
 .q{text-align:center}
-.q img{max-width:420px;width:100%;border-radius:20px;display:block;margin:0 auto 12px}
+.q img{max-width:440px;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:26px;display:block;margin:0 auto 12px;box-shadow:0 6px 18px rgba(80,55,40,.12)}
 .q .sentence{font-size:34px;margin:8px 0 4px;font-family:Fredoka;font-weight:500}
 .q .sentence u{text-decoration:none;display:inline-block;min-width:80px;border-bottom:4px solid var(--c);color:var(--c)}
 .opts{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:18px 0 8px}
-.opt{min-width:170px;min-height:84px;font:inherit;font-family:Fredoka;font-size:34px;border-radius:24px;border:4px solid var(--c);background:#fff;color:var(--ink);cursor:pointer;padding:6px 22px}
-.opt:active{transform:scale(.97)}
+.opt{min-width:170px;min-height:84px;font:inherit;font-family:Fredoka;font-size:34px;border-radius:26px;border:4px solid var(--c);background:#fff;color:var(--ink);cursor:pointer;padding:6px 22px;box-shadow:0 4px 10px rgba(0,0,0,.06);transition:transform .12s}
+.opt:hover{transform:translateY(-2px)}
 .opt.good{background:var(--mint-l);border-color:var(--mint)}
 .opt.bad{background:var(--coral-l);border-color:var(--coral);animation:shake .4s}
-.opt:disabled{cursor:default}
+.opt:disabled{cursor:default;transform:none}
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 .feedback{min-height:70px;font-size:26px;margin-top:8px}
-.next{font:inherit;font-size:26px;background:var(--c);color:#fff;border:none;border-radius:999px;padding:12px 34px;cursor:pointer;margin-top:6px}
-.done{font-family:Fredoka;font-size:30px;color:#2F8A6D;text-align:center;padding:20px}
+.next{font:inherit;font-size:26px;background:var(--c);color:#fff;border:none;border-radius:999px;padding:12px 34px;cursor:pointer;margin-top:6px;box-shadow:0 6px 14px rgba(0,0,0,.12)}
+.done{font-family:Fredoka;font-size:30px;color:var(--mint-d);text-align:center;padding:20px}
 
-/* pause */
-.pause{text-align:center;background:linear-gradient(160deg,#E9E4F8,#DFF0EA);border-radius:30px;padding:46px 20px}
-.pause .moon{font-size:90px}
-.pause button{font:inherit;font-size:28px;background:var(--lav);color:#fff;border:none;border-radius:999px;padding:16px 40px;cursor:pointer;margin-top:16px}
+/* PAUSE */
+.pause{text-align:center;border-radius:34px;overflow:hidden;box-shadow:var(--shadow);background:linear-gradient(160deg,#E7E1F7,#DCEFE7)}
+.pause .ph-top{height:240px}
+.pause .ph-top img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block;filter:saturate(.85) brightness(1.03)}
+.pause .body{padding:26px 20px 34px}
+.pause button{font:inherit;font-size:28px;background:var(--lav);color:#fff;border:none;border-radius:999px;padding:16px 40px;cursor:pointer;margin-top:16px;box-shadow:0 6px 14px rgba(0,0,0,.12)}
 
-/* phrases */
-.ph{background:var(--card);border-radius:26px;padding:20px 22px;margin:0 0 20px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:12px solid var(--sun)}
-.ph .num{font-family:Fredoka;color:var(--sun);font-size:24px}
+/* PHRASES */
+.ph{background:var(--card);border-radius:26px;padding:20px 22px;margin:0 0 20px;box-shadow:var(--shadow);border-left:12px solid var(--sun)}
+.ph .num{font-family:Fredoka;color:var(--orange);font-size:24px}
 .ph .eng{font-size:30px;margin:2px 0 12px}
 .ph .answer{display:none;align-items:center;gap:14px;background:var(--sun-l);border-radius:18px;padding:12px 16px;margin-bottom:12px}
 .ph .answer .fr{font-size:30px}
@@ -107,21 +132,25 @@ nav button.on{border-color:var(--coral);background:var(--coral-l)}
 .ph .btns button{font:inherit;font-size:22px;border-radius:999px;border:3px solid var(--sun);background:#fff;padding:10px 22px;cursor:pointer;min-height:56px}
 .ph .btns button.said{background:var(--mint-l);border-color:var(--mint)}
 
-/* revoir */
-.rv{background:var(--card);border-radius:22px;padding:16px 20px;margin-bottom:16px;border-left:10px solid var(--coral)}
+/* REVOIR */
+.rv{background:var(--card);border-radius:24px;padding:16px 20px;margin-bottom:16px;border-left:10px solid var(--coral);box-shadow:var(--shadow)}
 .rv .fr{font-size:28px}
 .rv a{display:inline-block;margin-top:8px;color:var(--lav);font-size:22px}
 .reset{font:inherit;font-size:18px;background:none;border:2px solid #D8CFC3;color:var(--soft);border-radius:999px;padding:8px 20px;cursor:pointer;margin-top:24px}
 
-/* stars */
 .star{position:fixed;pointer-events:none;z-index:99;font-size:34px;animation:fly 1.1s ease-out forwards}
 @keyframes fly{0%{opacity:1;transform:translate(0,0) scale(.6) rotate(0)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.3) rotate(160deg)}}
 
-@media (max-width:560px){
+@media (max-width:640px){
   body{font-size:21px}
-  header{padding-top:70px}
-  header h1{font-size:36px}
-  .verbs,.feel{grid-template-columns:1fr}
+  .hero{grid-template-columns:1fr;margin-top:70px}
+  .hero img{height:240px;order:1}
+  .hero .title{order:2;padding:18px 20px 22px}
+  .hero h1{font-size:34px}
+  .verbs{grid-template-columns:1fr}
+  .feel{grid-template-columns:1fr 1fr}
+  .banner{height:170px}
+  .banner .pill h2{font-size:26px}
   .opt{min-width:130px;font-size:28px}
   .q .sentence{font-size:28px}
 }
@@ -131,27 +160,33 @@ nav button.on{border-color:var(--coral);background:var(--coral-l)}
 <div id="score">⭐ <span id="sc">0</span> / 22</div>
 <div class="wrap">
 
-<header>
-  <span class="tag">LEÇON 1 · LE VERBE ÊTRE</span>
-  <h1>Je suis contente !</h1>
-  <p>Le verbe être et les émotions <span class="en">· The verb "to be" and feelings</span></p>
-</header>
+<div class="hero">
+  <img src="img/hero.jpg" alt="">
+  <div class="title">
+    <span class="tag">LEÇON 1 · LE VERBE ÊTRE</span>
+    <h1>Je suis contente !</h1>
+    <p>Le verbe être et les émotions <span class="en">· The verb "to be" and feelings</span></p>
+  </div>
+</div>
 
 <nav id="nav">
-  <button data-s="regle">1. La règle<small>The rule</small></button>
-  <button data-s="ex">2. Exercices<small>Exercises</small></button>
-  <button data-s="pause">😌 Pause<small>Eye break</small></button>
-  <button data-s="phrases">3. Mes phrases<small>My sentences</small></button>
-  <button data-s="revoir">À revoir<small>To review</small></button>
+  <button data-s="regle">📖 La règle<small>The rule</small></button>
+  <button data-s="ex">✏️ Exercices<small>Exercises</small></button>
+  <button data-s="pause">🌙 Pause<small>Eye break</small></button>
+  <button data-s="phrases">🗣️ Mes phrases<small>My sentences</small></button>
+  <button data-s="revoir">🔁 À revoir<small>To review</small></button>
 </nav>
 
 <!-- ============ RÈGLE ============ -->
 <section class="screen" id="s-regle">
-  <p>Evelyn, écoute et répète. <span class="en">· Evelyn, listen and repeat.</span> <button class="play" data-a="c_regle" style="width:46px;height:46px;font-size:20px;vertical-align:middle">🔊</button></p>
+  <p class="intro"><button class="play sm" data-a="c_regle">🔊</button><span>Evelyn, écoute et répète. <span class="en">· Evelyn, listen and repeat.</span></span></p>
 
-  <div class="block" id="r-etre" style="--c:#2F8A6D;--c-l:var(--mint-l)">
-    <h2>Le verbe être <span class="en">The verb "to be"</span></h2>
-    <p>On utilise <b>être</b> pour dire comment on est. <br><span class="en">We use "être" to say how we are.</span></p>
+  <div class="block" id="r-etre" style="--c:#2E8A6C;--c-l:var(--mint-l)">
+    <div class="banner"><img src="img/famille.jpg" alt="" style="object-position:50% 35%">
+      <div class="cap"><button class="play sm" data-a="e_famille" style="--c-l:#fff">🔊</button> Nous sommes contents !</div>
+      <div class="pill"><h2>Le verbe être <span class="en">The verb "to be"</span></h2></div></div>
+    <div class="inner">
+    <p style="margin-top:0">On utilise <b>être</b> pour dire comment on est. <br><span class="en">We use "être" to say how we are.</span></p>
     <div class="verbs">
       <div class="verb"><button class="play" data-a="v1">🔊</button><div><div class="fr">je <b>suis</b></div><div class="en">I am</div></div></div>
       <div class="verb"><button class="play" data-a="v5">🔊</button><div><div class="fr">nous <b>sommes</b></div><div class="en">we are</div></div></div>
@@ -165,37 +200,45 @@ nav button.on{border-color:var(--coral);background:var(--coral-l)}
     <div class="tip">👦 <b>il</b> = un garçon <span class="en">a boy</span> · 👧 <b>elle</b> = une fille <span class="en">a girl</span><br>
     👦👦 <b>ils</b> = des garçons, ou des garçons et des filles <span class="en">boys, or boys and girls</span><br>
     👧👧 <b>elles</b> = des filles <span class="en">girls</span></div>
-  </div>
-
-  <div class="block" id="r-emotions" style="--c:#4A8CC4;--c-l:var(--sky-l)">
-    <h2>Tu te sens comment ? <span class="en">How do you feel?</span></h2>
-    <div class="feel">
-      <div class="card"><img src="img/content.jpg" alt=""><div class="row"><button class="play" data-a="e_content">🔊</button><div><div class="fr">Léo est <b>content</b>.</div><div class="en">Léo is happy.</div></div></div></div>
-      <div class="card"><img src="img/triste.jpg" alt=""><div class="row"><button class="play" data-a="e_triste">🔊</button><div><div class="fr">Bastien est <b>triste</b>.</div><div class="en">Bastien is sad.</div></div></div></div>
-      <div class="card"><img src="img/fache.jpg" alt=""><div class="row"><button class="play" data-a="e_fache">🔊</button><div><div class="fr">Marie est <b>fâchée</b>.</div><div class="en">Marie is angry.</div></div></div></div>
-      <div class="card"><img src="img/malade.jpg" alt=""><div class="row"><button class="play" data-a="e_malade">🔊</button><div><div class="fr">Marie est <b>malade</b>.</div><div class="en">Marie is ill.</div></div></div></div>
-      <div class="card"><img src="img/fatigue.jpg" alt=""><div class="row"><button class="play" data-a="e_fatigue">🔊</button><div><div class="fr">Madame Legrand est <b>fatiguée</b>.</div><div class="en">Mrs Legrand is tired.</div></div></div></div>
-      <div class="card"><img src="img/peur.jpg" alt=""><div class="row"><button class="play" data-a="e_peur">🔊</button><div><div class="fr">Maggie <b>a peur</b>.</div><div class="en">Maggie is scared.</div></div></div></div>
     </div>
-    <div class="tip">⚠️ <b>peur</b> va avec <b>avoir</b> : j'<b>ai</b> peur, elle <b>a</b> peur.<br><span class="en">"peur" goes with "avoir" (to have): I am scared, she is scared.</span></div>
-    <div class="big-q"><button class="play" data-a="q_question" style="vertical-align:middle">🔊</button> Tu te sens comment aujourd'hui ?<br><span class="en">How do you feel today?</span></div>
   </div>
 
-  <div class="block" id="r-fille" style="--c:#C76F9E;--c-l:#F8E3EE">
-    <h2>Garçon ou fille ? <span class="en">Boy or girl?</span></h2>
-    <p>Pour une fille, on ajoute souvent un <b>e</b>. <br><span class="en">For a girl, we often add an "e".</span></p>
+  <div class="block" id="r-emotions" style="--c:#3B7DB6;--c-l:var(--sky-l)">
+    <div class="inner">
+    <h2 style="font-size:32px;color:var(--c);margin-bottom:14px">Tu te sens comment ? <span class="en" style="font-size:20px">· How do you feel?</span></h2>
+    <div class="feel">
+      <div class="card"><img src="img/contente.jpg" alt="" style="object-position:50% 25%"><div class="txt"><div class="row"><button class="play sm" data-a="e_contente">🔊</button><div class="fr">Elle est <b>contente</b>.</div></div><div class="en">She is happy.</div></div></div>
+      <div class="card"><img src="img/triste.jpg" alt="" style="object-position:50% 30%"><div class="txt"><div class="row"><button class="play sm" data-a="e_triste">🔊</button><div class="fr">Elle est <b>triste</b>.</div></div><div class="en">She is sad.</div></div></div>
+      <div class="card"><img src="img/fachee.jpg" alt="" style="object-position:58% 30%"><div class="txt"><div class="row"><button class="play sm" data-a="e_fachee">🔊</button><div class="fr">Elle est <b>fâchée</b>.</div></div><div class="en">She is angry.</div></div></div>
+      <div class="card"><img src="img/malade.jpg" alt="" style="object-position:50% 35%"><div class="txt"><div class="row"><button class="play sm" data-a="e_malade">🔊</button><div class="fr">Il est <b>malade</b>.</div></div><div class="en">He is ill.</div></div></div>
+      <div class="card"><img src="img/fatiguee.jpg" alt="" style="object-position:50% 45%"><div class="txt"><div class="row"><button class="play sm" data-a="e_fatiguee">🔊</button><div class="fr">Elle est <b>fatiguée</b>.</div></div><div class="en">She is tired.</div></div></div>
+      <div class="card"><img src="img/peur.jpg" alt="" style="object-position:45% 50%"><div class="txt"><div class="row"><button class="play sm" data-a="e_peur">🔊</button><div class="fr">Il <b>a peur</b>.</div></div><div class="en">He is scared.</div></div></div>
+    </div>
+    <div class="tip">⚠️ <b>peur</b> va avec <b>avoir</b> : j'<b>ai</b> peur, il <b>a</b> peur.<br><span class="en">"peur" goes with "avoir" (to have): I am scared, he is scared.</span></div>
+    <div class="big-q"><button class="play sm" data-a="q_question" style="vertical-align:middle">🔊</button> Tu te sens comment aujourd'hui ?<br><span class="en">How do you feel today?</span></div>
+    </div>
+  </div>
+
+  <div class="block" id="r-fille" style="--c:#C9699B;--c-l:var(--rose-l)">
+    <div class="banner"><img src="img/rire.jpg" alt="" style="object-position:50% 30%">
+      <div class="pill"><h2>Garçon ou fille ? <span class="en">Boy or girl?</span></h2></div></div>
+    <div class="inner">
+    <p style="margin-top:0">Pour une fille, on ajoute souvent un <b>e</b>. <br><span class="en">For a girl, we often add an "e".</span></p>
     <div class="say"><button class="play" data-a="f1">🔊</button><div><div class="fr">Léo est content. Evelyn est content<b>e</b>.</div><div class="en">Léo is happy. Evelyn is happy.</div></div></div>
     <div class="say"><button class="play" data-a="f2">🔊</button><div><div class="fr">Papa est fâché. Maman est fâché<b>e</b>.</div><div class="en">Dad is angry. Mum is angry.</div></div></div>
     <div class="say"><button class="play" data-a="f3">🔊</button><div><div class="fr">Mon frère est fatigué. Ma sœur est fatigué<b>e</b>.</div><div class="en">My brother is tired. My sister is tired.</div></div></div>
     <div class="tip lav"><b>triste</b> et <b>malade</b> finissent déjà par e : pas de changement ! <br><span class="en">"triste" and "malade" already end in e: no change!</span></div>
     <div class="say"><button class="play" data-a="f4">🔊</button><div><div class="fr">Il est triste. Elle est triste.</div><div class="en">He is sad. She is sad.</div></div></div>
     <div class="say"><button class="play" data-a="f5">🔊</button><div><div class="fr">Il est malade. Elle est malade.</div><div class="en">He is ill. She is ill.</div></div></div>
-    <div class="big-q" style="background:#F8E3EE">👧 Evelyn, tu es une fille : <b>Je suis contente !</b><br><span class="en">Evelyn, you are a girl: I am happy!</span></div>
+    <div class="big-q" style="background:var(--rose-l)">👧 Evelyn, tu es une fille : <b>Je suis contente !</b><br><span class="en">Evelyn, you are a girl: I am happy!</span></div>
+    </div>
   </div>
 
   <div class="block" id="r-sandwich" style="--c:#D9822B;--c-l:var(--sun-l)">
-    <h2>Ne … pas : le sandwich <span class="en">The "not" sandwich</span></h2>
-    <p>Pour dire <b>non</b>, on met le verbe entre <b>ne</b> et <b>pas</b>, comme dans un sandwich. <br><span class="en">To say "not", we put the verb between "ne" and "pas", like in a sandwich.</span></p>
+    <div class="banner"><img src="img/sandwich.jpg" alt="" style="object-position:50% 45%">
+      <div class="pill"><h2>Ne … pas : le sandwich <span class="en">The "not" sandwich</span></h2></div></div>
+    <div class="inner">
+    <p style="margin-top:0">Pour dire <b>non</b>, on met le verbe entre <b>ne</b> et <b>pas</b>, comme dans un sandwich. <br><span class="en">To say "not", we put the verb between "ne" and "pas", like in a sandwich.</span></p>
     <div class="sandwich"><span class="plain">Je</span><span class="bread">ne</span><span class="fill">suis</span><span class="bread">pas</span><span class="plain">triste.</span></div>
     <div class="say"><button class="play" data-a="n1">🔊</button><div><div class="fr">Je suis triste. → Je <b>ne</b> suis <b>pas</b> triste.</div><div class="en">I am sad. → I am not sad.</div></div></div>
     <div class="tip">Devant une voyelle (a, e, i, o, u), <b>ne</b> devient <b>n'</b>. <br><span class="en">Before a vowel (a, e, i, o, u), "ne" becomes "n'".</span>
@@ -203,29 +246,34 @@ nav button.on{border-color:var(--coral);background:var(--coral-l)}
     <div class="say"><button class="play" data-a="n2">🔊</button><div><div class="fr">Tu es malade. → Tu <b>n'</b>es <b>pas</b> malade.</div><div class="en">You are ill. → You are not ill.</div></div></div>
     <div class="say"><button class="play" data-a="n3">🔊</button><div><div class="fr">Il est fatigué. → Il <b>n'</b>est <b>pas</b> fatigué.</div><div class="en">He is tired. → He is not tired.</div></div></div>
     <div class="say"><button class="play" data-a="n4">🔊</button><div><div class="fr">Mon grand-père <b>n'</b>est <b>pas</b> content.</div><div class="en">My grandpa is not happy.</div></div></div>
+    </div>
   </div>
 
-  <div class="block" id="r-tres" style="--c:#8B76D0;--c-l:var(--lav-l)">
-    <h2>Très <span class="en">Very</span></h2>
+  <div class="block" id="r-tres" style="--c:#8C7BD1;--c-l:var(--lav-l)">
+    <div class="banner"><img src="img/saut.jpg" alt="" style="object-position:50% 22%">
+      <div class="pill"><h2>Très <span class="en">Very</span></h2></div></div>
+    <div class="inner">
+    <div class="say"><button class="play" data-a="t2">🔊</button><div><div class="fr">Elle est <b>très</b> contente !</div><div class="en">She is very happy!</div></div></div>
     <div class="say"><button class="play" data-a="t1">🔊</button><div><div class="fr">Je suis <b>très</b> contente !</div><div class="en">I am very happy!</div></div></div>
+    </div>
   </div>
 </section>
 
 <!-- ============ EXERCICES ============ -->
 <section class="screen" id="s-ex">
-  <div class="ex" id="ex1" style="--c:#2F8A6D">
+  <div class="ex" id="ex1" style="--c:#2E8A6C">
     <h2>1 · Le bon verbe <span class="en">The right verb</span></h2>
-    <p class="consigne">Evelyn, écoute et choisis le bon verbe. <button class="play" data-a="c_ex1" style="width:44px;height:44px;font-size:20px;vertical-align:middle">🔊</button><br><span class="en">Evelyn, listen and choose the right verb.</span></p>
+    <p class="consigne"><button class="play sm" data-a="c_ex1" style="vertical-align:middle">🔊</button> Evelyn, écoute et choisis le bon verbe.<br><span class="en">Evelyn, listen and choose the right verb.</span></p>
     <div class="dots"></div><div class="body"></div>
   </div>
-  <div class="ex" id="ex2" style="--c:#4A8CC4">
+  <div class="ex" id="ex2" style="--c:#3B7DB6">
     <h2>2 · Vrai ou faux ? <span class="en">True or false?</span></h2>
-    <p class="consigne">Evelyn, regarde, écoute et réponds. <button class="play" data-a="c_ex2" style="width:44px;height:44px;font-size:20px;vertical-align:middle">🔊</button><br><span class="en">Evelyn, look, listen and answer.</span></p>
+    <p class="consigne"><button class="play sm" data-a="c_ex2" style="vertical-align:middle">🔊</button> Evelyn, regarde la photo, écoute et réponds.<br><span class="en">Evelyn, look at the photo, listen and answer.</span></p>
     <div class="dots"></div><div class="body"></div>
   </div>
   <div class="ex" id="ex3" style="--c:#D9822B">
     <h2>3 · Le sandwich <span class="en">The sandwich</span></h2>
-    <p class="consigne">Evelyn, choisis le bon sandwich : <b>ne … pas</b> ou <b>n' … pas</b> ? <button class="play" data-a="c_ex3" style="width:44px;height:44px;font-size:20px;vertical-align:middle">🔊</button><br><span class="en">Evelyn, choose the right sandwich.</span></p>
+    <p class="consigne"><button class="play sm" data-a="c_ex3" style="vertical-align:middle">🔊</button> Evelyn, choisis le bon sandwich : <b>ne … pas</b> ou <b>n' … pas</b> ?<br><span class="en">Evelyn, choose the right sandwich.</span></p>
     <div class="dots"></div><div class="body"></div>
   </div>
 </section>
@@ -233,17 +281,19 @@ nav button.on{border-color:var(--coral);background:var(--coral-l)}
 <!-- ============ PAUSE ============ -->
 <section class="screen" id="s-pause">
   <div class="pause">
-    <div class="moon">🌙</div>
+        <div class="body">
+    <div style="font-size:90px">🌙</div>
     <h2 style="font-size:36px">Pause pour les yeux</h2>
     <p class="en" style="font-size:24px">Eye break</p>
     <p>Evelyn, ferme les yeux et écoute.<br><span class="en">Evelyn, close your eyes and listen.</span></p>
     <button id="pauseBtn">▶ Commencer · Start</button>
+    </div>
   </div>
 </section>
 
 <!-- ============ PHRASES ============ -->
 <section class="screen" id="s-phrases">
-  <p>Evelyn, lis la phrase en anglais et dis-la en français. Puis écoute. <button class="play" data-a="c_phr" style="width:44px;height:44px;font-size:20px;vertical-align:middle">🔊</button><br><span class="en">Evelyn, read the English sentence and say it in French. Then listen.</span></p>
+  <p class="intro"><button class="play sm" data-a="c_phr">🔊</button><span>Evelyn, lis la phrase en anglais et dis-la en français. Puis écoute.<br><span class="en">Evelyn, read the English sentence and say it in French. Then listen.</span></span></p>
   <div id="phList"></div>
 </section>
 
@@ -270,14 +320,14 @@ const EX = {
     {s:'Je ne ___ pas fâchée.', o:['est','suis'], a:'suis', au:'x1_8', en:'I am not angry.', r:'r-etre'}
   ]},
   ex2: {type:'tf', items:[
-    {img:'content', s:'Léo est content.', a:'Vrai', au:'x2_1', fix:'Léo est content.', en:'Léo is happy.', r:'r-emotions'},
-    {img:'triste', s:'Bastien est content.', a:'Faux', au:'x2_2', fix:'Bastien est triste.', en:'Bastien is sad.', r:'r-emotions'},
-    {img:'malade', s:'Marie est malade.', a:'Vrai', au:'x2_3', fix:'Marie est malade.', en:'Marie is ill.', r:'r-emotions'},
-    {img:'fatigue', s:'Madame Legrand n\'est pas fatiguée.', a:'Faux', au:'x2_4', fix:'Madame Legrand est fatiguée.', en:'Mrs Legrand is tired.', r:'r-sandwich'},
-    {img:'peur', s:'Maggie a peur.', a:'Vrai', au:'x2_5', fix:'Maggie a peur.', en:'Maggie is scared.', r:'r-emotions'},
-    {img:'fache', s:'Marie n\'est pas fâchée.', a:'Faux', au:'x2_6', fix:'Marie est fâchée.', en:'Marie is angry.', r:'r-sandwich', note:'Marie est à droite. · Marie is on the right.'},
-    {img:'triste', s:'Bastien n\'est pas content.', a:'Vrai', au:'x2_7', fix:'Bastien n\'est pas content.', en:'Bastien is not happy.', r:'r-sandwich'},
-    {img:'content', s:'Léo n\'est pas triste.', a:'Vrai', au:'x2_8', fix:'Léo n\'est pas triste.', en:'Léo is not sad.', r:'r-sandwich'}
+    {img:'contente', s:'Elle est contente.', a:'Vrai', au:'x2_1', fix:'Elle est contente.', en:'She is happy.', r:'r-emotions'},
+    {img:'triste', s:'Elle est contente.', a:'Faux', au:'x2_2', fix:'Elle est triste.', en:'She is sad.', r:'r-emotions'},
+    {img:'malade', s:'Il est malade.', a:'Vrai', au:'x2_3', fix:'Il est malade.', en:'He is ill.', r:'r-emotions'},
+    {img:'fatiguee', s:'Elle n\'est pas fatiguée.', a:'Faux', au:'x2_4', fix:'Elle est fatiguée.', en:'She is tired.', r:'r-sandwich'},
+    {img:'peur', pos:'45% 50%', s:'Il a peur.', a:'Vrai', au:'x2_5', fix:'Il a peur.', en:'He is scared.', r:'r-emotions'},
+    {img:'fachee', pos:'64% 30%', s:'Elle n\'est pas fâchée.', a:'Faux', au:'x2_6', fix:'Elle est fâchée.', en:'She is angry.', r:'r-sandwich'},
+    {img:'triste', s:'Elle n\'est pas contente.', a:'Vrai', au:'x2_7', fix:'Elle n\'est pas contente.', en:'She is not happy.', r:'r-sandwich'},
+    {img:'grandpere', s:'Le grand-père est triste.', a:'Faux', au:'x2_8', fix:'Le grand-père est content.', en:'The grandpa is happy.', r:'r-emotions'}
   ]},
   ex3: {type:'sand', items:[
     {p:['Je','suis','triste.'], a:'ne … pas', full:'Je ne suis pas triste.', au:'x3_1', en:'I am not sad.', r:'r-sandwich'},
@@ -302,7 +352,7 @@ const PH = [
 const RULE_NAMES = {'r-etre':'Le verbe être','r-emotions':'Tu te sens comment ?','r-fille':'Garçon ou fille ?','r-sandwich':'Ne … pas : le sandwich'};
 
 /* ---------- state ---------- */
-const KEY = 'evelyn-lecon1-etre-v1';
+const KEY = 'evelyn-lecon1-etre-v2';
 let st;
 try { st = JSON.parse(localStorage.getItem(KEY)); } catch(e) { st = null; }
 if (!st) st = {screen:'regle', ex:{ex1:[],ex2:[],ex3:[]}, idx:{ex1:0,ex2:0,ex3:0}, said:{}, shown:{}};
@@ -373,7 +423,7 @@ function renderEx(id){
     q = `<div class="sentence">${esc(it.s).replace('___', '<u>' + (r ? it.a : '?') + '</u>')}</div>`;
     opts = it.o;
   } else if (data.type === 'tf') {
-    q = `<img src="img/${it.img}.jpg" alt="">${it.note ? `<div class="en">${it.note}</div>` : ''}<div class="sentence">${esc(it.s)}</div>`;
+    q = `<img src="img/${it.img}.jpg" alt="" style="object-position:${it.pos||'50% 35%'}">${it.note ? `<div class="en">${it.note}</div>` : ''}<div class="sentence">${esc(it.s)}</div>`;
     opts = ['Vrai', 'Faux'];
   } else {
     const g = r ? it.a.split(' … ') : ['?', '?'];
