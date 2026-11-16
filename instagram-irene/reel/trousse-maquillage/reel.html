@@ -1,0 +1,165 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#2a0f2e}
+body{font-family:"Bricolage Grotesque",sans-serif;color:#fff;position:relative}
+#cv{position:absolute;inset:0}
+.abs{position:absolute}
+#logo{left:40px;top:44px;width:132px;height:132px;border-radius:50%;border:6px solid #fff;box-shadow:0 8px 30px rgba(255,90,170,.6);overflow:hidden;background:#fff}
+#logo img{width:100%;height:100%;object-fit:cover}
+#score{right:40px;top:62px;background:linear-gradient(135deg,#ff5fa2,#c86bff);border:4px solid #fff;border-radius:60px;padding:14px 32px;font:800 46px "Bricolage Grotesque";box-shadow:0 0 34px rgba(255,95,162,.8)}
+#round{left:50%;top:205px;transform:translateX(-50%);white-space:nowrap;background:rgba(255,255,255,.16);border:3px solid rgba(255,255,255,.7);border-radius:60px;padding:10px 34px;font:700 34px "Bricolage Grotesque";letter-spacing:2px;backdrop-filter:blur(6px)}
+/* miroir */
+#mirror{left:90px;top:300px;width:900px;height:1040px;border-radius:450px 450px 60px 60px;background:radial-gradient(ellipse at 50% 30%,rgba(255,240,250,.22),rgba(255,180,220,.08) 60%,rgba(80,20,90,.25));border:14px solid transparent;
+ background-clip:padding-box;box-shadow:0 0 0 14px #f7c66b,0 0 0 20px #fff1d6,0 0 80px rgba(255,190,90,.55),inset 0 0 120px rgba(255,255,255,.15)}
+.bulb{width:46px;height:46px;border-radius:50%;margin:-23px 0 0 -23px;background:radial-gradient(circle at 40% 35%,#fff,#ffe9b8 45%,#f2b14d);}
+/* textes */
+.big{left:0;right:0;text-align:center}
+#hook1{top:620px;font:800 190px/1 "Bricolage Grotesque";letter-spacing:-4px;text-shadow:0 10px 0 #b0287a,0 0 40px rgba(255,95,162,.9)}
+#swipe{left:120px;top:600px;width:840px;height:260px}
+#hook2{top:900px;font:700 150px/1.1 "Dancing Script";color:#fff;text-shadow:0 0 30px #ff5fa2,0 6px 0 #b0287a}
+#word{top:470px;font:italic 700 92px/1.1 "Playfair Display";color:#ffe3f1;text-shadow:0 4px 18px rgba(0,0,0,.35)}
+#word .art{color:#ffd166;font-style:normal;font-family:"Bricolage Grotesque";font-weight:800;position:relative;display:inline-block}
+#word .art .x{position:absolute;left:-8px;right:-8px;top:52%;height:12px;background:#ff2e7e;border-radius:6px;transform-origin:left}
+#icon{left:390px;top:640px;width:300px;height:300px;font-size:230px;line-height:300px;text-align:center;filter:drop-shadow(0 14px 22px rgba(0,0,0,.35))}
+#ring{left:345px;top:595px;width:390px;height:390px}
+#cdnum{left:0;right:0;top:1000px;text-align:center;font:800 120px "Bricolage Grotesque";color:#ffd166;text-shadow:0 0 30px #ff5fa2}
+#answer{top:1010px;font:700 128px/1.05 "Dancing Script";color:#fff;text-shadow:0 0 34px #ff5fa2,0 6px 0 #b0287a;white-space:nowrap}
+#answer .fa{color:#ffd166}
+#badge{left:640px;top:930px;background:linear-gradient(135deg,#ffd166,#ff8fc0);color:#5a1240;font:800 44px "Bricolage Grotesque";padding:10px 26px;border-radius:40px;border:4px solid #fff;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+#warn{left:-60px;right:-60px;top:640px;height:300px;background:repeating-linear-gradient(-45deg,#ff2e7e 0 60px,#ffd166 60px 120px);box-shadow:0 0 60px rgba(255,46,126,.8)}
+#warnt{left:0;right:0;top:700px;text-align:center}
+#warnt span{display:inline-block;background:#fff;color:#e0115f;font:800 104px/1 "Bricolage Grotesque";padding:26px 46px;border-radius:30px;border:10px solid #e0115f;box-shadow:0 14px 40px rgba(0,0,0,.4)}
+#sent{top:560px;font:700 86px/1.15 "Dancing Script";color:#fff;text-shadow:0 0 28px #ff5fa2;padding:0 150px}
+#sent b{color:#ffd166}
+#sub2{top:930px;font:800 66px "Bricolage Grotesque"}
+#sub2 .ok{color:#7dffb0}#sub2 .ko{color:#fff;text-decoration:line-through;text-decoration-color:#ff2e7e;text-decoration-thickness:10px;opacity:.9}#sub2{text-shadow:0 4px 16px rgba(60,0,60,.5)}
+#sky{left:0;right:0;top:400px;text-align:center;font-size:170px}
+#pad{width:420px;height:420px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#fdf2f7 60%,#f3d7e6);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+#final{top:520px}
+#fq{font:800 92px/1.1 "Bricolage Grotesque";text-shadow:0 0 30px #ff5fa2}
+#fs{margin:40px auto 0;width:520px;height:300px;border-radius:40px;background:linear-gradient(135deg,#ff5fa2,#c86bff);border:8px solid #fff;font:800 170px/284px "Bricolage Grotesque";box-shadow:0 0 70px rgba(255,95,162,.9)}
+#fc{margin-top:46px;font:700 76px/1.15 "Dancing Script";color:#ffe3f1}
+#endc{top:560px}
+#endc img{width:430px;height:430px;border-radius:50%;border:14px solid #fff;box-shadow:0 0 80px rgba(255,95,162,.9)}
+#endc .n{font:800 66px "Bricolage Grotesque";margin-top:40px}#endc .s{font:700 84px "Dancing Script";color:#ffd166;margin-top:6px}
+/* sous-titres */
+#cap{left:60px;right:60px;bottom:150px;background:rgba(40,10,45,.55);border:3px solid rgba(255,255,255,.35);border-radius:36px;padding:26px 34px;text-align:center;backdrop-filter:blur(10px)}
+#cfr{font:800 56px/1.15 "Bricolage Grotesque"}#cit{font:italic 600 44px/1.2 "Playfair Display";color:#ffc2df;margin-top:8px}
+#sign{left:0;right:0;bottom:56px;text-align:center;font:700 32px "Bricolage Grotesque";color:rgba(255,255,255,.85);letter-spacing:1px}
+</style></head><body>
+<canvas id="cv" width="1080" height="1920"></canvas>
+<div id="mirror" class="abs"></div><div id="bulbs"></div>
+<div id="hook1" class="abs big">LE TRUC ?</div>
+<svg id="swipe" class="abs" viewBox="0 0 840 260"><defs><linearGradient id="lip" x1="0" x2="1"><stop offset="0" stop-color="#ff1f6b"/><stop offset=".5" stop-color="#ff3d8b"/><stop offset="1" stop-color="#d4004f"/></linearGradient></defs>
+<path id="sw" d="M20 170 C 220 110, 520 120, 820 80" stroke="url(#lip)" stroke-width="58" stroke-linecap="round" fill="none" stroke-dasharray="900" stroke-dashoffset="900" opacity=".92"/></svg>
+<div id="hook2" class="abs big">le maquillage</div>
+<div id="compact" class="abs"></div>
+<div id="round" class="abs"></div>
+<div id="word" class="abs big"></div>
+<svg id="ring" class="abs" viewBox="0 0 390 390"><circle cx="195" cy="195" r="180" stroke="rgba(255,255,255,.25)" stroke-width="16" fill="none"/>
+<circle id="rg" cx="195" cy="195" r="180" stroke="#ffd166" stroke-width="16" fill="none" stroke-linecap="round" stroke-dasharray="1131" stroke-dashoffset="0" transform="rotate(-90 195 195)"/></svg>
+<div id="icon" class="abs"></div><div id="cdnum" class="abs"></div>
+<div id="answer" class="abs big"></div><div id="badge" class="abs">masculin !</div>
+<div id="warn" class="abs"></div><div id="warnt" class="abs"><span>ATTENTION<br>AU PIÈGE !</span></div>
+<div id="sky" class="abs"></div>
+<div id="sent" class="abs big"></div><div id="sub2" class="abs big"></div>
+<div id="pad" class="abs"></div>
+<div id="final" class="abs big"><div id="fq">Combien de<br>bonnes réponses ?</div><div id="fs">? / 10</div><div id="fc">Écrivez votre score<br>en commentaire 💬</div></div>
+<div id="endc" class="abs big"><img src="logo.png"><div class="n">Irene · Francese per italiani</div><div class="s">Seguitemi !</div></div>
+<div id="logo" class="abs"><img src="logo.png"></div>
+<div id="score" class="abs">💄 0/10</div>
+<div id="cap" class="abs"><div id="cfr"></div><div id="cit"></div></div>
+<div id="sign" class="abs">Irene · Francese per italiani</div>
+<script>
+var T=%%T%%,DUR=T.end+0.05;
+var R1=[["3","il rossetto","le rouge à lèvres","💄"],["4","lo smalto","le vernis à ongles","💅"],["5","il fondotinta","le fond de teint","🧴"],["6","l'ombretto","le fard à paupières","🎨"],["7","la cipria","la poudre","C"],["8","il pennello","le pinceau","🖌️"]];
+var R2=[["10","la","matita","le","crayon","✏️"],["11","le","ciglia","les","cils","👁️"],["12","le","sopracciglia","les","sourcils","🤨"],["13","le","unghie","les","ongles","💅"]];
+var $=function(i){return document.getElementById(i)};
+function cl(x){return Math.max(0,Math.min(1,x))}function ease(x){x=cl(x);return 1-Math.pow(1-x,3)}
+function back(x){x=cl(x);var c=1.70158*1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)}
+function show(id,o,tr){var e=$(id);e.style.opacity=o;e.style.display=o>0.001?"block":"none";if(tr!==undefined)e.style.transform=tr}
+function rnd(s){var x=Math.sin(s*127.1+311.7)*43758.5453;return x-Math.floor(x)}
+var cv=$("cv"),cx=cv.getContext("2d");
+/* ampoules */
+var bh="";for(var i=0;i<26;i++){var a=Math.PI*(1-i/25);var x,y;if(i<26){var ang=Math.PI+i*Math.PI/25;x=540+468*Math.cos(ang);y=760+468*Math.sin(ang)} bh+='<div class="bulb abs" id="b'+i+'" style="left:'+x+'px;top:'+y+'px"></div>'}
+for(var j=0;j<6;j++){bh+='<div class="bulb abs" id="bl'+j+'" style="left:72px;top:'+(820+j*90)+'px"></div><div class="bulb abs" id="br'+j+'" style="left:1008px;top:'+(820+j*90)+'px"></div>'}
+$("bulbs").innerHTML=bh;
+/* compact poudre (SVG) */
+$("compact").innerHTML='<svg width="520" height="520" viewBox="0 0 520 520"><defs><radialGradient id="gd" cx=".4" cy=".35"><stop offset="0" stop-color="#fff4d6"/><stop offset=".5" stop-color="#f7c66b"/><stop offset="1" stop-color="#b9822a"/></radialGradient><radialGradient id="pw" cx=".45" cy=".4"><stop offset="0" stop-color="#ffe6ef"/><stop offset="1" stop-color="#f3a9c6"/></radialGradient><linearGradient id="mr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#e9d7ff"/><stop offset="1" stop-color="#ffd1e6"/></linearGradient></defs>'+
+'<ellipse cx="260" cy="350" rx="230" ry="120" fill="url(#gd)"/><ellipse cx="260" cy="335" rx="190" ry="92" fill="url(#pw)"/><text x="260" y="350" text-anchor="middle" font-family="Dancing Script" font-size="54" fill="#d0628f" opacity=".7">Irène</text>'+
+'<g id="lid" style="transform-origin:260px 290px"><ellipse cx="260" cy="300" rx="230" ry="120" fill="url(#gd)"/><ellipse cx="260" cy="292" rx="200" ry="100" fill="url(#mr)" id="lidm"/><path d="M150 250 Q 210 220 260 235" stroke="#fff" stroke-width="14" stroke-linecap="round" fill="none" opacity=".8"/></g></svg>';
+/* particules */
+function burst(t,t0,cxp,cyp,n,seed,cols,pow){var dt=t-t0;if(dt<0||dt>1.6)return;for(var i=0;i<n;i++){var a=rnd(seed+i)*Math.PI*2,v=(300+rnd(seed+i*3)*700)*pow,x=cxp+Math.cos(a)*v*dt,y=cyp+Math.sin(a)*v*dt+500*dt*dt,al=cl(1-dt/1.5),s=6+rnd(seed+i*7)*12;
+ cx.globalAlpha=al;cx.fillStyle=cols[i%cols.length];if(i%3==0)star(x,y,s*1.6,dt*6+i);else{cx.beginPath();cx.arc(x,y,s/2,0,7);cx.fill()}}cx.globalAlpha=1}
+function star(x,y,s,r){cx.save();cx.translate(x,y);cx.rotate(r);cx.beginPath();for(var k=0;k<8;k++){var rr=k%2?s*.28:s;var a=k*Math.PI/4;cx.lineTo(Math.cos(a)*rr,Math.sin(a)*rr)}cx.closePath();cx.fill();cx.restore()}
+var GL=["#ffd166","#fff","#ff8fc0","#ffb3d9","#f7c66b"];
+function bg(t,shake){var g=cx.createLinearGradient(0,0,1080,1920);g.addColorStop(0,"#ff7eb6");g.addColorStop(.45,"#c75bd1");g.addColorStop(1,"#3b1a5c");cx.fillStyle=g;cx.fillRect(0,0,1080,1920);
+ for(var i=0;i<22;i++){var r=60+rnd(i)*170,x=(rnd(i+50)*1180-50+Math.sin(t*.3+i)*40),y=((rnd(i+90)*2200-(t*(20+rnd(i+9)*40)))%2200+2200)%2200-150;var gg=cx.createRadialGradient(x,y,0,x,y,r);var c=i%3==0?"255,214,120":i%3==1?"255,255,255":"255,140,200";
+  gg.addColorStop(0,"rgba("+c+",.33)");gg.addColorStop(1,"rgba("+c+",0)");cx.fillStyle=gg;cx.beginPath();cx.arc(x,y,r,0,7);cx.fill()}
+ for(var i=0;i<46;i++){var x=rnd(i+300)*1080,y=rnd(i+400)*1920,a=Math.max(0,Math.sin(t*2.2+i*1.7));cx.globalAlpha=a*.9;cx.fillStyle="#fff";star(x,y,6+rnd(i)*10,0)}cx.globalAlpha=1}
+function cap(fr,it){$("cfr").innerHTML=fr;$("cit").innerHTML=it;show("cap",fr?1:0)}
+function hideAll(){["hook1","swipe","hook2","compact","round","word","ring","icon","cdnum","answer","badge","warn","warnt","sky","sent","sub2","pad","final","endc"].forEach(function(i){show(i,0)})}
+function bulbs(t,on){for(var i=0;i<26;i++){var k=cl((t-on)*14-i*.35);var fl=.75+.25*Math.sin(t*9+i);var e=$("b"+i);e.style.opacity=.25+.75*k*fl;e.style.boxShadow=k>0?"0 0 "+(30*k)+"px "+(10*k)+"px rgba(255,220,140,"+(.8*k)+")":"none"}
+ for(var j=0;j<6;j++){var k=cl((t-on)*14-(26+j)*.35);["bl","br"].forEach(function(p){var e=$(p+j);e.style.opacity=.25+.75*k;e.style.boxShadow=k>0?"0 0 "+(30*k)+"px "+(10*k)+"px rgba(255,220,140,"+(.8*k)+")":"none"})}}
+function render(t){cx.clearRect(0,0,1080,1920);hideAll();var sh=0;
+ /* score */
+ var sc=0;R1.concat(R2).forEach(function(r){if(t>=T[r[0]][0]+.15)sc++});var lastRev=-9;R1.concat(R2).forEach(function(r){if(t>=T[r[0]][0])lastRev=T[r[0]][0]});
+ $("score").textContent="💄 "+sc+"/10";$("score").style.display=t>=T["16"][0]-.1?"none":"block";$("score").style.transform="scale("+(1+.3*Math.max(0,1-(t-lastRev-.15)*3)*(t>=lastRev+.15?1:0))+")";
+ if(t>=T["9"][0]&&t<T["9"][0]+.6)sh=Math.sin(t*90)*18*(1-(t-T["9"][0])/.6);
+ document.body.style.transform="translate("+sh+"px,"+(sh*.4)+"px)";
+ bg(t);bulbs(t,T["2a"][0]);
+ var mi=$("mirror");mi.style.opacity=t<T.cd3?.9:1;
+ /* HOOK */
+ if(t<T["2a"][0]){var a1=back((t-.2)/.5);show("hook1",cl((t-.2)*4),"scale("+(.4+.6*a1)+") rotate("+(Math.sin(t*5)*2)+"deg)");
+  if(t>=T["1b"][0]){show("swipe",1);$("sw").setAttribute("stroke-dashoffset",900*(1-ease((t-T["1b"][0])/.45)));
+   var w=ease((t-T["1b"][0]-.55)/1.1);show("hook2",cl(w*3),"scale("+(.8+.2*back((t-T["1b"][0]-.55)/.6))+")");$("hook2").style.clipPath="inset(0 "+(100-w*100)+"% 0 0)";burst(t,T["1b"][0]+1.1,540,960,70,5,GL,1)}
+  cap(t<T["1b"][0]?"Le trucco, en français, c'est… le truc ?":"Non ! C'est le maquillage !",t<T["1b"][0]?"Il trucco, in francese, è «le truc»?":"No! È «le maquillage»!")}
+ /* OUVERTURE */
+ else if(t<T.cd3){var c=$("compact");show("compact",1,"translate(280px,"+(560+ (1-back((t-T["2a"][0])/.6))*900)+"px)");c.style.left="0";c.style.top="0";
+  var op=ease((t-T["2a"][0]-.5)/.8);$("lid").style.transform="perspective(900px) rotateX("+(op*-120)+"deg)";
+  if(t>T["2a"][0]+.7){var dt=t-T["2a"][0]-.7;for(var i=0;i<40;i++){var x=540+(rnd(i)-.5)*700*Math.min(1,dt),y=880-dt*(150+rnd(i+5)*260),r=40+rnd(i+8)*70;cx.globalAlpha=cl(.5-dt*.2);var gg=cx.createRadialGradient(x,y,0,x,y,r);gg.addColorStop(0,"rgba(255,225,238,.9)");gg.addColorStop(1,"rgba(255,225,238,0)");cx.fillStyle=gg;cx.beginPath();cx.arc(x,y,r,0,7);cx.fill()}cx.globalAlpha=1;burst(t,T["2a"][0]+.9,540,900,50,9,GL,.8)}
+  if(t>=T["2b"][0]){show("round",cl((t-T["2b"][0])*3),"translateX(-50%) scale("+back((t-T["2b"][0])/.5)+")");$("round").textContent="MANCHE 1 · MA TROUSSE ✨"}
+  cap(t<T["2b"][0]?"J'ouvre ma trousse…":"Vous avez deux secondes !",t<T["2b"][0]?"Apro la mia trousse…":"Avete due secondi!")}
+ /* MANCHE 1 */
+ else if(t<T["9"][0]){var cur=R1[0];R1.forEach(function(r){if(t>=T["cd"+r[0]])cur=r});question(t,cur,1)}
+ /* PIÈGE */
+ else if(t<T.cd10){var d=t-T["9"][0];show("warn",1,"rotate(-6deg) scaleX("+ease(d/.35)+")");show("warnt",1,"scale("+(d<.5?3-2*ease(d/.35):1)+") rotate("+(-4+Math.sin(t*12)*1.5)+"deg)");
+  show("round",1,"translateX(-50%)");$("round").textContent="MANCHE 2 · LE PIÈGE DU GENRE ⚠️";cap("Attention au piège !","Attenzione alla trappola!")}
+ /* MANCHE 2 */
+ else if(t<T["14"][0]-.3){var cur=R2[0];R2.forEach(function(r){if(t>=T["cd"+r[0]])cur=r});question(t,cur,2)}
+ /* MATIN */
+ else if(t<T["15"][0]-.15){var d=t-T["14"][0]+.3;show("sky",cl(d*3),"translateY("+((1-ease(d/.8))*60)+"px) rotate("+(t*20)+"deg)");$("sky").textContent="☀️";
+  show("sent",1);$("sent").innerHTML="Le matin, je me maquille <b>les yeux</b>.";$("sent").style.clipPath="inset(0 "+(100-ease(d/1.6)*100)+"% 0 0)";
+  if(d>1.8){show("sub2",cl((d-1.8)*3),"scale("+back((d-1.8)/.5)+")");$("sub2").innerHTML='<span class="ok">les yeux ✓</span> &nbsp; <span class="ko">mes yeux</span>'}
+  cap("Le matin, je me maquille les yeux.","La mattina mi trucco gli occhi.")}
+ /* SOIR */
+ else if(t<T["16"][0]-.1){var d=t-T["15"][0]+.15;show("sky",1,"scale("+back(d/.5)+")");$("sky").textContent="🌙";show("sent",1);$("sent").innerHTML="Le soir,<br>je me <b>démaquille</b> !";$("sent").style.clipPath="none";
+  var p=ease((d-.9)/1.2);show("pad",d>.6?1:0);$("pad").style.left=(-450+p*1100)+"px";$("pad").style.top=(560+Math.sin(p*9)*60)+"px";$("pad").style.transform="rotate("+(p*200)+"deg)";
+  $("sent").style.opacity=d<.9?1:1;burst(t,T["15"][0]+1.4,540,700,40,77,["#fff","#ffe3f1"],.7);cap("Le soir, je me démaquille !","La sera mi strucco!")}
+ /* FINAL */
+ else if(t<T["16"][1]+1.2){var d=t-T["16"][0]+.1;show("final",1,"scale("+(.9+.1*back(d/.6))+")");$("fs").style.transform="rotate("+(Math.sin(t*3)*3)+"deg) scale("+(1+.04*Math.sin(t*6))+")";
+  $("fc").style.opacity=t>T["16"][0]+1.9?1:0;burst(t,T["16"][0]+.2,540,900,70,33,GL,1.1);
+  cap(t<T["16"][0]+1.9?"Combien de bonnes réponses ?":"Écrivez votre score en commentaire !",t<T["16"][0]+1.9?"Quante risposte giuste?":"Scrivete il vostro punteggio nei commenti!")}
+ else{var d=t-T["16"][1]-1.2;show("endc",1,"scale("+back(d/.6)+")");burst(t,T["16"][1]+1.3,540,780,90,55,GL,1.2);show("cap",0);$("logo").style.opacity=1}
+}
+function question(t,r,m){var cd=T["cd"+r[0]],rv=T[r[0]][0],d=t-cd;
+ show("round",1,"translateX(-50%)");$("round").textContent=m==1?"MANCHE 1 · MA TROUSSE ✨":"MANCHE 2 · LE PIÈGE DU GENRE ⚠️";
+ var ic=m==1?r[3]:r[5];var iz=$("icon");if(ic=="C"){iz.innerHTML='<div style="width:250px;height:250px;margin:25px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#ffe6ef,#f3a9c6 60%,#f7c66b 61%,#b9822a);box-shadow:0 0 0 10px #f7c66b"></div>'}else iz.textContent=ic;
+ var fl=Math.sin(t*3)*12;show("icon",cl(d*4),"translateY("+fl+"px) scale("+back(d/.5)+") rotate("+(Math.sin(t*2)*6)+"deg)");
+ /* mot italien */
+ if(m==1)$("word").innerHTML=r[1]+" ?";else{var x=cl((t-rv)/.35);$("word").innerHTML='<span class="art">'+r[1]+'<span class="x" style="transform:scaleX('+x+')"></span></span> '+r[2]+" ?"}
+ show("word",cl(d*4),"translateY("+((1-ease(d/.4))*-40)+"px)");
+ /* compte à rebours */
+ if(t<rv){var k=cl(d/2.3);show("ring",1);$("rg").setAttribute("stroke-dashoffset",1131*k);var n=d<1.15?"2":"1";show("cdnum",1,"scale("+(1.3-.3*ease((d%1.15)/.3))+")");$("cdnum").textContent=n}
+ else{show("ring",cl(1-(t-rv)*4));var e=$("answer");
+  if(m==1)e.innerHTML=r[2];else e.innerHTML='<span class="fa">'+r[3]+'</span> '+r[4];
+  var w=ease((t-rv)/.7);show("answer",1,"scale("+(.85+.15*back((t-rv)/.5))+")");e.style.clipPath="inset(-20% "+(100-w*100)+"% -20% 0)";
+  burst(t,rv+.25,540,1080,64,parseInt(r[0])*13,GL,1);
+  if(m==2){show("badge",cl((t-rv-.5)*4),"rotate(-10deg) scale("+back((t-rv-.5)/.4)+")")}}
+ cap(t<rv?(m==1?"Comment dit-on…":"Attention au genre !"):(m==1?r[2]:r[3]+" "+r[4]),m==1?r[1]:r[1]+" "+r[2]);
+}
+render(0);
+</script></body></html>
