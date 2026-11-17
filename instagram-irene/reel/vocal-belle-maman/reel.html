@@ -1,0 +1,190 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1080px;height:1920px;overflow:hidden;font-family:'Bricolage Grotesque',sans-serif;position:relative;
+background:linear-gradient(160deg,#fff3e8,#ffe1ea 55%,#ffd3c4)}
+#bg{position:absolute;inset:0;overflow:hidden}
+.bk{position:absolute;border-radius:50%;filter:blur(30px);opacity:.55}
+.logo{position:absolute;top:44px;left:44px;width:140px;height:140px;border-radius:50%;border:7px solid #fff;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.18);z-index:20}
+.logo img{width:100%;height:100%;object-fit:cover}
+.top{position:absolute;left:60px;right:60px;top:200px;height:380px;text-align:center;z-index:10}
+.blk{position:absolute;left:0;right:0;top:0;opacity:0}
+.fr{font-size:62px;font-weight:800;line-height:1.05;color:#2b1d3a}
+.fr b{color:#e8457a}
+.it{margin-top:14px;font-size:36px;font-weight:500;color:#7b5a72;font-style:italic}
+.pill{display:inline-block;margin-top:26px;background:#e8457a;color:#fff;border-radius:40px;padding:14px 34px;font-size:46px;font-weight:800;box-shadow:0 10px 24px rgba(232,69,122,.35)}
+.pill small{display:block;font-size:28px;font-weight:500;font-style:italic;opacity:.92}
+.chip{display:inline-block;background:#2b1d3a;color:#fff;border-radius:30px;padding:8px 22px;font-size:28px;font-weight:700;margin-bottom:16px}
+.slots{display:flex;justify-content:center;gap:30px;margin-top:26px}
+.slot{width:130px;height:130px;border-radius:30px;background:#fff;border:6px dashed #e8457a;display:flex;align-items:center;justify-content:center;font-size:72px;font-weight:800;color:#e8457a}
+.check{display:flex;flex-direction:column;gap:9px;margin-top:2px;text-align:left}
+.cr{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.75);border-radius:24px;padding:8px 16px;border:4px solid transparent}
+.cr .n{width:56px;height:56px;border-radius:50%;background:#efe4ea;color:#b07a95;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800;flex:none}
+.cr .tx{font-size:31px;font-weight:700;color:#b9a6b2}.cr .tx i{display:block;font-size:23px;font-weight:500;color:#b9a6b2}
+.cr.on{background:#fff;border-color:#2fb67c}.cr.on .n{background:#2fb67c;color:#fff}.cr.on .tx{color:#2b1d3a}.cr.on .tx i{color:#7b5a72}
+/* phone */
+.phone{position:absolute;left:200px;top:600px;width:680px;height:1250px;border-radius:94px;background:#141218;padding:20px;box-shadow:0 40px 90px rgba(80,20,60,.35),inset 0 0 0 3px #3a3540;z-index:5}
+.screen{width:100%;height:100%;border-radius:76px;overflow:hidden;background:#efe7de;position:relative;background-image:radial-gradient(#e1d6c9 2px,transparent 2px);background-size:34px 34px}
+.island{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:190px;height:54px;border-radius:30px;background:#000;z-index:8}
+.status{position:absolute;top:28px;left:56px;right:56px;display:flex;justify-content:space-between;font-size:28px;font-weight:700;color:#fff;z-index:7}
+.head{position:absolute;top:0;left:0;right:0;height:210px;background:#1f7a63;padding:106px 28px 0;display:flex;align-items:center;gap:20px;color:#fff;z-index:6}
+.av{width:82px;height:82px;border-radius:50%;background:#ffd9a8;display:flex;align-items:center;justify-content:center;font-size:50px;flex:none}
+.head .nm{font-size:38px;font-weight:700}.head .st{font-size:25px;opacity:.85}
+.chat{position:absolute;top:210px;left:0;right:0;bottom:130px;display:flex;flex-direction:column;justify-content:flex-end;gap:20px;padding:20px 26px;overflow:hidden}
+.day{align-self:center;background:#dfeef3;color:#4a5b63;font-size:24px;padding:8px 20px;border-radius:14px}
+.vb{align-self:flex-start;width:540px;background:#fff;border-radius:34px 34px 34px 8px;padding:24px 24px 14px;box-shadow:0 4px 10px rgba(0,0,0,.08);position:relative;transform-origin:left bottom}
+.vb .row{display:flex;align-items:center;gap:18px}
+.play{width:88px;height:88px;border-radius:50%;background:#1f7a63;display:flex;align-items:center;justify-content:center;flex:none;position:relative}
+.play .tri{border-left:32px solid #fff;border-top:20px solid transparent;border-bottom:20px solid transparent;margin-left:8px}
+.play .pau{display:none;gap:10px}.play .pau i{width:12px;height:36px;background:#fff;border-radius:3px;display:block}
+.play.on .tri{display:none}.play.on .pau{display:flex}
+.wave{display:flex;align-items:center;gap:6px;height:80px;flex:1}
+.wave i{width:8px;border-radius:4px;background:#b7c7c2;display:block}
+.wave i.p{background:#1f7a63}
+.meta{display:flex;justify-content:space-between;font-size:23px;color:#8a9592;margin-top:6px;padding-left:106px}
+.vb .mini{position:absolute;right:-22px;top:-26px;width:60px;height:60px;border-radius:50%;background:#ffd9a8;border:4px solid #fff;display:flex;align-items:center;justify-content:center;font-size:32px}
+.tb{align-self:flex-start;max-width:560px;background:#fff;border-radius:30px 30px 30px 8px;padding:18px 22px;box-shadow:0 4px 10px rgba(0,0,0,.08);transform-origin:left bottom}
+.tb .f{font-size:31px;font-weight:600;color:#1c1a22;line-height:1.25}
+.tb .f mark{background:#ffd1e2;color:#c2185b;border-radius:8px;padding:0 6px;font-weight:800}
+.tb .i{font-size:24px;color:#7d8790;font-style:italic;margin-top:6px}
+.tb .lab{font-size:20px;font-weight:700;color:#1f7a63;margin-bottom:4px;letter-spacing:.04em}
+.input{position:absolute;left:22px;right:22px;bottom:30px;height:90px;border-radius:50px;background:#fff;display:flex;align-items:center;padding:0 30px;font-size:30px;color:#9aa;z-index:6}
+.notif{position:absolute;left:22px;right:22px;top:80px;background:rgba(250,250,252,.97);border-radius:34px;padding:20px 24px;display:flex;gap:18px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:9;opacity:0}
+.notif .ic{width:70px;height:70px;border-radius:18px;background:#25b07a;display:flex;align-items:center;justify-content:center;font-size:40px;flex:none}
+.notif b{font-size:30px}.notif div div{font-size:27px;color:#555}
+.dim{position:absolute;inset:0;background:rgba(30,20,40,.55);z-index:7;opacity:0;display:flex;align-items:center;justify-content:center}
+.bigpause{width:230px;height:230px;border-radius:50%;background:#e8457a;display:flex;align-items:center;justify-content:center;gap:34px;box-shadow:0 0 0 20px rgba(232,69,122,.25)}
+.bigpause i{width:40px;height:110px;background:#fff;border-radius:10px;display:block}
+.dec{position:absolute;inset:0;z-index:7;background:linear-gradient(170deg,#2b1d3a,#4a2350);opacity:0;padding:250px 34px 40px;display:flex;flex-direction:column;gap:22px}
+.card{background:#fff;border-radius:30px;padding:20px 26px;opacity:0;border-left:14px solid #e8457a}
+.card .k{font-size:50px;font-weight:800;color:#e8457a}
+.card .m{font-size:30px;font-weight:700;color:#2b1d3a}
+.card .x{font-size:24px;color:#7b5a72;font-style:italic;margin-top:4px}
+.hand{position:absolute;font-size:150px;z-index:30;filter:drop-shadow(0 12px 14px rgba(0,0,0,.3));opacity:0;pointer-events:none}
+.ripple{position:absolute;width:140px;height:140px;border-radius:50%;border:7px solid #e8457a;z-index:29;opacity:0}
+.final{position:absolute;inset:0;z-index:15;opacity:0;text-align:center;padding:380px 70px 0}
+.final .fr{font-size:74px}
+.bubs{display:flex;justify-content:center;gap:28px;margin-top:50px}
+.bub3{width:150px;height:150px;border-radius:50%;background:#fff;box-shadow:0 10px 26px rgba(232,69,122,.3);display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:800;color:#e8457a;border:6px solid #e8457a}
+.cm{margin-top:40px;font-size:44px;font-weight:800;color:#2b1d3a}
+.next{margin:60px auto 0;width:860px;background:#2b1d3a;color:#fff;border-radius:44px;padding:36px 40px;opacity:0}
+.next .a{font-size:34px;opacity:.85}.next .b{font-size:60px;font-weight:800;color:#ffd166;margin-top:6px}.next .c{font-size:30px;font-style:italic;opacity:.85;margin-top:8px}
+.follow{margin:46px auto 0;display:inline-flex;align-items:center;gap:22px;background:#fff;border-radius:60px;padding:16px 40px 16px 16px;font-size:44px;font-weight:800;color:#e8457a;opacity:0;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+.follow img{width:96px;height:96px;border-radius:50%}
+.spark{position:absolute;z-index:31;font-size:44px;pointer-events:none}
+</style></head><body>
+<div id="bg"></div>
+<div class="logo"><img src="logo.png"></div>
+<div class="top">
+ <div class="blk" id="t1"><div class="fr">Votre <b>belle-mère</b> française vous a laissé un vocal…</div><div class="it">La vostra suocera francese vi ha lasciato un vocale…</div><div class="pill" id="t1b">Vous comprenez tout ?<small>Capite tutto?</small></div></div>
+ <div class="blk" id="t2"><div class="chip">1ʳᵉ écoute · vitesse réelle 🔥</div><div class="fr">Écoutez bien… 🎧</div><div class="it">Ascoltate bene: è francese vero, veloce!</div></div>
+ <div class="blk" id="t3"><div class="fr"><b>Trois choses !</b></div><div class="it" id="t3a">Cosa vuole Monique? 3 cose!</div><div class="slots"><div class="slot">1</div><div class="slot">2</div><div class="slot">3</div></div></div>
+ <div class="blk" id="t4" style="top:-15px"><div class="chip">2ᵉ écoute · lentement 🐢 · Riascoltiamo piano</div><div class="check">
+   <div class="cr" id="c1"><div class="n">1</div><div class="tx">Déjeuner dimanche, midi pile !<i>Pranzo domenica, a mezzogiorno in punto</i></div></div>
+   <div class="cr" id="c2"><div class="n">2</div><div class="tx">Pas de dessert : tarte Tatin !<i>Niente dolce: c'è già la tarte Tatin</i></div></div>
+   <div class="cr" id="c3"><div class="n">3</div><div class="tx">Camille : une chemise, pas le pull !<i>Camille con la camicia, non con il maglione</i></div></div></div></div>
+ <div class="blk" id="t5"><div class="fr">🔍 Le <b>décodeur</b></div><div class="it">Il decodificatore del francese parlato</div></div>
+ <div class="blk" id="t6"><div class="fr">Un <b>deuxième</b> vocal ! 😱</div><div class="it">Un secondo vocale!</div></div>
+</div>
+<div class="phone" id="phone"><div class="screen">
+ <div class="island"></div><div class="status"><span>12:07</span><span>●●● 🔋</span></div>
+ <div class="head"><span style="font-size:42px">‹</span><div class="av">👵</div><div><div class="nm">Belle-maman</div><div class="st" id="st">en ligne</div></div></div>
+ <div class="chat" id="chat">
+  <div class="day">Aujourd'hui</div>
+  <div class="vb" id="v1"><div class="mini">👵</div><div class="row"><div class="play" id="p1"><div class="tri"></div><div class="pau"><i></i><i></i></div></div><div class="wave" id="w1"></div></div><div class="meta"><span id="d1">0:19</span><span>12:06</span></div></div>
+  <div class="tb" id="s1"><div class="lab">TRANSCRIPTION</div><div class="f">Coucou, c'est Monique !</div><div class="i">Ciao, sono Monique!</div></div>
+  <div class="tb" id="s2"><div class="f">Bon, <mark>j'te</mark> fais un <mark>p'tit</mark> vocal parce que dimanche on fait un déjeuner à la maison, avec toute la famille.</div><div class="i">Allora, ti mando un vocalino perché domenica facciamo un pranzo a casa, con tutta la famiglia.</div></div>
+  <div class="tb" id="s3"><div class="f">Vous venez, hein ?</div><div class="i">Venite, eh?</div></div>
+  <div class="tb" id="s4"><div class="f"><mark>Midi pile</mark>, hein, pas midi et demi comme la dernière fois !</div><div class="i">A mezzogiorno in punto, eh, non a mezzogiorno e mezzo come l'ultima volta!</div></div>
+  <div class="tb" id="s5"><div class="f">Et <mark>ramène pas</mark> de dessert, j'ai déjà fait ma tarte Tatin.</div><div class="i">E non portare il dolce, ho già fatto la mia tarte Tatin.</div></div>
+  <div class="tb" id="s6"><div class="f">Ah, et dis à Camille de mettre une chemise, pas son vieux pull.</div><div class="i">Ah, e di' a Camille di mettersi una camicia, non il suo vecchio maglione.</div></div>
+  <div class="tb" id="s7"><div class="f">Bon, <mark>j'file</mark>, bisous bisous !</div><div class="i">Bene, scappo, baci baci!</div></div>
+  <div class="vb" id="v2"><div class="mini">👵</div><div class="row"><div class="play" id="p2"><div class="tri"></div><div class="pau"><i></i><i></i></div></div><div class="wave" id="w2"></div></div><div class="meta"><span id="d2">0:04</span><span>12:09</span></div></div>
+  <div class="tb" id="s8"><div class="lab">TRANSCRIPTION</div><div class="f">Ah ! Et apportez le vin… mais pas <mark>américain</mark>, hein ! 🍷</div><div class="i">Ah! E portate il vino… ma non americano, eh!</div></div>
+ </div>
+ <div class="input">Message</div>
+ <div class="notif" id="n1"><div class="ic">💬</div><div><b>Belle-maman 👵</b><div>🎤 Message vocal (0:19)</div></div></div>
+ <div class="notif" id="n2"><div class="ic">💬</div><div><b>Belle-maman 👵</b><div>🎤 Encore un vocal… (0:04)</div></div></div>
+ <div class="dim" id="dim"><div class="bigpause" id="bp"><i></i><i></i></div></div>
+ <div class="dec" id="dec">
+  <div class="card" id="k1"><div class="k">midi pile</div><div class="m">= mezzogiorno in punto</div><div class="x">« pile » = esattamente, all'ora precisa</div></div>
+  <div class="card" id="k2"><div class="k">j'file</div><div class="m">= scappo, devo andare</div><div class="x">filer = andarsene in fretta</div></div>
+  <div class="card" id="k3"><div class="k">ramène pas</div><div class="m">= (ne) ramène pas</div><div class="x">nel parlato il « ne » sparisce!</div></div>
+  <div class="card" id="k4"><div class="k">j'te · p'tit</div><div class="m">= je te · petit</div><div class="x">il francese parlato « mangia » le vocali</div></div>
+ </div>
+</div></div>
+<div class="final" id="fin">
+ <div class="fr">Combien de choses vous avez <b>comprises</b> ?</div><div class="it" style="font-size:42px">Quante cose avete capito?</div>
+ <div class="bubs"><div class="bub3" id="b1">1/3</div><div class="bub3" id="b2">2/3</div><div class="bub3" id="b3">3/3</div></div>
+ <div class="cm">👇 Scrivetelo nei commenti!</div>
+ <div class="next" id="nx"><div class="a">Le prochain vocal… 📱</div><div class="b">votre patron français ! 👔😱</div><div class="c">Il prossimo vocale… il vostro capo francese!</div></div>
+ <div class="follow" id="fo"><img src="logo.png">Seguitemi ▶</div>
+</div>
+<div class="hand" id="hand">👆</div><div class="ripple" id="rip"></div>
+<script>
+const ENV=%%ENV%%;
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease=x=>{x=cl(x);return 1-Math.pow(1-x,3)};
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+// bokeh
+const bg=$("bg");const BK=[];const cols=["#ffb3c7","#ffd59e","#ffc6e8","#ffe1a8","#f7a8c8","#ffcfb3"];
+for(let i=0;i<9;i++){const d=document.createElement("div");d.className="bk";const s=180+((i*97)%220);d.style.width=d.style.height=s+"px";d.style.background=cols[i%6];bg.appendChild(d);BK.push({d,x:(i*131)%1000,y:(i*263)%1800,s:.3+((i*7)%5)/10})}
+// waves
+function mkw(id,n,seed){const w=$(id);let h="";for(let i=0;i<n;i++){const v=18+Math.abs(Math.sin(i*1.7+seed)*45+Math.sin(i*.6+seed*2)*18);h+=`<i style="height:${v|0}px"></i>`}w.innerHTML=h}
+mkw("w1",28,1);mkw("w2",28,4);
+const W1=[...$("w1").children],W2=[...$("w2").children];
+const T={a1:.40,a2:7.70,a2e:27.0,a3:27.70,mett:28.93,ecr:30.47,a3e:32.41,a4:35.30,s:[35.30,37.30,44.66,46.34,50.76,54.72,58.66],a4e:60.97,a5:62.00,k:[62.70,64.28,65.70,67.14],a5e:68.84,a6:70.30,a6e:74.05,a7:74.60,nx:78.93,end:83.8};
+function show(id,on,tf){const e=$(id);e.style.opacity=on;if(tf!==undefined)e.style.transform=tf}
+function blk(id,t0,t1,t){const a=cl((t-t0)/.35)*cl((t1-t)/.3);show(id,a,`translateY(${(1-ease((t-t0)/.4))*40}px)`)}
+function fmt(s){s=Math.max(0,Math.floor(s));return "0:"+String(s).padStart(2,"0")}
+function pop(id,t0,t){const e=$(id);if(t<t0){e.style.display="none";return}e.style.display="";const k=back((t-t0)/.45);e.style.transform=`scale(${.3+.7*k})`;e.style.opacity=cl((t-t0)/.2)}
+function handAt(el,t0,tap,t1,t){const h=$("hand"),r=$("rip");if(t<t0||t>t1){h.style.opacity=0;r.style.opacity=0;return}
+ const b=el.getBoundingClientRect();const tx=b.left+b.width/2-40,ty=b.top+b.height/2-20;
+ const k=ease((t-t0)/(tap-t0-.15));const sx=1000,sy=1900;const x=sx+(tx-sx)*k,y=sy+(ty-sy)*k;
+ const press=(t>tap-.12&&t<tap+.12)?.85:1;h.style.left=x+"px";h.style.top=y+"px";h.style.transform=`rotate(-18deg) scale(${press})`;h.style.opacity=cl((t1-t)/.3);
+ if(t>=tap){const q=cl((t-tap)/.6);r.style.left=(b.left+b.width/2-70)+"px";r.style.top=(b.top+b.height/2-70)+"px";r.style.transform=`scale(${.6+q*1.3})`;r.style.opacity=1-q}else r.style.opacity=0}
+function wave(bars,prog,amp){const n=bars.length;bars.forEach((b,i)=>{const on=i/n<prog;b.className=on?"p":"";const base=parseFloat(b.dataset.h||b.style.height);b.dataset.h=base;const cur=Math.abs(i/n-prog)<1.5/n;b.style.height=(cur?Math.min(78,base*(0.8+amp*0.9)):base)+"px"})}
+function sparks(t,t0,x,y){document.querySelectorAll(".spark[data-t='"+t0+"']").forEach(s=>s.remove());if(t<t0||t>t0+.9)return;const q=(t-t0)/.9;
+ for(let i=0;i<8;i++){const s=document.createElement("div");s.className="spark";s.dataset.t=t0;s.textContent=i%2?"✨":"⭐";const a=i/8*6.283;s.style.left=(x+Math.cos(a)*q*120)+"px";s.style.top=(y+Math.sin(a)*q*120-q*30)+"px";s.style.opacity=1-q;document.body.appendChild(s)}}
+window.render=function(t){
+ const f=Math.min(ENV.length-1,Math.floor(t*30)),amp=ENV[f]||0;
+ BK.forEach((b,i)=>{b.d.style.left=(b.x+Math.sin(t*b.s+i)*60)+"px";b.d.style.top=(b.y+Math.cos(t*b.s*.8+i)*80)+"px"});
+ // top blocks
+ blk("t1",.3,7.6,t);show("t1b",cl((t-5.3)/.25),`scale(${back((t-5.3)/.45)})`);
+ blk("t2",7.7,27.5,t);blk("t3",27.6,35.25,t);blk("t4",35.3,61.7,t);blk("t5",61.8,69.0,t);blk("t6",69.1,74.4,t);
+ $("t3a").innerHTML=t<T.mett?"Cosa vuole Monique? 3 cose!":(t<T.ecr?"⏸ <b>Mettez sur pause !</b> · Mettete in pausa!":"✍️ Scrivetele nei commenti! 👇");
+ [...document.querySelectorAll(".slot")].forEach((s,i)=>{s.style.transform=`rotate(${Math.sin(t*6+i)*6}deg) scale(${back((t-27.8-i*.15)/.4)})`});
+ // phone in / out
+ const pin=ease((t-0)/.9),pout=ease((t-74.4)/.8);$("phone").style.transform=`translateY(${(1-pin)*900+pout*1400}px)`;$("phone").style.opacity=1-pout;
+ // notifications
+ const n1=cl((t-1.0)/.3)*cl((2.4-t)/.3);show("n1",n1,`translateY(${(1-ease((t-1)/.4))*-120}px)`);
+ const n2=cl((t-68.9)/.3)*cl((70.0-t)/.3);show("n2",n2,`translateY(${(1-ease((t-68.9)/.4))*-120}px)`);
+ // chat items
+ pop("v1",1.9,t);
+ ["s1","s2","s3","s4","s5","s6","s7"].forEach((id,i)=>pop(id,T.s[i]+.05,t));
+ pop("v2",69.4,t);pop("s8",T.a6+.4,t);
+ // voice 1 play
+ const p1=(t>=7.55&&t<T.a2e)||(t>=T.a4&&t<T.a4e);$("p1").classList.toggle("on",p1);
+ let pr1=0;if(t>=7.55)pr1=cl((t-T.a2)/(T.a2e-T.a2));if(t>=T.a4)pr1=cl((t-T.a4)/(T.a4e-T.a4));if(t>=T.a2e&&t<T.a4)pr1=1;
+ wave(W1,pr1,p1?amp:0);$("d1").textContent=p1?fmt(pr1*19):"0:19";
+ const p2=t>=T.a6&&t<T.a6e;$("p2").classList.toggle("on",p2);const pr2=cl((t-T.a6)/(T.a6e-T.a6));wave(W2,t>=T.a6?pr2:0,p2?amp:0);$("d2").textContent=p2?fmt(pr2*4):"0:04";
+ $("st").textContent=(t>1&&t<1.9)||(t>68.8&&t<69.4)?"enregistre un audio…":"en ligne";
+ // hands
+ if(t<10)handAt($("p1"),6.4,7.55,8.2,t);else if(t<40)handAt($("p1"),34.3,35.15,35.8,t);else handAt($("p2"),69.4,70.2,70.8,t);
+ // challenge dim
+ const dm=cl((t-28.6)/.3)*cl((35.1-t)/.3);$("dim").style.opacity=dm;$("bp").style.transform=`scale(${1+Math.sin(t*5)*.06})`;
+ // checklist
+ [["c1",T.s[3]+.6],["c2",T.s[4]+.8],["c3",T.s[5]+1.2]].forEach(([id,t0])=>{const on=t>=t0;$(id).classList.toggle("on",on);$(id).style.transform=on?`scale(${1+(1-cl((t-t0)/.4))*.08})`:"";const r=$(id).getBoundingClientRect();sparks(t,t0,r.left+50,r.top+30)});
+ // decoder
+ $("dec").style.opacity=cl((t-61.8)/.35)*cl((69.0-t)/.35);
+ T.k.forEach((k0,i)=>{const e=$("k"+(i+1));e.style.opacity=cl((t-k0+.15)/.25);e.style.transform=`translateX(${(1-back((t-k0+.15)/.5))*-500}px)`});
+ // final
+ const fo=cl((t-74.7)/.4);$("fin").style.opacity=fo;
+ ["b1","b2","b3"].forEach((id,i)=>{$(id).style.transform=`scale(${back((t-75.2-i*.2)/.45)}) translateY(${Math.sin(t*4+i)*8}px)`});
+ const nx=cl((t-T.nx)/.35);$("nx").style.opacity=nx;$("nx").style.transform=`scale(${.7+.3*back((t-T.nx)/.5)})`;
+ const fl=cl((t-80.6)/.35);$("fo").style.opacity=fl;$("fo").style.transform=`scale(${back((t-80.6)/.5)})`;
+};
+render(0);
+</script></body></html>
