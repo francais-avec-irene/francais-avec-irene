@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Je suis contente ! · Jeux en plus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F7FF;--ink:#33304A;--soft:#7A7592;--teal:#21A99A;--teal-l:#DDF5F1;--pink:#E8618C;--pink-l:#FDE4EC;--sun:#F6B93B;--sun-l:#FEF3D6;--violet:#7C6BE0;--violet-l:#ECE9FC;--sky:#4C9BE8;--sky-l:#E0EEFC;--ok:#22A56B;--ko:#E0526A;--shadow:0 10px 28px rgba(40,50,90,.12),0 2px 6px rgba(40,50,90,.06)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:Nunito,system-ui,sans-serif;font-weight:800;color:var(--ink);font-size:24px;line-height:1.4;
+ background:radial-gradient(600px 400px at 0 0,#FDE4EC 0,transparent 70%),radial-gradient(600px 450px at 100% 15%,#DDF5F1 0,transparent 70%),radial-gradient(600px 500px at 50% 100%,#ECE9FC 0,transparent 70%),var(--bg);background-attachment:fixed}
+h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
+.en{color:var(--soft);font-style:italic;font-weight:600;font-size:.82em}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px 100px}
+#score{position:fixed;top:12px;right:12px;z-index:60;background:#fff;border:3px solid var(--sun);border-radius:999px;padding:5px 18px;font-family:Fredoka;font-size:26px;box-shadow:var(--shadow);transition:transform .2s}
+#score.bump{transform:scale(1.25)}
+.hero{margin:20px 0 8px;border-radius:32px;overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-columns:1.1fr 1fr;background:linear-gradient(135deg,#FFF5F8,#E9F7F4)}
+.hero img{width:100%;height:300px;object-fit:cover;object-position:50% 25%;display:block;order:2}
+.hero .t{padding:28px 22px 26px 30px;align-self:center}
+.tag{display:inline-block;background:var(--violet-l);color:var(--violet);border-radius:999px;padding:3px 14px;font-size:15px;letter-spacing:.08em;font-family:Fredoka}
+.hero h1{font-size:44px;color:var(--pink);line-height:1.1;margin:6px 0 4px}
+.hero p{margin:0;font-size:20px}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:18px 0 22px}
+nav button{min-height:70px;border:3px solid transparent;border-radius:20px;font:inherit;font-size:19px;cursor:pointer;background:#fff;color:var(--ink);box-shadow:0 3px 10px rgba(40,50,90,.08);padding:4px}
+nav button small{display:block;font-size:14px;color:var(--soft);font-style:italic;font-weight:600}
+nav button.on{border-color:var(--pink);background:var(--pink-l)}
+nav button.done::after{content:" ✓";color:var(--ok)}
+.screen{display:none}.screen.on{display:block;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.card{background:#fff;border-radius:28px;box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+.shead{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.shead .ic{font-size:44px;animation:wig 3s ease-in-out infinite}
+@keyframes wig{0%,100%{transform:rotate(0)}50%{transform:rotate(-10deg)}}
+.shead h2{font-size:32px}
+.instr{display:flex;gap:12px;align-items:center;background:var(--sun-l);border-radius:18px;padding:10px 14px;margin-bottom:16px}
+.play{flex:none;width:58px;height:58px;border-radius:50%;border:0;background:var(--teal);color:#fff;font-size:26px;cursor:pointer;box-shadow:0 4px 10px rgba(33,169,154,.35)}
+.play:active{transform:scale(.92)}
+.big .play{width:96px;height:96px;font-size:44px;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(33,169,154,.45)}50%{box-shadow:0 0 0 18px rgba(33,169,154,0)}}
+.dots{display:flex;gap:8px;justify-content:center;margin:6px 0 14px}
+.dots i{width:16px;height:16px;border-radius:50%;background:#E3E1EE}
+.dots i.ok{background:var(--ok)}.dots i.ko{background:var(--ko)}.dots i.cur{outline:3px solid var(--sun);outline-offset:2px}
+.sent{text-align:center;font-family:Fredoka;font-size:36px;margin:6px 0}
+.gap{display:inline-block;min-width:110px;border-bottom:5px solid var(--violet);color:var(--violet);padding:0 6px}
+.tr{text-align:center;min-height:30px}
+.next{display:block;margin:16px auto 0;border:0;border-radius:999px;background:var(--pink);color:#fff;font:600 26px Fredoka;padding:12px 34px;cursor:pointer;box-shadow:0 6px 14px rgba(232,97,140,.35);visibility:hidden}
+.next.show{visibility:visible;animation:pop .4s}
+@keyframes pop{0%{transform:scale(.6)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
+.fb{text-align:center;font-size:22px;min-height:34px;margin-top:8px}
+.fb.ok{color:var(--ok)}.fb.ko{color:var(--ko)}
+/* bulles */
+.sky{position:relative;height:300px;border-radius:24px;background:linear-gradient(180deg,#CFE8FF,#EAF4FF 60%,#F7FBFF);overflow:hidden;margin-top:10px}
+.cloud{position:absolute;font-size:60px;opacity:.75;animation:drift 22s linear infinite}
+@keyframes drift{from{transform:translateX(-120px)}to{transform:translateX(980px)}}
+.bub{position:absolute;width:130px;height:130px;border-radius:50%;border:0;cursor:pointer;font:600 32px Fredoka;color:#2f2b4a;
+ background:radial-gradient(circle at 32% 28%,#fff 0 12%,rgba(255,255,255,.55) 13% 22%,transparent 23%),radial-gradient(circle,rgba(255,255,255,.25) 55%,var(--bc) 100%);box-shadow:inset 0 -8px 18px rgba(0,0,0,.08),0 6px 16px rgba(60,90,160,.18);animation:float var(--d) ease-in-out infinite alternate}
+@keyframes float{0%{transform:translate(0,30px)}50%{transform:translate(14px,-6px)}100%{transform:translate(-10px,-34px)}}
+.bub.popit{animation:popb .5s forwards}
+@keyframes popb{0%{transform:scale(1)}40%{transform:scale(1.35)}100%{transform:scale(1.8);opacity:0}}
+.bub.bad{filter:grayscale(1);opacity:.5;animation:shake .4s}
+.bub.glow{box-shadow:0 0 0 8px var(--ok),0 0 30px var(--ok)}
+.bub:disabled{cursor:default}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+/* dé */
+.diebox{display:flex;flex-direction:column;align-items:center;gap:10px}
+.die{width:140px;height:140px;border-radius:30px;border:0;background:linear-gradient(135deg,#fff,#F1EEFF);box-shadow:var(--shadow);font-size:84px;cursor:pointer}
+.die.roll{animation:roll 1s cubic-bezier(.3,.7,.4,1)}
+@keyframes roll{0%{transform:rotate(0) scale(1)}30%{transform:rotate(250deg) scale(1.2) translateY(-30px)}70%{transform:rotate(560deg) scale(.9)}100%{transform:rotate(720deg) scale(1)}}
+.who{display:none;align-items:center;justify-content:center;gap:16px;background:var(--violet-l);border-radius:24px;padding:14px 26px;font-family:Fredoka;font-size:30px}
+.who.show{display:flex;animation:pop .5s}
+.who .e1{font-size:76px;line-height:1}.who .e2{font-size:76px;line-height:1;animation:wig 1.6s ease-in-out infinite}
+.choices{display:grid;gap:12px;margin-top:16px}
+.ch{border:4px solid #E4E0F3;background:#fff;border-radius:22px;padding:16px;font:600 28px Fredoka;color:var(--ink);cursor:pointer;transition:transform .15s}
+.ch:hover{transform:translateY(-2px)}
+.ch.good{border-color:var(--ok);background:#E3F7EC;animation:pop .4s}.ch.bad{border-color:var(--ko);background:#FDE6EA;text-decoration:line-through;animation:shake .4s}
+.ch:disabled{cursor:default}
+/* robot */
+.robot{display:flex;align-items:center;gap:14px;justify-content:center}
+.robot .r{font-size:110px;animation:bob 1.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-14px) rotate(4deg)}}
+.bubble{position:relative;background:var(--sky-l);border-radius:24px;padding:14px 20px;font-family:Fredoka;font-size:30px;max-width:420px}
+.bubble::before{content:"";position:absolute;left:-14px;top:40%;border:10px solid transparent;border-right:16px solid var(--sky-l)}
+.sandw{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:16px;min-height:60px}
+.sandw span{padding:8px 16px;border-radius:16px;font:600 28px Fredoka;background:var(--teal-l);color:#15786d}
+.sandw .bread{background:var(--sun);color:#5b3a00}
+.sandw .bl{animation:inl .7s both}.sandw .br{animation:inr .7s .25s both}
+@keyframes inl{from{transform:translateX(-200px) rotate(-30deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes inr{from{transform:translateX(200px) rotate(30deg);opacity:0}to{transform:none;opacity:1}}
+/* écoute */
+.pics{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.pic{border:5px solid #E4E0F3;border-radius:26px;background:#fff;padding:8px;cursor:pointer;animation:pop .5s both}
+.pic:nth-child(2){animation-delay:.15s}
+.pic img{width:100%;height:230px;object-fit:contain;border-radius:18px;display:block}
+.pic.good{border-color:var(--ok);box-shadow:0 0 0 6px #C7EEDA}.pic.bad{border-color:var(--ko);opacity:.55}
+.pic:disabled{cursor:default}
+/* jacques */
+.jac{text-align:center}
+.jac .emo{font-size:150px;line-height:1.1;display:inline-block;animation:dance 1.2s ease-in-out infinite}
+@keyframes dance{0%,100%{transform:rotate(-12deg) translateY(0)}50%{transform:rotate(12deg) translateY(-22px)}}
+/* roue */
+.wheelw{position:relative;width:300px;height:300px;margin:6px auto}
+.wheel{width:300px;height:300px;border-radius:50%;border:8px solid #fff;box-shadow:var(--shadow);transition:transform 2.6s cubic-bezier(.15,.85,.25,1);position:relative;overflow:hidden}
+.wheel span{position:absolute;left:50%;top:50%;font-size:42px;transform-origin:0 0}
+.pointer{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:44px;z-index:2;filter:drop-shadow(0 3px 3px rgba(0,0,0,.2))}
+.spin{display:block;margin:14px auto;border:0;border-radius:999px;background:var(--violet);color:#fff;font:600 26px Fredoka;padding:12px 34px;cursor:pointer}
+.spin:disabled{opacity:.4}
+.rcard{display:none;text-align:center;background:var(--pink-l);border-radius:24px;padding:14px}
+.rcard.show{display:block;animation:pop .5s}
+.rcard .big2{font-size:64px}
+.rcard .no{font-size:64px;color:var(--ko)}
+.ans{display:none;font-family:Fredoka;font-size:32px;margin-top:8px}.ans.show{display:block;animation:pop .4s}
+/* rappel */
+.rule{border-radius:22px;padding:14px 18px;margin-bottom:14px;border:3px solid var(--c);background:#fff}
+.rule h3{color:var(--c);font-size:26px;margin-bottom:6px}
+.rl{display:flex;gap:10px;align-items:center;margin:6px 0}
+.rl .play{width:44px;height:44px;font-size:20px;background:var(--c)}
+.rl .en{display:block}
+.rule.flash{animation:flash 1.4s 2}
+@keyframes flash{50%{box-shadow:0 0 0 10px var(--c)}}
+/* à revoir */
+.rv{border-left:6px solid var(--pink);background:#fff;border-radius:16px;padding:10px 14px;margin:10px 0;box-shadow:0 2px 8px rgba(40,50,90,.06)}
+.rv .a{color:var(--ok)}
+.rv button{margin-top:6px;border:3px solid var(--violet-l);background:#fff;color:var(--violet);border-radius:999px;font:600 18px Fredoka;padding:4px 14px;cursor:pointer}
+.reset{border:3px solid #E3E1EE;background:#fff;color:var(--soft);border-radius:999px;font:600 18px Fredoka;padding:8px 18px;cursor:pointer;margin-top:12px}
+.star{position:fixed;z-index:100;pointer-events:none;font-size:30px;animation:sp 1s ease-out forwards}
+@keyframes sp{0%{transform:translate(0,0) scale(.3);opacity:0}20%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.2) rotate(140deg);opacity:0}}
+.foot{text-align:center;color:var(--soft);font:600 15px Fredoka;margin-top:20px}
+@media(max-width:640px){body{font-size:20px}.hero{grid-template-columns:1fr}.hero img{height:200px;order:0}.hero h1{font-size:34px}nav{grid-template-columns:repeat(2,1fr)}.sent{font-size:28px}.bub{width:100px;height:100px;font-size:26px}.pic img{height:150px}.ch{font-size:22px}.robot .r{font-size:80px}.bubble{font-size:24px}.wheelw,.wheel{width:260px;height:260px}}
+</style>
+</head>
+<body>
+<div id="score">⭐ <span id="sc">0</span> / <span id="tot">24</span></div>
+<div class="wrap">
+ <section class="hero"><div class="t"><span class="tag">LEÇON 1 · JEUX EN PLUS</span><h1>Je suis contente !</h1><p>On joue avec le verbe être <span class="en">· Let's play with the verb "to be"</span></p></div><img src="img/saut.jpg" alt=""></section>
+ <nav id="nav"></nav>
+ <div id="screens"></div>
+ <div class="foot">Le français avec Irène</div>
+</div>
+<script>
+const D = {"RULES": [{"id": "r-etre", "t": "Le verbe être", "en": "The verb \"to be\"", "lines": [["je suis · tu es · il / elle est", "I am · you are · he / she is"], ["nous sommes · vous êtes · ils / elles sont", "we are · you are · they are"]], "au": ["adb6bdd5ff", "a983180794"]}, {"id": "r-emotions", "t": "Les émotions", "en": "Feelings", "lines": [["content · triste · fâché · malade · fatigué", "happy · sad · angry · ill · tired"], ["J'ai peur. (avec avoir !)", "I am scared. (with \"avoir\"!)"]], "au": ["a78f59a01d", "a37bed1da2"]}, {"id": "r-fille", "t": "Garçon ou fille ?", "en": "Boy or girl?", "lines": [["Il est content. → Elle est contente.", "For a girl, we often add an \"e\"."], ["triste, malade : pas de changement", "triste, malade: no change"]], "au": ["a3d90088f0", "aa3b5ef216"]}, {"id": "r-sandwich", "t": "Ne … pas : le sandwich", "en": "The \"not\" sandwich", "lines": [["Je ne suis pas triste.", "I am not sad."], ["Il n'est pas fatigué. (n' devant a, e, i, o, u)", "He is not tired. (n' before a, e, i, o, u)"]], "au": ["a4ddae0b12", "a2144e50a8"]}], "BULLES": [{"s": "Je ___ très contente !", "o": ["suis", "es", "sont"], "a": "suis", "en": "I am very happy!", "r": "r-etre", "full": "Je suis très contente !", "au": "a55223d896"}, {"s": "Nous ___ fatigués.", "o": ["êtes", "sommes", "est"], "a": "sommes", "en": "We are tired.", "r": "r-etre", "full": "Nous sommes fatigués.", "au": "a8b5ae0e81"}, {"s": "Tu ___ triste ?", "o": ["est", "suis", "es"], "a": "es", "en": "Are you sad?", "r": "r-etre", "full": "Tu es triste ?", "au": "adb4459c7e"}, {"s": "Papa ___ fâché.", "o": ["est", "sont", "es"], "a": "est", "en": "Dad is angry.", "r": "r-etre", "full": "Papa est fâché.", "au": "a2595d9d06"}, {"s": "Elles ___ malades.", "o": ["est", "sont", "sommes"], "a": "sont", "en": "They (girls) are ill.", "r": "r-etre", "full": "Elles sont malades.", "au": "ab70939560"}, {"s": "Vous ___ contents !", "o": ["sommes", "es", "êtes"], "a": "êtes", "en": "You are happy!", "r": "r-etre", "full": "Vous êtes contents !", "au": "aecf0d9fd6"}], "DE": [{"who": "👧", "name": "Mia", "emo": "😊", "ok": "Mia est contente.", "ko": "Mia est content.", "en": "Mia is happy.", "r": "r-fille", "au": "a2d91307a9"}, {"who": "👦", "name": "Tom", "emo": "😴", "ok": "Tom est fatigué.", "ko": "Tom est fatiguée.", "en": "Tom is tired.", "r": "r-fille", "au": "a1def7d1d9"}, {"who": "👩", "name": "Maman", "emo": "😠", "ok": "Maman est fâchée.", "ko": "Maman est fâché.", "en": "Mum is angry.", "r": "r-fille", "au": "a9c1722e57"}, {"who": "👨", "name": "Papa", "emo": "🤒", "ok": "Papa est malade.", "ko": "Papa sont malade.", "en": "Dad is ill.", "r": "r-etre", "au": "a7411d350f"}, {"who": "👧👧", "name": "Les filles", "emo": "😢", "ok": "Elles sont tristes.", "ko": "Elles est tristes.", "en": "They (girls) are sad.", "r": "r-etre", "au": "abba4edde0"}, {"who": "👴", "name": "Grand-père", "emo": "😄", "ok": "Mon grand-père est content.", "ko": "Mon grand-père est contente.", "en": "My grandpa is happy.", "r": "r-fille", "au": "a496e9cb06"}], "ROBOT": [{"s": "Je suis fatiguée.", "ok": "Je ne suis pas fatiguée.", "ko": "Je suis ne pas fatiguée.", "en": "I am not tired.", "p": ["Je", "ne", "suis", "pas", "fatiguée."], "rau": "r0c7f35f04", "au": "a613da0373"}, {"s": "Tu es content.", "ok": "Tu n'es pas content.", "ko": "Tu ne es pas content.", "en": "You are not happy.", "p": ["Tu", "n'", "es", "pas", "content."], "rau": "rc66be741a", "au": "a181ac97d4"}, {"s": "Elle est malade.", "ok": "Elle n'est pas malade.", "ko": "Elle ne pas est malade.", "en": "She is not ill.", "p": ["Elle", "n'", "est", "pas", "malade."], "rau": "rae31ee92f", "au": "a61db953f2"}, {"s": "Nous sommes tristes.", "ok": "Nous ne sommes pas tristes.", "ko": "Nous sommes pas ne tristes.", "en": "We are not sad.", "p": ["Nous", "ne", "sommes", "pas", "tristes."], "rau": "r0d6b69eff", "au": "ae6b141440"}, {"s": "Mon chat est fâché.", "ok": "Mon chat n'est pas fâché.", "ko": "Mon chat ne est pas fâché.", "en": "My cat is not angry.", "p": ["Mon chat", "n'", "est", "pas", "fâché."], "w": "chat = cat", "rau": "r486dcb1a2", "au": "ae0629774f"}, {"s": "Vous êtes malades.", "ok": "Vous n'êtes pas malades.", "ko": "Vous ne êtes pas malades.", "en": "You are not ill.", "p": ["Vous", "n'", "êtes", "pas", "malades."], "rau": "r2d922e365", "au": "add66b9857"}], "ECOUTE": [{"s": "Il est triste.", "ok": "triste", "ko": "contente2", "en": "He is sad.", "r": "r-emotions", "au": "addd1d9c4e"}, {"s": "Elle est malade.", "ok": "malade", "ko": "fachee", "en": "She is ill.", "r": "r-emotions", "au": "aae31ee92f"}, {"s": "Elle a peur.", "ok": "peur", "ko": "rire", "en": "She is scared.", "r": "r-emotions", "au": "a9aa6c6b81"}, {"s": "Elle est fatiguée.", "ok": "fatiguee", "ko": "saut", "en": "She is tired.", "r": "r-emotions", "au": "a33ff810b6"}, {"s": "Elle est fâchée.", "ok": "fachee", "ko": "contente", "en": "She is angry.", "r": "r-emotions", "au": "aaf93801cb"}, {"s": "Ils sont contents.", "ok": "grandpere", "ko": "triste2", "en": "They are happy.", "r": "r-emotions", "au": "ab4bae3bd9"}], "JACQUES": [{"s": "Jacques a dit : fais une tête contente !", "emo": "😄", "en": "Simon says: make a happy face!", "au": "a5ce09b905"}, {"s": "Jacques a dit : fais une tête triste !", "emo": "😢", "en": "Simon says: make a sad face!", "au": "a4b96cf0de"}, {"s": "Jacques a dit : fais une tête fâchée !", "emo": "😠", "en": "Simon says: make an angry face!", "au": "a586426d25"}, {"s": "Jacques a dit : tu as peur ! Cache tes yeux !", "emo": "😱", "en": "Simon says: you are scared! Hide your eyes!", "au": "aa5bf3b144"}, {"s": "Jacques a dit : tu es fatiguée. Bâille !", "emo": "🥱", "en": "Simon says: you are tired. Yawn!", "au": "a590f0bd92"}, {"s": "Jacques a dit : tu es très contente. Saute !", "emo": "🤸", "en": "Simon says: you are very happy. Jump!", "au": "a36fe154b0"}], "ROUE": [{"who": "👧 elle", "emo": "😊", "neg": false, "fr": "Elle est contente.", "en": "She is happy.", "au": "a77e6e821d"}, {"who": "👦 il", "emo": "😢", "neg": false, "fr": "Il est triste.", "en": "He is sad.", "au": "addd1d9c4e"}, {"who": "👨‍👩‍👧 nous", "emo": "😴", "neg": false, "fr": "Nous sommes fatigués.", "en": "We are tired.", "au": "a8b5ae0e81"}, {"who": "🙋‍♀️ je", "emo": "😱", "neg": false, "fr": "J'ai peur.", "en": "I am scared.", "au": "a37bed1da2"}, {"who": "👦 il", "emo": "😠", "neg": true, "fr": "Il n'est pas fâché.", "en": "He is not angry.", "au": "ac88c02901"}, {"who": "👩 maman", "emo": "🤒", "neg": true, "fr": "Maman n'est pas malade.", "en": "Mum is not ill.", "au": "afcd8e9fbe"}], "INSTR": {"i1": "Evelyn, lis la phrase et touche la bonne bulle.", "i2": "Evelyn, lance le dé, puis choisis la bonne phrase.", "i3": "Evelyn, le robot dit toujours non. Choisis sa phrase.", "i4": "Evelyn, écoute et touche la bonne image.", "i5": "Evelyn, lève-toi ! Écoute Jacques et fais comme lui.", "i6": "Evelyn, fais tourner la roue et dis la phrase. Puis écoute."}, "INS": {"i1": "abf7335dad", "i2": "a8dc7c9bc5", "i3": "a2aa5ada03", "i4": "a411c32972", "i5": "a2ac1674a5", "i6": "a1419c055d"}};
+const KEY = "evelyn-lecon1-jeux-v1";
+let S; try { S = JSON.parse(localStorage.getItem(KEY)); } catch(e) { S = null; }
+if (!S) S = {res:{}, idx:{b:0,d:0,r:0,e:0,j:0,w:0}, rolled:{}, said:{}, screen:"rappel"};
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+let cur = null;
+function play(k){ if(!k) return; try { if (cur) cur.pause(); cur = new Audio("audio/"+k+".mp3"); cur.play().catch(()=>{}); } catch(e){} }
+let actx=null;
+function chime(good){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+  (good?[659,880,1175,1568]:[330,262]).forEach((f,i)=>{ const o=actx.createOscillator(),g=actx.createGain(); o.type=good?"sine":"triangle"; o.frequency.value=f; o.connect(g); g.connect(actx.destination);
+  const t=actx.currentTime+i*(good?.08:.14); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(good?.12:.07,t+.02); g.gain.exponentialRampToValueAtTime(.0001,t+.35); o.start(t); o.stop(t+.4); }); }catch(e){} }
+function stars(el){ const r=el.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2; const sym=["⭐","✨","🌟","💖","⭐","✨","🌈","⭐","✨","🌟"];
+  sym.forEach((s,i)=>{ const e=document.createElement("span"); e.className="star"; e.textContent=s; const a=Math.PI*2*i/sym.length, d=70+Math.random()*60;
+  e.style.left=cx+"px"; e.style.top=cy+"px"; e.style.setProperty("--dx",Math.cos(a)*d+"px"); e.style.setProperty("--dy",Math.sin(a)*d-20+"px"); e.style.animationDelay=(i*25)+"ms"; document.body.appendChild(e); setTimeout(()=>e.remove(),1200); });
+  const sc=document.getElementById("score"); sc.classList.add("bump"); setTimeout(()=>sc.classList.remove("bump"),250); }
+
+const SCREENS = [
+ {id:"rappel", ic:"📖", t:"Rappel", en:"Reminder"},
+ {id:"bulles", ic:"🫧", t:"Les bulles", en:"Bubbles", n:D.BULLES.length, p:"b"},
+ {id:"de", ic:"🎲", t:"Le dé", en:"The die", n:D.DE.length, p:"d"},
+ {id:"robot", ic:"🤖", t:"Le robot", en:"The robot", n:D.ROBOT.length, p:"r"},
+ {id:"ecoute", ic:"👂", t:"J'écoute", en:"I listen", n:D.ECOUTE.length, p:"e"},
+ {id:"pause", ic:"🌙", t:"Pause", en:"Move!"},
+ {id:"roue", ic:"🎡", t:"La roue", en:"The wheel"},
+ {id:"revoir", ic:"🔁", t:"À revoir", en:"To review"},
+];
+const TOTAL = D.BULLES.length + D.DE.length + D.ROBOT.length + D.ECOUTE.length;
+document.getElementById("tot").textContent = TOTAL;
+document.getElementById("nav").innerHTML = SCREENS.map(s=>`<button data-s="${s.id}">${s.ic} ${s.t}<small>${s.en}</small></button>`).join("");
+document.getElementById("screens").innerHTML = SCREENS.map(s=>`<section class="screen" id="sc-${s.id}"></section>`).join("");
+function instr(k){ return `<div class="instr"><button class="play" data-a="${D.INS[k]}">🔊</button><div>${esc(D.INSTR[k])}<div class="en">${esc(EN_INSTR[k])}</div></div></div>`; }
+const EN_INSTR = {i1:"Evelyn, read the sentence and tap the right bubble.",i2:"Evelyn, roll the die, then choose the right sentence.",i3:"Evelyn, the robot always says no. Choose its sentence.",i4:"Evelyn, listen and tap the right picture.",i5:"Evelyn, stand up! Listen to Jacques and do as he says.",i6:"Evelyn, spin the wheel and say the sentence. Then listen."};
+function head(s){ return `<div class="shead"><span class="ic">${s.ic}</span><div><h2>${s.t}</h2><div class="en">${s.en}</div></div></div>`; }
+function dots(p,n,i){ let h='<div class="dots">'; for(let k=0;k<n;k++){ const r=S.res[p+k]; h+=`<i class="${r?(r.ok?"ok":"ko"):""} ${k===i?"cur":""}"></i>`; } return h+"</div>"; }
+function show(id){ S.screen=id; save(); document.querySelectorAll(".screen").forEach(e=>e.classList.toggle("on", e.id==="sc-"+id)); document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on", b.dataset.s===id)); RENDER[id](); if(window.__ready) document.getElementById("nav").scrollIntoView({behavior:"smooth"}); }
+function mark(p, i, ok, el){ S.res[p+i]={ok}; save(); if(ok){ chime(true); stars(el); } else chime(false); refresh(); }
+function refresh(){ let n=0; Object.values(S.res).forEach(r=>{ if(r.ok) n++; }); document.getElementById("sc").textContent=n;
+  SCREENS.forEach(s=>{ if(!s.p) return; let all=true; for(let k=0;k<s.n;k++) if(!S.res[s.p+k]) all=false; const b=document.querySelector(`nav button[data-s="${s.id}"]`); b.classList.toggle("done", all); }); }
+function nextBtn(p, n, scr){ const i=S.idx[p]; return i < n-1 ? `<button class="next" id="nx">Suivant ▶ <span style="font-size:.7em">Next</span></button>` : `<button class="next" id="nx">Jeu suivant ▶ <span style="font-size:.7em">Next game</span></button>`; }
+function bindNext(p, n, scr, nextScr){ const b=document.getElementById("nx"); if(!b) return; if(S.res[p+S.idx[p]]) b.classList.add("show");
+  b.onclick=()=>{ if(S.idx[p]<n-1){ S.idx[p]++; save(); RENDER[scr](); } else show(nextScr); }; }
+const RENDER = {};
+// ---------- Rappel
+RENDER.rappel = () => { const cols={"r-etre":"#4C9BE8","r-emotions":"#E8618C","r-fille":"#7C6BE0","r-sandwich":"#21A99A"};
+  document.getElementById("sc-rappel").innerHTML = `<div class="card">${head(SCREENS[0])}<p style="margin:0 0 14px">Evelyn, écoute la règle, puis joue ! <span class="en">· Evelyn, listen to the rule, then play!</span></p>` +
+  D.RULES.map(r=>`<div class="rule" id="${r.id}" style="--c:${cols[r.id]}"><h3>${esc(r.t)} <span class="en">· ${esc(r.en)}</span></h3>${r.lines.map((l,i)=>`<div class="rl"><button class="play" data-a="${r.au[i]}">🔊</button><div>${esc(l[0])}<span class="en">${esc(l[1])}</span></div></div>`).join("")}</div>`).join("") +
+  `<button class="next show" onclick="show('bulles')">On joue ! ▶ <span style="font-size:.7em">Let's play!</span></button></div>`; };
+// ---------- Bulles
+RENDER.bulles = () => { const i=S.idx.b, it=D.BULLES[i], r=S.res["b"+i]; const colors=["#9FD3FF","#FFC2D6","#C9F0C6"];
+  const pos=[[8,90],[38,30],[68,100]];
+  let h=`<div class="card">${head(SCREENS[1])}${instr("i1")}${dots("b",D.BULLES.length,i)}
+  <div class="sent">${esc(it.s).replace("___",`<span class="gap" id="gp">${r? esc(it.a):"…"}</span>`)}</div><div class="tr en" id="tr">${r?esc(it.en):""}</div>
+  <div class="sky"><span class="cloud" style="top:10px">☁️</span><span class="cloud" style="top:150px;animation-delay:-11s;font-size:44px">☁️</span>`;
+  it.o.forEach((o,k)=>{ h+=`<button class="bub ${r&&o===it.a?"glow":""} ${r&&!r.ok&&o===r.c?"bad":""}" data-o="${esc(o)}" style="left:${pos[k][0]}%;top:${pos[k][1]}px;--bc:${colors[k]};--d:${3+k*.7}s;animation-delay:-${k}s" ${r?"disabled":""}>${esc(o)}</button>`; });
+  h+=`</div><div class="fb ${r?(r.ok?"ok":"ko"):""}" id="fb">${r?(r.ok?"✓ Oui ! · Yes!":"✗ "+esc(it.full)):""}</div>${nextBtn("b",D.BULLES.length)}</div>`;
+  const el=document.getElementById("sc-bulles"); el.innerHTML=h;
+  el.querySelectorAll(".bub").forEach(b=>b.onclick=()=>{ if(S.res["b"+i]) return; const ok=b.dataset.o===it.a; S.res["b"+i]={ok,c:b.dataset.o};
+    el.querySelectorAll(".bub").forEach(x=>x.disabled=true);
+    if(ok){ b.classList.add("popit"); } else { b.classList.add("bad"); el.querySelector(`.bub[data-o="${it.a}"]`).classList.add("glow"); }
+    document.getElementById("gp").textContent=it.a; document.getElementById("tr").textContent=it.en;
+    const fb=document.getElementById("fb"); fb.className="fb "+(ok?"ok":"ko"); fb.textContent= ok?"✓ Oui ! · Yes!":"✗ "+it.full;
+    mark("b",i,ok,b); setTimeout(()=>play(it.au),350); document.getElementById("nx").classList.add("show"); });
+  bindNext("b",D.BULLES.length,"bulles","de"); };
+// ---------- Dé
+RENDER.de = () => { const i=S.idx.d, it=D.DE[i], r=S.res["d"+i], rolled=S.rolled["d"+i]; const opts = i%2 ? [it.ko,it.ok] : [it.ok,it.ko];
+  let h=`<div class="card">${head(SCREENS[2])}${instr("i2")}${dots("d",D.DE.length,i)}
+  <div class="diebox"><button class="die" id="die" ${rolled?"disabled":""}>🎲</button><div class="en" id="dl">${rolled?"":"Touche le dé ! · Tap the die!"}</div>
+  <div class="who ${rolled?"show":""}" id="who"><span class="e1">${it.who}</span><span>${esc(it.name)}</span><span class="e2">${it.emo}</span></div></div>
+  <div class="choices" id="chs" style="${rolled?"":"display:none"}">${opts.map(o=>`<button class="ch ${r&&o===it.ok?"good":""} ${r&&!r.ok&&o===it.ko?"bad":""}" data-o="${esc(o)}" ${r?"disabled":""}>${esc(o)}</button>`).join("")}</div>
+  <div class="tr en" id="tr">${r?esc(it.en):""}</div>${nextBtn("d",D.DE.length)}</div>`;
+  const el=document.getElementById("sc-de"); el.innerHTML=h;
+  document.getElementById("die").onclick=e=>{ const d=e.currentTarget; d.disabled=true; d.classList.add("roll"); chime(true);
+    setTimeout(()=>{ S.rolled["d"+i]=1; save(); document.getElementById("who").classList.add("show"); document.getElementById("dl").textContent=""; document.getElementById("chs").style.display=""; },1000); };
+  el.querySelectorAll(".ch").forEach(b=>b.onclick=()=>{ if(S.res["d"+i]) return; const ok=b.dataset.o===it.ok;
+    el.querySelectorAll(".ch").forEach(x=>{ x.disabled=true; if(x.dataset.o===it.ok) x.classList.add("good"); }); if(!ok) b.classList.add("bad");
+    document.getElementById("tr").textContent=it.en; mark("d",i,ok,b); play(it.au); document.getElementById("nx").classList.add("show"); });
+  bindNext("d",D.DE.length,"de","robot"); };
+// ---------- Robot
+function sandHTML(p){ return p.map((w,k)=>`<span class="${k===1?"bread bl":k===3?"bread br":""}">${esc(w)}</span>`).join(""); }
+RENDER.robot = () => { const i=S.idx.r, it=D.ROBOT[i], r=S.res["r"+i]; const opts = i%2 ? [it.ko,it.ok] : [it.ok,it.ko];
+  let h=`<div class="card">${head(SCREENS[3])}${instr("i3")}${dots("r",D.ROBOT.length,i)}
+  <div class="robot"><span class="r">🤖</span><div class="bubble"><button class="play" data-a="${it.rau}" style="width:44px;height:44px;font-size:20px;vertical-align:middle;margin-right:8px">🔊</button>${esc(it.s)}</div></div>
+  ${it.w?`<div class="en" style="text-align:center;margin-top:6px">${esc(it.w)}</div>`:""}
+  <div style="text-align:center;margin-top:12px">Le robot dit non… <span class="en">· The robot says no…</span></div>
+  <div class="choices">${opts.map(o=>`<button class="ch ${r&&o===it.ok?"good":""} ${r&&!r.ok&&o===it.ko?"bad":""}" data-o="${esc(o)}" ${r?"disabled":""}>🤖 ${esc(o)}</button>`).join("")}</div>
+  <div class="sandw" id="sw">${r?sandHTML(it.p):""}</div><div class="tr en" id="tr">${r?esc(it.en):""}</div>${nextBtn("r",D.ROBOT.length)}</div>`;
+  const el=document.getElementById("sc-robot"); el.innerHTML=h;
+  el.querySelectorAll(".ch").forEach(b=>b.onclick=()=>{ if(S.res["r"+i]) return; const ok=b.dataset.o===it.ok;
+    el.querySelectorAll(".ch").forEach(x=>{ x.disabled=true; if(x.dataset.o===it.ok) x.classList.add("good"); }); if(!ok) b.classList.add("bad");
+    document.getElementById("sw").innerHTML=sandHTML(it.p); document.getElementById("tr").textContent=it.en; mark("r",i,ok,b); play(it.au); document.getElementById("nx").classList.add("show"); });
+  bindNext("r",D.ROBOT.length,"robot","ecoute"); };
+// ---------- Écoute
+RENDER.ecoute = () => { const i=S.idx.e, it=D.ECOUTE[i], r=S.res["e"+i]; const opts = i%2 ? [it.ko,it.ok] : [it.ok,it.ko];
+  let h=`<div class="card">${head(SCREENS[4])}${instr("i4")}${dots("e",D.ECOUTE.length,i)}
+  <div class="big" style="text-align:center"><button class="play" data-a="${it.au}">🔊</button></div>
+  <div class="pics">${opts.map(o=>`<button class="pic ${r&&o===it.ok?"good":""} ${r&&!r.ok&&o===it.ko?"bad":""}" data-o="${o}" ${r?"disabled":""}><img src="img/${o}.jpg" alt=""></button>`).join("")}</div>
+  <div class="sent" id="st" style="font-size:30px">${r?esc(it.s):""}</div><div class="tr en" id="tr">${r?esc(it.en):""}</div>${nextBtn("e",D.ECOUTE.length)}</div>`;
+  const el=document.getElementById("sc-ecoute"); el.innerHTML=h;
+  el.querySelectorAll(".pic").forEach(b=>b.onclick=()=>{ if(S.res["e"+i]) return; const ok=b.dataset.o===it.ok;
+    el.querySelectorAll(".pic").forEach(x=>{ x.disabled=true; if(x.dataset.o===it.ok) x.classList.add("good"); }); if(!ok) b.classList.add("bad");
+    document.getElementById("st").textContent=it.s; document.getElementById("tr").textContent=it.en; mark("e",i,ok,b); setTimeout(()=>play(it.au),300); document.getElementById("nx").classList.add("show"); });
+  bindNext("e",D.ECOUTE.length,"ecoute","pause"); };
+// ---------- Pause : Jacques a dit
+RENDER.pause = () => { const i=S.idx.j, it=D.JACQUES[i];
+  const el=document.getElementById("sc-pause");
+  el.innerHTML=`<div class="card jac">${head(SCREENS[5])}${instr("i5")}
+  <div class="en" style="margin-bottom:8px">« Jacques a dit » = "Simon says". Ne regarde pas l'écran : bouge ! · Don't look at the screen: move!</div>
+  <div class="emo">${it.emo}</div>
+  <div class="big" style="margin:10px 0"><button class="play" data-a="${it.au}">🔊</button></div>
+  <div class="sent" style="font-size:28px">${esc(it.s)}</div><div class="en">${esc(it.en)}</div>
+  <button class="next show" id="nx">${i<D.JACQUES.length-1?"Suivant ▶ <span style='font-size:.7em'>Next</span>":"Jeu suivant ▶ <span style='font-size:.7em'>Next game</span>"}</button></div>`;
+  document.getElementById("nx").onclick=()=>{ if(S.idx.j<D.JACQUES.length-1){ S.idx.j++; save(); RENDER.pause(); setTimeout(()=>play(D.JACQUES[S.idx.j].au),300); } else { S.idx.j=0; save(); show("roue"); } }; };
+// ---------- Roue
+RENDER.roue = () => { const i=S.idx.w % D.ROUE.length, it=D.ROUE[i], n=D.ROUE.length; const cols=["#FFC2D6","#9FD3FF","#C9F0C6","#FFE29A","#D9CCFF","#FFCFA8"];
+  const grad="conic-gradient("+cols.map((c,k)=>`${c} ${k*360/n}deg ${(k+1)*360/n}deg`).join(",")+")";
+  const spans=D.ROUE.map((r,k)=>{ const a=(k+.5)*360/n-90; return `<span style="transform:rotate(${a}deg) translate(80px) rotate(${-a}deg) translate(-50%,-50%)">${r.emo}</span>`; }).join("");
+  const said=S.said["w"+i];
+  const el=document.getElementById("sc-roue");
+  el.innerHTML=`<div class="card">${head(SCREENS[6])}${instr("i6")}
+  <div class="wheelw"><div class="pointer">🔻</div><div class="wheel" id="wh" style="background:${grad}">${spans}</div></div>
+  <button class="spin" id="spin">Tourne ! <span style="font-size:.7em">Spin!</span></button>
+  <div class="rcard" id="rc"><div class="big2">${it.who.split(" ")[0]} ${it.neg?'<span class="no">✖</span>':""}${it.emo}</div>
+   <div><b>${esc(it.who.split(" ").slice(1).join(" "))}</b> ${it.neg?"· ne … pas":""}</div>
+   <div style="margin-top:6px">Dis la phrase ! <span class="en">· Say the sentence!</span></div>
+   <div style="margin-top:10px"><button class="play" id="lis" data-a="${it.au}">🔊</button></div>
+   <div class="ans" id="ans">${esc(it.fr)}<div class="en">${esc(it.en)}</div></div></div>
+  <button class="next" id="nx">${(S.idx.w+1)<n?"Encore ! ▶ <span style='font-size:.7em'>Again!</span>":"À revoir ▶ <span style='font-size:.7em'>To review</span>"}</button></div>`;
+  const wh=document.getElementById("wh");
+  document.getElementById("spin").onclick=e=>{ e.currentTarget.disabled=true; const target=360*5 + (360 - (i+.5)*360/n); wh.style.transform=`rotate(${target}deg)`; chime(true);
+    setTimeout(()=>{ document.getElementById("rc").classList.add("show"); },2700); };
+  document.getElementById("lis").addEventListener("click",()=>{ document.getElementById("ans").classList.add("show"); S.said["w"+i]=1; save(); stars(document.getElementById("lis")); document.getElementById("nx").classList.add("show"); });
+  document.getElementById("nx").onclick=()=>{ if(S.idx.w+1<n){ S.idx.w++; save(); RENDER.roue(); } else { S.idx.w=0; save(); show("revoir"); } }; };
+// ---------- À revoir
+RENDER.revoir = () => { const W=[]; const add=(p,arr,f)=>arr.forEach((it,k)=>{ const r=S.res[p+k]; if(r && !r.ok) W.push(f(it)); });
+  add("b",D.BULLES,it=>({q:it.s,a:it.full,r:it.r})); add("d",D.DE,it=>({q:it.name+" "+it.emo,a:it.ok,r:it.r}));
+  add("r",D.ROBOT,it=>({q:it.s,a:it.ok,r:"r-sandwich"})); add("e",D.ECOUTE,it=>({q:"🔊",a:it.s,r:it.r}));
+  const names={}; D.RULES.forEach(r=>names[r.id]=r.t);
+  const answered=Object.keys(S.res).length;
+  document.getElementById("sc-revoir").innerHTML=`<div class="card">${head(SCREENS[7])}
+  <p style="margin:0 0 10px">Evelyn, voici les phrases à revoir. Touche pour relire la règle. <span class="en">· Evelyn, here are the sentences to review. Tap to read the rule again.</span></p>
+  ${W.length? W.map(w=>`<div class="rv"><div>${esc(w.q)}</div><div class="a">→ ${esc(w.a)}</div><button data-rule="${w.r}">↑ ${esc(names[w.r])}</button></div>`).join("") : `<p class="en">${answered? "Rien à revoir ! · Nothing to review!" : "Joue d'abord aux jeux. · Play the games first."}</p>`}
+  <button class="reset" id="rs">↺ Recommencer · Start again</button></div>`;
+  document.querySelectorAll("#sc-revoir [data-rule]").forEach(b=>b.onclick=()=>goRule(b.dataset.rule));
+  document.getElementById("rs").onclick=e=>{ const b=e.currentTarget; if(b.dataset.sure){ localStorage.removeItem(KEY); location.reload(); } else { b.dataset.sure=1; b.textContent="Sûre ? Touche encore · Sure? Tap again"; } }; };
+function goRule(id){ show("rappel"); setTimeout(()=>{ const e=document.getElementById(id); if(!e) return; e.scrollIntoView({behavior:"smooth",block:"center"}); e.classList.remove("flash"); void e.offsetWidth; e.classList.add("flash"); },150); }
+// ---------- events
+document.addEventListener("click",e=>{ const p=e.target.closest(".play"); if(p && p.dataset.a) play(p.dataset.a); const n=e.target.closest("nav button"); if(n) show(n.dataset.s); });
+refresh(); show(S.screen || "rappel"); window.__ready=1;
+</script>
+</body>
+</html>
