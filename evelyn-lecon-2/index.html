@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Où est le chat ? · Leçon 2</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F7FF;--ink:#33304A;--soft:#7A7592;--teal:#21A99A;--teal-l:#DDF5F1;--pink:#E8618C;--pink-l:#FDE4EC;--sun:#F6B93B;--sun-l:#FEF3D6;--violet:#7C6BE0;--violet-l:#ECE9FC;--sky:#4C9BE8;--sky-l:#E0EEFC;--ok:#22A56B;--ko:#E0526A;--shadow:0 10px 28px rgba(40,50,90,.12),0 2px 6px rgba(40,50,90,.06)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:Nunito,system-ui,sans-serif;font-weight:800;color:var(--ink);font-size:24px;line-height:1.4;
+ background:radial-gradient(600px 400px at 0 0,#FDE4EC 0,transparent 70%),radial-gradient(600px 450px at 100% 15%,#DDF5F1 0,transparent 70%),radial-gradient(600px 500px at 50% 100%,#ECE9FC 0,transparent 70%),var(--bg);background-attachment:fixed}
+h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
+.en{color:var(--soft);font-style:italic;font-weight:600;font-size:.82em}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px 100px}
+#score{position:fixed;top:12px;right:12px;z-index:60;background:#fff;border:3px solid var(--sun);border-radius:999px;padding:5px 18px;font-family:Fredoka;font-size:26px;box-shadow:var(--shadow);transition:transform .2s}
+#score.bump{transform:scale(1.25)}
+.hero{margin:20px 0 8px;border-radius:32px;overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-columns:1.1fr 1fr;background:linear-gradient(135deg,#FFF5F8,#E9F7F4)}
+.hero img{width:100%;height:300px;object-fit:cover;object-position:50% 25%;display:block;order:2}
+.hero .t{padding:28px 22px 26px 30px;align-self:center}
+.tag{display:inline-block;background:var(--violet-l);color:var(--violet);border-radius:999px;padding:3px 14px;font-size:15px;letter-spacing:.08em;font-family:Fredoka}
+.hero h1{font-size:44px;color:var(--pink);line-height:1.1;margin:6px 0 4px}
+.hero p{margin:0;font-size:20px}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:18px 0 22px}
+nav button{min-height:70px;border:3px solid transparent;border-radius:20px;font:inherit;font-size:19px;cursor:pointer;background:#fff;color:var(--ink);box-shadow:0 3px 10px rgba(40,50,90,.08);padding:4px}
+nav button small{display:block;font-size:14px;color:var(--soft);font-style:italic;font-weight:600}
+nav button.on{border-color:var(--pink);background:var(--pink-l)}
+nav button.done::after{content:" ✓";color:var(--ok)}
+.screen{display:none}.screen.on{display:block;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.card{background:#fff;border-radius:28px;box-shadow:var(--shadow);padding:22px;margin-bottom:18px}
+.shead{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.shead .ic{font-size:44px;animation:wig 3s ease-in-out infinite}
+@keyframes wig{0%,100%{transform:rotate(0)}50%{transform:rotate(-10deg)}}
+.shead h2{font-size:32px}
+.instr{display:flex;gap:12px;align-items:center;background:var(--sun-l);border-radius:18px;padding:10px 14px;margin-bottom:16px}
+.play{flex:none;width:58px;height:58px;border-radius:50%;border:0;background:var(--teal);color:#fff;font-size:26px;cursor:pointer;box-shadow:0 4px 10px rgba(33,169,154,.35)}
+.play:active{transform:scale(.92)}
+.big .play{width:96px;height:96px;font-size:44px;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(33,169,154,.45)}50%{box-shadow:0 0 0 18px rgba(33,169,154,0)}}
+.dots{display:flex;gap:8px;justify-content:center;margin:6px 0 14px}
+.dots i{width:16px;height:16px;border-radius:50%;background:#E3E1EE}
+.dots i.ok{background:var(--ok)}.dots i.ko{background:var(--ko)}.dots i.cur{outline:3px solid var(--sun);outline-offset:2px}
+.sent{text-align:center;font-family:Fredoka;font-size:36px;margin:6px 0}
+.gap{display:inline-block;min-width:110px;border-bottom:5px solid var(--violet);color:var(--violet);padding:0 6px}
+.tr{text-align:center;min-height:30px}
+.next{display:block;margin:16px auto 0;border:0;border-radius:999px;background:var(--pink);color:#fff;font:600 26px Fredoka;padding:12px 34px;cursor:pointer;box-shadow:0 6px 14px rgba(232,97,140,.35);visibility:hidden}
+.next.show{visibility:visible;animation:pop .4s}
+@keyframes pop{0%{transform:scale(.6)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
+.fb{text-align:center;font-size:22px;min-height:34px;margin-top:8px}
+.fb.ok{color:var(--ok)}.fb.ko{color:var(--ko)}
+/* bulles */
+.sky{position:relative;height:300px;border-radius:24px;background:linear-gradient(180deg,#CFE8FF,#EAF4FF 60%,#F7FBFF);overflow:hidden;margin-top:10px}
+.cloud{position:absolute;font-size:60px;opacity:.75;animation:drift 22s linear infinite}
+@keyframes drift{from{transform:translateX(-120px)}to{transform:translateX(980px)}}
+.bub{position:absolute;width:130px;height:130px;border-radius:50%;border:0;cursor:pointer;font:600 32px Fredoka;color:#2f2b4a;
+ background:radial-gradient(circle at 32% 28%,#fff 0 12%,rgba(255,255,255,.55) 13% 22%,transparent 23%),radial-gradient(circle,rgba(255,255,255,.25) 55%,var(--bc) 100%);box-shadow:inset 0 -8px 18px rgba(0,0,0,.08),0 6px 16px rgba(60,90,160,.18);animation:float var(--d) ease-in-out infinite alternate}
+@keyframes float{0%{transform:translate(0,30px)}50%{transform:translate(14px,-6px)}100%{transform:translate(-10px,-34px)}}
+.bub.popit{animation:popb .5s forwards}
+@keyframes popb{0%{transform:scale(1)}40%{transform:scale(1.35)}100%{transform:scale(1.8);opacity:0}}
+.bub.bad{filter:grayscale(1);opacity:.5;animation:shake .4s}
+.bub.glow{box-shadow:0 0 0 8px var(--ok),0 0 30px var(--ok)}
+.bub:disabled{cursor:default}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+/* dé */
+.diebox{display:flex;flex-direction:column;align-items:center;gap:10px}
+.die{width:140px;height:140px;border-radius:30px;border:0;background:linear-gradient(135deg,#fff,#F1EEFF);box-shadow:var(--shadow);font-size:84px;cursor:pointer}
+.die.roll{animation:roll 1s cubic-bezier(.3,.7,.4,1)}
+@keyframes roll{0%{transform:rotate(0) scale(1)}30%{transform:rotate(250deg) scale(1.2) translateY(-30px)}70%{transform:rotate(560deg) scale(.9)}100%{transform:rotate(720deg) scale(1)}}
+.who{display:none;align-items:center;justify-content:center;gap:16px;background:var(--violet-l);border-radius:24px;padding:14px 26px;font-family:Fredoka;font-size:30px}
+.who.show{display:flex;animation:pop .5s}
+.who .e1{font-size:76px;line-height:1}.who .e2{font-size:76px;line-height:1;animation:wig 1.6s ease-in-out infinite}
+.choices{display:grid;gap:12px;margin-top:16px}
+.ch{border:4px solid #E4E0F3;background:#fff;border-radius:22px;padding:16px;font:600 28px Fredoka;color:var(--ink);cursor:pointer;transition:transform .15s}
+.ch:hover{transform:translateY(-2px)}
+.ch.good{border-color:var(--ok);background:#E3F7EC;animation:pop .4s}.ch.bad{border-color:var(--ko);background:#FDE6EA;text-decoration:line-through;animation:shake .4s}
+.ch:disabled{cursor:default}
+/* robot */
+.robot{display:flex;align-items:center;gap:14px;justify-content:center}
+.robot .r{font-size:110px;animation:bob 1.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-14px) rotate(4deg)}}
+.bubble{position:relative;background:var(--sky-l);border-radius:24px;padding:14px 20px;font-family:Fredoka;font-size:30px;max-width:420px}
+.bubble::before{content:"";position:absolute;left:-14px;top:40%;border:10px solid transparent;border-right:16px solid var(--sky-l)}
+.sandw{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:16px;min-height:60px}
+.sandw span{padding:8px 16px;border-radius:16px;font:600 28px Fredoka;background:var(--teal-l);color:#15786d}
+.sandw .bread{background:var(--sun);color:#5b3a00}
+.sandw .bl{animation:inl .7s both}.sandw .br{animation:inr .7s .25s both}
+@keyframes inl{from{transform:translateX(-200px) rotate(-30deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes inr{from{transform:translateX(200px) rotate(30deg);opacity:0}to{transform:none;opacity:1}}
+/* écoute */
+.pics{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.pic{border:5px solid #E4E0F3;border-radius:26px;background:#fff;padding:8px;cursor:pointer;animation:pop .5s both}
+.pic:nth-child(2){animation-delay:.15s}
+.pic img{width:100%;height:230px;object-fit:contain;border-radius:18px;display:block}
+.pic.good{border-color:var(--ok);box-shadow:0 0 0 6px #C7EEDA}.pic.bad{border-color:var(--ko);opacity:.55}
+.pic:disabled{cursor:default}
+/* jacques */
+.jac{text-align:center}
+.jac .emo{font-size:150px;line-height:1.1;display:inline-block;animation:dance 1.2s ease-in-out infinite}
+@keyframes dance{0%,100%{transform:rotate(-12deg) translateY(0)}50%{transform:rotate(12deg) translateY(-22px)}}
+/* roue */
+.wheelw{position:relative;width:300px;height:300px;margin:6px auto}
+.wheel{width:300px;height:300px;border-radius:50%;border:8px solid #fff;box-shadow:var(--shadow);transition:transform 2.6s cubic-bezier(.15,.85,.25,1);position:relative;overflow:hidden}
+.wheel span{position:absolute;left:50%;top:50%;font-size:42px;transform-origin:0 0}
+.pointer{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:44px;z-index:2;filter:drop-shadow(0 3px 3px rgba(0,0,0,.2))}
+.spin{display:block;margin:14px auto;border:0;border-radius:999px;background:var(--violet);color:#fff;font:600 26px Fredoka;padding:12px 34px;cursor:pointer}
+.spin:disabled{opacity:.4}
+.rcard{display:none;text-align:center;background:var(--pink-l);border-radius:24px;padding:14px}
+.rcard.show{display:block;animation:pop .5s}
+.rcard .big2{font-size:64px}
+.rcard .no{font-size:64px;color:var(--ko)}
+.ans{display:none;font-family:Fredoka;font-size:32px;margin-top:8px}.ans.show{display:block;animation:pop .4s}
+/* rappel */
+.rule{border-radius:22px;padding:14px 18px;margin-bottom:14px;border:3px solid var(--c);background:#fff}
+.rule h3{color:var(--c);font-size:26px;margin-bottom:6px}
+.rl{display:flex;gap:10px;align-items:center;margin:6px 0}
+.rl .play{width:44px;height:44px;font-size:20px;background:var(--c)}
+.rl .en{display:block}
+.rule.flash{animation:flash 1.4s 2}
+@keyframes flash{50%{box-shadow:0 0 0 10px var(--c)}}
+/* à revoir */
+.rv{border-left:6px solid var(--pink);background:#fff;border-radius:16px;padding:10px 14px;margin:10px 0;box-shadow:0 2px 8px rgba(40,50,90,.06)}
+.rv .a{color:var(--ok)}
+.rv button{margin-top:6px;border:3px solid var(--violet-l);background:#fff;color:var(--violet);border-radius:999px;font:600 18px Fredoka;padding:4px 14px;cursor:pointer}
+.reset{border:3px solid #E3E1EE;background:#fff;color:var(--soft);border-radius:999px;font:600 18px Fredoka;padding:8px 18px;cursor:pointer;margin-top:12px}
+.star{position:fixed;z-index:100;pointer-events:none;font-size:30px;animation:sp 1s ease-out forwards}
+@keyframes sp{0%{transform:translate(0,0) scale(.3);opacity:0}20%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.2) rotate(140deg);opacity:0}}
+.foot{text-align:center;color:var(--soft);font:600 15px Fredoka;margin-top:20px}
+@media(max-width:640px){body{font-size:20px}.hero{grid-template-columns:1fr}.hero img{height:200px;order:0}.hero h1{font-size:34px}nav{grid-template-columns:repeat(2,1fr)}.sent{font-size:28px}.bub{width:100px;height:100px;font-size:26px}.pic img{height:150px}.ch{font-size:22px}.robot .r{font-size:80px}.bubble{font-size:24px}.wheelw,.wheel{width:260px;height:260px}}
+
+:root{--sea:#2FA3C9;--sea-l:#DDF2FA}
+body{background:radial-gradient(600px 400px at 0 0,#DDF2FA 0,transparent 70%),radial-gradient(600px 450px at 100% 15%,#FDE4EC 0,transparent 70%),radial-gradient(600px 500px at 50% 100%,#E6F4EC 0,transparent 70%),#F4F9FF;background-attachment:fixed}
+.hero h1{color:var(--sea)}
+nav{grid-template-columns:repeat(4,1fr)}
+nav button.on{border-color:var(--sea);background:var(--sea-l)}
+.pic-e{font-size:.9em}
+/* scène */
+.stage{position:relative;width:300px;height:230px;margin:6px auto}
+.stage .ob{position:absolute;bottom:0;line-height:1;z-index:2}
+.stage .pet{position:absolute;font-size:72px;line-height:1;left:50%;transform:translateX(-50%);z-index:3;animation:land .7s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes land{from{transform:translate(-50%,-120px);opacity:0}to{transform:translateX(-50%);opacity:1}}
+.stage .pet.happy{animation:hop .6s 2}
+@keyframes hop{50%{transform:translate(-50%,-26px) rotate(-8deg)}}
+.tbl{position:absolute;left:50%;bottom:0;width:220px;height:120px;transform:translateX(-50%);z-index:2}
+.tbl .tp{position:absolute;top:0;left:0;right:0;height:20px;border-radius:10px;background:linear-gradient(#C98B55,#A86A38);box-shadow:0 4px 0 #8A532A}
+.tbl .lg{position:absolute;top:18px;width:16px;height:102px;border-radius:6px;background:#A86A38}
+.tbl .l1{left:16px}.tbl .l2{right:16px}
+.o-table.p-sur .pet{bottom:132px}
+.o-table.p-sous .pet{bottom:4px;font-size:64px}
+.box{left:50%;transform:translateX(-50%);width:180px;height:115px;border-radius:8px;background:linear-gradient(#D9A066,#B97A3E);box-shadow:inset 0 -10px 0 rgba(0,0,0,.08),0 4px 0 #8f5a2a}
+.box::after{content:'';position:absolute;left:50%;top:22px;width:46px;height:30px;transform:translateX(-50%);border-radius:6px;background:rgba(255,255,255,.35)}
+.box .flap{position:absolute;top:-26px;width:80px;height:30px;background:#E2B07A;border-radius:6px 6px 2px 2px}
+.box .f1{left:-6px;transform:rotate(-24deg);transform-origin:right bottom}.box .f2{right:-6px;transform:rotate(24deg);transform-origin:left bottom}
+.o-boite.p-dans .pet{bottom:96px;z-index:1}
+.o-boite.p-devant .pet{bottom:-6px;left:70%;font-size:66px}
+.house{font-size:165px;left:50%;transform:translateX(-50%)}
+.o-maison.p-devant .pet{bottom:0;left:66%}
+.o-maison.p-derriere .pet{bottom:50px;left:22%;z-index:1;font-size:66px}
+.ch1{font-size:110px;left:6%}.ch2{font-size:110px;right:6%}
+.o-chaises.p-entre .pet{bottom:6px}
+.o-chaises.p-sur .pet{bottom:100px;left:22%}
+.stage.sm{zoom:.52;margin:0 auto}
+.minis{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+.mini{border:5px solid #E4E0F3;border-radius:26px;background:#fff;padding:10px 4px 6px;cursor:pointer;overflow:hidden;animation:pop .5s both}
+.mini.good{border-color:var(--ok);box-shadow:0 0 0 6px #C7EEDA}.mini.bad{border-color:var(--ko);opacity:.55}
+.mini:disabled{cursor:default}
+.choices.three{grid-template-columns:repeat(3,1fr)}
+.ch.big{font-size:32px;padding:18px 6px}
+/* valise */
+.trav{display:flex}
+.suit{font-size:90px}
+.suit.fly{animation:flyaway .9s ease-in forwards}
+.suit:disabled{display:none}
+.suit.fly:disabled{display:block}
+@keyframes flyaway{0%{transform:none}30%{transform:translateY(10px) rotate(-8deg)}100%{transform:translate(160px,-220px) rotate(25deg) scale(.3);opacity:0}}
+.dest{display:none;position:relative;width:100%;max-width:520px;border-radius:26px;overflow:hidden;box-shadow:var(--shadow)}
+.dest.show{display:block;animation:pop .6s}
+.dest img{width:100%;height:260px;object-fit:cover;display:block}
+.dest .trv{position:absolute;left:16px;bottom:10px;font-size:70px;animation:bob 1.4s ease-in-out infinite;filter:drop-shadow(0 4px 6px rgba(0,0,0,.3))}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-14px) rotate(4deg)}}
+/* rappel */
+.places{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:8px 0 12px}
+.place,.prep{border:3px solid #E4E0F3;border-radius:20px;background:#fff;padding:6px;cursor:pointer;font:inherit;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:2px}
+.place img{width:100%;height:110px;object-fit:cover;border-radius:14px}
+.place b,.prep b{font-family:Fredoka;font-weight:600;font-size:22px}
+.place .en,.prep .en{font-size:15px}
+.preps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0 12px}
+.prep{overflow:hidden;padding-top:10px}
+.prep b{color:var(--pink);font-size:26px}
+.mum{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--sky-l);border-radius:24px;padding:16px}
+.mum .mic{font-size:90px;animation:bob 1.6s ease-in-out infinite}
+.en2{font:600 30px Fredoka;color:#3B6FB0;text-align:center}
+@media(max-width:640px){nav{grid-template-columns:repeat(2,1fr)}.places{grid-template-columns:repeat(2,1fr)}.preps{grid-template-columns:repeat(2,1fr)}.choices.three{grid-template-columns:1fr}.dest img{height:190px}.stage.sm{zoom:.42}.prep .stage.sm{zoom:.45}}
+</style>
+</head>
+<body>
+<div id="score">⭐ <span id="sc">0</span> / <span id="tot">0</span></div>
+<div class="wrap">
+ <section class="hero"><div class="t"><span class="tag">LEÇON 2 · ÊTRE ET OÙ ?</span><h1>Où est le chat ?</h1><p>Le chat est dans la boîte ! <span class="en">· The cat is in the box!</span></p></div><img src="img/hero.jpg" alt="" style="object-position:50% 40%"></section>
+ <nav id="nav"></nav>
+ <div id="screens"></div>
+ <div class="foot">Le français avec Irène</div>
+</div>
+<script>
+const D = {"RULES": [{"id": "r-lieux", "c": "#2FA3C9", "t": "Où ? Les lieux", "en": "Where? Places", "places": [{"img": "mer", "fr": "à la mer", "en": "at the seaside", "say": "Je suis à la mer.", "au": "8245911e3d"}, {"img": "montagne", "fr": "à la montagne", "en": "in the mountains", "say": "Je suis à la montagne.", "au": "67aab9dc29"}, {"img": "campagne", "fr": "à la campagne", "en": "in the countryside", "say": "Je suis à la campagne.", "au": "18225cd813"}, {"img": "ville", "fr": "en ville", "en": "in town", "say": "Je suis en ville.", "au": "c0fb362b20"}, {"img": "maison", "fr": "à la maison", "en": "at home", "say": "Je suis à la maison.", "au": "af82e7291f"}], "lines": [["Nous sommes à la mer.", "We are at the seaside.", "18c4f581ec"], ["Ma mamie est à la campagne.", "My grandma is in the countryside.", "fd33de32a6"], ["Papa est en ville.", "Dad is in town.", "b7fc318482"]]}, {"id": "r-prep", "c": "#E8618C", "t": "Où est le chat ? Les petits mots", "en": "Where is the cat? The little words", "preps": [{"obj": "table", "pos": "sur", "w": "sur", "wen": "on", "say": "Le chat est sur la table.", "au": "3cc2ddf658"}, {"obj": "table", "pos": "sous", "w": "sous", "wen": "under", "say": "Le chat est sous la table.", "au": "9464430490"}, {"obj": "boite", "pos": "dans", "w": "dans", "wen": "in", "say": "Le chat est dans la boîte.", "au": "714035c981"}, {"obj": "maison", "pos": "devant", "w": "devant", "wen": "in front of", "say": "Le chat est devant la maison.", "au": "e4d05c72a6"}, {"obj": "maison", "pos": "derriere", "w": "derrière", "wen": "behind", "say": "Le chat est derrière la maison.", "au": "a8afdeaa17"}, {"obj": "chaises", "pos": "entre", "w": "entre", "wen": "between", "say": "Le chat est entre les chaises.", "au": "7105fa27a4"}], "lines": [["Le stylo est sur la table.", "The pen is on the table.", "7824218ddb"], ["Le ballon est sous la chaise.", "The ball is under the chair.", "28013d5234"]]}, {"id": "r-etre", "c": "#7C6BE0", "t": "Le verbe être (rappel)", "en": "The verb \"to be\" (reminder)", "lines": [["je suis · tu es · il / elle est", "I am · you are · he / she is", "f246d2d83b"], ["nous sommes · vous êtes · ils / elles sont", "we are · you are · they are", "0140ad64c8"]]}, {"id": "r-ou", "c": "#21A99A", "t": "La question : Où ?", "en": "The question: Where?", "lines": [["Où es-tu ? Je suis à la maison.", "Where are you? I am at home.", "08240ca2bf"], ["Où est le chat ? Il est sous la table.", "Where is the cat? It is under the table.", "36260d23a8"]]}, {"id": "r-sandwich", "c": "#F0A030", "t": "Ne … pas : le sandwich", "en": "The \"not\" sandwich", "lines": [["Je ne suis pas à la mer.", "I am not at the seaside.", "c7f2d9718c"], ["Le chat n'est pas sur la table.", "The cat is not on the table.", "76843045e7"]]}], "BULLES": [{"s": "Nous ___ à la mer.", "o": ["sommes", "sont", "est"], "a": "sommes", "en": "We are at the seaside.", "r": "r-etre", "full": "Nous sommes à la mer.", "au": "18c4f581ec", "pic": "🏖️"}, {"s": "Je ___ à la maison.", "o": ["es", "suis", "est"], "a": "suis", "en": "I am at home.", "r": "r-etre", "full": "Je suis à la maison.", "au": "af82e7291f", "pic": "🏠"}, {"s": "Les enfants ___ en ville.", "o": ["est", "êtes", "sont"], "a": "sont", "en": "The children are in town.", "r": "r-etre", "full": "Les enfants sont en ville.", "au": "98046cd60c", "pic": "🏙️"}, {"s": "Tu ___ à la montagne ?", "o": ["es", "est", "suis"], "a": "es", "en": "Are you in the mountains?", "r": "r-etre", "full": "Tu es à la montagne ?", "au": "0a7c974715", "pic": "🏔️"}, {"s": "Vous ___ à la campagne.", "o": ["sommes", "êtes", "sont"], "a": "êtes", "en": "You are in the countryside.", "r": "r-etre", "full": "Vous êtes à la campagne.", "au": "51bb3b180b", "pic": "🐄"}, {"s": "Le stylo ___ sur la table.", "o": ["sont", "es", "est"], "a": "est", "en": "The pen is on the table.", "r": "r-etre", "full": "Le stylo est sur la table.", "au": "7824218ddb", "pic": "🖊️"}], "CHAT": [{"obj": "table", "pos": "sur", "s": "Le chat est ___ la table.", "o": ["sous", "sur", "dans"], "a": "sur", "en": "The cat is on the table.", "full": "Le chat est sur la table.", "au": "3cc2ddf658"}, {"obj": "boite", "pos": "dans", "s": "Le chat est ___ la boîte.", "o": ["dans", "sur", "derrière"], "a": "dans", "en": "The cat is in the box.", "full": "Le chat est dans la boîte.", "au": "714035c981"}, {"obj": "table", "pos": "sous", "s": "Le chat est ___ la table.", "o": ["sur", "devant", "sous"], "a": "sous", "en": "The cat is under the table.", "full": "Le chat est sous la table.", "au": "9464430490"}, {"obj": "maison", "pos": "devant", "s": "Le chat est ___ la maison.", "o": ["derrière", "devant", "dans"], "a": "devant", "en": "The cat is in front of the house.", "full": "Le chat est devant la maison.", "au": "e4d05c72a6"}, {"obj": "chaises", "pos": "entre", "s": "Le chat est ___ les chaises.", "o": ["entre", "sur", "sous"], "a": "entre", "en": "The cat is between the chairs.", "full": "Le chat est entre les chaises.", "au": "7105fa27a4"}, {"obj": "maison", "pos": "derriere", "s": "Le chat est ___ la maison.", "o": ["devant", "sous", "derrière"], "a": "derrière", "en": "The cat is behind the house.", "full": "Le chat est derrière la maison.", "au": "a8afdeaa17"}], "VALISE": [{"who": "👧", "name": "Mia", "img": "mer", "ok": "Mia est à la mer.", "ko": "Mia est à la montagne.", "en": "Mia is at the seaside.", "r": "r-lieux", "au": "70fb061925"}, {"who": "👨‍👩‍👧", "name": "Nous", "img": "montagne", "ok": "Nous sommes à la montagne.", "ko": "Nous est à la montagne.", "en": "We are in the mountains.", "r": "r-etre", "au": "64d9b268da"}, {"who": "👦👦", "name": "Les garçons", "img": "campagne", "ok": "Ils sont à la campagne.", "ko": "Ils sont en ville.", "en": "They are in the countryside.", "r": "r-lieux", "au": "f696c87b19"}, {"who": "🙋‍♀️", "name": "Moi, Evelyn", "img": "maison", "ok": "Je suis à la maison.", "ko": "Je es à la maison.", "en": "I am at home.", "r": "r-etre", "au": "af82e7291f"}, {"who": "👵", "name": "Mamie", "img": "ville", "ok": "Mamie est en ville.", "ko": "Mamie est à la mer.", "en": "Grandma is in town.", "r": "r-lieux", "au": "621aa5706c"}, {"who": "🧒", "name": "Toi", "img": "mer", "ok": "Tu es à la mer !", "ko": "Tu est à la mer !", "en": "You are at the seaside!", "r": "r-etre", "au": "3d82a12b93"}], "ECOUTE": [{"s": "Nous sommes à la montagne.", "ok": "montagne", "ko": "mer", "en": "We are in the mountains.", "r": "r-lieux", "au": "64d9b268da"}, {"s": "Ils sont en ville.", "ok": "ville", "ko": "campagne", "en": "They are in town.", "r": "r-lieux", "au": "74a0112e4a"}, {"s": "Je suis à la maison.", "ok": "maison", "ko": "montagne", "en": "I am at home.", "r": "r-lieux", "au": "af82e7291f"}, {"s": "Elle est à la campagne.", "ok": "campagne", "ko": "ville", "en": "She is in the countryside.", "r": "r-lieux", "au": "787aa3e983"}, {"s": "Les enfants sont à la mer.", "ok": "mer", "ko": "maison", "en": "The children are at the seaside.", "r": "r-lieux", "au": "1a2b174948"}, {"s": "Le chat est dans la boîte.", "ok": "chat-boite", "ko": "maison", "en": "The cat is in the box.", "r": "r-prep", "au": "714035c981"}], "JACQUES": [{"s": "Jacques a dit : mets tes mains sur ta tête !", "emo": "🙆‍♀️", "en": "Simon says: put your hands on your head! (la tête = head)", "au": "a002eb57da"}, {"s": "Jacques a dit : mets tes mains devant tes yeux !", "emo": "🙈", "en": "Simon says: put your hands in front of your eyes! (les yeux = eyes)", "au": "153c7ceb77"}, {"s": "Jacques a dit : mets tes mains derrière ton dos !", "emo": "🤸‍♀️", "en": "Simon says: put your hands behind your back! (le dos = back)", "au": "4f6c91500b"}, {"s": "Jacques a dit : cache-toi sous la table !", "emo": "🫣", "en": "Simon says: hide under the table!", "au": "b8fc5d81f7"}, {"s": "Jacques a dit : mets un stylo sur ta tête !", "emo": "🖊️", "en": "Simon says: put a pen on your head!", "au": "321e2d3e37"}], "CACHE": [{"obj": "table", "who": "⚽", "pos": "sous", "o": ["sur", "sous"], "s": "Le ballon est sous la table.", "en": "The ball is under the table.", "au": "346e6db703"}, {"obj": "boite", "who": "⚽", "pos": "dans", "o": ["dans", "devant"], "s": "Le ballon est dans la boîte.", "en": "The ball is in the box.", "au": "cfaf72aadc"}, {"obj": "maison", "who": "⚽", "pos": "derriere", "o": ["devant", "derriere"], "s": "Le ballon est derrière la maison.", "en": "The ball is behind the house.", "au": "4a67cab2f5"}, {"obj": "table", "who": "🖊️", "pos": "sur", "o": ["sous", "sur"], "s": "Le stylo est sur la table.", "en": "The pen is on the table.", "au": "7824218ddb"}, {"obj": "chaises", "who": "🧸", "pos": "entre", "o": ["entre", "sur"], "s": "L'ours est entre les chaises.", "en": "The teddy bear is between the chairs.", "au": "94ff973cf2"}, {"obj": "boite", "who": "🖊️", "pos": "devant", "o": ["dans", "devant"], "s": "Le stylo est devant la boîte.", "en": "The pen is in front of the box.", "au": "ed0988e279"}], "ROBOT": [{"s": "Je suis à la mer.", "ok": "Je ne suis pas à la mer.", "ko": "Je suis ne pas à la mer.", "en": "I am not at the seaside.", "p": ["Je", "ne", "suis", "pas", "à la mer."], "rau": "8245911e3d", "au": "c7f2d9718c"}, {"s": "Le chat est sur le lit.", "ok": "Le chat n'est pas sur le lit.", "ko": "Le chat ne est pas sur le lit.", "en": "The cat is not on the bed.", "p": ["Le chat", "n'", "est", "pas", "sur le lit."], "rau": "d7286154e7", "au": "d7aeace207"}, {"s": "Nous sommes en ville.", "ok": "Nous ne sommes pas en ville.", "ko": "Nous sommes pas ne en ville.", "en": "We are not in town.", "p": ["Nous", "ne", "sommes", "pas", "en ville."], "rau": "ccf5e2153b", "au": "63d9ad8a89"}, {"s": "Tu es à la maison.", "ok": "Tu n'es pas à la maison.", "ko": "Tu ne es pas à la maison.", "en": "You are not at home.", "p": ["Tu", "n'", "es", "pas", "à la maison."], "rau": "6a0d18fafe", "au": "5228635d3d"}, {"s": "Les stylos sont dans la boîte.", "ok": "Les stylos ne sont pas dans la boîte.", "ko": "Les stylos ne pas sont dans la boîte.", "en": "The pens are not in the box.", "p": ["Les stylos", "ne", "sont", "pas", "dans la boîte."], "rau": "d7db58966e", "au": "75fc777538"}], "ROUE": [{"who": "👧", "icon": "🏖️", "hint": "elle · la mer", "fr": "Elle est à la mer.", "en": "She is at the seaside.", "au": "85f83824db"}, {"who": "👦", "icon": "🏔️", "hint": "il · la montagne", "fr": "Il est à la montagne.", "en": "He is in the mountains.", "au": "3c5532c106"}, {"who": "👨‍👩‍👧", "icon": "🏠", "hint": "nous · la maison", "fr": "Nous sommes à la maison.", "en": "We are at home.", "au": "c8c2da2615"}, {"who": "🐈", "icon": "📦", "hint": "le chat · dans", "fr": "Le chat est dans la boîte.", "en": "The cat is in the box.", "au": "714035c981"}, {"who": "🖊️", "icon": "⬆️", "hint": "le stylo · sur la table", "fr": "Le stylo est sur la table.", "en": "The pen is on the table.", "au": "7824218ddb"}, {"who": "🙋‍♀️", "icon": "🏙️", "hint": "je · la ville", "fr": "Je suis en ville.", "en": "I am in town.", "au": "c0fb362b20"}], "PHRASES": [{"icon": "🖊️", "en": "The pen is on the table.", "fr": "Le stylo est sur la table.", "au": "7824218ddb"}, {"icon": "🏖️", "en": "We are at the seaside.", "fr": "Nous sommes à la mer.", "au": "18c4f581ec"}, {"icon": "🐈", "en": "The cat is under the chair.", "fr": "Le chat est sous la chaise.", "au": "062bb87c33"}, {"icon": "🏠", "en": "I am at home.", "fr": "Je suis à la maison.", "au": "af82e7291f"}, {"icon": "🏙️", "en": "My dad is in town.", "fr": "Mon papa est en ville.", "au": "9f1598d867"}, {"icon": "⚽", "en": "The ball is in the box.", "fr": "Le ballon est dans la boîte.", "au": "cfaf72aadc"}, {"icon": "🐄", "en": "Grandma is in the countryside.", "fr": "Mamie est à la campagne.", "au": "248c04fe38"}, {"icon": "🏔️", "en": "Where are you? I am in the mountains.", "fr": "Où es-tu ? Je suis à la montagne.", "au": "5a009164ce"}], "INS": {"bulles": ["Evelyn, lis la phrase et touche la bonne bulle.", "Evelyn, read the sentence and tap the right bubble.", "1c35e61c4d"], "chat": ["Evelyn, regarde le chat. Où est le chat ? Touche le bon mot.", "Evelyn, look at the cat. Where is the cat? Tap the right word.", "c56cd67272"], "valise": ["Evelyn, touche la valise : on part en voyage ! Puis choisis la bonne phrase.", "Evelyn, tap the suitcase: we're going on a trip! Then choose the right sentence.", "3d9d623a7c"], "ecoute": ["Evelyn, écoute et touche la bonne photo.", "Evelyn, listen and tap the right photo.", "eb03e26301"], "pause": ["Evelyn, lève-toi ! Écoute Jacques et fais comme lui.", "Evelyn, stand up! Listen to Jacques and do as he says.", "77c18779d4"], "cache": ["Evelyn, écoute. Où est le ballon ? Touche la bonne image.", "Evelyn, listen. Where is the ball? Tap the right picture.", "de30828df8"], "robot": ["Evelyn, le robot dit toujours non. Choisis sa phrase.", "Evelyn, the robot always says no. Choose its sentence.", "25071007c5"], "roue": ["Evelyn, fais tourner la roue et dis la phrase. Puis écoute.", "Evelyn, spin the wheel and say the sentence. Then listen.", "bc885b756d"], "phrases": ["Evelyn, lis la phrase en anglais et dis-la en français. Puis écoute.", "Evelyn, read the sentence in English and say it in French. Then listen.", "30c17fa9b2"]}};
+const KEY = "evelyn-lecon2-v1";
+let S; try { S = JSON.parse(localStorage.getItem(KEY)); } catch(e) { S = null; }
+if (!S) S = {res:{}, idx:{b:0,c:0,v:0,e:0,h:0,r:0,j:0,w:0,p:0}, rolled:{}, said:{}, screen:"rappel"};
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+let cur = null;
+function play(k){ if(!k) return; try { if (cur) cur.pause(); cur = new Audio("audio/"+k+".mp3"); cur.play().catch(()=>{}); } catch(e){} }
+let actx=null;
+function chime(good){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+  (good?[659,880,1175,1568]:[330,262]).forEach((f,i)=>{ const o=actx.createOscillator(),g=actx.createGain(); o.type=good?"sine":"triangle"; o.frequency.value=f; o.connect(g); g.connect(actx.destination);
+  const t=actx.currentTime+i*(good?.08:.14); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(good?.12:.07,t+.02); g.gain.exponentialRampToValueAtTime(.0001,t+.35); o.start(t); o.stop(t+.4); }); }catch(e){} }
+function whoosh(){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); const o=actx.createOscillator(),g=actx.createGain(); o.type="sine";
+  const t=actx.currentTime; o.frequency.setValueAtTime(300,t); o.frequency.exponentialRampToValueAtTime(1200,t+.5); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.08,t+.1); g.gain.exponentialRampToValueAtTime(.0001,t+.55);
+  o.connect(g); g.connect(actx.destination); o.start(t); o.stop(t+.6);}catch(e){} }
+function stars(el){ const r=el.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2; const sym=["⭐","✨","🌟","💖","⭐","✨","🌈","⭐","✨","🌟"];
+  sym.forEach((s,i)=>{ const e=document.createElement("span"); e.className="star"; e.textContent=s; const a=Math.PI*2*i/sym.length, d=70+Math.random()*60;
+  e.style.left=cx+"px"; e.style.top=cy+"px"; e.style.setProperty("--dx",Math.cos(a)*d+"px"); e.style.setProperty("--dy",Math.sin(a)*d-20+"px"); e.style.animationDelay=(i*25)+"ms"; document.body.appendChild(e); setTimeout(()=>e.remove(),1200); });
+  const sc=document.getElementById("score"); sc.classList.add("bump"); setTimeout(()=>sc.classList.remove("bump"),250); }
+
+/* ---------- scène : objet + petit personnage ---------- */
+function scene(obj,pos,who,small){
+  const W = who || "🐈";
+  let o="";
+  if(obj==="table") o=`<div class="tbl"><i class="tp"></i><i class="lg l1"></i><i class="lg l2"></i></div>`;
+  else if(obj==="boite") o=`<div class="ob box"><i class="flap f1"></i><i class="flap f2"></i></div>`;
+  else if(obj==="maison") o=`<div class="ob house">🏠</div>`;
+  else if(obj==="chaises") o=`<div class="ob ch1">🪑</div><div class="ob ch2">🪑</div>`;
+  else if(obj==="lit") o=`<div class="ob bed">🛏️</div>`;
+  return `<div class="stage ${small?"sm":""} o-${obj} p-${pos}">${o}<div class="pet">${W}</div></div>`;
+}
+
+const SCREENS = [
+ {id:"rappel", ic:"📖", t:"Rappel", en:"Reminder"},
+ {id:"bulles", ic:"🫧", t:"Les bulles", en:"Bubbles", n:D.BULLES.length, p:"b"},
+ {id:"chat", ic:"🐈", t:"Où est le chat ?", en:"Where is the cat?", n:D.CHAT.length, p:"c"},
+ {id:"valise", ic:"🧳", t:"La valise magique", en:"The magic suitcase", n:D.VALISE.length, p:"v"},
+ {id:"ecoute", ic:"👂", t:"J'écoute", en:"I listen", n:D.ECOUTE.length, p:"e"},
+ {id:"pause", ic:"🌙", t:"Pause", en:"Move!"},
+ {id:"cache", ic:"⚽", t:"Où est le ballon ?", en:"Where is the ball?", n:D.CACHE.length, p:"h"},
+ {id:"robot", ic:"🤖", t:"Le robot", en:"The robot", n:D.ROBOT.length, p:"r"},
+ {id:"roue", ic:"🎡", t:"La roue", en:"The wheel"},
+ {id:"phrases", ic:"💬", t:"Mes phrases", en:"My sentences"},
+ {id:"revoir", ic:"🔁", t:"À revoir", en:"To review"},
+];
+const TOTAL = SCREENS.reduce((a,s)=>a+(s.n||0),0);
+document.getElementById("tot").textContent = TOTAL;
+document.getElementById("nav").innerHTML = SCREENS.map(s=>`<button data-s="${s.id}">${s.ic} ${s.t}<small>${s.en}</small></button>`).join("");
+document.getElementById("screens").innerHTML = SCREENS.map(s=>`<section class="screen" id="sc-${s.id}"></section>`).join("");
+const SC = id => SCREENS.find(s=>s.id===id);
+function instr(k){ return `<div class="instr"><button class="play" data-a="${D.INS[k][2]}">🔊</button><div>${esc(D.INS[k][0])}<div class="en">${esc(D.INS[k][1])}</div></div></div>`; }
+function head(s){ return `<div class="shead"><span class="ic">${s.ic}</span><div><h2>${s.t}</h2><div class="en">${s.en}</div></div></div>`; }
+function dots(p,n,i){ let h='<div class="dots">'; for(let k=0;k<n;k++){ const r=S.res[p+k]; h+=`<i class="${r?(r.ok?"ok":"ko"):""} ${k===i?"cur":""}"></i>`; } return h+"</div>"; }
+function show(id){ S.screen=id; save(); document.querySelectorAll(".screen").forEach(e=>{ const on=e.id==="sc-"+id; e.classList.toggle("on", on); if(!on) e.innerHTML=""; }); document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on", b.dataset.s===id)); RENDER[id](); if(window.__ready) document.getElementById("nav").scrollIntoView({behavior:"smooth"}); }
+function mark(p, i, ok, el){ S.res[p+i]={ok}; save(); if(ok){ chime(true); stars(el); } else chime(false); refresh(); }
+function refresh(){ let n=0; Object.values(S.res).forEach(r=>{ if(r.ok) n++; }); document.getElementById("sc").textContent=n;
+  SCREENS.forEach(s=>{ if(!s.p) return; let all=true; for(let k=0;k<s.n;k++) if(!S.res[s.p+k]) all=false; const b=document.querySelector(`nav button[data-s="${s.id}"]`); b.classList.toggle("done", all); }); }
+function nextBtn(p, n){ const i=S.idx[p]; return i < n-1 ? `<button class="next" id="nx">Suivant ▶ <span style="font-size:.7em">Next</span></button>` : `<button class="next" id="nx">Jeu suivant ▶ <span style="font-size:.7em">Next game</span></button>`; }
+function bindNext(p, n, scr, nextScr){ const b=document.getElementById("nx"); if(!b) return; if(S.res[p+S.idx[p]]) b.classList.add("show");
+  b.onclick=()=>{ if(S.idx[p]<n-1){ S.idx[p]++; save(); RENDER[scr](); } else show(nextScr); }; }
+function choiceGame(el, p, i, it, after){ // boutons .ch : it.ok / it.ko
+  el.querySelectorAll(".ch").forEach(b=>b.onclick=()=>{ if(S.res[p+i]) return; const ok=b.dataset.o===it.ok;
+    el.querySelectorAll(".ch").forEach(x=>{ x.disabled=true; if(x.dataset.o===it.ok) x.classList.add("good"); }); if(!ok) b.classList.add("bad");
+    const tr=document.getElementById("tr"); if(tr) tr.textContent=it.en; mark(p,i,ok,b); if(after) after(ok); setTimeout(()=>play(it.au),300); document.getElementById("nx").classList.add("show"); }); }
+const RENDER = {};
+
+// ---------- Rappel
+RENDER.rappel = () => {
+  let h = `<div class="card">${head(SC("rappel"))}<p style="margin:0 0 14px">Evelyn, écoute la règle, puis joue ! <span class="en">· Evelyn, listen to the rule, then play!</span></p>`;
+  D.RULES.forEach(r=>{
+    h += `<div class="rule" id="${r.id}" style="--c:${r.c}"><h3>${esc(r.t)} <span class="en">· ${esc(r.en)}</span></h3>`;
+    if(r.places) h += `<div class="places">${r.places.map(p=>`<button class="place play2" data-a="${p.au}"><img src="img/${p.img}.jpg" alt=""><b>${esc(p.fr)}</b><span class="en">${esc(p.en)}</span></button>`).join("")}</div>`;
+    if(r.preps) h += `<div class="preps">${r.preps.map(p=>`<button class="prep play2" data-a="${p.au}">${scene(p.obj,p.pos,null,true)}<b>${esc(p.w)}</b><span class="en">${esc(p.wen)}</span></button>`).join("")}</div>`;
+    h += (r.lines||[]).map(l=>`<div class="rl"><button class="play" data-a="${l[2]}">🔊</button><div>${esc(l[0])}<span class="en">${esc(l[1])}</span></div></div>`).join("");
+    h += `</div>`;
+  });
+  h += `<button class="next show" onclick="show('bulles')">On joue ! ▶ <span style="font-size:.7em">Let's play!</span></button></div>`;
+  document.getElementById("sc-rappel").innerHTML = h; };
+
+// ---------- Bulles
+RENDER.bulles = () => { const i=S.idx.b, it=D.BULLES[i], r=S.res["b"+i]; const colors=["#9FD3FF","#FFC2D6","#C9F0C6"];
+  const pos=[[8,90],[38,30],[68,100]];
+  let h=`<div class="card">${head(SC("bulles"))}${instr("bulles")}${dots("b",D.BULLES.length,i)}
+  <div class="sent">${it.pic?`<span class="pic-e">${it.pic}</span> `:""}${esc(it.s).replace("___",`<span class="gap" id="gp">${r? esc(it.a):"…"}</span>`)}</div><div class="tr en" id="tr">${r?esc(it.en):""}</div>
+  <div class="sky"><span class="cloud" style="top:10px">☁️</span><span class="cloud" style="top:150px;animation-delay:-11s;font-size:44px">☁️</span>`;
+  it.o.forEach((o,k)=>{ h+=`<button class="bub ${r&&o===it.a?"glow":""} ${r&&!r.ok&&o===r.c?"bad":""}" data-o="${esc(o)}" style="left:${pos[k][0]}%;top:${pos[k][1]}px;--bc:${colors[k]};--d:${3+k*.7}s;animation-delay:-${k}s" ${r?"disabled":""}>${esc(o)}</button>`; });
+  h+=`</div><div class="fb ${r?(r.ok?"ok":"ko"):""}" id="fb">${r?(r.ok?"✓ Oui ! · Yes!":"✗ "+esc(it.full)):""}</div>${nextBtn("b",D.BULLES.length)}</div>`;
+  const el=document.getElementById("sc-bulles"); el.innerHTML=h;
+  el.querySelectorAll(".bub").forEach(b=>b.onclick=()=>{ if(S.res["b"+i]) return; const ok=b.dataset.o===it.a; S.res["b"+i]={ok,c:b.dataset.o};
+    el.querySelectorAll(".bub").forEach(x=>x.disabled=true);
+    if(ok){ b.classList.add("popit"); } else { b.classList.add("bad"); el.querySelector(`.bub[data-o="${it.a}"]`).classList.add("glow"); }
+    document.getElementById("gp").textContent=it.a; document.getElementById("tr").textContent=it.en;
+    const fb=document.getElementById("fb"); fb.className="fb "+(ok?"ok":"ko"); fb.textContent= ok?"✓ Oui ! · Yes!":"✗ "+it.full;
+    mark("b",i,ok,b); setTimeout(()=>play(it.au),350); document.getElementById("nx").classList.add("show"); });
+  bindNext("b",D.BULLES.length,"bulles","chat"); };
+
+// ---------- Où est le chat ?
+RENDER.chat = () => { const i=S.idx.c, it=D.CHAT[i], r=S.res["c"+i];
+  let h=`<div class="card">${head(SC("chat"))}${instr("chat")}${dots("c",D.CHAT.length,i)}
+  <div class="jump" id="jp">${scene(it.obj,it.pos)}</div>
+  <div class="sent">${esc(it.s).replace("___",`<span class="gap" id="gp">${r?esc(it.a):"…"}</span>`)}</div>
+  <div class="choices three">${it.o.map(o=>`<button class="ch big ${r&&o===it.a?"good":""} ${r&&!r.ok&&o===r.c?"bad":""}" data-o="${esc(o)}" ${r?"disabled":""}>${esc(o)}</button>`).join("")}</div>
+  <div class="tr en" id="tr">${r?esc(it.en):""}</div>${nextBtn("c",D.CHAT.length)}</div>`;
+  const el=document.getElementById("sc-chat"); el.innerHTML=h;
+  el.querySelectorAll(".ch").forEach(b=>b.onclick=()=>{ if(S.res["c"+i]) return; const ok=b.dataset.o===it.a; S.res["c"+i]={ok,c:b.dataset.o};
+    el.querySelectorAll(".ch").forEach(x=>{ x.disabled=true; if(x.dataset.o===it.a) x.classList.add("good"); }); if(!ok) b.classList.add("bad");
+    document.getElementById("gp").textContent=it.a; document.getElementById("tr").textContent=it.en;
+    if(ok) document.querySelector("#jp .pet").classList.add("happy");
+    mark("c",i,ok,b); setTimeout(()=>play(it.au),300); document.getElementById("nx").classList.add("show"); });
+  bindNext("c",D.CHAT.length,"chat","valise"); };
+
+// ---------- Valise magique
+RENDER.valise = () => { const i=S.idx.v, it=D.VALISE[i], r=S.res["v"+i], rolled=S.rolled["v"+i]; const opts = i%2 ? [it.ko,it.ok] : [it.ok,it.ko];
+  let h=`<div class="card">${head(SC("valise"))}${instr("valise")}${dots("v",D.VALISE.length,i)}
+  <div class="diebox"><div class="who show trav"><span class="e1">${it.who}</span><span>${esc(it.name)}</span></div>
+  <button class="die suit" id="die" ${rolled?"disabled":""}>🧳</button><div class="en" id="dl">${rolled?"":"Touche la valise ! · Tap the suitcase!"}</div>
+  <div class="dest ${rolled?"show":""}" id="dest"><img src="img/${it.img}.jpg" alt=""><span class="trv">${it.who}</span></div></div>
+  <div class="choices" id="chs" style="${rolled?"":"display:none"}">${opts.map(o=>`<button class="ch ${r&&o===it.ok?"good":""} ${r&&!r.ok&&o===it.ko?"bad":""}" data-o="${esc(o)}" ${r?"disabled":""}>${esc(o)}</button>`).join("")}</div>
+  <div class="tr en" id="tr">${r?esc(it.en):""}</div>${nextBtn("v",D.VALISE.length)}</div>`;
+  const el=document.getElementById("sc-valise"); el.innerHTML=h;
+  document.getElementById("die").onclick=e=>{ const d=e.currentTarget; d.disabled=true; d.classList.add("fly"); whoosh();
+    setTimeout(()=>{ S.rolled["v"+i]=1; save(); document.getElementById("dest").classList.add("show"); document.getElementById("dl").textContent=""; document.getElementById("chs").style.display=""; },900); };
+  choiceGame(el,"v",i,it); bindNext("v",D.VALISE.length,"valise","ecoute"); };
+
+// ---------- J'écoute (photos)
+RENDER.ecoute = () => { const i=S.idx.e, it=D.ECOUTE[i], r=S.res["e"+i]; const opts = i%2 ? [it.ko,it.ok] : [it.ok,it.ko];
+  let h=`<div class="card">${head(SC("ecoute"))}${instr("ecoute")}${dots("e",D.ECOUTE.length,i)}
+  <div class="big" style="text-align:center"><button class="play" data-a="${it.au}">🔊</button></div>
+  <div class="pics">${opts.map(o=>`<button class="pic ${r&&o===it.ok?"good":""} ${r&&!r.ok&&o===it.ko?"bad":""}" data-o="${o}" ${r?"disabled":""}><img src="img/${o}.jpg" alt=""></button>`).join("")}</div>
+  <div class="sent" id="st" style="font-size:30px">${r?esc(it.s):""}</div><div class="tr en" id="tr">${r?esc(it.en):""}</div>${nextBtn("e",D.ECOUTE.length)}</div>`;
+  const el=document.getElementById("sc-ecoute"); el.innerHTML=h;
+  el.querySelectorAll(".pic").forEach(b=>b.onclick=()=>{ if(S.res["e"+i]) return; const ok=b.dataset.o===it.ok;
+    el.querySelectorAll(".pic").forEach(x=>{ x.disabled=true; if(x.dataset.o===it.ok) x.classList.add("good"); }); if(!ok) b.classList.add("bad");
+    document.getElementById("st").textContent=it.s; document.getElementById("tr").textContent=it.en; mark("e",i,ok,b); setTimeout(()=>play(it.au),300); document.getElementById("nx").classList.add("show"); });
+  bindNext("e",D.ECOUTE.length,"ecoute","pause"); };
+
+// ---------- Pause : Jacques a dit
+RENDER.pause = () => { const i=S.idx.j, it=D.JACQUES[i];
+  const el=document.getElementById("sc-pause");
+  el.innerHTML=`<div class="card jac">${head(SC("pause"))}${instr("pause")}
+  <div class="en" style="margin-bottom:8px">« Jacques a dit » = "Simon says". Ne regarde pas l'écran : bouge ! · Don't look at the screen: move!</div>
+  <div class="emo">${it.emo}</div>
+  <div class="big" style="margin:10px 0"><button class="play" data-a="${it.au}">🔊</button></div>
+  <div class="sent" style="font-size:28px">${esc(it.s)}</div><div class="en">${esc(it.en)}</div>
+  <button class="next show" id="nx">${i<D.JACQUES.length-1?"Suivant ▶ <span style='font-size:.7em'>Next</span>":"Jeu suivant ▶ <span style='font-size:.7em'>Next game</span>"}</button></div>`;
+  document.getElementById("nx").onclick=()=>{ if(S.idx.j<D.JACQUES.length-1){ S.idx.j++; save(); RENDER.pause(); setTimeout(()=>play(D.JACQUES[S.idx.j].au),300); } else { S.idx.j=0; save(); show("cache"); } }; };
+
+// ---------- Où est le ballon ? (écoute + 3 petites scènes)
+RENDER.cache = () => { const i=S.idx.h, it=D.CACHE[i], r=S.res["h"+i];
+  let h=`<div class="card">${head(SC("cache"))}${instr("cache")}${dots("h",D.CACHE.length,i)}
+  <div class="big" style="text-align:center"><button class="play" data-a="${it.au}">🔊</button></div>
+  <div class="minis">${it.o.map(p=>`<button class="mini ${r&&p===it.pos?"good":""} ${r&&!r.ok&&p===r.c?"bad":""}" data-o="${p}" ${r?"disabled":""}>${scene(it.obj,p,it.who,true)}</button>`).join("")}</div>
+  <div class="sent" id="st" style="font-size:30px">${r?esc(it.s):""}</div><div class="tr en" id="tr">${r?esc(it.en):""}</div>${nextBtn("h",D.CACHE.length)}</div>`;
+  const el=document.getElementById("sc-cache"); el.innerHTML=h;
+  el.querySelectorAll(".mini").forEach(b=>b.onclick=()=>{ if(S.res["h"+i]) return; const ok=b.dataset.o===it.pos; S.res["h"+i]={ok,c:b.dataset.o};
+    el.querySelectorAll(".mini").forEach(x=>{ x.disabled=true; if(x.dataset.o===it.pos) x.classList.add("good"); }); if(!ok) b.classList.add("bad");
+    document.getElementById("st").textContent=it.s; document.getElementById("tr").textContent=it.en; mark("h",i,ok,b); setTimeout(()=>play(it.au),300); document.getElementById("nx").classList.add("show"); });
+  bindNext("h",D.CACHE.length,"cache","robot"); };
+
+// ---------- Robot
+function sandHTML(p){ return p.map((w,k)=>`<span class="${k===1?"bread bl":k===3?"bread br":""}">${esc(w)}</span>`).join(""); }
+RENDER.robot = () => { const i=S.idx.r, it=D.ROBOT[i], r=S.res["r"+i]; const opts = i%2 ? [it.ko,it.ok] : [it.ok,it.ko];
+  let h=`<div class="card">${head(SC("robot"))}${instr("robot")}${dots("r",D.ROBOT.length,i)}
+  <div class="robot"><span class="r">🤖</span><div class="bubble"><button class="play" data-a="${it.rau}" style="width:44px;height:44px;font-size:20px;vertical-align:middle;margin-right:8px">🔊</button>${esc(it.s)}</div></div>
+  <div style="text-align:center;margin-top:12px">Le robot dit non… <span class="en">· The robot says no…</span></div>
+  <div class="choices">${opts.map(o=>`<button class="ch ${r&&o===it.ok?"good":""} ${r&&!r.ok&&o===it.ko?"bad":""}" data-o="${esc(o)}" ${r?"disabled":""}>🤖 ${esc(o)}</button>`).join("")}</div>
+  <div class="sandw" id="sw">${r?sandHTML(it.p):""}</div><div class="tr en" id="tr">${r?esc(it.en):""}</div>${nextBtn("r",D.ROBOT.length)}</div>`;
+  const el=document.getElementById("sc-robot"); el.innerHTML=h;
+  choiceGame(el,"r",i,it,()=>{ document.getElementById("sw").innerHTML=sandHTML(it.p); });
+  bindNext("r",D.ROBOT.length,"robot","roue"); };
+
+// ---------- Roue
+RENDER.roue = () => { const i=S.idx.w % D.ROUE.length, it=D.ROUE[i], n=D.ROUE.length; const cols=["#FFC2D6","#9FD3FF","#C9F0C6","#FFE29A","#D9CCFF","#FFCFA8"];
+  const grad="conic-gradient("+cols.map((c,k)=>`${c} ${k*360/n}deg ${(k+1)*360/n}deg`).join(",")+")";
+  const spans=D.ROUE.map((r,k)=>{ const a=(k+.5)*360/n-90; return `<span style="transform:rotate(${a}deg) translate(80px) rotate(${-a}deg) translate(-50%,-50%)">${r.icon}</span>`; }).join("");
+  const el=document.getElementById("sc-roue");
+  el.innerHTML=`<div class="card">${head(SC("roue"))}${instr("roue")}
+  <div class="wheelw"><div class="pointer">🔻</div><div class="wheel" id="wh" style="background:${grad}">${spans}</div></div>
+  <button class="spin" id="spin">Tourne ! <span style="font-size:.7em">Spin!</span></button>
+  <div class="rcard" id="rc"><div class="big2">${it.who} ${it.icon}</div><div><b>${esc(it.hint)}</b></div>
+   <div style="margin-top:6px">Dis la phrase ! <span class="en">· Say the sentence!</span></div>
+   <div style="margin-top:10px"><button class="play" id="lis" data-a="${it.au}">🔊</button></div>
+   <div class="ans" id="ans">${esc(it.fr)}<div class="en">${esc(it.en)}</div></div></div>
+  <button class="next" id="nx">${(S.idx.w+1)<n?"Encore ! ▶ <span style='font-size:.7em'>Again!</span>":"Mes phrases ▶ <span style='font-size:.7em'>My sentences</span>"}</button></div>`;
+  const wh=document.getElementById("wh");
+  document.getElementById("spin").onclick=e=>{ e.currentTarget.disabled=true; const target=360*5 + (360 - (i+.5)*360/n); wh.style.transform=`rotate(${target}deg)`; chime(true);
+    setTimeout(()=>{ document.getElementById("rc").classList.add("show"); },2700); };
+  document.getElementById("lis").addEventListener("click",()=>{ document.getElementById("ans").classList.add("show"); S.said["w"+i]=1; save(); stars(document.getElementById("lis")); document.getElementById("nx").classList.add("show"); });
+  document.getElementById("nx").onclick=()=>{ if(S.idx.w+1<n){ S.idx.w++; save(); RENDER.roue(); } else { S.idx.w=0; save(); show("phrases"); } }; };
+
+// ---------- Mes phrases (oral)
+RENDER.phrases = () => { const i=S.idx.p, it=D.PHRASES[i], n=D.PHRASES.length, said=S.said["p"+i];
+  const el=document.getElementById("sc-phrases");
+  el.innerHTML=`<div class="card">${head(SC("phrases"))}${instr("phrases")}
+  <div class="dots">${D.PHRASES.map((x,k)=>`<i class="${S.said["p"+k]?"ok":""} ${k===i?"cur":""}"></i>`).join("")}</div>
+  <div class="mum"><div class="mic">${it.icon}</div><div class="en2">${esc(it.en)}</div></div>
+  <div style="text-align:center;margin:8px 0">Dis-la en français ! <span class="en">· Say it in French!</span></div>
+  <div class="big" style="text-align:center"><button class="play" id="lis" data-a="${it.au}">🔊</button></div>
+  <div class="ans ${said?"show":""}" id="ans" style="text-align:center">${esc(it.fr)}</div>
+  <button class="next ${said?"show":""}" id="nx">${i<n-1?"Suivant ▶ <span style='font-size:.7em'>Next</span>":"À revoir ▶ <span style='font-size:.7em'>To review</span>"}</button></div>`;
+  document.getElementById("lis").addEventListener("click",()=>{ document.getElementById("ans").classList.add("show"); if(!S.said["p"+i]) stars(document.getElementById("lis")); S.said["p"+i]=1; save(); document.getElementById("nx").classList.add("show"); });
+  document.getElementById("nx").onclick=()=>{ if(S.idx.p<n-1){ S.idx.p++; save(); RENDER.phrases(); } else show("revoir"); }; };
+
+// ---------- À revoir
+RENDER.revoir = () => { const W=[]; const add=(p,arr,f)=>arr.forEach((it,k)=>{ const r=S.res[p+k]; if(r && !r.ok) W.push(f(it)); });
+  add("b",D.BULLES,it=>({q:it.s,a:it.full,r:it.r})); add("c",D.CHAT,it=>({q:"🐈 "+it.s,a:it.full,r:"r-prep"}));
+  add("v",D.VALISE,it=>({q:it.who+" "+it.name,a:it.ok,r:it.r})); add("e",D.ECOUTE,it=>({q:"🔊",a:it.s,r:it.r}));
+  add("h",D.CACHE,it=>({q:"🔊",a:it.s,r:"r-prep"})); add("r",D.ROBOT,it=>({q:it.s,a:it.ok,r:"r-sandwich"}));
+  const names={}; D.RULES.forEach(r=>names[r.id]=r.t);
+  const answered=Object.keys(S.res).length;
+  document.getElementById("sc-revoir").innerHTML=`<div class="card">${head(SC("revoir"))}
+  <p style="margin:0 0 10px">Evelyn, voici les phrases à revoir. Touche pour relire la règle. <span class="en">· Evelyn, here are the sentences to review. Tap to read the rule again.</span></p>
+  ${W.length? W.map(w=>`<div class="rv"><div>${esc(w.q)}</div><div class="a">→ ${esc(w.a)}</div><button data-rule="${w.r}">↑ ${esc(names[w.r])}</button></div>`).join("") : `<p class="en">${answered? "Rien à revoir ! Bravo ! · Nothing to review! Well done!" : "Joue d'abord aux jeux. · Play the games first."}</p>`}
+  <button class="reset" id="rs">↺ Recommencer · Start again</button></div>`;
+  document.querySelectorAll("#sc-revoir [data-rule]").forEach(b=>b.onclick=()=>goRule(b.dataset.rule));
+  document.getElementById("rs").onclick=e=>{ const b=e.currentTarget; if(b.dataset.sure){ localStorage.removeItem(KEY); location.reload(); } else { b.dataset.sure=1; b.textContent="Sûre ? Touche encore · Sure? Tap again"; } }; };
+function goRule(id){ show("rappel"); setTimeout(()=>{ const e=document.getElementById(id); if(!e) return; e.scrollIntoView({behavior:"smooth",block:"center"}); e.classList.remove("flash"); void e.offsetWidth; e.classList.add("flash"); },150); }
+// ---------- events
+document.addEventListener("click",e=>{ const p=e.target.closest(".play, .play2"); if(p && p.dataset.a) play(p.dataset.a); const n=e.target.closest("nav button"); if(n) show(n.dataset.s); });
+refresh(); show(S.screen || "rappel"); window.__ready=1;
+
+</script>
+</body>
+</html>
