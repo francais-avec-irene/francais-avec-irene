@@ -100,7 +100,7 @@ footer{text-align:center;color:var(--muted);font-size:13px;margin-top:26px}
 @media(max-width:600px){.hero{height:220px}.hero h1{font-size:22px}.opts,.fb,.res{margin-left:0}.art td.aw{width:36%}}
 </style></head><body>
 <div id="top"><div id="brand">Le français avec Irène</div><div id="tr"><button id="itall">IT</button><div id="score"><span class="s">★</span> <span id="sc">0</span> / 12</div></div></div>
-<main>
+<div class="fai-top" style="text-align:center;padding:16px 0 4px;background:transparent;position:relative;z-index:1"><img src="../marque/logo-irene.png" alt="Le français avec Irène" style="width:96px;height:96px;display:inline-block;vertical-align:middle"></div><script>(function(){var t=document.currentScript.previousElementSibling;function fix(){t.style.marginTop="0px";var r=t.querySelector("img").getBoundingClientRect(),y=window.scrollY,need=0;document.querySelectorAll("body *").forEach(function(e){if(e===t||t.contains(e))return;var p=getComputedStyle(e).position;if(p!=="fixed")return;var b=e.getBoundingClientRect();if(!b.width||!b.height||b.top>200)return;if(b.left<r.right&&b.right>r.left&&b.bottom+y>r.top+y-4)need=Math.max(need,b.bottom-r.top+10);});if(y===0&&need>0)t.style.marginTop=need+"px";}if(document.readyState==="complete")fix();else window.addEventListener("load",fix);setTimeout(fix,600);})();</script><main>
 <div class="hero"><img src="img/hero.jpg" alt=""><div class="ht"><div class="tag">MARIO · 16 novembre 2026</div><br><h1>Vocabulaire, expressions et grammaire<span>Le rhume, le tableau, la perte, la démocratie, entraîner, la montée</span><span class="hit">Il raffreddore, il quadro, la perdita, la democrazia, comportare, l'innalzamento</span></h1></div></div>
 <div class="cap0">Le pont Alexandre III et la tour Eiffel, le soir · Paris</div>
 
@@ -172,4 +172,4 @@ $("#copyb").onclick=function(){var i=$("#shareurl");i.select();try{navigator.cli
 var rb=$("#resetb");rb.onclick=function(){if(!rb.classList.contains("confirm")){rb.classList.add("confirm");rb.textContent="Toucher encore pour tout effacer";setTimeout(function(){rb.classList.remove("confirm");rb.textContent="Tout recommencer"},4000);return}try{localStorage.removeItem(KEY)}catch(e){}location.reload()};
 score();revoir();
 })();
-</script></body></html>
+</script><div class="fai-sign" style="text-align:center;padding:26px 16px 30px;clear:both"><img src="../marque/signature-irene.png" alt="Le français avec Irène · Cours de français en ligne" style="width:100%;max-width:300px;height:auto;display:inline-block"></div></body></html>

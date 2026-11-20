@@ -155,7 +155,7 @@ footer{text-align:center;color:#8f86c9;font-size:13px;margin-top:30px}
 @media(max-width:600px){h1{font-size:30px}.hero .tops .top{width:62px;height:62px}.lvt{font-size:25px}.opts,.fb,.res,.tbuild,.tpool,.tact{margin-left:0}#brand,.xpl{display:none}}
 </style></head><body>
 <div id="top"><div id="xp"><div id="xpb"></div></div><div class="xpl" id="xpl">0 XP</div><button id="enall">EN</button><button id="snd">🔔</button><div id="score">⭐ <span id="sc">0</span> / 22</div></div>
-<main>
+<div class="fai-top" style="text-align:center;padding:16px 0 4px;background:transparent;position:relative;z-index:1"><img src="../marque/logo-irene.png" alt="Le français avec Irène" style="width:96px;height:96px;display:inline-block;vertical-align:middle"></div><script>(function(){var t=document.currentScript.previousElementSibling;function fix(){t.style.marginTop="0px";var r=t.querySelector("img").getBoundingClientRect(),y=window.scrollY,need=0;document.querySelectorAll("body *").forEach(function(e){if(e===t||t.contains(e))return;var p=getComputedStyle(e).position;if(p!=="fixed")return;var b=e.getBoundingClientRect();if(!b.width||!b.height||b.top>200)return;if(b.left<r.right&&b.right>r.left&&b.bottom+y>r.top+y-4)need=Math.max(need,b.bottom-r.top+10);});if(y===0&&need>0)t.style.marginTop=need+"px";}if(document.readyState==="complete")fix();else window.addEventListener("load",fix);setTimeout(fix,600);})();</script><main>
 <div class="hero" id="hero"><img src="img/hero.jpg" alt="" onerror="this.remove()"><div class="tops"><svg class="top h1" viewBox="0 0 100 100"><defs><radialGradient id="gh1" cx="50%" cy="45%"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#ff8a00"/><stop offset="1" stop-color="#ff3d00"/></radialGradient></defs>
 <g class="spin"><circle cx="50" cy="50" r="44" fill="url(#gh1)" stroke="#111" stroke-width="3"/>
 <path d="M50 6 L62 38 L94 50 L62 62 L50 94 L38 62 L6 50 L38 38Z" fill="#ff3d00" opacity=".85" stroke="#111" stroke-width="2"/>
@@ -321,4 +321,4 @@ $("#copyb").onclick=function(){var i=$("#shareurl");i.select();try{navigator.cli
 var rb=$("#resetb");rb.onclick=function(){if(!rb.classList.contains("confirm")){rb.classList.add("confirm");rb.textContent="Touche encore pour tout effacer";setTimeout(function(){rb.classList.remove("confirm");rb.textContent="Tout recommencer"},4000);return}try{localStorage.removeItem(KEY)}catch(e){}location.reload()};
 score();revoir();badges(false);
 })();
-</script></body></html>
+</script><div class="fai-sign" style="text-align:center;padding:26px 16px 30px;clear:both"><img src="../marque/signature-irene.png" alt="Le français avec Irène · Cours de français en ligne" style="width:100%;max-width:300px;height:auto;display:inline-block"></div></body></html>
