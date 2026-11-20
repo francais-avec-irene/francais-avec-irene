@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Révision DELF B2 · Carys</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#24223a;--muted:#6f6c86;--line:#e7e4f2;--bg:#fbf8f4;--ok:#1f9d6b;--okbg:#e6f7ef;--ko:#d6455b;--kobg:#fdecef;--gold:#f5b62a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font-family:Nunito,system-ui,sans-serif;color:var(--ink);background:var(--bg);font-size:17px;line-height:1.5}
+h1,h2,h3,h4,.pop{font-family:Poppins,system-ui,sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+/* top bar */
+.top{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;min-height:56px}
+.nav{display:flex;gap:6px;overflow-x:auto;flex:1;scrollbar-width:none;padding:6px 0}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;font:600 13px Poppins;color:#fff;padding:6px 11px;border-radius:999px;white-space:nowrap}
+.nav a.rev{background:#2b2840}
+.score{flex:none;display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#ffcf4d,#f59b2a);color:#3a2500;font:800 16px Poppins;padding:7px 14px;border-radius:999px;box-shadow:0 3px 10px rgba(245,155,42,.35)}
+.score small{font-weight:600;font-size:12px;opacity:.8}
+.prog{height:4px;background:var(--line)}.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#23407a,#1d8a6b,#b3264a,#7b3fa0,#c9761b,#0e7c8c);transition:width .4s}
+/* hero */
+.hero{margin:18px auto 0;position:relative;border-radius:22px;overflow:hidden;height:300px;box-shadow:0 10px 30px rgba(40,30,90,.18)}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.hero .card{position:absolute;left:18px;bottom:18px;right:18px;max-width:560px;background:rgba(255,255,255,.94);border-radius:16px;padding:14px 18px}
+.tag{display:inline-block;font:700 11px Poppins;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#b3264a,#c9761b);padding:4px 10px;border-radius:999px}
+.hero h1{margin:8px 0 2px;font-size:30px;line-height:1.15}
+.hero .en{color:var(--muted);font-style:italic}
+.rainbow{height:5px;border-radius:5px;margin:14px 0;background:linear-gradient(90deg,#23407a,#1d8a6b,#b3264a,#7b3fa0,#c9761b,#0e7c8c)}
+.intro{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 20px;margin:6px 0 10px}
+.intro b{color:#6c4ee0}
+.en{color:var(--muted);font-style:italic}
+.intro ul{margin:8px 0 0;padding-left:20px}
+.mapgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;margin:14px 0 4px}
+.mapgrid a{display:block;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-left:6px solid var(--c);border-radius:14px;padding:10px 14px;font-size:14px}
+.mapgrid a b{font-family:Poppins;color:var(--c)}
+/* modules */
+.module{margin-top:44px}
+.mban{position:relative;border-radius:22px;overflow:hidden;height:210px}
+.mban img{width:100%;height:100%;object-fit:cover;display:block}
+.mban .lbl{position:absolute;left:16px;bottom:16px;background:#fff;border-radius:14px;padding:8px 16px 10px;border-left:7px solid var(--c);max-width:80%}
+.mban .lbl small{font:700 11px Poppins;letter-spacing:.14em;text-transform:uppercase;color:var(--c)}
+.mban .lbl h2{margin:0;font-size:24px;line-height:1.2}
+.point{background:#fff;border-radius:20px;margin:22px 0;box-shadow:0 4px 18px rgba(40,30,90,.07);overflow:hidden;border:1px solid var(--line)}
+.phead{background:linear-gradient(120deg,var(--c),var(--c2));color:#fff;padding:14px 20px;display:flex;gap:14px;align-items:center}
+.phead .n{font:800 30px Poppins;opacity:.9;min-width:44px}
+.phead h3{margin:0;font-size:21px;line-height:1.2}
+.phead .en{color:rgba(255,255,255,.9)}
+.pbody{padding:18px 20px 8px}
+.secttl{font:700 12px Poppins;letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin:6px 0 8px}
+.rule{background:color-mix(in srgb,var(--c) 7%,#fff);border:1.5px solid color-mix(in srgb,var(--c) 30%,#fff);border-radius:16px;padding:12px 16px;overflow:hidden}
+.rule .pimg{float:right;width:170px;height:120px;object-fit:cover;border-radius:12px;border:4px solid #fff;box-shadow:0 0 0 2px var(--c);margin:2px 0 8px 14px}
+.rl{margin:0 0 9px}.rl:last-child{margin-bottom:2px}
+.rl .fr b,.ex .fr b,.box b,td b{color:var(--c)}
+.rl .en,.ex .en,.box .en{display:block;font-size:15px}
+.formula{display:inline-block;margin:10px 0 2px;padding:7px 16px;border-radius:999px;border:2px solid var(--c);background:#fff;font:600 15px Poppins;color:var(--c)}
+.formula .en{font:italic 400 13px Nunito;margin-left:6px}
+.tblw{overflow-x:auto;margin:12px 0 4px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:15px;background:#fff;border:1.5px solid color-mix(in srgb,var(--c) 30%,#fff);border-radius:12px;overflow:hidden}
+th{background:color-mix(in srgb,var(--c) 14%,#fff);font:600 13px Poppins;text-align:left;padding:7px 10px;color:var(--ink)}
+td{padding:6px 10px;border-top:1px solid var(--line)}
+td.say{cursor:pointer}td.say:hover{background:color-mix(in srgb,var(--c) 8%,#fff)}
+td.say::after{content:" 🔊";font-size:11px;opacity:.55}
+.box{margin:12px 0 4px;background:#fff;border-left:5px solid var(--c2);border-radius:10px;padding:9px 14px;box-shadow:0 1px 0 var(--line)}
+.box h4{margin:0 0 4px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--c2);filter:brightness(.8)}
+.box p{margin:0 0 6px}
+.exs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 6px}
+.ex{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid var(--line);border-top:4px solid var(--c);border-radius:14px;padding:10px 12px}
+.ex .fr{font-weight:600}
+.snd{flex:none;width:36px;height:36px;border-radius:50%;border:0;background:var(--c);color:#fff;font-size:16px;cursor:pointer;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.snd:active{transform:scale(.92)}
+/* exercises */
+.exo{margin:18px 0 16px;border-radius:16px;border:1.5px solid var(--line);overflow:hidden}
+.exh{padding:10px 16px;background:color-mix(in srgb,var(--c2) 18%,#fff);border-bottom:1.5px solid var(--line)}
+.exh .num{font:800 12px Poppins;letter-spacing:.14em;text-transform:uppercase;color:var(--c)}
+.exh h4{margin:2px 0 4px;font-size:17px}
+.exh .cons{font-weight:700}
+.exh .cons .en{font-weight:400;display:block;font-size:15px}
+.exh .mini{float:right;font:700 13px Poppins;color:var(--c);background:#fff;border-radius:999px;padding:3px 10px}
+.items{padding:6px 14px 10px}
+.item{padding:12px 4px;border-bottom:1px dashed var(--line);position:relative}
+.item:last-child{border-bottom:0}
+.item .q{font-size:17px}
+.item .lead{display:inline-block;margin:4px 0;font-size:14px;color:var(--muted)}
+.gap{display:inline-block;min-width:70px;border-bottom:2.5px solid var(--c);text-align:center;font-weight:700;color:var(--c);padding:0 4px}
+.hint{color:var(--muted);font-style:italic;font-size:15px}
+input.inp,input.tr{font:600 17px Nunito;color:var(--ink);border:2px solid color-mix(in srgb,var(--c) 40%,#fff);border-radius:10px;padding:4px 8px;background:#fff;outline:none}
+input.inp{width:9em;margin:2px 2px}
+input.tr{width:100%;margin-top:6px}
+input:focus{border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 20%,transparent)}
+input.good{border-color:var(--ok);background:var(--okbg)}input.bad{border-color:var(--ko);background:var(--kobg);text-decoration:line-through}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.btn{font:700 14px Poppins;border:0;border-radius:999px;padding:8px 16px;cursor:pointer;background:var(--c);color:#fff}
+.btn.ghost{background:#fff;color:var(--c);border:2px solid color-mix(in srgb,var(--c) 40%,#fff);padding:6px 12px}
+.btn:disabled{opacity:.4;cursor:default}
+.opt{font:600 15px Nunito;border:2px solid color-mix(in srgb,var(--c) 35%,#fff);background:#fff;border-radius:12px;padding:7px 13px;cursor:pointer;color:var(--ink);text-align:left}
+.opt small{display:block;font-style:italic;color:var(--muted);font-weight:400;font-size:12px}
+.opt:hover{border-color:var(--c)}
+.opt.good{border-color:var(--ok);background:var(--okbg);color:#0e5a3c}
+.opt.bad{border-color:var(--ko);background:var(--kobg);color:#8a1d2e;text-decoration:line-through}
+.opt:disabled{cursor:default}
+.fb{margin-top:7px;font-size:15px;border-radius:10px;padding:7px 11px;display:none}
+.fb.ok{display:block;background:var(--okbg);color:#0e5a3c}
+.fb.ko{display:block;background:var(--kobg);color:#7d1b2b}
+.fb .why{display:block;font-size:14px;margin-top:3px}
+.tren{display:block;margin-top:5px;font-size:15px}
+.tren.show{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:7px;min-height:44px;padding:6px;border-radius:12px}
+.zone{border:2px dashed color-mix(in srgb,var(--c) 40%,#fff);background:color-mix(in srgb,var(--c) 5%,#fff);margin-top:6px}
+.chip{font:700 15px Nunito;padding:6px 12px;border-radius:10px;background:#fff;border:2px solid color-mix(in srgb,var(--c2) 60%,#fff);cursor:pointer;color:var(--ink)}
+.zone .chip{background:var(--c);border-color:var(--c);color:#fff}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 14px}
+.match .col{display:flex;flex-direction:column;gap:8px}
+.mi{font:700 15px Nunito;padding:9px 12px;border-radius:12px;border:2px solid color-mix(in srgb,var(--c) 35%,#fff);background:#fff;cursor:pointer;text-align:left;color:var(--ink)}
+.mi.sel{border-color:var(--c);background:color-mix(in srgb,var(--c) 12%,#fff)}
+.mi.done{border-color:var(--ok);background:var(--okbg);color:#0e5a3c;cursor:default}
+.mi.done.late{border-color:#e9a23b;background:#fff5e3;color:#7a4b06}
+.mi.shake{animation:shake .35s;border-color:var(--ko);background:var(--kobg)}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.item .snd{width:32px;height:32px;font-size:14px}
+.item .snd.hid{display:none}
+/* stars */
+.star{position:fixed;z-index:100;pointer-events:none;color:var(--gold);font-size:18px;animation:pop .9s ease-out forwards;text-shadow:0 0 6px rgba(245,182,42,.6)}
+@keyframes pop{0%{transform:translate(0,0) scale(.3);opacity:0}25%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(70deg);opacity:0}}
+/* envoi résultats */
+.send{margin:0 18px 18px;padding:16px;border-radius:16px;background:#f4f1ff;border:1.5px solid #ddd5fb}
+.send h3{margin:0 0 2px;color:#2b2840;font:700 17px Poppins}
+.send p{margin:0 0 10px;font-size:14px;color:#5d5876}
+.send label{display:block;font:700 13px Poppins;color:#2b2840;margin-bottom:4px}
+.send input{width:100%;box-sizing:border-box;font:inherit;padding:10px 12px;border:1.5px solid #ddd5fb;border-radius:12px;margin-bottom:12px;background:#fff}
+.send .btn{width:100%;padding:12px 16px;font-size:15px}
+.send .st{margin:10px 0 0;font-weight:600;font-size:14px}
+.send .st.ok{color:#13704f}.send .st.ko{color:#b3261e}
+/* à revoir */
+#revoir{margin:50px 0 20px;background:#fff;border-radius:22px;border:1px solid var(--line);overflow:hidden}
+#revoir .rh{background:#2b2840;color:#fff;padding:16px 20px}
+#revoir .rh h2{margin:0;font-size:24px}
+#revoir .rh .en{color:#c9c5e6}
+#revlist{padding:10px 18px 16px}
+.rv{border-left:5px solid var(--c);background:#faf9fe;border-radius:10px;padding:9px 13px;margin:10px 0}
+.rv .t{font:700 12px Poppins;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
+.rv .a{color:#0e5a3c;font-weight:700}
+.rv a{display:inline-block;margin-top:5px;font:700 13px Poppins;color:var(--c);text-decoration:none;border:2px solid color-mix(in srgb,var(--c) 40%,#fff);padding:3px 10px;border-radius:999px}
+.empty{color:var(--muted);font-style:italic;padding:10px 0}
+.reset{margin:16px 0 0}
+.foot{text-align:center;color:var(--muted);font:600 13px Poppins;padding:20px 0 90px}
+/* accents */
+#acc{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#2b2840;padding:8px;display:none;justify-content:center;gap:6px;flex-wrap:wrap}
+#acc.on{display:flex}
+#acc button{font:700 17px Nunito;min-width:38px;height:38px;border-radius:9px;border:0;background:#fff;color:#2b2840;cursor:pointer}
+@media (max-width:680px){
+ body{font-size:16px}.exs{grid-template-columns:1fr}.hero{height:260px}.hero h1{font-size:23px}
+ .rule .pimg{float:none;width:100%;height:150px;margin:0 0 10px}
+ .match{grid-template-columns:1fr 1fr}.phead h3{font-size:18px}.mban{height:170px}.mban .lbl h2{font-size:19px}
+}
+
+/* ---- Carys additions ---- */
+.fai-top{text-align:center;padding:16px 0 0}
+.fai-top img{width:96px;height:96px;display:inline-block}
+.fai-sign{text-align:center;padding:26px 16px 30px}
+.fai-sign img{width:100%;max-width:300px;height:auto;display:inline-block}
+.intro b{color:#b3264a}
+.timer{flex:none;display:flex;align-items:center;gap:5px;border:0;cursor:pointer;background:#23407a;color:#fff;font:800 15px Poppins;padding:7px 12px;border-radius:999px;box-shadow:0 3px 10px rgba(35,64,122,.3)}
+.timer.run{background:#1d8a6b}
+.timer.over{background:#b3264a}
+.timer .ti{font-size:14px}
+.mtime{display:inline-block;margin-left:8px;font:700 12px Poppins;color:#fff;background:var(--c);padding:3px 10px;border-radius:999px;vertical-align:middle;letter-spacing:.02em}
+.plan{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 2px}
+.plan span{font:600 13px Poppins;background:#fff;border:1.5px solid var(--line);border-left:5px solid var(--c);border-radius:10px;padding:5px 10px}
+.plan span b{color:var(--c)}
+.tdone{position:fixed;left:50%;top:70px;transform:translateX(-50%);z-index:90;background:#fff;border:2px solid #b3264a;border-radius:16px;padding:14px 18px;max-width:92%;width:440px;box-shadow:0 10px 30px rgba(0,0,0,.18);display:none}
+.tdone.on{display:block}
+.tdone .en{display:block;font-size:14px;margin-top:4px}
+.tdone button{margin-top:10px;font:700 14px Poppins;border:0;border-radius:999px;padding:7px 18px;background:#b3264a;color:#fff;cursor:pointer}
+.nopt .phead{display:none}
+/* sort */
+.sort{padding:12px 14px}
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:46px;padding:8px;border-radius:12px;background:color-mix(in srgb,var(--c) 5%,#fff);border:2px dashed color-mix(in srgb,var(--c) 30%,#fff)}
+.scard{font:700 15px Nunito;padding:7px 12px;border-radius:10px;background:#fff;border:2px solid color-mix(in srgb,var(--c2) 60%,#fff);cursor:pointer;color:var(--ink)}
+.scard.sel{border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,#fff);transform:translateY(-2px)}
+.scard.shake{animation:shake .35s;border-color:var(--ko);background:var(--kobg)}
+.bins{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.bin{border:2px solid var(--c);border-radius:14px;min-height:120px;padding:8px;background:#fff;cursor:pointer}
+.bin h5{margin:0 0 6px;font:800 14px Poppins;color:var(--c);text-transform:uppercase;letter-spacing:.08em}
+.bin h5 small{display:block;font:italic 400 12px Nunito;color:var(--muted);text-transform:none;letter-spacing:0}
+.bin .in{display:flex;flex-wrap:wrap;gap:6px}
+.bin .scard{cursor:default;border-color:var(--ok);background:var(--okbg);color:#0e5a3c;font-size:14px;padding:5px 9px}
+.bin .scard.late{border-color:#e9a23b;background:#fff5e3;color:#7a4b06}
+/* production */
+#prod{margin-top:44px}
+.pcard{background:#fff;border-radius:20px;border:1px solid var(--line);box-shadow:0 4px 18px rgba(40,30,90,.07);overflow:hidden;margin:18px 0}
+.pcard .pbody{padding:16px 20px}
+.sujet{background:#23407a;color:#fff;border-radius:16px;padding:14px 18px}
+.sujet .k{font:700 11px Poppins;letter-spacing:.14em;text-transform:uppercase;color:#f3c66b}
+.sujet p{margin:6px 0 0;font-weight:600}
+.sujet .en{color:#cdd8f0;display:block;font-weight:400}
+.lex{columns:3 180px;column-gap:10px;margin:8px 0}
+.lex div{break-inside:avoid;background:#fff;border:1.5px solid var(--line);border-top:4px solid #c9761b;border-radius:12px;padding:7px 10px;margin:0 0 10px}
+.lex b{display:block;color:#7a4300}
+.ideas{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
+.ideas .col{border-radius:14px;padding:10px 12px}
+.ideas .pour{background:#e8f6f0;border:1.5px solid #9fd8c0}.ideas .contre{background:#fcebef;border:1.5px solid #efb0bf}
+.ideas h5{margin:0 0 6px;font:800 13px Poppins;text-transform:uppercase;letter-spacing:.08em}
+.ideas .pour h5{color:#126b52}.ideas .contre h5{color:#9b1f3e}
+.idea{display:block;width:100%;text-align:left;font:600 15px Nunito;background:#fff;border:1.5px solid transparent;border-radius:10px;padding:7px 10px;margin:0 0 7px;cursor:pointer;color:var(--ink)}
+.idea .en{display:block;font-size:13px}
+.idea.on{border-color:#1d8a6b;box-shadow:0 0 0 2px #1d8a6b33}
+.idea.on::before{content:"✓ ";color:#1d8a6b;font-weight:800}
+.step{border:1.5px solid var(--line);border-left:6px solid var(--c);border-radius:14px;padding:12px 14px;margin:12px 0;background:#fff}
+.step h4{margin:0;font-size:17px}
+.step h4 small{font:600 12px Poppins;color:var(--c);margin-left:6px}
+.step .help{margin:3px 0 8px;font-size:15px}
+.step .help .en{display:block;font-size:14px}
+.starters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.starter{font:600 14px Nunito;border:1.5px dashed var(--c);background:color-mix(in srgb,var(--c) 6%,#fff);color:var(--ink);border-radius:999px;padding:5px 11px;cursor:pointer}
+.starter::before{content:"+ ";color:var(--c);font-weight:800}
+textarea.wr{width:100%;min-height:120px;font:500 17px/1.6 Nunito;color:var(--ink);border:2px solid color-mix(in srgb,var(--c) 35%,#fff);border-radius:12px;padding:10px 12px;resize:vertical;outline:none;background:repeating-linear-gradient(#fff 0 26px,#eef0f6 26px 27px)}
+textarea.wr:focus{border-color:var(--c)}
+.wcount{position:sticky;bottom:10px;z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:#fff;border:2px solid #23407a;border-radius:16px;padding:10px 14px;margin:14px 0;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.wcount .n{font:800 20px Poppins;color:#23407a}
+.wcount .bar{flex:1;min-width:120px;height:8px;border-radius:8px;background:#eee;overflow:hidden}
+.wcount .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#b3264a,#c9761b,#1d8a6b);transition:width .3s}
+.checks{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.ck{font:700 14px Nunito;border:2px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;color:var(--muted)}
+.ck small{font-weight:400;font-style:italic;margin-left:4px}
+.ck.on{border-color:#1d8a6b;background:#e8f6f0;color:#0e5a3c}
+.ck.on::before{content:"✓ "}
+.ck.auto{cursor:default}
+.saved{font-size:13px;color:var(--muted);font-style:italic}
+@media (max-width:680px){.bins{grid-template-columns:1fr 1fr}.ideas{grid-template-columns:1fr}.timer{padding:7px 9px;font-size:14px}.timer .ti{display:none}}
+@media print{.top,#acc,.tdone{display:none!important}}
+
+.pcard p .en{display:block}
+
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><nav class="nav" id="nav"></nav><button class="timer" id="timer" type="button" title="Minuteur · Timer"><span class="ti">⏱</span> <span id="tleft">60:00</span> <span id="tico">▶</span></button><div class="score" title="Bonnes réponses · Correct answers">★ <span id="sc">0</span><small>/ <span id="tot">0</span></small></div></div><div class="prog"><i id="pg"></i></div></div>
+<div class="fai-top"><img src="../marque/logo-irene.png" alt="Le français avec Irène"></div>
+<main class="wrap" id="app"></main>
+<div id="acc"></div>
+<div id="tdone" class="tdone"><b>⏱ L'heure est passée !</b> Termine ta phrase, puis envoie tes résultats à Irène.<span class="en">Time's up! Finish your sentence, then send your results to Irène.</span><button type="button" id="tdclose">OK</button></div>
+<script>
+const D = {"modules": [{"id": "m0", "num": 0, "img": "hero.jpg", "min": 2, "title": "Échauffement", "title_en": "Warm-up", "color": "#23407a", "color2": "#4f7fd1", "points": ["p0"]}, {"id": "m1", "num": 1, "img": "m1.jpg", "min": 8, "title": "Le gérondif", "title_en": "The gerund", "color": "#1d8a6b", "color2": "#5cc29b", "points": ["p1", "p2"]}, {"id": "m2", "num": 2, "img": "m3.jpg", "min": 10, "title": "Le subjonctif", "title_en": "The subjunctive", "color": "#b3264a", "color2": "#e5677f", "points": ["p3", "p4"]}, {"id": "m3", "num": 3, "img": "m4.jpg", "min": 10, "title": "Exprimer une hypothèse", "title_en": "Expressing a hypothesis", "color": "#7b3fa0", "color2": "#b77bd8", "points": ["p5", "p6"]}, {"id": "m4", "num": 4, "img": "m5.jpg", "min": 10, "title": "Les pronoms compléments", "title_en": "Object pronouns", "color": "#c9761b", "color2": "#efb04a", "points": ["p7", "p8", "p9"]}, {"id": "m5", "num": 5, "img": "m2.jpg", "min": 5, "title": "Le défi de Noël", "title_en": "The Christmas challenge", "color": "#0e7c8c", "color2": "#4cc0cf", "points": ["p10"]}], "points": {"p0": {"title": "Trois questions pour commencer", "title_en": "Three questions to start", "exercises": [{"type": "choose", "title": "Tu te souviens ?", "title_en": "Do you remember?", "c": "Carys, choisis la bonne forme. Ne réfléchis pas trop : fais confiance à ton oreille !", "c_en": "Carys, choose the right form. Don't overthink it: trust your ear!", "items": [{"q": "C'est ___ des affiches qu'on apprend le métier.", "opts": ["en dessinant", "dessinant", "à dessiner"], "a": [0], "en": "It's by drawing posters that you learn the job.", "id": "p0e1i1", "full": "C'est en dessinant des affiches qu'on apprend le métier.", "audio": "a98f64140ee0", "ref": "p1"}, {"q": "Il faut que la vitrine ___ prête lundi.", "opts": ["soit", "est", "sera"], "a": [0], "en": "The shop window must be ready on Monday.", "id": "p0e1i2", "full": "Il faut que la vitrine soit prête lundi.", "audio": "a2fdf87cd436", "ref": "p3"}, {"q": "Si j'avais le temps, je ___ au musée d'Orsay ce soir.", "opts": ["passerais", "passerai", "passais"], "a": [0], "en": "If I had time, I would go to the Musée d'Orsay tonight.", "id": "p0e1i3", "full": "Si j'avais le temps, je passerais au musée d'Orsay ce soir.", "audio": "a4714be3c9aa", "ref": "p5"}, {"q": "Le nouveau slogan ? Je ___ ai envoyé ce matin.", "opts": ["le lui", "lui le", "le leur y"], "a": [0], "en": "The new slogan? I sent it to him this morning.", "id": "p0e1i4", "full": "Le nouveau slogan ? Je le lui ai envoyé ce matin.", "audio": "a3eea0024070", "ref": "p8"}], "id": "p0e1"}], "id": "p0"}, "p1": {"title": "Le gérondif : forme et valeurs", "title_en": "The gerund: form and meanings", "img": "m1.jpg", "rule": [["Le gérondif = **en + participe présent**. Le participe présent se forme sur le radical de **nous** au présent + **-ant** : nous prépar-ons → **en préparant**.", "The gerund = **en + present participle**. The present participle is built on the **nous** stem in the present + **-ant**: nous prépar-ons → en préparant."], ["Trois formes irrégulières : être → **en étant** · avoir → **en ayant** · savoir → **en sachant**.", "Three irregular forms: être → en étant · avoir → en ayant · savoir → en sachant."], ["Le gérondif est **invariable** et son sujet est **toujours le même** que celui du verbe principal.", "The gerund never changes and its subject is **always the same** as the subject of the main verb."]], "table": {"head": ["Valeur · Meaning", "Exemple · Example", "= autre tournure · other way to say it"], "rows": [["**Simultanéité** · same time", "Je réponds aux mails **en prenant** mon café.", "pendant que je prends"], ["**Manière, moyen** · manner, means", "C'est **en observant** les passants qu'on trouve des idées.", "grâce à l'observation"], ["**Cause** · cause", "**En oubliant** le brief, l'agence a perdu le client.", "parce qu'elle a oublié"], ["**Condition** · condition", "**En partant** à 7 h, tu éviteras les bouchons.", "si tu pars à 7 h"], ["**Opposition** · contrast", "**Tout en adorant** Noël, elle critique la surconsommation.", "bien qu'elle adore"]]}, "box": {"title": "À retenir · Remember", "lines": [["**Tout en** + gérondif renforce l'idée de **simultanéité** ou marque une **opposition** : c'est une tournure très appréciée à l'écrit au DELF B2.", "**Tout en** + gerund stresses that two things happen **at the same time**, or marks a **contrast**: examiners love it in a DELF B2 essay."]]}, "ex": [["Carys écoute des podcasts **en allant** au bureau.", "Carys listens to podcasts on her way to the office.", "aa840934474b"], ["**En lisant** la presse française, tu enrichiras ton vocabulaire.", "By reading the French press, you'll enrich your vocabulary.", "a96f9d5ee318"], ["**Tout en travaillant** sur la campagne de Noël, elle prépare son examen.", "While working on the Christmas campaign, she is preparing for her exam.", "a757fb1eddef"], ["**En sachant** cela, j'aurais refusé le projet.", "Had I known that, I would have turned down the project.", "ab393c68e4f6"]], "exercises": [{"type": "match", "title": "Le bon participe", "title_en": "The right participle", "c": "Carys, associe chaque infinitif à son participe présent. Touche un verbe, puis sa forme.", "c_en": "Carys, match each infinitive with its present participle. Tap a verb, then its form.", "pairs": [["savoir", "sachant"], ["faire", "faisant"], ["voir", "voyant"], ["finir", "finissant"], ["boire", "buvant"], ["dire", "disant"]], "rorder": [3, 0, 5, 1, 4, 2], "id": "p1e1"}, {"type": "qcm", "title": "Quelle valeur ?", "title_en": "Which meaning?", "c": "Carys, lis chaque phrase et touche la valeur du gérondif.", "c_en": "Carys, read each sentence and tap the meaning of the gerund.", "items": [{"q": "Elle a appris le français **en regardant** des films sans sous-titres.", "opts": ["simultanéité", "manière / moyen", "condition", "opposition"], "a": [1], "en": "She learnt French by watching films without subtitles.", "id": "p1e2i1", "full": "Elle a appris le français en regardant des films sans sous-titres.", "audio": "aec55d9cc751"}, {"q": "**En partant** maintenant, tu attraperas le dernier métro.", "opts": ["cause", "condition", "opposition", "simultanéité"], "a": [1], "en": "If you leave now, you'll catch the last metro.", "id": "p1e2i2", "full": "En partant maintenant, tu attraperas le dernier métro.", "audio": "a494ecd492f6"}, {"q": "Il chantonne **en installant** les décorations de la vitrine.", "opts": ["simultanéité", "cause", "condition", "opposition"], "a": [0], "en": "He hums while putting up the window decorations.", "id": "p1e2i3", "full": "Il chantonne en installant les décorations de la vitrine.", "audio": "ad8134daf306"}, {"q": "**Tout en reconnaissant** son talent, le jury a préféré un autre projet.", "opts": ["manière / moyen", "opposition", "simultanéité", "condition"], "a": [1], "en": "While acknowledging her talent, the jury preferred another project.", "id": "p1e2i4", "full": "Tout en reconnaissant son talent, le jury a préféré un autre projet.", "audio": "a45c802ca345"}, {"q": "**En publiant** la vidéo trop tôt, la marque a gâché la surprise.", "opts": ["condition", "manière / moyen", "cause", "opposition"], "a": [2], "en": "By publishing the video too early, the brand spoiled the surprise.", "id": "p1e2i5", "full": "En publiant la vidéo trop tôt, la marque a gâché la surprise.", "audio": "ad3025fd94b1"}], "id": "p1e2"}, {"type": "order", "title": "Remets la phrase en ordre", "title_en": "Put the sentence back in order", "c": "Carys, touche les mots dans le bon ordre pour construire la phrase.", "c_en": "Carys, tap the words in the right order to build the sentence.", "items": [{"words": ["une", "visitant", "j'ai", "Louvre,", "idée", "En", "eu", "le"], "a": ["En visitant le Louvre, j'ai eu une idée", "j'ai eu une idée En visitant le Louvre,"], "punct": ".", "full": "En visitant le Louvre, j'ai eu une idée.", "en": "While visiting the Louvre, I had an idea.", "id": "p1e3i1", "audio": "a848c8c8776b"}, {"words": ["elle", "Tout", "voyager", "prend", "travaillant", "le", "en", "temps", "de", "beaucoup,"], "a": ["Tout en travaillant beaucoup, elle prend le temps de voyager", "elle prend le temps de voyager Tout en travaillant beaucoup,"], "punct": ".", "full": "Tout en travaillant beaucoup, elle prend le temps de voyager.", "en": "Although she works a lot, she takes the time to travel.", "id": "p1e3i2", "audio": "a3496a43b68f"}], "id": "p1e3"}], "id": "p1"}, "p2": {"title": "Gérondif ou participe présent ?", "title_en": "Gerund or present participle?", "rule": [["Le **gérondif** (avec **en**) se rapporte au **sujet** du verbe : c'est le sujet qui fait les deux actions.", "The **gerund** (with **en**) refers to the **subject** of the verb: the subject does both actions."], ["Le **participe présent** (sans **en**) se rapporte au **nom juste avant**. Il remplace **qui + verbe**, surtout à l'écrit.", "The **present participle** (without **en**) refers to the **noun just before it**. It replaces **qui + verb**, mostly in writing."], ["La forme composée **ayant / étant + participe passé** marque une action **terminée avant** l'autre (souvent avec une idée de cause).", "The compound form **ayant / étant + past participle** marks an action **completed before** the other one (often with a sense of cause)."]], "table": {"head": ["", "Exemple · Example", "Qui fait l'action ? · Who does it?"], "rows": [["Gérondif", "J'ai croisé le directeur **en sortant** de l'ascenseur.", "moi (je sortais) · me"], ["Participe présent", "J'ai croisé le directeur **sortant** de l'ascenseur.", "le directeur (qui sortait) · the director"], ["Forme composée", "**Ayant terminé** la maquette, elle l'a envoyée au client.", "elle, avant d'envoyer · she, before sending"]]}, "ex": [["Les clients **souhaitant** un devis peuvent nous écrire.", "Customers wishing to get a quote can write to us.", "abbf1086c5b1"], ["**Ne connaissant pas** la marque, elle a posé beaucoup de questions.", "Not knowing the brand, she asked a lot of questions.", "a871eaf9c108"], ["**Étant arrivée** en avance, Carys a visité l'exposition.", "Having arrived early, Carys visited the exhibition.", "a3a09b935cea"], ["On progresse **en parlant** avec des francophones.", "You make progress by speaking with French speakers.", "a8f115861899"]], "exercises": [{"type": "qcm", "title": "Qui fait l'action ?", "title_en": "Who does the action?", "c": "Carys, regarde la forme en -ant. Elle se rapporte au sujet ou au nom juste avant ?", "c_en": "Carys, look at the -ant form. Does it refer to the subject or to the noun just before it?", "items": [{"q": "J'ai vu la photographe **en traversant** la place.", "opts": ["le sujet de la phrase", "le nom juste avant"], "a": [0], "en": "I saw the photographer as I was crossing the square.", "id": "p2e1i1", "full": "J'ai vu la photographe en traversant la place.", "audio": "a3d4af369f6a"}, {"q": "J'ai vu la photographe **traversant** la place.", "opts": ["le sujet de la phrase", "le nom juste avant"], "a": [1], "en": "I saw the photographer (who was) crossing the square.", "id": "p2e1i2", "full": "J'ai vu la photographe traversant la place.", "audio": "ac075c0070cf"}, {"q": "Nous cherchons un graphiste **parlant** anglais.", "opts": ["le sujet de la phrase", "le nom juste avant"], "a": [1], "en": "We are looking for a graphic designer who speaks English.", "id": "p2e1i3", "full": "Nous cherchons un graphiste parlant anglais.", "audio": "a69484b7cb8a"}, {"q": "Le client a souri **en découvrant** l'affiche.", "opts": ["le sujet de la phrase", "le nom juste avant"], "a": [0], "en": "The client smiled when he saw the poster.", "id": "p2e1i4", "full": "Le client a souri en découvrant l'affiche.", "audio": "ae25f13b5ea1"}], "id": "p2e1"}, {"type": "choose", "title": "Avec ou sans « en » ?", "title_en": "With or without « en »?", "c": "Carys, choisis la bonne forme pour compléter la phrase.", "c_en": "Carys, choose the right form to complete the sentence.", "items": [{"q": "Les vitrines ___ le plus de monde sont celles des grands magasins.", "opts": ["attirant", "en attirant"], "a": [0], "en": "The windows that attract the most people are those of the department stores.", "id": "p2e2i1", "full": "Les vitrines attirant le plus de monde sont celles des grands magasins.", "audio": "ad21e8b8a403"}, {"q": "Elle a trouvé le slogan ___ sa douche.", "opts": ["en prenant", "prenant"], "a": [0], "en": "She came up with the slogan while having a shower.", "id": "p2e2i2", "full": "Elle a trouvé le slogan en prenant sa douche.", "audio": "a08de507ccef"}, {"q": "___ la présentation, nous sommes allés dîner.", "opts": ["Ayant fini", "En finissant"], "a": [0], "en": "Having finished the presentation, we went out for dinner.", "id": "p2e2i3", "full": "Ayant fini la présentation, nous sommes allés dîner.", "audio": "a7a923f2f6b0"}, {"q": "Les candidats ___ le DELF B2 peuvent étudier en France.", "opts": ["ayant obtenu", "en obtenant"], "a": [0], "en": "Candidates who have passed the DELF B2 can study in France.", "id": "p2e2i4", "full": "Les candidats ayant obtenu le DELF B2 peuvent étudier en France.", "audio": "a91619c90aca"}], "id": "p2e2"}], "id": "p2"}, "p3": {"title": "Subjonctif ou indicatif ?", "title_en": "Subjunctive or indicative?", "img": "m3.jpg", "rule": [["**Subjonctif** : l'action est vue comme une **idée** : volonté, souhait, sentiment, nécessité, possibilité, doute, but, concession.", "**Subjunctive**: the action is seen as an **idea**: will, wish, feeling, necessity, possibility, doubt, purpose, concession."], ["**Indicatif** : l'action est vue comme un **fait** réel ou probable : certitude, opinion affirmative, probabilité, espoir.", "**Indicative**: the action is seen as a real or likely **fact**: certainty, affirmative opinion, probability, hope."], ["**Même sujet** dans les deux parties → on utilise l'**infinitif** : Je veux **partir**. Elle travaille **pour réussir**.", "**Same subject** in both parts → use the **infinitive**: Je veux partir. Elle travaille pour réussir."]], "table": {"head": ["+ subjonctif · subjunctive", "+ indicatif · indicative"], "rows": [["il est **possible** que · il se peut que", "il est **probable** que · il me semble que"], ["je **ne pense pas** que · je doute que", "je **pense** que · je suis sûre que"], ["je **souhaite** que · je veux que", "j'**espère** que"], ["**avant** que · jusqu'à ce que", "**après** que · pendant que"], ["**bien que** · quoique", "**même si** · alors que"]]}, "box": {"title": "Les deux pièges du B2 · Two B2 traps", "lines": [["**Espérer que** + indicatif : J'espère que tu **viendras**.", "**Espérer que** takes the indicative: J'espère que tu viendras."], ["**Après que** + indicatif : Après que tu **auras signé**, nous commencerons.", "**Après que** takes the indicative: Après que tu auras signé, nous commencerons."]]}, "ex": [["Il faut que l'équipe **finisse** le visuel avant vendredi.", "The team has to finish the visual before Friday.", "a7171db5c197"], ["Je ne pense pas que ce slogan **puisse** convaincre les jeunes.", "I don't think this slogan can convince young people.", "a9881d1ae0b1"], ["Il est probable que la campagne **sera** un succès.", "The campaign is likely to be a success.", "a185fdb42798"], ["Bien que le budget **soit** réduit, le projet reste ambitieux.", "Although the budget is smaller, the project remains ambitious.", "af2e9f56e33d"]], "exercises": [{"type": "sort", "title": "Le tri express", "title_en": "Quick sort", "c": "Carys, touche une expression, puis la bonne case : indicatif ou subjonctif ?", "c_en": "Carys, tap an expression, then the right box: indicative or subjunctive?", "bins": ["Indicatif", "Subjonctif"], "cards": [["il faut que", 1], ["j'espère que", 0], ["bien que", 1], ["après que", 0], ["il est probable que", 0], ["je doute que", 1], ["il se peut que", 1], ["je suis sûre que", 0], ["à condition que", 1], ["je ne crois pas que", 1], ["même si", 0], ["il me semble que", 0]], "id": "p3e1"}, {"type": "choose", "title": "La campagne de Noël", "title_en": "The Christmas campaign", "c": "Carys, choisis la bonne forme du verbe.", "c_en": "Carys, choose the right form of the verb.", "items": [{"q": "Le client exige que nous ___ trois propositions.", "opts": ["fassions", "faisons", "ferons"], "a": [0], "en": "The client demands that we make three proposals.", "id": "p3e2i1", "full": "Le client exige que nous fassions trois propositions.", "audio": "afcbf1e54f5d"}, {"q": "Nous espérons que le public ___ séduit.", "opts": ["sera", "soit", "serait"], "a": [0], "en": "We hope the public will be won over.", "id": "p3e2i2", "full": "Nous espérons que le public sera séduit.", "audio": "a55cb1c36743"}, {"q": "Après que vous ___ le contrat, nous lancerons la production.", "opts": ["aurez signé", "ayez signé", "signiez"], "a": [0], "en": "Once you have signed the contract, we will start production.", "id": "p3e2i3", "full": "Après que vous aurez signé le contrat, nous lancerons la production.", "audio": "a4f568fbdde4"}, {"q": "Elle travaille tard pour que tout ___ prêt.", "opts": ["soit", "est", "sera"], "a": [0], "en": "She works late so that everything is ready.", "id": "p3e2i4", "full": "Elle travaille tard pour que tout soit prêt.", "audio": "ac8a60789f88"}, {"q": "Il est probable que la neige ___ les livraisons.", "opts": ["ralentira", "ralentisse", "ait ralenti"], "a": [0], "en": "The snow will probably slow down deliveries.", "id": "p3e2i5", "full": "Il est probable que la neige ralentira les livraisons.", "audio": "a9d30f1c492a"}, {"q": "Je doute qu'ils ___ le temps de tout refaire.", "opts": ["aient", "ont", "auront"], "a": [0], "en": "I doubt they will have time to redo everything.", "id": "p3e2i6", "full": "Je doute qu'ils aient le temps de tout refaire.", "audio": "affc68920a7e"}], "id": "p3e2"}], "id": "p3"}, "p4": {"title": "Les formes à connaître par cœur", "title_en": "The forms to know by heart", "rule": [["**Subjonctif présent** : radical de **ils** au présent + **-e, -es, -e, -ions, -iez, -ent** : ils choisiss-ent → que je **choisisse**.", "**Present subjunctive**: **ils** stem in the present + these endings: ils choisiss-ent → que je choisisse."], ["**Subjonctif passé** : **avoir / être** au subjonctif + participe passé. Il exprime une action **déjà faite** : Je suis ravie que vous **soyez venus**.", "**Past subjunctive**: avoir / être in the subjunctive + past participle. It expresses an action **already done**: Je suis ravie que vous soyez venus."]], "table": {"head": ["Verbe", "que je…", "que nous…"], "rows": [["être", "sois", "soyons"], ["avoir", "aie", "ayons"], ["aller", "aille", "allions"], ["faire", "fasse", "fassions"], ["pouvoir", "puisse", "puissions"], ["savoir", "sache", "sachions"], ["vouloir", "veuille", "voulions"]]}, "ex": [["Je suis ravie que vous **ayez aimé** la vidéo.", "I'm delighted that you liked the video.", "a6a8450aa143"], ["Il faut que tu **saches** répondre en deux minutes.", "You need to know how to answer in two minutes.", "aebc79d7412f"]], "exercises": [{"type": "match", "title": "Les irréguliers", "title_en": "The irregular verbs", "c": "Carys, associe chaque infinitif à sa forme au subjonctif.", "c_en": "Carys, match each infinitive with its subjunctive form.", "pairs": [["faire", "que je fasse"], ["savoir", "que tu saches"], ["aller", "qu'il aille"], ["pouvoir", "que nous puissions"], ["vouloir", "qu'elles veuillent"], ["valoir", "que ça vaille"]], "rorder": [2, 5, 0, 4, 1, 3], "id": "p4e1"}, {"type": "choose", "title": "Présent ou passé ?", "title_en": "Present or past?", "c": "Carys, l'action est-elle déjà faite ? Choisis le subjonctif présent ou le subjonctif passé.", "c_en": "Carys, has the action already happened? Choose the present or the past subjunctive.", "items": [{"q": "Je regrette que tu ___ la soirée de lancement hier.", "opts": ["aies manqué", "manques"], "a": [0], "en": "I'm sorry you missed the launch party yesterday.", "id": "p4e2i1", "full": "Je regrette que tu aies manqué la soirée de lancement hier.", "audio": "abb180a8c14f"}, {"q": "Il faut que nous ___ avant midi.", "opts": ["partions", "soyons partis"], "a": [0], "en": "We have to leave before noon.", "id": "p4e2i2", "full": "Il faut que nous partions avant midi.", "audio": "a2a6bac5ceb8"}, {"q": "Je suis contente que tu ___ hier soir.", "opts": ["sois venue", "viennes"], "a": [0], "en": "I'm glad you came last night.", "id": "p4e2i3", "full": "Je suis contente que tu sois venue hier soir.", "audio": "a1b199836476"}], "id": "p4e2"}], "id": "p4"}, "p5": {"title": "Les phrases avec « si »", "title_en": "Sentences with « si »", "img": "m4.jpg", "rule": [["Après **si** (hypothèse), on n'emploie **jamais** le futur ni le conditionnel.", "After **si** (meaning if), you **never** use the future or the conditional."], ["On peut **mélanger** les temps : une condition dans le passé et une conséquence dans le présent.", "You can **mix** tenses: a condition in the past and a consequence in the present."]], "table": {"head": ["Si + …", "→ …", "Exemple · Example"], "rows": [["présent", "présent / futur / impératif", "S'il neige, nous **reporterons** le tournage."], ["imparfait", "conditionnel présent", "Si j'**avais** plus de temps, je **visiterais** tous les musées."], ["plus-que-parfait", "conditionnel passé", "Si nous **avions lancé** la campagne plus tôt, nous **aurions vendu** davantage."], ["plus-que-parfait", "conditionnel présent", "Si j'**avais accepté** ce poste à Londres, je ne **vivrais** pas à Paris aujourd'hui."]]}, "ex": [["Si le client **valide** aujourd'hui, nous **imprimerons** demain.", "If the client approves today, we'll print tomorrow.", "a7323a43bdf1"], ["Si j'**étais** toi, je **présenterais** les deux versions.", "If I were you, I'd present both versions.", "a30c1481ec50"], ["Si tu m'**avais prévenue**, je **serais venue** plus tôt.", "If you had told me, I would have come earlier.", "abc8c10f8482"]], "exercises": [{"type": "match", "title": "Les bonnes moitiés", "title_en": "The right halves", "c": "Carys, associe le début et la fin de chaque phrase.", "c_en": "Carys, match the beginning and the end of each sentence.", "pairs": [["Si le client valide aujourd'hui,", "nous imprimerons les affiches demain."], ["Si j'étais directrice artistique,", "je changerais toute la palette."], ["Si nous avions écouté Carys,", "nous aurions évité ce flop."], ["Si j'avais appris le français enfant,", "je n'aurais plus d'accent aujourd'hui."], ["Au cas où le train serait en retard,", "préviens l'équipe."], ["Même si la campagne coûtait plus cher,", "elle en vaudrait la peine."]], "rorder": [3, 5, 1, 4, 0, 2], "id": "p5e1"}, {"type": "choose", "title": "Le bon temps après « si »", "title_en": "The right tense after « si »", "c": "Carys, choisis la forme correcte.", "c_en": "Carys, choose the correct form.", "items": [{"q": "Si tu ___ le temps ce week-end, viens voir l'exposition Monet.", "opts": ["as", "aurais", "auras"], "a": [0], "en": "If you have time this weekend, come and see the Monet exhibition.", "id": "p5e2i1", "full": "Si tu as le temps ce week-end, viens voir l'exposition Monet.", "audio": "a6be360ff934"}, {"q": "Si nous ___ ce budget, nous tournerions à Venise.", "opts": ["avions", "aurions", "aurons"], "a": [0], "en": "If we had this budget, we would shoot in Venice.", "id": "p5e2i2", "full": "Si nous avions ce budget, nous tournerions à Venise.", "audio": "a4d5f16edb2e"}, {"q": "Si l'agence avait gagné ce prix, elle ___ plus de clients aujourd'hui.", "opts": ["aurait", "aurait eu", "avait"], "a": [0], "en": "If the agency had won that award, it would have more clients today.", "id": "p5e2i3", "full": "Si l'agence avait gagné ce prix, elle aurait plus de clients aujourd'hui.", "audio": "aebe81210360"}, {"q": "Si j'avais su, je ___ le train de 8 h.", "opts": ["aurais pris", "prendrais", "avais pris"], "a": [0], "en": "If I had known, I would have taken the 8 o'clock train.", "id": "p5e2i4", "full": "Si j'avais su, je aurais pris le train de 8 h.", "audio": "af40337d63cf"}], "id": "p5e2"}], "id": "p5"}, "p6": {"title": "Les autres façons d'exprimer l'hypothèse", "title_en": "Other ways to express a hypothesis", "rule": [["Au DELF B2, varier les tournures montre un **vrai niveau**. Chaque expression demande un mode précis.", "At DELF B2, varying your structures shows a **real level**. Each expression requires a specific mood."]], "table": {"head": ["Expression", "Mode", "Exemple · Example"], "rows": [["**au cas où**, dans le cas où", "conditionnel", "Au cas où le client **appellerait**, dis-lui que je rappelle."], ["**à condition que**, pourvu que, à moins que", "subjonctif", "Nous signerons, à moins que le prix ne **soit** trop élevé."], ["**à condition de**, à moins de", "infinitif", "Tu réussiras à condition de **t'entraîner**."], ["**même si**, sauf si", "indicatif", "Même si la campagne **coûtait** plus cher, elle en vaudrait la peine."], ["**en cas de**, avec, sans", "nom", "**Sans** ton aide, je n'aurais jamais fini."], ["**en** + participe présent", "gérondif", "**En partant** plus tôt, tu aurais vu le défilé."]]}, "ex": [["Au cas où il **pleuvrait**, la soirée aurait lieu à l'intérieur.", "In case it rains, the party will be held indoors.", "abd6794c7cd4"], ["J'irai au marché de Noël, à moins qu'il ne **fasse** trop froid.", "I'll go to the Christmas market, unless it's too cold.", "a6e67746745c"], ["**En cas de** retard, prévenez l'accueil.", "If you are late, let reception know.", "a2fdf4c23f90"]], "exercises": [{"type": "choose", "title": "Le bon mode", "title_en": "The right mood", "c": "Carys, choisis la forme qui va avec l'expression.", "c_en": "Carys, choose the form that goes with the expression.", "items": [{"q": "Au cas où le client ___ des modifications, envoie-moi un message.", "opts": ["demanderait", "demande", "demandait"], "a": [0], "en": "In case the client asks for changes, send me a message.", "id": "p6e1i1", "full": "Au cas où le client demanderait des modifications, envoie-moi un message.", "audio": "a46f9179777e"}, {"q": "Nous lancerons la campagne le 15, à moins que le client ne ___ un autre calendrier.", "opts": ["veuille", "veut", "voudra"], "a": [0], "en": "We'll launch the campaign on the 15th, unless the client wants a different schedule.", "id": "p6e1i2", "full": "Nous lancerons la campagne le 15, à moins que le client ne veuille un autre calendrier.", "audio": "aeaf12cb1c53"}, {"q": "Tu pourras partir plus tôt à condition de ___ ton rapport.", "opts": ["finir", "finisses", "finis"], "a": [0], "en": "You can leave earlier on condition that you finish your report.", "id": "p6e1i3", "full": "Tu pourras partir plus tôt à condition de finir ton rapport.", "audio": "ac8653b9e8b8"}, {"q": "___ le soutien de ton équipe, tu n'aurais jamais fini à temps.", "opts": ["Sans", "Si", "Au cas où"], "a": [0], "en": "Without your team's support, you would never have finished on time.", "id": "p6e1i4", "full": "Sans le soutien de ton équipe, tu n'aurais jamais fini à temps.", "audio": "a6b3d600c781"}, {"q": "___ un peu plus tôt, tu aurais vu les illuminations.", "opts": ["En partant", "Partir", "Si tu partais"], "a": [0], "en": "If you had left a little earlier, you would have seen the lights.", "id": "p6e1i5", "full": "En partant un peu plus tôt, tu aurais vu les illuminations.", "audio": "a6e5ff81a071"}], "id": "p6e1"}, {"type": "order", "title": "Construis l'hypothèse", "title_en": "Build the hypothesis", "c": "Carys, touche les mots dans le bon ordre.", "c_en": "Carys, tap the words in the right order.", "items": [{"words": ["où", "Au", "il", "pleuvrait,", "cas", "la", "à", "lieu", "soirée", "aurait", "l'intérieur"], "a": ["Au cas où il pleuvrait, la soirée aurait lieu à l'intérieur"], "punct": ".", "en": "In case it rains, the party will be held indoors.", "id": "p6e2i1", "full": "Au cas où il pleuvrait, la soirée aurait lieu à l'intérieur.", "audio": "abd6794c7cd4"}, {"words": ["à", "Je", "condition", "viendrai,", "que", "tu", "m'", "invites"], "a": ["Je viendrai, à condition que tu m' invites"], "punct": ".", "full": "Je viendrai, à condition que tu m'invites.", "en": "I'll come, provided you invite me.", "id": "p6e2i2", "audio": "a79df6f1a61d"}], "id": "p6e2"}], "id": "p6"}, "p7": {"title": "Les pronoms simples", "title_en": "Single object pronouns", "img": "m5.jpg", "rule": [["**le, la, l', les** remplacent un **COD** (verbe + quelqu'un / quelque chose, sans préposition).", "**le, la, l', les** replace a **direct object** (verb + someone / something, no preposition)."], ["**lui, leur** remplacent **à + personne**. **en** remplace **de + chose** ou une **quantité**. **y** remplace **à + chose** ou un **lieu**.", "**lui, leur** replace **à + person**. **en** replaces **de + thing** or a **quantity**. **y** replaces **à + thing** or a **place**."], ["Avec **penser à, s'intéresser à, faire attention à** + personne, on garde **à + pronom tonique** : Je pense **à elle**.", "With **penser à, s'intéresser à, faire attention à** + person, keep **à + stressed pronoun**: Je pense à elle."]], "table": {"head": ["On remplace… · We replace…", "Pronom", "Exemple · Example"], "rows": [["la vitrine (COD)", "la / l'", "Je **l'**ai photographiée."], ["au directeur (à + personne)", "lui", "Je **lui** ai répondu."], ["du budget (de + chose)", "en", "Je m'**en** occupe."], ["mille affiches (quantité)", "en", "Nous **en** avons imprimé mille."], ["à ce projet (à + chose)", "y", "J'**y** crois."]]}, "ex": [["Tu as vu la nouvelle vitrine ? Oui, je **l'**ai vue hier.", "Have you seen the new window? Yes, I saw it yesterday.", "ab40d8f6eb2c"], ["Tu penses encore à ton ancienne cheffe ? Oui, je pense souvent **à elle**.", "Do you still think about your former boss? Yes, I often think about her.", "ade13c91e2e1"]], "exercises": [{"type": "choose", "title": "Le bon pronom", "title_en": "The right pronoun", "c": "Carys, choisis le pronom qui convient.", "c_en": "Carys, choose the right pronoun.", "items": [{"q": "Tu as répondu au directeur ? Oui, je ___ ai répondu.", "opts": ["lui", "l'", "y"], "a": [0], "en": "Did you reply to the director? Yes, I replied to him.", "id": "p7e1i1", "full": "Tu as répondu au directeur ? Oui, je lui ai répondu.", "audio": "a003eb727c38"}, {"q": "Tu t'occupes du budget ? Oui, je m'___ occupe.", "opts": ["en", "y", "le"], "a": [0], "en": "Are you dealing with the budget? Yes, I'm dealing with it.", "id": "p7e1i2", "full": "Tu t'occupes du budget ? Oui, je m'en occupe.", "audio": "a3ddb35bb8f9"}, {"q": "Tu crois à ce projet ? Oui, j'___ crois vraiment.", "opts": ["y", "en", "le"], "a": [0], "en": "Do you believe in this project? Yes, I really believe in it.", "id": "p7e1i3", "full": "Tu crois à ce projet ? Oui, j'y crois vraiment.", "audio": "ab41e147ed87"}, {"q": "Tu t'intéresses à ce photographe ? Oui, je m'intéresse beaucoup ___.", "opts": ["à lui", "lui", "y"], "a": [0], "en": "Are you interested in this photographer? Yes, I'm very interested in him.", "id": "p7e1i4", "full": "Tu t'intéresses à ce photographe ? Oui, je m'intéresse beaucoup à lui.", "audio": "a5a1865aa4fa"}, {"q": "Combien d'affiches avez-vous imprimées ? Nous ___ avons imprimé mille.", "opts": ["en", "les", "y"], "a": [0], "en": "How many posters did you print? We printed a thousand (of them).", "id": "p7e1i5", "full": "Combien d'affiches avez-vous imprimées ? Nous en avons imprimé mille.", "audio": "abbe81eca444"}], "id": "p7e1"}], "id": "p7"}, "p8": {"title": "Les doubles pronoms : l'ordre", "title_en": "Double pronouns: the order", "rule": [["Quand il y a **deux pronoms**, l'ordre est toujours le même :", "When there are **two pronouns**, the order is always the same:"], ["Exception : à l'**impératif affirmatif**, les pronoms vont **après** le verbe, avec des **traits d'union**, et le COD passe en premier : Donne-**le-moi** ! Parle-**m'en** !", "Exception: in the **affirmative imperative**, pronouns go **after** the verb, with **hyphens**, and the direct object comes first: Donne-le-moi ! Parle-m'en !"], ["À l'**impératif négatif**, on revient à l'ordre normal : Ne **me le** donne pas !", "In the **negative imperative**, the normal order comes back: Ne me le donne pas !"]], "formula": ["me · te · se · nous · vous → le · la · les → lui · leur → y → en", "always in this order, before the verb"], "table": {"head": ["Phrase", "Avec deux pronoms · With two pronouns"], "rows": [["Elle me dit **la nouvelle**.", "Elle **me la** dit."], ["J'envoie **le devis au client**.", "Je **le lui** envoie."], ["Il nous parle **de son voyage**.", "Il **nous en** parle."], ["Il y a **des cadeaux**.", "Il **y en** a."], ["Montre **les photos à tes collègues** !", "Montre-**les-leur** !"]]}, "ex": [["Le devis ? Je **le lui** envoie ce soir.", "The quote? I'm sending it to him tonight.", "aee5e9d33b94"], ["Tes photos de Venise ? Montre-**les-moi** !", "Your photos of Venice? Show them to me!", "ad95c49560e3"], ["Ce projet ? Ne **lui en** parle pas encore.", "This project? Don't tell her about it yet.", "a8bba48e03c3"]], "exercises": [{"type": "choose", "title": "Deux pronoms à la fois", "title_en": "Two pronouns at once", "c": "Carys, remplace les mots en gras par deux pronoms.", "c_en": "Carys, replace the words in bold with two pronouns.", "items": [{"q": "Carys envoie **la maquette au client**. → Carys ___ envoie.", "opts": ["la lui", "lui la", "le lui"], "a": [0], "full": "Carys la lui envoie.", "en": "Carys sends it to him.", "id": "p8e1i1", "audio": "a0a0466d2ab0"}, {"q": "Le client nous a donné **des idées**. → Le client ___ a donné.", "opts": ["nous en", "en nous", "nous les"], "a": [0], "full": "Le client nous en a donné.", "en": "The client gave us some.", "id": "p8e1i2", "audio": "afd56a18b558"}, {"q": "Montre **les photos à tes collègues** ! → Montre-___ !", "opts": ["les-leur", "leur-les", "les-lui"], "a": [0], "full": "Montre-les-leur !", "en": "Show them to them!", "id": "p8e1i3", "audio": "ad1fc96d909d"}, {"q": "Ne parle pas **de ce projet à Paul** ! → Ne ___ parle pas !", "opts": ["lui en", "en lui", "le lui"], "a": [0], "full": "Ne lui en parle pas !", "en": "Don't tell him about it!", "id": "p8e1i4", "audio": "adb05bad33d8"}, {"q": "Rends-moi **le dossier** ! → Rends-___ !", "opts": ["le-moi", "me-le", "moi-le"], "a": [0], "full": "Rends-le-moi !", "en": "Give it back to me!", "id": "p8e1i5", "audio": "a6666cf9bea8"}, {"q": "Il a emmené **ses enfants au marché de Noël**. → Il ___ a emmenés.", "opts": ["les y", "y les", "leur y"], "a": [0], "full": "Il les y a emmenés.", "en": "He took them there.", "id": "p8e1i6", "audio": "a21cfdd17a1d"}], "id": "p8e1"}, {"type": "order", "title": "Le bon ordre", "title_en": "The right order", "c": "Carys, touche les mots dans le bon ordre.", "c_en": "Carys, tap the words in the right order.", "items": [{"words": ["l'", "te", "Je", "demain", "enverrai"], "a": ["Je te l' enverrai demain"], "punct": ".", "full": "Je te l'enverrai demain.", "en": "I'll send it to you tomorrow.", "id": "p8e2i1", "audio": "ad0f607bb3c5"}, {"words": ["en", "Le", "a", "nous", "directeur", "parlé", "hier"], "a": ["Le directeur nous en a parlé hier"], "punct": ".", "en": "The director told us about it yesterday.", "id": "p8e2i2", "full": "Le directeur nous en a parlé hier.", "audio": "a727afb6f6ae"}, {"words": ["y", "Il", "trop", "a", "en", "dans", "vitrine", "cette"], "a": ["Il y en a trop dans cette vitrine"], "punct": ".", "en": "There are too many of them in this window.", "id": "p8e2i3", "full": "Il y en a trop dans cette vitrine.", "audio": "ad558b7c9d76"}], "id": "p8e2"}], "id": "p8"}, "p9": {"title": "Les doubles pronoms dans la phrase", "title_en": "Double pronouns in the sentence", "rule": [["**Temps simple** : les pronoms se placent **devant le verbe conjugué** : Je **le lui** donne.", "**Simple tense**: pronouns go **before the conjugated verb**: Je le lui donne."], ["**Temps composé** : **devant l'auxiliaire**, et le participe s'accorde avec le **COD placé avant** : La vidéo ? Je **la lui** ai montré**e**.", "**Compound tense**: **before the auxiliary**, and the past participle agrees with the **direct object placed before it**: Je la lui ai montrée."], ["**Verbe + infinitif** : **devant l'infinitif** : Je vais **la lui** montrer. Je peux **vous en** parler.", "**Verb + infinitive**: **before the infinitive**: Je vais la lui montrer. Je peux vous en parler."], ["**Faire / laisser + infinitif** : **devant faire** : Je **la lui** ferai lire.", "**Faire / laisser + infinitive**: **before faire**: Je la lui ferai lire."], ["**Négation** : **ne** + pronoms + verbe + **pas** : Je **ne la lui** ai **pas** montrée.", "**Negation**: ne + pronouns + verb + pas: Je ne la lui ai pas montrée."]], "ex": [["Ces fleurs ? Je **les lui** ai offert**es** pour Noël.", "These flowers? I gave them to her for Christmas.", "a615dd234838"], ["Les invitations ? Vous pouvez **les leur** envoyer aujourd'hui ?", "The invitations? Can you send them to them today?", "a5bc3f404c4d"], ["Le contrat ? Elle **le lui** fera signer lundi.", "The contract? She'll get him to sign it on Monday.", "a29ea557b873"]], "exercises": [{"type": "qcm", "title": "La phrase correcte", "title_en": "The correct sentence", "c": "Carys, remplace les mots en gras et touche la phrase correcte.", "c_en": "Carys, replace the words in bold and tap the correct sentence.", "items": [{"q": "Je vais montrer **la vidéo à Marc**.", "opts": ["Je vais la lui montrer.", "Je la lui vais montrer.", "Je vais lui la montrer."], "a": [0], "en": "I'm going to show it to him.", "id": "p9e1i1", "full": "Je vais la lui montrer.", "audio": "ae4239bd6aff"}, {"q": "J'ai offert **ces fleurs à ma mère**.", "opts": ["Je les lui ai offertes.", "Je les lui ai offert.", "Je lui les ai offertes."], "a": [0], "en": "I gave them to her.", "id": "p9e1i2", "full": "Je les lui ai offertes.", "audio": "a5e6b994f151"}, {"q": "Je n'ai pas parlé **du budget aux stagiaires**.", "opts": ["Je ne leur en ai pas parlé.", "Je ne leur ai pas en parlé.", "Je n'en leur ai pas parlé."], "a": [0], "en": "I didn't tell them about it.", "id": "p9e1i3", "full": "Je ne leur en ai pas parlé.", "audio": "a8758b599535"}, {"q": "Elle fera signer **le contrat au client**.", "opts": ["Elle le lui fera signer.", "Elle lui le fera signer.", "Elle fera le lui signer."], "a": [0], "en": "She'll get him to sign it.", "id": "p9e1i4", "full": "Elle le lui fera signer.", "audio": "a4a492c6ea4c"}, {"q": "Il faut que tu donnes **la clé à Sophie**.", "opts": ["Il faut que tu la lui donnes.", "Il faut que tu lui la donnes.", "Il la lui faut que tu donnes."], "a": [0], "en": "You need to give it to her.", "id": "p9e1i5", "full": "Il faut que tu la lui donnes.", "audio": "a5664b6a3cf1"}], "id": "p9e1"}, {"type": "fill", "title": "À toi de répondre", "title_en": "Your turn to answer", "c": "Carys, écris les deux pronoms qui manquent.", "c_en": "Carys, write the two missing pronouns.", "items": [{"q": "Tu as envoyé la présentation aux clients ? Oui, je ___ ai envoyée ce matin.", "a": ["la leur"], "en": "Did you send the presentation to the clients? Yes, I sent it to them this morning.", "id": "p9e2i1", "full": "Tu as envoyé la présentation aux clients ? Oui, je la leur ai envoyée ce matin.", "audio": "a7a697be8a88"}, {"q": "Tu as parlé de la soirée à Julien ? Non, je ne ___ ai pas encore parlé.", "a": ["lui en"], "en": "Did you tell Julien about the party? No, I haven't told him about it yet.", "id": "p9e2i2", "full": "Tu as parlé de la soirée à Julien ? Non, je ne lui en ai pas encore parlé.", "audio": "ad93c027be3c"}, {"q": "Tu vas offrir des chocolats à tes collègues ? Oui, je vais ___ offrir.", "a": ["leur en"], "en": "Are you going to give chocolates to your colleagues? Yes, I'm going to give them some.", "id": "p9e2i3", "full": "Tu vas offrir des chocolats à tes collègues ? Oui, je vais leur en offrir.", "audio": "adf7b8090aa0"}], "id": "p9e2"}], "id": "p9"}, "p10": {"title": "Le grand défi de Noël : tout mélangé", "title_en": "The big Christmas challenge: everything mixed", "exercises": [{"type": "choose", "title": "Dix questions, dix étoiles", "title_en": "Ten questions, ten stars", "c": "Carys, voici tout ce que tu as révisé, mélangé comme à l'examen. Va vite, mais lis bien !", "c_en": "Carys, here is everything you've reviewed, mixed as in the exam. Go fast, but read carefully!", "items": [{"q": "___ en retard, prévenez-nous.", "opts": ["Au cas où vous seriez", "Si vous seriez", "Pourvu que vous êtes"], "a": [0], "en": "In case you are late, let us know.", "id": "p10e1i1", "full": "Au cas où vous seriez en retard, prévenez-nous.", "audio": "a519970d0d32", "ref": "p6"}, {"q": "Bien qu'elle ___ beaucoup voyagé, elle n'est jamais allée à Lyon.", "opts": ["ait", "a", "aurait"], "a": [0], "en": "Although she has travelled a lot, she has never been to Lyon.", "id": "p10e1i2", "full": "Bien qu'elle ait beaucoup voyagé, elle n'est jamais allée à Lyon.", "audio": "a303e3f8dbad", "ref": "p3"}, {"q": "Tes croquis, tu les as montrés à la cheffe ? Oui, je ___ ai montrés.", "opts": ["les lui", "lui les", "les leur"], "a": [0], "en": "Your sketches, did you show them to the boss? Yes, I showed them to her.", "id": "p10e1i3", "full": "Tes croquis, tu les as montrés à la cheffe ? Oui, je les lui ai montrés.", "audio": "a27ed7a3166d", "ref": "p9"}, {"q": "C'est ___ qu'on devient bon.", "opts": ["en pratiquant", "pratiquant", "à pratiquer"], "a": [0], "en": "It's by practising that you get good.", "id": "p10e1i4", "full": "C'est en pratiquant qu'on devient bon.", "audio": "a7c0bf364c12", "ref": "p1"}, {"q": "Si j'avais su, je ___ plus tôt.", "opts": ["serais venue", "viendrais", "étais venue"], "a": [0], "en": "If I had known, I would have come earlier.", "id": "p10e1i5", "full": "Si j'avais su, je serais venue plus tôt.", "audio": "a61114322292", "ref": "p5"}, {"q": "Je ne crois pas qu'il ___ raison.", "opts": ["ait", "a", "aura"], "a": [0], "en": "I don't think he is right.", "id": "p10e1i6", "full": "Je ne crois pas qu'il ait raison.", "audio": "ae3f88c0d3a9", "ref": "p3"}, {"q": "Ton voyage à Rome ? Parle-___ !", "opts": ["m'en", "en-moi", "moi-en"], "a": [0], "en": "Your trip to Rome? Tell me about it!", "id": "p10e1i7", "full": "Ton voyage à Rome ? Parle-m'en !", "audio": "a68009eb3d4a", "ref": "p8"}, {"q": "Il est probable que la campagne ___ un succès.", "opts": ["sera", "soit", "serait"], "a": [0], "en": "The campaign will probably be a success.", "id": "p10e1i8", "full": "Il est probable que la campagne sera un succès.", "audio": "a185fdb42798", "ref": "p3"}, {"q": "___ en vacances, elle a répondu à ses mails.", "opts": ["Tout en étant", "Tout étant", "En ayant"], "a": [0], "en": "Even while on holiday, she answered her emails.", "id": "p10e1i9", "full": "Tout en étant en vacances, elle a répondu à ses mails.", "audio": "acbf65fac98a", "ref": "p1"}, {"q": "On y arrivera, à condition que tu ___ à l'heure.", "opts": ["sois", "es", "seras"], "a": [0], "en": "We'll make it, provided you are on time.", "id": "p10e1i10", "full": "On y arrivera, à condition que tu sois à l'heure.", "audio": "ac6f3cc2f1b1", "ref": "p6"}], "id": "p10e1"}], "id": "p10"}}, "prod": {"min": 15, "title": "Production écrite guidée", "title_en": "Guided writing", "sujet": "Dans le magazine de votre quartier à Paris, un lecteur écrit : « Les publicités de Noël commencent chaque année plus tôt et ne servent qu'à nous faire dépenser. Il faudrait les interdire avant le 1er décembre. » Vous réagissez dans un article argumenté. Vous donnez votre point de vue en vous appuyant sur des exemples précis.", "sujet_en": "In your Paris neighbourhood magazine, a reader writes: \"Christmas adverts start earlier every year and are only there to make us spend money. They should be banned before 1 December.\" You respond in an argumentative article. You give your point of view, backed up by specific examples.", "words": "250 mots environ", "words_en": "about 250 words", "lex": [["la surconsommation", "overconsumption"], ["le pouvoir d'achat", "purchasing power"], ["susciter l'émotion", "to stir emotion"], ["la magie de Noël", "the magic of Christmas"], ["une campagne responsable", "a responsible campaign"], ["le consommateur averti", "the informed consumer"], ["inciter à + infinitif", "to encourage to"], ["faire rêver", "to make people dream"], ["les commerces de proximité", "local shops"], ["l'éco-conception", "eco-design"], ["un message engagé", "a committed message"], ["la saturation publicitaire", "advertising overload"]], "ideas_pour": [["La publicité crée de la magie et de l'émotion.", "Advertising creates magic and emotion."], ["Elle fait vivre les commerces et des milliers d'emplois.", "It keeps shops and thousands of jobs alive."], ["Elle peut porter des messages forts : solidarité, famille.", "It can carry strong messages: solidarity, family."]], "ideas_contre": [["Elle pousse à acheter des cadeaux inutiles.", "It pushes people to buy useless gifts."], ["Elle met la pression sur les familles modestes.", "It puts pressure on low-income families."], ["Elle commence trop tôt et lasse le public.", "It starts too early and wears the public out."]], "steps": [{"t": "Introduction", "t_en": "Introduction", "lines": "3 à 4 lignes", "help": "Présente le débat et reformule l'avis du lecteur, puis annonce ta position.", "help_en": "Introduce the debate, rephrase the reader's view, then state your position.", "chips": ["Chaque année, dès le mois d'octobre, ", "Selon un lecteur, ", "Faut-il vraiment ", "Je ne partage pas tout à fait cet avis. "]}, {"t": "Je reconnais que…", "t_en": "I acknowledge that…", "lines": "5 à 6 lignes", "help": "Donne raison au lecteur sur un point, avec un exemple.", "help_en": "Agree with the reader on one point, with an example.", "chips": ["Il est vrai que ", "Certes, ", "On ne peut pas nier que ", "Bien que la publicité "]}, {"t": "Mais je pense que…", "t_en": "But I think that…", "lines": "6 à 8 lignes", "help": "Développe ton opinion avec deux arguments et un exemple tiré de ton expérience.", "help_en": "Develop your opinion with two arguments and an example from your experience.", "chips": ["Cependant, ", "En travaillant dans la publicité, j'ai constaté que ", "Il me semble que ", "Il faut que les marques "]}, {"t": "Conclusion", "t_en": "Conclusion", "lines": "3 à 4 lignes", "help": "Résume ta position et propose une solution réaliste.", "help_en": "Sum up your position and suggest a realistic solution.", "chips": ["En définitive, ", "Plutôt que de les interdire, ", "Si chaque marque ", "Ce serait la meilleure façon de "]}], "checks": [["ger", "un gérondif (en + -ant)", "a gerund", "auto"], ["subj", "un subjonctif", "a subjunctive", "self"], ["hyp", "une hypothèse (si, au cas où…)", "a hypothesis", "auto"], ["pron", "deux pronoms dans la même phrase", "two pronouns in the same sentence", "self"], ["conn", "au moins quatre connecteurs", "at least four linking words", "auto"]]}, "opt_en": {"simultanéité": "two actions at the same time", "manière / moyen": "manner / means", "cause": "cause", "condition": "condition", "opposition": "contrast", "le sujet de la phrase": "the subject of the sentence", "le nom juste avant": "the noun just before", "Indicatif": "indicative", "Subjonctif": "subjunctive"}};
+const KEY = "carys-delf-b2-revision-v1";
+const TOTAL_MIN = 60;
+let S = {};
+try { S = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { S = {}; }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
+const OPT_EN = D.opt_en;
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const md = s => esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+const strip = s => String(s).replace(/\*\*/g,"");
+const player = new Audio();
+function play(k){ if(!k) return; try{ player.pause(); player.src = "audio/"+k+".mp3"; player.currentTime=0; player.play().catch(()=>{}); }catch(e){} }
+function norm(s){ return String(s).normalize("NFC").toLowerCase().replace(/[’‘`´]/g,"'").replace(/œ/g,"oe").replace(/[«»"“”.!?…,;:]/g," ").replace(/\s*'\s*/g,"'").replace(/\s*-\s*/g,"-").replace(/\s+/g," ").trim(); }
+function loose(s){ return norm(s).normalize("NFD").replace(/[̀-ͯ]/g,""); }
+function judge(val, answers){
+  const n = norm(val), l = loose(val);
+  for (const a of answers){ if (n === norm(a)) return "ok"; }
+  for (const a of answers){ if (l === loose(a)) return "acc"; }
+  return "ko";
+}
+function stars(el){
+  const r = el.getBoundingClientRect(); const cx = r.left + Math.min(r.width,260)/2, cy = r.top + r.height/2;
+  for (let i=0;i<7;i++){ const s=document.createElement("span"); s.className="star"; s.textContent= i%3? "★":"✦";
+    const ang = Math.random()*Math.PI*2, dist = 40+Math.random()*45;
+    s.style.left = cx+"px"; s.style.top = cy+"px"; s.style.setProperty("--dx", Math.cos(ang)*dist+"px"); s.style.setProperty("--dy", Math.sin(ang)*dist-15+"px");
+    s.style.animationDelay = (i*30)+"ms"; document.body.appendChild(s); setTimeout(()=>s.remove(), 1100); }
+}
+const UNITS = [];
+const PNUM = {};
+// ---------- render
+function render(){
+  const app = document.getElementById("app");
+  let h = `<section class="hero"><img src="img/hero.jpg" alt="Les Champs-Élysées illuminés pour Noël"><div class="card"><span class="tag">Pour Carys · Révision DELF B2</span><h1>Gérondif, subjonctif, hypothèses et pronoms</h1><div class="en">Gerund, subjunctive, hypotheses and pronouns · DELF B2 review</div></div></section>
+  <div class="rainbow"></div>
+  <div class="intro"><b>Carys, voici une heure de révision avant ton DELF B2.</b> Quatre points de grammaire qui font la différence à l'écrit et à l'oral, dans l'univers que tu connais : Paris, les vitrines, les campagnes de Noël.<span class="en">Carys, here is a one-hour review before your DELF B2. Four grammar points that make the difference in writing and speaking, set in a world you know: Paris, shop windows, Christmas campaigns.</span>
+  <ul><li>Lance le <b>minuteur</b> en haut : la séance dure 60 minutes. <span class="en">Start the <b>timer</b> at the top: the session lasts 60 minutes.</span></li>
+  <li>Chaque partie commence par un <b>rappel</b>, puis des jeux. Écoute les phrases avec 🔊. <span class="en">Each part starts with a <b>reminder</b>, then games. Listen to the sentences with 🔊.</span></li>
+  <li>Ton score s'affiche en haut à droite et tes réponses restent enregistrées. <span class="en">Your score appears at the top right and your answers are saved.</span></li>
+  <li>Tu termines par une <b>production écrite guidée</b>, puis tu envoies tes résultats à Irène. <span class="en">You finish with a <b>guided writing task</b>, then send your results to Irène.</span></li></ul>
+  <div class="plan">`;
+  D.modules.forEach(m => h += `<span style="--c:${m.color}"><b>${m.min} min</b> · ${esc(m.title)}</span>`);
+  h += `<span style="--c:#23407a"><b>${D.prod.min} min</b> · Production écrite</span></div></div>`;
+  let pn = 0;
+  D.modules.forEach(m => {
+    h += `<section class="module" id="${m.id}" style="--c:${m.color};--c2:${m.color2}"><div class="mban"><img src="img/${m.img}" alt=""><div class="lbl"><small>${m.num ? "Partie " + m.num : "Pour commencer"} <span class="mtime">⏱ ${m.min} min</span></small><h2>${esc(m.title)}</h2><div class="en">${esc(m.title_en)}</div></div></div>`;
+    m.points.forEach(pid => { const p = D.points[pid]; if (p.rule) { pn++; p.n = pn; PNUM[pid] = pn; } h += renderPoint(p); });
+    h += `</section>`;
+  });
+  h += renderProd();
+  h += `<section id="revoir" style="--c:#b3264a"><div class="rh"><h2>À revoir</h2><div class="en">To review: your mistakes and the rules to read again</div></div><div id="revlist"></div><div class="send" style="--c:#b3264a"><h3>📩 Envoyer mes résultats à Irène</h3><p>Irène reçoit ton score, les points à revoir et ta production écrite. <span class="en">Irène gets your score, the points to review and your writing.</span></p><label for="sname">Ton prénom · Your first name</label><input id="sname" type="text" value="Carys" autocomplete="given-name"><button class="btn" id="sendbtn" type="button">Envoyer à Irène · Send to Irène</button><p class="st" id="sendst" role="status"></p></div></section>
+  <div class="foot">Le français avec Irène</div>`;
+  app.innerHTML = h;
+  document.getElementById("nav").innerHTML = D.modules.map(m => `<a href="#${m.id}" style="background:${m.color}">${m.num ? m.num + " · " : ""}${esc(m.title)}</a>`).join("") + `<a href="#prod" style="background:#23407a">✍ Production</a><a href="#revoir" class="rev">À revoir (<span id="rvn">0</span>)</a>`;
+}
+function renderPoint(p){
+  let h = `<article class="point${p.rule ? "" : " nopt"}" id="rule-${p.id}">`;
+  if (p.rule){
+    h += `<div class="phead"><div class="n">${p.n}</div><div><h3>${esc(p.title)}</h3><div class="en">${esc(p.title_en)}</div></div></div><div class="pbody">`;
+    h += `<div class="secttl">Rappel · Reminder</div><div class="rule">`;
+    if (p.img) h += `<img class="pimg" src="img/${p.img}" alt="">`;
+    p.rule.forEach(r => h += `<p class="rl"><span class="fr">${md(r[0])}</span><span class="en">${md(r[1])}</span></p>`);
+    if (p.formula) h += `<div class="formula">${esc(p.formula[0])}<span class="en">${esc(p.formula[1])}</span></div>`;
+    if (p.table){ h += `<div class="tblw"><table><tr>${p.table.head.map(c=>`<th>${md(c)}</th>`).join("")}</tr>`;
+      p.table.rows.forEach(r => { h += "<tr>" + r.map(c => `<td>${md(c)}</td>`).join("") + "</tr>"; });
+      h += `</table></div>`; }
+    if (p.box){ h += `<div class="box"><h4>${esc(p.box.title)}</h4>${p.box.lines.map(l=>`<p>${md(l[0])}<span class="en">${md(l[1])}</span></p>`).join("")}</div>`; }
+    h += `</div><div class="secttl" style="margin-top:14px">Exemples · Examples</div><div class="exs">`;
+    p.ex.forEach(e => h += `<div class="ex"><button class="snd" data-a="${e[2]}" aria-label="Écouter">🔊</button><div><span class="fr">${md(e[0])}</span><span class="en">${esc(e[1])}</span></div></div>`);
+    h += `</div>`;
+  } else {
+    h += `<div class="pbody">`;
+  }
+  p.exercises.forEach((x, xi) => h += renderExo(p, x, xi));
+  return h + `</div></article>`;
+}
+function refOf(p, it){ return (it && it.ref) || p.id; }
+function renderExo(p, x, xi){
+  const cnt = x.type === "match" ? x.pairs.length : x.type === "sort" ? x.cards.length : x.items.length;
+  const lbl = p.rule ? `Exercice ${p.n}.${xi+1}` : (p.id === "p0" ? "Échauffement" : "Défi final");
+  let h = `<div class="exo" id="${x.id}"><div class="exh"><span class="mini" id="mini-${x.id}">0 / ${cnt}</span><div class="num">${lbl}</div><h4>${esc(x.title)} <span class="en" style="font-weight:400">· ${esc(x.title_en)}</span></h4><div class="cons">${esc(x.c)}<span class="en">${esc(x.c_en)}</span></div></div>`;
+  if (x.type === "match"){
+    x.pairs.forEach((pr, i) => UNITS.push({id:`${x.id}m${i}`, pid:p.id, exo:x.id, q:pr[0], answer:`${pr[0]} ${pr[1]}`}));
+    h += `<div class="match" data-x="${x.id}"><div class="col">${x.pairs.map((pr,i)=>`<button class="mi L" data-i="${i}">${esc(pr[0])}</button>`).join("")}</div><div class="col">${x.rorder.map(i=>`<button class="mi R" data-i="${i}">${esc(x.pairs[i][1])}</button>`).join("")}</div></div></div>`;
+    return h;
+  }
+  if (x.type === "sort"){
+    x.cards.forEach((c, i) => UNITS.push({id:`${x.id}s${i}`, pid:p.id, exo:x.id, q:c[0], answer:`${x.bins[c[1]]}`}));
+    const order = x.cards.map((c,i)=>i).sort((a,b)=> ((a*7+3)%x.cards.length) - ((b*7+3)%x.cards.length));
+    h += `<div class="sort" data-x="${x.id}"><div class="pool">${order.map(i=>`<button class="scard" data-i="${i}">${esc(x.cards[i][0])}</button>`).join("")}</div><div class="bins">${x.bins.map((b,bi)=>`<div class="bin" data-b="${bi}"><h5>${esc(b)}<small>${esc(OPT_EN[b]||"")}</small></h5><div class="in"></div></div>`).join("")}</div></div></div>`;
+    return h;
+  }
+  h += `<div class="items">`;
+  x.items.forEach(it => {
+    UNITS.push({id:it.id, pid:refOf(p, it), exo:x.id, q: x.type==="order" ? it.words.join(" / ") : strip(it.q), answer: it.full});
+    h += `<div class="item" id="${it.id}" data-t="${x.type}">`;
+    if (x.type === "fill"){
+      const w = Math.max(6, it.a[0].length + 3);
+      h += `<div class="q">${md(it.q).replace("___", `<input class="inp" style="width:${w}ch" autocomplete="off" autocapitalize="off" spellcheck="false">`)}</div>`;
+      h += `<div class="row"><button class="btn chk">Vérifier · Check</button><button class="snd hid" data-a="${it.audio}">🔊</button></div>`;
+    } else if (x.type === "choose" || x.type === "qcm"){
+      h += `<div class="q">${x.type==="choose" ? md(it.q).replace("___", `<span class="gap">…</span>`) : md(it.q)}</div><div class="row">`;
+      it.opts.forEach((o, oi) => h += `<button class="opt" data-o="${oi}">${esc(o)}${OPT_EN[o]?`<small>${esc(OPT_EN[o])}</small>`:""}</button>`);
+      h += `<button class="snd hid" data-a="${it.audio}">🔊</button></div>`;
+    } else if (x.type === "order"){
+      h += `<div class="chips bank">${it.words.map((w,wi)=>`<button class="chip" data-w="${wi}">${esc(w)}</button>`).join("")}</div><div class="chips zone"></div>`;
+      h += `<div class="row"><button class="btn chk" disabled>Vérifier · Check</button><button class="btn ghost undo">↺</button><button class="snd hid" data-a="${it.audio}">🔊</button></div>`;
+    }
+    h += `<div class="fb"></div><div class="tren en">${esc(it.en)}</div></div>`;
+  });
+  return h + `</div></div>`;
+}
+// ---------- production
+function renderProd(){
+  const P = D.prod;
+  let h = `<section class="module" id="prod" style="--c:#23407a;--c2:#4f7fd1"><div class="mban"><img src="img/m2.jpg" alt=""><div class="lbl"><small>Partie 6 <span class="mtime">⏱ ${P.min} min</span></small><h2>${esc(P.title)}</h2><div class="en">${esc(P.title_en)}</div></div></div>
+  <div class="pcard"><div class="pbody">
+   <div class="sujet"><div class="k">Sujet · Task · ${esc(P.words)} · ${esc(P.words_en)}</div><p>${esc(P.sujet)}<span class="en">${esc(P.sujet_en)}</span></p></div>
+   <div class="secttl" style="margin-top:16px">1 · Choisis tes idées · Pick your ideas</div>
+   <p style="margin:0 0 6px">Touche les idées que tu veux utiliser : une ou deux de chaque côté.<span class="en">Tap the ideas you want to use: one or two on each side.</span></p>
+   <div class="ideas"><div class="col pour"><h5>Pour la publicité · For</h5>${P.ideas_pour.map((d,i)=>`<button class="idea" data-k="ip${i}">${esc(d[0])}<span class="en">${esc(d[1])}</span></button>`).join("")}</div><div class="col contre"><h5>Contre · Against</h5>${P.ideas_contre.map((d,i)=>`<button class="idea" data-k="ic${i}">${esc(d[0])}<span class="en">${esc(d[1])}</span></button>`).join("")}</div></div>
+   <div class="secttl" style="margin-top:16px">2 · Mots utiles · Useful words</div>
+   <div class="lex">${P.lex.map(l=>`<div><b>${esc(l[0])}</b><span class="en">${esc(l[1])}</span></div>`).join("")}</div>
+   <div class="secttl" style="margin-top:16px">3 · Écris ton article · Write your article</div>
+   <p style="margin:0">Touche un début de phrase pour l'ajouter à ton texte, puis continue.<span class="en">Tap a sentence starter to add it to your text, then carry on.</span></p>`;
+  P.steps.forEach((s, i) => {
+    h += `<div class="step"><h4>${i+1}. ${esc(s.t)}<small>${esc(s.lines)}</small></h4><div class="help">${esc(s.help)}<span class="en">${esc(s.t_en)} · ${esc(s.help_en)}</span></div><div class="starters">${s.chips.map(c=>`<button class="starter" data-s="${i}">${esc(c.trim())}</button>`).join("")}</div><textarea class="wr" id="w${i}" data-s="${i}" spellcheck="false" placeholder="Écris ici · Write here"></textarea></div>`;
+  });
+  h += `<div class="wcount"><span class="n" id="wn">0</span><span>mots · words</span><div class="bar"><i id="wbar"></i></div><span class="saved" id="wsaved"></span></div>
+   <div class="secttl">4 · Mon défi grammaire · My grammar challenge</div>
+   <p style="margin:0 0 4px">Dans ton texte, utilise tout ce que tu as révisé. Certaines cases se cochent toutes seules, coche les autres toi-même.<span class="en">In your text, use everything you've reviewed. Some boxes tick themselves, tick the others yourself.</span></p>
+   <div class="checks">${P.checks.map(c=>`<button class="ck ${c[3]}" data-c="${c[0]}" type="button">${esc(c[1])}<small>${esc(c[2])}</small></button>`).join("")}</div>
+  </div></div></section>`;
+  return h;
+}
+const CONN = ["cependant","pourtant","toutefois","néanmoins","en revanche","d'abord","tout d'abord","ensuite","enfin","de plus","en outre","par ailleurs","en effet","certes","donc","ainsi","c'est pourquoi","en définitive","en conclusion","bref","par exemple","alors que","même si","bien que","puisque","car","mais"];
+function prodText(){ return [0,1,2,3].map(i => (document.getElementById("w"+i)||{}).value || "").map(t=>t.trim()).filter(Boolean).join("\n\n"); }
+function prodRefresh(){
+  const t = prodText(); const n = (t.match(/[A-Za-zÀ-ÿœŒ0-9]+(?:['’-][A-Za-zÀ-ÿœŒ0-9]+)*/g) || []).length;
+  document.getElementById("wn").textContent = n;
+  document.getElementById("wbar").style.width = Math.min(100, 100*n/250) + "%";
+  const low = " " + t.toLowerCase().replace(/’/g,"'") + " ";
+  const auto = {
+    ger: /\ben [a-zàâçéèêëîïôûùüÿœ']+ant\b/.test(low),
+    hyp: /\bsi\b|\bs'il|\bs'ils|au cas où|dans le cas où|à condition|à moins|en cas de|pourvu que|même si/.test(low),
+    conn: CONN.filter(c => new RegExp("(^|[^a-zà-ÿœ'])" + c + "(?![a-zà-ÿœ])").test(low)).length >= 4,
+  };
+  S._ck = S._ck || {};
+  document.querySelectorAll(".ck").forEach(b => { const k = b.dataset.c; const on = b.classList.contains("auto") ? auto[k] : !!S._ck[k]; b.classList.toggle("on", !!on); });
+}
+function prodInit(){
+  S._w = S._w || ["","","",""]; S._idea = S._idea || {};
+  [0,1,2,3].forEach(i => { const ta = document.getElementById("w"+i); ta.value = S._w[i] || ""; });
+  document.querySelectorAll(".idea").forEach(b => b.classList.toggle("on", !!S._idea[b.dataset.k]));
+  let tmo;
+  document.addEventListener("input", e => {
+    if (!e.target.matches("textarea.wr")) return;
+    S._w[+e.target.dataset.s] = e.target.value; prodRefresh();
+    clearTimeout(tmo); tmo = setTimeout(() => { save(); const d = new Date(); document.getElementById("wsaved").textContent = "Enregistré · Saved " + d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}); }, 500);
+  });
+  prodRefresh();
+}
+function insertStarter(b){
+  const ta = document.getElementById("w"+b.dataset.s); const txt = b.textContent;
+  let v = ta.value; const sep = v && !/\s$/.test(v) ? " " : "";
+  ta.value = v + sep + txt + " "; S._w[+b.dataset.s] = ta.value; save(); prodRefresh();
+  ta.focus(); ta.selectionStart = ta.selectionEnd = ta.value.length;
+}
+// ---------- lookups
+const ITEM = {}, EXO = {};
+D.modules.forEach(m => m.points.forEach(pid => { const p = D.points[pid]; p.exercises.forEach(x => { EXO[x.id] = {x, p}; if (x.items) x.items.forEach(it => ITEM[it.id] = {it, x, p}); }); }));
+function showResult(id, rec, fresh){
+  const {it, x} = ITEM[id]; const el = document.getElementById(id); if (!el) return;
+  const fb = el.querySelector(".fb"); const ok = rec.ok;
+  el.querySelectorAll("input,.opt,.chip,.chk,.undo").forEach(b => b.disabled = true);
+  if (x.type === "fill"){ const inp = el.querySelector("input"); inp.value = rec.val; inp.classList.add(ok?"good":"bad"); }
+  if (x.type === "choose" || x.type === "qcm"){
+    el.querySelectorAll(".opt").forEach(b => { const o = +b.dataset.o; if (o === it.a[0]) b.classList.add("good"); if (!ok && o === rec.val) b.classList.add("bad"); });
+    if (x.type === "choose"){ const g = el.querySelector(".gap"); g.textContent = it.opts[it.a[0]]; }
+  }
+  if (x.type === "order"){ const z = el.querySelector(".zone"), b = el.querySelector(".bank"); z.innerHTML = (rec.val||"").split(" ").filter(Boolean).map(w=>`<span class="chip">${esc(w)}</span>`).join(""); b.innerHTML = ""; }
+  let msg = ok ? `✓ Correct !` : `✗ La bonne réponse · The right answer : <b>${esc(it.full)}</b>`;
+  if (ok && rec.acc) msg += ` <span class="why">Attention aux accents · Watch the accents : <b>${esc(it.full)}</b></span>`;
+  if (ok && x.type === "order") msg += ` <span class="why">${esc(it.full)}</span>`;
+  fb.className = "fb " + (ok ? "ok" : "ko"); fb.innerHTML = msg;
+  el.querySelector(".snd").classList.remove("hid");
+  if (fresh){ if (ok) stars(fb); play(it.audio); }
+}
+function record(id, rec){ S[id] = rec; save(); showResult(id, rec, true); refresh(); }
+// ---------- events
+document.addEventListener("click", e => {
+  const t = e.target.closest("button,.bin"); if (!t) return;
+  if (t.matches(".snd")) { play(t.dataset.a); return; }
+  if (t.matches("#timer")) { toggleTimer(); return; }
+  if (t.matches("#tdclose")) { document.getElementById("tdone").classList.remove("on"); return; }
+  if (t.matches(".starter")) { insertStarter(t); return; }
+  if (t.matches(".idea")) { S._idea = S._idea || {}; S._idea[t.dataset.k] = !S._idea[t.dataset.k]; t.classList.toggle("on", S._idea[t.dataset.k]); save(); return; }
+  if (t.matches(".ck") && !t.classList.contains("auto")) { S._ck = S._ck || {}; S._ck[t.dataset.c] = !S._ck[t.dataset.c]; save(); prodRefresh(); return; }
+  const item = t.closest(".item");
+  if (t.matches(".opt") && item && !S[item.id]){ const {it} = ITEM[item.id]; const o = +t.dataset.o; record(item.id, {ok: it.a.includes(o), val:o}); return; }
+  if (t.matches(".chk") && item && !S[item.id]){
+    const {it, x} = ITEM[item.id];
+    if (x.type === "fill"){ const v = item.querySelector("input").value; if (!v.trim()) return; const j = judge(v, it.a); record(item.id, {ok: j!=="ko", acc: j==="acc", val: v}); }
+    if (x.type === "order"){ const v = [...item.querySelectorAll(".zone .chip")].map(c=>c.textContent).join(" "); const ok = it.a.some(a => norm(v) === norm(a)); record(item.id, {ok, val: v + (it.punct||"")}); }
+    return;
+  }
+  if (t.matches(".chip") && item && !S[item.id]){
+    const z = item.querySelector(".zone"), b = item.querySelector(".bank");
+    if (t.parentElement === b) z.appendChild(t); else b.appendChild(t);
+    item.querySelector(".chk").disabled = b.children.length > 0; return;
+  }
+  if (t.matches(".undo") && item && !S[item.id]){ const z = item.querySelector(".zone"), b = item.querySelector(".bank"); [...z.children].forEach(c => b.appendChild(c)); item.querySelector(".chk").disabled = true; return; }
+  if (t.matches(".mi")) { matchClick(t); return; }
+  if (t.matches(".scard") && t.closest(".pool")) { sortSelect(t); return; }
+  if (t.matches(".scard") && t.closest(".bin")) { sortDrop(t.closest(".bin")); return; }
+  if (t.matches(".bin")) { sortDrop(t); return; }
+  if (t.matches("#resetbtn")){ if (t.dataset.sure){ S = {}; save(); try{ localStorage.removeItem(KEY+"-timer"); }catch(e){} location.reload(); } else { t.dataset.sure = 1; t.textContent = "Sûre ? Touche encore · Sure? Tap again"; } return; }
+  if (t.closest("#acc")){ const a = document.activeElement; if (a && (a.tagName === "INPUT" || a.tagName === "TEXTAREA")){ const s = a.selectionStart, en = a.selectionEnd; a.value = a.value.slice(0,s) + t.textContent + a.value.slice(en); a.selectionStart = a.selectionEnd = s + t.textContent.length; a.dispatchEvent(new Event("input",{bubbles:true})); } return; }
+});
+document.addEventListener("keydown", e => { if (e.key === "Enter" && e.target.matches("input.inp")){ const c = e.target.closest(".item").querySelector(".chk"); if (c) c.click(); } });
+const ACC = ["é","è","ê","à","â","ç","î","ï","ô","ù","û","œ","«","»"];
+const accEl = document.getElementById("acc");
+accEl.innerHTML = ACC.map(c => `<button type="button">${c}</button>`).join("");
+accEl.addEventListener("mousedown", e => e.preventDefault());
+accEl.addEventListener("touchstart", e => { if (e.target.tagName === "BUTTON"){ e.preventDefault(); e.target.click(); } }, {passive:false});
+document.addEventListener("focusin", e => { if (e.target.matches("input.inp,textarea")) accEl.classList.add("on"); });
+document.addEventListener("focusout", e => { setTimeout(() => { if (!document.activeElement || !document.activeElement.matches("input.inp,textarea")) accEl.classList.remove("on"); }, 120); });
+// ---------- matching
+let SEL = {};
+function matchClick(b){
+  const box = b.closest(".match"), xid = box.dataset.x; const i = +b.dataset.i;
+  if (b.classList.contains("done")) return;
+  if (b.classList.contains("L")){ box.querySelectorAll(".L").forEach(z => z.classList.remove("sel")); b.classList.add("sel"); SEL[xid] = i; return; }
+  if (SEL[xid] === undefined) { b.classList.add("shake"); setTimeout(()=>b.classList.remove("shake"), 400); return; }
+  const li = SEL[xid], uid = `${xid}m${li}`;
+  if (i === li){
+    const rec = S[uid] || {}; rec.done = 1; if (rec.ok === undefined) rec.ok = true; S[uid] = rec; save();
+    markMatch(box, li, rec); if (rec.ok) stars(b); delete SEL[xid]; refresh();
+  } else {
+    b.classList.add("shake"); setTimeout(()=>b.classList.remove("shake"), 400);
+    if (!S[uid]) { S[uid] = {ok:false}; save(); refresh(); }
+  }
+}
+function markMatch(box, i, rec){ box.querySelectorAll(`[data-i="${i}"]`).forEach(z => { z.classList.remove("sel"); z.classList.add("done"); if (!rec.ok) z.classList.add("late"); }); }
+// ---------- sorting game
+let SSEL = {};
+function sortSelect(c){ const box = c.closest(".sort"); box.querySelectorAll(".pool .scard").forEach(z => z.classList.remove("sel")); c.classList.add("sel"); SSEL[box.dataset.x] = +c.dataset.i; }
+function sortDrop(bin){
+  const box = bin.closest(".sort"), xid = box.dataset.x; const {x} = EXO[xid];
+  const i = SSEL[xid]; if (i === undefined) return;
+  const card = box.querySelector(`.pool .scard[data-i="${i}"]`); if (!card) return;
+  const uid = `${xid}s${i}`;
+  if (+bin.dataset.b === x.cards[i][1]){
+    const rec = S[uid] || {}; rec.done = 1; if (rec.ok === undefined) rec.ok = true; S[uid] = rec; save();
+    placeCard(box, i, rec); if (rec.ok) stars(bin); delete SSEL[xid]; refresh();
+  } else {
+    card.classList.add("shake"); setTimeout(()=>card.classList.remove("shake"), 400);
+    if (!S[uid]) { S[uid] = {ok:false}; save(); refresh(); }
+  }
+}
+function placeCard(box, i, rec){
+  const {x} = EXO[box.dataset.x]; const card = box.querySelector(`.pool .scard[data-i="${i}"]`); if (!card) return;
+  card.classList.remove("sel"); if (!rec.ok) card.classList.add("late");
+  box.querySelector(`.bin[data-b="${x.cards[i][1]}"] .in`).appendChild(card);
+}
+// ---------- timer
+const TK = KEY + "-timer";
+let T = {acc:0, run:null, shown:false};
+try { T = Object.assign(T, JSON.parse(localStorage.getItem(TK) || "{}")); } catch(e){}
+function tsave(){ try { localStorage.setItem(TK, JSON.stringify(T)); } catch(e){} }
+function elapsed(){ return T.acc + (T.run ? Date.now() - T.run : 0); }
+function toggleTimer(){ if (T.run){ T.acc = elapsed(); T.run = null; } else { T.run = Date.now(); } tsave(); tick(); }
+function tick(){
+  const left = TOTAL_MIN*60000 - elapsed(); const el = document.getElementById("timer");
+  const s = Math.max(0, Math.ceil(left/1000));
+  document.getElementById("tleft").textContent = String(Math.floor(s/60)).padStart(2,"0") + ":" + String(s%60).padStart(2,"0");
+  document.getElementById("tico").textContent = T.run ? "❚❚" : "▶";
+  el.classList.toggle("run", !!T.run && left > 0); el.classList.toggle("over", left <= 0);
+  if (left <= 0 && T.run){ T.acc = TOTAL_MIN*60000; T.run = null; if (!T.shown){ T.shown = true; document.getElementById("tdone").classList.add("on"); } tsave(); }
+}
+setInterval(tick, 1000);
+// ---------- score + à revoir
+function refresh(){
+  let ok = 0; const wrong = [];
+  UNITS.forEach(u => { const r = S[u.id]; if (!r) return; if (r.ok && (ITEM[u.id] || r.done)) ok++; if (r.ok === false) wrong.push(u); });
+  Object.keys(EXO).forEach(xid => { const us = UNITS.filter(u => u.exo === xid); const g = us.filter(u => S[u.id] && S[u.id].ok && (ITEM[u.id] || S[u.id].done)).length; const m = document.getElementById("mini-"+xid); if (m) m.textContent = `${g} / ${us.length}`; });
+  document.getElementById("sc").textContent = ok;
+  document.getElementById("tot").textContent = UNITS.length;
+  const answered = UNITS.filter(u => S[u.id] && (ITEM[u.id] ? true : S[u.id].done)).length;
+  document.getElementById("pg").style.width = (100*answered/UNITS.length) + "%";
+  document.getElementById("rvn").textContent = wrong.length;
+  const L = document.getElementById("revlist");
+  if (!wrong.length){ L.innerHTML = `<p class="empty">Pour l'instant, rien à revoir. · Nothing to review for now.</p>`; }
+  else {
+    let h = ""; const mcol = {}; D.modules.forEach(m => m.points.forEach(pid => mcol[pid] = m.color));
+    wrong.forEach(u => { const p = D.points[u.pid];
+      h += `<div class="rv" style="--c:${mcol[u.pid]}"><div class="t">Règle ${PNUM[u.pid]} · ${esc(p.title)}</div><div>${esc(u.q)}</div><div class="a">→ ${esc(u.answer)}</div><a href="#rule-${u.pid}">↑ Revoir la règle · Review the rule</a></div>`; });
+    L.innerHTML = h;
+  }
+  if (!document.getElementById("resetbtn")) L.insertAdjacentHTML("afterend", `<div style="padding:0 18px 18px"><button class="btn ghost reset" id="resetbtn" style="--c:#b3264a">Recommencer à zéro · Start again</button></div>`);
+}
+// ---------- init
+render();
+Object.keys(S).forEach(id => { if (ITEM[id]) showResult(id, S[id], false); });
+document.querySelectorAll(".match").forEach(box => { const xid = box.dataset.x; EXO[xid].x.pairs.forEach((p,i) => { const r = S[`${xid}m${i}`]; if (r && r.done) markMatch(box, i, r); }); });
+document.querySelectorAll(".sort").forEach(box => { const xid = box.dataset.x; EXO[xid].x.cards.forEach((c,i) => { const r = S[`${xid}s${i}`]; if (r && r.done) placeCard(box, i, r); }); });
+prodInit();
+refresh(); tick();
+// ---------- envoi des résultats
+(function(){
+  const b=document.getElementById("sendbtn"),st=document.getElementById("sendst"),nm=document.getElementById("sname"),SK=KEY+"-sent";
+  let last=null; try{ last=localStorage.getItem(SK); }catch(e){}
+  if(last){ st.className="st ok"; st.textContent="Résultats déjà envoyés le "+last+". Tu peux les renvoyer. · Already sent. You can send them again."; }
+  b.onclick=async()=>{
+    let ok=0; const wrong=[];
+    UNITS.forEach(u=>{ const r=S[u.id]; if(!r) return; if(r.ok && (ITEM[u.id] || r.done)) ok++; if(r.ok===false) wrong.push(u); });
+    const done=UNITS.filter(u=>S[u.id] && (ITEM[u.id] ? true : S[u.id].done)).length;
+    const lines=wrong.map(u=>{ const p=D.points[u.pid]; return "• Règle "+PNUM[u.pid]+" · "+p.title+"\n   "+u.q+"\n   → "+u.answer; });
+    const name=(nm.value||"").trim()||"Élève";
+    const txt=prodText(); const nw=(txt.match(/[A-Za-zÀ-ÿœŒ0-9]+(?:['’-][A-Za-zÀ-ÿœŒ0-9]+)*/g)||[]).length;
+    const mins=Math.round(elapsed()/60000);
+    const data={access_key:"e554b1d0-2dda-40a0-b94b-f833d9d5fad6",subject:"Résultats de "+name+" · Révision DELF B2",from_name:"Le français avec Irène",
+      "Élève":name,"Leçon":"Carys · Révision DELF B2 (gérondif, subjonctif, hypothèses, pronoms)","Score":ok+" / "+UNITS.length,"Questions faites":done+" / "+UNITS.length,
+      "Temps passé":mins+" min",
+      "À revoir":lines.length?lines.join("\n"):"Rien à revoir 🎉",
+      "Production écrite":txt?("("+nw+" mots)\n\n"+txt):"Pas encore écrite"};
+    b.disabled=true; const lbl=b.textContent; b.textContent="Envoi en cours… · Sending…"; st.className="st"; st.textContent="";
+    try{
+      const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)});
+      const j=await r.json(); if(!j.success) throw new Error(j.message||"erreur");
+      const d=new Date(), t=d.toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" à "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+      try{ localStorage.setItem(SK,t); }catch(e){}
+      st.className="st ok"; st.textContent="Merci ! Irène a bien reçu tes résultats. · Thank you! Irène has received your results.";
+    }catch(e){ st.className="st ko"; st.textContent="L'envoi n'a pas marché. Vérifie ta connexion et réessaie. · Sending failed. Check your connection and try again."; }
+    b.disabled=false; b.textContent=lbl;
+  };
+})();
+
+</script>
+<div class="fai-sign"><img src="../marque/signature-irene.png" alt="Le français avec Irène · Cours de français en ligne"></div>
+</body>
+</html>
