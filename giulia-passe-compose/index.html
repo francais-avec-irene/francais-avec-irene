@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hier, j'ai dansé ! · Le passé composé</title>
+<link rel="icon" href="../marque/logo-irene.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Pacifico&display=swap" rel="stylesheet">
+<style>:root{--rose:#ff4f9a;--bubble:#ff8cc6;--blush:#fff3f8;--lilac:#a77bff;--lav:#efe6ff;--peach:#ffae8f;--plum:#4a2140;--mint:#2fc79c;--coral:#ff6b6b;--gold:#f5b700;--ink:#4a2140;--soft:#8a6a82}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Nunito,system-ui,sans-serif;color:var(--ink);font-size:17px;line-height:1.5;background:linear-gradient(180deg,#fff0f7 0%,#f7efff 45%,#fff4ee 100%);background-attachment:fixed;-webkit-tap-highlight-color:transparent}
+.hearts-bg{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;background-image:radial-gradient(circle at 10% 20%,#ffd1e6 0 3px,transparent 4px),radial-gradient(circle at 80% 30%,#e5d4ff 0 4px,transparent 5px),radial-gradient(circle at 40% 80%,#ffd9c9 0 3px,transparent 4px),radial-gradient(circle at 90% 85%,#ffd1e6 0 5px,transparent 6px);background-size:220px 220px,260px 260px,300px 300px,340px 340px}
+main{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 14px 30px}
+h1,h2,h3,h4{font-family:Fredoka,Nunito,sans-serif;margin:0;line-height:1.15}
+.it{color:#9a6f93;font-style:italic;font-size:.88em;margin:2px 0 0}
+body.noit .it{display:none!important}
+.center{text-align:center}
+b{font-weight:800}
+.score{position:fixed;top:12px;right:12px;z-index:50;background:#fff;border-radius:999px;padding:7px 16px 7px 12px;box-shadow:0 6px 20px rgba(255,79,154,.3);font-family:Fredoka;display:flex;align-items:center;gap:6px;border:2px solid #ffd1e6}
+.score b{font-size:22px;color:var(--rose)}.score small{color:var(--soft);font-size:15px}
+.score.pop{animation:pop .5s}
+@keyframes pop{50%{transform:scale(1.25)}}
+.ittog{position:fixed;left:12px;bottom:12px;z-index:50;border:0;border-radius:999px;padding:9px 14px;background:#fff;box-shadow:0 6px 18px rgba(167,123,255,.3);font:600 14px Fredoka;color:var(--plum);cursor:pointer}
+body.noit .ittog{opacity:.6}
+.fai-top{text-align:center;padding:14px 0 6px;position:relative;z-index:1}.fai-top img{width:92px;height:92px}
+.fai-sign{text-align:center;padding:26px 16px 40px;position:relative;z-index:1}.fai-sign img{width:100%;max-width:300px}
+
+/* hero : photo bien visible, sans voile */
+.hero{position:relative;border-radius:28px;overflow:hidden;box-shadow:0 14px 40px rgba(255,79,154,.25);margin:4px 0 22px;border:5px solid #fff}
+.hero>img{display:block;width:100%;height:380px;object-fit:cover;object-position:center 30%}
+.herocard{position:absolute;left:16px;bottom:16px;background:rgba(255,255,255,.92);border-radius:22px;padding:14px 20px 12px;max-width:min(470px,88%);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.tag{display:inline-block;background:linear-gradient(90deg,var(--rose),var(--lilac));color:#fff;font:600 12px Fredoka;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:999px;margin-bottom:6px}
+.hero h1{font-size:40px;color:var(--plum)}
+.hero h1 em{font-family:Pacifico,cursive;font-style:normal;color:var(--rose);font-weight:400}
+
+.plan{background:#fff;border-radius:24px;padding:18px 18px 16px;box-shadow:0 8px 24px rgba(167,123,255,.15);margin-bottom:24px;border:2px dashed #ffc2de}
+.plan h2{color:var(--rose);font-size:24px}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.steps a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--plum);background:var(--blush);border-radius:999px;padding:6px 12px 6px 6px;font-weight:700;font-size:15px;border:1.5px solid #ffd1e6}
+.steps a span{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--rose);color:#fff;font:600 13px Fredoka}
+.steps a i{font-style:normal;font-size:12px;color:#fff;background:var(--lilac);border-radius:999px;padding:1px 8px}
+.steps a.exs{background:linear-gradient(90deg,#ffe0ef,#efe3ff)}.steps a.exs span{background:var(--lilac)}
+
+.sec{border-radius:26px;margin:0 0 24px;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(74,33,64,.08);scroll-margin-top:70px}
+.sech{display:flex;align-items:center;gap:14px;padding:16px 20px;color:#fff;position:relative}
+.sech h2{font-size:25px}.sech h2 em{font-style:normal;background:rgba(255,255,255,.25);border-radius:10px;padding:0 6px}
+.sech .it{color:rgba(255,255,255,.92)}
+.num{flex:none;width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;font:700 22px Fredoka}
+.dur{margin-left:auto;font-style:normal;font:600 13px Fredoka;background:rgba(255,255,255,.28);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.secb{padding:18px 20px 22px}
+.c1 .sech{background:linear-gradient(110deg,#ff4f9a,#ff8cc6)}.c1 .num{color:#ff4f9a}
+.c2 .sech{background:linear-gradient(110deg,#a77bff,#d59cff)}.c2 .num{color:#a77bff}
+.c3 .sech{background:linear-gradient(110deg,#ff7d6b,#ffb38f)}.c3 .num{color:#ff7d6b}
+.c4 .sech{background:linear-gradient(110deg,#e85fd0,#a77bff)}.c4 .num{color:#e85fd0}
+.c5 .sech{background:linear-gradient(110deg,#2fb8a6,#7ad9c4)}.c5 .num{color:#2fb8a6}
+.c6 .sech{background:linear-gradient(110deg,#f07aa8,#f5b46b)}.c6 .num{color:#f07aa8}
+.lead{font-size:18px;margin:0}
+.note{background:#fff7d6;border-radius:14px;padding:10px 14px;margin:12px 0;border-left:5px solid #ffd34d}
+.sub{font-size:18px;color:var(--lilac);margin:18px 0 8px}
+.split{display:grid;grid-template-columns:1.25fr 1fr;gap:18px;align-items:start}
+.ph{margin:0;border-radius:20px;overflow:hidden;border:4px solid #ffe0ef;background:#fff;box-shadow:0 6px 18px rgba(255,79,154,.15)}
+.ph img{display:block;width:100%;height:230px;object-fit:cover}
+.ph.tall img{height:300px}
+.ph figcaption{padding:8px 12px;font-size:14px;font-style:italic;color:var(--soft);text-align:center}
+.twin{display:flex;align-items:center;gap:10px;margin:14px 0}
+.fr-box,.it-box{flex:1;border-radius:16px;padding:10px 14px;text-align:center;font:600 22px Fredoka;background:#ffe9f3;border:2px solid #ffc2de}
+.it-box{background:#eefaf3;border-color:#b9ead0}
+.fr-box.b2{background:#eef3ff;border-color:#c9d6ff;font-size:19px}
+.fr-box small,.it-box small{display:block;font:600 11px Nunito;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.fr-box b{color:var(--rose)}.it-box b{color:#1f9d6b}.fr-box b.e{color:#fff;background:var(--rose);border-radius:8px;padding:0 6px}
+.eq{font:700 26px Fredoka;color:var(--lilac)}
+.exl{display:flex;gap:10px;align-items:flex-start;margin:10px 0}
+.exl .fr{margin:0;font-weight:700}.exl .fr b{color:var(--rose)}
+.spk{flex:none;width:38px;height:38px;border-radius:50%;border:0;background:linear-gradient(135deg,#ffd1e6,#e5d4ff);cursor:pointer;font-size:17px;box-shadow:0 3px 8px rgba(167,123,255,.25)}
+.spk.sm{width:32px;height:32px;font-size:14px}
+.spk.playing{animation:pulse 1s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(255,79,154,.18)}}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{border:0;border-radius:999px;padding:8px 14px;background:linear-gradient(135deg,#fff0f7,#f3ebff);font:600 16px Fredoka;color:var(--plum);cursor:pointer;border:1.5px solid #f3c6e0}
+.pill small{font-family:Nunito;font-size:12px}
+.timeline{display:flex;align-items:center;gap:8px;margin-top:16px;font:600 14px Fredoka}
+.tl-past{background:var(--lav);color:#7a4fd6;padding:6px 12px;border-radius:999px}
+.tl-arrow{flex:1;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--lilac),var(--rose));position:relative}
+.tl-arrow:after{content:'';position:absolute;right:-2px;top:-6px;border:8px solid transparent;border-left-color:var(--rose)}
+.tl-now{background:#ffe0ef;color:var(--rose);padding:6px 12px;border-radius:999px}
+.formula{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;margin:4px 0}
+.formula span{font:600 20px Fredoka;border-radius:999px;padding:8px 18px}
+.f1{background:var(--lilac);color:#fff}.f2{background:var(--rose);color:#fff}.formula .plus{color:var(--lilac);padding:0 2px}
+.conj{display:flex;flex-direction:column;gap:7px}
+.crow{display:grid;grid-template-columns:1fr auto;align-items:center;text-align:left;border:0;background:#faf6ff;border-radius:14px;padding:9px 14px;cursor:pointer;border:1.5px solid #e9dcff;font-family:inherit;color:inherit}
+.crow .cf{font:500 19px Fredoka}.crow .cf b{color:var(--lilac)}.crow .cf em{font-style:normal;color:var(--rose);font-weight:600}
+.crow .it{grid-column:1}.crow .mini{grid-row:1/3;grid-column:2;font-size:15px}
+.box-heart{margin-top:16px;background:linear-gradient(135deg,#fff0f7,#f3ebff);border-radius:18px;padding:12px 16px;border:2px dashed #e0b8ff}
+.rule{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.r1,.r2{font:600 30px Fredoka;background:#fff3ee;border:2px solid #ffc9b5;border-radius:18px;padding:6px 18px}
+.r1 s{color:#ff7d6b}.r2 b{color:var(--rose)}
+.arrow{font:600 16px Fredoka;color:#ff7d6b}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.vcard{background:#fff;border-radius:20px;overflow:hidden;border:2px solid #ffe0d6;box-shadow:0 5px 16px rgba(255,125,107,.12)}
+.vcard img{width:100%;height:140px;object-fit:cover;display:block}
+.vb{padding:10px 12px 12px}
+.pair{border:0;background:#fff3ee;border-radius:999px;padding:5px 14px;font:500 18px Fredoka;color:var(--plum);cursor:pointer}
+.pair b{color:var(--rose)}.pair span{color:#ff7d6b}
+.vcard .exl{margin:8px 0 0}.vcard .fr{font-size:15px}
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.flip{perspective:900px;height:250px;cursor:pointer;outline:none}
+.fin{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.4,1.6,.5,1);transform-style:preserve-3d}
+.flip.on .fin{transform:rotateY(180deg)}
+.ff,.fb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;overflow:hidden}
+.ff img{width:100%;height:100%;object-fit:cover;display:block}
+.ffl{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(255,255,255,.93);border-radius:16px;padding:6px 12px;display:flex;justify-content:space-between;align-items:center}
+.ffl b{font:600 24px Fredoka;color:var(--plum)}.ffl span{font-size:12px;color:var(--soft)}
+.fb{transform:rotateY(180deg);background:linear-gradient(160deg,#fff0f7,#efe3ff);border:3px solid #f2c4ff;padding:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px}
+.bi{margin:0;font:500 16px Fredoka;color:var(--soft)}
+.bp{margin:0;font:700 40px Fredoka;color:var(--rose);line-height:1.05}
+.bit{margin:0 0 4px}
+.bex{margin:4px 0 0;font-weight:700;font-size:15px}.bex b{color:var(--rose)}
+.bt{font-size:13px}
+.sandwich{display:flex;align-items:center;gap:6px;margin:14px 0;flex-wrap:wrap}
+.sandwich span{font:600 22px Fredoka;border-radius:14px;padding:6px 14px}
+.sw{background:#d8f5ee;color:#1f9d8a;border:2px solid #9fe3d3}
+.mid{background:#efe6ff;color:#7a4fd6}.sandwich .pr{background:none;padding:6px 2px;color:var(--plum)}.pp{background:#ffe0ef;color:var(--rose)}
+
+/* exercices */
+.exintro{text-align:center;background:linear-gradient(120deg,#ff4f9a,#a77bff);color:#fff;border-radius:26px;padding:22px 18px;margin:34px 0 22px;box-shadow:0 12px 30px rgba(167,123,255,.35)}
+.exintro h2{font-size:30px}.exintro .it{color:#ffe6f4}
+.exo{position:relative;background:#fff;border-radius:26px;margin:0 0 26px;box-shadow:0 10px 30px rgba(74,33,64,.08);overflow:hidden;scroll-margin-top:70px}
+.exh{display:flex;gap:14px;align-items:center;padding:16px 20px;color:#fff}
+.exh h3{font-size:20px}.exh .it{color:rgba(255,255,255,.9)}
+.exn{flex:none;width:52px;height:52px;border-radius:18px;background:rgba(255,255,255,.95);display:grid;place-items:center;font:700 28px Fredoka}
+.ety{margin:0;font:600 12px Fredoka;letter-spacing:.14em;opacity:.9}
+.exb{padding:18px 20px 90px;position:relative}
+.x1 .exh{background:linear-gradient(110deg,#ff6fae,#ffa3c9)}.x1 .exn{color:#ff6fae}
+.x2 .exh{background:linear-gradient(110deg,#9b6dff,#c9a2ff)}.x2 .exn{color:#9b6dff}
+.x3 .exh{background:linear-gradient(110deg,#ff8a70,#ffc09a)}.x3 .exn{color:#ff8a70}
+.x4 .exh{background:linear-gradient(110deg,#e45bc8,#ff8cc6)}.x4 .exn{color:#e45bc8}
+.x5 .exh{background:linear-gradient(110deg,#25b5a0,#86dfca)}.x5 .exn{color:#25b5a0}
+.x6 .exh{background:linear-gradient(110deg,#7b5cff,#ff6fae)}.x6 .exn{color:#7b5cff}
+.revoir .exh{background:linear-gradient(110deg,#4a2140,#a14b8f)}.revoir .exn{color:#a14b8f}
+.revoir .exb{padding-bottom:22px}
+.q{margin:0 0 8px;font-weight:700;font-size:18px}
+.blank{display:inline-block;min-width:60px;border-bottom:3px dotted var(--lilac);color:var(--lilac);text-align:center;font-weight:800;padding:0 4px}
+.blank.ok{color:var(--mint);border-color:var(--mint)}.blank.ko{color:var(--coral);border-color:var(--coral)}
+.opt{border:2px solid #f0d3ea;background:#fff;border-radius:999px;padding:8px 16px;font:600 16px Fredoka;color:var(--plum);cursor:pointer;transition:transform .15s}
+.opt:active{transform:scale(.95)}
+.opt.ok{background:var(--mint);border-color:var(--mint);color:#fff}
+.opt.ko{background:var(--coral);border-color:var(--coral);color:#fff;text-decoration:line-through}
+.opt.right{border-color:var(--mint);color:var(--mint);box-shadow:0 0 0 3px #c9f2e5}
+.done .opt{pointer-events:none}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.it .after,.after{display:none}.done .after{display:block}
+body.noit .done .after{display:none}
+.shake{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.it1{background:var(--blush);border-radius:18px;padding:12px 14px;margin-bottom:10px;border:1.5px solid #ffd9ea}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two .opt{border-radius:16px;padding:10px}.two .opt small{display:block;font:600 12px Nunito;opacity:.75}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.it2{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center;background:#faf6ff;border-radius:18px;padding:10px;border:1.5px solid #e9dcff}
+.it2 img{width:96px;height:96px;object-fit:cover;border-radius:16px}
+.it3{background:#fff6f2;border-radius:18px;padding:12px 14px;margin-bottom:10px;border:1.5px solid #ffdccd}
+.it3 .opt{padding:6px 14px}
+/* téléphone */
+.phone{max-width:420px;margin:0 auto;border-radius:36px;background:#fff;border:10px solid #2b1830;box-shadow:0 18px 40px rgba(74,33,64,.3);overflow:hidden}
+.pbar{display:flex;align-items:center;gap:10px;padding:12px 14px;background:linear-gradient(90deg,#ffe0ef,#efe3ff);border-bottom:1px solid #f3d6ea}
+.pbar small{display:block;color:var(--mint);font-size:12px}.pbar .ic{margin-left:auto}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--lilac),var(--rose));color:#fff;font:700 18px Fredoka}
+.chat{padding:14px 12px;background:#fff8fc;min-height:300px;display:flex;flex-direction:column;gap:10px}
+.msg{display:flex;flex-direction:column;max-width:85%;animation:msgin .35s ease}
+.msg.hide{display:none}
+.msg.lea{align-self:flex-start}.msg.me{align-self:flex-end;align-items:flex-end}
+.bub{border-radius:20px;padding:10px 14px;font-size:16px;line-height:1.35}
+.lea .bub{background:#f1e9ff;border-bottom-left-radius:6px}
+.me .bub{background:linear-gradient(135deg,#ff6fae,#ff9bc8);color:#fff;border-bottom-right-radius:6px}
+.me .bub .it{color:#ffe7f2}.me .blank{color:#fff;border-color:#fff}
+.me .blank.ok{color:#fff;background:rgba(255,255,255,.25);border-radius:6px}
+.msg .opts{margin-top:6px;justify-content:flex-end}
+.msg.lea .opts{justify-content:flex-start}
+.msg.done .opts{display:none}
+.pic .bub{padding:4px;background:#fff;border:2px solid #ffc2de}.pic img{display:block;width:210px;height:160px;object-fit:cover;border-radius:16px}
+.typing{display:none;gap:4px;padding:0 0 12px 18px;background:#fff8fc}.typing.on{display:flex}
+.typing span{width:8px;height:8px;border-radius:50%;background:#d2b4ff;animation:blink 1s infinite}.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes blink{50%{opacity:.25}}
+@keyframes msgin{from{opacity:0;transform:translateY(10px) scale(.96)}}
+/* ordre */
+.it5{background:#effbf7;border-radius:18px;padding:12px 14px;margin-bottom:12px;border:1.5px solid #c4ecdf}
+.line{min-height:50px;border-radius:14px;border:2px dashed #9fe3d3;background:#fff;padding:6px;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.bank{display:flex;flex-wrap:wrap;gap:6px}
+.tile{border:0;border-radius:12px;padding:8px 13px;font:600 17px Fredoka;background:#fff;color:var(--plum);box-shadow:0 3px 0 #9fe3d3,0 4px 10px rgba(37,181,160,.15);cursor:pointer}
+.line .tile{background:#d8f5ee}
+.it5.okk .line{border-color:var(--mint);background:#e4fbf3}.it5.koo .line{border-color:var(--coral)}
+.sol{margin:6px 0 0;font-weight:800;color:#1f9d8a}
+/* journal */
+.diary{background:#fffdf7;border-radius:20px;border:2px solid #f3dcc2;box-shadow:inset 0 0 0 6px #fff7ea;padding:16px 18px}
+.dtop{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.dtop img{width:74px;height:74px;border-radius:50%;object-fit:cover;border:3px solid #ffc2de}
+.dtop p{margin:0;font:400 22px Pacifico;color:var(--rose)}
+.dtext{font-size:18px;line-height:2.15;margin:0}
+.gap{white-space:nowrap}
+.gap input{width:104px;border:0;border-bottom:3px solid var(--lilac);background:#f5efff;border-radius:8px 8px 0 0;font:600 18px Fredoka;color:var(--plum);text-align:center;padding:2px 4px;outline:none}
+.gap input:focus{background:#ffe9f4}
+.gap small{font-size:13px;color:var(--soft);margin-left:2px}
+.gap.ok input{border-color:var(--mint);background:#e4fbf3;color:#1f9d6b}
+.gap.ko input{border-color:var(--coral);background:#ffecec;color:var(--coral);text-decoration:line-through}
+.gap .fix{font:700 17px Fredoka;color:#1f9d6b;margin-left:4px}
+.dbtn{display:flex;gap:10px;align-items:center;margin-top:12px}
+.ekey{width:48px;height:44px;border-radius:12px;border:2px solid var(--lilac);background:#fff;font:700 22px Fredoka;color:var(--lilac);cursor:pointer}
+.btn{border:0;border-radius:999px;padding:11px 22px;font:600 17px Fredoka;color:#fff;background:linear-gradient(90deg,var(--rose),var(--lilac));cursor:pointer;box-shadow:0 6px 16px rgba(255,79,154,.3)}
+.btn.ghost{background:#fff;color:var(--plum);border:2px solid #f0d3ea;box-shadow:none;margin-top:14px}
+.btn:disabled{opacity:.6}
+.spk.big{width:46px;height:46px}.hidden{display:none}
+/* médailles */
+.medslot{position:absolute;right:14px;bottom:12px;width:74px;height:84px}
+.medslot svg{width:100%;height:100%;filter:drop-shadow(0 4px 8px rgba(0,0,0,.2));animation:wobble 3s ease-in-out infinite}
+@keyframes wobble{50%{transform:rotate(-6deg)}}
+.medslot .lbl{position:absolute;right:82px;bottom:20px;white-space:nowrap;font:600 14px Fredoka;color:var(--plum);background:#fff;border-radius:999px;padding:4px 12px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+#medalstage{position:fixed;inset:0;z-index:90;pointer-events:none;display:none;align-items:center;justify-content:center;background:radial-gradient(circle,rgba(255,240,248,.85),rgba(255,240,248,0) 70%)}
+#medalstage.on{display:flex}
+#medalstage .bigmed{width:min(78vw,340px);transform-origin:center;position:relative}
+#medalstage .bigmed svg{width:100%;height:auto;filter:drop-shadow(0 18px 30px rgba(0,0,0,.25))}
+#medalstage .mtitle{position:absolute;left:50%;bottom:-54px;transform:translateX(-50%);white-space:nowrap;font:700 30px Fredoka;color:var(--rose);text-shadow:0 2px 0 #fff,0 0 18px #fff}
+.rays{position:absolute;inset:-30%;border-radius:50%;background:repeating-conic-gradient(rgba(255,215,90,.35) 0 10deg,transparent 10deg 20deg);animation:spin 6s linear infinite;z-index:-1}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes medalIn{0%{transform:scale(0) rotate(-200deg);opacity:0}60%{transform:scale(1.18) rotate(12deg);opacity:1}80%{transform:scale(.95) rotate(-4deg)}100%{transform:scale(1) rotate(0)}}
+/* effets */
+#fx{position:fixed;inset:0;pointer-events:none;z-index:95}
+.pt{position:fixed;font-size:22px;will-change:transform,opacity;animation:fly 1.1s ease-out forwards}
+@keyframes fly{0%{transform:translate(0,0) scale(.3) rotate(0);opacity:1}70%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(var(--r));opacity:0}}
+.medrow{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:14px}
+.medrow div{text-align:center;font:600 13px Fredoka;color:var(--soft);width:84px}
+.medrow svg{width:58px;height:66px}
+.medrow .none{width:58px;height:58px;border-radius:50%;border:3px dashed #e8cfe0;margin:4px auto}
+#revlist a{display:block;text-decoration:none;color:var(--plum);background:var(--blush);border-radius:14px;padding:9px 14px;margin-bottom:8px;border-left:5px solid var(--rose)}
+#revlist a small{display:block;color:#1f9d6b;font-weight:700}
+#revlist .rv-ok{text-align:center;font:600 18px Fredoka;color:var(--mint)}
+.send{background:linear-gradient(135deg,#fff0f7,#f3ebff);border-radius:20px;padding:16px;margin-top:16px}
+.send h4{font-size:19px;color:var(--rose)}.send p{margin:4px 0 10px}
+.send label{display:block;font-weight:700;font-size:14px;margin-bottom:4px}
+.send input{width:100%;max-width:280px;border:2px solid #f0d3ea;border-radius:12px;padding:9px 12px;font:600 16px Nunito;margin-bottom:10px;display:block}
+.st{font-weight:700}.st.ok{color:#1f9d6b}.st.ko{color:var(--coral)}
+.flashsec{animation:flash 1.6s}
+@keyframes flash{0%,100%{box-shadow:0 10px 30px rgba(74,33,64,.08)}30%{box-shadow:0 0 0 6px #ffb3d6}}
+@media(max-width:760px){
+ body{font-size:16px}
+ .hero>img{height:300px}.hero h1{font-size:31px}
+ .split{grid-template-columns:1fr}
+ .vgrid,.fgrid{grid-template-columns:1fr 1fr}
+ .g2{grid-template-columns:1fr}
+ .sech h2{font-size:21px}
+ .dur{display:none}
+ .flip{height:230px}.bp{font-size:34px}
+}
+@media(max-width:470px){.vgrid{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr 1fr}.flip{height:220px}.bex{font-size:13px}.two{grid-template-columns:1fr}.herocard{left:10px;right:10px;bottom:10px}}
+</style></head><body>
+<div class="score" id="score"><span>💖</span><b id="sc">0</b><small>/ <span id="tot">0</span></small></div>
+<button class="ittog" id="ittog" type="button">🇮🇹 <span>Traduzione</span></button>
+<div class="hearts-bg" aria-hidden="true"></div>
+<div class="fai-top"><img src="../marque/logo-irene.png" alt="Le français avec Irène"></div>
+<main>
+<header class="hero" id="top">
+  <img src="img/hero.jpg" alt="Danseuse">
+  <div class="herocard">
+    <span class="tag">Grammaire · Le passé composé</span>
+    <h1>Hier, j'ai <em>dansé</em> !</h1>
+    <p class="it">Ieri ho ballato! · Il passato prossimo</p>
+  </div>
+</header>
+
+<section class="plan">
+  <h2>💗 Ta leçon de 30 minutes</h2>
+  <p class="it">La tua lezione di 30 minuti</p>
+  <div class="steps">
+    <a href="#regle-quand"><span>1</span>Quand ?<i>2 min</i></a>
+    <a href="#regle-avoir"><span>2</span>Avoir + participe<i>2 min</i></a>
+    <a href="#regle-er"><span>3</span>Les verbes en -er<i>3 min</i></a>
+    <a href="#regle-stars"><span>4</span>Les participes stars<i>3 min</i></a>
+    <a href="#regle-negation"><span>5</span>Dire non<i>1 min</i></a>
+    <a href="#regle-aller"><span>6</span>Le secret d'aller<i>1 min</i></a>
+    <a href="#ex1" class="exs"><span>✿</span>6 exercices + médailles<i>18 min</i></a>
+  </div>
+</section>
+
+<section class="sec c1" id="regle-quand">
+  <div class="sech"><span class="num">1</span><div><h2>Le passé composé, c'est quoi ?</h2><p class="it">Che cos'è il passé composé?</p></div><i class="dur">2 min</i></div>
+  <div class="secb">
+    <div class="split">
+      <div>
+        <p class="lead">On utilise le passé composé pour raconter une <b>action terminée</b> dans le passé.</p>
+        <p class="it">Si usa per raccontare un'azione finita nel passato.</p>
+        <div class="twin"><div class="fr-box"><small>français</small>j'<b>ai mangé</b></div><div class="eq">=</div><div class="it-box"><small>italiano</small>ho <b>mangiato</b></div></div>
+        <p class="note">💡 C'est comme le <b>passato prossimo</b> en italien !</p>
+      </div>
+      <figure class="ph"><img src="img/pasta_intro.jpg" alt="Assiette de pâtes"><figcaption>Samedi, j'ai mangé des pâtes au pesto.</figcaption></figure>
+    </div>
+    <div class="exl"><button class="spk" type="button" data-a="audio/a9dd26a4da5.mp3" aria-label="Écouter">🔊</button><div><p class="fr">Hier, j&#x27;ai dansé pendant deux heures.</p><p class="it">Ieri ho ballato per due ore.</p></div></div><div class="exl"><button class="spk" type="button" data-a="audio/aae387a8305.mp3" aria-label="Écouter">🔊</button><div><p class="fr">Samedi, j&#x27;ai mangé des pâtes au pesto.</p><p class="it">Sabato ho mangiato la pasta al pesto.</p></div></div>
+    <h3 class="sub">Les petits mots du passé <span class="it">· le parole del passato</span></h3>
+    <div class="pills"><button class="pill tw" type="button" data-a="audio/a24072372ac.mp3">hier <small class="it">ieri</small></button><button class="pill tw" type="button" data-a="audio/a6730bf30a1.mp3">ce matin <small class="it">stamattina</small></button><button class="pill tw" type="button" data-a="audio/ab7f6c3e2dc.mp3">samedi dernier <small class="it">sabato scorso</small></button><button class="pill tw" type="button" data-a="audio/acc9c981e69.mp3">l&#x27;été dernier <small class="it">l&#x27;estate scorsa</small></button><button class="pill tw" type="button" data-a="audio/ad8ef5f8cdc.mp3">il y a deux jours <small class="it">due giorni fa</small></button></div>
+    <div class="timeline"><span class="tl-past">hier · samedi dernier · l'été dernier</span><span class="tl-arrow"></span><span class="tl-now">aujourd'hui 💗</span></div>
+  </div>
+</section>
+
+<section class="sec c2" id="regle-avoir">
+  <div class="sech"><span class="num">2</span><div><h2>La formule magique</h2><p class="it">La formula magica</p></div><i class="dur">2 min</i></div>
+  <div class="secb">
+    <div class="formula"><span class="f1">avoir</span><span class="plus">au présent</span><span class="plus">+</span><span class="f2">participe passé</span></div>
+    <p class="it center">avere al presente + participio passato</p>
+    <div class="split">
+      <div class="conj">
+        <h3 class="sub">danser · <span class="it">ballare</span></h3>
+        <button class="crow" type="button" data-a="audio/aee2a7c95b4.mp3"><span class="cf">j'<b>ai</b> <em>dansé</em></span><span class="it">io ho ballato</span><span class="mini">🔊</span></button><button class="crow" type="button" data-a="audio/acf051249c0.mp3"><span class="cf">tu <b>as</b> <em>dansé</em></span><span class="it">tu hai ballato</span><span class="mini">🔊</span></button><button class="crow" type="button" data-a="audio/a6d553c7a9e.mp3"><span class="cf">il / elle <b>a</b> <em>dansé</em></span><span class="it">lui / lei ha ballato</span><span class="mini">🔊</span></button><button class="crow" type="button" data-a="audio/a9d63ce104d.mp3"><span class="cf">nous <b>avons</b> <em>dansé</em></span><span class="it">noi abbiamo ballato</span><span class="mini">🔊</span></button><button class="crow" type="button" data-a="audio/a8ace766754.mp3"><span class="cf">vous <b>avez</b> <em>dansé</em></span><span class="it">voi avete ballato</span><span class="mini">🔊</span></button><button class="crow" type="button" data-a="audio/add7ccfea66.mp3"><span class="cf">ils / elles <b>ont</b> <em>dansé</em></span><span class="it">loro hanno ballato</span><span class="mini">🔊</span></button>
+      </div>
+      <figure class="ph tall"><img src="img/dance2.jpg" alt="Danseuse"><figcaption>Nous avons dansé tout l'après-midi !</figcaption></figure>
+    </div>
+    <div class="box-heart">💜 Le verbe <b>avoir</b> change avec la personne. Le participe <b>dansé</b> ne change pas.<p class="it">Il verbo avere cambia con la persona. Il participio non cambia.</p></div>
+  </div>
+</section>
+
+<section class="sec c3" id="regle-er">
+  <div class="sech"><span class="num">3</span><div><h2>Les verbes en <em>-er</em> → <em>é</em></h2><p class="it">I verbi in -er → é</p></div><i class="dur">3 min</i></div>
+  <div class="secb">
+    <div class="rule"><div class="r1">dans<s>er</s></div><div class="arrow">✂️ -er &nbsp;+&nbsp; é</div><div class="r2">dans<b>é</b></div></div>
+    <p class="note center">🎧 <b>danser</b> et <b>dansé</b> : même son ! Mais à l'écrit, on met un <b>é</b>.<br><span class="it">Stesso suono, ma si scrive con é. Come -are → -ato in italiano.</span></p>
+    <div class="vgrid"><div class="vcard"><img src="img/pasta.jpg" alt=""><div class="vb"><button class="pair" type="button" data-a="audio/a0bb522a560.mp3">manger <span>→</span> <b>mangé</b></button>
+<div class="exl"><button class="spk" type="button" data-a="audio/a1d3d0bc139.mp3" aria-label="Écouter">🔊</button><div><p class="fr">J&#x27;ai <b>mangé</b> des spaghettis à la tomate.</p><p class="it">Ho mangiato degli spaghetti al pomodoro.</p></div></div></div></div><div class="vcard"><img src="img/cinema.jpg" alt=""><div class="vb"><button class="pair" type="button" data-a="audio/a41d6f01821.mp3">regarder <span>→</span> <b>regardé</b></button>
+<div class="exl"><button class="spk" type="button" data-a="audio/a35ec30740c.mp3" aria-label="Écouter">🔊</button><div><p class="fr">Nous avons <b>regardé</b> un film au cinéma.</p><p class="it">Abbiamo guardato un film al cinema.</p></div></div></div></div><div class="vcard"><img src="img/kitten.jpg" alt=""><div class="vb"><button class="pair" type="button" data-a="audio/a24452a9572.mp3">jouer <span>→</span> <b>joué</b></button>
+<div class="exl"><button class="spk" type="button" data-a="audio/abe1fa106b0.mp3" aria-label="Écouter">🔊</button><div><p class="fr">Le chaton a <b>joué</b> avec une pelote de laine.</p><p class="it">Il gattino ha giocato con un gomitolo di lana.</p></div></div></div></div><div class="vcard"><img src="img/headphones.jpg" alt=""><div class="vb"><button class="pair" type="button" data-a="audio/a66aa309f03.mp3">écouter <span>→</span> <b>écouté</b></button>
+<div class="exl"><button class="spk" type="button" data-a="audio/a7c0009c2c9.mp3" aria-label="Écouter">🔊</button><div><p class="fr">Tu as <b>écouté</b> la nouvelle chanson ?</p><p class="it">Hai ascoltato la nuova canzone?</p></div></div></div></div><div class="vcard"><img src="img/micro.jpg" alt=""><div class="vb"><button class="pair" type="button" data-a="audio/a8283ec7dd6.mp3">chanter <span>→</span> <b>chanté</b></button>
+<div class="exl"><button class="spk" type="button" data-a="audio/a41e0f3c5e8.mp3" aria-label="Écouter">🔊</button><div><p class="fr">Elles ont <b>chanté</b> sur scène.</p><p class="it">Hanno cantato sul palco.</p></div></div></div></div><div class="vcard"><img src="img/dogwalk.jpg" alt=""><div class="vb"><button class="pair" type="button" data-a="audio/a99a0d0a8c0.mp3">promener <span>→</span> <b>promené</b></button>
+<div class="exl"><button class="spk" type="button" data-a="audio/a57a542110d.mp3" aria-label="Écouter">🔊</button><div><p class="fr">Alice a <b>promené</b> le chien au parc.</p><p class="it">Alice ha portato a spasso il cane al parco.</p></div></div></div></div></div>
+  </div>
+</section>
+
+<section class="sec c4" id="regle-stars">
+  <div class="sech"><span class="num">4</span><div><h2>Les participes stars ⭐</h2><p class="it">I participi "star" (irregolari)</p></div><i class="dur">3 min</i></div>
+  <div class="secb">
+    <p class="lead center">Ces verbes très utilisés ont un participe spécial. Touche chaque carte pour la retourner !</p>
+    <p class="it center">Questi verbi molto usati hanno un participio speciale. Tocca ogni carta per girarla!</p>
+    <div class="fgrid"><div class="flip" tabindex="0" data-a="audio/a30f5203f7e.mp3"><div class="fin">
+<div class="ff"><img src="img/cake.jpg" alt=""><div class="ffl"><b>faire</b><span>touche ✨</span></div></div>
+<div class="fb"><p class="bi">faire</p><p class="bp">fait</p><p class="bit it">= fatto</p><p class="bex">J&#x27;ai <b>fait</b> un gâteau au chocolat.</p><p class="it bt">Ho fatto una torta al cioccolato.</p><button class="spk sm" type="button" data-a="audio/aa4e896f8c1.mp3" aria-label="Écouter">🔊</button></div>
+</div></div><div class="flip" tabindex="0" data-a="audio/a5d38e6336c.mp3"><div class="fin">
+<div class="ff"><img src="img/eiffel.jpg" alt=""><div class="ffl"><b>voir</b><span>touche ✨</span></div></div>
+<div class="fb"><p class="bi">voir</p><p class="bp">vu</p><p class="bit it">= visto</p><p class="bex">J&#x27;ai <b>vu</b> la tour Eiffel !</p><p class="it bt">Ho visto la torre Eiffel!</p><button class="spk sm" type="button" data-a="audio/a5ba113d67d.mp3" aria-label="Écouter">🔊</button></div>
+</div></div><div class="flip" tabindex="0" data-a="audio/a33380d0678.mp3"><div class="fin">
+<div class="ff"><img src="img/smartphone.jpg" alt=""><div class="ffl"><b>prendre</b><span>touche ✨</span></div></div>
+<div class="fb"><p class="bi">prendre</p><p class="bp">pris</p><p class="bit it">= preso</p><p class="bex">Elle a <b>pris</b> une photo de son chat.</p><p class="it bt">Ha fatto una foto al suo gatto.</p><button class="spk sm" type="button" data-a="audio/a19233d7f2d.mp3" aria-label="Écouter">🔊</button></div>
+</div></div><div class="flip" tabindex="0" data-a="audio/a563c1e5796.mp3"><div class="fin">
+<div class="ff"><img src="img/chocolat.jpg" alt=""><div class="ffl"><b>boire</b><span>touche ✨</span></div></div>
+<div class="fb"><p class="bi">boire</p><p class="bp">bu</p><p class="bit it">= bevuto</p><p class="bex">Nous avons <b>bu</b> un chocolat chaud.</p><p class="it bt">Abbiamo bevuto una cioccolata calda.</p><button class="spk sm" type="button" data-a="audio/a32ebcb9d20.mp3" aria-label="Écouter">🔊</button></div>
+</div></div><div class="flip" tabindex="0" data-a="audio/aeda3dad333.mp3"><div class="fin">
+<div class="ff"><img src="img/book.jpg" alt=""><div class="ffl"><b>lire</b><span>touche ✨</span></div></div>
+<div class="fb"><p class="bi">lire</p><p class="bp">lu</p><p class="bit it">= letto</p><p class="bex">J&#x27;ai <b>lu</b> un livre génial.</p><p class="it bt">Ho letto un libro fantastico.</p><button class="spk sm" type="button" data-a="audio/ad629b59beb.mp3" aria-label="Écouter">🔊</button></div>
+</div></div><div class="flip" tabindex="0" data-a="audio/a2bd57e7f34.mp3"><div class="fin">
+<div class="ff"><img src="img/rabbit.jpg" alt=""><div class="ffl"><b>avoir</b><span>touche ✨</span></div></div>
+<div class="fb"><p class="bi">avoir</p><p class="bp">eu</p><p class="bit it">= avuto</p><p class="bex">J&#x27;ai <b>eu</b> un lapin pour mon anniversaire.</p><p class="it bt">Ho avuto un coniglio per il mio compleanno.</p><button class="spk sm" type="button" data-a="audio/a92678cb4fa.mp3" aria-label="Écouter">🔊</button></div>
+</div></div><div class="flip" tabindex="0" data-a="audio/a29baf6f39d.mp3"><div class="fin">
+<div class="ff"><img src="img/ballet.jpg" alt=""><div class="ffl"><b>être</b><span>touche ✨</span></div></div>
+<div class="fb"><p class="bi">être</p><p class="bp">été</p><p class="bit it">= stato</p><p class="bex">Le spectacle de danse a <b>été</b> magnifique.</p><p class="it bt">Lo spettacolo di danza è stato magnifico.</p><button class="spk sm" type="button" data-a="audio/af78b86f4fc.mp3" aria-label="Écouter">🔊</button></div>
+</div></div><div class="flip" tabindex="0" data-a="audio/aaa51c71c7f.mp3"><div class="fin">
+<div class="ff"><img src="img/gelato.jpg" alt=""><div class="ffl"><b>finir</b><span>touche ✨</span></div></div>
+<div class="fb"><p class="bi">finir</p><p class="bp">fini</p><p class="bit it">= finito</p><p class="bex">Il a <b>fini</b> sa glace.</p><p class="it bt">Ha finito il suo gelato.</p><button class="spk sm" type="button" data-a="audio/a6b776ce8f8.mp3" aria-label="Écouter">🔊</button></div>
+</div></div><div class="flip" tabindex="0" data-a="audio/ac88b0e4b37.mp3"><div class="fin">
+<div class="ff"><img src="img/catsleep.jpg" alt=""><div class="ffl"><b>dormir</b><span>touche ✨</span></div></div>
+<div class="fb"><p class="bi">dormir</p><p class="bp">dormi</p><p class="bit it">= dormito</p><p class="bex">Le chat a <b>dormi</b> toute la journée.</p><p class="it bt">Il gatto ha dormito tutto il giorno.</p><button class="spk sm" type="button" data-a="audio/af66ba2c309.mp3" aria-label="Écouter">🔊</button></div>
+</div></div></div>
+  </div>
+</section>
+
+<section class="sec c5" id="regle-negation">
+  <div class="sech"><span class="num">5</span><div><h2>Dire non</h2><p class="it">Dire di no</p></div><i class="dur">1 min</i></div>
+  <div class="secb">
+    <div class="split">
+      <div>
+        <p class="lead"><b>ne</b> … <b>pas</b> fait un sandwich autour de <b>avoir</b> :</p>
+        <p class="it">ne … pas fanno un panino intorno ad avoir</p>
+        <div class="sandwich"><span class="pr">je</span><span class="sw">n'</span><span class="mid">ai</span><span class="sw">pas</span><span class="pp">dansé</span></div>
+        <p class="note">Devant une voyelle : <b>ne → n'</b> · je <b>n'</b>ai <b>pas</b> dansé</p>
+        <div class="exl"><button class="spk" type="button" data-a="audio/a437c7f686a.mp3" aria-label="Écouter">🔊</button><div><p class="fr">Je n&#x27;ai pas dansé hier.</p><p class="it">Ieri non ho ballato.</p></div></div><div class="exl"><button class="spk" type="button" data-a="audio/a4887de1fa9.mp3" aria-label="Écouter">🔊</button><div><p class="fr">Le perroquet n&#x27;a pas parlé.</p><p class="it">Il pappagallo non ha parlato.</p></div></div><div class="exl"><button class="spk" type="button" data-a="audio/a1074ee026d.mp3" aria-label="Écouter">🔊</button><div><p class="fr">Nous n&#x27;avons pas regardé la télé.</p><p class="it">Non abbiamo guardato la TV.</p></div></div>
+      </div>
+      <figure class="ph"><img src="img/parrot.jpg" alt="Perroquet"><figcaption>Le perroquet n'a pas parlé.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec c6" id="regle-aller">
+  <div class="sech"><span class="num">6</span><div><h2>Le petit secret d'<em>aller</em></h2><p class="it">Il piccolo segreto di aller</p></div><i class="dur">1 min</i></div>
+  <div class="secb">
+    <div class="split">
+      <div>
+        <p class="lead">Avec <b>aller</b>, on utilise <b>être</b> (comme en italien : <i>sono andata</i>).</p>
+        <div class="twin"><div class="fr-box"><small>une fille</small>je suis allé<b class="e">e</b></div><div class="fr-box b2"><small>un garçon</small>je suis allé</div></div>
+        <p class="note">💗 Tu es une fille : tu ajoutes un <b>e</b> !<span class="it"> Sei una ragazza: aggiungi una e!</span></p>
+        <div class="exl"><button class="spk" type="button" data-a="audio/a8c36b0b2d2.mp3" aria-label="Écouter">🔊</button><div><p class="fr">Je suis allée au cours de danse.</p><p class="it">Sono andata a lezione di danza.</p></div></div><div class="exl"><button class="spk" type="button" data-a="audio/ae7a7b95e35.mp3" aria-label="Écouter">🔊</button><div><p class="fr">Alice est allée à Paris.</p><p class="it">Alice è andata a Parigi.</p></div></div><div class="exl"><button class="spk" type="button" data-a="audio/ab29c11c293.mp3" aria-label="Écouter">🔊</button><div><p class="fr">Mon frère est allé au parc.</p><p class="it">Mio fratello è andato al parco.</p></div></div>
+      </div>
+      <figure class="ph"><img src="img/eiffel_aller.jpg" alt="Paris"><figcaption>Alice est allée à Paris.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="exintro" id="exercices"><h2>✨ À toi de jouer, Giulia !</h2><p>Pour chaque exercice, tu gagnes une médaille : <b>or</b> sans erreur, <b>argent</b> avec 1 erreur, <b>bronze</b> avec 2 erreurs ou plus.</p><p class="it">Per ogni esercizio vinci una medaglia: oro senza errori, argento con 1 errore, bronzo con 2 errori o più.</p></div>
+<section class="exo x1" id="ex1" data-ex="ex1"><div class="exh"><span class="exn">1</span><div><p class="ety">EXERCICE · MAINTENANT OU C'EST FINI ?</p><h3>Giulia, lis la phrase : c'est maintenant (présent) ou c'est fini (passé composé) ?</h3><p class="it">Leggi la frase: è adesso (presente) o è finito (passé composé)?</p></div><i class="dur">2 min</i></div><div class="exb"><div class="it1 item" data-id="e1_0" data-ok="p" data-a="audio/a2248d4a5f1.mp3"><p class="q">J&#x27;ai mangé une pizza.</p><div class="two"><button type="button" class="opt" data-v="n">💗 Maintenant <small>présent</small></button><button type="button" class="opt" data-v="p">💜 C'est fini <small>passé composé</small></button></div><p class="it after">Ho mangiato una pizza.</p></div><div class="it1 item" data-id="e1_1" data-ok="n" data-a="audio/ab69ca27335.mp3"><p class="q">Je mange une pizza.</p><div class="two"><button type="button" class="opt" data-v="n">💗 Maintenant <small>présent</small></button><button type="button" class="opt" data-v="p">💜 C'est fini <small>passé composé</small></button></div><p class="it after">Mangio una pizza.</p></div><div class="it1 item" data-id="e1_2" data-ok="n" data-a="audio/a00375d40f6.mp3"><p class="q">Le chien joue dans le jardin.</p><div class="two"><button type="button" class="opt" data-v="n">💗 Maintenant <small>présent</small></button><button type="button" class="opt" data-v="p">💜 C'est fini <small>passé composé</small></button></div><p class="it after">Il cane gioca in giardino.</p></div><div class="it1 item" data-id="e1_3" data-ok="p" data-a="audio/a39c616d3ed.mp3"><p class="q">Le chien a joué dans le jardin.</p><div class="two"><button type="button" class="opt" data-v="n">💗 Maintenant <small>présent</small></button><button type="button" class="opt" data-v="p">💜 C'est fini <small>passé composé</small></button></div><p class="it after">Il cane ha giocato in giardino.</p></div><div class="it1 item" data-id="e1_4" data-ok="p" data-a="audio/a2a851d19e0.mp3"><p class="q">Nous avons regardé un film.</p><div class="two"><button type="button" class="opt" data-v="n">💗 Maintenant <small>présent</small></button><button type="button" class="opt" data-v="p">💜 C'est fini <small>passé composé</small></button></div><p class="it after">Abbiamo guardato un film.</p></div><div class="it1 item" data-id="e1_5" data-ok="n" data-a="audio/a3b29e17d81.mp3"><p class="q">Elle danse avec ses amies.</p><div class="two"><button type="button" class="opt" data-v="n">💗 Maintenant <small>présent</small></button><button type="button" class="opt" data-v="p">💜 C'est fini <small>passé composé</small></button></div><p class="it after">Balla con le sue amiche.</p></div><div class="medslot" aria-live="polite"></div></div></section><section class="exo x2" id="ex2" data-ex="ex2"><div class="exh"><span class="exn">2</span><div><p class="ety">EXERCICE · LE BON PARTICIPE</p><h3>Choisis le bon participe passé.</h3><p class="it">Scegli il participio passato giusto.</p></div><i class="dur">3 min</i></div><div class="exb"><div class="g2"><div class="it2 item" data-id="e2_0" data-ok="mangé" data-a="audio/a172b5a0ccb.mp3"><img src="img/pasta2.jpg" alt=""><div><p class="q">Hier, j&#x27;ai <span class="blank">___</span> des pâtes au pesto.</p><div class="opts"><button type="button" class="opt" data-v="mange">mange</button><button type="button" class="opt" data-v="mangé">mangé</button><button type="button" class="opt" data-v="manger">manger</button></div><p class="it">Ieri ho mangiato la pasta al pesto.</p></div></div><div class="it2 item" data-id="e2_1" data-ok="joué" data-a="audio/a39c616d3ed.mp3"><img src="img/puppy.jpg" alt=""><div><p class="q">Le chien a <span class="blank">___</span> dans le jardin.</p><div class="opts"><button type="button" class="opt" data-v="joue">joue</button><button type="button" class="opt" data-v="joué">joué</button><button type="button" class="opt" data-v="jouer">jouer</button></div><p class="it">Il cane ha giocato in giardino.</p></div></div><div class="it2 item" data-id="e2_2" data-ok="regardé" data-a="audio/a35ec30740c.mp3"><img src="img/cinema_b.jpg" alt=""><div><p class="q">Nous avons <span class="blank">___</span> un film au cinéma.</p><div class="opts"><button type="button" class="opt" data-v="regarder">regarder</button><button type="button" class="opt" data-v="regarde">regarde</button><button type="button" class="opt" data-v="regardé">regardé</button></div><p class="it">Abbiamo guardato un film al cinema.</p></div></div><div class="it2 item" data-id="e2_3" data-ok="fait" data-a="audio/ac844f2f86b.mp3"><img src="img/cupcakes.jpg" alt=""><div><p class="q">J&#x27;ai <span class="blank">___</span> des cupcakes pour maman.</p><div class="opts"><button type="button" class="opt" data-v="fais">fais</button><button type="button" class="opt" data-v="fait">fait</button><button type="button" class="opt" data-v="faire">faire</button></div><p class="it">Ho fatto dei cupcake per la mamma.</p></div></div><div class="it2 item" data-id="e2_4" data-ok="vu" data-a="audio/ab801c83b51.mp3"><img src="img/horse.jpg" alt=""><div><p class="q">Tu as <span class="blank">___</span> le cheval de Léa ?</p><div class="opts"><button type="button" class="opt" data-v="voir">voir</button><button type="button" class="opt" data-v="vu">vu</button><button type="button" class="opt" data-v="vois">vois</button></div><p class="it">Hai visto il cavallo di Léa?</p></div></div><div class="it2 item" data-id="e2_5" data-ok="bu" data-a="audio/a74a43e7666.mp3"><img src="img/chocolat_b.jpg" alt=""><div><p class="q">Elle a <span class="blank">___</span> un chocolat chaud.</p><div class="opts"><button type="button" class="opt" data-v="boire">boire</button><button type="button" class="opt" data-v="boit">boit</button><button type="button" class="opt" data-v="bu">bu</button></div><p class="it">Ha bevuto una cioccolata calda.</p></div></div></div><div class="medslot" aria-live="polite"></div></div></section><section class="exo x3" id="ex3" data-ex="ex3"><div class="exh"><span class="exn">3</span><div><p class="ety">EXERCICE · AVOIR AU PRÉSENT</p><h3>Complète avec le verbe avoir : ai, as, a, avons, avez, ont.</h3><p class="it">Completa con il verbo avere.</p></div><i class="dur">2 min</i></div><div class="exb"><div class="it3 item" data-id="e3_0" data-ok="ai" data-a="audio/a558bf9bf37.mp3"><p class="q">J&#x27;<span class="blank">___</span> dansé toute la soirée.</p><div class="opts"><button type="button" class="opt" data-v="ai">ai</button><button type="button" class="opt" data-v="as">as</button><button type="button" class="opt" data-v="a">a</button><button type="button" class="opt" data-v="avons">avons</button><button type="button" class="opt" data-v="avez">avez</button><button type="button" class="opt" data-v="ont">ont</button></div><p class="it">Ho ballato tutta la sera.</p></div><div class="it3 item" data-id="e3_1" data-ok="as" data-a="audio/ada377cc4cd.mp3"><p class="q">Tu <span class="blank">___</span> lu le livre ?</p><div class="opts"><button type="button" class="opt" data-v="ai">ai</button><button type="button" class="opt" data-v="as">as</button><button type="button" class="opt" data-v="a">a</button><button type="button" class="opt" data-v="avons">avons</button><button type="button" class="opt" data-v="avez">avez</button><button type="button" class="opt" data-v="ont">ont</button></div><p class="it">Hai letto il libro?</p></div><div class="it3 item" data-id="e3_2" data-ok="a" data-a="audio/a8c116b557b.mp3"><p class="q">Le chat <span class="blank">___</span> dormi sur le canapé.</p><div class="opts"><button type="button" class="opt" data-v="ai">ai</button><button type="button" class="opt" data-v="as">as</button><button type="button" class="opt" data-v="a">a</button><button type="button" class="opt" data-v="avons">avons</button><button type="button" class="opt" data-v="avez">avez</button><button type="button" class="opt" data-v="ont">ont</button></div><p class="it">Il gatto ha dormito sul divano.</p></div><div class="it3 item" data-id="e3_3" data-ok="avons" data-a="audio/aa7435a6985.mp3"><p class="q">Nous <span class="blank">___</span> pris le train pour Paris.</p><div class="opts"><button type="button" class="opt" data-v="ai">ai</button><button type="button" class="opt" data-v="as">as</button><button type="button" class="opt" data-v="a">a</button><button type="button" class="opt" data-v="avons">avons</button><button type="button" class="opt" data-v="avez">avez</button><button type="button" class="opt" data-v="ont">ont</button></div><p class="it">Abbiamo preso il treno per Parigi.</p></div><div class="it3 item" data-id="e3_4" data-ok="avez" data-a="audio/a1ae1e4a449.mp3"><p class="q">Vous <span class="blank">___</span> fini vos devoirs ?</p><div class="opts"><button type="button" class="opt" data-v="ai">ai</button><button type="button" class="opt" data-v="as">as</button><button type="button" class="opt" data-v="a">a</button><button type="button" class="opt" data-v="avons">avons</button><button type="button" class="opt" data-v="avez">avez</button><button type="button" class="opt" data-v="ont">ont</button></div><p class="it">Avete finito i compiti?</p></div><div class="it3 item" data-id="e3_5" data-ok="ont" data-a="audio/a49ec12ba3f.mp3"><p class="q">Mes amies <span class="blank">___</span> chanté au karaoké.</p><div class="opts"><button type="button" class="opt" data-v="ai">ai</button><button type="button" class="opt" data-v="as">as</button><button type="button" class="opt" data-v="a">a</button><button type="button" class="opt" data-v="avons">avons</button><button type="button" class="opt" data-v="avez">avez</button><button type="button" class="opt" data-v="ont">ont</button></div><p class="it">Le mie amiche hanno cantato al karaoke.</p></div><div class="medslot" aria-live="polite"></div></div></section><section class="exo x4" id="ex4" data-ex="ex4"><div class="exh"><span class="exn">4</span><div><p class="ety">EXERCICE · SMS AVEC LÉA</p><h3>Tu écris à ton amie Léa. Choisis la bonne bulle pour compléter les messages.</h3><p class="it">Scrivi alla tua amica Léa. Scegli la bolla giusta per completare i messaggi.</p></div><i class="dur">4 min</i></div><div class="exb"><div class="phone"><div class="pbar"><span class="av">L</span><div><b>Léa</b><small>en ligne</small></div><span class="ic">📞 💜</span></div><div class="chat" id="chat"><div class="msg lea"><div class="bub">Coucou Giulia ! Tu as passé un bon week-end ? 💕<p class="it">Ciao Giulia! Hai passato un bel weekend?</p></div></div><div class="msg me item sms" data-id="e4_1" data-ok="ai" data-a="audio/a4b14a7af7f.mp3" data-full="Oui, super ! Samedi, j&#x27;ai dansé au spectacle de l&#x27;école 💃"><div class="bub">Oui, super ! Samedi, j&#x27;<span class="blank">___</span> dansé au spectacle de l&#x27;école 💃<p class="it after">Sì, benissimo! Sabato ho ballato allo spettacolo della scuola.</p></div><div class="opts"><button type="button" class="opt" data-v="ai">ai</button><button type="button" class="opt" data-v="a">a</button><button type="button" class="opt" data-v="as">as</button></div></div><div class="msg lea"><div class="bub">Trop bien !! Et après ? 😍<p class="it">Che bello!! E dopo?</p></div></div><div class="msg me item sms" data-id="e4_3" data-ok="mangé" data-a="audio/af48ff200ac.mp3" data-full="Après, nous avons mangé des pâtes chez ma grand-mère 🍝"><div class="bub">Après, nous avons <span class="blank">___</span> des pâtes chez ma grand-mère 🍝<p class="it after">Dopo abbiamo mangiato la pasta dalla nonna.</p></div><div class="opts"><button type="button" class="opt" data-v="manger">manger</button><button type="button" class="opt" data-v="mange">mange</button><button type="button" class="opt" data-v="mangé">mangé</button></div></div><div class="msg lea item sms" data-id="e4_4" data-ok="vu" data-a="audio/a40a5d0b769.mp3" data-full="Miam ! Moi, j&#x27;ai vu un film avec mon frère 🎬"><div class="bub">Miam ! Moi, j&#x27;ai <span class="blank">___</span> un film avec mon frère 🎬<p class="it after">Gnam! Io ho visto un film con mio fratello.</p></div><div class="opts"><button type="button" class="opt" data-v="vois">vois</button><button type="button" class="opt" data-v="voir">voir</button><button type="button" class="opt" data-v="vu">vu</button></div></div><div class="msg me item sms" data-id="e4_5" data-ok="promené" data-a="audio/ad06f5d62a9.mp3" data-full="Et dimanche, j&#x27;ai promené le chien au parc 🐶"><div class="bub">Et dimanche, j&#x27;ai <span class="blank">___</span> le chien au parc 🐶<p class="it after">E domenica ho portato a spasso il cane al parco.</p></div><div class="opts"><button type="button" class="opt" data-v="promener">promener</button><button type="button" class="opt" data-v="promène">promène</button><button type="button" class="opt" data-v="promené">promené</button></div></div><div class="msg lea"><div class="bub">Et le soir ? 🌙<p class="it">E la sera?</p></div></div><div class="msg me item sms" data-id="e4_7" data-ok="dormi" data-a="audio/a9c8498e858.mp3" data-full="Le soir, le chat a dormi sur mon lit 😻"><div class="bub">Le soir, le chat a <span class="blank">___</span> sur mon lit 😻<p class="it after">La sera il gatto ha dormito sul mio letto.</p></div><div class="opts"><button type="button" class="opt" data-v="dormir">dormir</button><button type="button" class="opt" data-v="dort">dort</button><button type="button" class="opt" data-v="dormi">dormi</button></div></div><div class="msg lea item sms" data-id="e4_8" data-ok="pris" data-a="audio/a86a4c1f2b9.mp3" data-full="Trop mignon ! Tu as pris une photo ? 📸"><div class="bub">Trop mignon ! Tu as <span class="blank">___</span> une photo ? 📸<p class="it after">Che carino! Hai fatto una foto?</p></div><div class="opts"><button type="button" class="opt" data-v="pris">pris</button><button type="button" class="opt" data-v="prendre">prendre</button><button type="button" class="opt" data-v="prend">prend</button></div></div><div class="msg me"><div class="bub">Oui, regarde ! 💖<p class="it">Sì, guarda!</p></div></div><div class="msg me pic"><div class="bub"><img src="img/catbed.jpg" alt="Chat sur le lit"></div></div><div class="msg lea"><div class="bub">😍😍😍 Trop chou !<p class="it">Troppo carino!</p></div></div></div><div class="typing"><span></span><span></span><span></span></div></div><div class="medslot" aria-live="polite"></div></div></section><section class="exo x5" id="ex5" data-ex="ex5"><div class="exh"><span class="exn">5</span><div><p class="ety">EXERCICE · REMETS DANS L'ORDRE</p><h3>Touche les mots dans le bon ordre pour faire la phrase.</h3><p class="it">Tocca le parole nell'ordine giusto per formare la frase.</p></div><i class="dur">3 min</i></div><div class="exb"><div class="it5 item" data-id="e5_0" data-ok="J&#x27;ai dansé avec mes amies." data-a="audio/a9c7586c538.mp3"><div class="line"></div><div class="bank"><button type="button" class="tile">mes</button><button type="button" class="tile">avec</button><button type="button" class="tile">amies.</button><button type="button" class="tile">dansé</button><button type="button" class="tile">J&#x27;ai</button></div><p class="it">Ho ballato con le mie amiche.</p></div><div class="it5 item" data-id="e5_1" data-ok="Le chaton a bu du lait." data-a="audio/accac8b70f1.mp3"><div class="line"></div><div class="bank"><button type="button" class="tile">du</button><button type="button" class="tile">Le</button><button type="button" class="tile">lait.</button><button type="button" class="tile">chaton</button><button type="button" class="tile">bu</button><button type="button" class="tile">a</button></div><p class="it">Il gattino ha bevuto del latte.</p></div><div class="it5 item" data-id="e5_2" data-ok="Nous avons vu un perroquet." data-a="audio/a2485fdc5e4.mp3"><div class="line"></div><div class="bank"><button type="button" class="tile">avons</button><button type="button" class="tile">Nous</button><button type="button" class="tile">un</button><button type="button" class="tile">vu</button><button type="button" class="tile">perroquet.</button></div><p class="it">Abbiamo visto un pappagallo.</p></div><div class="it5 item" data-id="e5_3" data-ok="Elle n&#x27;a pas fini sa glace." data-a="audio/adff752d678.mp3"><div class="line"></div><div class="bank"><button type="button" class="tile">pas</button><button type="button" class="tile">glace.</button><button type="button" class="tile">fini</button><button type="button" class="tile">n&#x27;a</button><button type="button" class="tile">sa</button><button type="button" class="tile">Elle</button></div><p class="it">Non ha finito il suo gelato.</p></div><div class="medslot" aria-live="polite"></div></div></section><section class="exo x6" id="ex6" data-ex="ex6"><div class="exh"><span class="exn">6</span><div><p class="ety">EXERCICE · LE JOURNAL DE GIULIA</p><h3>Écris le participe passé du verbe entre parenthèses, puis touche « Vérifier ».</h3><p class="it">Scrivi il participio passato del verbo tra parentesi, poi tocca « Vérifier ».</p></div><i class="dur">4 min</i></div><div class="exb"><div class="diary"><div class="dtop"><img src="img/diary.jpg" alt=""><p>📖 Mon journal · <i>vendredi</i></p></div><p class="dtext">Cher journal, aujourd&#x27;hui, j&#x27;ai <span class="gap item" data-id="e6_0" data-ok="passé"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="passer"><small>(passer)</small></span> une journée géniale ! Ce matin, j&#x27;ai <span class="gap item" data-id="e6_1" data-ok="pris"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="prendre"><small>(prendre)</small></span> le petit-déjeuner avec Alice. Après l&#x27;école, je suis allée au cours de danse et nous avons <span class="gap item" data-id="e6_2" data-ok="dansé"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="danser"><small>(danser)</small></span> sur une chanson pop. Le soir, maman a <span class="gap item" data-id="e6_3" data-ok="fait"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="faire"><small>(faire)</small></span> des lasagnes ! Mon chat a <span class="gap item" data-id="e6_4" data-ok="regardé"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="regarder"><small>(regarder)</small></span> les lasagnes toute la soirée. Après le dîner, j&#x27;ai <span class="gap item" data-id="e6_5" data-ok="fini"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="finir"><small>(finir)</small></span> mes devoirs et j&#x27;ai <span class="gap item" data-id="e6_6" data-ok="lu"><input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="lire"><small>(lire)</small></span> trois chapitres de mon livre. Bonne nuit ! 💜</p><div class="dbtn"><button type="button" class="ekey" id="ekey">é</button><button type="button" class="btn" id="check6">Vérifier ✨</button><button class="spk big hidden" id="spk6" type="button" data-a="audio/a0d2a2f38c4.mp3" aria-label="Écouter">🔊</button></div><p class="it after" id="it6">Caro diario, oggi ho passato una giornata fantastica! Stamattina ho fatto colazione con Alice. Dopo la scuola sono andata a lezione di danza e abbiamo ballato su una canzone pop. La sera la mamma ha fatto le lasagne! Il mio gatto ha guardato le lasagne tutta la sera. Dopo cena ho finito i compiti e ho letto tre capitoli del mio libro. Buonanotte!</p></div><div class="medslot" aria-live="polite"></div></div></section>
+<section class="exo revoir" id="revoir"><div class="exh"><span class="exn">★</span><div><p class="ety">À REVOIR</p><h3>Tes médailles et les points à relire</h3><p class="it">Le tue medaglie e i punti da rileggere</p></div></div>
+<div class="exb"><div id="medals" class="medrow"></div><div id="revlist"></div>
+<div class="send"><h4>📩 Envoyer mes résultats à Irène</h4><p>Irène reçoit ton score, tes médailles et les points à revoir.</p><label for="sname">Ton prénom</label><input id="sname" type="text" value="Giulia" autocomplete="given-name"><button class="btn" id="sendbtn" type="button">Envoyer à Irène</button><p class="st" id="sendst" role="status"></p></div>
+<button class="btn ghost" id="reset" type="button">Recommencer les exercices</button></div></section></main>
+<div class="fai-sign"><img src="../marque/signature-irene.png" alt="Le français avec Irène · Cours de français en ligne"></div>
+<div id="fx" aria-hidden="true"></div><div id="medalstage" aria-hidden="true"></div>
+<script>(function(){
+"use strict";
+var REG={"e1_0": {"ex": "ex1", "label": "J'ai mangé une pizza.", "answer": "passé composé", "rule": "regle-quand"}, "e1_1": {"ex": "ex1", "label": "Je mange une pizza.", "answer": "présent", "rule": "regle-quand"}, "e1_2": {"ex": "ex1", "label": "Le chien joue dans le jardin.", "answer": "présent", "rule": "regle-quand"}, "e1_3": {"ex": "ex1", "label": "Le chien a joué dans le jardin.", "answer": "passé composé", "rule": "regle-quand"}, "e1_4": {"ex": "ex1", "label": "Nous avons regardé un film.", "answer": "passé composé", "rule": "regle-quand"}, "e1_5": {"ex": "ex1", "label": "Elle danse avec ses amies.", "answer": "présent", "rule": "regle-quand"}, "e2_0": {"ex": "ex2", "label": "Hier, j'ai … des pâtes au pesto.", "answer": "Hier, j'ai mangé des pâtes au pesto.", "rule": "regle-er"}, "e2_1": {"ex": "ex2", "label": "Le chien a … dans le jardin.", "answer": "Le chien a joué dans le jardin.", "rule": "regle-er"}, "e2_2": {"ex": "ex2", "label": "Nous avons … un film au cinéma.", "answer": "Nous avons regardé un film au cinéma.", "rule": "regle-er"}, "e2_3": {"ex": "ex2", "label": "J'ai … des cupcakes pour maman.", "answer": "J'ai fait des cupcakes pour maman.", "rule": "regle-stars"}, "e2_4": {"ex": "ex2", "label": "Tu as … le cheval de Léa ?", "answer": "Tu as vu le cheval de Léa ?", "rule": "regle-stars"}, "e2_5": {"ex": "ex2", "label": "Elle a … un chocolat chaud.", "answer": "Elle a bu un chocolat chaud.", "rule": "regle-stars"}, "e3_0": {"ex": "ex3", "label": "J' … dansé toute la soirée.", "answer": "J'ai dansé toute la soirée.", "rule": "regle-avoir"}, "e3_1": {"ex": "ex3", "label": "Tu … lu le livre ?", "answer": "Tu as lu le livre ?", "rule": "regle-avoir"}, "e3_2": {"ex": "ex3", "label": "Le chat … dormi sur le canapé.", "answer": "Le chat a dormi sur le canapé.", "rule": "regle-avoir"}, "e3_3": {"ex": "ex3", "label": "Nous … pris le train pour Paris.", "answer": "Nous avons pris le train pour Paris.", "rule": "regle-avoir"}, "e3_4": {"ex": "ex3", "label": "Vous … fini vos devoirs ?", "answer": "Vous avez fini vos devoirs ?", "rule": "regle-avoir"}, "e3_5": {"ex": "ex3", "label": "Mes amies … chanté au karaoké.", "answer": "Mes amies ont chanté au karaoké.", "rule": "regle-avoir"}, "e4_1": {"ex": "ex4", "label": "Oui, super ! Samedi, j'… dansé au spectacle de l'école", "answer": "Oui, super ! Samedi, j'ai dansé au spectacle de l'école", "rule": "regle-avoir"}, "e4_3": {"ex": "ex4", "label": "Après, nous avons … des pâtes chez ma grand-mère", "answer": "Après, nous avons mangé des pâtes chez ma grand-mère", "rule": "regle-er"}, "e4_4": {"ex": "ex4", "label": "Miam ! Moi, j'ai … un film avec mon frère", "answer": "Miam ! Moi, j'ai vu un film avec mon frère", "rule": "regle-stars"}, "e4_5": {"ex": "ex4", "label": "Et dimanche, j'ai … le chien au parc", "answer": "Et dimanche, j'ai promené le chien au parc", "rule": "regle-er"}, "e4_7": {"ex": "ex4", "label": "Le soir, le chat a … sur mon lit", "answer": "Le soir, le chat a dormi sur mon lit", "rule": "regle-stars"}, "e4_8": {"ex": "ex4", "label": "Trop mignon ! Tu as … une photo ?", "answer": "Trop mignon ! Tu as pris une photo ?", "rule": "regle-stars"}, "e5_0": {"ex": "ex5", "label": "Phrase 1 à remettre dans l'ordre", "answer": "J'ai dansé avec mes amies.", "rule": "regle-avoir"}, "e5_1": {"ex": "ex5", "label": "Phrase 2 à remettre dans l'ordre", "answer": "Le chaton a bu du lait.", "rule": "regle-stars"}, "e5_2": {"ex": "ex5", "label": "Phrase 3 à remettre dans l'ordre", "answer": "Nous avons vu un perroquet.", "rule": "regle-stars"}, "e5_3": {"ex": "ex5", "label": "Phrase 4 à remettre dans l'ordre", "answer": "Elle n'a pas fini sa glace.", "rule": "regle-negation"}, "e6_0": {"ex": "ex6", "label": "(passer) → passé", "answer": "passé", "rule": "regle-er"}, "e6_1": {"ex": "ex6", "label": "(prendre) → pris", "answer": "pris", "rule": "regle-stars"}, "e6_2": {"ex": "ex6", "label": "(danser) → dansé", "answer": "dansé", "rule": "regle-er"}, "e6_3": {"ex": "ex6", "label": "(faire) → fait", "answer": "fait", "rule": "regle-stars"}, "e6_4": {"ex": "ex6", "label": "(regarder) → regardé", "answer": "regardé", "rule": "regle-er"}, "e6_5": {"ex": "ex6", "label": "(finir) → fini", "answer": "fini", "rule": "regle-stars"}, "e6_6": {"ex": "ex6", "label": "(lire) → lu", "answer": "lu", "rule": "regle-stars"}};
+var KEY="giulia-passe-compose-v1";
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var S;try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){S={}}
+S.items=S.items||{};S.medals=S.medals||{};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+/* ---------- audio ---------- */
+var player=new Audio(),curBtn=null;
+function play(src,btn){try{player.pause();if(curBtn)curBtn.classList.remove("playing");player=new Audio(src);curBtn=btn||null;if(btn)btn.classList.add("playing");
+ player.onended=function(){if(btn)btn.classList.remove("playing")};var p=player.play();if(p&&p.catch)p.catch(function(){if(btn)btn.classList.remove("playing")});}catch(e){}}
+$$("[data-a].spk,[data-a].pill,[data-a].crow,[data-a].pair").forEach(function(b){b.addEventListener("click",function(ev){ev.stopPropagation();play(b.getAttribute("data-a"),b)})});
+
+/* ---------- traduction ---------- */
+function applyIt(){document.body.classList.toggle("noit",S.noit===true)}
+$("#ittog").addEventListener("click",function(){S.noit=!S.noit;save();applyIt()});applyIt();
+
+/* ---------- cartes à retourner ---------- */
+$$(".flip").forEach(function(c){function t(){c.classList.toggle("on");if(c.classList.contains("on"))play(c.getAttribute("data-a"))}
+ c.addEventListener("click",t);c.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();t()}})});
+
+/* ---------- effets ---------- */
+var EM=["💖","✨","⭐","💗","🌸","💜","🌟"];
+function burst(el,n,big){var r=el.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,fx=$("#fx");
+ for(var i=0;i<n;i++){var s=document.createElement("span");s.className="pt";s.textContent=EM[Math.floor(Math.random()*EM.length)];
+  var a=Math.random()*Math.PI*2,d=(big?140:60)+Math.random()*(big?200:80);
+  s.style.left=x+"px";s.style.top=y+"px";s.style.fontSize=(big?24:16)+Math.random()*(big?22:12)+"px";
+  s.style.setProperty("--dx",Math.cos(a)*d+"px");s.style.setProperty("--dy",Math.sin(a)*d+"px");s.style.setProperty("--r",(Math.random()*120-60)+"deg");
+  s.style.animationDelay=(Math.random()*.15)+"s";fx.appendChild(s);(function(s){setTimeout(function(){s.remove()},1500)})(s)}}
+
+/* ---------- médailles ---------- */
+var MC={gold:["#fff6c2","#ffd23f","#d99a00","Médaille d'or"],silver:["#ffffff","#dfe3ea","#98a2b3","Médaille d'argent"],bronze:["#ffe0c2","#e3995e","#a5582a","Médaille de bronze"]};
+var uid=0;
+function medalSVG(t){var c=MC[t],g="mg"+(uid++);
+ return '<svg viewBox="0 0 200 232" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="'+g+'" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="'+c[0]+'"/><stop offset=".55" stop-color="'+c[1]+'"/><stop offset="1" stop-color="'+c[2]+'"/></radialGradient></defs>'
+ +'<polygon points="52,0 98,0 112,96 76,104" fill="#ff6fae"/><polygon points="64,0 74,0 92,100 84,102" fill="#ffd1e6"/>'
+ +'<polygon points="102,0 148,0 124,104 88,96" fill="#a77bff"/><polygon points="126,0 136,0 114,102 106,100" fill="#e5d4ff"/>'
+ +'<circle cx="100" cy="152" r="74" fill="'+c[2]+'"/><circle cx="100" cy="150" r="70" fill="url(#'+g+')"/>'
+ +'<circle cx="100" cy="150" r="55" fill="none" stroke="'+c[2]+'" stroke-width="3" stroke-dasharray="2 6" opacity=".7"/>'
+ +'<path d="M62 170 q-14 -30 4 -58" fill="none" stroke="'+c[2]+'" stroke-width="4" stroke-linecap="round"/><path d="M138 170 q14 -30 -4 -58" fill="none" stroke="'+c[2]+'" stroke-width="4" stroke-linecap="round"/>'
+ +'<g fill="'+c[2]+'" opacity=".85"><ellipse cx="58" cy="148" rx="5" ry="9" transform="rotate(-20 58 148)"/><ellipse cx="60" cy="130" rx="5" ry="9" transform="rotate(10 60 130)"/><ellipse cx="142" cy="148" rx="5" ry="9" transform="rotate(20 142 148)"/><ellipse cx="140" cy="130" rx="5" ry="9" transform="rotate(-10 140 130)"/></g>'
+ +'<path d="M100 112 l11 23 25 3 -18 17 5 25 -23 -12 -23 12 5 -25 -18 -17 25 -3z" fill="'+c[0]+'" stroke="'+c[2]+'" stroke-width="3" stroke-linejoin="round"/>'
+ +'<path d="M100 150 c-6 -8 -18 -2 -12 7 l12 11 12 -11 c6 -9 -6 -15 -12 -7z" fill="#ff4f9a"/>'
+ +'<ellipse cx="78" cy="118" rx="16" ry="8" fill="#fff" opacity=".45" transform="rotate(-30 78 118)"/></svg>'}
+function medalType(err){return err===0?"gold":(err===1?"silver":"bronze")}
+function exItems(ex){return Object.keys(REG).filter(function(k){return REG[k].ex===ex})}
+function exErrors(ex){return exItems(ex).filter(function(k){return S.items[k]&&!S.items[k].ok}).length}
+function exDone(ex){return exItems(ex).every(function(k){return S.items[k]})}
+function errTxt(n){return n===0?"0 erreur · parfait !":(n===1?"1 erreur":n+" erreurs")}
+function placeSmall(ex,anim){var slot=$("#"+ex+" .medslot"),t=S.medals[ex];if(!slot)return;if(!t){slot.innerHTML="";return}
+ slot.innerHTML=medalSVG(t)+'<span class="lbl">'+MC[t][3]+'</span>';if(anim){slot.animate([{transform:"scale(1.6)"},{transform:"scale(.85)"},{transform:"scale(1)"}],{duration:500,easing:"ease-out"});burst(slot,14)}}
+var busy=false;
+function award(ex){if(S.medals[ex]||!exDone(ex))return;var err=exErrors(ex),t=medalType(err);S.medals[ex]=t;save();renderRevoir();
+ var st=$("#medalstage");st.innerHTML='<div class="bigmed"><div class="rays"></div>'+medalSVG(t)+'<div class="mtitle">'+MC[t][3]+' !<div style="font-size:17px;color:#8a6a82;text-align:center">'+errTxt(err)+'</div></div></div>';
+ var bm=$(".bigmed",st);st.classList.add("on");busy=true;
+ bm.animate([{transform:"scale(0) rotate(-200deg)",opacity:0},{transform:"scale(1.18) rotate(12deg)",opacity:1,offset:.6},{transform:"scale(.95) rotate(-4deg)",offset:.8},{transform:"scale(1) rotate(0)"}],{duration:950,easing:"ease-out"});
+ setTimeout(function(){burst(bm,40,true)},350);setTimeout(function(){burst(bm,26,true)},900);
+ setTimeout(function(){var slot=$("#"+ex+" .medslot"),a=bm.getBoundingClientRect(),b=slot.getBoundingClientRect();
+  var dx=(b.left+b.width/2)-(a.left+a.width/2),dy=(b.top+b.height/2)-(a.top+a.height/2),sc=b.width/a.width;
+  $(".mtitle",st).style.opacity=0;$(".rays",st).style.opacity=0;
+  var an=bm.animate([{transform:"translate(0,0) scale(1)"},{transform:"translate("+dx+"px,"+dy+"px) scale("+sc+")"}],{duration:850,easing:"cubic-bezier(.6,-0.2,.4,1)",fill:"forwards"});
+  an.onfinish=function(){st.classList.remove("on");st.innerHTML="";placeSmall(ex,true);busy=false}},2300)}
+
+/* ---------- score ---------- */
+var TOT=Object.keys(REG).length;$("#tot").textContent=TOT;
+function score(){return Object.keys(S.items).filter(function(k){return REG[k]&&S.items[k].ok}).length}
+function upd(p){$("#sc").textContent=score();if(p){var s=$("#score");s.classList.remove("pop");void s.offsetWidth;s.classList.add("pop")}}
+
+function record(id,ok,v,el){S.items[id]={ok:ok,v:v};save();upd(ok);renderRevoir();
+ if(ok)burst(el,16);else el.classList.add("shake");
+ var ex=REG[id].ex;if(exDone(ex))setTimeout(function(){award(ex)},ok?900:1300)}
+
+/* ---------- QCM (ex1, ex2, ex3, SMS) ---------- */
+function showChoice(it,v,ok,anim){var good=it.getAttribute("data-ok");it.classList.add("done");
+ $$(".opt",it).forEach(function(o){var ov=o.getAttribute("data-v");if(ov===v)o.classList.add(ok?"ok":"ko");if(!ok&&ov===good)o.classList.add("right")});
+ var bl=$(".blank",it);if(bl){bl.textContent=good;bl.classList.add(ok?"ok":"ko")}}
+$$(".item").forEach(function(it){if(it.classList.contains("it5")||it.classList.contains("gap"))return;
+ $$(".opt",it).forEach(function(o){o.addEventListener("click",function(){var id=it.getAttribute("data-id");if(S.items[id])return;
+  var v=o.getAttribute("data-v"),ok=v===it.getAttribute("data-ok");showChoice(it,v,ok,true);play(it.getAttribute("data-a"));record(id,ok,v,o);
+  if(it.classList.contains("sms"))setTimeout(revealChat,700)})})});
+
+/* ---------- SMS : apparition progressive ---------- */
+function revealChat(){var msgs=$$("#chat .msg"),stop=false,newly=[];
+ msgs.forEach(function(m){if(stop){m.classList.add("hide");return}if(m.classList.contains("hide"))newly.push(m);
+  if(m.classList.contains("item")&&!S.items[m.getAttribute("data-id")])stop=true});
+ msgs.forEach(function(m){if(newly.indexOf(m)>=0)m.classList.add("hide")});
+ var ty=$(".typing");var i=0;function next(){if(i>=newly.length){ty.classList.remove("on");return}ty.classList.add("on");
+  setTimeout(function(){newly[i].classList.remove("hide");i++;next()},i===0?350:650)}next()}
+function initChat(){var stop=false;$$("#chat .msg").forEach(function(m){if(stop)m.classList.add("hide");if(m.classList.contains("item")&&!S.items[m.getAttribute("data-id")])stop=true})}
+
+/* ---------- ex5 : remettre dans l'ordre ---------- */
+$$(".it5").forEach(function(it){var line=$(".line",it),bank=$(".bank",it),id=it.getAttribute("data-id");
+ $$(".tile",it).forEach(function(t){t.addEventListener("click",function(){if(S.items[id])return;
+  (t.parentNode===bank?line:bank).appendChild(t);
+  if(!$(".tile",bank)){var v=$$(".tile",line).map(function(x){return x.textContent}).join(" "),ok=v===it.getAttribute("data-ok");
+   finish5(it,ok,v);play(it.getAttribute("data-a"));record(id,ok,v,line)}})})});
+function finish5(it,ok,v){it.classList.add("done",ok?"okk":"koo");if(!ok&&!$(".sol",it)){var p=document.createElement("p");p.className="sol";p.textContent="✔ "+it.getAttribute("data-ok");$(".bank",it).after(p)}}
+
+/* ---------- ex6 : journal ---------- */
+var lastInput=null;$$(".gap input").forEach(function(i){i.addEventListener("focus",function(){lastInput=i})});
+$("#ekey").addEventListener("mousedown",function(e){e.preventDefault()});
+$("#ekey").addEventListener("click",function(){var i=lastInput||$(".gap input");if(!i||i.disabled)return;var s=i.selectionStart||i.value.length;i.value=i.value.slice(0,s)+"é"+i.value.slice(i.selectionEnd||s);i.focus();i.setSelectionRange(s+1,s+1)});
+function norm(s){return (s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[’`]/g,"'")}
+function show6(){var gaps=$$(".gap");gaps.forEach(function(g){var r=S.items[g.getAttribute("data-id")];if(!r)return;var inp=$("input",g);inp.value=r.v;inp.disabled=true;g.classList.add(r.ok?"ok":"ko");
+  if(!r.ok&&!$(".fix",g)){var f=document.createElement("span");f.className="fix";f.textContent=g.getAttribute("data-ok");g.insertBefore(f,$("small",g))}});
+ if(exDone("ex6")){$("#ex6 .diary").classList.add("done");$("#spk6").classList.remove("hidden");$("#check6").disabled=true}}
+$("#check6").addEventListener("click",function(){var gaps=$$(".gap"),empty=gaps.filter(function(g){return !norm($("input",g).value)});
+ if(empty.length){empty.forEach(function(g){g.classList.remove("shake");void g.offsetWidth;g.classList.add("shake")});$("input",empty[0]).focus();return}
+ var any=false,okAll=true;gaps.forEach(function(g){var id=g.getAttribute("data-id");if(S.items[id])return;var v=norm($("input",g).value),ok=v===g.getAttribute("data-ok");if(!ok)okAll=false;S.items[id]={ok:ok,v:v};any=true});
+ save();upd(true);renderRevoir();show6();burst($("#check6"),okAll?30:10);play($("#spk6").getAttribute("data-a"),$("#spk6"));setTimeout(function(){award("ex6")},1200)});
+
+/* ---------- à revoir ---------- */
+var RN={"regle-quand":"Le passé composé, c'est quoi ?","regle-avoir":"La formule : avoir + participe","regle-er":"Les verbes en -er → é","regle-stars":"Les participes stars","regle-negation":"Dire non","regle-aller":"Le secret d'aller"};
+var EXN={ex1:"Ex. 1",ex2:"Ex. 2",ex3:"Ex. 3",ex4:"Ex. 4",ex5:"Ex. 5",ex6:"Ex. 6"};
+function renderRevoir(){var w=Object.keys(REG).filter(function(k){return S.items[k]&&!S.items[k].ok}),L=$("#revlist");
+ L.innerHTML=w.length?w.map(function(k){var r=REG[k];return '<a href="#'+r.rule+'" data-r="'+r.rule+'">'+EXN[r.ex]+' · '+esc(r.label)+'<small>✔ '+esc(r.answer)+' — 📖 '+RN[r.rule]+'</small></a>'}).join(""):
+  (Object.keys(S.items).length?'<p class="rv-ok">💖 Rien à revoir pour l\'instant, bravo !</p>':'<p class="rv-ok" style="color:#8a6a82">Fais les exercices : les points à revoir apparaîtront ici.</p>');
+ $$("a",L).forEach(function(a){a.addEventListener("click",function(){var s=document.getElementById(a.getAttribute("data-r"));setTimeout(function(){s.classList.remove("flashsec");void s.offsetWidth;s.classList.add("flashsec")},400)})});
+ $("#medals").innerHTML=["ex1","ex2","ex3","ex4","ex5","ex6"].map(function(e){var t=S.medals[e];return '<div>'+(t?medalSVG(t):'<div class="none"></div>')+'<br>'+EXN[e]+'</div>'}).join("")}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+/* ---------- restauration ---------- */
+$$(".item").forEach(function(it){var id=it.getAttribute("data-id"),r=S.items[id];if(!r)return;
+ if(it.classList.contains("it5")){var line=$(".line",it),bank=$(".bank",it);r.v.split(" ").forEach(function(w){var t=$$(".tile",bank).filter(function(x){return x.textContent===w})[0];if(t)line.appendChild(t)});finish5(it,r.ok,r.v)}
+ else if(!it.classList.contains("gap"))showChoice(it,r.v,r.ok,false)});
+show6();initChat();["ex1","ex2","ex3","ex4","ex5","ex6"].forEach(function(e){if(!S.medals[e]&&exDone(e))S.medals[e]=medalType(exErrors(e));placeSmall(e,false)});
+upd(false);renderRevoir();
+
+/* ---------- recommencer ---------- */
+$("#reset").addEventListener("click",function(){if(!window.confirm("Effacer toutes tes réponses et tes médailles ?"))return;S.items={};S.medals={};delete S.sentAt;save();location.hash="#exercices";location.reload()});
+
+/* ---------- envoi à Irène ---------- */
+(function(){var b=$("#sendbtn"),st=$("#sendst"),nm=$("#sname");
+ if(S.sentAt){st.className="st ok";st.textContent="Résultats déjà envoyés le "+S.sentAt+". Tu peux les renvoyer si tu as refait des exercices."}
+ b.onclick=function(){var done=Object.keys(REG).filter(function(k){return S.items[k]}).length;
+  var w=Object.keys(REG).filter(function(k){return S.items[k]&&!S.items[k].ok}).map(function(k){return "• "+EXN[REG[k].ex]+" · "+REG[k].label+" → "+REG[k].answer});
+  var md=["ex1","ex2","ex3","ex4","ex5","ex6"].map(function(e){var t=S.medals[e];return EXN[e]+" : "+(t?MC[t][3].replace("Médaille ","").replace("d'","").replace("de ",""):"pas encore faite")}).join("\n");
+  var name=(nm.value||"").trim()||"Élève";
+  var data={access_key:"e554b1d0-2dda-40a0-b94b-f833d9d5fad6",subject:"Résultats de "+name+" · Le passé composé",from_name:"Le français avec Irène",
+   "Élève":name,"Leçon":"Giulia · Hier, j'ai dansé ! (passé composé)","Score":score()+" / "+TOT,"Questions faites":done+" / "+TOT,"Médailles":md,
+   "À revoir":w.length?w.join("\n"):"Rien à revoir 🎉"};
+  b.disabled=true;b.textContent="Envoi en cours…";st.className="st";st.textContent="";
+  fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)})
+  .then(function(r){return r.json()}).then(function(j){if(!j.success)throw new Error(j.message||"erreur");
+   S.sentAt=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" à "+new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});save();
+   st.className="st ok";st.textContent="Merci ! Irène a bien reçu tes résultats. 💖"})
+  .catch(function(){st.className="st ko";st.textContent="L'envoi n'a pas marché. Vérifie ta connexion et réessaie."})
+  .then(function(){b.disabled=false;b.textContent="Envoyer à Irène"})}})();
+})();
+</script></body></html>
