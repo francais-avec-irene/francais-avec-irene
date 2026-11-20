@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La nominalisation · Edina</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#0f6e6e;--teal2:#14a3a3;--coral:#e8735a;--gold:#d9a441;--plum:#6b3f7a;--sage:#5f8f5a;--ink:#1f2a33;--soft:#f6f3ee;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Poppins,sans-serif;color:var(--ink);background:var(--soft);line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px 60px}
+.score{position:fixed;top:12px;right:12px;z-index:50;background:#fff;border:2px solid var(--gold);border-radius:30px;padding:6px 14px;font-weight:700;color:var(--teal);box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.score span{color:var(--coral)}
+.logo{display:block;width:120px;margin:14px auto 10px}
+.hero{position:relative;border-radius:22px;overflow:hidden;height:340px;background:url(img/hero.jpg) center/cover}
+.hero:before{content:"";position:absolute;inset:0 auto 0 0;width:38px;background:linear-gradient(90deg,rgba(15,40,50,.45),transparent)}
+.hero .t{position:absolute;left:26px;bottom:24px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.75),0 0 3px rgba(0,0,0,.6)}
+.tag{display:inline-block;background:var(--gold);color:#fff;font-size:12px;letter-spacing:2px;padding:4px 12px;border-radius:20px;font-weight:600;text-shadow:none}
+.hero h1{margin:8px 0 2px;font-size:44px;line-height:1.05}
+.hero p{margin:0;font-family:Lora;font-style:italic;font-size:18px}
+.rainbow{height:5px;border-radius:5px;margin:12px 0 22px;background:linear-gradient(90deg,var(--teal),var(--teal2),var(--gold),var(--coral),var(--plum))}
+.en{font-family:Lora;font-style:italic;color:#6b7680;font-size:.93em}
+.box{background:#fff;border-radius:18px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 10px rgba(0,0,0,.05);border-top:6px solid var(--teal)}
+.inner-box{border-left:5px solid var(--plum);background:#f4eef7;border-radius:10px;padding:10px 14px;margin:10px 0}
+.pill{display:inline-block;border:2px solid var(--teal);color:var(--teal);border-radius:20px;padding:3px 12px;font-weight:600;margin:3px 2px;background:#fff}
+.band{position:relative;height:200px;border-radius:20px;overflow:hidden;margin:44px 0 14px;background-size:cover;background-position:center}
+.band:before{content:"";position:absolute;inset:0 auto 0 0;width:36px;background:linear-gradient(90deg,rgba(0,0,0,.4),transparent)}
+.band .t{position:absolute;left:22px;bottom:16px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.8),0 0 3px rgba(0,0,0,.7)}
+.band .num{font-weight:300;font-size:34px;opacity:.95}
+.band h2{margin:0;font-size:30px;line-height:1.1}
+.band .en{color:#fff;font-size:16px}
+h3{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin:18px 0 6px}
+.ex-line{display:flex;gap:10px;align-items:flex-start;margin:8px 0}
+.ex-line .fr b{color:var(--coral)}
+.say{flex:0 0 auto;border:none;background:var(--teal);color:#fff;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:14px}
+.say:hover{background:var(--coral)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.two{grid-template-columns:1fr}.hero h1{font-size:34px}.hero{height:280px}}
+.side{border-radius:14px;padding:12px 14px}
+.side.a{background:#e6f4f4;border:2px solid var(--teal2)}
+.side.b{background:#fdeee9;border:2px solid var(--coral)}
+.side h4{margin:0 0 6px;font-size:15px}
+/* flip cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:12px 0}
+.flip{perspective:1200px;height:270px;cursor:pointer}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .7s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.1)}
+.front{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;padding:16px}
+.front .w{font-size:24px;font-weight:700;line-height:1.2}
+.front .s{font-family:Lora;font-style:italic;opacity:.95;margin-top:6px}
+.front .hint{position:absolute;bottom:10px;font-size:11px;letter-spacing:1px;opacity:.85}
+.front.photo{justify-content:flex-end;background-size:cover;background-position:center}
+.front.photo .w,.front.photo .s{text-shadow:0 2px 8px rgba(0,0,0,.85)}
+.back{transform:rotateY(180deg);background:#fff;border:3px solid var(--teal2);padding:12px 14px;overflow:auto;font-size:14px}
+.back .w{font-weight:700;color:var(--teal)}
+.back .ex{margin:7px 0;padding:6px 8px;background:#f7f5f0;border-radius:8px}
+.back .note{font-size:12px;background:#fff6e0;border-radius:8px;padding:5px 8px;margin-top:6px}
+.c1{background:linear-gradient(135deg,#0f6e6e,#14a3a3)}.c2{background:linear-gradient(135deg,#e8735a,#d9a441)}.c3{background:linear-gradient(135deg,#6b3f7a,#b0608f)}.c4{background:linear-gradient(135deg,#5f8f5a,#9bbf6a)}.c5{background:linear-gradient(135deg,#2c4a7a,#4f86c6)}
+/* exercises */
+.exo{background:#fff;border-radius:18px;margin:18px 0;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.exo .hd{padding:12px 18px;color:#fff}
+.exo .hd small{letter-spacing:2px;font-size:11px;opacity:.9}
+.exo .hd b{display:block;font-size:16px}
+.exo .hd .en{color:#f1f1f1}
+.exo .bd{padding:10px 18px 16px}
+.q{padding:10px 0;border-bottom:1px dashed #ddd}
+.q:last-child{border:none}
+.q .txt{margin-bottom:6px}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opt{border:2px solid #cfd6da;background:#fff;border-radius:20px;padding:5px 14px;cursor:pointer;font-family:inherit;font-size:14px}
+.opt:hover{border-color:var(--teal2)}
+.opt.good{background:#dff3e4;border-color:#3a9a55;color:#1e6b35;font-weight:600}
+.opt.bad{background:#fbe3e0;border-color:#d0574a;color:#9b2c22;text-decoration:line-through}
+.inp{display:flex;gap:6px;flex-wrap:wrap}
+.inp input{flex:1;min-width:200px;border:2px solid #cfd6da;border-radius:10px;padding:7px 10px;font-family:inherit;font-size:15px}
+.inp input.good{border-color:#3a9a55;background:#eef9f1}
+.inp input.bad{border-color:#d0574a;background:#fdf0ee}
+.btn{border:none;border-radius:10px;padding:7px 14px;background:var(--teal);color:#fff;cursor:pointer;font-family:inherit;font-weight:600}
+.btn.alt{background:#8a96a0}
+.fb{margin-top:6px;font-size:14px;display:none}
+.fb.show{display:block}
+.fb .ok{color:#1e6b35;font-weight:600}
+.fb .ko{color:#9b2c22;font-weight:600}
+.oral{background:linear-gradient(135deg,#fff8ec,#fdeee9);border:2px dashed var(--coral);border-radius:18px;padding:14px 18px;margin:16px 0}
+.oral .lab{display:inline-block;background:var(--coral);color:#fff;border-radius:20px;padding:2px 12px;font-size:12px;letter-spacing:2px;font-weight:600}
+.oral ul{margin:8px 0 0;padding-left:20px}
+.oral li{margin:6px 0}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.words span{background:#fff;border:2px solid var(--gold);border-radius:20px;padding:2px 10px;font-size:13px}
+.words span.used{background:var(--gold);color:#fff}
+textarea{width:100%;min-height:160px;border:2px solid #cfd6da;border-radius:12px;padding:10px;font-family:Lora;font-size:15px}
+.revoir{background:#fff;border-radius:18px;padding:16px 20px;border-top:6px solid var(--coral)}
+.revoir li{margin:6px 0}
+.revoir a{color:var(--teal);font-weight:600}
+.star{position:fixed;pointer-events:none;z-index:99;font-size:20px;color:var(--gold);animation:pop 1s ease-out forwards}
+@keyframes pop{0%{opacity:0;transform:scale(.3)}30%{opacity:1;transform:scale(1.1)}100%{opacity:0;transform:translateY(-40px) scale(.7)}}
+.sig{display:block;width:260px;margin:40px auto 10px}
+.send{margin-top:12px}
+#sendmsg{font-size:14px;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="score">★ <span id="sc">0</span> / <span id="tot">0</span></div>
+<div class="wrap">
+<img class="logo" src="img/logo-irene.png" alt="">
+
+<div class="hero"><div class="t">
+<span class="tag">GRAMMAIRE · STYLE</span>
+<h1>La nominalisation</h1>
+<p>Nommer l'art et la nature · Turning verbs and adjectives into nouns</p>
+</div></div>
+<div class="rainbow"></div>
+
+<div class="box">
+<b>Nominaliser</b>, c'est transformer un verbe, un adjectif ou une expression en <b>nom</b>. On l'utilise pour <b>condenser</b> une information, pour écrire des <b>titres</b> (presse, expositions, catalogues de musée) et pour donner au style plus d'<b>élégance</b>.
+<div class="en">To nominalise is to turn a verb, an adjective or a phrase into a noun. It condenses information, creates headlines (press, exhibitions, museum catalogues) and makes your style more elegant.</div>
+<div class="inner-box">
+<div class="ex-line"><button class="say" data-say="Le musée rouvre ses portes. La réouverture du musée.">▶</button><div class="fr">Le musée <b>rouvre</b> ses portes. → <b>La réouverture</b> du musée.<div class="en">The museum reopens its doors. → The reopening of the museum.</div></div></div>
+<div class="ex-line"><button class="say" data-say="Les glaciers fondent rapidement. La fonte rapide des glaciers.">▶</button><div class="fr">Les glaciers <b>fondent rapidement</b>. → <b>La fonte rapide</b> des glaciers.<div class="en">The glaciers are melting fast. → The rapid melting of the glaciers.</div></div></div>
+</div>
+<span class="pill">-tion / -sion</span><span class="pill">-ment</span><span class="pill">-ure</span><span class="pill">-age</span><span class="pill">-té</span><span class="pill">-eur</span><span class="pill">-esse</span><span class="pill">-ise</span>
+</div>
+
+<h3>Échauffement · Retourne les cartes</h3>
+<div class="cards" id="warm"></div>
+<div id="ex0"></div>
+
+<!-- SECTION 1 -->
+<div class="band" id="r1" style="background-image:url(img/s1.jpg);background-position:center 30%"><div class="t"><span class="num">01</span><h2>À partir d'un adjectif</h2><span class="en">From an adjective</span></div></div>
+<div class="box" style="border-top-color:var(--coral)">
+<h3 style="color:var(--coral)">Singulier ou pluriel : le sens change</h3>
+<div class="two">
+<div class="side a"><h4>Singulier = la qualité</h4>Une idée abstraite.<div class="en">Singular = the quality itself (abstract).</div>
+<div class="ex-line"><button class="say" data-say="La politesse de cet homme me touche.">▶</button><div class="fr"><b>La politesse</b> de cet homme me touche.<div class="en">This man's politeness touches me.</div></div></div></div>
+<div class="side b"><h4>Pluriel = des choses concrètes</h4>Des paroles, des actes, des personnes ou des objets qui ont cette qualité.<div class="en">Plural = concrete words, acts, people or objects with that quality.</div>
+<div class="ex-line"><button class="say" data-say="Nous avons échangé des politesses.">▶</button><div class="fr">Nous avons échangé <b>des politesses</b>.<div class="en">We exchanged polite remarks.</div></div></div></div>
+</div>
+</div>
+<div class="cards" id="cards1"></div>
+<div id="ex1"></div>
+
+<div class="box" id="r1b" style="border-top-color:var(--plum)">
+<h3 style="color:var(--plum)">Pas de nom pour certains adjectifs</h3>
+Beaucoup d'adjectifs n'ont pas de nom correspondant : <i>adorable, irrésistible, terne, insupportable, odieux, ordinaire, rêveur, redoutable, remarquable…</i>
+<div class="en">Many adjectives have no matching noun.</div>
+<div class="inner-box">On emploie alors : <span class="pill">le caractère</span><span class="pill">le côté</span><span class="pill">l'aspect</span><span class="pill">la tendance</span> + adjectif
+<div class="en">Then we use: the character / the side / the aspect / the tendency + adjective.</div></div>
+<div class="ex-line"><button class="say" data-say="Le côté rêveur de ce peintre se voit dans chaque toile.">▶</button><div class="fr"><b>Le côté rêveur</b> de ce peintre se voit dans chaque toile.<div class="en">This painter's dreamy side shows in every canvas.</div></div></div>
+<div class="ex-line"><button class="say" data-say="L'aspect terne de ces couleurs m'a déçue.">▶</button><div class="fr"><b>L'aspect terne</b> de ces couleurs m'a déçue.<div class="en">The dull look of these colours disappointed me.</div></div></div>
+<div class="ex-line"><button class="say" data-say="Le caractère remarquable de ce site lui vaut d'être protégé.">▶</button><div class="fr"><b>Le caractère remarquable</b> de ce site lui vaut d'être protégé.<div class="en">The remarkable nature of this site has earned it protection.</div></div></div>
+</div>
+<div id="ex2"></div>
+
+<div class="oral"><span class="lab">À L'ORAL</span>
+<ul>
+<li>Edina, choisis un tableau ou un paysage que tu aimes. Décris-le avec au moins trois noms : <i>la beauté, la douceur, la lumière, le côté…, l'aspect…</i>
+<div class="en">Choose a painting or landscape you love. Describe it with at least three nouns.</div></li>
+<li>Qu'est-ce qui te touche le plus chez quelqu'un : <b>la gentillesse</b> ou <b>la politesse</b> ? Et quand quelqu'un te dit <b>des gentillesses</b>, comment réagis-tu ?
+<div class="en">What touches you most in someone: kindness or politeness? And when someone says kind things to you, how do you react?</div></li>
+<li>Raconte une rencontre où on a seulement échangé <b>des banalités</b>.
+<div class="en">Tell about a meeting where people only exchanged small talk.</div></li>
+</ul></div>
+
+<!-- SECTION 2 -->
+<div class="band" id="r2" style="background-image:url(img/s2.jpg)"><div class="t"><span class="num">02</span><h2>À partir d'une locution</h2><span class="en">From a set phrase</span></div></div>
+<div class="box" style="border-top-color:var(--gold)">
+Une locution entière (verbe, pronom, préposition…) devient un <b>nom</b> : on ajoute des <b>traits d'union</b> et un <b>article</b>. Ces noms sont généralement <b>invariables</b>.
+<div class="en">A whole phrase becomes a noun: add hyphens and an article. These nouns are usually invariable.</div>
+<div class="inner-box"><span class="pill">je ne sais quoi</span> → <span class="pill">un je-ne-sais-quoi</span> &nbsp; <span class="pill">tête à tête</span> → <span class="pill">un tête-à-tête</span></div>
+</div>
+<div class="cards" id="cards2"></div>
+<div id="ex3"></div>
+<div id="ex4"></div>
+<div class="oral"><span class="lab">À L'ORAL</span>
+<ul>
+<li>Quelle ville, quel artiste ou quel lieu a pour toi <b>un je-ne-sais-quoi</b> ? Essaie quand même de l'expliquer.
+<div class="en">Which city, artist or place has a certain "je-ne-sais-quoi" for you? Try to explain it anyway.</div></li>
+<li>Le <b>qu'en-dira-t-on</b> compte-t-il dans tes choix ? Donne un exemple.
+<div class="en">Does what people might say influence your choices? Give an example.</div></li>
+<li>Quel <b>savoir-faire</b> aimerais-tu apprendre (céramique, aquarelle, jardinage…) ? Pourquoi ?
+<div class="en">Which craft or skill would you like to learn? Why?</div></li>
+</ul></div>
+
+<!-- SECTION 3 -->
+<div class="band" id="r3" style="background-image:url(img/s3.jpg)"><div class="t"><span class="num">03</span><h2>Différentes formes, différents sens</h2><span class="en">Different forms, different meanings</span></div></div>
+<div class="box" style="border-top-color:var(--sage)">
+Un même verbe ou adjectif peut donner <b>plusieurs noms</b>, chacun avec <b>son propre sens</b>. Retourne chaque carte pour découvrir la différence.
+<div class="en">The same verb or adjective can produce several nouns, each with its own meaning. Flip each card to see the difference.</div>
+</div>
+<div class="cards" id="cards3"></div>
+<div id="ex5"></div>
+<div id="ex6"></div>
+<div class="oral"><span class="lab">À L'ORAL</span>
+<ul>
+<li>Edina, explique avec tes propres exemples la différence entre : <b>l'isolation / l'isolement</b>, <b>la déchirure / le déchirement</b>, <b>le froid / la froideur</b>.
+<div class="en">Explain the difference with your own examples.</div></li>
+<li>Situation : tu visites une vieille maison de campagne à vendre. Parle de son <b>isolation</b>, des <b>finitions</b>, du <b>froid</b> en hiver et de l'<b>isolement</b> du lieu.
+<div class="en">Situation: you visit an old country house for sale. Talk about its insulation, finishing touches, the cold in winter and how isolated it is.</div></li>
+</ul></div>
+
+<!-- SECTION 4 -->
+<div class="band" id="r4" style="background-image:url(img/s4.jpg);background-position:center 40%"><div class="t"><span class="num">04</span><h2>L'ordre de la phrase</h2><span class="en">Word order</span></div></div>
+<div class="box" style="border-top-color:var(--plum)">
+Quand on nominalise une phrase :
+<div class="inner-box">
+<span class="pill">verbe → nom</span> <span class="pill">adverbe → adjectif</span> <span class="pill">sujet → de + nom</span>
+<div class="en">verb → noun · adverb → adjective · subject → "de" + noun</div></div>
+<div class="ex-line"><button class="say" data-say="On remarque que la ville s'est lentement développée. On remarque le lent développement de la ville.">▶</button><div class="fr">On remarque que la ville s'est <b>lentement développée</b>. → On remarque <b>le lent développement</b> de la ville.<div class="en">We notice that the town has slowly developed. → We notice the town's slow development.</div></div></div>
+<div class="ex-line"><button class="say" data-say="On annonce que l'usine va fermer. Fermeture annoncée de l'usine !">▶</button><div class="fr">On annonce que l'usine va <b>fermer</b>. → On annonce <b>la fermeture</b> de l'usine. → <b>Fermeture annoncée de l'usine !</b> (titre de journal)<div class="en">It is announced that the factory will close. → Factory closure announced! (headline)</div></div></div>
+<h3>Titres d'actualité culturelle</h3>
+<div class="ex-line"><button class="say" data-say="Les abeilles disparaissent de façon inquiétante. Disparition inquiétante des abeilles.">▶</button><div class="fr">Les abeilles <b>disparaissent</b> de façon <b>inquiétante</b>. → <b>Disparition inquiétante</b> des abeilles<div class="en">Bees are disappearing worryingly. → Worrying disappearance of bees</div></div></div>
+<div class="ex-line"><button class="say" data-say="Un Monet a été vendu à un prix record. Vente record d'un Monet.">▶</button><div class="fr">Un Monet <b>a été vendu</b> à un prix record. → <b>Vente record</b> d'un Monet<div class="en">A Monet sold for a record price. → Record sale of a Monet</div></div></div>
+<div class="inner-box">Dans un titre, l'article disparaît souvent et l'adjectif peut se placer <b>avant</b> le nom (<i>le <b>lent</b> développement</i>) pour un effet plus littéraire.
+<div class="en">In headlines the article often disappears, and the adjective may come before the noun for a more literary effect.</div></div>
+</div>
+<div id="ex7"></div>
+<div id="ex8"></div>
+<div class="oral"><span class="lab">À L'ORAL</span>
+<ul>
+<li>Edina, tu es journaliste culturelle à la radio. Transforme chaque nouvelle en titre, puis développe-la en deux ou trois phrases :
+<ul><li>Le château de Versailles restaure sa galerie des Glaces.</li><li>Les cerisiers du Japon fleurissent plus tôt chaque année.</li><li>Une jeune sculptrice gagne un grand prix.</li><li>Les visiteurs reviennent en masse dans les jardins de Giverny.</li></ul>
+<div class="en">You are a cultural radio journalist. Turn each piece of news into a headline, then develop it in two or three sentences.</div></li>
+<li>Invente le titre de ta prochaine exposition idéale. Explique son thème.
+<div class="en">Invent the title of your ideal next exhibition. Explain its theme.</div></li>
+</ul></div>
+
+<!-- SECTION 5 -->
+<div class="band" id="r5" style="background-image:url(img/s5.jpg)"><div class="t"><span class="num">05</span><h2>Réflexion philosophique</h2><span class="en">Philosophical reflection</span></div></div>
+<div class="box" style="border-top-color:var(--teal)">
+<div style="font-size:20px;font-weight:700;color:var(--teal)">« La beauté de la nature rend-elle l'art inutile ? »</div>
+<div class="en">"Does the beauty of nature make art unnecessary?"</div>
+<h3>Pour trouver tes idées</h3>
+<ul>
+<li>La <b>contemplation</b> d'un coucher de soleil procure-t-elle la même émotion que celle d'un tableau ?<div class="en">Does contemplating a sunset give the same emotion as contemplating a painting?</div></li>
+<li>L'art ne sert-il pas à garder une trace de la <b>fragilité</b> et de la <b>disparition</b> des choses ?<div class="en">Doesn't art serve to keep a trace of the fragility and disappearance of things?</div></li>
+<li>L'artiste ajoute-t-il <b>un je-ne-sais-quoi</b> que la nature n'a pas : un regard, une <b>interprétation</b> ?<div class="en">Does the artist add something the nature lacks: a gaze, an interpretation?</div></li>
+</ul>
+<h3>Organise ta réponse</h3>
+<div class="inner-box"><b>1.</b> Introduction : <i>« On pense souvent que… »</i> · <b>2.</b> D'un côté : <i>« La beauté de… »</i> · <b>3.</b> De l'autre : <i>« Pourtant, la création artistique… »</i> · <b>4.</b> Conclusion : <i>« Finalement, … »</i>
+<div class="en">1. Introduction · 2. On the one hand · 3. On the other hand · 4. Conclusion</div></div>
+Edina, réponds à l'oral, puis note tes idées ci-dessous. Les noms que tu utilises s'allument.
+<div class="en">Answer orally, then jot down your ideas below. The nouns you use light up.</div>
+<div class="words" id="words"></div>
+<textarea id="notes" placeholder="Mes idées…"></textarea>
+</div>
+
+<!-- À REVOIR -->
+<h3 id="revoir-h" style="margin-top:40px">À revoir</h3>
+<div class="revoir"><div id="revoir">Pas encore d'erreur à revoir.</div>
+<div class="send"><button class="btn" id="sendbtn">Envoyer mes résultats à Irène</button> <button class="btn alt" id="reset">Recommencer</button><div id="sendmsg"></div></div>
+</div>
+
+<img class="sig" src="img/signature-irene.png" alt="Le français avec Irène">
+</div>
+
+<script>
+const AUDIO={"Cette exposition sur Berthe Morisot attire des milliers de visiteurs.": "32786083b8.mp3", "La peinture en plein air était une révolution.": "273a14f8bd.mp3", "La restauration de la cathédrale a duré cinq ans.": "b6af804d10.mp3", "La découverte de cette grotte a ému les chercheurs.": "cd5f6c50df.mp3", "J'aime la douceur de la lumière en automne.": "ad2f48b365.mp3", "La fragilité des coquelicots me touche.": "6514c20332.mp3", "La lenteur de la marche permet d'observer la nature.": "557d31007d.mp3", "L'immensité de l'océan donne le vertige.": "aa2470f195.mp3", "La beauté de ce jardin est saisissante.": "e654db13cd.mp3", "Dans ce musée, on croise des beautés de toutes les époques.": "348f291341.mp3", "La curiosité est le moteur de tout artiste.": "c6ff803b46.mp3", "Ce cabinet de curiosités expose des fossiles et des coquillages rares.": "9243edf4a4.mp3", "Sa gentillesse avec les visiteurs est connue.": "6d687a48ea.mp3", "Il m'a dit des gentillesses sur mes aquarelles.": "59a956940d.mp3", "La banalité de ses vêtements contraste avec son talent.": "d4c9a5035a.mp3", "Au vernissage, on a dit des banalités sur la météo.": "d9186edf35.mp3", "La nouveauté de son style a surpris la critique.": "15308d96e5.mp3", "La librairie du musée présente ses nouveautés.": "68a5fb4ab6.mp3", "L'excentricité de cet acteur amuse le public.": "84650d7157.mp3", "Il a fait des excentricités toute sa vie.": "9546d0af48.mp3", "Ce paysage a un je-ne-sais-quoi d'apaisant.": "a898190a88.mp3", "Au ski, elle fait du hors-piste.": "837b4d7dd1.mp3", "Nous aurons un tête-à-tête demain.": "2fa0e7eaa8.mp3", "Le face-à-face entre les deux candidats a révélé leur caractère.": "495daa47bc.mp3", "Tout le monde critique le laisser-aller de ce jardin abandonné.": "04e38aab74.mp3", "Le savoir-faire des souffleurs de verre est impressionnant.": "e35b513b3c.mp3", "Arriver en retard à un dîner, c'est manquer de savoir-vivre.": "46b9ee98e7.mp3", "Elle peint sans se soucier du qu'en-dira-t-on.": "fcba6cc54c.mp3", "Le va-et-vient des vagues m'aide à méditer.": "69dc3e676a.mp3", "Ce je-m'en-foutisme me choque.": "cff8ff5f02.mp3", "Le changement climatique transforme nos forêts.": "ee6f7b1a34.mp3", "Le taux de change entre l'euro et le dollar est stable.": "eb4102f4d4.mp3", "L'arrestation du voleur de tableaux a eu lieu à Nice.": "8109b206e8.mp3", "L'arrêt du bus est juste devant le musée.": "219fd09491.mp3", "Il y a une petite déchirure dans la toile.": "d76b468984.mp3", "Quitter ses enfants a été un vrai déchirement pour elle.": "ab7229b322.mp3", "Elle a acheté sa robe après plusieurs essayages.": "69af610a82.mp3", "Il a réussi son coup au premier essai.": "1625afe6f4.mp3", "L'isolation de la maison réduit la consommation d'énergie.": "49fb75bb93.mp3", "Il faut remédier à l'isolement des personnes âgées.": "bdf1994efc.mp3", "Ces pneus ont une bonne adhérence.": "102aa4392a.mp3", "Le ministre a communiqué son adhésion au projet.": "f84371f5d5.mp3", "À la fin du chantier…": "9171bf8e9b.mp3", "…il ne reste que des finitions à effectuer.": "123e6f08d3.mp3", "La grosseur des cordes varie selon les instruments. La grossesse d'Adèle se passe bien.": "38aa929f6e.mp3", "Le grossissement de ce microscope n'est pas suffisant.": "dba0adf6d3.mp3", "Le froid hivernal est arrivé dans la région.": "e3400edd9d.mp3", "Solange a répondu avec sa froideur habituelle.": "b89884e229.mp3", "Le nationalisme considère la nationalité comme essentielle.": "c0e0743708.mp3", "Le gouvernement prône la nationalisation de certaines entreprises.": "8d217b98be.mp3", "la création": "7246644729.mp3", "la protection": "c0f040dc76.mp3", "l'admiration": "7693e94a9d.mp3", "la disparition": "91f7e5aff0.mp3", "la pureté": "05959445eb.mp3", "la profondeur": "a20344ebf9.mp3", "le caractère sauvage (ou la sauvagerie)": "e960923f56.mp3", "Le musée a exposé toutes les curiosités rapportées par les explorateurs.": "18f35bf980.mp3", "Ce que j'aime chez Morisot, c'est la légèreté de sa touche.": "1164363776.mp3", "Au vernissage, on a échangé quelques politesses, puis chacun est reparti.": "e52166d628.mp3", "Ce critique n'écrit que des banalités : rien d'original.": "0cc4f69e51.mp3", "La beauté de ce paysage m'a coupé le souffle.": "be58bffff4.mp3", "Les excentricités de ce peintre faisaient scandale à l'époque.": "9d71a96b13.mp3", "Le caractère redoutable de cette forêt.": "6e9723ee48.mp3", "Le côté irrésistible de ce chat.": "78ad65537e.mp3", "L'aspect terne du ciel.": "e2878cc471.mp3", "Le caractère ordinaire de ce paysage.": "3a7e1ceaa7.mp3", "Le côté insupportable de ce collègue.": "cfd1b1707d.mp3", "Ce tableau a un je-ne-sais-quoi de mystérieux qu'on ne sait pas expliquer.": "c9481d7525.mp3", "Les artisans transmettent leur savoir-faire de génération en génération.": "68f335e00e.mp3", "Elle peint ce qu'elle veut, sans se soucier du qu'en-dira-t-on.": "3206ee4237.mp3", "Le va-et-vient des visiteurs dans la salle empêchait de se concentrer.": "2ab3169f8d.mp3", "Pinceaux sales, toiles abandonnées : ce laisser-aller dans son atelier m'étonne.": "81d11ab00f.mp3", "Le tête-à-tête entre le peintre et son modèle a duré des heures.": "c81ffb9f36.mp3", "Il fait du hors-piste.": "1ded6fbff0.mp3", "Leur face-à-face télévisé a fait du bruit.": "eca505a4c8.mp3", "Elle a beaucoup de savoir-vivre.": "239a99535e.mp3", "L'isolation de la serre permet aux orchidées de survivre l'hiver.": "986e67588d.mp3", "Le vieux berger vit dans un isolement total au fond de la vallée.": "5bfd6ccc29.mp3", "Il y a une petite déchirure dans la toile : il faut la restaurer.": "f0cc373cc6.mp3", "Quitter son village natal a été un véritable déchirement.": "545e5b0feb.mp3", "L'encadreur termine les finitions du cadre doré.": "d9d871aa3f.mp3", "Grâce au grossissement de la loupe, on voit chaque coup de pinceau.": "5a1e67c9fb.mp3", "Ces chaussures de randonnée ont une excellente adhérence sur la roche.": "699a18b27f.mp3", "Le musée a reçu mille nouvelles adhésions cette année.": "254b055f85.mp3", "La froideur de la gardienne du musée m'a surprise.": "779b7932ce.mp3", "L'arrêt du train à Giverny ne dure que deux minutes.": "2274fba2a7.mp3", "Mon premier essai de peinture à l'huile a été un désastre.": "c72813258f.mp3", "L'arrestation du voleur de tableaux a eu lieu à l'aéroport.": "b2c1594b1e.mp3", "Pour un mariage, il faut prévoir plusieurs essayages de la robe.": "9b051c79d8.mp3", "Fonte rapide des glaciers des Alpes": "76734a36b2.mp3", "Découverte d'une toile de Berthe Morisot": "aaaaed76e4.mp3", "Protection de la forêt de Fontainebleau": "a58a20f6ab.mp3", "Agrandissement du Louvre": "89aa240fe4.mp3", "Retour du loup dans les Alpes": "aec836392b.mp3", "Forte augmentation du nombre de visiteurs": "e9012d4f68.mp3", "On constate la forte augmentation des prix.": "10220fd8b0.mp3", "Les experts craignent le lent assèchement de la rivière.": "88a230e7b7.mp3", "On attend l'arrivée de l'artiste.": "3c3f2a22b8.mp3", "Tout le monde a remarqué son absence.": "20043cf3f9.mp3", "Le musée rouvre ses portes. La réouverture du musée.": "c2bd47c76d.mp3", "Les glaciers fondent rapidement. La fonte rapide des glaciers.": "00ea1e867c.mp3", "La politesse de cet homme me touche.": "994233ca80.mp3", "Nous avons échangé des politesses.": "2b761550f5.mp3", "Le côté rêveur de ce peintre se voit dans chaque toile.": "70f844fa04.mp3", "L'aspect terne de ces couleurs m'a déçue.": "fc02cace33.mp3", "Le caractère remarquable de ce site lui vaut d'être protégé.": "e574177df9.mp3", "On remarque que la ville s'est lentement développée. On remarque le lent développement de la ville.": "237cd932e0.mp3", "On annonce que l'usine va fermer. Fermeture annoncée de l'usine !": "d783b9ee05.mp3", "Les abeilles disparaissent de façon inquiétante. Disparition inquiétante des abeilles.": "6454611fb4.mp3", "Un Monet a été vendu à un prix record. Vente record d'un Monet.": "d73ace4860.mp3"};
+const KEY="edina-nominalisation-v1";
+let ST={a:{},notes:""};
+try{ST=JSON.parse(localStorage.getItem(KEY))||ST;if(!ST.a)ST.a={};}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}}
+let player=new Audio();
+function speak(t){const f=AUDIO[t];if(f){player.pause();player=new Audio("audio/"+f);player.play().catch(()=>{});}else if(window.speechSynthesis){const u=new SpeechSynthesisUtterance(t);u.lang="fr-FR";speechSynthesis.cancel();speechSynthesis.speak(u);}}
+document.addEventListener("click",e=>{const b=e.target.closest(".say");if(b){e.stopPropagation();speak(b.dataset.say);}});
+
+/* ---------- CARTES ---------- */
+const WARM=[
+["exposer","verbe","l'exposition","Cette exposition sur Berthe Morisot attire des milliers de visiteurs.","This Berthe Morisot exhibition draws thousands of visitors.","c1"],
+["peindre","verbe","la peinture","La peinture en plein air était une révolution.","Painting outdoors was a revolution.","c2"],
+["restaurer","verbe","la restauration","La restauration de la cathédrale a duré cinq ans.","The cathedral's restoration took five years.","c3"],
+["découvrir","verbe","la découverte","La découverte de cette grotte a ému les chercheurs.","The discovery of this cave moved the researchers.","c4"],
+["doux","adjectif","la douceur","J'aime la douceur de la lumière en automne.","I love the softness of the autumn light.","c5"],
+["fragile","adjectif","la fragilité","La fragilité des coquelicots me touche.","The fragility of poppies moves me.","c1"],
+["lent","adjectif","la lenteur","La lenteur de la marche permet d'observer la nature.","Walking slowly lets you observe nature.","c2"],
+["immense","adjectif","l'immensité","L'immensité de l'océan donne le vertige.","The vastness of the ocean is dizzying.","c3"]
+];
+const C1=[
+["la beauté","des beautés","La beauté de ce jardin est saisissante.","The beauty of this garden is striking.","Dans ce musée, on croise des beautés de toutes les époques.","In this museum you come across beauties from every era.","des beautés = des femmes belles, ou de belles choses","img/louvre.jpg"],
+["la curiosité","des curiosités","La curiosité est le moteur de tout artiste.","Curiosity drives every artist.","Ce cabinet de curiosités expose des fossiles et des coquillages rares.","This cabinet of curiosities displays rare fossils and shells.","des curiosités = des objets rares, étonnants",""],
+["la gentillesse","des gentillesses","Sa gentillesse avec les visiteurs est connue.","Her kindness to visitors is well known.","Il m'a dit des gentillesses sur mes aquarelles.","He said kind things about my watercolours.","des gentillesses = des paroles aimables",""],
+["la banalité","des banalités","La banalité de ses vêtements contraste avec son talent.","The plainness of his clothes contrasts with his talent.","Au vernissage, on a dit des banalités sur la météo.","At the private view we made small talk about the weather.","des banalités = des paroles banales",""],
+["la nouveauté","des nouveautés","La nouveauté de son style a surpris la critique.","The novelty of her style surprised the critics.","La librairie du musée présente ses nouveautés.","The museum bookshop presents its new releases.","des nouveautés = de nouveaux produits, livres…",""],
+["l'excentricité","des excentricités","L'excentricité de cet acteur amuse le public.","This actor's eccentricity amuses the public.","Il a fait des excentricités toute sa vie.","He did eccentric things all his life.","des excentricités = des actes extravagants",""]
+];
+const C2=[
+["un je-ne-sais-quoi","Ce paysage a un je-ne-sais-quoi d'apaisant.","This landscape has something soothing about it.","= quelque chose qu'on ne peut pas définir"],
+["le hors-piste","Au ski, elle fait du hors-piste.","When skiing, she goes off-piste.","hors de la piste"],
+["un tête-à-tête","Nous aurons un tête-à-tête demain.","We'll have a one-to-one meeting tomorrow.","une rencontre à deux"],
+["un face-à-face","Le face-à-face entre les deux candidats a révélé leur caractère.","The debate between the two candidates revealed their characters.","une confrontation directe"],
+["le laisser-aller","Tout le monde critique le laisser-aller de ce jardin abandonné.","Everyone criticises the neglect of this abandoned garden.","= la négligence"],
+["le savoir-faire","Le savoir-faire des souffleurs de verre est impressionnant.","The glassblowers' expertise is impressive.","une compétence technique"],
+["le savoir-vivre","Arriver en retard à un dîner, c'est manquer de savoir-vivre.","Arriving late to a dinner shows a lack of manners.","= les bonnes manières"],
+["le qu'en-dira-t-on","Elle peint sans se soucier du qu'en-dira-t-on.","She paints without caring what people will say.","= l'opinion des autres"],
+["un va-et-vient","Le va-et-vient des vagues m'aide à méditer.","The ebb and flow of the waves helps me meditate.","un mouvement aller-retour"],
+["le je-m'en-foutisme","Ce je-m'en-foutisme me choque.","This couldn't-care-less attitude shocks me.","familier : l'indifférence totale"]
+];
+const C3=[
+["le changement","le change","Le changement climatique transforme nos forêts.","Climate change is transforming our forests.","Le taux de change entre l'euro et le dollar est stable.","The euro-dollar exchange rate is stable."],
+["l'arrestation","l'arrêt","L'arrestation du voleur de tableaux a eu lieu à Nice.","The art thief was arrested in Nice.","L'arrêt du bus est juste devant le musée.","The bus stop is right in front of the museum."],
+["la déchirure","le déchirement","Il y a une petite déchirure dans la toile.","There is a small tear in the canvas.","Quitter ses enfants a été un vrai déchirement pour elle.","Leaving her children was truly heartbreaking for her."],
+["l'essayage","l'essai","Elle a acheté sa robe après plusieurs essayages.","She bought her dress after several fittings.","Il a réussi son coup au premier essai.","He succeeded on the first try."],
+["l'isolation","l'isolement","L'isolation de la maison réduit la consommation d'énergie.","Insulating the house reduces energy use.","Il faut remédier à l'isolement des personnes âgées.","We must address the isolation of elderly people."],
+["l'adhérence","l'adhésion","Ces pneus ont une bonne adhérence.","These tyres have good grip.","Le ministre a communiqué son adhésion au projet.","The minister declared his support for the project."],
+["la fin","les finitions","À la fin du chantier…","At the end of the building work…","…il ne reste que des finitions à effectuer.","…only the finishing touches remain."],
+["la grosseur · la grossesse","le grossissement","La grosseur des cordes varie selon les instruments. La grossesse d'Adèle se passe bien.","String thickness varies with the instrument. Adèle's pregnancy is going well.","Le grossissement de ce microscope n'est pas suffisant.","This microscope's magnification is not strong enough."],
+["le froid","la froideur","Le froid hivernal est arrivé dans la région.","The winter cold has reached the region.","Solange a répondu avec sa froideur habituelle.","Solange answered with her usual coldness."],
+["le nationalisme · la nationalité","la nationalisation","Le nationalisme considère la nationalité comme essentielle.","Nationalism sees nationality as essential.","Le gouvernement prône la nationalisation de certaines entreprises.","The government advocates nationalising some companies."]
+];
+const cols=["c1","c2","c3","c4","c5"];
+function card(front,back){return `<div class="flip" onclick="this.classList.toggle('on')"><div class="in">${front}<div class="face back">${back}</div></div></div>`}
+function line(fr,en){return `<div class="ex"><button class="say" data-say="${fr.replace(/"/g,'&quot;')}" style="width:26px;height:26px;font-size:11px;float:right;margin-left:6px">▶</button>${fr}<div class="en">${en}</div></div>`}
+document.getElementById("warm").innerHTML=WARM.map(w=>card(`<div class="face front ${w[5]}"><div class="s">${w[1]}</div><div class="w">${w[0]}</div><div class="hint">TOUCHE POUR RETOURNER</div></div>`,`<div class="w">${w[0]} → ${w[2]}</div>${line(w[3],w[4])}`)).join("");
+document.getElementById("cards1").innerHTML=C1.map((c,i)=>card(c[7]?`<div class="face front photo" style="background-image:url(${c[7]})"><div class="w">${c[0]} / ${c[1]}</div><div class="s">singulier ou pluriel ?</div></div>`:`<div class="face front ${cols[i%5]}"><div class="w">${c[0]}<br>/ ${c[1]}</div><div class="s">singulier ou pluriel ?</div><div class="hint">TOUCHE POUR RETOURNER</div></div>`,`<div class="w">${c[0]}</div>${line(c[2],c[3])}<div class="w">${c[1]}</div>${line(c[4],c[5])}<div class="note">${c[6]}</div>`)).join("");
+document.getElementById("cards2").innerHTML=C2.map((c,i)=>card(`<div class="face front ${cols[(i+2)%5]}"><div class="w">${c[0]}</div><div class="s">${c[3]}</div><div class="hint">TOUCHE POUR RETOURNER</div></div>`,`<div class="w">${c[0]}</div>${line(c[1],c[2])}<div class="note">${c[3]}</div>`)).join("");
+document.getElementById("cards3").innerHTML=C3.map((c,i)=>card(`<div class="face front ${cols[(i+4)%5]}"><div class="w">${c[0]}</div><div class="s">≠</div><div class="w">${c[1]}</div><div class="hint">TOUCHE POUR RETOURNER</div></div>`,`<div class="w">${c[0]}</div>${line(c[2],c[3])}<div class="w">${c[1]}</div>${line(c[4],c[5])}`)).join("");
+
+/* ---------- EXERCICES ---------- */
+// q: [text with ___, options|null(answers for input), correct, full sentence, english]
+const EX=[
+{id:"ex0",n:"0",type:"inp",col:"#0f6e6e",t:"Trouve le nom (avec l'article).",en:"Find the noun (with the article).",rule:"warm",items:[
+["créer → ___",["la création"],"la création","to create → creation"],
+["protéger → ___",["la protection"],"la protection","to protect → protection"],
+["admirer → ___",["l'admiration"],"l'admiration","to admire → admiration"],
+["disparaître → ___",["la disparition"],"la disparition","to disappear → disappearance"],
+["pur → ___",["la pureté"],"la pureté","pure → purity"],
+["profond → ___",["la profondeur"],"la profondeur","deep → depth"],
+["sauvage → ___",["la sauvagerie","le caractère sauvage","le côté sauvage"],"le caractère sauvage (ou la sauvagerie)","wild → wildness"]]},
+{id:"ex1",n:"1",type:"qcm",col:"#e8735a",t:"Singulier ou pluriel ? Choisis.",en:"Singular or plural? Choose.",rule:"r1",items:[
+["Le musée a exposé toutes les ___ rapportées par les explorateurs.",["curiosité","curiosités"],1,"Le musée a exposé toutes les curiosités rapportées par les explorateurs.","The museum displayed all the curiosities brought back by explorers."],
+["Ce que j'aime chez Morisot, c'est la ___ de sa touche.",["légèreté","légèretés"],0,"Ce que j'aime chez Morisot, c'est la légèreté de sa touche.","What I love about Morisot is the lightness of her brushwork."],
+["Au vernissage, on a échangé quelques ___, puis chacun est reparti.",["politesse","politesses"],1,"Au vernissage, on a échangé quelques politesses, puis chacun est reparti.","At the private view we exchanged a few pleasantries, then everyone left."],
+["Ce critique n'écrit que des ___ : rien d'original.",["banalité","banalités"],1,"Ce critique n'écrit que des banalités : rien d'original.","This critic writes nothing but platitudes: nothing original."],
+["La ___ de ce paysage m'a coupé le souffle.",["beauté","beautés"],0,"La beauté de ce paysage m'a coupé le souffle.","The beauty of this landscape took my breath away."],
+["Les ___ de ce peintre faisaient scandale à l'époque.",["excentricité","excentricités"],1,"Les excentricités de ce peintre faisaient scandale à l'époque.","This painter's eccentric antics caused scandal at the time."]]},
+{id:"ex2",n:"2",type:"qcm",col:"#6b3f7a",t:"Choisis la bonne nominalisation.",en:"Choose the correct nominalisation.",rule:"r1b",items:[
+["Cette forêt est redoutable. → ___ de cette forêt",["la redoutabilité","le caractère redoutable"],1,"Le caractère redoutable de cette forêt.","The fearsome nature of this forest."],
+["Ce chat est irrésistible. → ___ de ce chat",["le côté irrésistible","l'irrésistance"],0,"Le côté irrésistible de ce chat.","This cat's irresistible side."],
+["Le ciel est terne. → ___ du ciel",["la ternité","l'aspect terne"],1,"L'aspect terne du ciel.","The dull look of the sky."],
+["Ce paysage est ordinaire. → ___ de ce paysage",["le caractère ordinaire","l'ordinarité"],0,"Le caractère ordinaire de ce paysage.","The ordinary nature of this landscape."],
+["Ce collègue est insupportable. → ___ de ce collègue",["le côté insupportable","l'insupportabilité"],0,"Le côté insupportable de ce collègue.","This colleague's unbearable side."]]},
+{id:"ex3",n:"3",type:"qcm",col:"#d9a441",t:"Complète avec la bonne locution.",en:"Complete with the right set phrase.",rule:"r2",items:[
+["Ce tableau a ___ de mystérieux qu'on ne sait pas expliquer.",["un je-ne-sais-quoi","un tête-à-tête","un va-et-vient"],0,"Ce tableau a un je-ne-sais-quoi de mystérieux qu'on ne sait pas expliquer.","This painting has something mysterious about it that can't be explained."],
+["Les artisans transmettent leur ___ de génération en génération.",["savoir-vivre","savoir-faire","laisser-aller"],1,"Les artisans transmettent leur savoir-faire de génération en génération.","Craftsmen pass on their expertise from generation to generation."],
+["Elle peint ce qu'elle veut, sans se soucier du ___.",["hors-piste","face-à-face","qu'en-dira-t-on"],2,"Elle peint ce qu'elle veut, sans se soucier du qu'en-dira-t-on.","She paints what she likes, without caring what people say."],
+["Le ___ des visiteurs dans la salle empêchait de se concentrer.",["va-et-vient","je-ne-sais-quoi","savoir-faire"],0,"Le va-et-vient des visiteurs dans la salle empêchait de se concentrer.","The comings and goings of visitors made it hard to concentrate."],
+["Pinceaux sales, toiles abandonnées : ce ___ dans son atelier m'étonne.",["savoir-vivre","laisser-aller","tête-à-tête"],1,"Pinceaux sales, toiles abandonnées : ce laisser-aller dans son atelier m'étonne.","Dirty brushes, abandoned canvases: this neglect in his studio surprises me."],
+["Le ___ entre le peintre et son modèle a duré des heures.",["tête-à-tête","hors-piste","qu'en-dira-t-on"],0,"Le tête-à-tête entre le peintre et son modèle a duré des heures.","The one-to-one between the painter and his model lasted for hours."]]},
+{id:"ex4",n:"4",type:"inp",col:"#c0603f",t:"Transforme avec une locution nominalisée.",en:"Rewrite using a nominalised phrase.",rule:"r2",items:[
+["Il skie en dehors des pistes. → Il fait du ___.",["hors-piste"],"Il fait du hors-piste.","He skis off-piste."],
+["Les deux artistes se sont affrontés à la télévision. → Leur ___ télévisé a fait du bruit.",["face-à-face"],"Leur face-à-face télévisé a fait du bruit.","Their televised face-off caused a stir."],
+["Elle sait parfaitement se comporter en société. → Elle a beaucoup de ___.",["savoir-vivre"],"Elle a beaucoup de savoir-vivre.","She has excellent manners."]]},
+{id:"ex5",n:"5",type:"qcm",col:"#5f8f5a",t:"Choisis le nom qui convient.",en:"Choose the right noun.",rule:"r3",items:[
+["L'___ de la serre permet aux orchidées de survivre l'hiver.",["isolation","isolement"],0,"L'isolation de la serre permet aux orchidées de survivre l'hiver.","The greenhouse insulation lets the orchids survive the winter."],
+["Le vieux berger vit dans un ___ total au fond de la vallée.",["isolation","isolement"],1,"Le vieux berger vit dans un isolement total au fond de la vallée.","The old shepherd lives in total isolation at the bottom of the valley."],
+["Il y a une petite ___ dans la toile : il faut la restaurer.",["déchirure","déchirement"],0,"Il y a une petite déchirure dans la toile : il faut la restaurer.","There is a small tear in the canvas: it must be restored."],
+["Quitter son village natal a été un véritable ___.",["déchirure","déchirement"],1,"Quitter son village natal a été un véritable déchirement.","Leaving his home village was truly heartbreaking."],
+["L'encadreur termine les ___ du cadre doré.",["fins","finitions"],1,"L'encadreur termine les finitions du cadre doré.","The framer is finishing the touches on the gilded frame."],
+["Grâce au ___ de la loupe, on voit chaque coup de pinceau.",["grossissement","grosseur"],0,"Grâce au grossissement de la loupe, on voit chaque coup de pinceau.","Thanks to the magnifying glass, you can see every brushstroke."],
+["Ces chaussures de randonnée ont une excellente ___ sur la roche.",["adhésion","adhérence"],1,"Ces chaussures de randonnée ont une excellente adhérence sur la roche.","These hiking boots have excellent grip on rock."],
+["Le musée a reçu mille nouvelles ___ cette année.",["adhérences","adhésions"],1,"Le musée a reçu mille nouvelles adhésions cette année.","The museum received a thousand new memberships this year."],
+["La ___ de la gardienne du musée m'a surprise.",["froideur","froid"],0,"La froideur de la gardienne du musée m'a surprise.","The museum attendant's coldness surprised me."],
+["Le ___ climatique transforme nos forêts.",["change","changement"],1,"Le changement climatique transforme nos forêts.","Climate change is transforming our forests."]]},
+{id:"ex6",n:"6",type:"inp",col:"#3f7f6a",t:"Écris le nom qui manque.",en:"Write the missing noun.",rule:"r3",items:[
+["L'___ du train à Giverny ne dure que deux minutes.",["arrêt"],"L'arrêt du train à Giverny ne dure que deux minutes.","The train only stops at Giverny for two minutes."],
+["Mon premier ___ de peinture à l'huile a été un désastre.",["essai"],"Mon premier essai de peinture à l'huile a été un désastre.","My first attempt at oil painting was a disaster."],
+["L'___ du voleur de tableaux a eu lieu à l'aéroport.",["arrestation"],"L'arrestation du voleur de tableaux a eu lieu à l'aéroport.","The painting thief was arrested at the airport."],
+["Pour un mariage, il faut prévoir plusieurs ___ de la robe.",["essayages"],"Pour un mariage, il faut prévoir plusieurs essayages de la robe.","For a wedding, you need to plan several dress fittings."]]},
+{id:"ex7",n:"7",type:"inp",col:"#2c4a7a",t:"Écris le titre de journal (sans verbe).",en:"Write the newspaper headline (no verb).",rule:"r4",items:[
+["Les glaciers des Alpes fondent rapidement.",["fonte rapide des glaciers des alpes","la fonte rapide des glaciers des alpes","rapide fonte des glaciers des alpes"],"Fonte rapide des glaciers des Alpes","Rapid melting of Alpine glaciers"],
+["Une toile de Berthe Morisot a été découverte.",["découverte d'une toile de berthe morisot","la découverte d'une toile de berthe morisot"],"Découverte d'une toile de Berthe Morisot","Discovery of a Berthe Morisot canvas"],
+["La forêt de Fontainebleau est protégée.",["protection de la forêt de fontainebleau","la protection de la forêt de fontainebleau"],"Protection de la forêt de Fontainebleau","Protection of the Fontainebleau forest"],
+["Le Louvre s'agrandit.",["agrandissement du louvre","l'agrandissement du louvre"],"Agrandissement du Louvre","Expansion of the Louvre"],
+["Le loup revient dans les Alpes.",["retour du loup dans les alpes","le retour du loup dans les alpes"],"Retour du loup dans les Alpes","Return of the wolf to the Alps"],
+["Le nombre de visiteurs augmente fortement.",["forte augmentation du nombre de visiteurs","la forte augmentation du nombre de visiteurs","augmentation forte du nombre de visiteurs"],"Forte augmentation du nombre de visiteurs","Sharp rise in visitor numbers"]]},
+{id:"ex8",n:"8",type:"qcm",col:"#8a4d7a",t:"Quelle phrase nominalisée est correcte ?",en:"Which nominalised sentence is correct?",rule:"r4",items:[
+["On constate que les prix augmentent fortement.",["On constate l'augmentation fortement des prix.","On constate la forte augmentation des prix."],1,"On constate la forte augmentation des prix.","We note the sharp rise in prices."],
+["Les experts craignent que la rivière s'assèche lentement.",["Les experts craignent le lent assèchement de la rivière.","Les experts craignent l'assèchement de la rivière lentement."],0,"Les experts craignent le lent assèchement de la rivière.","Experts fear the slow drying-up of the river."],
+["On attend que l'artiste arrive.",["On attend l'arrivée de l'artiste.","On attend l'arrivage de l'artiste."],0,"On attend l'arrivée de l'artiste.","We are waiting for the artist's arrival."],
+["Tout le monde a remarqué qu'il était absent.",["Tout le monde a remarqué son absence.","Tout le monde a remarqué son absentement."],0,"Tout le monde a remarqué son absence.","Everyone noticed his absence."]]}
+];
+let TOTAL=0;EX.forEach(x=>TOTAL+=x.items.length);document.getElementById("tot").textContent=TOTAL;
+function norm(s){return s.toLowerCase().replace(/[’`]/g,"'").replace(/[.!?;:«»"]/g,"").replace(/\s+/g," ").trim()}
+function esc(s){return s.replace(/"/g,"&quot;")}
+EX.forEach(x=>{
+ let h=`<div class="exo"><div class="hd" style="background:${x.col}"><small>EXERCICE ${x.n}</small><b>${x.t}</b><span class="en">${x.en}</span></div><div class="bd">`;
+ x.items.forEach((it,i)=>{const id=x.id+"_"+i;
+  h+=`<div class="q" id="${id}"><div class="txt">${i+1}. ${it[0]}</div>`;
+  if(x.type=="qcm"){h+=`<div class="opts">`+it[1].map((o,k)=>`<button class="opt" data-q="${id}" data-k="${k}">${o}</button>`).join("")+`</div>`;}
+  else{h+=`<div class="inp"><input id="${id}_in" autocomplete="off" autocapitalize="off"><button class="btn" data-check="${id}">Vérifier</button><button class="btn alt" data-show="${id}">Réponse</button></div>`;}
+  const full=x.type=="qcm"?it[3]:it[2], en=x.type=="qcm"?it[4]:it[3];
+  h+=`<div class="fb" id="${id}_fb"><span class="res"></span> <button class="say" data-say="${esc(full)}" style="width:26px;height:26px;font-size:11px">▶</button> ${full}<div class="en">${en}</div></div></div>`;});
+ h+=`</div></div>`;document.getElementById(x.id).innerHTML=h;});
+function getItem(id){const [e,i]=id.split("_");const x=EX.find(z=>z.id==e);return {x,it:x.items[+i]};}
+function star(el){const r=el.getBoundingClientRect();for(let k=0;k<5;k++){const s=document.createElement("div");s.className="star";s.textContent="✦";s.style.left=(r.left+r.width/2+(Math.random()*80-40))+"px";s.style.top=(r.top+(Math.random()*30-15))+"px";s.style.animationDelay=(k*0.08)+"s";document.body.appendChild(s);setTimeout(()=>s.remove(),1400);}}
+function render(id,anim){const st=ST.a[id];if(!st)return;const {x,it}=getItem(id);const q=document.getElementById(id);const fb=document.getElementById(id+"_fb");
+ if(x.type=="qcm"){q.querySelectorAll(".opt").forEach(b=>{b.classList.remove("good","bad");const k=+b.dataset.k;if(k==it[2])b.classList.add("good");else if(st.v==k)b.classList.add("bad");});}
+ else{const inp=document.getElementById(id+"_in");inp.value=st.v||"";inp.classList.remove("good","bad");inp.classList.add(st.ok?"good":"bad");}
+ fb.classList.add("show");fb.querySelector(".res").innerHTML=st.ok?'<span class="ok">✓ Bravo !</span>':'<span class="ko">✗ Réponse :</span>';
+ if(anim&&st.ok)star(q);}
+document.addEventListener("click",e=>{
+ const o=e.target.closest(".opt");if(o){const id=o.dataset.q;if(ST.a[id])return;const {it}=getItem(id);const k=+o.dataset.k;ST.a[id]={v:k,ok:k==it[2]};save();render(id,true);update();speak(it[3]);return;}
+ const c=e.target.closest("[data-check]");if(c){const id=c.dataset.check;if(ST.a[id])return;const {it}=getItem(id);const v=document.getElementById(id+"_in").value;if(!v.trim())return;const ok=it[1].some(a=>norm(a)==norm(v));ST.a[id]={v,ok};save();render(id,true);update();speak(it[2]);return;}
+ const s=e.target.closest("[data-show]");if(s){const id=s.dataset.show;if(ST.a[id])return;const {it}=getItem(id);ST.a[id]={v:document.getElementById(id+"_in").value,ok:false};save();render(id,false);update();speak(it[2]);return;}
+});
+document.addEventListener("keydown",e=>{if(e.key=="Enter"&&e.target.tagName=="INPUT"){const b=document.querySelector(`[data-check="${e.target.id.replace('_in','')}"]`);b&&b.click();}});
+const TITLES={warm:"Échauffement : verbe ou adjectif → nom",r1:"Adjectif : singulier ou pluriel",r1b:"Adjectifs sans nom : le côté, l'aspect, le caractère",r2:"Nominalisation d'une locution",r3:"Différentes formes, différents sens",r4:"L'ordre de la phrase"};
+function wrongList(){const L=[];EX.forEach(x=>x.items.forEach((it,i)=>{const st=ST.a[x.id+"_"+i];if(st&&!st.ok)L.push({x,it,id:x.id+"_"+i});}));return L;}
+function update(){let n=0;Object.values(ST.a).forEach(s=>{if(s.ok)n++});document.getElementById("sc").textContent=n;
+ const L=wrongList();const R=document.getElementById("revoir");
+ if(!L.length){R.innerHTML="Pas encore d'erreur à revoir.";return;}
+ R.innerHTML="<ul>"+L.map(w=>`<li>Exercice ${w.x.n} : ${w.x.type=="qcm"?w.it[3]:w.it[2]} — <a href="#${w.x.rule}">revoir : ${TITLES[w.x.rule]}</a></li>`).join("")+"</ul>";}
+Object.keys(ST.a).forEach(id=>{if(document.getElementById(id))render(id,false)});update();
+/* notes + mots */
+const WORDS=["la beauté","la contemplation","la fragilité","la disparition","la création","l'interprétation","un je-ne-sais-quoi","la douceur","la lumière","la profondeur","la découverte","le côté","l'aspect","le caractère","la lenteur","l'immensité"];
+const N=document.getElementById("notes");N.value=ST.notes||"";
+function hw(){const t=N.value.toLowerCase();document.getElementById("words").innerHTML=WORDS.map(w=>{const core=w.replace(/^(la |le |l'|un )/,"");return `<span class="${t.includes(core)?'used':''}">${w}</span>`}).join("");}
+N.addEventListener("input",()=>{ST.notes=N.value;save();hw();});hw();
+/* envoi */
+document.getElementById("sendbtn").onclick=async()=>{const m=document.getElementById("sendmsg");m.textContent="Envoi en cours…";
+ let n=0;Object.values(ST.a).forEach(s=>{if(s.ok)n++});const L=wrongList();
+ const data={access_key:"e554b1d0-2dda-40a0-b94b-f833d9d5fad6",subject:"Edina · La nominalisation · "+n+"/"+TOTAL,from_name:"Edina",eleve:"Edina",lecon:"La nominalisation",score:n+" / "+TOTAL+" (réponses données : "+Object.keys(ST.a).length+")",a_revoir:L.length?L.map(w=>"Ex. "+w.x.n+" : "+(w.x.type=="qcm"?w.it[3]:w.it[2])+(w.x.type=="inp"&&ST.a[w.id].v?" (réponse : "+ST.a[w.id].v+")":"")).join("\n"):"Rien à revoir",notes:ST.notes||""};
+ try{const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)});const j=await r.json();m.textContent=j.success?"Merci Edina, tes résultats sont envoyés à Irène.":"L'envoi n'a pas fonctionné, réessaie.";}catch(e){m.textContent="L'envoi n'a pas fonctionné, réessaie.";}};
+{const rb=document.getElementById("reset");let armed=false;rb.onclick=()=>{if(!armed){armed=true;rb.textContent="Confirmer : tout effacer";setTimeout(()=>{armed=false;rb.textContent="Recommencer"},4000);return;}ST={a:{},notes:""};save();location.reload();};}
+</script>
+</body>
+</html>
