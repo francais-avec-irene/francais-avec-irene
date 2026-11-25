@@ -340,11 +340,17 @@ var rb=$("#resetb");rb.onclick=function(){if(!rb.classList.contains("confirm")){
 /* envoi à Irène */
 (function(){var b=$("#sendbtn"),st=$("#sendst"),nm=$("#sname"),SK=KEY+"-sent",last=null;try{last=localStorage.getItem(SK)}catch(e){}
  if(last){st.className="st ok";st.textContent="Résultats déjà envoyés le "+last+". Tu peux les renvoyer. · Already sent. You can send them again."}
- b.onclick=function(){var lines=[],done=0;$$(".item").forEach(function(el){var s=S.a[el.id];if(!s)return;done++;if(!s.ok){var r=document.getElementById(el.dataset.rule);var lab=r?(r.querySelector(".mt")||r.querySelector(".fw")||r.querySelector(".gh .txt")||r.querySelector(".eh .txt")||r).textContent.replace(/\s+/g," ").replace(/^\s*\d+\s*·\s*/,"").slice(0,80):"";lines.push("• "+el.dataset.full.replace(/&#x27;/g,"'")+"\n   → à revoir : "+lab)}});
+ b.onclick=function(){var lines=[],done=0;$$(".item").forEach(function(el){var s=S.a[el.id];if(!s)return;done++;if(!s.ok){var r=document.getElementById(el.dataset.rule);var lab=r?(r.querySelector(".mt")||r.querySelector(".fw")||r.querySelector(".gh .txt")||r.querySelector(".eh .txt")||r).textContent.replace(/\s+/g," ").replace(/^\s*\d+\s*·\s*/,"").slice(0,80):"";var full=el.dataset.full.replace(/&#x27;/g,"'"),cl=el.classList,nm2=(nm.value||"").trim()||"Carys",ex=el.id.replace(/^e(\d+)-(\d+)$/,"Exercice $1, n° $2");
+   var qn=$(".qq .txt",el)||$(".qq .itq",el)||$(".qq",el),q=qn?qn.textContent.replace(/_{3,}/g,"___").replace(/\s+/g," ").trim():"",vt=$(".vt",el),rep="",bon=full;
+   if(cl.contains("q")){var o=$('.opt[data-i="'+s.v+'"]',el),c=$('.opt[data-i="'+el.dataset.a+'"]',el);rep=o?o.textContent:"";bon=c?c.textContent:full}
+   else if(cl.contains("typ")){rep=s.v;bon=JSON.parse(el.dataset.ans)[0];if(vt)q+=" ("+vt.textContent.trim()+")"}
+   else if(cl.contains("ord")){rep=s.v}
+   else if(cl.contains("trad")){rep=((S.t&&S.t[el.id])||"").trim()||"(pas de traduction écrite)";rep+="  [elle a jugé sa traduction incorrecte]"}
+   lines.push("• "+ex+(q?" : "+q:"")+"\n   ✗ Réponse de "+nm2+" : "+rep+"\n   ✓ Bonne réponse : "+bon+(bon!==full?"\n   Phrase correcte : "+full:"")+"\n   → Règle : "+lab)}});
   var txt=(S.f&&S.f.wprod||"").trim(),nw=txt?txt.split(/\s+/).length:0,name=(nm.value||"").trim()||"Carys";
   var data={access_key:"e554b1d0-2dda-40a0-b94b-f833d9d5fad6",subject:"Résultats de "+name+" · Entraînement DELF B2",from_name:"Le français avec Irène",
    "Élève":name,"Leçon":"Carys · Entraînement ciblé DELF B2 (gérondif, subjonctif, hypothèse, pronoms) · 25 novembre 2026",
-   "Score":nOk()+" / "+TOTAL,"Questions faites":done+" / "+TOTAL,"À revoir":lines.length?lines.join("\n"):"Rien à revoir 🎉",
+   "Score":nOk()+" / "+TOTAL,"Questions faites":done+" / "+TOTAL,"À revoir":lines.length?lines.join("\n\n"):"Rien à revoir 🎉",
    "Production écrite · Une pub de Noël sans humains ?":txt?("("+nw+" mots)\n\n"+txt):"Pas encore écrite"};
   b.disabled=true;var lbl=b.textContent;b.textContent="Envoi en cours… · Sending…";st.className="st";st.textContent="";
   fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)}).then(function(r){return r.json()}).then(function(j){if(!j.success)throw new Error(j.message||"erreur");
