@@ -145,6 +145,15 @@ input.txt.bad{border-color:var(--ko);color:var(--ko);background:var(--kot)}
 textarea#prod{width:100%;font:17px/1.7 "Nunito",sans-serif;padding:14px;border:2px solid var(--vi);border-radius:16px;background:repeating-linear-gradient(var(--card) 0 28.4px,var(--line) 28.4px 29.4px);background-attachment:local;color:var(--ink);resize:vertical;line-height:29.4px}
 .count{font:600 15px "Poppins",sans-serif;color:var(--soft);margin:6px 0}
 .count.good{color:var(--ok)}
+.corr-sec{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px 22px;margin-bottom:26px}
+.corr-sec h2{margin:0 0 4px;font-size:22px;color:var(--vi)}
+.corrtext{font-size:17px;line-height:1.85}
+.corrtext p{margin:0 0 .9em}
+.corrtext u{text-decoration:underline;text-decoration-color:var(--ko);text-decoration-thickness:2px;text-underline-offset:3px}
+.corrtext .c{color:var(--ok);font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font:500 14px/1.4 "Poppins",sans-serif;color:var(--soft);padding:8px 12px;border:1px dashed var(--line);border-radius:10px;margin-bottom:16px}
+.corr-sec details{margin-top:8px;border-top:1px dashed var(--line);padding-top:10px}
+.corr-sec summary{cursor:pointer;font:600 16px "Poppins",sans-serif;color:var(--bl);min-height:44px;display:flex;align-items:center}
 .star{position:fixed;z-index:50;pointer-events:none;color:#f5b301;font-size:20px;animation:pop .9s ease-out forwards}
 @keyframes pop{0%{transform:scale(.2);opacity:0}30%{transform:scale(1.2) translateY(-6px);opacity:1}100%{transform:scale(.8) translateY(-34px);opacity:0}}
 @media(prefers-reduced-motion:reduce){.star{display:none}}
@@ -169,10 +178,36 @@ textarea#prod{width:100%;font:17px/1.7 "Nunito",sans-serif;padding:14px;border:2
 </header>
 
 <div class="intro">
- <p><b>Alice, voici ton entraînement à partir de ta production « Faut-il fermer les zoos et les aquariums ? ».</b> Tu vas revoir six points où tu t'es trompée. Pour chaque point : lis la règle, écoute les exemples, puis fais l'exercice. Tu as une seule tentative par question. Lance le chronomètre en haut : tu as environ 35 minutes.</p>
- <p class="it">Alice, ecco il tuo allenamento a partire dal tuo testo sugli zoo. Rivedrai sei punti in cui hai sbagliato: leggi la regola, ascolta gli esempi e poi fai l'esercizio. Hai un solo tentativo per domanda. Circa 35 minuti.</p>
+ <p><b>Alice, voici ton entraînement à partir de ta production « Faut-il fermer les zoos et les aquariums ? ».</b> Commence par lire la correction de ton texte. Ensuite, tu vas revoir six points où tu t'es trompée. Pour chaque point : lis la règle, écoute les exemples, puis fais l'exercice. Tu as une seule tentative par question. Lance le chronomètre en haut : tu as environ 35 minutes.</p>
+ <p class="it">Alice, ecco il tuo allenamento a partire dal tuo testo sugli zoo. Prima leggi la correzione del tuo testo, poi rivedrai sei punti in cui hai sbagliato: leggi la regola, ascolta gli esempi e poi fai l'esercizio. Hai un solo tentativo per domanda. Circa 35 minuti.</p>
  <p class="it" style="margin:0">Tes réponses restent enregistrées : tu peux fermer la page et revenir plus tard.</p>
 </div>
+
+<section class="corr-sec" id="correction">
+ <h2>La correction de ton texte</h2>
+ <p class="it" style="margin:0 0 12px">La correzione del tuo testo: l'errore è sottolineato in rosso, la correzione è in verde tra parentesi.</p>
+ <div class="corrtext"><div class="legend"><span><u>erreur soulignée</u></span><span class="c">(correction en vert)</span></div>
+
+<p>Bonjour à tous !</p>
+<p>Je m'appelle Sara, j'ai 16 ans et je voudrais <u>vous repondre à la question si on faut</u> <span class="c">(répondre à la question de savoir s'il faut)</span> fermer les zoos et les aquariums.</p>
+<p><u>Depuis j'étais très petite, j'ai bien aimé</u> <span class="c">(Depuis que je suis toute petite, j'aime)</span> tous les animaux, <u>aussi les requin</u> <span class="c">(même les requins)</span> et les serpents qui font peur à <u>beaucoup des personnes</u> <span class="c">(beaucoup de personnes)</span>. <u>Enfait</u> <span class="c">(En fait)</span> mon objectif est de devenir <u>une vétérinaire</u> <span class="c">(vétérinaire)</span> pour aider à combattre les maladies. Quand j'avais 8 ans <u>j'irais</u> <span class="c">(j'allais)</span> tous les dimanches au zoo à <u>cote</u> <span class="c">(côté)</span> de chez moi pour regarder <u>tous les espèces</u> <span class="c">(toutes les espèces)</span> d'animaux, <u>aussi lesquelles plus étranges</u> <span class="c">(même les plus étranges)</span>.</p>
+<p>Les zoos et les aquariums permettent de rapprocher le monde animal <u>à tous</u> <span class="c">(de tout le monde)</span> et de développer la passion des enfants pour les animaux. <u>Depuis</u> <span class="c">(De plus,)</span> ils protègent les espèces en voie de disparition et ils permettent aux scientifiques de <u>leur étudier plus vicin</u> <span class="c">(les étudier de plus près)</span>. <u>Cependant que</u> <span class="c">(Cependant,)</span> d'autres personnes pensent que faire vivre des <u>etre vivant</u> <span class="c">(êtres vivants)</span> dans un espace limité n'est pas <u>correcte</u> <span class="c">(correct)</span> et <u>ils</u> <span class="c">(elles)</span> proposent <u>d'éliminer</u> <span class="c">(de supprimer)</span> les zoos. <u>En suite ils</u> <span class="c">(Ensuite, elles)</span> disent que <u>celui</u> <span class="c">(c'est)</span> <u>une manière pour</u> <span class="c">(un moyen de)</span> s'enrichir.</p>
+<p>Je pense que les animaux ne comprennent pas <u>d'etre</u> <span class="c">(qu'ils sont)</span> derrière une vitre et <u>si les modalités de le zoo ne sont pas mals</u> <span class="c">(que, si les conditions de vie au zoo sont bonnes,)</span> il n'y a rien de mal, à condition que les <u>objectives sont éducative et pour la recherche</u> <span class="c">(objectifs soient éducatifs et scientifiques)</span>.</p>
+<p>Je pense que la captivité devrait <u>etre</u> <span class="c">(être)</span> gérée de façon à respecter le <u>bien-etre</u> <span class="c">(bien-être)</span> des animaux et que <u>progesseviment</u> <span class="c">(progressivement)</span> les zoos devraient <u>disparetre</u> <span class="c">(disparaître)</span> et laisser place à des structures <u>médical</u> <span class="c">(médicales)</span> de transition <u>ou</u> <span class="c">(où)</span> les animaux <u>ni saraient di passage</u> <span class="c">(ne seraient que de passage)</span>.</p>
+<p>Merci pour <u>l'attention</u> <span class="c">(votre attention)</span> et j'espère vivement <u>de ne pas etre</u> <span class="c">(ne pas être)</span> <u>l'unique qui la pense comme ca</u> <span class="c">(la seule à penser comme ça)</span>.</p>
+<p>Salut !!</p>
+</div>
+ <details><summary>Voir le texte corrigé au propre</summary><div class="corrtext clean">
+<p>Bonjour à tous !</p>
+<p>Je m'appelle Sara, j'ai 16 ans et je voudrais répondre à la question de savoir s'il faut fermer les zoos et les aquariums.</p>
+<p>Depuis que je suis toute petite, j'aime tous les animaux, même les requins et les serpents qui font peur à beaucoup de personnes. En fait, mon objectif est de devenir vétérinaire pour aider à combattre les maladies. Quand j'avais 8 ans, j'allais tous les dimanches au zoo à côté de chez moi pour regarder toutes les espèces d'animaux, même les plus étranges.</p>
+<p>Les zoos et les aquariums permettent de rapprocher le monde animal de tout le monde et de développer la passion des enfants pour les animaux. De plus, ils protègent les espèces en voie de disparition et ils permettent aux scientifiques de les étudier de plus près. Cependant, d'autres personnes pensent que faire vivre des êtres vivants dans un espace limité n'est pas correct et elles proposent de supprimer les zoos. Ensuite, elles disent que c'est un moyen de s'enrichir.</p>
+<p>Je pense que les animaux ne comprennent pas qu'ils sont derrière une vitre et que, si les conditions de vie au zoo sont bonnes, il n'y a rien de mal, à condition que les objectifs soient éducatifs et scientifiques.</p>
+<p>Je pense que la captivité devrait être gérée de façon à respecter le bien-être des animaux et que progressivement les zoos devraient disparaître et laisser place à des structures médicales de transition où les animaux ne seraient que de passage.</p>
+<p>Merci pour votre attention et j'espère vivement ne pas être la seule à penser comme ça.</p>
+<p>Salut !!</p>
+</div></details>
+</section>
 
 <!-- RÈGLE 1 -->
 <section class="rule" id="regle1" style="--c:var(--bl);--t:var(--blt)">
