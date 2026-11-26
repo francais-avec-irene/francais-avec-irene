@@ -544,7 +544,7 @@ $("#reset").addEventListener("click",function(){if(!window.confirm("Effacer tout
   var w=Object.keys(REG).filter(function(k){return S.items[k]&&!S.items[k].ok}).map(function(k){return "• "+EXN[REG[k].ex]+" · "+REG[k].label+" → "+REG[k].answer});
   var md=["ex1","ex2","ex3","ex4","ex5","ex6"].map(function(e){var t=S.medals[e];return EXN[e]+" : "+(t?MC[t][3].replace("Médaille ","").replace("d'","").replace("de ",""):"pas encore faite")}).join("\n");
   var name=(nm.value||"").trim()||"Élève";
-  var data={access_key:"e554b1d0-2dda-40a0-b94b-f833d9d5fad6",subject:"Résultats de "+name+" · Le passé composé",from_name:"Le français avec Irène",
+  var data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats de "+name+" · Le passé composé",from_name:"Le français avec Irène",
    "Élève":name,"Leçon":"Giulia · Hier, j'ai dansé ! (passé composé)","Score":score()+" / "+TOT,"Questions faites":done+" / "+TOT,"Médailles":md,
    "À revoir":w.length?w.join("\n"):"Rien à revoir 🎉"};
   b.disabled=true;b.textContent="Envoi en cours…";st.className="st";st.textContent="";

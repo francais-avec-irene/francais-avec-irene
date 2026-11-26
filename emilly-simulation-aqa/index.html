@@ -371,7 +371,7 @@ setInterval(tick,1000);"LRW".split("").forEach(function(P){paint(P,false)});tick
   var rv=[];Object.keys(Q).forEach(function(id){var q=Q[id];if(q.type!=="task"&&S.mk[q.paper]&&grade(id)<q.marks)rv.push("• "+NAME[q.paper]+" Q"+q.n+" : "+strip(q.label||"")+" → "+q.sol+(typeof S.a[id]==="string"?"  [réponse : "+S.a[id]+"]":(S.a[id]?"  [réponse : "+[].concat(S.a[id]).join(" / ")+"]":"")))});
   var tr=Object.keys(Q).filter(function(id){return Q[id].type==="trans"||Q[id].type==="dict"}).map(function(id){var q=Q[id];return "• "+(q.src||"Dictée "+q.n)+"\n  → "+((S.a[id]||"").trim()||"(pas de réponse)")+"  ["+(S.mk[q.paper]?grade(id):"?")+"/2]"});
   var tx=["B","C"].map(function(sec){var t=S.tb[sec]||(sec==="B"?"2.1":"3.1"),id="W"+t.replace(".","_"),v=(S.a[id]||"").trim();return "Question "+t+" ("+Q[id].label+", "+words(v)+" mots) :\n"+(v||"(pas encore écrit)")});
-  var data={access_key:"e554b1d0-2dda-40a0-b94b-f833d9d5fad6",subject:"Résultats de "+name+" · Simulation AQA Higher",from_name:"Le français avec Irène",
+  var data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats de "+name+" · Simulation AQA Higher",from_name:"Le français avec Irène",
    "Élève":name,"Document":"Simulation AQA GCSE French Higher (demi-format)","Notes":sc,"Score automatique":$("#sc").textContent+" / 60",
    "À revoir":rv.length?rv.join("\n"):"Rien à revoir","Traductions et dictée":tr.join("\n"),"Writing · textes à corriger":tx.join("\n\n")};
   b.disabled=true;b.textContent="Envoi en cours…";st.className="st";st.textContent="";

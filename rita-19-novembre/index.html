@@ -645,7 +645,7 @@ function renderRev(){const L=$("#revlist");if(!L)return;const w=Object.keys(REG)
  b.onclick=async()=>{const tot=Object.keys(REG).length,done=Object.keys(REG).filter(id=>S.items[id]&&(S.items[id].ok||S.items[id].wrong)).length;
   const w=Object.keys(REG).filter(id=>S.items[id]&&S.items[id].wrong).map(id=>"• "+REG[id].label+" → "+REG[id].answer);
   const name=(nm.value||"").trim()||"Élève";const prod=(($("#prod")&&$("#prod").value)||S.prod||"").trim();
-  const data={access_key:"e554b1d0-2dda-40a0-b94b-f833d9d5fad6",subject:"Résultats de "+name+" · Leçon du 19 novembre",from_name:"Le français avec Irène",
+  const data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats de "+name+" · Leçon du 19 novembre",from_name:"Le français avec Irène",
    "Élève":name,"Leçon":"Rita · 19 novembre","Score":score()+" / "+tot,"Questions faites":done+" / "+tot,
    "À revoir":w.length?w.join("\n"):"Rien à revoir 🎉","Production écrite":prod||"(pas encore écrite)"};
   b.disabled=true;b.textContent="Envoi en cours…";st.className="st";st.textContent="";

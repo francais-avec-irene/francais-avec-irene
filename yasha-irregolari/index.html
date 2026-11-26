@@ -440,7 +440,7 @@ document.getElementById("sendbtn").addEventListener("click",()=>{const b=documen
  const bad=ITEMS.filter(it=>S.items[it.dataset.id]&&!S.items[it.dataset.id].ok).map(it=>"• "+qtext(it)+" → "+(it.classList.contains("tf")?(it.dataset.ans==="V"?"Vero":"Falso"):it.dataset.full)+"  (tua risposta: "+S.items[it.dataset.id].v.replace(/ ¦ /g," ")+")");
  const iv=[...document.querySelectorAll(".note-in")].map(i=>{const q=i.closest(".pqb").querySelector(".it").textContent.replace(/^\d+/,"");return "• "+q+"\n  → "+((S.notes[i.dataset.id]||"").trim()||"(—)")}).join("\n");
  const name=(document.getElementById("sname").value||"").trim()||"Yasha";
- const data={access_key:"e554b1d0-2dda-40a0-b94b-f833d9d5fad6",subject:"Résultats de "+name+" · Italiano, capitolo 08",from_name:"Le français avec Irène",
+ const data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats de "+name+" · Italiano, capitolo 08",from_name:"Le français avec Irène",
   "Allieva":name,"Lezione":"Capitolo 08 · Verbi irregolari, modali e sapere","Punteggio":ok+" / "+ITEMS.length,"Esercizi fatti":done+" / "+ITEMS.length,
   "Risposte orali":SPS.filter(s=>S.said[s.dataset.id]).length+" / "+SPS.length,"Carte imparate":S.known.length+" / "+cardsEl.children.length,
   "Da rivedere":bad.length?bad.join("\n"):"Niente da rivedere","Intervista":iv};

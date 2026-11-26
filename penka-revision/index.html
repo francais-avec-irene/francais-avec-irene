@@ -206,7 +206,7 @@ var rb=$("#resetb");rb.onclick=function(){if(!rb.classList.contains("confirm")){
  b.onclick=function(){var tot=Object.keys(REG).length,done=Object.keys(REG).filter(function(id){return S.a[id]}).length;
   var w=wrong().map(function(id){return"• "+REG[id].answer});
     var name=(nm.value||"").trim()||"Penka";
-  var data={access_key:"e554b1d0-2dda-40a0-b94b-f833d9d5fad6",subject:"Résultats de "+name+" · Grande révision du 23 novembre",from_name:"Le français avec Irène",
+  var data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats de "+name+" · Grande révision du 23 novembre",from_name:"Le français avec Irène",
    "Élève":name,"Leçon":"Penka · grande révision · 23 novembre 2026","Score":score()+" / "+tot,"Questions faites":done+" / "+tot,
    "À revoir":w.length?w.join("\n"):"Rien à revoir"};
   b.disabled=true;b.textContent="Envoi en cours…";st.className="st";st.textContent="";

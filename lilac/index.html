@@ -382,7 +382,7 @@ refresh();
     const done=UNITS.filter(u=>S[u.id] && (ITEM[u.id] ? true : S[u.id].done)).length;
     const lines=wrong.map(u=>{ const p=D.points[u.pid]; return "• Point "+p.n+" · "+p.title+"\n   "+u.q+"\n   → "+u.answer; });
     const name=(nm.value||"").trim()||"Élève";
-    const data={access_key:"e554b1d0-2dda-40a0-b94b-f833d9d5fad6",subject:"Résultats de "+name+" · Grande révision de grammaire",from_name:"Le français avec Irène",
+    const data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats de "+name+" · Grande révision de grammaire",from_name:"Le français avec Irène",
       "Élève":name,"Leçon":"Lilac · Grande révision de grammaire","Score":ok+" / "+UNITS.length,"Questions faites":done+" / "+UNITS.length,
       "À revoir":lines.length?lines.join("\n"):"Rien à revoir 🎉"};
     b.disabled=true; const lbl=b.textContent; b.textContent="Envoi en cours… · Sending…"; st.className="st"; st.textContent="";

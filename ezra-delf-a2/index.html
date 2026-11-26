@@ -403,7 +403,7 @@ setInterval(tick,1000);["CO","CE","PE","PO"].forEach(P=>paint(P,false));tick();
   const sc=["CO","CE"].map(P=>NAME[P]+" : "+(S.mk[P]?pScore(P)+" / "+pMax(P)+(S.fin[P]?" ("+S.fin[P]+")":""):"pas encore corrigé")).join("\n");
   const rv=Object.keys(Q).filter(id=>S.mk[Q[id].paper]&&S.a[id]!==Q[id].ans).map(id=>"• "+NAME[Q[id].paper]+" Q"+Q[id].n+" : "+Q[id].label+" → "+Q[id].sol+" [réponse : "+(S.a[id]||"aucune")+"]");
   const tx=["PE1","PE2"].map((id,i)=>"Texte "+(i+1)+" ("+words(S.tx[id])+" mots) :\n"+((S.tx[id]||"").trim()||"(pas encore écrit)")).join("\n\n");
-  const data={access_key:"e554b1d0-2dda-40a0-b94b-f833d9d5fad6",subject:"Résultats de "+name+" · Simulation DELF A2 junior",from_name:"Le français avec Irène",
+  const data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats de "+name+" · Simulation DELF A2 junior",from_name:"Le français avec Irène",
    "Élève":name,"Document":"Simulation guidée DELF A2 junior (demi-format)","Points":sc+"\nTotal : "+$("#sc").textContent+" / 26",
    "À revoir":rv.length?rv.join("\n"):"Rien à revoir","Production écrite":tx,"Oral":S.mk.PO?"Préparé (à faire en cours)":"Pas encore fait"};
   b.disabled=true;b.textContent="Envoi…";st.className="st";st.textContent="";
