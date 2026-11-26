@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>J'ai sept ans ! · Leçon 3</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF8F1;--ink:#33304A;--soft:#7A7592;--teal:#21A99A;--teal-l:#DDF5F1;--pink:#E8618C;--pink-l:#FDE4EC;--sun:#F6B93B;--sun-l:#FEF3D6;--violet:#7C6BE0;--violet-l:#ECE9FC;--sky:#4C9BE8;--sky-l:#E0EEFC;--orange:#F08A3C;--orange-l:#FFE9D6;--ok:#22A56B;--ko:#E0526A;--shadow:0 10px 28px rgba(40,50,90,.12),0 2px 6px rgba(40,50,90,.06)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:Nunito,system-ui,sans-serif;font-weight:800;color:var(--ink);font-size:24px;line-height:1.4;
+ background:radial-gradient(620px 420px at 0 0,#FFE9D6 0,transparent 70%),radial-gradient(600px 450px at 100% 12%,#ECE9FC 0,transparent 70%),radial-gradient(640px 520px at 50% 100%,#DDF5F1 0,transparent 70%),var(--bg);background-attachment:fixed}
+h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
+.en{color:var(--soft);font-style:italic;font-weight:600;font-size:.82em}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px 60px}
+.topbar{display:flex;align-items:center;padding:14px 0 4px}
+.topbar img{width:92px;height:92px}
+#score{position:fixed;top:12px;right:12px;z-index:60;background:#fff;border:3px solid var(--sun);border-radius:999px;padding:5px 18px;font-family:Fredoka;font-size:26px;box-shadow:var(--shadow);transition:transform .2s}
+#score.bump{transform:scale(1.25)}
+.i3{width:84px;height:84px;object-fit:contain;display:inline-block;vertical-align:middle;filter:drop-shadow(0 6px 8px rgba(40,50,90,.18))}
+.i3.s{width:58px;height:58px}.i3.l{width:120px;height:120px}.i3.xl{width:160px;height:160px}
+.gold{filter:hue-rotate(165deg) saturate(1.5) drop-shadow(0 6px 8px rgba(40,50,90,.18))}
+.hero{margin:8px 0 8px;border-radius:32px;overflow:hidden;overflow:clip;box-shadow:var(--shadow);display:grid;grid-template-columns:1.05fr 1fr;background:linear-gradient(135deg,#FFF1E4,#F3EEFF)}
+.hero img.ph{width:100%;height:310px;object-fit:cover;object-position:50% 35%;display:block;order:2}
+.hero .t{padding:26px 22px 24px 30px;align-self:center;position:relative}
+.tag{display:inline-block;background:var(--violet-l);color:var(--violet);border-radius:999px;padding:3px 14px;font-size:15px;letter-spacing:.08em;font-family:Fredoka}
+.hero h1{font-size:50px;color:var(--orange);line-height:1.05;margin:8px 0 6px}
+.hero p{margin:0;font-size:20px}
+.hero .floaty{display:flex;gap:6px;margin-top:12px}
+.hero .floaty img{width:54px;height:54px;animation:bob 2.2s ease-in-out infinite}
+.hero .floaty img:nth-child(2){animation-delay:-.5s}.hero .floaty img:nth-child(3){animation-delay:-1s}.hero .floaty img:nth-child(4){animation-delay:-1.5s}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:18px 0 22px}
+nav button{min-height:74px;border:3px solid transparent;border-radius:20px;font:inherit;font-size:18px;cursor:pointer;background:#fff;color:var(--ink);box-shadow:0 3px 10px rgba(40,50,90,.08);padding:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15}
+nav button img{width:34px;height:34px}
+nav button small{display:block;font-size:13px;color:var(--soft);font-style:italic;font-weight:600}
+nav button.on{border-color:var(--orange);background:var(--orange-l)}
+nav button.done::after{content:"✓";color:var(--ok);font-size:20px;line-height:1}
+.screen{display:none}.screen.on{display:block;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.card{background:#fff;border-radius:28px;box-shadow:var(--shadow);padding:22px;margin-bottom:18px;position:relative;overflow:hidden;overflow:clip}
+.shead{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.shead img{width:58px;height:58px;animation:wig 3s ease-in-out infinite}
+@keyframes wig{0%,100%{transform:rotate(0)}50%{transform:rotate(-10deg)}}
+.shead h2{font-size:32px}
+.instr{display:flex;gap:12px;align-items:center;background:var(--sun-l);border-radius:18px;padding:10px 14px;margin-bottom:14px}
+.play{flex:none;width:58px;height:58px;border-radius:50%;border:0;background:var(--teal);color:#fff;font-size:26px;cursor:pointer;box-shadow:0 4px 10px rgba(33,169,154,.35)}
+.play:active{transform:scale(.92)}
+.big .play{width:92px;height:92px;font-size:42px;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(33,169,154,.45)}50%{box-shadow:0 0 0 18px rgba(33,169,154,0)}}
+.dots{display:flex;gap:8px;justify-content:center;margin:6px 0 12px}
+.dots i{width:16px;height:16px;border-radius:50%;background:#E3E1EE}
+.dots i.ok{background:var(--ok)}.dots i.ko{background:var(--ko)}.dots i.cur{outline:3px solid var(--sun);outline-offset:2px}
+.sent{text-align:center;font-family:Fredoka;font-size:38px;margin:8px 0;line-height:1.25}
+.gap{display:inline-block;min-width:96px;border-bottom:5px solid var(--violet);color:var(--violet);padding:0 6px}
+.tr{text-align:center;min-height:30px}
+.next{display:block;margin:16px auto 0;border:0;border-radius:999px;background:var(--pink);color:#fff;font:600 26px Fredoka;padding:12px 34px;cursor:pointer;box-shadow:0 6px 14px rgba(232,97,140,.35);visibility:hidden}
+.next.show{visibility:visible;animation:pop .4s}
+@keyframes pop{0%{transform:scale(.6)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.choices{display:grid;gap:12px;margin-top:14px}
+.choices.three{grid-template-columns:repeat(3,1fr)}
+.ch{border:4px solid #E4E0F3;background:#fff;border-radius:22px;padding:16px;font:600 28px Fredoka;color:var(--ink);cursor:pointer;transition:transform .15s}
+.ch.big{font-size:34px;padding:18px 6px}
+.ch:hover{transform:translateY(-2px)}
+.ch.good{border-color:var(--ok);background:#E3F7EC;animation:pop .4s}.ch.bad{border-color:var(--ko);background:#FDE6EA;text-decoration:line-through;animation:shake .4s}
+.ch:disabled{cursor:default}
+.star{position:fixed;z-index:100;pointer-events:none;font-size:30px;animation:sp 1s ease-out forwards}
+@keyframes sp{0%{transform:translate(0,0) scale(.3);opacity:0}20%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.2) rotate(140deg);opacity:0}}
+.conf{position:absolute;top:30%;left:50%;width:12px;height:18px;border-radius:3px;z-index:5;pointer-events:none;animation:conf 1.6s cubic-bezier(.2,.7,.4,1) forwards}
+@keyframes conf{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+.no-wrap{position:relative;display:inline-block}
+.no-wrap::after{content:"";position:absolute;inset:-4px;background:url(img/3d/cross.png) center/contain no-repeat;opacity:.92}
+.grp{display:inline-flex;align-items:flex-end;gap:2px;flex-wrap:wrap;justify-content:center}
+
+/* ---------- gâteau ---------- */
+.party{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end;background:linear-gradient(180deg,#FFF6EC,#FFE9F1);border-radius:24px;padding:14px 10px 8px;position:relative;overflow:hidden;overflow:clip}
+.garland{position:absolute;top:0;left:0;right:0;height:34px;background:repeating-linear-gradient(90deg,#F6B93B 0 30px,#E8618C 30px 60px,#21A99A 60px 90px,#7C6BE0 90px 120px);clip-path:polygon(0 0,100% 0,100% 30%,97% 100%,94% 30%,91% 100%,88% 30%,85% 100%,82% 30%,79% 100%,76% 30%,73% 100%,70% 30%,67% 100%,64% 30%,61% 100%,58% 30%,55% 100%,52% 30%,49% 100%,46% 30%,43% 100%,40% 30%,37% 100%,34% 30%,31% 100%,28% 30%,25% 100%,22% 30%,19% 100%,16% 30%,13% 100%,10% 30%,7% 100%,4% 30%,1% 100%,0 30%);opacity:.85}
+.guest{text-align:center;padding-top:30px}
+.guest .grp img{animation:bob 2s ease-in-out infinite}
+.guest .grp img:nth-child(2){animation-delay:-.7s}
+.guest .nm{font-family:Fredoka;font-size:26px;color:var(--pink);margin-top:4px}
+.cakebox{position:relative;width:200px;margin:30px auto 0}
+.cakebox .ck{width:200px;height:200px;display:block;transition:filter .4s}
+.cakebox:not(.lit) .ck{filter:saturate(.55) brightness(.97) drop-shadow(0 8px 10px rgba(40,50,90,.18))}
+.topper{position:absolute;left:50%;top:-30px;transform:translateX(-50%);background:var(--violet);color:#fff;font:700 30px Fredoka;border-radius:16px;padding:0 14px;box-shadow:0 4px 10px rgba(124,107,224,.4);z-index:3}
+.flames i{position:absolute;top:12px;width:14px;height:24px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(circle at 50% 70%,#fff 0 18%,#FFE066 30%,#FF9A1F 70%);opacity:0;transform:scale(0);transform-origin:50% 100%;z-index:2}
+.flames i:nth-child(1){left:48px}.flames i:nth-child(2){left:93px}.flames i:nth-child(3){left:133px}
+.lit .flames i{opacity:1;transform:scale(1);animation:flick .5s ease-in-out infinite alternate;transition:transform .3s}
+.lit .flames i:nth-child(2){animation-delay:-.2s;transition-delay:.15s}.lit .flames i:nth-child(3){animation-delay:-.35s;transition-delay:.3s}
+@keyframes flick{from{transform:scale(1) rotate(-6deg)}to{transform:scale(1.15,1.3) rotate(6deg)}}
+.lit::before{content:"";position:absolute;left:10%;right:10%;top:-20px;height:90px;background:radial-gradient(closest-side,rgba(255,214,102,.75),transparent);z-index:0;animation:glow 1.4s ease-in-out infinite alternate}
+@keyframes glow{from{opacity:.6}to{opacity:1}}
+.hb{display:none;grid-column:1/-1;text-align:center;font:700 34px Fredoka;color:var(--pink);letter-spacing:.02em}
+.hb.show{display:block;animation:pop .5s}
+.hb img{width:46px;height:46px;vertical-align:middle}
+
+/* ---------- fusée ---------- */
+.fus{display:grid;grid-template-columns:200px 1fr;gap:16px}
+.space{position:relative;height:430px;border-radius:24px;overflow:hidden;overflow:clip;background:linear-gradient(180deg,#3B2F7A 0%,#5B4BB5 45%,#8C7BE6 80%,#C9BDFF 100%)}
+.space .tw{position:absolute;width:6px;height:6px;border-radius:50%;background:#fff;animation:tw 2s ease-in-out infinite}
+@keyframes tw{50%{opacity:.2;transform:scale(.5)}}
+.space .moon{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:84px;animation:bob 4s ease-in-out infinite}
+.space .pad{position:absolute;bottom:0;left:0;right:0;height:26px;background:#4B4470;border-top:5px solid #6E679A}
+.space .lvl{position:absolute;right:8px;width:22px;height:22px;border-radius:50%;border:3px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
+.space .lvl.on{background:var(--sun);border-color:#fff;box-shadow:0 0 12px #FFE066}
+.rkt{position:absolute;left:50%;width:92px;transform:translateX(-50%) rotate(-45deg);transition:bottom 1s cubic-bezier(.3,1.3,.5,1);z-index:3}
+.rkt img{width:92px;height:92px}
+.rkt.boost img{animation:shake .25s 3}
+.rkt.go{transition:bottom 2.2s cubic-bezier(.6,0,.9,.5),left 2.2s cubic-bezier(.6,0,.9,.5);bottom:160%!important}
+.count{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font:700 80px Fredoka;color:#fff;text-shadow:0 4px 14px rgba(0,0,0,.35);z-index:8;text-align:center;border-radius:28px;cursor:pointer;pointer-events:none;-webkit-text-stroke:2px #5B4BB5}.count.end{background:rgba(59,47,122,.85);pointer-events:auto;-webkit-text-stroke:0}
+.count.show{display:flex}
+.count span{animation:pop .5s}
+.ines{display:flex;align-items:center;gap:10px}
+.ines .bubble{background:var(--violet-l);border-radius:22px;padding:10px 16px;font-family:Fredoka;font-size:26px;position:relative}
+.ines .bubble::before{content:"";position:absolute;left:-14px;top:40%;border:9px solid transparent;border-right:14px solid var(--violet-l)}
+.fam{display:flex;align-items:center;justify-content:center;gap:16px;margin:12px 0 2px;background:#F7F5FF;border-radius:22px;padding:10px}
+.fam .plus{font:700 34px Fredoka;color:var(--violet)}
+.fam .grp img{animation:bob 2.4s ease-in-out infinite}
+.fam .obj img{animation:wig 2.4s ease-in-out infinite}
+.mmm .ch.big{font-size:40px}
+
+/* ---------- chapeau ---------- */
+.magic{position:relative;display:grid;grid-template-columns:1fr 1.2fr;align-items:end;gap:10px;background:linear-gradient(180deg,#2E2A55 0%,#4A3F8C 70%,#6D5BC4 100%);border-radius:24px;padding:16px;min-height:330px;overflow:hidden;overflow:clip}
+.magic::before{content:"";position:absolute;left:0;right:0;bottom:-90px;height:220px;background:radial-gradient(closest-side,rgba(255,224,120,.35),transparent)}
+.curtain{position:absolute;top:0;bottom:0;width:46px;background:repeating-linear-gradient(90deg,#B3264A 0 12px,#D2405F 12px 24px);box-shadow:inset -6px 0 10px rgba(0,0,0,.25)}
+.curtain.l{left:0;border-radius:24px 0 60% 0}.curtain.r{right:0;border-radius:0 24px 0 60%}
+.magic .mg{text-align:center;z-index:1}
+.magic .mg img{width:150px;height:150px;animation:bob 2.6s ease-in-out infinite}
+.hatzone{position:relative;height:300px;z-index:1}
+.hat{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);border:0;background:none;cursor:pointer;padding:0;z-index:3}
+.hat img{width:170px;height:170px;filter:drop-shadow(0 10px 12px rgba(0,0,0,.4))}
+.hat.wiggle img{animation:hatw .9s ease-in-out}
+@keyframes hatw{20%{transform:rotate(-14deg)}40%{transform:rotate(12deg) translateY(-10px)}60%{transform:rotate(-8deg)}80%{transform:rotate(6deg)}}
+.hat:not(:disabled) img{animation:hatpulse 1.8s ease-in-out infinite}
+@keyframes hatpulse{50%{transform:scale(1.07)}}
+.hat:disabled{cursor:default}
+.tap{position:absolute;left:0;right:0;top:20px;text-align:center;color:#FFE7A0;font:600 24px Fredoka;animation:bob 1.6s infinite;z-index:4}
+.rise{position:absolute;left:50%;bottom:120px;transform:translateX(-50%);z-index:2;opacity:0;white-space:nowrap}
+.rise.show{animation:rise 1s cubic-bezier(.3,1.4,.5,1) forwards}
+@keyframes rise{from{opacity:0;transform:translate(-50%,60px) scale(.3)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
+.rise img{width:110px;height:110px}
+.puff{position:absolute;left:50%;bottom:130px;transform:translateX(-50%);z-index:4;text-align:center;opacity:0}
+.puff.show{animation:puff 1.4s ease-out forwards}
+@keyframes puff{0%{opacity:0;transform:translateX(-50%) scale(.3)}30%{opacity:1;transform:translateX(-50%) scale(1.25)}100%{opacity:1;transform:translateX(-50%) scale(1)}}
+.puff img{width:150px;height:150px}
+.puff b{display:block;color:#fff;font:700 30px Fredoka;margin-top:-30px;white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.4)}.puff .pen{display:block;color:#E6E0FF;font:italic 600 18px Nunito}
+.qrow{display:flex;align-items:center;gap:12px;justify-content:center;margin:4px 0 12px;flex-wrap:wrap}
+.qrow .q{font:600 32px Fredoka}
+.qb{display:inline-flex;align-items:center;gap:4px;background:var(--sun-l);border-radius:18px;padding:4px 12px;font:700 30px Fredoka;color:var(--orange)}
+.qb img{width:56px;height:56px}
+.chs3 .ch{font-size:26px;text-align:left;padding:14px 18px}
+
+/* ---------- perroquet ---------- */
+.sea{position:relative;border-radius:24px;overflow:hidden;overflow:clip;background:linear-gradient(180deg,#BFE6FF 0%,#E6F6FF 55%,#59B7E8 56%,#2F8FC9 100%);padding:14px;min-height:250px;display:grid;grid-template-columns:1fr 1fr;align-items:center}
+.sea .wave{position:absolute;left:-10%;right:-10%;bottom:30px;height:26px;background:radial-gradient(circle at 20px -6px,transparent 18px,#7CCBF2 19px) 0 0/40px 26px repeat-x;animation:waves 4s linear infinite;opacity:.8}
+@keyframes waves{to{transform:translateX(40px)}}
+.sea .shp{display:none}
+.sea .flag{position:absolute;right:20px;top:14px;width:60px;animation:wig 2s ease-in-out infinite}
+.parrot{border:0;background:none;cursor:pointer;text-align:center;z-index:2;padding:0}
+.parrot img{width:170px;height:170px;animation:bob 2.2s ease-in-out infinite;filter:drop-shadow(0 10px 10px rgba(0,0,0,.2))}
+.parrot.talk img{animation:talk .25s 6}
+@keyframes talk{50%{transform:scale(1.12) rotate(-8deg)}}
+.parrot span{display:inline-block;background:#fff;border-radius:999px;padding:4px 16px;font:600 22px Fredoka;color:var(--teal);box-shadow:var(--shadow)}
+.chest{z-index:2;text-align:center;align-self:end}
+.chestbox{position:relative;display:inline-block;width:170px;height:96px;border-radius:12px 12px 16px 16px;background:linear-gradient(#A8672F,#7A4518);border:5px solid #E5B341;box-shadow:0 8px 14px rgba(0,0,0,.25)}
+.chestbox::before{content:"";position:absolute;left:-5px;right:-5px;top:-46px;height:46px;border-radius:80px 80px 0 0;background:linear-gradient(#C47D3C,#9A5A24);border:5px solid #E5B341;border-bottom:0}
+.chestbox::after{content:"";position:absolute;left:50%;top:-8px;width:26px;height:30px;transform:translateX(-50%);background:#E5B341;border-radius:6px}
+.gems{position:absolute;left:6px;right:6px;top:-40px;display:flex;flex-wrap:wrap;justify-content:center;gap:0;z-index:2}
+.gems img{width:34px;height:34px}
+.gems img.new{animation:drop .8s cubic-bezier(.3,1.4,.5,1)}
+@keyframes drop{from{transform:translateY(-120px) scale(1.6);opacity:0}to{transform:none;opacity:1}}
+.pics{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.pic{border:5px solid #E4E0F3;border-radius:26px;background:#fff;padding:14px 6px;cursor:pointer;animation:pop .5s both;min-height:150px;display:flex;align-items:center;justify-content:center}
+.pic:nth-child(2){animation-delay:.15s}
+.pic.good{border-color:var(--ok);box-shadow:0 0 0 6px #C7EEDA}.pic.bad{border-color:var(--ko);opacity:.55}
+.pic:disabled{cursor:default}
+
+/* ---------- ferme ---------- */
+.farm{position:relative;height:250px;border-radius:24px;overflow:hidden;overflow:clip;background:linear-gradient(180deg,#9AD7FF 0%,#D9F1FF 52%,#8DD36B 53%,#5DB548 100%)}
+.farm .sun{position:absolute;top:10px;right:18px;width:76px;animation:spin 18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.farm .hut{position:absolute;left:12px;bottom:92px;width:120px}
+.farm .tree{position:absolute;left:130px;bottom:98px;width:86px}
+.farm .fence{position:absolute;left:0;right:0;bottom:100px;height:24px;background:repeating-linear-gradient(90deg,transparent 0 22px,#fff 22px 30px),linear-gradient(transparent 6px,#fff 6px 10px,transparent 10px 15px,#fff 15px 19px,transparent 19px);opacity:.85}
+.farm .field{position:absolute;left:10px;right:10px;bottom:8px;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:2px}
+.farm .field img{width:62px;height:62px}
+.farm .field img.new{animation:runin 1.1s cubic-bezier(.3,1.2,.5,1)}
+@keyframes runin{from{transform:translateX(500px) rotate(10deg)}70%{transform:translateX(-10px)}to{transform:none}}
+.jade{display:flex;align-items:center;gap:12px;justify-content:center;margin-top:12px}
+.jade .card2{background:#F1FAEC;border:4px dashed #8DD36B;border-radius:22px;padding:8px 16px;display:flex;align-items:center;gap:6px}
+.badge{background:var(--orange);color:#fff;font:700 26px Fredoka;border-radius:999px;padding:0 12px}
+
+/* ---------- pause / roue / phrases / revoir ---------- */
+.jac{text-align:center}
+.jac .emo img{width:170px;height:170px;animation:dance 1.2s ease-in-out infinite}
+@keyframes dance{0%,100%{transform:rotate(-12deg) translateY(0)}50%{transform:rotate(12deg) translateY(-22px)}}
+.wheelw{position:relative;width:310px;height:310px;margin:6px auto}
+.wheel{width:310px;height:310px;border-radius:50%;border:8px solid #fff;box-shadow:var(--shadow);transition:transform 2.8s cubic-bezier(.15,.85,.25,1);position:relative;overflow:hidden;overflow:clip}
+.wheel img{position:absolute;left:50%;top:50%;width:58px;height:58px;transform-origin:0 0}
+.pointer{position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:44px;z-index:2;filter:drop-shadow(0 3px 3px rgba(0,0,0,.2))}
+.spin{display:block;margin:14px auto;border:0;border-radius:999px;background:var(--violet);color:#fff;font:600 26px Fredoka;padding:12px 34px;cursor:pointer}
+.spin:disabled{opacity:.4}
+.rcard{display:none;text-align:center;background:var(--orange-l);border-radius:24px;padding:14px}
+.rcard.show{display:block;animation:pop .5s}
+.ans{display:none;font-family:Fredoka;font-size:32px;margin-top:8px}.ans.show{display:block;animation:pop .4s}
+.mum{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--sky-l);border-radius:24px;padding:16px}
+.mum img{animation:bob 1.6s ease-in-out infinite}
+.en2{font:600 30px Fredoka;color:#3B6FB0;text-align:center}
+.rule{border-radius:22px;padding:14px 18px;margin-bottom:16px;border:3px solid var(--c);background:#fff}
+.rule h3{color:var(--c);font-size:27px;margin-bottom:8px}
+.rl{display:flex;gap:10px;align-items:center;margin:7px 0}
+.rl .play{width:46px;height:46px;font-size:20px;background:var(--c)}
+.rl .en{display:block}
+.rule.flash{animation:flash 1.4s 2}
+@keyframes flash{50%{box-shadow:0 0 0 10px var(--c)}}
+.conj{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:4px 0 10px}
+.conj div{background:var(--violet-l);border-radius:16px;padding:8px 10px;text-align:center;font:600 28px Fredoka;color:#4B3DB0}
+.conj div span{display:block;font:italic 600 15px Nunito;color:var(--soft)}
+.note{display:inline-block;background:var(--sun-l);border-radius:14px;padding:4px 14px;font:600 22px Fredoka;margin:4px 0}
+.note .en{font-size:16px}
+.rphoto{width:100%;max-height:260px;object-fit:cover;border-radius:18px;display:block;margin:6px 0 10px}
+.mcards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0 10px}
+.mcard{border:3px solid #CDEFE9;border-radius:20px;background:#fff;padding:8px;cursor:pointer;font:inherit;color:var(--ink);display:flex;flex-direction:column;align-items:center}
+.mcard b{font:700 40px Fredoka;color:var(--teal)}
+.mcard .ex{font-family:Fredoka;font-size:21px;font-weight:600}
+.mcard .en{font-size:14px}
+.pets{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0 4px}
+.pet{border:3px solid #FBE2C4;border-radius:20px;background:#fff;padding:6px;cursor:pointer;font:inherit;color:var(--ink);display:flex;flex-direction:column;align-items:center}
+.pet img{width:100%;height:120px;object-fit:cover;border-radius:14px}
+.pet b{font:600 23px Fredoka}
+.pet .en{font-size:15px}
+.newwords{font-size:17px;color:var(--soft);font-style:italic;font-weight:600;margin-top:6px}
+.rv{border-left:6px solid var(--pink);background:#fff;border-radius:16px;padding:10px 14px;margin:10px 0;box-shadow:0 2px 8px rgba(40,50,90,.06)}
+.rv .a{color:var(--ok)}.rv .w{color:var(--ko);font-size:.9em}
+.rv button{margin-top:6px;border:3px solid var(--violet-l);background:#fff;color:var(--violet);border-radius:999px;font:600 18px Fredoka;padding:4px 14px;cursor:pointer}
+.reset{border:3px solid #E3E1EE;background:#fff;color:var(--soft);border-radius:999px;font:600 18px Fredoka;padding:8px 18px;cursor:pointer;margin-top:12px}
+.send{margin-top:18px;background:var(--violet-l);border-radius:22px;padding:16px;text-align:center}
+.send h3{color:var(--violet);font-size:26px}
+.send .go{border:0;border-radius:999px;background:var(--violet);color:#fff;font:600 24px Fredoka;padding:12px 30px;cursor:pointer;margin-top:8px}
+.send .go:disabled{opacity:.5}
+.sign{text-align:center;padding:26px 16px 30px}
+.sign img{width:100%;max-width:300px;height:auto}
+@media(max-width:680px){body{font-size:20px}.hero{grid-template-columns:1fr}.hero img.ph{height:210px;order:0}.hero h1{font-size:38px}
+ nav{grid-template-columns:repeat(2,1fr)}.sent{font-size:30px}.ch{font-size:22px}.ch.big{font-size:28px}.choices.three{grid-template-columns:repeat(3,1fr)}
+ .party{grid-template-columns:1fr}.guest{padding-top:34px}.cakebox{margin-top:26px}
+ .fus{grid-template-columns:1fr}.space{height:200px}.rkt{transition:left 1s cubic-bezier(.3,1.3,.5,1)}
+ .magic{grid-template-columns:84px 1fr;min-height:0;padding:12px 40px 12px 44px;gap:0}.magic .mg img{width:84px;height:84px}.hatzone{height:270px}.hat img{width:140px;height:140px}.tap{font-size:20px}.puff b{font-size:26px}
+ .sea{grid-template-columns:1fr 1fr;min-height:210px}.parrot img{width:120px;height:120px}.chestbox{width:130px}.sea .shp,.sea .flag{display:none}
+ .i3{width:64px;height:64px}.i3.l{width:92px;height:92px}.i3.xl{width:120px;height:120px}
+ .pets{grid-template-columns:repeat(2,1fr)}.mcards{grid-template-columns:1fr}.conj{grid-template-columns:repeat(2,1fr)}
+ .parrot span{font-size:15px;white-space:nowrap;padding:3px 10px}.count{font-size:46px}.fam{gap:8px}.fam .i3,.pic .i3{width:52px;height:52px}.party .i3.l{width:84px;height:84px} .wheelw,.wheel{width:270px;height:270px}.qrow .q{font-size:26px}.chs3 .ch{font-size:21px}}
+</style>
+</head>
+<body>
+<div id="score">⭐ <span id="sc">0</span> / <span id="tot">0</span></div>
+<div class="wrap">
+ <div class="topbar"><img src="../marque/logo-irene.png" alt="Le français avec Irène"></div>
+ <section class="hero"><div class="t"><span class="tag">LEÇON 3 · LE VERBE AVOIR</span><h1>J'ai sept ans !</h1><p>L'âge, la famille, les animaux… <span class="en">· Age, family, animals…</span></p>
+  <div class="floaty"><img src="img/3d/parrot.png" alt=""><img src="img/3d/cake.png" alt=""><img src="img/3d/rabbit.png" alt=""><img src="img/3d/rocket.png" alt=""></div></div>
+  <img class="ph" src="img/hero.jpg" alt=""></section>
+ <nav id="nav"></nav>
+ <div id="screens"></div>
+</div>
+<div class="sign"><img src="../marque/signature-irene.png" alt="Le français avec Irène · Cours de français en ligne"></div>
+<script>
+const D = {"RULES": [{"id": "r-avoir", "c": "#7C6BE0", "t": "Le verbe avoir", "en": "The verb \"to have\"", "conj": [["j'ai", "I have"], ["tu as", "you have"], ["il / elle a", "he / she has"], ["nous avons", "we have"], ["vous avez", "you have"], ["ils / elles ont", "they have"]], "lines": [["Le pirate a un perroquet.", "The pirate has a parrot.", "204fcd7093"], ["Nous avons un ballon rouge.", "We have a red ball.", "fdbac88565"]], "note": ["je + ai → j'ai", "I + have → j'ai"], "conjau": "84f60d0b72"}, {"id": "r-age", "c": "#E8618C", "t": "Mon âge : avoir … ans", "en": "My age: in French, you HAVE your years!", "photo": "age", "lines": [["J'ai sept ans.", "I am seven (years old).", "3a6b95a0c7"], ["Quel âge as-tu ?", "How old are you?", "09f6031ffa"], ["Le bébé a un an.", "The baby is one.", "11a4b6d4db"]]}, {"id": "r-mon", "c": "#21A99A", "t": "Mon, ma, mes", "en": "My", "cards": [{"w": "mon", "en": "+ boy word", "ex": "mon frère · mon oncle", "exen": "my brother · my uncle", "img": ["boy-l", "manbeard-ml"], "au": "6245bc4b18"}, {"w": "ma", "en": "+ girl word", "ex": "ma sœur · ma tante", "exen": "my sister · my aunt", "img": ["girl-md", "woman-md"], "au": "697d154789"}, {"w": "mes", "en": "+ more than one", "ex": "mes parents · mes amis", "exen": "my parents · my friends", "img": ["woman-l", "man-d"], "au": "671e27db38"}], "photo": "famille", "lines": [["Ma sœur a trois ans.", "My sister is three.", "2091f585c2"], ["Mon oncle a une guitare.", "My uncle has a guitar.", "46233ad771"], ["Mes parents ont deux chats.", "My parents have two cats.", "e23ddfba39"]], "new": "Nouveaux mots · New words : un oncle = an uncle · une tante = an aunt · les parents = parents"}, {"id": "r-animaux", "c": "#F0A030", "t": "Les animaux", "en": "Animals", "pets": [{"img": "perroquet", "fr": "un perroquet", "en": "a parrot", "say": "Un perroquet. Le pirate a un perroquet.", "au": "292bf2d0f7"}, {"img": "tortue", "fr": "une tortue", "en": "a tortoise", "say": "Une tortue. Zoé a une tortue.", "au": "845dd336f1"}, {"img": "hamster", "fr": "un hamster", "en": "a hamster", "say": "Un hamster. Hugo a un hamster.", "au": "f6628ff1df"}, {"img": "poney", "fr": "un poney", "en": "a pony", "say": "Un poney. Les jumelles ont un poney.", "au": "2d1d471b61"}, {"img": "lapin", "fr": "un lapin", "en": "a rabbit", "say": "Un lapin. Tu as un lapin blanc ?", "au": "71ee782520"}, {"img": "poisson", "fr": "un poisson rouge", "en": "a goldfish", "say": "Un poisson rouge. Nous avons un poisson rouge.", "au": "bbe28bcebd"}], "lines": []}, {"id": "r-pasde", "c": "#2FA3C9", "t": "Ne … pas de", "en": "Not … any", "lines": [["J'ai un chien. → Je n'ai pas de chien.", "I have a dog. → I don't have a dog.", "5dc34e8ce3"], ["Elle a une trousse. → Elle n'a pas de trousse.", "She has a pencil case. → She doesn't have a pencil case.", "ef3ad8eed8"], ["Ils ont des crayons. → Ils n'ont pas de crayons.", "They have pencils. → They don't have pencils.", "a3ee92ebfd"]], "note": ["un, une, des → de", "after « ne … pas » : a / an / some → de"]}], "GATEAU": [{"who": ["girl-ml"], "name": "Moi, Evelyn", "s": "Moi, j'___ sept ans !", "o": ["ai", "as", "a"], "a": "ai", "full": "Moi, j'ai sept ans !", "en": "Me, I am seven!", "age": "7", "r": "r-age", "au": "729891cdfa"}, {"who": ["boy-md"], "name": "Léo", "s": "Léo ___ neuf ans.", "o": ["ont", "a", "as"], "a": "a", "full": "Léo a neuf ans.", "en": "Léo is nine.", "age": "9", "r": "r-avoir", "au": "0ba9f8d76c"}, {"who": ["girl-m", "girl-m"], "name": "Les jumelles", "s": "Les jumelles ___ cinq ans.", "o": ["a", "avons", "ont"], "a": "ont", "full": "Les jumelles ont cinq ans.", "en": "The twin girls are five. (les jumelles = twin girls)", "age": "5", "r": "r-avoir", "au": "2a96f3a70e"}, {"who": ["child-ml"], "name": "Toi", "s": "Tu ___ six ans ?", "o": ["as", "ai", "a"], "a": "as", "full": "Tu as six ans ?", "en": "Are you six?", "age": "6", "r": "r-avoir", "au": "2faf2966bc"}, {"who": ["girl-d", "boy-l"], "name": "Nous", "s": "Nous ___ dix ans.", "o": ["avez", "avons", "ont"], "a": "avons", "full": "Nous avons dix ans.", "en": "We are ten.", "age": "10", "r": "r-avoir", "au": "fe4c0e893b"}, {"who": ["mage-m"], "name": "Le magicien", "s": "Le magicien ___ cent ans !", "o": ["a", "ont", "as"], "a": "a", "full": "Le magicien a cent ans !", "en": "The wizard is a hundred! (cent = a hundred)", "age": "100", "r": "r-age", "au": "0a0eef74e6"}], "FUSEE": [{"who": ["boy-l"], "obj": ["bike"], "s": "___ frère a un vélo jaune.", "a": "Mon", "full": "Mon frère a un vélo jaune.", "en": "My brother has a yellow bike.", "au": "730f333d18"}, {"who": ["woman-md"], "obj": ["guitar"], "s": "___ tante a une guitare.", "a": "Ma", "full": "Ma tante a une guitare.", "en": "My aunt has a guitar.", "au": "a3442b0df6"}, {"who": ["woman-l", "man-d"], "obj": ["car"], "s": "___ parents ont une voiture rouge.", "a": "Mes", "full": "Mes parents ont une voiture rouge.", "en": "My parents have a red car.", "au": "69d4dd8a8c"}, {"who": ["girl-md"], "obj": ["teddy"], "s": "___ sœur a quatre ans.", "a": "Ma", "full": "Ma sœur a quatre ans.", "en": "My sister is four.", "au": "3bdd8b8026"}, {"who": ["manbeard-ml"], "obj": ["boat"], "s": "___ oncle a un bateau.", "a": "Mon", "full": "Mon oncle a un bateau.", "en": "My uncle has a boat. (un bateau = a boat)", "au": "6bf32dae8d"}, {"who": ["girl-l", "boy-m", "girl-d"], "obj": ["ball"], "s": "___ amis ont un ballon.", "a": "Mes", "full": "Mes amis ont un ballon.", "en": "My friends have a ball.", "au": "17a922fd16"}], "CHAPEAU": [{"mage": "mage-m", "q": "Le magicien a un lapin ?", "qen": "Does the wizard have a rabbit?", "in": true, "obj": ["rabbit"], "o": ["Oui, il a un lapin.", "Non, il n'a pas de lapin.", "Non, il n'a pas un lapin."], "a": 0, "en": "Yes, he has a rabbit.", "qau": "998b809d92", "au": "ab9143caf9"}, {"mage": "mage-f", "q": "La magicienne a une colombe ?", "qen": "Does the witch have a dove? (une colombe = a dove)", "in": false, "obj": ["dove"], "o": ["Oui, elle a une colombe.", "Non, elle n'a pas une colombe.", "Non, elle n'a pas de colombe."], "a": 2, "en": "No, she doesn't have a dove.", "qau": "243f59bfcd", "au": "2ce4519542"}, {"mage": "mage-m", "q": "Le magicien a des fleurs ?", "qen": "Does the wizard have flowers?", "in": true, "obj": ["bouquet"], "o": ["Non, il n'a pas de fleurs.", "Oui, il a des fleurs.", "Non, il n'a pas des fleurs."], "a": 1, "en": "Yes, he has flowers.", "qau": "5992936d76", "au": "a999913611"}, {"mage": "mage-f", "q": "La magicienne a un poisson rouge ?", "qen": "Does the witch have a goldfish?", "in": false, "obj": ["fish"], "o": ["Non, elle n'a pas de poisson rouge.", "Oui, elle a un poisson rouge.", "Non, elle n'a pas un poisson rouge."], "a": 0, "en": "No, she doesn't have a goldfish.", "qau": "9556446d17", "au": "eb9d0391d4"}, {"mage": "mage-f", "q": "La magicienne a une souris ?", "qen": "Does the witch have a mouse? (une souris = a mouse)", "in": true, "obj": ["mouse"], "o": ["Non, elle n'a pas de souris.", "Non, elle n'a pas une souris.", "Oui, elle a une souris."], "a": 2, "en": "Yes, she has a mouse.", "qau": "8007948f7e", "au": "48147b6b1d"}, {"mage": "mage-m", "q": "Les magiciens ont des pommes ?", "qen": "Do the wizards have apples?", "in": false, "obj": ["apple", "apple"], "two": true, "o": ["Non, ils n'ont pas de pommes.", "Non, ils n'ont pas des pommes.", "Oui, ils ont des pommes."], "a": 0, "en": "No, they don't have apples.", "qau": "4417e4f996", "au": "d4d6a9ef7e"}], "PERROQUET": [{"s": "J'ai trois chiens.", "en": "I have three dogs.", "ok": {"who": [], "obj": ["dog", "dog", "dog"]}, "ko": {"who": [], "obj": ["dog"]}, "r": "r-avoir", "kd": "image : un seul chien", "au": "1ccaf9dd54"}, {"s": "Il a un hamster.", "en": "He has a hamster.", "ok": {"who": ["boy-m"], "obj": ["hamster"]}, "ko": {"who": ["boy-m"], "obj": ["turtle"]}, "r": "r-animaux", "kd": "image : un garçon avec une tortue", "au": "400e88e72e"}, {"s": "Nous n'avons pas de vélo.", "en": "We don't have a bike.", "ok": {"who": ["girl-md", "boy-l"], "obj": ["bike"], "no": true}, "ko": {"who": ["girl-md", "boy-l"], "obj": ["bike"]}, "r": "r-pasde", "kd": "image : ils ont un vélo", "au": "2a30f9f72e"}, {"s": "Elle a un poney.", "en": "She has a pony.", "ok": {"who": ["girl-l"], "obj": ["horse"]}, "ko": {"who": ["girl-l"], "obj": ["cat"]}, "r": "r-animaux", "kd": "image : une fille avec un chat", "au": "a8d7bbe721"}, {"s": "Ils ont des pommes.", "en": "They have apples.", "ok": {"who": ["boy-md", "boy-l"], "obj": ["apple", "apple", "apple"]}, "ko": {"who": ["boy-md", "boy-l"], "obj": ["banana", "banana", "banana"]}, "r": "r-avoir", "kd": "image : des bananes", "au": "321016e6f4"}, {"s": "Le bébé n'a pas de ballon.", "en": "The baby doesn't have a ball.", "ok": {"who": ["baby-m"], "obj": ["ball"], "no": true}, "ko": {"who": ["baby-m"], "obj": ["ball"]}, "r": "r-pasde", "kd": "image : le bébé a un ballon", "au": "c129d47aa9"}], "FERME": [{"s": "___ avons un tracteur.", "o": ["Ils", "Nous", "Tu"], "a": "Nous", "full": "Nous avons un tracteur.", "en": "We have a tractor. (un tracteur = a tractor)", "obj": "tractor", "n": 1, "au": "da581ab70f"}, {"s": "___ ont six vaches.", "o": ["Ils", "Je", "Nous"], "a": "Ils", "full": "Ils ont six vaches.", "en": "They have six cows. (une vache = a cow)", "obj": "cow", "n": 6, "au": "600e730eea"}, {"s": "___ as un cochon ?", "o": ["Il", "Vous", "Tu"], "a": "Tu", "full": "Tu as un cochon ?", "en": "Do you have a pig? (un cochon = a pig)", "obj": "pig", "n": 1, "au": "6f239bc7a4"}, {"s": "___ ai deux canards.", "o": ["J'", "Tu", "Elle"], "a": "J'", "full": "J'ai deux canards.", "en": "I have two ducks. (un canard = a duck)", "obj": "duck", "n": 2, "au": "201017db6d"}, {"s": "___ avez des poules ?", "o": ["Nous", "Vous", "Ils"], "a": "Vous", "full": "Vous avez des poules ?", "en": "Do you have hens? (une poule = a hen)", "obj": "hen", "n": 3, "au": "b670af1995"}, {"s": "___ a un mouton blanc.", "o": ["Tu", "Nous", "Elle"], "a": "Elle", "full": "Elle a un mouton blanc.", "en": "She has a white sheep. (un mouton = a sheep)", "obj": "ewe", "n": 1, "au": "cd7450c324"}], "PAUSE": [{"s": "Saute comme un lapin !", "en": "Jump like a rabbit!", "img": "rabbit", "au": "ee5292fa38"}, {"s": "Vole comme un perroquet !", "en": "Fly like a parrot!", "img": "parrot", "au": "00f7a39c95"}, {"s": "Nage comme un poisson !", "en": "Swim like a fish!", "img": "fish", "au": "2e390f3aab"}, {"s": "Marche tout doucement, comme une tortue !", "en": "Walk very slowly, like a tortoise!", "img": "turtle", "au": "8215ba72b1"}, {"s": "Ferme les yeux et compte jusqu'à cinq. Un, deux, trois, quatre, cinq. Ouvre les yeux !", "en": "Close your eyes and count to five. Open your eyes!", "img": "moon", "au": "546695d403"}], "ROUE": [{"who": ["astro-f"], "icon": "turtle", "ok": true, "hint": "l'astronaute · une tortue", "fr": "L'astronaute a une tortue.", "en": "The astronaut has a tortoise.", "au": "7ffd6b8560"}, {"who": ["man-d"], "icon": "parrot", "ok": true, "hint": "le pirate · un perroquet", "fr": "Le pirate a un perroquet.", "en": "The pirate has a parrot.", "au": "204fcd7093"}, {"who": ["girl-ml"], "icon": "cake", "ok": true, "hint": "je · 7 ans", "fr": "J'ai sept ans.", "en": "I am seven.", "au": "3a6b95a0c7"}, {"who": ["farmer-m"], "icon": "bike", "ok": false, "hint": "le fermier · un vélo", "fr": "Le fermier n'a pas de vélo.", "en": "The farmer doesn't have a bike.", "au": "d942f7a755"}, {"who": ["girl-d", "boy-m"], "icon": "dog", "ok": true, "hint": "nous · un chien", "fr": "Nous avons un chien.", "en": "We have a dog.", "au": "e11432d757"}, {"who": ["mage-f"], "icon": "tophat", "ok": true, "hint": "la magicienne · un chapeau noir", "fr": "La magicienne a un chapeau noir.", "en": "The witch has a black hat.", "au": "cb6747edd2"}], "PHRASES": [{"icon": "cake", "en": "I am seven.", "fr": "J'ai sept ans.", "au": "3a6b95a0c7"}, {"icon": "fish", "en": "My brother has a goldfish.", "fr": "Mon frère a un poisson rouge.", "au": "4562392876"}, {"icon": "horse", "en": "My aunt has a pony.", "fr": "Ma tante a un poney.", "au": "32d3ca5560"}, {"icon": "dog", "en": "We don't have a dog.", "fr": "Nous n'avons pas de chien.", "no": true, "au": "b28e153cbd"}, {"icon": "gift", "en": "How old are you?", "fr": "Quel âge as-tu ?", "au": "09f6031ffa"}, {"icon": "parrot", "en": "My grandparents have a parrot.", "fr": "Mes grands-parents ont un perroquet.", "au": "4cbd95f2af"}, {"icon": "crayon", "en": "She has a green pencil case.", "fr": "Elle a une trousse verte.", "au": "09e832b838"}, {"icon": "hamster", "en": "They don't have a hamster.", "fr": "Ils n'ont pas de hamster.", "no": true, "au": "aaf428a197"}], "INS": {"gateau": ["Evelyn, lis la phrase et choisis le bon mot. Les bougies vont s'allumer !", "Evelyn, read the sentence and choose the right word. The candles will light up!", "b44ec111be"], "fusee": ["Evelyn, aide Inès l'astronaute : mon, ma ou mes ? La fusée monte !", "Evelyn, help Inès the astronaut: mon, ma or mes? The rocket goes up!", "cdfdfe60bf"], "chapeau": ["Evelyn, écoute la question et touche le chapeau magique. Puis choisis la bonne réponse.", "Evelyn, listen to the question and tap the magic hat. Then choose the right answer.", "6fb7f6f5f0"], "perroquet": ["Evelyn, touche le perroquet et écoute. Puis touche la bonne image.", "Evelyn, tap the parrot and listen. Then tap the right picture.", "8c50bb7f9e"], "ferme": ["Evelyn, qui parle ? Choisis le bon petit mot. Les animaux arrivent à la ferme !", "Evelyn, who is talking? Choose the right little word. The animals come to the farm!", "a28ac3e334"], "pause": ["Evelyn, lève-toi ! Écoute et fais comme les animaux.", "Evelyn, stand up! Listen and move like the animals.", "877a438a51"], "roue": ["Evelyn, fais tourner la roue et dis la phrase. Puis écoute.", "Evelyn, spin the wheel and say the sentence. Then listen.", "f45371246b"], "phrases": ["Evelyn, lis la phrase en anglais et dis-la en français. Puis écoute.", "Evelyn, read the sentence in English and say it in French. Then listen.", "a3b4d6e692"]}};
+const KEY = "evelyn-lecon3-v1";
+let S; try { S = JSON.parse(localStorage.getItem(KEY)); } catch(e) { S = null; }
+if (!S || !S.idx) S = {res:{}, idx:{g:0,f:0,h:0,p:0,j:0,x:0,w:0,ph:0}, rolled:{}, said:{}, screen:"rappel"};
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+const I = (k,c) => `<img class="i3 ${c||""} ${k==="fish"?"gold":""}" src="img/3d/${k}.png" alt="">`;
+const G = (arr,c,no) => { const h=`<span class="grp">${arr.map(k=>I(k,c)).join("")}</span>`; return no?`<span class="no-wrap">${h}</span>`:h; };
+let cur = null;
+function play(k){ if(!k) return; try { if (cur) cur.pause(); cur = new Audio("audio/"+k+".mp3"); cur.play().catch(()=>{}); } catch(e){} }
+let actx=null;
+function ac(){ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); return actx; }
+function chime(good){ try{ const a=ac();
+  (good?[659,880,1175,1568]:[330,262]).forEach((f,i)=>{ const o=a.createOscillator(),g=a.createGain(); o.type=good?"sine":"triangle"; o.frequency.value=f; o.connect(g); g.connect(a.destination);
+  const t=a.currentTime+i*(good?.08:.14); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(good?.12:.07,t+.02); g.gain.exponentialRampToValueAtTime(.0001,t+.35); o.start(t); o.stop(t+.4); }); }catch(e){} }
+function sweep(f1,f2,d,type,vol){ try{ const a=ac(),o=a.createOscillator(),g=a.createGain(); o.type=type||"sine"; const t=a.currentTime;
+  o.frequency.setValueAtTime(f1,t); o.frequency.exponentialRampToValueAtTime(f2,t+d); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(vol||.08,t+.05); g.gain.exponentialRampToValueAtTime(.0001,t+d);
+  o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+d+.05);}catch(e){} }
+function magicSound(){ [880,1175,1397,1760,2093].forEach((f,i)=>setTimeout(()=>sweep(f,f*1.02,.25,"sine",.05),i*70)); }
+function stars(el){ const r=el.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2; const sym=["⭐","✨","🌟","💖","⭐","✨","🌈","⭐","✨","🌟"];
+  sym.forEach((s,i)=>{ const e=document.createElement("span"); e.className="star"; e.textContent=s; const a=Math.PI*2*i/sym.length, d=70+Math.random()*60;
+  e.style.left=cx+"px"; e.style.top=cy+"px"; e.style.setProperty("--dx",Math.cos(a)*d+"px"); e.style.setProperty("--dy",Math.sin(a)*d-20+"px"); e.style.animationDelay=(i*25)+"ms"; document.body.appendChild(e); setTimeout(()=>e.remove(),1200); });
+  const sc=document.getElementById("score"); sc.classList.add("bump"); setTimeout(()=>sc.classList.remove("bump"),250); }
+function confetti(box){ const cols=["#F6B93B","#E8618C","#21A99A","#7C6BE0","#4C9BE8","#F08A3C"]; for(let k=0;k<36;k++){ const c=document.createElement("i"); c.className="conf";
+  c.style.background=cols[k%cols.length]; c.style.setProperty("--dx",(Math.random()*560-280)+"px"); c.style.setProperty("--dy",(Math.random()*260-40)+"px"); c.style.setProperty("--r",(Math.random()*720-360)+"deg"); c.style.animationDelay=(Math.random()*.2)+"s";
+  box.appendChild(c); setTimeout(()=>c.remove(),2000);} }
+
+const SCREENS = [
+ {id:"rappel", ic:"sparkles", t:"Rappel", en:"Reminder"},
+ {id:"gateau", ic:"cake", t:"Le gâteau magique", en:"The magic cake", n:D.GATEAU.length, p:"g", name:"Le gâteau magique"},
+ {id:"fusee", ic:"rocket", t:"La fusée d'Inès", en:"Inès's rocket", n:D.FUSEE.length, p:"f", name:"La fusée d'Inès"},
+ {id:"chapeau", ic:"tophat", t:"Le chapeau magique", en:"The magic hat", n:D.CHAPEAU.length, p:"h", name:"Le chapeau magique"},
+ {id:"pause", ic:"moon", t:"Pause", en:"Move!"},
+ {id:"perroquet", ic:"parrot", t:"Le perroquet pirate", en:"The pirate parrot", n:D.PERROQUET.length, p:"p", name:"Le perroquet pirate"},
+ {id:"ferme", ic:"tractor", t:"La ferme de Jade", en:"Jade's farm", n:D.FERME.length, p:"j", name:"La ferme de Jade"},
+ {id:"roue", ic:"glowstar", t:"La roue", en:"The wheel"},
+ {id:"phrases", ic:"balloon", t:"Mes phrases", en:"My sentences"},
+ {id:"revoir", ic:"gem", t:"À revoir", en:"To review"},
+];
+const TOTAL = SCREENS.reduce((a,s)=>a+(s.n||0),0);
+document.getElementById("tot").textContent = TOTAL;
+document.getElementById("nav").innerHTML = SCREENS.map(s=>`<button data-s="${s.id}"><img src="img/3d/${s.ic}.png" alt="">${s.t}<small>${s.en}</small></button>`).join("");
+document.getElementById("screens").innerHTML = SCREENS.map(s=>`<section class="screen" id="sc-${s.id}"></section>`).join("");
+const SC = id => SCREENS.find(s=>s.id===id);
+function instr(k){ return `<div class="instr"><button class="play" data-a="${D.INS[k][2]}">🔊</button><div>${esc(D.INS[k][0])}<div class="en">${esc(D.INS[k][1])}</div></div></div>`; }
+function head(s){ return `<div class="shead"><img src="img/3d/${s.ic}.png" alt=""><div><h2>${s.t}</h2><div class="en">${s.en}</div></div></div>`; }
+function dots(p,n,i){ let h='<div class="dots">'; for(let k=0;k<n;k++){ const r=S.res[p+k]; h+=`<i class="${r?(r.ok?"ok":"ko"):""} ${k===i?"cur":""}"></i>`; } return h+"</div>"; }
+function okCount(p,n){ let c=0; for(let k=0;k<n;k++) if(S.res[p+k]&&S.res[p+k].ok) c++; return c; }
+function allDone(p,n){ for(let k=0;k<n;k++) if(!S.res[p+k]) return false; return true; }
+function show(id){ S.screen=id; save(); document.querySelectorAll(".screen").forEach(e=>{ const on=e.id==="sc-"+id; e.classList.toggle("on", on); if(!on) e.innerHTML=""; }); document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on", b.dataset.s===id)); RENDER[id](); if(window.__ready) document.getElementById("nav").scrollIntoView({behavior:"smooth"}); }
+function mark(p, i, ok, c, el){ S.res[p+i]={ok,c}; save(); if(ok){ chime(true); stars(el); } else chime(false); refresh(); }
+function refresh(){ let n=0; Object.values(S.res).forEach(r=>{ if(r.ok) n++; }); document.getElementById("sc").textContent=n;
+  SCREENS.forEach(s=>{ if(!s.p) return; const b=document.querySelector(`nav button[data-s="${s.id}"]`); b.classList.toggle("done", allDone(s.p,s.n)); }); }
+function nextBtn(p, n){ const i=S.idx[p]; return `<button class="next" id="nx">${i < n-1 ? `Suivant ▶ <span style="font-size:.7em">Next</span>` : `Jeu suivant ▶ <span style="font-size:.7em">Next game</span>`}</button>`; }
+function bindNext(p, n, scr, nextScr){ const b=document.getElementById("nx"); if(!b) return; if(S.res[p+S.idx[p]]) b.classList.add("show");
+  b.onclick=()=>{ if(S.idx[p]<n-1){ S.idx[p]++; save(); RENDER[scr](); } else show(nextScr); }; }
+function gapSent(s, r, a){ return esc(s).replace("___",`<span class="gap" id="gp">${r? esc(a):"…"}</span>`); }
+const RENDER = {};
+
+// ---------- Rappel
+RENDER.rappel = () => {
+  let h = `<div class="card">${head(SC("rappel"))}<p style="margin:0 0 14px">Evelyn, écoute et regarde. Puis on joue ! <span class="en">· Evelyn, listen and look. Then we play!</span></p>`;
+  D.RULES.forEach(r=>{
+    h += `<div class="rule" id="${r.id}" style="--c:${r.c}"><h3>${esc(r.t)} <span class="en">· ${esc(r.en)}</span></h3>`;
+    if(r.conj) h += `<div class="rl"><button class="play" data-a="${r.conjau}">🔊</button><div class="conj" style="flex:1">${r.conj.map(c=>`<div>${esc(c[0])}<span>${esc(c[1])}</span></div>`).join("")}</div></div>`;
+    if(r.photo && !r.cards) h += `<img class="rphoto" src="img/${r.photo}.jpg" alt="">`;
+    if(r.cards) h += `<img class="rphoto" src="img/${r.photo}.jpg" alt="" style="object-position:50% 30%"><div class="mcards">${r.cards.map(c=>`<button class="mcard play2" data-a="${c.au}">${G(c.img,"s")}<b>${esc(c.w)}</b><span class="en">${esc(c.en)}</span><span class="ex">${esc(c.ex)}</span><span class="en">${esc(c.exen)}</span></button>`).join("")}</div>`;
+    if(r.pets) h += `<div class="pets">${r.pets.map(p=>`<button class="pet play2" data-a="${p.au}"><img src="img/${p.img}.jpg" alt=""><b>${esc(p.fr)}</b><span class="en">${esc(p.en)}</span></button>`).join("")}</div>`;
+    h += (r.lines||[]).map(l=>`<div class="rl"><button class="play" data-a="${l[2]}">🔊</button><div>${esc(l[0])}<span class="en">${esc(l[1])}</span></div></div>`).join("");
+    if(r.note) h += `<div class="note">${esc(r.note[0])} <span class="en">· ${esc(r.note[1])}</span></div>`;
+    if(r.new) h += `<div class="newwords">${esc(r.new)}</div>`;
+    h += `</div>`;
+  });
+  h += `<button class="next show" onclick="show('gateau')">On joue ! ▶ <span style="font-size:.7em">Let's play!</span></button></div>`;
+  document.getElementById("sc-rappel").innerHTML = h; };
+
+// ---------- 1. Le gâteau magique
+RENDER.gateau = () => { const i=S.idx.g, it=D.GATEAU[i], r=S.res["g"+i], n=D.GATEAU.length;
+  let h=`<div class="card">${head(SC("gateau"))}${instr("gateau")}${dots("g",n,i)}
+  <div class="party" id="pt"><div class="garland"></div>
+   <div class="guest">${G(it.who,"l")}<div class="nm">${esc(it.name)}</div></div>
+   <div class="cakebox ${r&&r.ok?"lit":""}" id="ck"><div class="topper">${esc(it.age)}</div><div class="flames"><i></i><i></i><i></i></div><img class="ck" src="img/3d/cake.png" alt=""></div>
+   <div class="hb ${r&&r.ok?"show":""}" id="hb"><img src="img/3d/party.png" alt=""> Joyeux anniversaire ! <img src="img/3d/party.png" alt="" style="transform:scaleX(-1)"></div>
+  </div>
+  <div class="sent">${gapSent(it.s,r,it.a)}</div>
+  <div class="choices three">${it.o.map(o=>`<button class="ch big ${r&&o===it.a?"good":""} ${r&&!r.ok&&o===r.c?"bad":""}" data-o="${esc(o)}" ${r?"disabled":""}>${esc(o)}</button>`).join("")}</div>
+  <div class="tr en" id="tr">${r?esc(it.en):""}</div>${nextBtn("g",n)}</div>`;
+  const el=document.getElementById("sc-gateau"); el.innerHTML=h;
+  el.querySelectorAll(".ch").forEach(b=>b.onclick=()=>{ if(S.res["g"+i]) return; const ok=b.dataset.o===it.a;
+    el.querySelectorAll(".ch").forEach(x=>{ x.disabled=true; if(x.dataset.o===it.a) x.classList.add("good"); }); if(!ok) b.classList.add("bad");
+    document.getElementById("gp").textContent=it.a; document.getElementById("tr").textContent=it.en;
+    mark("g",i,ok,b.dataset.o,b);
+    if(ok){ document.getElementById("ck").classList.add("lit"); setTimeout(()=>{ document.getElementById("hb").classList.add("show"); confetti(document.getElementById("pt")); sweep(400,900,.35,"triangle",.06); },500); }
+    setTimeout(()=>play(it.au),ok?900:350); document.getElementById("nx").classList.add("show"); });
+  bindNext("g",n,"gateau","fusee"); };
+
+// ---------- 2. La fusée d'Inès
+function rocketPos(level){ return 30 + level*52; }
+RENDER.fusee = () => { const i=S.idx.f, it=D.FUSEE[i], r=S.res["f"+i], n=D.FUSEE.length; const lvl=okCount("f",n);
+  const mob = window.matchMedia("(max-width:680px)").matches;
+  let tw=""; for(let k=0;k<22;k++) tw+=`<i class="tw" style="left:${(k*37)%95+2}%;top:${(k*53)%80+2}%;animation-delay:-${(k%7)*.3}s"></i>`;
+  let lv=""; for(let k=1;k<=n;k++) lv+=`<i class="lvl ${k<=lvl?"on":""}" style="bottom:${mob?"auto":rocketPos(k)+30+"px"};${mob?`top:8px;right:auto;left:${8+k*26}px`:""}">${k}</i>`;
+  let h=`<div class="card">${head(SC("fusee"))}${instr("fusee")}${dots("f",n,i)}
+  <div class="fus"><div class="space" id="sp">${tw}<img class="moon" src="img/3d/fullmoon.png" alt="" style="${mob?"left:auto;right:14px;transform:none;top:auto;bottom:40px;width:70px":""}">${lv}<div class="pad"></div>
+    <div class="rkt" id="rk" style="${mob?`bottom:20px;left:${12+lvl*12}%`:`bottom:${rocketPos(lvl)}px`};${mob?"transform:rotate(45deg)":""}"><img src="img/3d/rocket.png" alt=""></div></div>
+   <div><div class="ines">${I("astro-f","l")}<div class="bubble">Voici ma famille ! <span class="en">· Here is my family!</span></div></div>
+    <div class="fam">${G(it.who,"l")}<span class="plus">+</span><span class="obj">${G(it.obj,"l")}</span></div>
+    <div class="sent">${gapSent(it.s,r,it.a)}</div>
+    <div class="choices three mmm">${["Mon","Ma","Mes"].map(o=>`<button class="ch big ${r&&o===it.a?"good":""} ${r&&!r.ok&&o===r.c?"bad":""}" data-o="${o}" ${r?"disabled":""}>${o}</button>`).join("")}</div>
+    <div class="tr en" id="tr">${r?esc(it.en):""}</div></div></div>${nextBtn("f",n)}<div class="count" id="cd"></div></div>`;
+  const el=document.getElementById("sc-fusee"); el.innerHTML=h;
+  el.querySelectorAll(".ch").forEach(b=>b.onclick=()=>{ if(S.res["f"+i]) return; const ok=b.dataset.o===it.a;
+    el.querySelectorAll(".ch").forEach(x=>{ x.disabled=true; if(x.dataset.o===it.a) x.classList.add("good"); }); if(!ok) b.classList.add("bad");
+    document.getElementById("gp").textContent=it.a; document.getElementById("tr").textContent=it.en;
+    mark("f",i,ok,b.dataset.o,b);
+    const L=okCount("f",n), rk=document.getElementById("rk");
+    if(ok){ rk.classList.add("boost"); sweep(200,700,.6,"sawtooth",.04); if(mob) rk.style.left=(12+L*12)+"%"; else rk.style.bottom=rocketPos(L)+"px";
+      const lvls=el.querySelectorAll(".lvl"); if(lvls[L-1]) lvls[L-1].classList.add("on"); }
+    setTimeout(()=>play(it.au),400);
+    if(allDone("f",n)) setTimeout(launch,2600);
+    document.getElementById("nx").classList.add("show"); });
+  bindNext("f",n,"fusee","chapeau"); };
+function launch(){ const cd=document.getElementById("cd"), rk=document.getElementById("rk"); if(!cd) return; cd.classList.add("show");
+  const seq=["3","2","1","Décollage ! 🚀"]; seq.forEach((t,k)=>setTimeout(()=>{ cd.innerHTML=`<span>${t}</span>`; sweep(k<3?520:300,k<3?540:1400,k<3?.2:1.2,k<3?"square":"sawtooth",.05); if(k===3){ rk.classList.add("go"); if(window.matchMedia("(max-width:680px)").matches) rk.style.left="130%"; stars(rk); } },k*800));
+  setTimeout(()=>{ cd.innerHTML=`<span>Bravo !<br><span style="font-size:.45em">Inès est dans l'espace ! · Inès is in space!</span><br><span style="font-size:.3em">(touche pour fermer · tap to close)</span></span>`; cd.classList.add("end"); cd.onclick=()=>cd.classList.remove("show","end"); },4600); }
+
+// ---------- 3. Le chapeau magique
+RENDER.chapeau = () => { const i=S.idx.h, it=D.CHAPEAU[i], r=S.res["h"+i], n=D.CHAPEAU.length, rolled=S.rolled["h"+i];
+  let h=`<div class="card">${head(SC("chapeau"))}${instr("chapeau")}${dots("h",n,i)}
+  <div class="qrow"><button class="play" data-a="${it.qau}">🔊</button><span class="q">${esc(it.q)}</span><span class="qb">${G(it.obj)} ?</span></div>
+  <div class="en" style="text-align:center;margin-top:-8px;margin-bottom:8px">${esc(it.qen)}</div>
+  <div class="magic"><i class="curtain l"></i><i class="curtain r"></i>
+   <div class="mg"><img src="img/3d/${it.mage}.png" alt=""></div>
+   <div class="hatzone">
+    <div class="rise ${rolled&&it.in?"show":""}" id="ri">${G(it.obj)}</div>
+    <div class="puff ${rolled&&!it.in?"show":""}" id="pf"><img src="img/3d/cloud.png" alt=""><b>Pouf ! Rien !</b><span class="pen">Nothing!</span></div>
+    ${rolled?"":`<div class="tap" id="tp">Touche le chapeau ! · Tap the hat!</div>`}
+    <button class="hat" id="hat" ${rolled?"disabled":""}><img src="img/3d/tophat.png" alt=""></button>
+   </div></div>
+  <div class="choices chs3" id="chs" style="${rolled?"":"display:none"}">${it.o.map((o,k)=>`<button class="ch ${r&&k===it.a?"good":""} ${r&&!r.ok&&o===r.c?"bad":""}" data-k="${k}" ${r?"disabled":""}>${esc(o)}</button>`).join("")}</div>
+  <div class="tr en" id="tr">${r?esc(it.en):""}</div>${nextBtn("h",n)}</div>`;
+  const el=document.getElementById("sc-chapeau"); el.innerHTML=h;
+  if(!rolled) setTimeout(()=>{ if(S.screen==="chapeau" && S.idx.h===i) play(it.qau); },500);
+  document.getElementById("hat").onclick=e=>{ const b=e.currentTarget; b.disabled=true; b.classList.add("wiggle"); const tp=document.getElementById("tp"); if(tp) tp.remove(); magicSound();
+    setTimeout(()=>{ S.rolled["h"+i]=1; save();
+      if(it.in){ document.getElementById("ri").classList.add("show"); stars(document.getElementById("ri")); } else { document.getElementById("pf").classList.add("show"); sweep(900,120,.5,"triangle",.07); }
+      document.getElementById("chs").style.display=""; },900); };
+  el.querySelectorAll(".ch").forEach(b=>b.onclick=()=>{ if(S.res["h"+i]) return; const k=+b.dataset.k, ok=k===it.a;
+    el.querySelectorAll(".ch").forEach(x=>{ x.disabled=true; if(+x.dataset.k===it.a) x.classList.add("good"); }); if(!ok) b.classList.add("bad");
+    document.getElementById("tr").textContent=it.en; mark("h",i,ok,it.o[k],b); setTimeout(()=>play(it.au),350); document.getElementById("nx").classList.add("show"); });
+  bindNext("h",n,"chapeau","pause"); };
+
+// ---------- Pause
+RENDER.pause = () => { const i=S.idx.x, it=D.PAUSE[i], n=D.PAUSE.length;
+  const el=document.getElementById("sc-pause");
+  el.innerHTML=`<div class="card jac">${head(SC("pause"))}${instr("pause")}
+  <div class="en" style="margin-bottom:8px">Ne regarde pas l'écran : écoute et bouge ! · Don't look at the screen: listen and move!</div>
+  <div class="emo"><img class="${it.img==="fish"?"gold":""}" src="img/3d/${it.img}.png" alt=""></div>
+  <div class="big" style="margin:10px 0"><button class="play" data-a="${it.au}">🔊</button></div>
+  <div class="sent" style="font-size:30px">${esc(it.s)}</div><div class="en">${esc(it.en)}</div>
+  <button class="next show" id="nx">${i<n-1?"Suivant ▶ <span style='font-size:.7em'>Next</span>":"Jeu suivant ▶ <span style='font-size:.7em'>Next game</span>"}</button></div>`;
+  document.getElementById("nx").onclick=()=>{ if(S.idx.x<n-1){ S.idx.x++; save(); RENDER.pause(); setTimeout(()=>play(D.PAUSE[S.idx.x].au),300); } else { S.idx.x=0; save(); show("perroquet"); } }; };
+
+// ---------- 4. Le perroquet pirate
+function picHTML(p){ return `<span class="grp">${p.who.map(k=>I(k)).join("")}</span>${p.who.length?"&nbsp;":""}${p.no?`<span class="no-wrap">${G(p.obj)}</span>`:G(p.obj)}`; }
+RENDER.perroquet = () => { const i=S.idx.p, it=D.PERROQUET[i], r=S.res["p"+i], n=D.PERROQUET.length; const opts = i%2 ? ["ko","ok"] : ["ok","ko"]; const g=okCount("p",n);
+  let gems=""; for(let k=0;k<g;k++) gems+=`<img src="img/3d/gem.png" alt="">`;
+  let h=`<div class="card">${head(SC("perroquet"))}${instr("perroquet")}${dots("p",n,i)}
+  <div class="sea"><i class="wave"></i><img class="flag" src="img/3d/pirateflag.png" alt=""><img class="shp" src="img/3d/ship.png" alt="">
+   <button class="parrot" id="pr" data-a="${it.au}"><img src="img/3d/parrot.png" alt=""><br><span>🔊 Touche-moi ! · Tap me!</span></button>
+   <div class="chest"><div class="chestbox"><div class="gems" id="gm">${gems}</div></div><div class="en" style="color:#fff;margin-top:4px">Le trésor · The treasure</div></div></div>
+  <div class="pics">${opts.map(o=>`<button class="pic ${r&&o==="ok"?"good":""} ${r&&!r.ok&&o==="ko"?"bad":""}" data-o="${o}" ${r?"disabled":""}>${picHTML(it[o])}</button>`).join("")}</div>
+  <div class="sent" id="st" style="font-size:32px">${r?esc(it.s):""}</div><div class="tr en" id="tr">${r?esc(it.en):""}</div>${nextBtn("p",n)}</div>`;
+  const el=document.getElementById("sc-perroquet"); el.innerHTML=h;
+  const pr=document.getElementById("pr"); pr.onclick=()=>{ play(it.au); pr.classList.remove("talk"); void pr.offsetWidth; pr.classList.add("talk"); };
+  if(!r) setTimeout(()=>{ if(S.screen==="perroquet" && S.idx.p===i) pr.click(); },600);
+  el.querySelectorAll(".pic").forEach(b=>b.onclick=()=>{ if(S.res["p"+i]) return; const ok=b.dataset.o==="ok";
+    el.querySelectorAll(".pic").forEach(x=>{ x.disabled=true; if(x.dataset.o==="ok") x.classList.add("good"); }); if(!ok) b.classList.add("bad");
+    document.getElementById("st").textContent=it.s; document.getElementById("tr").textContent=it.en;
+    mark("p",i,ok,ok?it.s:it.kd,b);
+    if(ok){ const gi=document.createElement("img"); gi.src="img/3d/gem.png"; gi.className="new"; document.getElementById("gm").appendChild(gi); setTimeout(()=>sweep(1200,2400,.3,"sine",.06),300); }
+    setTimeout(()=>play(it.au),500); document.getElementById("nx").classList.add("show"); });
+  bindNext("p",n,"perroquet","ferme"); };
+
+// ---------- 5. La ferme de Jade
+RENDER.ferme = () => { const i=S.idx.j, it=D.FERME[i], r=S.res["j"+i], n=D.FERME.length;
+  let field=""; D.FERME.forEach((f,k)=>{ const rr=S.res["j"+k]; if(rr&&rr.ok){ for(let m=0;m<Math.min(f.n,3);m++) field+=`<img src="img/3d/${f.obj}.png" alt="">`; } });
+  let h=`<div class="card">${head(SC("ferme"))}${instr("ferme")}${dots("j",n,i)}
+  <div class="farm"><img class="sun" src="img/3d/sun.png" alt=""><i class="fence"></i><img class="hut" src="img/3d/hut.png" alt=""><img class="tree" src="img/3d/tree.png" alt=""><div class="field" id="fd">${field}</div></div>
+  <div class="jade">${I("farmer-f","l")}<div class="card2">${I(it.obj,"l")}${it.n>1?`<span class="badge">× ${it.n}</span>`:""}</div></div>
+  <div class="sent">${gapSent(it.s,r,it.a)}</div>
+  <div class="choices three">${it.o.map(o=>`<button class="ch big ${r&&o===it.a?"good":""} ${r&&!r.ok&&o===r.c?"bad":""}" data-o="${esc(o)}" ${r?"disabled":""}>${esc(o)}</button>`).join("")}</div>
+  <div class="tr en" id="tr">${r?esc(it.en):""}</div>${nextBtn("j",n)}</div>`;
+  const el=document.getElementById("sc-ferme"); el.innerHTML=h;
+  el.querySelectorAll(".ch").forEach(b=>b.onclick=()=>{ if(S.res["j"+i]) return; const ok=b.dataset.o===it.a;
+    el.querySelectorAll(".ch").forEach(x=>{ x.disabled=true; if(x.dataset.o===it.a) x.classList.add("good"); }); if(!ok) b.classList.add("bad");
+    document.getElementById("gp").textContent=it.a; document.getElementById("tr").textContent=it.en;
+    mark("j",i,ok,b.dataset.o,b);
+    if(ok){ const fd=document.getElementById("fd"); for(let m=0;m<Math.min(it.n,3);m++){ const im=document.createElement("img"); im.src=`img/3d/${it.obj}.png`; im.className="new"; im.style.animationDelay=(m*.15)+"s"; fd.appendChild(im);} sweep(300,600,.25,"triangle",.06); }
+    setTimeout(()=>play(it.au),400); document.getElementById("nx").classList.add("show"); });
+  bindNext("j",n,"ferme","roue"); };
+
+// ---------- Roue
+RENDER.roue = () => { const i=S.idx.w % D.ROUE.length, it=D.ROUE[i], n=D.ROUE.length; const cols=["#FFC2D6","#9FD3FF","#C9F0C6","#FFE29A","#D9CCFF","#FFCFA8"];
+  const grad="conic-gradient("+cols.map((c,k)=>`${c} ${k*360/n}deg ${(k+1)*360/n}deg`).join(",")+")";
+  const imgs=D.ROUE.map((r,k)=>{ const a=(k+.5)*360/n-90; return `<img src="img/3d/${r.icon}.png" style="transform:rotate(${a}deg) translate(88px) rotate(${-a}deg) translate(-50%,-50%)" alt="">`; }).join("");
+  const el=document.getElementById("sc-roue");
+  el.innerHTML=`<div class="card">${head(SC("roue"))}${instr("roue")}
+  <div class="wheelw"><div class="pointer">🔻</div><div class="wheel" id="wh" style="background:${grad}">${imgs}</div></div>
+  <button class="spin" id="spin">Tourne ! <span style="font-size:.7em">Spin!</span></button>
+  <div class="rcard" id="rc"><div>${G(it.who,"l")} ${it.ok?I(it.icon,"l"):`<span class="no-wrap">${I(it.icon,"l")}</span>`}</div><div style="font-family:Fredoka;font-size:26px">${esc(it.hint)} ${it.ok?"✓":"✗"}</div>
+   <div style="margin-top:6px">Dis la phrase ! <span class="en">· Say the sentence!</span></div>
+   <div style="margin-top:10px"><button class="play" id="lis" data-a="${it.au}">🔊</button></div>
+   <div class="ans" id="ans">${esc(it.fr)}<div class="en">${esc(it.en)}</div></div></div>
+  <button class="next" id="nx">${(S.idx.w+1)<n?"Encore ! ▶ <span style='font-size:.7em'>Again!</span>":"Mes phrases ▶ <span style='font-size:.7em'>My sentences</span>"}</button></div>`;
+  const wh=document.getElementById("wh");
+  document.getElementById("spin").onclick=e=>{ e.currentTarget.disabled=true; const target=360*5 + (360 - (i+.5)*360/n); wh.style.transform=`rotate(${target}deg)`;
+    for(let k=0;k<14;k++) setTimeout(()=>sweep(900,880,.04,"square",.03),k*(60+k*12));
+    setTimeout(()=>{ document.getElementById("rc").classList.add("show"); chime(true); },2900); };
+  document.getElementById("lis").addEventListener("click",()=>{ document.getElementById("ans").classList.add("show"); S.said["w"+i]=1; save(); stars(document.getElementById("lis")); document.getElementById("nx").classList.add("show"); });
+  document.getElementById("nx").onclick=()=>{ if(S.idx.w+1<n){ S.idx.w++; save(); RENDER.roue(); } else { S.idx.w=0; save(); show("phrases"); } }; };
+
+// ---------- Mes phrases
+RENDER.phrases = () => { const i=S.idx.ph, it=D.PHRASES[i], n=D.PHRASES.length, said=S.said["ph"+i];
+  const el=document.getElementById("sc-phrases");
+  el.innerHTML=`<div class="card">${head(SC("phrases"))}${instr("phrases")}
+  <div class="dots">${D.PHRASES.map((x,k)=>`<i class="${S.said["ph"+k]?"ok":""} ${k===i?"cur":""}"></i>`).join("")}</div>
+  <div class="mum">${it.no?`<span class="no-wrap">${I(it.icon,"xl")}</span>`:I(it.icon,"xl")}<div class="en2">${esc(it.en)}</div></div>
+  <div style="text-align:center;margin:8px 0">Dis-la en français ! <span class="en">· Say it in French!</span></div>
+  <div class="big" style="text-align:center"><button class="play" id="lis" data-a="${it.au}">🔊</button></div>
+  <div class="ans ${said?"show":""}" id="ans" style="text-align:center">${esc(it.fr)}</div>
+  <button class="next ${said?"show":""}" id="nx">${i<n-1?"Suivant ▶ <span style='font-size:.7em'>Next</span>":"À revoir ▶ <span style='font-size:.7em'>To review</span>"}</button></div>`;
+  document.getElementById("lis").addEventListener("click",()=>{ document.getElementById("ans").classList.add("show"); if(!S.said["ph"+i]) stars(document.getElementById("lis")); S.said["ph"+i]=1; save(); document.getElementById("nx").classList.add("show"); });
+  document.getElementById("nx").onclick=()=>{ if(S.idx.ph<n-1){ S.idx.ph++; save(); RENDER.phrases(); } else show("revoir"); }; };
+
+// ---------- À revoir
+function wrongList(){ const W=[]; const add=(p,arr,game,f)=>arr.forEach((it,k)=>{ const r=S.res[p+k]; if(r && !r.ok) W.push(Object.assign({game,c:r.c},f(it))); });
+  add("g",D.GATEAU,"Le gâteau magique",it=>({q:it.s,a:it.full,r:it.r}));
+  add("f",D.FUSEE,"La fusée d'Inès",it=>({q:it.s,a:it.full,r:"r-mon"}));
+  add("h",D.CHAPEAU,"Le chapeau magique",it=>({q:it.q,a:it.o[it.a],r:"r-pasde"}));
+  add("p",D.PERROQUET,"Le perroquet pirate",it=>({q:"🔊 "+it.s,a:it.s,r:it.r}));
+  add("j",D.FERME,"La ferme de Jade",it=>({q:it.s,a:it.full,r:"r-avoir"}));
+  return W; }
+RENDER.revoir = () => { const W=wrongList(); const names={}; D.RULES.forEach(r=>names[r.id]=r.t);
+  const answered=Object.keys(S.res).length, ok=Object.values(S.res).filter(r=>r.ok).length;
+  document.getElementById("sc-revoir").innerHTML=`<div class="card">${head(SC("revoir"))}
+  <p style="margin:0 0 6px;font-family:Fredoka;font-size:30px;text-align:center">⭐ ${ok} / ${TOTAL}</p>
+  <p style="margin:0 0 10px">Evelyn, voici les phrases à revoir. Touche le bouton pour relire la règle. <span class="en">· Evelyn, here are the sentences to review. Tap the button to read the rule again.</span></p>
+  ${W.length? W.map(w=>`<div class="rv"><div class="en">${esc(w.game)}</div><div>${esc(w.q)}</div><div class="w">✗ ${esc(w.c)}</div><div class="a">✓ ${esc(w.a)}</div><button data-rule="${w.r}">↑ ${esc(names[w.r])}</button></div>`).join("") : `<p class="en">${answered? "Rien à revoir ! Bravo ! · Nothing to review! Well done!" : "Joue d'abord aux jeux. · Play the games first."}</p>`}
+  <div class="send"><h3>Envoyer mes résultats à Irène</h3><div class="en">Send my results to Irène</div><button class="go" id="sendbtn">Envoyer à Irène ✉️</button><p id="sendst" role="status" style="margin:8px 0 0;font-weight:700"></p></div>
+  <button class="reset" id="rs">↺ Recommencer · Start again</button></div>`;
+  document.querySelectorAll("#sc-revoir [data-rule]").forEach(b=>b.onclick=()=>goRule(b.dataset.rule));
+  const st=document.getElementById("sendst"); if(S.sentAt){ st.style.color="var(--ok)"; st.textContent="Résultats déjà envoyés le "+S.sentAt+". Tu peux les renvoyer si tu as continué."; }
+  document.getElementById("sendbtn").onclick=sendResults;
+  document.getElementById("rs").onclick=e=>{ const b=e.currentTarget; if(b.dataset.sure){ localStorage.removeItem(KEY); location.reload(); } else { b.dataset.sure=1; b.textContent="Sûre ? Touche encore · Sure? Tap again"; } }; };
+async function sendResults(){ const b=document.getElementById("sendbtn"), st=document.getElementById("sendst"); const names={}; D.RULES.forEach(r=>names[r.id]=r.t);
+  const ok=Object.values(S.res).filter(r=>r.ok).length, n=Object.keys(S.res).length;
+  const w=wrongList().map(x=>"• "+x.game+" : "+x.q+"\n   ✗ Réponse d'Evelyn : "+x.c+"\n   ✓ Bonne réponse : "+x.a+"\n   → Règle : "+names[x.r]);
+  const per=SCREENS.filter(s=>s.p).map(s=>s.name+" : "+okCount(s.p,s.n)+" / "+s.n).join("\n");
+  const oral=Object.keys(S.said).length;
+  const data={access_key:"e85b2783-11f2-4a83-b141-a976f10897df",subject:"Résultats d'Evelyn · Leçon 3 « J'ai sept ans ! »",from_name:"Le français avec Irène",
+    "Élève":"Evelyn","Leçon":"Leçon 3 · Le verbe avoir (âge, famille, animaux, ne… pas de, mon/ma/mes)","Score":ok+" / "+TOTAL,"Questions faites":n+" / "+TOTAL,
+    "Détail par jeu":per,"À revoir":w.length?w.join("\n\n"):"Rien à revoir","Oral (roue + mes phrases écoutées)":oral+" / "+(D.ROUE.length+D.PHRASES.length)};
+  b.disabled=true; b.textContent="Envoi en cours…"; st.textContent="";
+  try{ const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)}); const j=await r.json(); if(!j.success) throw new Error(j.message||"erreur");
+    S.sentAt=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" à "+new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}); save(); st.style.color="var(--ok)"; st.textContent="Merci Evelyn ! Irène a bien reçu tes résultats. 💖"; stars(b); }
+  catch(e){ st.style.color="var(--ko)"; st.textContent="L'envoi n'a pas fonctionné. Vérifie la connexion et réessaie."; }
+  b.disabled=false; b.textContent="Envoyer à Irène ✉️"; }
+function goRule(id){ show("rappel"); setTimeout(()=>{ const e=document.getElementById(id); if(!e) return; e.scrollIntoView({behavior:"smooth",block:"center"}); e.classList.remove("flash"); void e.offsetWidth; e.classList.add("flash"); },150); }
+document.addEventListener("click",e=>{ const p=e.target.closest(".play, .play2"); if(p && p.dataset.a) play(p.dataset.a); const nb=e.target.closest("nav button"); if(nb) show(nb.dataset.s); });
+refresh(); show(SCREENS.some(s=>s.id===S.screen) ? S.screen : "rappel"); window.__ready=1;
+</script>
+</body>
+</html>
