@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Annamaria · Leçon du 27 novembre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>:root{--sans:Outfit;--disp:Outfit;--serif:Lora;--ink:#17343a;--muted:#5f7579;--deep:#0f4a52;
+--a1:#17a89b;--a1d:#0d7f75;--a1l:#d8f3ee;--a2:#f2b705;--a2d:#c08a00;--a2l:#fff4cf;--a3:#3f9ad8;--a3d:#2470a8;--a3l:#e1f0fb;
+--a4:#f07c5a;--a4d:#c9543a;--a4l:#fde6dd;--line:#d6ebe8;--paper:#fbfffe;
+--bg:linear-gradient(160deg,#dcf4f8 0%,#d3f1ea 45%,#bfe8e0 100%)}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans),system-ui,sans-serif;color:var(--ink);font-size:16px;line-height:1.55;background:var(--bg) fixed}
+.brand{max-width:980px;margin:0 auto;padding:14px 22px 0;display:flex;justify-content:flex-start}
+.brand img{width:92px;height:92px;display:block}
+.paper{max-width:980px;margin:10px auto 40px;background:var(--paper);border-radius:26px;overflow:hidden;box-shadow:0 18px 50px rgba(20,60,70,.16)}
+b.k{color:var(--a1d);font-weight:700}
+.hero{position:relative;height:340px;background-size:cover;background-position:center 55%;display:flex;align-items:flex-end;padding:26px}
+.htag{position:absolute;top:20px;left:22px;background:#fff;color:var(--deep);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:6px 14px;border-radius:30px;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.htitle{background:rgba(255,255,255,.93);border-radius:20px;padding:16px 22px;max-width:600px;box-shadow:0 8px 24px rgba(0,0,0,.15);border-left:6px solid var(--a1)}
+.hdate{margin:0;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--a2d);font-weight:700}
+.hero h1{margin:2px 0 4px;font-family:var(--disp);font-size:38px;line-height:1.12;color:var(--deep);font-weight:700}
+.hsub{margin:0;font-family:var(--serif);font-style:italic;color:var(--muted)}
+.credit{position:absolute;right:14px;bottom:10px;color:#fff;font-size:11px;text-shadow:0 1px 3px #000;opacity:.9}
+.rainbow{height:6px;background:linear-gradient(90deg,var(--a1),var(--a3),var(--a2),var(--a4),var(--a1))}
+.intro{padding:22px 34px 6px}
+.intro p{margin:0 0 14px}
+.toc{display:flex;flex-wrap:wrap;gap:8px}
+.toc a{text-decoration:none;font-size:13px;padding:6px 13px;border-radius:30px;background:#fff;border:1.5px solid var(--line);color:var(--deep);font-weight:600}
+.toc a.go{background:var(--a1);border-color:var(--a1);color:#fff}
+.sec{margin:26px 26px 0;border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 4px 18px rgba(20,60,70,.07)}
+.sechead{position:relative;height:200px;background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:16px}
+.sechead .credit{top:8px;bottom:auto}
+.lab{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.95);border-radius:16px;padding:10px 18px 10px 10px;box-shadow:0 6px 18px rgba(0,0,0,.14)}
+.lab h2{margin:0;font-family:var(--disp);font-size:21px;line-height:1.2;color:var(--deep)}
+.lab p{margin:0;font-family:var(--serif);font-style:italic;color:var(--muted);font-size:14px}
+.num{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;background:var(--a1)}
+.c2 .num{background:var(--a2)}.c3 .num{background:var(--a3)}.c4 .num{background:var(--a4)}
+.secbody{padding:22px 24px 26px}
+.lead{margin:0 0 16px;font-size:16.5px}
+.box{border-radius:18px;padding:16px 18px;margin:0 0 18px;border:2px solid var(--a1l);background:#fcfffe}
+.c2 .box{border-color:var(--a2l);background:#fffdf6}.c3 .box{border-color:var(--a3l);background:#fbfdff}.c4 .box{border-color:var(--a4l);background:#fffbfa}
+.box h3{margin:0 0 10px;font-size:17.5px;color:var(--deep);font-family:var(--disp)}
+.box ul{margin:0 0 10px;padding-left:20px}
+.box.nest{background:var(--a3l);border:0;border-left:6px solid var(--a3)}
+.box.gold{background:linear-gradient(135deg,var(--a2l),#fff);border:2px solid var(--a2)}
+.two,.three{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 12px}
+.three{grid-template-columns:repeat(3,1fr)}
+.two>div,.three>div{background:#fff;border-radius:14px;padding:12px 14px;border:1.5px solid var(--line)}
+.two p,.three p{margin:2px 0}
+.mini{font-size:11.5px;letter-spacing:.12em;font-weight:700;color:var(--a1d);margin:0 0 4px!important;text-transform:uppercase}
+.c2 .mini{color:var(--a2d)}.c3 .mini{color:var(--a3d)}.c4 .mini{color:var(--a4d)}
+i.t,.two i,.three i{font-family:var(--serif);color:var(--muted)}
+.tip{background:var(--a2l);border-radius:12px;padding:9px 13px;margin:10px 0 0;font-size:14.5px}
+.formula{background:#fff;border:1.5px dashed var(--a1);border-radius:14px;padding:10px 14px;margin:10px 0;font-size:15.5px}
+.formula span{display:inline-block;background:var(--a1);color:#fff;border-radius:20px;padding:0 10px;font-weight:700;margin:1px 0}
+.formula span.y{background:var(--a2)}.formula span.b{background:var(--a3)}.formula span.p{background:var(--a4)}
+.exs{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.ex{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:12px;padding:8px 12px;border:1px solid var(--line)}
+.ex p{margin:0}.ex .fr{font-family:var(--serif);font-size:16.5px}.ex .it,.bex .it{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:14px}
+.ex .it b.k,.bex .it b.k{color:inherit}
+.say{flex:none;border:0;background:var(--a1l);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:15px;transition:transform .15s}
+.say:active,.say.on{transform:scale(1.15);background:var(--a2l)}
+/* cartes */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;margin-top:6px}
+.card{perspective:1100px;height:320px;cursor:pointer;outline:none}
+.inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.3,.7,.25,1);transform-style:preserve-3d}
+.card.flip .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;overflow:hidden;box-shadow:0 8px 22px rgba(20,60,70,.16)}
+.front{background:#fff;display:flex;flex-direction:column;border:3px solid var(--a1l)}
+.front .ph{flex:1;background-size:cover;background-position:center;position:relative}
+.fw{padding:11px 12px 13px;text-align:center}
+.fw .w{display:block;font-weight:700;font-size:18px;line-height:1.25;color:var(--deep)}
+.fw .sub{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.turn{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;font-weight:700;color:var(--deep);box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.back{transform:rotateY(180deg);padding:15px 14px;display:flex;flex-direction:column;gap:6px;color:#fff;background:linear-gradient(150deg,var(--a1d),var(--a1))}
+.k2 .back{background:linear-gradient(150deg,var(--a2d),var(--a2))}.k3 .back{background:linear-gradient(150deg,var(--a3d),var(--a3))}.k4 .back{background:linear-gradient(150deg,var(--a4d),var(--a4))}
+.k2 .front{border-color:var(--a2l)}.k3 .front{border-color:var(--a3l)}.k4 .front{border-color:var(--a4l)}
+.bw{font-weight:700;font-size:18.5px;line-height:1.2}
+.cat{display:inline-block;align-self:flex-start;background:rgba(255,255,255,.25);border-radius:20px;padding:1px 9px;font-size:11.5px;letter-spacing:.05em}
+.tr{font-family:var(--serif);font-style:italic;font-size:15px;opacity:.97}
+.bex{display:flex;gap:8px;background:rgba(255,255,255,.96);color:var(--ink);border-radius:12px;padding:8px 9px;margin-top:2px}
+.bex p{margin:0}.bex .fr{font-family:var(--serif);font-size:14.5px}.bex .it{font-size:13px}
+.bex .say{width:30px;height:30px;font-size:13px}
+.note{margin:auto 0 0;font-size:12.5px;background:rgba(0,0,0,.15);border-radius:10px;padding:6px 9px;line-height:1.4}
+.pcap{position:absolute;left:0;right:0;bottom:0;padding:16px 8px 5px;background:linear-gradient(transparent,rgba(0,0,0,.5));color:#fff;font-size:10.5px;line-height:1.25;text-shadow:0 1px 3px rgba(0,0,0,.9)}
+/* exercices */
+.exzone{margin-top:34px;padding:10px 0 30px;background:linear-gradient(180deg,var(--a1l),rgba(255,255,255,0))}
+.exintro{text-align:center;padding:18px 20px 0}
+.exintro h2{margin:0;font-size:30px;color:var(--deep);font-family:var(--disp)}
+.exintro p{margin:4px 0 0;color:var(--muted)}
+.exo{margin:24px 26px 0;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 4px 18px rgba(20,60,70,.08)}
+.exhead{display:flex;flex-direction:column;color:#fff}
+.exph{height:130px;background-size:cover;background-position:center}
+.ext{display:flex;gap:14px;align-items:center;padding:14px 20px;background:linear-gradient(120deg,var(--a1d),var(--a1))}
+.x2 .ext{background:linear-gradient(120deg,var(--a2d),var(--a2))}.x3 .ext{background:linear-gradient(120deg,var(--a3d),var(--a3))}.x4 .ext{background:linear-gradient(120deg,var(--a4d),var(--a4))}.x5 .ext{background:linear-gradient(120deg,var(--deep),var(--a3d))}
+.exn{flex:none;width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:24px;font-weight:700}
+.ety{margin:0;font-size:11.5px;letter-spacing:.16em;opacity:.92;text-transform:uppercase}
+.exhead h3{margin:0;font-size:18px;line-height:1.3}
+.eit{margin:0;font-family:var(--serif);font-style:italic;opacity:.94;font-size:14px}
+.exbody{padding:18px 20px 22px}
+.q{padding:12px 0;border-bottom:1px dashed var(--line)}
+.q:last-child{border-bottom:0}
+.qt{margin:0 0 8px;font-family:var(--serif);font-size:17px}
+.qt .gap{display:inline-block;min-width:70px;border-bottom:2px solid var(--a1l);text-align:center;color:var(--a1d);font-weight:700;font-family:var(--sans)}
+.qit{display:block;font-family:var(--serif);font-style:italic;color:var(--muted);font-size:13.5px;margin:-4px 0 8px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.opt{border:2px solid var(--line);background:#fff;border-radius:30px;padding:6px 16px;font:inherit;font-size:15px;cursor:pointer;color:var(--deep)}
+.opt.long{border-radius:14px;text-align:left;font-family:var(--serif);font-size:15.5px;width:100%}
+.opt.good{background:#dff5ee;border-color:#2fb98f;color:#13704f;font-weight:600}
+.opt.bad{background:#fde5df;border-color:#ec8a74;color:#b4442b;text-decoration:line-through}
+.opt:disabled{cursor:default}
+.shake{animation:sh .4s}
+@keyframes sh{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.qn{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--a1l);color:var(--deep);font-size:12px;font-weight:700;margin-right:6px;font-family:var(--sans);vertical-align:2px}
+.match{display:grid;grid-template-columns:1fr 1.3fr;gap:10px 16px}
+.mcol{display:flex;flex-direction:column;gap:8px}
+.mi{border:2px solid var(--line);background:#fff;border-radius:14px;padding:9px 12px;font:inherit;font-size:14.5px;text-align:left;cursor:pointer;color:var(--ink)}
+.mi.sel{border-color:var(--a3);background:var(--a3l)}
+.mi.done{border-color:#2fb98f;background:#e5f7f1;cursor:default}
+.mi .tag{display:inline-block;min-width:22px;height:22px;border-radius:50%;background:#2fb98f;color:#fff;font-size:12px;text-align:center;margin-right:6px}
+.blank{display:inline-flex;align-items:center;gap:3px;vertical-align:middle}
+.blank input,.tin{font:inherit;font-size:15px;border:2px solid var(--a1l);border-radius:10px;padding:2px 7px;width:130px;background:#fff;color:var(--deep)}
+.blank button,.tok{border:0;background:var(--a1);color:#fff;border-radius:8px;width:28px;height:28px;cursor:pointer;font-weight:700}
+.blank.bad input,.tin.bad{border-color:#ec8a74;background:#fde5df}
+.tin.good{border-color:#2fb98f;background:#e5f7f1;color:#13704f;font-weight:600}
+.hint{font-size:12.5px;color:var(--muted);font-style:italic;font-family:var(--serif)}
+.msgfb{font-size:12.5px;color:#b4442b;display:block}
+.sol{border:0;background:none;color:var(--a4d);font-size:12.5px;text-decoration:underline;cursor:pointer;padding:0}
+.filled{color:#13704f;font-weight:700;background:#e5f7f1;border-radius:6px;padding:0 5px}
+.ord{padding:12px 0;border-bottom:1px dashed var(--line)}
+.line{min-height:46px;border:2px dashed var(--a1l);border-radius:14px;padding:6px;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;background:#fbfffe}
+.line.good{border:2px solid #2fb98f;background:#e5f7f1}
+.tiles{display:flex;flex-wrap:wrap;gap:6px}
+.tile{border:0;border-radius:10px;padding:6px 12px;font:inherit;font-size:15px;cursor:pointer;background:var(--a2l);color:var(--deep);font-weight:600;box-shadow:0 2px 0 var(--a2)}
+.line .tile{background:#fff;box-shadow:0 2px 0 var(--line)}
+.tile.used{visibility:hidden}
+.small{font-size:13px;border:0;background:none;color:var(--muted);cursor:pointer;text-decoration:underline}
+.items{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.item{border:2px solid var(--line);background:#fff;border-radius:16px;padding:8px 13px;font:inherit;font-size:15px;cursor:pointer}
+.item.sel{border-color:var(--a3);background:var(--a3l);transform:translateY(-2px)}
+.item.done{display:none}
+.bins{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bin{border:0;border-radius:18px 18px 12px 12px;padding:14px 8px 12px;color:#fff;cursor:pointer;font:inherit;text-align:center;min-height:130px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.bin b{font-size:17px;line-height:1.2}.bin small{font-size:12.5px;opacity:.95}
+.bin .lid{width:70%;height:8px;border-radius:6px;background:rgba(0,0,0,.18);margin-bottom:8px}
+.bin .in{font-size:13px;margin-top:6px;line-height:1.35}
+.tri-msg{min-height:26px;margin-top:12px;font-family:var(--serif);font-style:italic;color:var(--deep);text-align:center}
+.sujet{background:var(--a3l);border-radius:16px;padding:14px 16px;margin-bottom:14px}
+.sujet p{margin:0 0 6px}.sujet .it{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chips span{background:var(--a1l);border-radius:20px;padding:4px 11px;font-size:13.5px;color:var(--deep)}
+.prompt{background:var(--a2l);border-radius:14px;padding:10px 14px;margin:0 0 12px}
+.prompt ul{margin:6px 0 0;padding-left:20px}.prompt li{margin:3px 0;font-size:14.5px}
+.plan{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.plan>div{display:flex;gap:10px;align-items:flex-start;background:#f7fbfb;border-radius:14px;padding:10px 12px}
+.plan p{margin:0;font-size:14.5px}.plan i{font-family:var(--serif);color:var(--muted)}
+.pn{flex:none;width:28px;height:28px;border-radius:50%;background:var(--deep);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+.defi{border:2px dashed var(--a2);border-radius:14px;padding:8px 12px;background:var(--a2l);font-size:14.5px}
+textarea{width:100%;min-height:610px;border:2px solid var(--a1l);border-radius:16px;font:16px/30px var(--serif);color:var(--ink);padding:8px 14px;background:#fff repeating-linear-gradient(#fff 0 29px,var(--a1l) 29px 30px);background-attachment:local;resize:vertical}
+.prodbar{display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:10px;flex-wrap:wrap}
+#wc{font-size:13px;color:var(--muted)}
+.btn{border:0;background:linear-gradient(120deg,var(--a1d),var(--a1));color:#fff;font:inherit;font-weight:700;padding:10px 18px;border-radius:30px;cursor:pointer;box-shadow:0 6px 14px rgba(20,120,110,.25)}
+.btn.ghost{background:#fff;color:var(--muted);border:1.5px solid #ddd;box-shadow:none;font-weight:500;font-size:14px;margin-top:14px}
+.copyhelp{display:none;color:#13704f;font-size:14px;margin:8px 0 0}.copyhelp.on{display:block}
+.send{margin-top:18px;padding:16px;border-radius:16px;background:var(--a1l);border:1.5px solid var(--line)}
+.send h4{margin:0 0 4px;color:var(--deep);font-size:17px}
+.send p{margin:0 0 10px;color:var(--muted);font-size:14px}
+.send label{display:block;font-size:14px;font-weight:700;color:var(--deep);margin-bottom:4px}
+.send input{width:100%;font:inherit;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;margin-bottom:12px;background:#fff}
+.send .btn{width:100%}
+.send .st{margin:10px 0 0;font-size:14px;font-weight:700}
+.send .st.ok{color:#13704f}.send .st.ko{color:#b3261e}
+#revlist a{display:flex;gap:10px;align-items:center;text-decoration:none;color:var(--ink);background:var(--a2l);border:1.5px solid var(--a2);border-radius:14px;padding:9px 12px;margin-bottom:8px}
+#revlist a b{color:var(--a4d)}
+#revlist a span.ar{margin-left:auto;color:var(--a4d);font-weight:700}
+#revlist .ok{color:var(--muted);font-style:italic}
+.score{position:fixed;top:12px;right:12px;z-index:50;background:rgba(255,255,255,.97);border-radius:30px;padding:6px 14px;box-shadow:0 6px 18px rgba(20,60,70,.22);display:flex;align-items:center;gap:6px;font-weight:700;color:var(--deep)}
+.score b{font-size:19px}.score small{color:var(--muted)}
+.score.bump{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.18)}}
+.star{position:fixed;pointer-events:none;z-index:60;font-size:18px;color:#f2b628;animation:fly 1s ease-out forwards}
+@keyframes fly{0%{opacity:0;transform:translate(0,0) scale(.4)}25%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1) rotate(160deg)}}
+.flash{animation:flash 1.4s}
+@keyframes flash{0%,60%{box-shadow:0 0 0 4px var(--a2)}100%{box-shadow:none}}
+.credits{font-size:11.5px;color:var(--muted);padding:8px 26px}.credits summary{cursor:pointer}.credits ul{padding-left:18px;margin:6px 0}.credits li{margin:2px 0}.credits a{color:var(--muted)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.fai-sign{text-align:center;padding:26px 16px 30px}.fai-sign img{width:100%;max-width:300px;height:auto;display:inline-block}
+@media (max-width:680px){
+ .paper{margin:6px 0 0;border-radius:0}
+ .brand{padding:10px 12px 0}.brand img{width:70px;height:70px}
+ .hero{height:270px;padding:16px}.hero h1{font-size:26px}.hsub{font-size:13px}.htitle{padding:12px 16px}
+ .intro{padding:18px 16px 4px}
+ .sec,.exo{margin:18px 10px 0}
+ .secbody{padding:16px 13px 20px}.exbody{padding:14px 13px 18px}
+ .two,.three{grid-template-columns:1fr}
+ .cards{grid-template-columns:1fr 1fr;gap:10px}
+ .card{height:330px}
+ .fw .w{font-size:15.5px}.bw{font-size:15.5px}.back{padding:11px 10px}
+ .match{grid-template-columns:.9fr 1.1fr;gap:8px}.mi{font-size:13.5px;padding:8px 9px}
+ .lab h2{font-size:18px}
+}
+@media (max-width:480px){.cards{grid-template-columns:1fr}.card{height:300px}.fw .w{font-size:18px}.bw{font-size:18px}.back{padding:15px 14px}}
+
+/* cahier de liaison */
+.cahier{background:#fffef8 repeating-linear-gradient(#fffef8 0 31px,#cfe6f3 31px 32px);border-radius:12px;padding:18px 18px 18px 54px;position:relative;box-shadow:inset 0 0 0 1px #e6efe9,0 6px 16px rgba(0,0,0,.06);font-family:var(--serif);font-size:16.5px;line-height:32px}
+.cahier:before{content:"";position:absolute;left:38px;top:0;bottom:0;width:2px;background:#f19a9a}
+.cahier .who{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--a3d);margin-top:6px;line-height:26px}
+.cahier .who.p{color:var(--a4d)}
+.cahier p{margin:0 0 4px}
+.cahier .sig{font-family:"Caveat",cursive;font-size:22px;color:#2b5a9c}
+.cahier .blank input{background:rgba(255,255,255,.9)}
+/* phonétique */
+.mouth{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:6px 0 16px}
+.step{border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:4px;text-align:center}
+.step .big{font-size:34px;font-weight:800;color:var(--deep);line-height:1.1}
+.step b{color:var(--deep)}.step span{font-size:14px}.step i{font-family:var(--serif);color:var(--muted);font-size:13.5px}
+.s1{background:var(--a3l)}.s2{background:var(--a1l)}.s3{background:var(--a2l)}
+.arrowrow{text-align:center;font-family:var(--serif);font-size:18px;color:var(--deep);margin:4px 0 14px}
+.pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:8px 0 6px}
+.pair{display:flex;align-items:center;justify-content:space-between;gap:6px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:8px 10px}
+.pair .w{display:flex;align-items:center;gap:6px;font-size:16px}
+.pair .w b{font-weight:700}
+.pair .w.y b{color:var(--a1d)}.pair .w.u b{color:var(--a4d)}
+.pair .vs{font-size:12px;color:var(--muted)}
+.pair .say{width:30px;height:30px;font-size:13px}
+.pair small{display:block;font-family:var(--serif);font-style:italic;color:var(--muted);font-size:12px;line-height:1.2}
+.spell{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0}
+.spell>div{border-radius:16px;padding:12px 14px}
+.spell .sy{background:var(--a1l)}.spell .su{background:var(--a4l)}
+.spell h4{margin:0 0 6px;font-size:16px;color:var(--deep)}
+.spell p{margin:3px 0;font-size:15px}
+/* écoute */
+.listen{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.play{border:0;background:linear-gradient(135deg,var(--a3d),var(--a3));color:#fff;width:46px;height:46px;border-radius:50%;font-size:19px;cursor:pointer;box-shadow:0 4px 10px rgba(36,112,168,.3)}
+.play.on{transform:scale(1.1)}
+.uou{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.uou .opt{font-size:16px;font-weight:700;min-width:58px}
+.wgap{font-family:var(--serif);font-size:19px;letter-spacing:.02em}
+.wgap u{text-decoration:none;display:inline-block;min-width:30px;border-bottom:2px solid var(--a1);text-align:center;color:var(--a1d);font-weight:700}
+/* enregistrement */
+.rec{display:flex;flex-direction:column;gap:10px}
+.recrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:#f7fbfb;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px}
+.recrow p{margin:0;flex:1 1 220px;font-family:var(--serif);font-size:16.5px}
+.recrow p i{display:block;font-size:13.5px;color:var(--muted)}
+.rbtn{border:0;border-radius:30px;padding:7px 13px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;background:var(--a4l);color:var(--a4d)}
+.rbtn.on{background:var(--a4);color:#fff;animation:pulse 1s infinite}
+.rbtn.pl{background:var(--a1l);color:var(--a1d)}
+.rbtn:disabled{opacity:.4;cursor:default}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(240,124,90,.25)}}
+.recinfo{font-size:13.5px;color:var(--muted);font-style:italic}
+.qq{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.qq>div{border-radius:18px;padding:14px 16px}
+.qq .qa{background:var(--a1l)}.qq .qb{background:var(--a3l)}
+.qq h4{margin:0 0 4px;font-size:26px;font-family:var(--disp);color:var(--deep)}
+.qq p{margin:3px 0;font-size:15px}
+.qq .sch{font-family:var(--serif);background:#fff;border-radius:10px;padding:6px 10px;margin:8px 0;font-size:15.5px}
+.qq .sch b{color:var(--a4d)}
+@media (max-width:680px){.mouth,.spell,.qq{grid-template-columns:1fr}.cahier{padding:14px 10px 14px 40px;font-size:15.5px}.cahier:before{left:28px}}
+</style></head><body>
+<div class="score" id="score"><span>⭐</span><b id="sc">0</b><small>/ <span id="tot">0</span></small></div>
+<header class="brand"><img src="../marque/logo-irene.png" alt="Logo"></header>
+<main class="paper">
+<header class="hero" style="background-image:url(img/hero.jpg)"><div class="htag">Vocabulaire · prononciation · grammaire</div>
+<div class="htitle"><p class="hdate">Annamaria · 27 novembre</p><h1>Cartables, cantine et kermesse</h1>
+<p class="hsub">la vie de l'école en France · le son « u » de tu et lune · qui ou que ?</p></div>
+<span class="credit"></span></header><div class="rainbow"></div>
+<div class="intro"><p>Annamaria, voici ta leçon. <b>Retourne les cartes</b> pour découvrir les mots, touche <b>🔊</b> pour écouter, puis fais les exercices. Tes réponses restent enregistrées : tu peux fermer la page et revenir quand tu veux.</p>
+<nav class="toc"><a href="#s1">À l'école</a><a href="#s2">Les parents et l'école</a><a href="#s3">Après l'école</a><a href="#s4">Le son « u »</a><a href="#s5">Qui ou que ?</a><a href="#e1" class="go">Exercices ✏️</a></nav></div>
+<section class="sec c1" id="s1"><div class="sechead" style="background-image:url(img/s1.jpg)"><div class="lab"><span class="num">01</span><div><h2>À l'école</h2><p>la cartella, la mensa, il diario, la giustificazione, la pagella</p></div></div></div><div class="secbody"><p class="lead">Les mots de tous les jours quand on a un enfant à l'école en France.</p><div class="cards"><div class="card k1" tabindex="0" id="r-cartable"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_cartable.jpg)"></div><div class="fw"><span class="w">la cartella</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">le cartable</span><span class="cat">nom masculin</span><span class="tr">la cartella</span><div class="bex"><button class="say" data-say="Paolo a oublié son cartable dans la voiture !" aria-label="Écouter">🔊</button><div><p class="fr">Paolo a oublié son <b class='k'>cartable</b> dans la voiture !</p><p class="it">Paolo ha dimenticato la <b class='k'>cartella</b> in macchina!</p></div></div><p class="note">Un <b>sac à dos</b> = uno zaino. Le cartable est le sac de l'école.</p></div></div></div><div class="card k1" tabindex="0" id="r-cantine"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_cantine.jpg)"></div><div class="fw"><span class="w">la mensa</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">la cantine</span><span class="cat">nom féminin</span><span class="tr">la mensa (scolastica)</span><div class="bex"><button class="say" data-say="Le midi, Paolo mange à la cantine avec ses copains." aria-label="Écouter">🔊</button><div><p class="fr">Le midi, Paolo mange à la <b class='k'>cantine</b> avec ses copains.</p><p class="it">A pranzo Paolo mangia in <b class='k'>mensa</b> con i suoi amici.</p></div></div><p class="note">manger <b>à la</b> cantine = mangiare in mensa</p></div></div></div><div class="card k1" tabindex="0" id="r-repas"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_repas.jpg)"></div><div class="fw"><span class="w">il pasto</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">le repas</span><span class="cat">nom masculin</span><span class="tr">il pasto</span><div class="bex"><button class="say" data-say="Le menu des repas de la semaine est affiché devant l&#x27;école." aria-label="Écouter">🔊</button><div><p class="fr">Le menu des <b class='k'>repas</b> de la semaine est affiché devant l'école.</p><p class="it">Il menù dei <b class='k'>pasti</b> della settimana è affisso davanti alla scuola.</p></div></div><p class="note">Les repas : le petit déjeuner, le déjeuner, <b>le goûter</b> (la merenda, vers 16 h 30) et le dîner.</p></div></div></div><div class="card k1" tabindex="0" id="r-cahier"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_cahier.jpg)"></div><div class="fw"><span class="w">il quaderno delle comunicazioni</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">le cahier de liaison</span><span class="cat">nom masculin</span><span class="tr">il quaderno delle comunicazioni scuola-famiglia, il diario</span><div class="bex"><button class="say" data-say="La maîtresse a écrit un mot dans le cahier de liaison." aria-label="Écouter">🔊</button><div><p class="fr">La maîtresse a écrit un mot dans le <b class='k'>cahier de liaison</b>.</p><p class="it">La maestra ha scritto un avviso sul <b class='k'>quaderno delle comunicazioni</b>.</p></div></div><p class="note">À l'école primaire. Au collège, on dit <b>le carnet de correspondance</b>. Les parents le signent.</p></div></div></div><div class="card k1" tabindex="0" id="r-mot"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_mot.jpg)"></div><div class="fw"><span class="w">la giustificazione</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">le mot d'excuse</span><span class="cat">nom masculin</span><span class="tr">la giustificazione</span><div class="bex"><button class="say" data-say="Paolo était malade : j&#x27;ai écrit un mot d&#x27;excuse pour la maîtresse." aria-label="Écouter">🔊</button><div><p class="fr">Paolo était malade : j'ai écrit un <b class='k'>mot d'excuse</b> pour la maîtresse.</p><p class="it">Paolo era malato: ho scritto una <b class='k'>giustificazione</b> per la maestra.</p></div></div><p class="note"><b>Un mot</b> = aussi un petit message écrit : <i>je te laisse un mot sur la table</i> (ti lascio un biglietto).</p></div></div></div><div class="card k1" tabindex="0" id="r-notes"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_notes.jpg)"></div><div class="fw"><span class="w">la pagella, il libretto dei voti</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">le carnet de notes</span><span class="cat">nom masculin</span><span class="tr">la pagella, il libretto dei voti</span><div class="bex"><button class="say" data-say="Paolo a montré son carnet de notes à son papa : il est très fier !" aria-label="Écouter">🔊</button><div><p class="fr">Paolo a montré son <b class='k'>carnet de notes</b> à son papa : il est très fier !</p><p class="it">Paolo ha fatto vedere la <b class='k'>pagella</b> al suo papà: è molto fiero!</p></div></div><p class="note"><b>Une note</b> = un voto. Au collège, les notes sont sur 20 : 10/20, c'est la moyenne.</p></div></div></div></div></div></section><section class="sec c3" id="s2"><div class="sechead" style="background-image:url(img/s2.jpg)"><div class="lab"><span class="num">02</span><div><h2>Les parents et l'école</h2><p>andare a prendere, la riunione, il rappresentante, fare il punto, le ripetizioni</p></div></div></div><div class="secbody"><div class="box" id="r-chercher"><h3>Aller chercher quelqu'un quelque part</h3><p><b>Aller chercher</b> quelqu'un = aller le prendre à un endroit et le ramener → <i class="t">andare a prendere qualcuno</i>.</p><div class="formula"><span>aller</span> + <span class="y">chercher</span> + quelqu'un + <span class="b">à / au / chez…</span></div><div class="exs"><div class="ex"><button class="say" data-say="Je vais chercher mon fils à l&#x27;école à seize heures trente." aria-label="Écouter">🔊</button><div><p class="fr">Je vais <b class='k'>chercher</b> mon fils à l'école à seize heures trente.</p><p class="it">Vado a <b class='k'>prendere</b> mio figlio a scuola alle sedici e trenta.</p></div></div><div class="ex"><button class="say" data-say="Tu peux venir me chercher à la gare ?" aria-label="Écouter">🔊</button><div><p class="fr">Tu peux venir me <b class='k'>chercher</b> à la gare ?</p><p class="it">Puoi venire a <b class='k'>prendermi</b> alla stazione?</p></div></div><div class="ex"><button class="say" data-say="Marzia est allée le chercher au basket." aria-label="Écouter">🔊</button><div><p class="fr">Marzia est allée <b class='k'>le chercher</b> au basket.</p><p class="it">Marzia è andata a <b class='k'>prenderlo</b> a basket.</p></div></div></div><div class="box nest" style="margin-top:12px"><h3>Attention !</h3><p><b>chercher</b> seul = cercare : <i>Je cherche mes clés.</i> (Cerco le chiavi.)<br><b>aller chercher</b> = andare a prendere : <i>Je vais chercher Paolo.</i><br>Le pronom va devant <b>chercher</b> : je vais <b>le</b> chercher, je suis allée <b>le</b> chercher.</p></div></div><div class="cards"><div class="card k3" tabindex="0" id="r-reunion"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_reunion.jpg)"></div><div class="fw"><span class="w">la riunione dei genitori</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">la réunion parents d'élèves</span><span class="cat">nom féminin</span><span class="tr">la riunione dei genitori (con gli insegnanti)</span><div class="bex"><button class="say" data-say="La réunion parents d&#x27;élèves aura lieu jeudi à dix-huit heures." aria-label="Écouter">🔊</button><div><p class="fr">La <b class='k'>réunion parents d'élèves</b> aura lieu jeudi à dix-huit heures.</p><p class="it">La <b class='k'>riunione dei genitori</b> si terrà giovedì alle diciotto.</p></div></div><p class="note"><b>Un élève</b> = un alunno. On dit <b>parents d'élèves</b>, sans article.</p></div></div></div><div class="card k3" tabindex="0" id="r-delegue"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_delegue.jpg)"></div><div class="fw"><span class="w">il rappresentante di classe</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">le délégué / la déléguée de classe</span><span class="cat">nom</span><span class="tr">il / la rappresentante di classe</span><div class="bex"><button class="say" data-say="Les élèves ont élu deux délégués de classe." aria-label="Écouter">🔊</button><div><p class="fr">Les élèves ont élu deux <b class='k'>délégués de classe</b>.</p><p class="it">Gli alunni hanno eletto due <b class='k'>rappresentanti di classe</b>.</p></div></div><p class="note">élire → <b>élu</b>. Les parents ont aussi leurs représentants : <b>les parents délégués</b>.</p></div></div></div><div class="card k3" tabindex="0" id="r-bilan"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_bilan.jpg)"></div><div class="fw"><span class="w">fare il punto</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">faire le bilan</span><span class="cat">locution verbale</span><span class="tr">fare il punto, fare il bilancio</span><div class="bex"><button class="say" data-say="À la fin du trimestre, la maîtresse fait le bilan avec les parents." aria-label="Écouter">🔊</button><div><p class="fr">À la fin du trimestre, la maîtresse <b class='k'>fait le bilan</b> avec les parents.</p><p class="it">Alla fine del trimestre la maestra <b class='k'>fa il punto</b> con i genitori.</p></div></div><p class="note">faire le bilan <b>de</b> quelque chose : <i>faire le bilan de l'année</i>. <b>Un bilan de santé</b> = un check-up.</p></div></div></div><div class="card k3" tabindex="0" id="r-soutien"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_soutien.jpg)"></div><div class="fw"><span class="w">le ripetizioni</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">le soutien scolaire</span><span class="cat">nom masculin</span><span class="tr">il sostegno scolastico, le ripetizioni</span><div class="bex"><button class="say" data-say="Le mercredi, Hugo fait du soutien scolaire en maths." aria-label="Écouter">🔊</button><div><p class="fr">Le mercredi, Hugo fait du <b class='k'>soutien scolaire</b> en maths.</p><p class="it">Il mercoledì Hugo fa <b class='k'>ripetizioni</b> di matematica.</p></div></div><p class="note">Faux ami : <i>l'insegnante di sostegno</i> se dit <b>l'AESH</b> (accompagnant d'élèves en situation de handicap).</p></div></div></div></div></div></section><section class="sec c2" id="s3"><div class="sechead" style="background-image:url(img/s3.jpg)"><div class="lab"><span class="num">03</span><div><h2>Après l'école et pendant les vacances</h2><p>la festa della scuola, il centro ricreativo, il centro estivo, essere in tanti</p></div></div></div><div class="secbody"><div class="cards"><div class="card k2" tabindex="0" id="r-kermesse"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_kermesse.jpg)"></div><div class="fw"><span class="w">la festa della scuola</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">la kermesse</span><span class="cat">nom féminin</span><span class="tr">la festa della scuola (di fine anno, con giochi e bancarelle)</span><div class="bex"><button class="say" data-say="À la kermesse, Paolo a gagné un ours en peluche à la pêche aux canards." aria-label="Écouter">🔊</button><div><p class="fr">À la <b class='k'>kermesse</b>, Paolo a gagné un ours en peluche à la pêche aux canards.</p><p class="it">Alla <b class='k'>festa della scuola</b> Paolo ha vinto un orsacchiotto alla pesca delle paperelle.</p></div></div><p class="note">En juin : stands de jeux, tombola, gâteaux faits par les parents.</p></div></div></div><div class="card k2" tabindex="0" id="r-loisirs"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_loisirs.jpg)"></div><div class="fw"><span class="w">il centro ricreativo</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">le centre de loisirs</span><span class="cat">nom masculin</span><span class="tr">il centro ricreativo (il mercoledì e durante le vacanze)</span><div class="bex"><button class="say" data-say="Le mercredi, Paolo va au centre de loisirs : il fait du basket et du dessin." aria-label="Écouter">🔊</button><div><p class="fr">Le mercredi, Paolo va au <b class='k'>centre de loisirs</b> : il fait du basket et du dessin.</p><p class="it">Il mercoledì Paolo va al <b class='k'>centro ricreativo</b>: fa basket e disegno.</p></div></div><p class="note">En France, beaucoup d'enfants n'ont pas école le mercredi.</p></div></div></div><div class="card k2" tabindex="0" id="r-aere"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_aere.jpg)"></div><div class="fw"><span class="w">il centro estivo</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">le centre aéré</span><span class="cat">nom masculin</span><span class="tr">il centro estivo (all'aperto)</span><div class="bex"><button class="say" data-say="Cet été, Paolo ira au centre aéré pendant deux semaines." aria-label="Écouter">🔊</button><div><p class="fr">Cet été, Paolo ira au <b class='k'>centre aéré</b> pendant deux semaines.</p><p class="it">Quest'estate Paolo andrà al <b class='k'>centro estivo</b> per due settimane.</p></div></div><p class="note">Activités en plein air ; le soir, on rentre à la maison. Si on dort sur place, c'est <b>une colonie de vacances</b>.</p></div></div></div><div class="card k2" tabindex="0" id="r-nombreux"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_nombreux.jpg)"></div><div class="fw"><span class="w">essere in tanti</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">être très nombreux</span><span class="cat">locution</span><span class="tr">essere molto numerosi, essere in tanti</span><div class="bex"><button class="say" data-say="À la réunion, les parents étaient très nombreux." aria-label="Écouter">🔊</button><div><p class="fr">À la réunion, les parents étaient <b class='k'>très nombreux</b>.</p><p class="it">Alla riunione i genitori erano <b class='k'>tantissimi</b>.</p></div></div><p class="note">Nous étions <b>nombreux</b> = eravamo in tanti (à l'écrit, pas « nous étions beaucoup »). <b>Une famille nombreuse</b> = una famiglia numerosa.</p></div></div></div></div></div></section><section class="sec c4" id="s4"><div class="sechead" style="background-image:url(img/s4.jpg)"><div class="lab"><span class="num">04</span><div><h2>Le son « u » : tu, vu, lune</h2><p>la u francese non è la u italiana!</p></div></div></div><div class="secbody"><p class="lead">En italien, la lettre <b>u</b> se prononce comme le <b>ou</b> français. Mais en français, <b>u</b> est un autre son, qui n'existe pas en italien standard. Si tu dis « tu » à l'italienne, un Français entend <b>tout</b> !</p><div class="box" id="r-son"><h3>Comment faire le son [y] en 3 étapes</h3><div class="mouth"><div class="step s1"><span class="big">i</span><b>1 · Dis « iiii »</b><span>comme dans « si », « vie ». La langue est en avant, derrière les dents du bas.</span><i>Di’ « iiii » come in « sì ».</i></div><div class="step s2"><span class="big">👅</span><b>2 · Ne bouge pas la langue</b><span>Elle reste exactement à la même place, tout en avant.</span><i>La lingua resta ferma, in avanti.</i></div><div class="step s3"><span class="big">😗</span><b>3 · Arrondis les lèvres</b><span>Avance les lèvres comme pour un bisou (comme pour dire « ou »).</span><i>Arrotonda le labbra come per un bacio.</i></div></div><p class="arrowrow">iiiii… 😗 → <b>uuuu</b> : <b>tu</b>, <b>vu</b>, <b>lune</b></p><div class="exs"><div class="ex"><button class="say" data-say="Salut ! Tu as vu Lucie dans la rue ?" aria-label="Écouter">🔊</button><div><p class="fr">Salut ! Tu as vu Lucie dans la rue ?</p><p class="it">Ciao! Hai visto Lucie per strada?</p></div></div><div class="ex"><button class="say" data-say="Paolo a bu tout son jus." aria-label="Écouter">🔊</button><div><p class="fr">Paolo a bu tout son jus.</p><p class="it">Paolo ha bevuto tutto il suo succo.</p></div></div><div class="ex"><button class="say" data-say="Vous avez lu le menu de la cantine ?" aria-label="Écouter">🔊</button><div><p class="fr">Vous avez lu le menu de la cantine ?</p><p class="it">Avete letto il menù della mensa?</p></div></div></div><p class="tip">💡 Contrôle-toi devant un miroir : pour <b>u</b>, la bouche est petite et ronde, mais la langue est devant, comme pour <b>i</b>. Ce son existe dans plusieurs dialectes du nord de l'Italie (lombard, piémontais, ligure) et en allemand (München).</p></div><div class="box" id="r-paires"><h3>u [y] ou ou [u] ? Écoute la différence</h3><p>Touche 🔊 et répète chaque paire. Le sens change complètement !</p><div class="pairs"><div class="pair"><span class="w y"><button class="say" data-say="tu" aria-label="Écouter">🔊</button><span><b>tu</b><small>tu</small></span></span><span class="vs">≠</span><span class="w u"><span><b>tout</b><small>tutto</small></span><button class="say" data-say="tout" aria-label="Écouter">🔊</button></span></div><div class="pair"><span class="w y"><button class="say" data-say="vu" aria-label="Écouter">🔊</button><span><b>vu</b><small>visto</small></span></span><span class="vs">≠</span><span class="w u"><span><b>vous</b><small>voi</small></span><button class="say" data-say="vous" aria-label="Écouter">🔊</button></span></div><div class="pair"><span class="w y"><button class="say" data-say="rue" aria-label="Écouter">🔊</button><span><b>rue</b><small>strada</small></span></span><span class="vs">≠</span><span class="w u"><span><b>roue</b><small>ruota</small></span><button class="say" data-say="roue" aria-label="Écouter">🔊</button></span></div><div class="pair"><span class="w y"><button class="say" data-say="dessus" aria-label="Écouter">🔊</button><span><b>dessus</b><small>sopra</small></span></span><span class="vs">≠</span><span class="w u"><span><b>dessous</b><small>sotto</small></span><button class="say" data-say="dessous" aria-label="Écouter">🔊</button></span></div><div class="pair"><span class="w y"><button class="say" data-say="sûr" aria-label="Écouter">🔊</button><span><b>sûr</b><small>sicuro</small></span></span><span class="vs">≠</span><span class="w u"><span><b>sourd</b><small>sordo</small></span><button class="say" data-say="sourd" aria-label="Écouter">🔊</button></span></div><div class="pair"><span class="w y"><button class="say" data-say="pull" aria-label="Écouter">🔊</button><span><b>pull</b><small>maglione</small></span></span><span class="vs">≠</span><span class="w u"><span><b>poule</b><small>gallina</small></span><button class="say" data-say="poule" aria-label="Écouter">🔊</button></span></div><div class="pair"><span class="w y"><button class="say" data-say="bu" aria-label="Écouter">🔊</button><span><b>bu</b><small>bevuto</small></span></span><span class="vs">≠</span><span class="w u"><span><b>bout</b><small>pezzo, fine</small></span><button class="say" data-say="bout" aria-label="Écouter">🔊</button></span></div><div class="pair"><span class="w y"><button class="say" data-say="lu" aria-label="Écouter">🔊</button><span><b>lu</b><small>letto</small></span></span><span class="vs">≠</span><span class="w u"><span><b>loup</b><small>lupo</small></span><button class="say" data-say="loup" aria-label="Écouter">🔊</button></span></div><div class="pair"><span class="w y"><button class="say" data-say="jus" aria-label="Écouter">🔊</button><span><b>jus</b><small>succo</small></span></span><span class="vs">≠</span><span class="w u"><span><b>joue</b><small>guancia</small></span><button class="say" data-say="joue" aria-label="Écouter">🔊</button></span></div><div class="pair"><span class="w y"><button class="say" data-say="russe" aria-label="Écouter">🔊</button><span><b>russe</b><small>russo</small></span></span><span class="vs">≠</span><span class="w u"><span><b>rousse</b><small>rossa (di capelli)</small></span><button class="say" data-say="rousse" aria-label="Écouter">🔊</button></span></div><div class="pair"><span class="w y"><button class="say" data-say="pur" aria-label="Écouter">🔊</button><span><b>pur</b><small>puro</small></span></span><span class="vs">≠</span><span class="w u"><span><b>pour</b><small>per</small></span><button class="say" data-say="pour" aria-label="Écouter">🔊</button></span></div><div class="pair"><span class="w y"><button class="say" data-say="nu" aria-label="Écouter">🔊</button><span><b>nu</b><small>nudo</small></span></span><span class="vs">≠</span><span class="w u"><span><b>nous</b><small>noi</small></span><button class="say" data-say="nous" aria-label="Écouter">🔊</button></span></div></div></div><div class="box" id="r-ecrit"><h3>Comment ça s'écrit ?</h3><div class="spell"><div class="sy"><h4>[y] comme dans « lune »</h4><p><b>u</b> : tu, rue, plus, une, musique</p><p><b>û</b> : sûr, mûr, dû</p><p><b>eu</b> (participe du verbe avoir) : j'ai <b>eu</b>, tu as <b>eu</b> → [y]</p></div><div class="su"><h4>[u] comme dans « loup »</h4><p><b>ou</b> : vous, tout, jour, soupe</p><p><b>où</b> : où es-tu ?</p><p><b>oû</b> : le goût, août</p></div></div><div class="exs"><div class="ex"><button class="say" data-say="J&#x27;ai eu une bonne note." aria-label="Écouter">🔊</button><div><p class="fr">J'ai <b class='k'>eu</b> une bonne note.</p><p class="it">Ho preso un bel voto.</p></div></div><div class="ex"><button class="say" data-say="Bien sûr, nous irons tous en voiture !" aria-label="Écouter">🔊</button><div><p class="fr">Bien <b class='k'>sûr</b>, nous irons tous en voiture !</p><p class="it">Certo, andremo tutti in macchina!</p></div></div></div><p class="tip">💡 Dans <b>qu</b> et <b>gu</b>, le u ne se prononce pas : <i>qui, quatre, la guitare</i>. Et <b>un</b> est un son nasal : <i>un cartable</i>.</p></div></div></section><section class="sec c1" id="s5"><div class="sechead" style="background-image:url(img/s5.jpg)"><div class="lab"><span class="num">05</span><div><h2>Les pronoms relatifs qui et que</h2><p>in italiano « che », in francese due parole diverse</p></div></div></div><div class="secbody"><p class="lead"><b>Qui</b> et <b>que</b> relient deux phrases et évitent de répéter un nom. En italien, on dit toujours « che ». En français, il faut choisir : tout dépend du <b>rôle</b> du mot remplacé.</p><div class="box" id="r-quique"><h3>Qui ou que ? La règle</h3><div class="qq"><div class="qa" id="r-qui"><h4>qui</h4><p>= le <b>sujet</b> du verbe qui suit.</p><p>Après <b>qui</b>, on trouve directement le <b>verbe</b>.</p><p class="sch">J'ai un fils. <b>Mon fils</b> joue au basket.<br>→ J'ai un fils <b>qui joue</b> au basket.</p><p><i class="t">Ho un figlio che gioca a basket.</i></p></div><div class="qb" id="r-que"><h4>que · qu'</h4><p>= le <b>complément d'objet direct</b> (COD).</p><p>Après <b>que</b>, on trouve un <b>sujet</b> + un verbe.</p><p class="sch">Paolo a un cartable. J'ai acheté <b>ce cartable</b>.<br>→ Paolo a un cartable <b>que j'ai acheté</b> en septembre.</p><p><i class="t">Paolo ha una cartella che ho comprato a settembre.</i></p></div></div><div class="formula"><span>qui</span> + verbe &nbsp;·&nbsp; <span class="b">que</span> + sujet (je, tu, Paolo, la maîtresse…) + verbe</div><div class="exs"><div class="ex"><button class="say" data-say="C&#x27;est la maîtresse qui a écrit dans le cahier de liaison." aria-label="Écouter">🔊</button><div><p class="fr">C'est la maîtresse <b class='k'>qui</b> a écrit dans le cahier de liaison.</p><p class="it">È la maestra <b class='k'>che</b> ha scritto sul quaderno delle comunicazioni.</p></div></div><div class="ex"><button class="say" data-say="Paolo a un copain qui s&#x27;appelle Hugo." aria-label="Écouter">🔊</button><div><p class="fr">Paolo a un copain <b class='k'>qui</b> s'appelle Hugo.</p><p class="it">Paolo ha un amico <b class='k'>che</b> si chiama Hugo.</p></div></div><div class="ex"><button class="say" data-say="Le mot d&#x27;excuse que j&#x27;ai écrit est dans le cartable." aria-label="Écouter">🔊</button><div><p class="fr">Le mot d'excuse <b class='k'>que</b> j'ai écrit est dans le cartable.</p><p class="it">La giustificazione <b class='k'>che</b> ho scritto è nella cartella.</p></div></div><div class="ex"><button class="say" data-say="La kermesse que nous préparons aura lieu en juin." aria-label="Écouter">🔊</button><div><p class="fr">La kermesse <b class='k'>que</b> nous préparons aura lieu en juin.</p><p class="it">La festa <b class='k'>che</b> stiamo preparando si terrà a giugno.</p></div></div></div></div><div class="box nest" id="r-elision"><h3>Que → qu' ; qui ne change jamais</h3><p>Devant une voyelle, <b>que</b> devient <b>qu'</b> : le gâteau <b>qu'</b>Annamaria a fait, le repas <b>qu'</b>on mange à la cantine.<br><b>Qui</b> ne s'élide jamais : l'ami <b>qui</b> arrive, la maman <b>qui</b> attend.</p></div><div class="box gold" id="r-astuce"><h3>⭐ L'astuce</h3><p>Regarde le mot juste après le vide :<br>→ un <b>verbe</b> (parfois avec un petit pronom : <i>qui me parle, qui ne vient pas</i>) → <b>qui</b><br>→ un <b>sujet</b> (je, tu, il, on, nous, Paolo, la maîtresse…) → <b>que / qu'</b></p><p class="tip">Avec <b>que</b>, ne répète pas le nom : la cartella che ho comprato → le cartable <b>que j'ai acheté</b> (jamais « que je l'ai acheté »). Et au passé composé avec avoir, le participe s'accorde : la maîtresse que j'ai rencontr<b>ée</b>.</p></div></div></section><div class="exzone"><div class="exintro" id="e1"><h2>Exercices ✏️</h2><p>Le score en haut à droite compte tes bonnes réponses du premier coup.</p></div><section class="exo x1" id="ex1s"><div class="exhead"><div class="ext"><span class="exn">1</span><div><p class="ety">Vocabulaire · QCM</p><h3>Choisis le bon mot.</h3><p class="eit">Scegli la parola giusta.</p></div></div></div><div class="exbody"><div id="ex1"></div></div></section><section class="exo x3" id="ex2s"><div class="exhead"><div class="ext"><span class="exn">2</span><div><p class="ety">Vocabulaire · associations</p><h3>Relie le mot français à sa traduction.</h3><p class="eit">Tocca una parola a sinistra, poi la traduzione a destra.</p></div></div></div><div class="exbody"><div id="ex2"></div></div></section><section class="exo x2" id="ex3s"><div class="exhead"><div class="ext"><span class="exn">3</span><div><p class="ety">Le cahier de liaison de Paolo</p><h3>Complète les messages entre la maîtresse et Annamaria.</h3><p class="eit">Completa i messaggi (l'aiuto in italiano è tra parentesi). Poi tocca ✓.</p></div></div></div><div class="exbody"><div class="cahier" id="ex3"></div></div></section><section class="exo x4" id="ex4s"><div class="exhead"><div class="ext"><span class="exn">4</span><div><p class="ety">Prononciation · écoute</p><h3>Écoute et choisis le mot que tu entends.</h3><p class="eit">Tocca ▶︎, ascolta e scegli: u [y] o ou [u]?</p></div></div></div><div class="exbody"><div id="ex4"></div></div></section><section class="exo x1" id="ex5s"><div class="exhead"><div class="ext"><span class="exn">5</span><div><p class="ety">Prononciation · tri</p><h3>Classe les mots : son [y] ou son [u] ?</h3><p class="eit">Tocca un mot (lo senti), poi la scatola giusta.</p></div></div></div><div class="exbody"><div id="ex5"></div></div></section><section class="exo x3" id="ex6s"><div class="exhead"><div class="ext"><span class="exn">6</span><div><p class="ety">Orthographe · u ou ou ?</p><h3>Écoute le mot et complète avec u ou ou.</h3><p class="eit">Ascolta e completa con u oppure ou.</p></div></div></div><div class="exbody"><div id="ex6"></div></div></section><section class="exo x4" id="ex7s"><div class="exhead"><div class="ext"><span class="exn">7</span><div><p class="ety">Prononciation · à toi !</p><h3>Écoute, enregistre-toi et compare.</h3><p class="eit">Ascolta, registrati e confronta. (Questo esercizio non conta nel punteggio.)</p></div></div></div><div class="exbody"><div class="rec" id="ex7"></div><p class="recinfo" id="recinfo"></p></div></section><section class="exo x2" id="ex8s"><div class="exhead"><div class="ext"><span class="exn">8</span><div><p class="ety">Grammaire · qui, que, qu'</p><h3>Choisis le bon pronom relatif.</h3><p class="eit">Scegli: qui, que o qu'?</p></div></div></div><div class="exbody"><div id="ex8"></div></div></section><section class="exo x1" id="ex9s"><div class="exhead"><div class="ext"><span class="exn">9</span><div><p class="ety">Grammaire · une seule phrase</p><h3>Quelle phrase relie correctement les deux phrases ?</h3><p class="eit">Quale frase unisce correttamente le due frasi?</p></div></div></div><div class="exbody"><div id="ex9"></div></div></section><section class="exo x3" id="ex10s"><div class="exhead"><div class="ext"><span class="exn">10</span><div><p class="ety">Grammaire · phrases en désordre</p><h3>Remets les mots dans l'ordre.</h3><p class="eit">Rimetti le parole in ordine.</p></div></div></div><div class="exbody"><div id="ex10"></div></div></section><section class="exo x5" id="ex11s"><div class="exhead"><div class="exph" style="background-image:url(img/prod.jpg)"></div><div class="ext"><span class="exn">✍️</span><div><p class="ety">Réflexion · facultative</p><h3>Les devoirs à la maison : utiles ou inutiles ?</h3><p class="eit">Facoltativo: ne parleremo all'inizio della prossima lezione.</p></div></div></div><div class="exbody"><div class="sujet"><p>En France, une circulaire de 1956 interdit les devoirs écrits à la maison à l'école primaire. Pourtant, beaucoup d'enseignants en donnent encore, et le débat revient souvent : certains parents trouvent les devoirs indispensables, d'autres pensent qu'après une longue journée, les enfants ont besoin de jouer, de faire du sport ou de la musique.</p>
+<p class="it">In Francia una circolare del 1956 vieta i compiti scritti a casa alla scuola primaria. Eppure molti insegnanti ne danno ancora, e il dibattito torna spesso: alcuni genitori trovano i compiti indispensabili, altri pensano che dopo una lunga giornata i bambini abbiano bisogno di giocare, fare sport o musica.</p>
+<p><b>À ton avis, faut-il donner des devoirs à la maison aux enfants de l'école primaire ?</b></p><p class="it">Secondo te, bisogna dare compiti a casa ai bambini della scuola primaria?</p></div>
+<div class="chips"><span>les devoirs (m.)</span><span>apprendre ses leçons</span><span>le temps libre</span><span>se reposer</span><span>la fatigue</span><span>l'autonomie (f.)</span><span>aider son enfant</span><span>les inégalités (f.)</span><span>le soutien scolaire</span><span>prendre l'habitude de</span></div>
+<div class="prompt"><b>Pour trouver tes idées</b><ul>
+<li>Comment ça se passe avec Paolo le soir : devoirs, basket, batterie… ?</li>
+<li>Quand tu étais petite, en Italie, avais-tu beaucoup de compiti ? Ça t'a aidée ?</li>
+<li>Les devoirs sont-ils justes pour tous les enfants, même si les parents ne peuvent pas aider ?</li>
+<li>Que pourrait-on faire à la place : lire, jouer, aller au centre de loisirs ?</li></ul></div>
+<div class="plan">
+<div><span class="pn">1</span><p><b>Introduction</b> (3 à 4 lignes) : présente le débat et annonce ton avis.<br><i>Aujourd'hui, beaucoup de parents se demandent si… · À mon avis…</i></p></div>
+<div><span class="pn">2</span><p><b>Premier argument</b> (5 à 6 lignes), avec un exemple de ta vie de maman.<br><i>D'abord, les devoirs permettent de… · Par exemple, Paolo…</i></p></div>
+<div><span class="pn">3</span><p><b>Deuxième argument</b> (5 à 6 lignes) : l'autre point de vue.<br><i>Pourtant, il faut aussi penser aux enfants qui… · De plus…</i></p></div>
+<div><span class="pn">4</span><p><b>Conclusion</b> (3 à 4 lignes) : ta réponse nuancée.<br><i>Finalement, je pense que… · L'idéal serait…</i></p></div></div>
+<p class="defi">✨ <b>Défi</b> : utilise <b>qui</b> et <b>que</b> au moins deux fois chacun, et trois mots de la leçon (le cartable, le soutien scolaire, aller chercher…).</p>
+<textarea id="prod" placeholder="Écris ici…"></textarea>
+<div class="prodbar"><span id="wc">0 mot</span><button id="copy" class="btn">📋 Copier pour Irène</button></div>
+<p class="copyhelp" id="copyhelp">Le texte est copié : colle-le dans un message pour Irène.</p>
+<p class="tip">Ta production écrite est envoyée à Irène avec tes résultats (bouton en bas de la page). Elle ne compte pas dans le score : Irène la corrige à part.</p>
+</div></section><section class="exo x5" id="revoir"><div class="exhead"><div class="ext"><span class="exn">★</span><div><p class="ety">À revoir</p><h3>Les points à relire</h3><p class="eit">Touche un point pour remonter à la règle.</p></div></div></div><div class="exbody"><div id="revlist"></div>
+<div class="send" id="send"><h4>📩 Envoyer mes résultats à Irène</h4><p>Le bouton ouvre ta messagerie avec un e-mail déjà écrit pour Irène : ton score, tes erreurs (ta réponse et la bonne réponse) et ta production écrite. Tu n'as plus qu'à appuyer sur « Envoyer ».</p>
+<label for="sname">Ton prénom</label><input id="sname" type="text" value="Annamaria" autocomplete="given-name">
+<button class="btn" id="sendbtn" type="button">Envoyer à Irène</button><p class="st" id="sendst" role="status"></p></div>
+<button class="btn ghost" id="reset">Recommencer les exercices</button></div></section></div>
+</main>
+<div class="paper" style="background:transparent;box-shadow:none;margin-top:0;margin-bottom:0"><details class="credits"><summary>Crédits photos</summary><ul><li>École élémentaire, 17 rue Boileau, Paris 16e 6 · Polymagou · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:École_élémentaire,_17_rue_Boileau,_Paris_16e_6.jpg">Wikimedia Commons</a></li><li>Bicyclettes, en attendant la récréation · TOnin · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Bicyclettes,_en_attendant_la_récréation.jpg">Wikimedia Commons</a></li><li>Visite Cantine Groupe scolaire Aimé Legal à Mouans-Sartoux (6) · Rieul Techer · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Visite_Cantine_Groupe_scolaire_Aimé_Legal_à_Mouans-Sartoux_(6).JPG">Wikimedia Commons</a></li><li>Pêche aux canards Violay 2011 · Vikingenergy · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Pêche_aux_canards_Violay_2011.jpg">Wikimedia Commons</a></li><li>Ganapathy Kumar · <a href="https://unsplash.com/photos/9kbsq91NFwg">Unsplash</a></li><li>Boulogne-sur-Mer (62), école-musée, salle de classe n° 2 - vers 1879 1 · Pierre Poschadel · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Boulogne-sur-Mer_(62),_école-musée,_salle_de_classe_n°_2_-_vers_1879_1.jpg">Wikimedia Commons</a></li><li>Homework 01 · Kwameghana(Bright Kwame Ayisi) · CC0 · <a href="https://commons.wikimedia.org/wiki/File:Homework_01.jpg">Wikimedia Commons</a></li><li>Red satchel by Cambridge Satchel Company · Mark Hillary · CC BY 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Red_satchel_by_Cambridge_Satchel_Company.jpg">Wikimedia Commons</a></li><li>Alamo Heights High School Cafeteria Meeting Area · Andrewinator · CC BY 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Alamo_Heights_High_School_Cafeteria_Meeting_Area.jpg">Wikimedia Commons</a></li><li>Miraxh Tereziu · <a href="https://unsplash.com/photos/Np4aW71utRo">Unsplash</a></li><li>Kevin Wiegand · <a href="https://unsplash.com/photos/PgfSWgL3wjI">Unsplash</a></li><li>Writing a letter · Petar Milošević · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Writing_a_letter.jpg">Wikimedia Commons</a></li><li>lilartsy  · <a href="https://unsplash.com/photos/xqC7hdLMpgk">Unsplash</a></li><li>Parent teacher meeting at the Baozhong Junior High School 20120411 · 褒忠國中 雲端網 · CC BY 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Parent_teacher_meeting_at_the_Baozhong_Junior_High_School_20120411.jpg">Wikimedia Commons</a></li><li>Boulogne-sur-Mer (62), école-musée, salle de classe n° 3 - entre 1880 et 1950 6 · Pierre Poschadel · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Boulogne-sur-Mer_(62),_école-musée,_salle_de_classe_n°_3_-_entre_1880_et_1950_6.jpg">Wikimedia Commons</a></li><li>Boulogne-sur-Mer (62), école-musée, salle de classe n° 1 - de 1960 à nos jours 1 · Pierre Poschadel · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Boulogne-sur-Mer_(62),_école-musée,_salle_de_classe_n°_1_-_de_1960_à_nos_jours_1.jpg">Wikimedia Commons</a></li><li>Parent helps child with homework during afternoon study session at home · Shixart1985 · CC BY 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Parent_helps_child_with_homework_during_afternoon_study_session_at_home.jpg">Wikimedia Commons</a></li><li>Peche aux canards (foire saint-Romain 2014) · Frédéric BISSON · CC BY 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Peche_aux_canards_(foire_saint-Romain_2014).jpg">Wikimedia Commons</a></li><li>Children Playing at Baoqing Park 20160405 · 玄史生 · CC0 · <a href="https://commons.wikimedia.org/wiki/File:Children_Playing_at_Baoqing_Park_20160405.jpg">Wikimedia Commons</a></li><li>Centre aéré du Chaufour · JackyM59 · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Centre_aéré_du_Chaufour.jpg">Wikimedia Commons</a></li><li>Crowd at Noam Rotem concert · Asaf antman · CC BY 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Crowd_at_Noam_Rotem_concert.jpg">Wikimedia Commons</a></li></ul></details></div>
+<div class="fai-sign"><img src="../marque/signature-irene.png" alt="Cours de français en ligne"></div>
+<script>const AUDIO={"${esc(t)}": "05d97c8d2e.mp3", "Bien sûr, nous irons tous en voiture !": "c8ae351550.mp3", "As-tu vu le tutu de tulle de Lili d'Honolulu ?": "19ad0981db.mp3", "Avec plaisir, je ferai un gâteau ! Et cet été, Paolo ira au centre aéré.": "8fddb5dc5d.mp3", "C'est la maîtresse qui a écrit dans le cahier de liaison.": "fd64af3ae3.mp3", "Bonjour Madame, Paolo était malade lundi : voici son mot d'excuse. Jeudi, mon amie Marzia viendra le chercher à 16 h 30.": "f7ef2a0d99.mp3", "Bonne nouvelle : les élèves ont élu deux délégués de classe, Paolo et Léa !": "4f9408f207.mp3", "C'est le carnet de notes que Paolo a montré à son papa.": "0c6131c2bd.mp3", "C'est un mot qu'il faut signer": "45498e6bd2.mp3", "Ce soir, je vais chercher Paolo à la sortie de l'école.": "93ddc3c170.mp3", "Cet été, Paolo ira au centre aéré pendant deux semaines.": "fb63c1fbe1.mp3", "En juin, toute l'école prépare la kermesse : jeux, stands et gâteaux !": "85d98cb2f4.mp3", "Chers parents, la réunion parents d'élèves aura lieu jeudi à 18 h. Nous ferons le bilan du premier trimestre.": "a6f48aa6cc.mp3", "J'ai eu une bonne note.": "abeb6f6a70.mp3", "J'ai lu le mot que la maîtresse a écrit.": "716d3d5077.mp3", "J'ai une amie qui s'appelle Marzia": "f6e5d301a4.mp3", "Je connais une dame qui fait du soutien scolaire.": "4c39f3f9a1.mp3", "Je vais chercher mon fils à l'école à seize heures trente.": "8ce7665c3e.mp3", "La kermesse que nous préparons aura lieu en juin.": "2ab46f4ff1.mp3", "La kermesse que nous préparons sera magnifique": "cdcf289b3f.mp3", "La maîtresse a écrit un mot dans le cahier de liaison.": "acccafde1c.mp3", "Le cartable que j'ai acheté est bleu.": "7c2920673d.mp3", "La réunion parents d'élèves aura lieu jeudi à dix-huit heures.": "e3bef18739.mp3", "La maîtresse écrit les informations importantes dans le cahier de liaison.": "26b478e097.mp3", "Le menu des repas de la semaine est affiché devant l'école.": "bf1802c21c.mp3", "Le loup a vu la lune au-dessus du mur.": "6a1db13137.mp3", "Le mercredi, Paolo va au centre de loisirs : il fait du basket et du dessin.": "4bebed8103.mp3", "Le mercredi, Hugo fait du soutien scolaire en maths.": "71f560d3ea.mp3", "Le midi, les enfants mangent à la cantine.": "ab7fba48c4.mp3", "Le midi, Paolo mange à la cantine avec ses copains.": "e2e8a9f4cd.mp3", "Le repas qu' on mange à la cantine est équilibré.": "d7a48b2511.mp3", "Le mot d'excuse que j'ai écrit est dans le cartable.": "4e846db36e.mp3", "Les enfants qui vont au centre aéré font beaucoup de sport.": "794afeb8d6.mp3", "Marzia est allée le chercher au basket.": "b884f8bd62.mp3", "Les élèves ont élu deux délégués de classe.": "e4fa13cbe9.mp3", "Marzia est l'amie qui va chercher Paolo à l'école.": "0257cdca64.mp3", "Paolo a bu tout son jus.": "6021997ccb.mp3", "Paolo a montré son carnet de notes à son papa : il est très fier !": "ad8761e0b0.mp3", "Paolo a oublié son cartable : il n'a pas ses livres !": "6875389188.mp3", "Merci ! Pour la kermesse de juin, nous cherchons des parents volontaires. L'an dernier, vous étiez très nombreux !": "1866c1d388.mp3", "Paolo a oublié son cartable dans la voiture !": "61b1d50440.mp3", "Paolo a un cartable qui est très lourd": "eacb756dc2.mp3", "Paolo a un copain qui s'appelle Hugo.": "1e6c9154ec.mp3", "Paolo était malade : j'ai écrit un mot d'excuse pour la maîtresse.": "8962af1303.mp3", "Paolo était malade : sa maman écrit un mot d'excuse pour la maîtresse.": "a4002d50a4.mp3", "Paolo a une maîtresse qui est très gentille.": "d3c4ef141b.mp3", "Pendant les vacances d'été, Paolo ira au centre aéré.": "965f7f664a.mp3", "Tu peux venir me chercher à la gare ?": "ce44b9e6a1.mp3", "Voici la maîtresse que Paolo adore": "420d7b8d8c.mp3", "Salut ! Tu as vu Lucie dans la rue ?": "166357da28.mp3", "Voici le gâteau qu'Annamaria a fait pour la kermesse.": "7e94cfb1b9.mp3", "Voici le mot d'excuse qu' Annamaria a écrit.": "6f5759de07.mp3", "bonjour": "f023689457.mp3", "Vous avez lu le menu de la cantine ?": "90a2d34237.mp3", "bout": "eed1627ebd.mp3", "dessous": "bf79e51c24.mp3", "bu": "97bf9c5c97.mp3", "douze": "e3ca7fbe75.mp3", "dessus": "5bc8a2b9cd.mp3", "jus": "6ecd178dec.mp3", "du jus": "611316723f.mp3", "la bouche": "c057b10ddb.mp3", "joue": "7faf53dcd0.mp3", "la kermesse": "9bc3b160f6.mp3", "la lune": "3388ae1990.mp3", "la cantine": "68663cd7fa.mp3", "la musique": "fa0bf29b9f.mp3", "la nature": "4d6b6fcc6c.mp3", "la soupe": "4e3a156e22.mp3", "la route": "b95a45ef87.mp3", "la voiture": "57322f6fa1.mp3", "le bureau": "4130899523.mp3", "le cartable": "141a556578.mp3", "le carnet de notes": "1a0c0618dd.mp3", "le jour": "6b81c849bb.mp3", "le délégué de classe": "deffd05212.mp3", "le loup": "e2baa09f0f.mp3", "le menu": "fc5ed2a642.mp3", "le mot d'excuse": "1dbcd0a903.mp3", "le mur": "f611d783e2.mp3", "loup": "7ca63ef735.mp3", "le soutien scolaire": "03abd194bd.mp3", "lu": "3e7e122bf0.mp3", "lune": "a429d27ac5.mp3", "nous": "23300e00e8.mp3", "nu": "0288bde0c2.mp3", "poule": "af89f3e0f7.mp3", "pull": "f43dff9a0d.mp3", "pour": "37670f216e.mp3", "pur": "8fc789ca71.mp3", "roue": "130217b11a.mp3", "rousse": "4bf0fd4e84.mp3", "russe": "6f79c3086f.mp3", "rue": "a7dc5849a2.mp3", "salut": "3ed7dceaf2.mp3", "sourd": "5861561add.mp3", "sûr": "9e54853bf6.mp3", "tout": "8fee031b61.mp3", "tu": "b6b4ce6df0.mp3", "une minute": "105931186d.mp3", "vous": "593ffa780f.mp3", "vu": "0730b75e96.mp3", "À la fin du trimestre, la maîtresse et les parents font le bilan.": "fdbd69d260.mp3", "À la kermesse, Paolo a gagné un ours en peluche à la pêche aux canards.": "86f4720cd2.mp3", "À la fin du trimestre, la maîtresse fait le bilan avec les parents.": "75867545f1.mp3", "À la réunion, les parents étaient très nombreux.": "f64b5bd8e9.mp3", "être très nombreux": "78b03929fb.mp3"};</script>
+<script>const DATA={"ex1": [["Paolo a oublié son ___ : il n'a pas ses livres !", ["cartable", "bureau", "carnet"], 0, "r-cartable"], ["Le midi, les enfants mangent à la ___.", ["cuisine", "cantine", "kermesse"], 1, "r-cantine"], ["Paolo était malade : sa maman écrit un ___ pour la maîtresse.", ["carnet de notes", "bilan", "mot d'excuse"], 2, "r-mot"], ["La maîtresse écrit les informations importantes dans le ___.", ["cahier de liaison", "centre aéré", "cartable"], 0, "r-cahier"], ["À la fin du trimestre, la maîtresse et les parents font le ___.", ["repas", "bilan", "délégué"], 1, "r-bilan"], ["En juin, toute l'école prépare la ___ : jeux, stands et gâteaux !", ["réunion", "cantine", "kermesse"], 2, "r-kermesse"], ["Pendant les vacances d'été, Paolo ira au ___.", ["centre aéré", "carnet de notes", "soutien scolaire"], 0, "r-aere"], ["Ce soir, je vais ___ Paolo à la sortie de l'école.", ["trouver", "chercher", "porter"], 1, "r-chercher"]], "ex2": [["le cartable", "la cartella", "r-cartable"], ["la cantine", "la mensa", "r-cantine"], ["le mot d'excuse", "la giustificazione", "r-mot"], ["le carnet de notes", "la pagella", "r-notes"], ["le délégué de classe", "il rappresentante di classe", "r-delegue"], ["le soutien scolaire", "le ripetizioni", "r-soutien"], ["la kermesse", "la festa della scuola", "r-kermesse"], ["être très nombreux", "essere in tanti", "r-nombreux"]], "ex2o": [4, 7, 1, 5, 0, 3, 6, 2], "ex3": [["m", "Chers parents, la [[réunion]]{riunione} parents d'élèves aura lieu jeudi à 18 h. Nous ferons le [[bilan]]{il punto} du premier trimestre.", "r-reunion"], ["m", "Bonne nouvelle : les élèves ont élu deux [[délégués]]{rappresentanti} de classe, Paolo et Léa !", "r-delegue"], ["p", "Bonjour Madame, Paolo était malade lundi : voici son mot d'[[excuse]]{giustificazione}. Jeudi, mon amie Marzia viendra le [[chercher]]{andrà a prenderlo} à 16 h 30.", "r-mot"], ["m", "Merci ! Pour la [[kermesse]]{festa della scuola} de juin, nous cherchons des parents volontaires. L'an dernier, vous étiez très [[nombreux]]{numerosi} !", "r-kermesse"], ["p", "Avec plaisir, je ferai un gâteau ! Et cet été, Paolo ira au centre [[aéré]]{centro estivo}.", "r-aere"]], "ex4": [["tout", ["tu", "tout"]], ["vu", ["vu", "vous"]], ["rue", ["rue", "roue"]], ["dessous", ["dessus", "dessous"]], ["russe", ["russe", "rousse"]], ["sourd", ["sûr", "sourd"]], ["pull", ["pull", "poule"]], ["bout", ["bu", "bout"]], ["lu", ["lu", "loup"]], ["nous", ["nu", "nous"]]], "bins": [["y", "u · [y]", "comme lune 🌙", "linear-gradient(150deg,#0d7f75,#17a89b)"], ["u", "ou · [u]", "comme loup 🐺", "linear-gradient(150deg,#c9543a,#f07c5a)"]], "ex5": [["la lune", "y"], ["le loup", "u"], ["la musique", "y"], ["la soupe", "u"], ["la voiture", "y"], ["le jour", "u"], ["une minute", "y"], ["douze", "u"], ["le bureau", "y"], ["la bouche", "u"], ["du jus", "y"], ["la route", "u"]], "ex6": [["l_ne", "u", "lune"], ["le l_p", "ou", "le loup"], ["sal_t", "u", "salut"], ["bonj_r", "ou", "bonjour"], ["le m_r", "u", "le mur"], ["la s_pe", "ou", "la soupe"], ["la nat_re", "u", "la nature"], ["la b_che", "ou", "la bouche"], ["le men_", "u", "le menu"], ["d_ze", "ou", "douze"]], "ex7": [["Salut ! Tu as vu Lucie dans la rue ?", "Ciao! Hai visto Lucie per strada?"], ["Paolo a bu tout son jus.", "Paolo ha bevuto tutto il suo succo."], ["Vous avez lu le menu de la cantine ?", "Avete letto il menù della mensa?"], ["Le loup a vu la lune au-dessus du mur.", "Il lupo ha visto la luna sopra il muro."], ["As-tu vu le tutu de tulle de Lili d'Honolulu ?", "Scioglilingua: hai visto il tutù di tulle di Lili di Honolulu?"]], "ex8": [["Paolo a un copain ___ s'appelle Hugo.", ["qui", "que", "qu'"], 0, "r-qui"], ["Le cartable ___ j'ai acheté est bleu.", ["qui", "que", "qu'"], 1, "r-que"], ["C'est la maîtresse ___ a écrit dans le cahier de liaison.", ["qui", "que", "qu'"], 0, "r-qui"], ["Voici le mot d'excuse ___ Annamaria a écrit.", ["qui", "que", "qu'"], 2, "r-elision"], ["La kermesse ___ nous préparons aura lieu en juin.", ["qui", "que", "qu'"], 1, "r-que"], ["Les enfants ___ vont au centre aéré font beaucoup de sport.", ["qui", "que", "qu'"], 0, "r-qui"], ["Le repas ___ on mange à la cantine est équilibré.", ["qui", "que", "qu'"], 2, "r-elision"], ["Marzia est l'amie ___ va chercher Paolo à l'école.", ["qui", "que", "qu'"], 0, "r-qui"]], "ex9": [["J'ai lu le mot. La maîtresse a écrit ce mot.", ["J'ai lu le mot qui la maîtresse a écrit.", "J'ai lu le mot que la maîtresse a écrit.", "J'ai lu le mot que la maîtresse l'a écrit."], 1, "r-astuce"], ["Paolo a une maîtresse. Elle est très gentille.", ["Paolo a une maîtresse qui est très gentille.", "Paolo a une maîtresse qu'est très gentille.", "Paolo a une maîtresse qui elle est très gentille."], 0, "r-qui"], ["Voici le gâteau. Annamaria a fait ce gâteau pour la kermesse.", ["Voici le gâteau que Annamaria a fait pour la kermesse.", "Voici le gâteau qui Annamaria a fait pour la kermesse.", "Voici le gâteau qu'Annamaria a fait pour la kermesse."], 2, "r-elision"], ["Je connais une dame. Cette dame fait du soutien scolaire.", ["Je connais une dame qui fait du soutien scolaire.", "Je connais une dame que fait du soutien scolaire.", "Je connais une dame qu'elle fait du soutien scolaire."], 0, "r-qui"], ["C'est le carnet de notes. Paolo a montré ce carnet à son papa.", ["C'est le carnet de notes qui Paolo a montré à son papa.", "C'est le carnet de notes que Paolo a montré à son papa.", "C'est le carnet de notes que Paolo l'a montré à son papa."], 1, "r-que"]], "ex10": [["Paolo a un cartable qui est très lourd", "r-qui", "Paolo ha una cartella che è molto pesante."], ["Voici la maîtresse que Paolo adore", "r-que", "Ecco la maestra che Paolo adora."], ["J'ai une amie qui s'appelle Marzia", "r-qui", "Ho un'amica che si chiama Marzia."], ["C'est un mot qu'il faut signer", "r-elision", "È un avviso che bisogna firmare."], ["La kermesse que nous préparons sera magnifique", "r-que", "La festa che stiamo preparando sarà magnifica."]]};</script>
+<script>(function(){
+const KEY="annamaria-27-novembre-v1";
+
+let S={items:{},prod:"",tri:{},match:{},ord:{}};
+try{const raw=localStorage.getItem(KEY);if(raw)S=Object.assign(S,JSON.parse(raw));}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const REG={};
+function reg(id,rule,label,answer,ex,num){REG[id]={rule,label,answer,ex,num};}
+function it(id){return S.items[id]||(S.items[id]={});}
+function score(){let n=0;for(const id in REG){const x=S.items[id];if(x&&x.ok&&!x.wrong)n++;}return n;}
+function upd(bump){$("#sc").textContent=score();$("#tot").textContent=Object.keys(REG).length;if(bump){const b=$("#score");b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump");}renderRev();}
+function stars(el){if(!el)return;const r=el.getBoundingClientRect();const x=r.left+r.width/2,y=r.top+r.height/2;
+ for(let i=0;i<7;i++){const s=document.createElement("span");s.className="star";s.textContent=i%2?"✦":"★";
+  const a=Math.random()*Math.PI*2,d=40+Math.random()*45;s.style.left=x+"px";s.style.top=y+"px";
+  s.style.setProperty("--dx",Math.cos(a)*d+"px");s.style.setProperty("--dy",Math.sin(a)*d+"px");
+  s.style.animationDelay=(i*40)+"ms";document.body.appendChild(s);setTimeout(()=>s.remove(),1300);}}
+function good(id,el){const x=it(id);if(x.ok)return;x.ok=true;save();if(!x.wrong)stars(el);upd(!x.wrong);}
+function bad(id,el,given){const x=it(id);x.g=x.g||[];const g=(given==null?"":String(given)).trim();
+ if(g&&!x.g.includes(g)&&x.g.length<6)x.g.push(g);
+ if(!x.wrong){x.wrong=true;save();upd();}else save();
+ if(el){el.classList.remove("shake");void el.offsetWidth;el.classList.add("shake");}}
+/* voix */
+let VOICE=null;
+function pick(){if(!("speechSynthesis" in window))return;const vs=speechSynthesis.getVoices().filter(v=>/^fr/i.test(v.lang));
+ const pref=[/denise/i,/vivienne/i,/eloise/i,/google.*fran/i,/amélie|amelie/i,/audrey/i,/marie/i,/julie/i,/female|femme/i];
+ for(const p of pref){const v=vs.find(v=>p.test(v.name)&&/fr-FR/i.test(v.lang))||vs.find(v=>p.test(v.name));if(v){VOICE=v;return;}}
+ VOICE=vs.find(v=>/fr-FR/i.test(v.lang))||vs[0]||null;}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick;}
+let CUR=null;
+function akey(t){return t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu,"").replace(/\s+/g," ").trim();}
+function speak(t,btn){const f=(typeof AUDIO!=="undefined")&&AUDIO[akey(t)];
+ if(CUR){CUR.pause();}if("speechSynthesis" in window)speechSynthesis.cancel();
+ $$(".say.on").forEach(b=>b.classList.remove("on"));
+ if(f){CUR=new Audio("audio/"+f);if(btn){btn.classList.add("on");CUR.onended=CUR.onerror=()=>btn.classList.remove("on");}
+  CUR.play().catch(()=>{if(btn)btn.classList.remove("on");});return;}
+ if(!("speechSynthesis" in window))return;
+ const u=new SpeechSynthesisUtterance(akey(t).replace(/___/g,""));
+ u.lang="fr-FR";if(VOICE)u.voice=VOICE;u.rate=.9;
+ if(btn){btn.classList.add("on");u.onend=u.onerror=()=>btn.classList.remove("on");}
+ speechSynthesis.speak(u);}
+function sayBtn(t){return `<button class="say" data-say="${esc(t)}" aria-label="Écouter">🔊</button>`;}
+document.addEventListener("click",e=>{const b=e.target.closest(".say");if(b){e.stopPropagation();speak(b.dataset.say,b);return;}
+ const c=e.target.closest(".card");if(c)c.classList.toggle("flip");},true);
+document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList&&e.target.classList.contains("card")){e.preventDefault();e.target.classList.toggle("flip");}});
+const norm=s=>s.toLowerCase().replace(/[’`]/g,"'").replace(/\s+/g," ").trim().replace(/[.!?,;:]+$/,"");
+const noacc=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/-/g," ");
+
+/* QCM : list = [texte avec ___, options, index bonne, règle, (traduction)] */
+function qcm(box,list,prefix,exn,long){
+ list.forEach((q,i)=>{const [txt,opts,ans,r,itl]=q;const id=prefix+i;
+  const full=txt.includes("___")?txt.replace("___",opts[ans]):opts[ans];
+  reg(id,r,txt,opts[ans],exn,i+1);
+  const d=document.createElement("div");d.className="q";
+  d.innerHTML=`<p class="qt"><span class="qn">${i+1}</span>${esc(txt).replace("___",'<span class="gap">&nbsp;</span>')}</p>${itl?`<span class="qit">${esc(itl)}</span>`:""}<div class="opts"></div>`;
+  const o=$(".opts",d);const x=it(id);x.t=x.t||[];
+  const finish=()=>{const g=$(".gap",d);if(g)g.textContent=opts[ans];o.insertAdjacentHTML("beforeend",sayBtn(full));$$(".opt",o).forEach(b=>b.disabled=true);};
+  opts.forEach((op,k)=>{const b=document.createElement("button");b.className="opt"+(long?" long":"");b.textContent=op;
+   if(x.t.includes(k)){b.classList.add("bad");b.disabled=true;}
+   if(x.ok&&k===ans)b.classList.add("good");
+   b.onclick=()=>{if(k===ans){b.classList.add("good");finish();good(id,b);speak(full);}else{b.classList.add("bad");b.disabled=true;x.t.push(k);bad(id,b,op);}};
+   o.appendChild(b);});
+  if(x.ok)finish();
+  box.appendChild(d);});
+}
+/* associations : L=[[fr,it,regle]], order = permutation */
+function matchEx(box,L,order,prefix,exn){
+ L.forEach((p,i)=>reg(prefix+i,p[2],p[0]+" → …",p[1],exn,i+1));
+ box.innerHTML='<div class="match"><div class="mcol ml"></div><div class="mcol mr"></div></div>';
+ const ml=$(".ml",box),mr=$(".mr",box);let sel=null;S.match[prefix]=S.match[prefix]||[];
+ L.forEach((p,i)=>{const b=document.createElement("button");b.className="mi";b.dataset.i=i;b.innerHTML=`<b>${esc(p[0])}</b>`;
+  b.onclick=()=>{if(b.classList.contains("done"))return;$$(".mi",ml).forEach(x=>x.classList.remove("sel"));b.classList.add("sel");sel=i;speak(p[0]);};ml.appendChild(b);});
+ order.forEach(i=>{const b=document.createElement("button");b.className="mi";b.dataset.i=i;b.textContent=L[i][1];
+  b.onclick=()=>{if(sel===null||b.classList.contains("done"))return;const l=$(`.mi[data-i="${sel}"]`,ml);
+   if(sel===i){done(i);good(prefix+i,b);}else{bad(prefix+sel,l,L[i][1]);b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");}};
+  mr.appendChild(b);});
+ function done(i){if(S.match[prefix].indexOf(i)<0){S.match[prefix].push(i);save();}
+  [$(`.mi[data-i="${i}"]`,ml),$(`.mi[data-i="${i}"]`,mr)].forEach(b=>{b.classList.remove("sel");b.classList.add("done");if(!b.querySelector(".tag"))b.insertAdjacentHTML("afterbegin",`<span class="tag">✓</span>`);});sel=null;}
+ S.match[prefix].forEach(i=>done(i));
+}
+/* texte à trous : lignes avec [[rep|alt]]{indice} ; line=[html avant, texte, regle] */
+function blanksIn(container,txt,prefix,rule,exn,counter,labelPrefix){
+ const RX=/\[\[(.+?)\]\](?:\{(.+?)\})?/g;const bl=[];let r;while((r=RX.exec(txt))){bl.push({ans:r[1].split("|"),hint:r[2]||""});}
+ let j=0;const plain=txt.replace(RX,(m,a)=>a.split("|")[0]);
+ bl.forEach((b,k)=>{let jj=0;const lab=(labelPrefix||"")+"« "+txt.replace(RX,(m,a)=>(jj++===k?"___":a.split("|")[0]))+" »";counter.n++;reg(prefix+"_"+k,rule,lab,b.ans[0],exn,counter.n);});
+ container.innerHTML=esc(txt).replace(/\[\[(.+?)\]\](?:\{(.+?)\})?/g,()=>{const id=prefix+"_"+j,b=bl[j];j++;
+   if(it(id).ok)return `<span class="filled">${esc(b.ans[0])}</span>`;
+   return `<span class="blank" data-id="${id}" data-k="${j-1}"><input autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="réponse"><button>✓</button></span>${b.hint?` <span class="hint">(${esc(b.hint)})</span>`:""}`;})
+  +`<span class="msgfb"></span>`;
+ const after=()=>{if(!$(".blank",container)){$$(".hint",container).forEach(h=>h.remove());if(!$(".say",container))container.insertAdjacentHTML("beforeend"," "+sayBtn(plain));}};
+ $$(".blank",container).forEach(sp=>{const id=sp.dataset.id,b=bl[+sp.dataset.k],inp=$("input",sp);
+  const check=()=>{const v=norm(inp.value);if(!v)return;const fb=$(".msgfb",container);fb.textContent="";
+   if(b.ans.some(a=>norm(a)===v)){const h=sp.nextElementSibling;if(h&&h.classList.contains("hint"))h.remove();sp.outerHTML=`<span class="filled">${esc(b.ans[0])}</span>`;good(id,container);after();return;}
+   if(b.ans.some(a=>noacc(norm(a))===noacc(v))){fb.textContent="Presque ! Vérifie les accents.";return;}
+   sp.classList.add("bad");bad(id,sp,inp.value);fb.innerHTML=`Essaie encore… <button class="sol">voir la réponse</button>`;
+   $(".sol",fb).onclick=()=>{inp.value=b.ans[0];check();};};
+  $("button",sp).onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
+  inp.addEventListener("input",()=>sp.classList.remove("bad"));});
+ after();
+}
+/* phrases en désordre : list=[[phrase,regle,(traduction)]] */
+function orderEx(box,list,prefix,exn){
+ list.forEach((q,i)=>{const id=prefix+i;reg(id,q[1],"Phrase en désordre n° "+(i+1),q[0],exn,i+1);const x=it(id);
+  const words=q[0].split(" ");const sh=words.map((w,k)=>({w,k}));
+  for(let a=sh.length-1;a>0;a--){const b=(a*7+i*3+1)%(a+1);[sh[a],sh[b]]=[sh[b],sh[a]];}
+  if(sh.every((o,k)=>o.k===k))sh.reverse();
+  const d=document.createElement("div");d.className="ord";
+  d.innerHTML=`<p class="qt" style="margin:0 0 6px"><span class="qn">${i+1}</span>${q[2]?`<span class="hint">${esc(q[2])}</span>`:""}</p><div class="line"></div><div class="tiles"></div><button class="small">effacer</button>`;
+  const line=$(".line",d),tiles=$(".tiles",d),clr=$(".small",d);
+  if(x.ok){line.classList.add("good");line.innerHTML=words.map(w=>`<span class="tile">${esc(w)}</span>`).join("")+sayBtn(q[0]);tiles.remove();clr.remove();box.appendChild(d);return;}
+  sh.forEach(o=>{const t=document.createElement("button");t.className="tile";t.textContent=o.w;
+   t.onclick=()=>{if(t.classList.contains("used"))return;t.classList.add("used");const c=document.createElement("button");c.className="tile";c.textContent=o.w;
+    c.onclick=()=>{c.remove();t.classList.remove("used");};line.appendChild(c);
+    if($$(".tile",line).length===words.length){const s=$$(".tile",line).map(e=>e.textContent).join(" ");
+     if(s===q[0]){line.classList.add("good");$$(".tile",line).forEach(e=>e.onclick=null);tiles.remove();clr.remove();line.insertAdjacentHTML("beforeend",sayBtn(q[0]));good(id,line);speak(q[0]);}
+     else{bad(id,line,s);setTimeout(reset,900);}}};
+   tiles.appendChild(t);});
+  function reset(){line.innerHTML="";$$(".tile",tiles).forEach(t=>t.classList.remove("used"));}
+  clr.onclick=reset;box.appendChild(d);});
+}
+/* tri : bins=[[cle,titre,sous-titre,couleur]], items=[[texte,cle,regle]] */
+function triEx(box,bins,items,prefix,exn,speakItems){
+ box.innerHTML=`<div class="items"></div><div class="bins"></div><p class="tri-msg"></p>`;
+ const iz=$(".items",box),bz=$(".bins",box),msg=$(".tri-msg",box);let sel=null;S.tri[prefix]=S.tri[prefix]||{};
+ bins.forEach(b=>{const e=document.createElement("button");e.className="bin";e.style.background=b[3];e.dataset.b=b[0];
+  e.innerHTML=`<span class="lid"></span><b>${b[1]}</b><small>${b[2]}</small><span class="in"></span>`;
+  e.onclick=()=>{if(sel===null)return;const o=items[sel],id=prefix+sel;
+   if(o[1]===b[0]){S.tri[prefix][sel]=1;save();place(sel);msg.textContent=`Oui : « ${o[0]} » → ${b[1]}`;good(id,e);}
+   else{bad(id,e,b[1]);msg.textContent="Non, pas dans cette boîte… Écoute encore !";}};
+  bz.appendChild(e);});
+ items.forEach((o,i)=>{reg(prefix+i,o[2],`Classe « ${o[0]} »`,bins.find(b=>b[0]===o[1])[1],exn,i+1);
+  const e=document.createElement("button");e.className="item";e.dataset.i=i;e.textContent=o[0];
+  e.onclick=()=>{$$(".item",iz).forEach(x=>x.classList.remove("sel"));e.classList.add("sel");sel=i;if(speakItems)speak(o[0]);};iz.appendChild(e);});
+ function place(i){const el=$(`.item[data-i="${i}"]`,iz);if(el)el.classList.add("done");const inn=$(`.bin[data-b="${items[i][1]}"] .in`,bz);inn.textContent+=(inn.textContent?" · ":"")+items[i][0];sel=null;
+  if(Object.keys(S.tri[prefix]).length===items.length)msg.textContent="Bravo, tout est classé !";}
+ Object.keys(S.tri[prefix]).forEach(i=>place(+i));
+}
+/* production */
+function production(title,head){const ta=$("#prod"),wc=$("#wc");ta.value=S.prod||"";
+ const count=()=>{const n=(ta.value.trim().match(/[\wÀ-ÿ'’-]+/g)||[]).length;wc.textContent=n+(n>1?" mots":" mot");return n;};count();
+ let t;ta.addEventListener("input",()=>{count();clearTimeout(t);t=setTimeout(()=>{S.prod=ta.value;save();},150);});
+ window.addEventListener("pagehide",()=>{S.prod=ta.value;save();});document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden"){S.prod=ta.value;save();}});
+ ta.addEventListener("blur",()=>{S.prod=ta.value;save();});
+ $("#copy").onclick=()=>{S.prod=ta.value;save();
+  const txt=`${head}\n${title}\n\n${ta.value.trim()}\n\n(${count()} mots)`;
+  const ok=()=>{const h=$("#copyhelp");h.classList.add("on");setTimeout(()=>h.classList.remove("on"),5000);};
+  const fallback=()=>{const a=document.createElement("textarea");a.value=txt;a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();try{document.execCommand("copy");}catch(e){}a.remove();ok();};
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok,fallback);else fallback();};}
+/* à revoir */
+const ordered=()=>Object.keys(REG).sort((a,b)=>(REG[a].ex-REG[b].ex)||(REG[a].num-REG[b].num));
+function ruleTitle(r){const t=document.getElementById(r);if(!t)return r;const h=t.querySelector("h3")||t.querySelector(".bw")||t.querySelector("h2");return h?h.textContent.trim():r;}
+function renderRev(){const L=$("#revlist");if(!L)return;const w=ordered().filter(id=>S.items[id]&&S.items[id].wrong);
+ if(!w.length){L.innerHTML='<p class="ok">Pour l\'instant, rien à revoir. Les points difficiles apparaîtront ici.</p>';return;}
+ L.innerHTML=w.map(id=>{const r=REG[id];return `<a href="#${r.rule}" data-r="${r.rule}"><span>Exercice ${r.ex} · ${esc(r.label)}<br><b>${esc(r.answer)}</b></span><span class="ar">↑</span></a>`;}).join("");
+ $$("a",L).forEach(a=>a.onclick=e=>{e.preventDefault();let t=document.getElementById(a.dataset.r);if(!t)return;
+  const card=t.closest(".card");if(card&&!card.classList.contains("flip"))card.classList.add("flip");
+  t.scrollIntoView({behavior:"smooth",block:"center"});t.classList.remove("flash");void t.offsetWidth;t.classList.add("flash");});}
+function resetBtn(){const b=$("#reset");let armed=false;b.onclick=()=>{if(!armed){armed=true;b.textContent="Appuie encore pour confirmer";setTimeout(()=>{armed=false;b.textContent="Recommencer les exercices";},4000);return;}
+ const p=S.prod;S={items:{},prod:p,tri:{},match:{},ord:{}};save();location.reload();};}
+function rapport(name){const ids=ordered().filter(id=>S.items[id]&&S.items[id].wrong);
+ return ids.map(id=>{const r=REG[id],x=S.items[id];const g=(x.g&&x.g.length)?x.g.join("  /  "):"(pas de réponse écrite)";
+  return "• Exercice "+r.ex+", n° "+r.num+" : "+r.label+"\n   ✗ Réponse de "+name+" : "+g+"\n   ✓ Bonne réponse : "+r.answer+(x.ok?"":"\n   (pas encore trouvée)")+"\n   → Règle : "+ruleTitle(r.rule);});}
+function sender(lesson,subjectDate,prodTitle,extra){const b=$("#sendbtn"),st=$("#sendst"),nm=$("#sname");if(!b)return;
+ if(S.sentAt){st.className="st ok";st.textContent="Résultats déjà préparés le "+S.sentAt+". Tu peux les renvoyer si tu as refait des exercices.";}
+ b.onclick=()=>{const tot=Object.keys(REG).length,done=Object.keys(REG).filter(id=>S.items[id]&&(S.items[id].ok||S.items[id].wrong)).length;
+  const name=(nm.value||"").trim()||"Annamaria";const lines=rapport(name);
+  const prod=(($("#prod")&&$("#prod").value)||S.prod||"").trim();const nw=prod?(prod.match(/[\wÀ-ÿ'’-]+/g)||[]).length:0;
+  let body="Bonjour Irène,\n\nVoici mes résultats.\n\nÉlève : "+name+"\nLeçon : "+lesson+"\nScore (exercices seulement) : "+score()+" / "+tot+"\nQuestions faites : "+done+" / "+tot+"\n\n=== À REVOIR ===\n"+(lines.length?lines.join("\n\n"):"Rien à revoir 🎉");
+  if(extra){const x=extra();if(x)body+="\n\n"+x;}
+  body+="\n\n=== PRODUCTION ÉCRITE · "+prodTitle+" ===\n"+(prod?("("+nw+" mots)\n\n"+prod):"(pas encore écrite)")+"\n\n"+name;
+  const subject="Résultats de "+name+" · "+subjectDate;
+  const copied=()=>{st.className="st ok";st.textContent="Ta messagerie s'ouvre avec le message déjà écrit : appuie sur « Envoyer ». Le texte est aussi copié : si la messagerie ne s'ouvre pas, colle-le dans un e-mail à irene.francais.facile@gmail.com.";};
+  const fallback=()=>{const a=document.createElement("textarea");a.value=body;a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();try{document.execCommand("copy");}catch(e){}a.remove();copied();};
+  try{if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(body).then(copied,fallback);else fallback();}catch(e){fallback();}
+  S.sentAt=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" à "+new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});save();
+  setTimeout(()=>{location.href="mailto:irene.francais.facile@gmail.com?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);},150);};}
+
+/* ex 3 cahier */
+(function(){const box=$("#ex3");const c={n:0};
+ DATA.ex3.forEach((m,i)=>{const who=document.createElement("span");who.className="who"+(m[0]==="p"?" p":"");
+  who.textContent=m[0]==="p"?"✏️ Annamaria (maman de Paolo)":"📒 La maîtresse";box.appendChild(who);
+  const p=document.createElement("p");box.appendChild(p);blanksIn(p,m[1],"c"+i,m[2],3,c,"Cahier : ");});
+ box.insertAdjacentHTML("beforeend",'<p class="sig">Signature des parents : Annamaria ✓</p>');
+})();
+/* ex 4 écoute */
+(function(){const box=$("#ex4");
+ DATA.ex4.forEach((q,i)=>{const [target,opts]=q;const id="h"+i;const ans=opts.indexOf(target);
+  reg(id,"r-paires","Écoute n° "+(i+1)+" : "+opts.join(" ou ")+" ?",target,4,i+1);const x=it(id);x.t=x.t||[];
+  const d=document.createElement("div");d.className="q";
+  d.innerHTML=`<div class="listen"><span class="qn">${i+1}</span><button class="play" aria-label="Écouter">▶︎</button><div class="uou"></div></div>`;
+  const pl=$(".play",d);pl.onclick=()=>{speak(target,pl);};
+  const o=$(".uou",d);
+  opts.forEach((op,k)=>{const b=document.createElement("button");b.className="opt";b.textContent=op;
+   if(x.t.includes(k)){b.classList.add("bad");b.disabled=true;}
+   if(x.ok&&k===ans){b.classList.add("good");}
+   b.onclick=()=>{if(k===ans){b.classList.add("good");$$(".opt",o).forEach(z=>z.disabled=true);good(id,b);}
+    else{b.classList.add("bad");b.disabled=true;x.t.push(k);bad(id,b,op);speak(op);}};
+   o.appendChild(b);});
+  if(x.ok)$$(".opt",o).forEach(z=>z.disabled=true);
+  box.appendChild(d);});
+})();
+/* ex 5 tri */
+triEx($("#ex5"),DATA.bins,DATA.ex5.map(o=>[o[0],o[1],"r-ecrit"]),"t",5,true);
+/* ex 6 u / ou */
+(function(){const box=$("#ex6");
+ DATA.ex6.forEach((q,i)=>{const [pat,ans,word]=q;const id="w"+i;reg(id,"r-ecrit","Complète : "+pat.replace("_","…"),word,6,i+1);const x=it(id);x.t=x.t||[];
+  const d=document.createElement("div");d.className="q";
+  const show=()=>esc(pat).replace("_",`<u>${x.ok?ans:"&nbsp;"}</u>`);
+  d.innerHTML=`<div class="listen"><span class="qn">${i+1}</span><button class="play" aria-label="Écouter">▶︎</button><span class="wgap">${show()}</span><div class="uou"></div></div>`;
+  const pl=$(".play",d);pl.onclick=()=>speak(word,pl);
+  const o=$(".uou",d);
+  ["u","ou"].forEach(op=>{const b=document.createElement("button");b.className="opt";b.textContent=op;
+   if(x.t.includes(op)){b.classList.add("bad");b.disabled=true;}
+   if(x.ok&&op===ans)b.classList.add("good");
+   b.onclick=()=>{if(op===ans){b.classList.add("good");$$(".opt",o).forEach(z=>z.disabled=true);$(".wgap",d).innerHTML=esc(pat).replace("_",`<u>${ans}</u>`);good(id,b);speak(word);}
+    else{b.classList.add("bad");b.disabled=true;x.t.push(op);bad(id,b,pat.replace("_",op));}};
+   o.appendChild(b);});
+  if(x.ok)$$(".opt",o).forEach(z=>z.disabled=true);
+  box.appendChild(d);});
+})();
+/* ex 7 enregistrement */
+(function(){const box=$("#ex7");const can=!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder);
+ let stream=null,recd=null,curBtn=null;
+ DATA.ex7.forEach((q,i)=>{const d=document.createElement("div");d.className="recrow";
+  d.innerHTML=`${sayBtn(q[0])}<p>${esc(q[0])}<i>${esc(q[1])}</i></p><button class="rbtn">🎙️ Enregistrer</button><button class="rbtn pl" disabled>▶︎ Ma voix</button>`;
+  const [rb,pb]=$$(".rbtn",d);let url=null;
+  if(!can){rb.style.display="none";pb.style.display="none";}
+  rb.onclick=async()=>{if(recd&&curBtn===rb){recd.stop();return;}if(recd)recd.stop();
+   try{stream=stream||await navigator.mediaDevices.getUserMedia({audio:true});}catch(e){$("#recinfo").textContent="Pour t'enregistrer, autorise le micro dans ton navigateur.";return;}
+   const ch=[];recd=new MediaRecorder(stream);curBtn=rb;recd.ondataavailable=e=>ch.push(e.data);
+   recd.onstop=()=>{url&&URL.revokeObjectURL(url);url=URL.createObjectURL(new Blob(ch,{type:recd.mimeType||"audio/webm"}));pb.disabled=false;rb.classList.remove("on");rb.textContent="🎙️ Recommencer";recd=null;curBtn=null;new Audio(url).play().catch(()=>{});};
+   recd.start();rb.classList.add("on");rb.textContent="⏹ Stop";};
+  pb.onclick=()=>{if(url)new Audio(url).play().catch(()=>{});};
+  box.appendChild(d);});
+ $("#recinfo").textContent=can?"Touche 🔊 pour écouter le modèle, puis 🎙️ pour t'enregistrer et ▶︎ pour te réécouter. Rien n'est envoyé : ta voix reste sur ton téléphone.":"Ton navigateur ne permet pas l'enregistrement : écoute et répète à voix haute.";
+})();
+/* ex 1, 2, 8, 9, 10 */
+qcm($("#ex1"),DATA.ex1,"a",1);
+matchEx($("#ex2"),DATA.ex2,DATA.ex2o,"m",2);
+qcm($("#ex8"),DATA.ex8,"q",8);
+qcm($("#ex9"),DATA.ex9,"r",9,true);
+orderEx($("#ex10"),DATA.ex10,"o",10);
+production("Les devoirs à la maison : utiles ou inutiles ?","Annamaria · Réflexion · 27 novembre");
+resetBtn();
+sender("Annamaria · 27 novembre · Cartables, cantine et kermesse","Leçon du 27 novembre","Les devoirs à la maison");
+upd();
+
+})();</script>
+</body></html>
