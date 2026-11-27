@@ -7,6 +7,37 @@
 --a4:#f07c5a;--a4d:#c9543a;--a4l:#fde6dd;--line:#d6ebe8;--paper:#fbfffe;
 --bg:linear-gradient(160deg,#dcf4f8 0%,#d3f1ea 45%,#bfe8e0 100%)}
 
+.printbox{margin:28px 26px 0;padding:16px 18px;border-radius:18px;background:#fff;border:2px dashed var(--a1);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.printbox p{margin:0;font-size:14.5px;color:var(--muted);flex:1 1 220px}
+@media print{
+ @page{margin:12mm}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ body{background:#fff!important;font-size:12.5px}
+ .score,.toc,.exzone,.printbox,.say,.play,.turn,.tap,.credits,#carte,.tabs,.daynav,.dayex,.recinfo,.intro .tip{display:none!important}
+ .paper{box-shadow:none;margin:0;max-width:none;border-radius:0}
+ .brand img{width:60px;height:60px}
+ .hero{height:200px}.sechead,.dayhead{height:110px}
+ .sec,.box,.ex,.two>div,.three>div{box-shadow:none}
+ .sec{margin:12px 0 0;break-inside:auto}.secbody{padding:12px 6px}
+ .lab,.box h3,.dayhead{break-after:avoid}
+ .box,.ex,.card,.step{break-inside:avoid}
+ .cards{grid-template-columns:1fr 1fr!important;gap:10px}
+ .card{height:auto!important;perspective:none}
+ .card .inner{transform:none!important;height:auto;display:flex;flex-direction:column}
+ .face{position:relative!important;inset:auto;backface-visibility:visible;-webkit-backface-visibility:visible;box-shadow:none}
+ .front{border-radius:14px 14px 0 0;border-bottom:0}.front .ph{height:120px!important;flex:none!important}.fw{display:none!important}
+ .back{transform:none!important;border-radius:0 0 14px 14px;padding:10px!important;background:#fff!important;color:var(--ink)!important;border:2px solid var(--a1l);border-top:0}
+ .back .cat{background:var(--a1l)}.back .note{background:var(--a2l)!important;color:var(--ink)}.back .bw{color:var(--deep)}.back .bex{border:1px solid var(--line)}
+ .day{display:block!important;animation:none}
+ .dayhead{margin:14px 0 0}.daybody{margin:0}
+ .pcard{height:auto!important;perspective:none}
+ .pcard .inner{transform:none!important;height:auto}
+ .pf{position:relative!important;height:130px!important;inset:auto;box-shadow:none;border-radius:14px 14px 0 0}
+ .pb{position:relative!important;inset:auto;transform:none!important;overflow:visible;border-radius:0 0 14px 14px;box-shadow:none}
+ .pb h4{display:none}
+ a{color:inherit;text-decoration:none}
+}
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;font-family:var(--sans),system-ui,sans-serif;color:var(--ink);font-size:16px;line-height:1.55;background:var(--bg) fixed}
@@ -285,7 +316,7 @@ textarea{width:100%;min-height:610px;border:2px solid var(--a1l);border-radius:1
 <div class="prodbar"><span id="wc">0 mot</span><button id="copy" class="btn">📋 Copier pour Irène</button></div>
 <p class="copyhelp" id="copyhelp">Le texte est copié : colle-le dans un message pour Irène.</p>
 <p class="tip">Ta production écrite est envoyée à Irène avec tes résultats (bouton en bas de la page). Elle ne compte pas dans le score : Irène la corrige à part.</p>
-</div></section><section class="exo x5" id="revoir"><div class="exhead"><div class="ext"><span class="exn">★</span><div><p class="ety">À revoir</p><h3>Les points à relire</h3><p class="eit">Touche un point pour remonter à la règle.</p></div></div></div><div class="exbody"><div id="revlist"></div>
+</div></section><div class="printbox"><p>🖨️ Tu veux garder la leçon sur papier ? Imprime seulement la partie didactique, sans les exercices. Tu peux aussi choisir « Enregistrer en PDF ».</p><button class="btn" type="button" onclick="window.print()">Imprimer la leçon</button></div><section class="exo x5" id="revoir"><div class="exhead"><div class="ext"><span class="exn">★</span><div><p class="ety">À revoir</p><h3>Les points à relire</h3><p class="eit">Touche un point pour remonter à la règle.</p></div></div></div><div class="exbody"><div id="revlist"></div>
 <div class="send" id="send"><h4>📩 Envoyer mes résultats à Irène</h4><p>Le bouton ouvre ta messagerie avec un e-mail déjà écrit pour Irène : ton score, tes erreurs (ta réponse et la bonne réponse) et ta production écrite. Tu n'as plus qu'à appuyer sur « Envoyer ».</p>
 <label for="sname">Ton prénom</label><input id="sname" type="text" value="Annamaria" autocomplete="given-name">
 <button class="btn" id="sendbtn" type="button">Envoyer à Irène</button><p class="st" id="sendst" role="status"></p></div>
