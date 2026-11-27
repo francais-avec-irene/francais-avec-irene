@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mario · Leçon du 27 novembre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>:root{--sans:Outfit;--disp:Outfit;--serif:Lora;--ink:#2d2a35;--muted:#6c6874;--deep:#2e2f5b;
+--a1:#b4562f;--a1d:#8e3f1f;--a1l:#f8e3d8;--a2:#c9971c;--a2d:#946c06;--a2l:#fbf0cf;--a3:#3e5c9a;--a3d:#2b4475;--a3l:#e2e9f6;
+--a4:#5f8a3a;--a4d:#456a26;--a4l:#e6f0dc;--line:#ece1d6;--paper:#fffdf9;
+--bg:linear-gradient(160deg,#f3e9de 0%,#efe8f1 50%,#e3e8f2 100%)}
+
+.printbox{margin:28px 26px 0;padding:16px 18px;border-radius:18px;background:#fff;border:2px dashed var(--a1);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.printbox p{margin:0;font-size:14.5px;color:var(--muted);flex:1 1 220px}
+@media print{
+ @page{size:A4;margin:10mm 11mm}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ html{scroll-behavior:auto}
+ body{background:#fff!important}
+ .brand,.paper,.fai-sign{zoom:.68}
+ .score,.toc,.exzone,.printbox,.say,.play,.turn,.tap,.credits,#carte,.tabs,.daynav,.dayex,.recinfo,.intro .tip,.intro .who3,.hero .credit,.sechead .credit,.dayhead .credit,.ccr,.pcap{display:none!important}
+ .brand{padding:0}.brand img{width:70px;height:70px}
+ .paper{box-shadow:none!important;margin:0!important;max-width:none;border-radius:0;background:#fff}
+ .hero{height:170px;padding:14px}.hero h1{font-size:32px}
+ .intro{padding:10px 8px 0}
+ .sec{margin:14px 0 0!important;box-shadow:none;border:1.5px solid var(--line);border-radius:16px}
+ .sechead,.dayhead{height:90px!important;padding:10px}
+ .dayhead{margin:16px 0 0!important;box-shadow:none!important}
+ .lab{padding:6px 12px 6px 6px}.num,.dnum{width:38px;height:38px}
+ .secbody{padding:12px 12px}
+ .lead{margin:0 0 10px}
+ .box{break-inside:auto;padding:12px 14px;margin:0 0 12px}
+ .box h3,.lab,.dayhead,h2,h3,h4{break-after:avoid}
+ .ex,.card,.step,.two>div,.three>div,.pair,.spell>div,.qq>div,.step,.irr div,.conjt div,.formula,.tip{break-inside:avoid}
+ .exs{gap:5px}.ex{padding:5px 10px;box-shadow:none}
+ .cards{grid-template-columns:1fr 1fr 1fr!important;gap:8px}
+ .card{height:auto!important;perspective:none}
+ .card .inner{transform:none!important;height:auto;display:flex;flex-direction:column}
+ .face{position:relative!important;inset:auto;backface-visibility:visible;-webkit-backface-visibility:visible;box-shadow:none!important}
+ .front{border-radius:12px 12px 0 0;border-bottom:0}.front .ph{height:95px!important;flex:none!important}.fw{display:none!important}
+ .back{transform:none!important;border-radius:0 0 12px 12px;padding:8px!important;gap:4px!important;background:#fff!important;color:var(--ink)!important;border:2px solid var(--a1l);border-top:0}
+ .back .cat{background:var(--a1l)}.back .note{background:var(--a2l)!important;color:var(--ink)}.back .bw{color:var(--deep)}.back .bex{border:1px solid var(--line)}
+ .day{display:block!important;animation:none!important;opacity:1!important}
+ .daybody{margin:0!important;padding:8px 0 0!important}
+ .mood{margin:0 0 4px}
+ .timeline{display:grid!important;grid-template-columns:1fr 1fr;gap:10px;padding-left:0!important;margin-top:6px}
+ .timeline:before,.step:before{display:none}
+ .step{margin:0!important}
+ .when{margin-bottom:3px}
+ .pcard{height:auto!important;perspective:none}
+ .pcard .inner{transform:none!important;height:auto}
+ .pf{position:relative!important;height:105px!important;inset:auto;box-shadow:none!important;border-radius:12px 12px 0 0}
+ .pf .cap{padding:20px 12px 8px}.pf h3{font-size:18px}.pf p{display:none}
+ .pb{position:relative!important;inset:auto;transform:none!important;overflow:visible;border-radius:0 0 12px 12px;box-shadow:none!important;padding:10px 12px!important;gap:5px!important}
+ .pb h4{display:none}
+ .fai-sign{padding:10px 0 0;break-before:avoid}.fai-sign img{max-width:220px}
+ a{color:inherit;text-decoration:none}
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--sans),system-ui,sans-serif;color:var(--ink);font-size:16px;line-height:1.55;background:var(--bg) fixed}
+.brand{max-width:980px;margin:0 auto;padding:14px 22px 0;display:flex;justify-content:flex-start}
+.brand img{width:92px;height:92px;display:block}
+.paper{max-width:980px;margin:10px auto 40px;background:var(--paper);border-radius:26px;overflow:hidden;box-shadow:0 18px 50px rgba(20,60,70,.16)}
+b.k{color:var(--a1d);font-weight:700}
+.hero{position:relative;height:340px;background-size:cover;background-position:center 55%;display:flex;align-items:flex-end;padding:26px}
+.htag{position:absolute;top:20px;left:22px;background:#fff;color:var(--deep);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:6px 14px;border-radius:30px;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.htitle{background:rgba(255,255,255,.93);border-radius:20px;padding:16px 22px;max-width:600px;box-shadow:0 8px 24px rgba(0,0,0,.15);border-left:6px solid var(--a1)}
+.hdate{margin:0;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--a2d);font-weight:700}
+.hero h1{margin:2px 0 4px;font-family:var(--disp);font-size:38px;line-height:1.12;color:var(--deep);font-weight:700}
+.hsub{margin:0;font-family:var(--serif);font-style:italic;color:var(--muted)}
+.credit{position:absolute;right:14px;bottom:10px;color:#fff;font-size:11px;text-shadow:0 1px 3px #000;opacity:.9}
+.rainbow{height:6px;background:linear-gradient(90deg,var(--a1),var(--a3),var(--a2),var(--a4),var(--a1))}
+.intro{padding:22px 34px 6px}
+.intro p{margin:0 0 14px}
+.toc{display:flex;flex-wrap:wrap;gap:8px}
+.toc a{text-decoration:none;font-size:13px;padding:6px 13px;border-radius:30px;background:#fff;border:1.5px solid var(--line);color:var(--deep);font-weight:600}
+.toc a.go{background:var(--a1);border-color:var(--a1);color:#fff}
+.sec{margin:26px 26px 0;border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 4px 18px rgba(20,60,70,.07)}
+.sechead{position:relative;height:200px;background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:16px}
+.sechead .credit{top:8px;bottom:auto}
+.lab{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.95);border-radius:16px;padding:10px 18px 10px 10px;box-shadow:0 6px 18px rgba(0,0,0,.14)}
+.lab h2{margin:0;font-family:var(--disp);font-size:21px;line-height:1.2;color:var(--deep)}
+.lab p{margin:0;font-family:var(--serif);font-style:italic;color:var(--muted);font-size:14px}
+.num{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;background:var(--a1)}
+.c2 .num{background:var(--a2)}.c3 .num{background:var(--a3)}.c4 .num{background:var(--a4)}
+.secbody{padding:22px 24px 26px}
+.lead{margin:0 0 16px;font-size:16.5px}
+.box{border-radius:18px;padding:16px 18px;margin:0 0 18px;border:2px solid var(--a1l);background:#fcfffe}
+.c2 .box{border-color:var(--a2l);background:#fffdf6}.c3 .box{border-color:var(--a3l);background:#fbfdff}.c4 .box{border-color:var(--a4l);background:#fffbfa}
+.box h3{margin:0 0 10px;font-size:17.5px;color:var(--deep);font-family:var(--disp)}
+.box ul{margin:0 0 10px;padding-left:20px}
+.box.nest{background:var(--a3l);border:0;border-left:6px solid var(--a3)}
+.box.gold{background:linear-gradient(135deg,var(--a2l),#fff);border:2px solid var(--a2)}
+.two,.three{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 12px}
+.three{grid-template-columns:repeat(3,1fr)}
+.two>div,.three>div{background:#fff;border-radius:14px;padding:12px 14px;border:1.5px solid var(--line)}
+.two p,.three p{margin:2px 0}
+.mini{font-size:11.5px;letter-spacing:.12em;font-weight:700;color:var(--a1d);margin:0 0 4px!important;text-transform:uppercase}
+.c2 .mini{color:var(--a2d)}.c3 .mini{color:var(--a3d)}.c4 .mini{color:var(--a4d)}
+i.t,.two i,.three i{font-family:var(--serif);color:var(--muted)}
+.tip{background:var(--a2l);border-radius:12px;padding:9px 13px;margin:10px 0 0;font-size:14.5px}
+.formula{background:#fff;border:1.5px dashed var(--a1);border-radius:14px;padding:10px 14px;margin:10px 0;font-size:15.5px}
+.formula span{display:inline-block;background:var(--a1);color:#fff;border-radius:20px;padding:0 10px;font-weight:700;margin:1px 0}
+.formula span.y{background:var(--a2)}.formula span.b{background:var(--a3)}.formula span.p{background:var(--a4)}
+.exs{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.ex{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:12px;padding:8px 12px;border:1px solid var(--line)}
+.ex p{margin:0}.ex .fr{font-family:var(--serif);font-size:16.5px}.ex .it,.bex .it{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:14px}
+.ex .it b.k,.bex .it b.k{color:inherit}
+.say{flex:none;border:0;background:var(--a1l);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:15px;transition:transform .15s}
+.say:active,.say.on{transform:scale(1.15);background:var(--a2l)}
+/* cartes */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;margin-top:6px}
+.card{perspective:1100px;height:320px;cursor:pointer;outline:none}
+.inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.3,.7,.25,1);transform-style:preserve-3d}
+.card.flip .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;overflow:hidden;box-shadow:0 8px 22px rgba(20,60,70,.16)}
+.front{background:#fff;display:flex;flex-direction:column;border:3px solid var(--a1l)}
+.front .ph{flex:1;background-size:cover;background-position:center;position:relative}
+.fw{padding:11px 12px 13px;text-align:center}
+.fw .w{display:block;font-weight:700;font-size:18px;line-height:1.25;color:var(--deep)}
+.fw .sub{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.turn{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;font-weight:700;color:var(--deep);box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.back{transform:rotateY(180deg);padding:15px 14px;display:flex;flex-direction:column;gap:6px;color:#fff;background:linear-gradient(150deg,var(--a1d),var(--a1))}
+.k2 .back{background:linear-gradient(150deg,var(--a2d),var(--a2))}.k3 .back{background:linear-gradient(150deg,var(--a3d),var(--a3))}.k4 .back{background:linear-gradient(150deg,var(--a4d),var(--a4))}
+.k2 .front{border-color:var(--a2l)}.k3 .front{border-color:var(--a3l)}.k4 .front{border-color:var(--a4l)}
+.bw{font-weight:700;font-size:18.5px;line-height:1.2}
+.cat{display:inline-block;align-self:flex-start;background:rgba(255,255,255,.25);border-radius:20px;padding:1px 9px;font-size:11.5px;letter-spacing:.05em}
+.tr{font-family:var(--serif);font-style:italic;font-size:15px;opacity:.97}
+.bex{display:flex;gap:8px;background:rgba(255,255,255,.96);color:var(--ink);border-radius:12px;padding:8px 9px;margin-top:2px}
+.bex p{margin:0}.bex .fr{font-family:var(--serif);font-size:14.5px}.bex .it{font-size:13px}
+.bex .say{width:30px;height:30px;font-size:13px}
+.note{margin:auto 0 0;font-size:12.5px;background:rgba(0,0,0,.15);border-radius:10px;padding:6px 9px;line-height:1.4}
+.pcap{position:absolute;left:0;right:0;bottom:0;padding:16px 8px 5px;background:linear-gradient(transparent,rgba(0,0,0,.5));color:#fff;font-size:10.5px;line-height:1.25;text-shadow:0 1px 3px rgba(0,0,0,.9)}
+/* exercices */
+.exzone{margin-top:34px;padding:10px 0 30px;background:linear-gradient(180deg,var(--a1l),rgba(255,255,255,0))}
+.exintro{text-align:center;padding:18px 20px 0}
+.exintro h2{margin:0;font-size:30px;color:var(--deep);font-family:var(--disp)}
+.exintro p{margin:4px 0 0;color:var(--muted)}
+.exo{margin:24px 26px 0;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 4px 18px rgba(20,60,70,.08)}
+.exhead{display:flex;flex-direction:column;color:#fff}
+.exph{height:130px;background-size:cover;background-position:center}
+.ext{display:flex;gap:14px;align-items:center;padding:14px 20px;background:linear-gradient(120deg,var(--a1d),var(--a1))}
+.x2 .ext{background:linear-gradient(120deg,var(--a2d),var(--a2))}.x3 .ext{background:linear-gradient(120deg,var(--a3d),var(--a3))}.x4 .ext{background:linear-gradient(120deg,var(--a4d),var(--a4))}.x5 .ext{background:linear-gradient(120deg,var(--deep),var(--a3d))}
+.exn{flex:none;width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.25);display:grid;place-items:center;font-size:24px;font-weight:700}
+.ety{margin:0;font-size:11.5px;letter-spacing:.16em;opacity:.92;text-transform:uppercase}
+.exhead h3{margin:0;font-size:18px;line-height:1.3}
+.eit{margin:0;font-family:var(--serif);font-style:italic;opacity:.94;font-size:14px}
+.exbody{padding:18px 20px 22px}
+.q{padding:12px 0;border-bottom:1px dashed var(--line)}
+.q:last-child{border-bottom:0}
+.qt{margin:0 0 8px;font-family:var(--serif);font-size:17px}
+.qt .gap{display:inline-block;min-width:70px;border-bottom:2px solid var(--a1l);text-align:center;color:var(--a1d);font-weight:700;font-family:var(--sans)}
+.qit{display:block;font-family:var(--serif);font-style:italic;color:var(--muted);font-size:13.5px;margin:-4px 0 8px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.opt{border:2px solid var(--line);background:#fff;border-radius:30px;padding:6px 16px;font:inherit;font-size:15px;cursor:pointer;color:var(--deep)}
+.opt.long{border-radius:14px;text-align:left;font-family:var(--serif);font-size:15.5px;width:100%}
+.opt.good{background:#dff5ee;border-color:#2fb98f;color:#13704f;font-weight:600}
+.opt.bad{background:#fde5df;border-color:#ec8a74;color:#b4442b;text-decoration:line-through}
+.opt:disabled{cursor:default}
+.shake{animation:sh .4s}
+@keyframes sh{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.qn{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--a1l);color:var(--deep);font-size:12px;font-weight:700;margin-right:6px;font-family:var(--sans);vertical-align:2px}
+.match{display:grid;grid-template-columns:1fr 1.3fr;gap:10px 16px}
+.mcol{display:flex;flex-direction:column;gap:8px}
+.mi{border:2px solid var(--line);background:#fff;border-radius:14px;padding:9px 12px;font:inherit;font-size:14.5px;text-align:left;cursor:pointer;color:var(--ink)}
+.mi.sel{border-color:var(--a3);background:var(--a3l)}
+.mi.done{border-color:#2fb98f;background:#e5f7f1;cursor:default}
+.mi .tag{display:inline-block;min-width:22px;height:22px;border-radius:50%;background:#2fb98f;color:#fff;font-size:12px;text-align:center;margin-right:6px}
+.blank{display:inline-flex;align-items:center;gap:3px;vertical-align:middle}
+.blank input,.tin{font:inherit;font-size:15px;border:2px solid var(--a1l);border-radius:10px;padding:2px 7px;width:130px;background:#fff;color:var(--deep)}
+.blank button,.tok{border:0;background:var(--a1);color:#fff;border-radius:8px;width:28px;height:28px;cursor:pointer;font-weight:700}
+.blank.bad input,.tin.bad{border-color:#ec8a74;background:#fde5df}
+.tin.good{border-color:#2fb98f;background:#e5f7f1;color:#13704f;font-weight:600}
+.hint{font-size:12.5px;color:var(--muted);font-style:italic;font-family:var(--serif)}
+.msgfb{font-size:12.5px;color:#b4442b;display:block}
+.sol{border:0;background:none;color:var(--a4d);font-size:12.5px;text-decoration:underline;cursor:pointer;padding:0}
+.filled{color:#13704f;font-weight:700;background:#e5f7f1;border-radius:6px;padding:0 5px}
+.ord{padding:12px 0;border-bottom:1px dashed var(--line)}
+.line{min-height:46px;border:2px dashed var(--a1l);border-radius:14px;padding:6px;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;background:#fbfffe}
+.line.good{border:2px solid #2fb98f;background:#e5f7f1}
+.tiles{display:flex;flex-wrap:wrap;gap:6px}
+.tile{border:0;border-radius:10px;padding:6px 12px;font:inherit;font-size:15px;cursor:pointer;background:var(--a2l);color:var(--deep);font-weight:600;box-shadow:0 2px 0 var(--a2)}
+.line .tile{background:#fff;box-shadow:0 2px 0 var(--line)}
+.tile.used{visibility:hidden}
+.small{font-size:13px;border:0;background:none;color:var(--muted);cursor:pointer;text-decoration:underline}
+.items{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.item{border:2px solid var(--line);background:#fff;border-radius:16px;padding:8px 13px;font:inherit;font-size:15px;cursor:pointer}
+.item.sel{border-color:var(--a3);background:var(--a3l);transform:translateY(-2px)}
+.item.done{display:none}
+.bins{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bin{border:0;border-radius:18px 18px 12px 12px;padding:14px 8px 12px;color:#fff;cursor:pointer;font:inherit;text-align:center;min-height:130px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.bin b{font-size:17px;line-height:1.2}.bin small{font-size:12.5px;opacity:.95}
+.bin .lid{width:70%;height:8px;border-radius:6px;background:rgba(0,0,0,.18);margin-bottom:8px}
+.bin .in{font-size:13px;margin-top:6px;line-height:1.35}
+.tri-msg{min-height:26px;margin-top:12px;font-family:var(--serif);font-style:italic;color:var(--deep);text-align:center}
+.sujet{background:var(--a3l);border-radius:16px;padding:14px 16px;margin-bottom:14px}
+.sujet p{margin:0 0 6px}.sujet .it{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chips span{background:var(--a1l);border-radius:20px;padding:4px 11px;font-size:13.5px;color:var(--deep)}
+.prompt{background:var(--a2l);border-radius:14px;padding:10px 14px;margin:0 0 12px}
+.prompt ul{margin:6px 0 0;padding-left:20px}.prompt li{margin:3px 0;font-size:14.5px}
+.plan{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.plan>div{display:flex;gap:10px;align-items:flex-start;background:#f7fbfb;border-radius:14px;padding:10px 12px}
+.plan p{margin:0;font-size:14.5px}.plan i{font-family:var(--serif);color:var(--muted)}
+.pn{flex:none;width:28px;height:28px;border-radius:50%;background:var(--deep);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+.defi{border:2px dashed var(--a2);border-radius:14px;padding:8px 12px;background:var(--a2l);font-size:14.5px}
+textarea{width:100%;min-height:610px;border:2px solid var(--a1l);border-radius:16px;font:16px/30px var(--serif);color:var(--ink);padding:8px 14px;background:#fff repeating-linear-gradient(#fff 0 29px,var(--a1l) 29px 30px);background-attachment:local;resize:vertical}
+.prodbar{display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:10px;flex-wrap:wrap}
+#wc{font-size:13px;color:var(--muted)}
+.btn{border:0;background:linear-gradient(120deg,var(--a1d),var(--a1));color:#fff;font:inherit;font-weight:700;padding:10px 18px;border-radius:30px;cursor:pointer;box-shadow:0 6px 14px rgba(142,63,31,.25)}
+.btn.ghost{background:#fff;color:var(--muted);border:1.5px solid #ddd;box-shadow:none;font-weight:500;font-size:14px;margin-top:14px}
+.copyhelp{display:none;color:#13704f;font-size:14px;margin:8px 0 0}.copyhelp.on{display:block}
+.send{margin-top:18px;padding:16px;border-radius:16px;background:var(--a1l);border:1.5px solid var(--line)}
+.send h4{margin:0 0 4px;color:var(--deep);font-size:17px}
+.send p{margin:0 0 10px;color:var(--muted);font-size:14px}
+.send label{display:block;font-size:14px;font-weight:700;color:var(--deep);margin-bottom:4px}
+.send input{width:100%;font:inherit;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;margin-bottom:12px;background:#fff}
+.send .btn{width:100%}
+.send .st{margin:10px 0 0;font-size:14px;font-weight:700}
+.send .st.ok{color:#13704f}.send .st.ko{color:#b3261e}
+#revlist a{display:flex;gap:10px;align-items:center;text-decoration:none;color:var(--ink);background:var(--a2l);border:1.5px solid var(--a2);border-radius:14px;padding:9px 12px;margin-bottom:8px}
+#revlist a b{color:var(--a4d)}
+#revlist a span.ar{margin-left:auto;color:var(--a4d);font-weight:700}
+#revlist .ok{color:var(--muted);font-style:italic}
+.score{position:fixed;top:12px;right:12px;z-index:50;background:rgba(255,255,255,.97);border-radius:30px;padding:6px 14px;box-shadow:0 6px 18px rgba(20,60,70,.22);display:flex;align-items:center;gap:6px;font-weight:700;color:var(--deep)}
+.score b{font-size:19px}.score small{color:var(--muted)}
+.score.bump{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.18)}}
+.star{position:fixed;pointer-events:none;z-index:60;font-size:18px;color:#f2b628;animation:fly 1s ease-out forwards}
+@keyframes fly{0%{opacity:0;transform:translate(0,0) scale(.4)}25%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1) rotate(160deg)}}
+.flash{animation:flash 1.4s}
+@keyframes flash{0%,60%{box-shadow:0 0 0 4px var(--a2)}100%{box-shadow:none}}
+.credits{font-size:11.5px;color:var(--muted);padding:8px 26px}.credits summary{cursor:pointer}.credits ul{padding-left:18px;margin:6px 0}.credits li{margin:2px 0}.credits a{color:var(--muted)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.fai-sign{text-align:center;padding:26px 16px 30px}.fai-sign img{width:100%;max-width:300px;height:auto;display:inline-block}
+@media (max-width:680px){
+ .paper{margin:6px 0 0;border-radius:0}
+ .brand{padding:10px 12px 0}.brand img{width:70px;height:70px}
+ .hero{height:270px;padding:16px}.hero h1{font-size:26px}.hsub{font-size:13px}.htitle{padding:12px 16px}
+ .intro{padding:18px 16px 4px}
+ .sec,.exo{margin:18px 10px 0}
+ .secbody{padding:16px 13px 20px}.exbody{padding:14px 13px 18px}
+ .two,.three{grid-template-columns:1fr}
+ .cards{grid-template-columns:1fr 1fr;gap:10px}
+ .card{height:330px}
+ .fw .w{font-size:15.5px}.bw{font-size:15.5px}.back{padding:11px 10px}
+ .match{grid-template-columns:.9fr 1.1fr;gap:8px}.mi{font-size:13.5px;padding:8px 9px}
+ .lab h2{font-size:18px}
+}
+@media (max-width:480px){.cards{grid-template-columns:1fr}.card{height:300px}.fw .w{font-size:18px}.bw{font-size:18px}.back{padding:15px 14px}}
+
+/* cahier de liaison */
+.cahier{background:#fffef8 repeating-linear-gradient(#fffef8 0 31px,#cfe6f3 31px 32px);border-radius:12px;padding:18px 18px 18px 54px;position:relative;box-shadow:inset 0 0 0 1px #e6efe9,0 6px 16px rgba(0,0,0,.06);font-family:var(--serif);font-size:16.5px;line-height:32px}
+.cahier:before{content:"";position:absolute;left:38px;top:0;bottom:0;width:2px;background:#f19a9a}
+.cahier .who{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--a3d);margin-top:6px;line-height:26px}
+.cahier .who.p{color:var(--a4d)}
+.cahier p{margin:0 0 4px}
+.cahier .sig{font-family:"Caveat",cursive;font-size:22px;color:#2b5a9c}
+.cahier .blank input{background:rgba(255,255,255,.9)}
+/* phonétique */
+.mouth{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:6px 0 16px}
+.step{border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:4px;text-align:center}
+.step .big{font-size:34px;font-weight:800;color:var(--deep);line-height:1.1}
+.step b{color:var(--deep)}.step span{font-size:14px}.step i{font-family:var(--serif);color:var(--muted);font-size:13.5px}
+.s1{background:var(--a3l)}.s2{background:var(--a1l)}.s3{background:var(--a2l)}
+.arrowrow{text-align:center;font-family:var(--serif);font-size:18px;color:var(--deep);margin:4px 0 14px}
+.pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:8px 0 6px}
+.pair{display:flex;align-items:center;justify-content:space-between;gap:6px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:8px 10px}
+.pair .w{display:flex;align-items:center;gap:6px;font-size:16px}
+.pair .w b{font-weight:700}
+.pair .w.y b{color:var(--a1d)}.pair .w.u b{color:var(--a4d)}
+.pair .vs{font-size:12px;color:var(--muted)}
+.pair .say{width:30px;height:30px;font-size:13px}
+.pair small{display:block;font-family:var(--serif);font-style:italic;color:var(--muted);font-size:12px;line-height:1.2}
+.spell{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0}
+.spell>div{border-radius:16px;padding:12px 14px}
+.spell .sy{background:var(--a1l)}.spell .su{background:var(--a4l)}
+.spell h4{margin:0 0 6px;font-size:16px;color:var(--deep)}
+.spell p{margin:3px 0;font-size:15px}
+/* écoute */
+.listen{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.play{border:0;background:linear-gradient(135deg,var(--a3d),var(--a3));color:#fff;width:46px;height:46px;border-radius:50%;font-size:19px;cursor:pointer;box-shadow:0 4px 10px rgba(36,112,168,.3)}
+.play.on{transform:scale(1.1)}
+.uou{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.uou .opt{font-size:16px;font-weight:700;min-width:58px}
+.wgap{font-family:var(--serif);font-size:19px;letter-spacing:.02em}
+.wgap u{text-decoration:none;display:inline-block;min-width:30px;border-bottom:2px solid var(--a1);text-align:center;color:var(--a1d);font-weight:700}
+/* enregistrement */
+.rec{display:flex;flex-direction:column;gap:10px}
+.recrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:#f7fbfb;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px}
+.recrow p{margin:0;flex:1 1 220px;font-family:var(--serif);font-size:16.5px}
+.recrow p i{display:block;font-size:13.5px;color:var(--muted)}
+.rbtn{border:0;border-radius:30px;padding:7px 13px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;background:var(--a4l);color:var(--a4d)}
+.rbtn.on{background:var(--a4);color:#fff;animation:pulse 1s infinite}
+.rbtn.pl{background:var(--a1l);color:var(--a1d)}
+.rbtn:disabled{opacity:.4;cursor:default}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(240,124,90,.25)}}
+.recinfo{font-size:13.5px;color:var(--muted);font-style:italic}
+.qq{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.qq>div{border-radius:18px;padding:14px 16px}
+.qq .qa{background:var(--a1l)}.qq .qb{background:var(--a3l)}
+.qq h4{margin:0 0 4px;font-size:26px;font-family:var(--disp);color:var(--deep)}
+.qq p{margin:3px 0;font-size:15px}
+.qq .sch{font-family:var(--serif);background:#fff;border-radius:10px;padding:6px 10px;margin:8px 0;font-size:15.5px}
+.qq .sch b{color:var(--a4d)}
+@media (max-width:680px){.mouth,.spell,.qq{grid-template-columns:1fr}.cahier{padding:14px 10px 14px 40px;font-size:15.5px}.cahier:before{left:28px}}
+
+/* gérondif */
+.conj{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 14px}
+.conj>div{background:#fff;border:1.5px solid var(--a2l);border-radius:12px;padding:8px 10px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;font-size:15px}
+.conj i{font-family:var(--serif);color:var(--muted)}.conj i b{color:var(--a2d)}
+.conj span{color:var(--a2d);font-weight:700}
+.conj>div>b{color:var(--deep)}
+.uses{display:flex;flex-direction:column;gap:10px}
+.uses>div{background:#fff;border-radius:14px;padding:8px 10px 10px;border:1.5px solid var(--line)}
+.uses .ex{border:0;padding:4px 2px 0}
+.ut{display:inline-block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#fff;background:var(--a2);border-radius:20px;padding:2px 10px}
+.box.gold .ex{margin:8px 0 0}
+/* comparaison */
+.cmp{border-radius:18px;margin:0 0 14px;border:2px solid var(--a4l);background:#fff;overflow:hidden}
+.cmph{display:flex;gap:10px;align-items:center;padding:9px 14px;background:var(--a4l);color:var(--deep);font-size:16px}
+.cn{flex:none;width:28px;height:28px;border-radius:50%;background:var(--a4);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+.cmpb{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 14px 4px}
+.cmpb>div{display:flex;gap:8px;align-items:center;border-radius:12px;padding:8px 10px;font-family:var(--serif);font-size:16px}
+.cmpb p{margin:0;flex:1}
+.ci{background:#eef6ea}.cf{background:var(--a3l)}
+.flag{flex:none;font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.08em;border-radius:6px;padding:2px 6px;color:#fff;background:var(--a4)}
+.cf .flag{background:var(--a3)}
+.cf b{color:var(--a3d)}.ci i{color:var(--a4d);font-style:italic}
+.cnote{margin:6px 14px 12px;font-size:14.5px;color:var(--ink)}
+/* lettres accentuées */
+.acc{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 2px;padding:5px 6px;background:var(--a3l);border-radius:12px}
+.acc .al{font-size:11.5px;color:var(--a3d);font-weight:700;align-self:center;margin-right:4px}
+.ak{border:0;background:#fff;color:var(--deep);min-width:27px;height:28px;border-radius:8px;font:600 16px var(--serif);cursor:pointer;box-shadow:0 1px 0 rgba(0,0,0,.12);padding:0 6px}
+.ak:active{background:var(--a2l);transform:translateY(1px)}
+/* SMS */
+.phone{max-width:390px;margin:0 auto;background:#111;border-radius:42px;padding:12px;box-shadow:0 18px 40px rgba(0,0,0,.25);position:relative}
+.notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:110px;height:22px;background:#111;border-radius:0 0 14px 14px;z-index:2}
+.phead{background:#f7f2ec;border-radius:30px 30px 0 0;padding:30px 16px 10px;display:flex;gap:10px;align-items:center;border-bottom:1px solid #ebe2d7}
+.phead small{display:block;color:#3aa77a;font-size:12px}
+.av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff;display:grid;place-items:center;font-weight:700}
+.chat{background:#efeaf3;border-radius:0 0 30px 30px;padding:14px 10px 18px;min-height:440px;max-height:620px;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
+.bub{max-width:88%;padding:8px 12px;border-radius:16px;font-size:15px;line-height:1.45;position:relative;animation:pop .35s ease-out}
+.bub.c{background:#fff;align-self:flex-start;border-bottom-left-radius:4px}
+.bub.r{background:#dcefe2;align-self:flex-end;border-bottom-right-radius:4px}
+.bub .say{width:24px;height:24px;font-size:11px;margin-left:4px;vertical-align:middle;background:rgba(0,0,0,.06)}
+.bub .tm{display:block;text-align:right;font-size:10.5px;color:#7b8b86}
+.bub .gap{display:inline-block;min-width:54px;border-bottom:2px solid var(--a1);text-align:center;color:var(--a1d);font-weight:700}
+.bub .gap.ok{border:0;color:#13704f}
+.smsopts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.smsopts .opt{padding:5px 12px;font-size:14.5px;background:#fff}
+.typing{align-self:flex-start;background:#fff;border-radius:16px;padding:10px 14px;display:flex;gap:4px}
+.typing i{width:7px;height:7px;border-radius:50%;background:#9aa;animation:bl 1s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes bl{50%{opacity:.25}}
+.big2{font-size:22px;font-weight:700;color:var(--deep);margin:0 0 6px!important;font-family:var(--disp)}
+.prompt i{display:block;font-family:var(--serif);color:var(--muted);font-size:13.5px}
+#prod{min-height:400px}
+.q .qtr{display:block;font-family:var(--serif);font-style:italic;color:var(--muted);font-size:13.5px;margin-top:6px}
+@media (max-width:680px){.conj{grid-template-columns:1fr 1fr}.cmpb{grid-template-columns:1fr}}
+@media print{
+ .acc,.phone,#s1 .lead{display:none!important}
+ .hero{height:170px!important;padding:12px!important}.htitle{padding:8px 14px!important}.hero h1{font-size:24px!important}.hsub{font-size:12px}.sechead{height:72px!important}.front .ph{height:82px!important}
+ .ak{min-width:0}
+ .sec{break-before:auto}
+ .conj{grid-template-columns:repeat(3,1fr)!important}
+ .cmpb{grid-template-columns:1fr 1fr!important}
+ .cmp,.uses>div,.conj>div{break-inside:avoid}
+}
+</style></head><body>
+<div class="score" id="score"><span>⭐</span><b id="sc">0</b><small>/ <span id="tot">0</span></small></div>
+<header class="brand"><img src="../marque/logo-irene.png" alt="Logo"></header>
+<main class="paper">
+<header class="hero" style="background-image:url(img/hero.jpg)"><div class="htag">Vocabulaire · expressions · grammaire</div>
+<div class="htitle"><p class="hdate">Mario · 27 novembre</p><h1>S'imaginer, parier… et le gérondif</h1><p class="hsub">Immaginarsi, scommettere… e il gerundio francese</p></div><span class="credit">Les gorges du Verdon · Provence</span></header><div class="rainbow"></div>
+<div class="intro"><p>Bonjour Mario ! Aujourd'hui, neuf mots et expressions, puis le gérondif et ses différences avec l'italien. Les images vous emmènent de la grotte de Lascaux au Centre Pompidou.</p>
+<nav class="toc"><a href="#s1">01 · Les mots</a><a href="#s2">02 · Les expressions</a><a href="#s3">03 · Le gérondif</a><a href="#s4">04 · Français / italien</a><a class="go" href="#e1">Exercices ✏️</a></nav></div>
+<section class="sec c1" id="s1"><div class="sechead" style="background-image:url(img/c_marchandise.jpg)"><span class="credit">La coupole des Galeries Lafayette · Paris</span><div class="lab"><span class="num">01</span><div><h2>Les mots</h2><p>la merce, il peccato, l'entusiasmo, la scommessa, la sete di guadagno</p></div></div></div>
+<div class="secbody"><p class="lead">Touchez une carte pour la retourner, puis touchez 🔊 pour écouter la phrase.</p><div class="cards"><div class="card k1" tabindex="0" id="r-marchandise"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_marchandise.jpg)"><span class="pcap">La coupole des Galeries Lafayette, 1912 · Paris</span></div><div class="fw"><span class="w">la merce</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">la marchandise</span><span class="cat">nom féminin</span><span class="tr">la merce</span><div class="bex"><button class="say" data-say="Sous la coupole des Galeries Lafayette, des marchandises du monde entier attirent les visiteurs." aria-label="Écouter">🔊</button><div><p class="fr">Sous la coupole des Galeries Lafayette, des <b class='k'>marchandises</b> du monde entier attirent les visiteurs.</p><p class="it">Sotto la cupola delle Galeries Lafayette, <b class='k'>merci</b> provenienti da tutto il mondo attirano i visitatori.</p></div></div><p class="note">Attention : en français, <b>merci</b> veut dire « grazie » ! Un train de marchandises = un treno merci.</p></div></div></div><div class="card k1" tabindex="0" id="r-peche"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_peche.jpg)"><span class="pcap">La Tentation d'Ève, Gislebert, vers 1130 · Musée Rolin, Autun</span></div><div class="fw"><span class="w">il peccato</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">un péché</span><span class="cat">nom masculin</span><span class="tr">un peccato</span><div class="bex"><button class="say" data-say="Sur ce relief roman d&#x27;Autun, Ève cueille le fruit défendu : c&#x27;est le péché originel." aria-label="Écouter">🔊</button><div><p class="fr">Sur ce relief roman d'Autun, Ève cueille le fruit défendu : c'est le <b class='k'>péché</b> originel.</p><p class="it">In questo rilievo romanico di Autun, Eva coglie il frutto proibito: è il <b class='k'>peccato</b> originale.</p></div></div><p class="note">« Che peccato ! » se dit <b>« C'est dommage ! »</b>. Un <b>péché mignon</b> = un piccolo vizio (di gola).</p></div></div></div><div class="card k2" tabindex="0" id="r-engouement"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_engouement.jpg)"><span class="pcap">Moulin Rouge · La Goulue, Henri de Toulouse-Lautrec, 1891 · affiche</span></div><div class="fw"><span class="w">l'entusiasmo, la passione (improvvisa)</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">l'engouement</span><span class="cat">nom masculin</span><span class="tr">l'entusiasmo, la passione, la moda (del momento)</span><div class="bex"><button class="say" data-say="Cette affiche de Toulouse-Lautrec montre l&#x27;engouement des Parisiens pour les bals du Moulin-Rouge." aria-label="Écouter">🔊</button><div><p class="fr">Cette affiche de Toulouse-Lautrec montre l'<b class='k'>engouement</b> des Parisiens pour les bals du Moulin-Rouge.</p><p class="it">Questo manifesto di Toulouse-Lautrec mostra l'<b class='k'>entusiasmo</b> dei parigini per i balli del Moulin-Rouge.</p></div></div><p class="note">On dit l'engouement <b>pour</b> quelque chose : l'engouement pour les voitures électriques.</p></div></div></div><div class="card k2" tabindex="0" id="r-pari"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_pari.jpg)"><span class="pcap">Chevaux de course, Edgar Degas · peinture impressionniste</span></div><div class="fw"><span class="w">una scommessa</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">un pari</span><span class="cat">nom masculin</span><span class="tr">una scommessa</span><div class="bex"><button class="say" data-say="Avant le départ de la course, chacun fait son pari sur son cheval préféré." aria-label="Écouter">🔊</button><div><p class="fr">Avant le départ de la course, chacun fait son <b class='k'>pari</b> sur son cheval préféré.</p><p class="it">Prima della partenza della corsa, ognuno fa la propria <b class='k'>scommessa</b> sul cavallo preferito.</p></div></div><p class="note">Le verbe : <b>parier</b>. <i>Je te parie qu'il va pleuvoir</i> = Scommetto che pioverà. Attention : « pari » en italien = égal.</p></div></div></div><div class="card k3" tabindex="0" id="r-appat"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_appat.jpg)"><span class="pcap">Le palais Brongniart, ancienne Bourse de Paris, 1808-1826</span></div><div class="fw"><span class="w">la sete di guadagno</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">l'appât du gain</span><span class="cat">locution nominale</span><span class="tr">la sete di guadagno, l'avidità</span><div class="bex"><button class="say" data-say="Au palais Brongniart, l&#x27;appât du gain a fait la fortune, et parfois la ruine, de nombreux spéculateurs." aria-label="Écouter">🔊</button><div><p class="fr">Au palais Brongniart, l'<b class='k'>appât du gain</b> a fait la fortune, et parfois la ruine, de nombreux spéculateurs.</p><p class="it">A palazzo Brongniart la <b class='k'>sete di guadagno</b> ha fatto la fortuna, e talvolta la rovina, di molti speculatori.</p></div></div><p class="note"><b>Un appât</b> = un'esca (pour la pêche). Le <b>t</b> ne se prononce pas : [apa]. <i>Mordre à l'appât</i> = abboccare.</p></div></div></div></div></div></section>
+<section class="sec c3" id="s2"><div class="sechead" style="background-image:url(img/c_moitie.jpg)"><span class="credit">Le château de Chambord · Loir-et-Cher</span><div class="lab"><span class="num">02</span><div><h2>Les expressions</h2><p>immaginarsi, autorizzato da, la metà di loro, tuttavia</p></div></div></div>
+<div class="secbody"><div class="cards"><div class="card k3" tabindex="0" id="r-imaginer"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_imaginer.jpg)"><span class="pcap">La Bohémienne endormie, Henri Rousseau, 1897 · MoMA, New York</span></div><div class="fw"><span class="w">immaginarsi, figurarsi</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">s'imaginer quelque chose</span><span class="cat">verbe pronominal</span><span class="tr">immaginarsi, figurarsi qualcosa</span><div class="bex"><button class="say" data-say="Devant ce tableau de Rousseau, on s&#x27;imagine facilement le silence du désert." aria-label="Écouter">🔊</button><div><p class="fr">Devant ce tableau de Rousseau, on <b class='k'>s'imagine</b> facilement le silence du désert.</p><p class="it">Davanti a questo quadro di Rousseau <b class='k'>ci si immagina</b> facilmente il silenzio del deserto.</p></div></div><p class="note"><b>s'imaginer que</b> + indicatif : <i>Je m'imaginais que ce serait plus difficile.</i> (Mi immaginavo che sarebbe stato più difficile.)</p></div></div></div><div class="card k4" tabindex="0" id="r-autorise"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_autorise.jpg)"><span class="pcap">Peintures de la grotte de Lascaux, il y a environ 17 000 ans · Dordogne</span></div><div class="fw"><span class="w">autorizzato da qualcuno</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">autorisé par quelqu'un</span><span class="cat">participe passé, adjectif</span><span class="tr">autorizzato da qualcuno</span><div class="bex"><button class="say" data-say="Seuls quelques scientifiques, autorisés par le ministère de la Culture, entrent dans la vraie grotte de Lascaux." aria-label="Écouter">🔊</button><div><p class="fr">Seuls quelques scientifiques, <b class='k'>autorisés par</b> le ministère de la Culture, entrent dans la vraie grotte de Lascaux.</p><p class="it">Solo pochi scienziati, <b class='k'>autorizzati dal</b> Ministero della Cultura, entrano nella vera grotta di Lascaux.</p></div></div><p class="note">Il s'accorde : autorisé, autoris<b>ée</b>, autoris<b>és</b>. <b>Autoriser quelqu'un à</b> + infinitif = autorizzare qualcuno a…</p></div></div></div><div class="card k4" tabindex="0" id="r-moitie"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_moitie.jpg)"><span class="pcap">Le château de Chambord, Renaissance, commencé en 1519 · Loir-et-Cher</span></div><div class="fw"><span class="w">la metà di loro</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">la moitié d'entre eux</span><span class="cat">locution</span><span class="tr">la metà di loro</span><div class="bex"><button class="say" data-say="Hier, vingt touristes ont visité Chambord : la moitié d&#x27;entre eux venaient d&#x27;Italie." aria-label="Écouter">🔊</button><div><p class="fr">Hier, vingt touristes ont visité Chambord : la <b class='k'>moitié d'entre eux</b> venaient d'Italie.</p><p class="it">Ieri venti turisti hanno visitato Chambord: la <b class='k'>metà di loro</b> veniva dall'Italia.</p></div></div><p class="note">On entend aussi « la moitié d'eux », mais on écrit <b>la moitié d'entre eux</b> (d'entre elles, d'entre nous). Verbe au singulier ou au pluriel : les deux sont corrects.</p></div></div></div><div class="card k1" tabindex="0" id="r-neanmoins"><div class="inner"><div class="face front"><div class="ph" style="background-image:url(img/c_neanmoins.jpg)"><span class="pcap">La dune du Pilat, la plus haute dune d'Europe · Gironde</span></div><div class="fw"><span class="w">tuttavia, ciononostante</span><span class="sub">Comment dit-on… ?</span></div><span class="turn">↻</span></div><div class="face back"><span class="bw">néanmoins</span><span class="cat">adverbe</span><span class="tr">tuttavia, ciononostante, nondimeno</span><div class="bex"><button class="say" data-say="Le vent soufflait fort ; nous sommes néanmoins montés jusqu&#x27;au sommet de la dune." aria-label="Écouter">🔊</button><div><p class="fr">Le vent soufflait fort ; nous sommes <b class='k'>néanmoins</b> montés jusqu'au sommet de la dune.</p><p class="it">Il vento soffiava forte; <b class='k'>ciononostante</b> siamo saliti fino in cima alla duna.</p></div></div><p class="note">Registre soigné. Synonymes : <b>pourtant, cependant, toutefois</b>. Il se place en début de phrase ou après le verbe conjugué.</p></div></div></div></div></div></section>
+<section class="sec c2" id="s3"><div class="sechead" style="background-image:url(img/s_gerondif.jpg)"><span class="credit">La Rencontre ou Bonjour Monsieur Courbet, Gustave Courbet, 1854 · Musée Fabre, Montpellier</span><div class="lab"><span class="num">03</span><div><h2>Le gérondif : en marchant, en lisant…</h2><p>la formazione e gli usi</p></div></div></div>
+<div class="secbody">
+<p class="lead">Sur ce tableau, Courbet salue son ami <b>en levant</b> son chapeau : il fait deux actions en même temps. Pour le dire, le français utilise le <b>gérondif</b>.</p>
+<div class="box" id="r-formation"><h3>1 · La formation</h3>
+<div class="formula"><span>en</span> + <span class="y">radical de « nous » au présent</span> + <span class="b">-ant</span></div>
+<div class="conj">
+<div><i>nous parl<b>ons</b></i><span>→</span><b>en parlant</b></div>
+<div><i>nous finiss<b>ons</b></i><span>→</span><b>en finissant</b></div>
+<div><i>nous pren<b>ons</b></i><span>→</span><b>en prenant</b></div>
+<div><i>nous fais<b>ons</b></i><span>→</span><b>en faisant</b></div>
+<div><i>nous voy<b>ons</b></i><span>→</span><b>en voyant</b></div>
+<div><i>nous mange<b>ons</b></i><span>→</span><b>en mangeant</b></div>
+</div>
+<div class="box nest" id="r-irreg"><h3>Trois exceptions seulement</h3><p><b>être</b> → en <b>étant</b> · <b>avoir</b> → en <b>ayant</b> · <b>savoir</b> → en <b>sachant</b></p></div>
+<div class="two">
+<div id="r-pron"><p class="mini">Verbes pronominaux</p><p>Le pronom change avec le sujet :<br>je me promène → <b>en me promenant</b><br>nous nous levons → <b>en nous levant</b></p></div>
+<div><p class="mini">Toujours invariable</p><p>Le gérondif ne s'accorde jamais :<br>Elle est partie <b>en courant</b>.<br>Ils sont partis <b>en courant</b>.</p></div>
+</div></div>
+<div class="box" id="r-emplois"><h3>2 · Quand l'utiliser ?</h3>
+<div class="uses">
+<div><span class="ut">Deux actions en même temps</span><div class="ex"><button class="say" data-say="Mario écoute la radio en conduisant." aria-label="Écouter">🔊</button><div><p class="fr">Mario écoute la radio <b class='k'>en conduisant</b>.</p><p class="it">Mario ascolta la radio <b class='k'>mentre guida</b>.</p></div></div></div>
+<div><span class="ut">La manière, le moyen</span><div class="ex"><button class="say" data-say="C&#x27;est en visitant les musées qu&#x27;on apprend à regarder." aria-label="Écouter">🔊</button><div><p class="fr">C'est <b class='k'>en visitant</b> les musées qu'on apprend à regarder.</p><p class="it">È <b class='k'>visitando</b> i musei che si impara a guardare.</p></div></div></div>
+<div id="r-condition"><span class="ut">La condition</span><div class="ex"><button class="say" data-say="En partant maintenant, vous arriverez avant la fermeture." aria-label="Écouter">🔊</button><div><p class="fr"><b class='k'>En partant</b> maintenant, vous arriverez avant la fermeture.</p><p class="it"><b class='k'>Partendo</b> adesso, arriverà prima della chiusura.</p></div></div></div>
+<div id="r-toutEn"><span class="ut">tout en + gérondif : en même temps, ou malgré</span><div class="ex"><button class="say" data-say="Tout en étant prudent, il a fait un pari risqué." aria-label="Écouter">🔊</button><div><p class="fr"><b class='k'>Tout en étant</b> prudent, il a fait un pari risqué.</p><p class="it"><b class='k'>Pur essendo</b> prudente, ha fatto una scommessa rischiosa.</p></div></div></div>
+</div></div>
+<div class="box gold" id="r-sujet1"><h3>⭐ La règle d'or</h3><p>Le gérondif a toujours <b>le même sujet</b> que le verbe principal.</p><div class="ex"><button class="say" data-say="En sortant du musée, nous avons vu la Seine." aria-label="Écouter">🔊</button><div><p class="fr"><b class='k'>En sortant</b> du musée, nous avons vu la Seine.</p><p class="it"><b class='k'>Uscendo</b> dal museo, abbiamo visto la Senna.</p></div></div><p class="tip">Ici, c'est « nous » qui sortons et « nous » qui voyons la Seine.</p></div>
+</div></section>
+<section class="sec c4" id="s4"><div class="sechead" style="background-image:url(img/s_italien.jpg)"><span class="credit">Le pont du Gard, aqueduc romain, Ier siècle · Gard</span><div class="lab"><span class="num">04</span><div><h2>Gérondif français et gerundio italien</h2><p>cinque differenze da conoscere</p></div></div></div>
+<div class="secbody">
+<p class="lead">Le gérondif ressemble au gerundio italien, mais les deux ne fonctionnent pas toujours de la même façon.</p>
+<div class="cmp" id="r-en"><div class="cmph"><span class="cn">1</span><b>Le français ajoute toujours « en »</b></div><div class="cmpb"><div class="ci"><span class="flag">IT</span><p><i>Leggendo</i> s'impara.</p></div><div class="cf"><span class="flag">FR</span><p><b>En lisant</b>, on apprend.</p><button class="say" data-say="En lisant, on apprend." aria-label="Écouter">🔊</button></div></div><p class="cnote">L'italien n'a pas de préposition devant le gerundio ; le français a toujours <b>en</b>.</p></div>
+<div class="cmp" id="r-pronoms"><div class="cmph"><span class="cn">2</span><b>Les pronoms se placent devant</b></div><div class="cmpb"><div class="ci"><span class="flag">IT</span><p>L'ho riconosciuto <i>guardandolo</i>.</p></div><div class="cf"><span class="flag">FR</span><p>Je l'ai reconnu <b>en le regardant</b>.</p><button class="say" data-say="Je l&#x27;ai reconnu en le regardant." aria-label="Écouter">🔊</button></div></div><p class="cnote">En italien, le pronom est soudé à la fin (guardando<b>lo</b>, parlando<b>gli</b>). En français, il va entre <b>en</b> et le verbe : en <b>le</b> regardant, en <b>lui</b> parlant.</p></div>
+<div class="cmp" id="r-stare"><div class="cmph"><span class="cn">3</span><b>« Stare + gerundio » ne se traduit pas par le gérondif</b></div><div class="cmpb"><div class="ci"><span class="flag">IT</span><p><i>Sto leggendo</i> un romanzo.</p></div><div class="cf"><span class="flag">FR</span><p><b>Je suis en train de lire</b> un roman.</p><button class="say" data-say="Je suis en train de lire un roman." aria-label="Écouter">🔊</button></div></div><p class="cnote">Pour une action en cours : <b>être en train de</b> + infinitif, ou simplement le présent : <i>je lis un roman</i>.</p></div>
+<div class="cmp" id="r-sujet"><div class="cmph"><span class="cn">4</span><b>Sujet différent : pas de gérondif</b></div><div class="cmpb"><div class="ci"><span class="flag">IT</span><p><i>Essendo tardi</i>, siamo tornati in albergo.</p></div><div class="cf"><span class="flag">FR</span><p><b>Comme il était tard</b>, nous sommes rentrés à l'hôtel.</p><button class="say" data-say="Comme il était tard, nous sommes rentrés à l&#x27;hôtel." aria-label="Écouter">🔊</button></div></div><p class="cnote">En italien, le gerundio peut avoir un autre sujet que le verbe principal. En français, c'est impossible : on utilise <b>comme</b> + verbe conjugué.</p></div>
+<div class="cmp" id="r-pur"><div class="cmph"><span class="cn">5</span><b>« Pur + gerundio » = « tout en + gérondif »</b></div><div class="cmpb"><div class="ci"><span class="flag">IT</span><p><i>Pur essendo</i> stanco, ha visitato tutto il museo.</p></div><div class="cf"><span class="flag">FR</span><p><b>Tout en étant</b> fatigué, il a visité tout le musée.</p><button class="say" data-say="Tout en étant fatigué, il a visité tout le musée." aria-label="Écouter">🔊</button></div></div><p class="cnote"><b>Tout en</b> exprime ici une opposition : bien qu'il soit fatigué.</p></div>
+<div class="box nest" id="r-cause"><h3>Et pour la cause ?</h3><p>« <i>Essendo stanco, è rimasto a casa</i> » → <b>Étant fatigué</b>, il est resté à la maison (sans <b>en</b> : c'est le participe présent, plutôt écrit), ou plus simplement : <b>Comme il était fatigué</b>, il est resté à la maison.</p></div>
+</div></section>
+<div class="exzone"><div class="exintro" id="e1"><h2>Exercices ✏️</h2><p>Le score en haut à droite compte vos bonnes réponses du premier coup.</p></div><section class="exo x1" id="ex1s"><div class="exhead"><div class="ext"><span class="exn">1</span><div><p class="ety">Vocabulaire · QCM</p><h3>Choisissez le bon mot.</h3><p class="eit">Scelga la parola giusta.</p></div></div></div><div class="exbody"><div id="ex1"></div></div></section><section class="exo x3" id="ex2s"><div class="exhead"><div class="ext"><span class="exn">2</span><div><p class="ety">Vocabulaire · associations</p><h3>Reliez le mot français à sa traduction.</h3><p class="eit">Tocchi una parola francese, poi la sua traduzione.</p></div></div></div><div class="exbody"><div id="ex2"></div></div></section><section class="exo x2" id="ex3s"><div class="exhead"><div class="ext"><span class="exn">3</span><div><p class="ety">Grammaire · le gérondif</p><h3>Écrivez le gérondif du verbe entre parenthèses.</h3><p class="eit">Scriva il gerundio francese (con « en »). Sotto ogni frase trova le lettere accentate.</p></div></div></div><div class="exbody"><div id="ex3"></div></div></section><section class="exo x4" id="ex4s"><div class="exhead"><div class="ext"><span class="exn">4</span><div><p class="ety">Français ou italien ?</p><h3>Choisissez la bonne traduction.</h3><p class="eit">Scelga la traduzione corretta.</p></div></div></div><div class="exbody"><div id="ex4"></div></div></section><section class="exo x1" id="ex5s"><div class="exhead"><div class="ext"><span class="exn">5</span><div><p class="ety">SMS</p><h3>Mario, vous échangez des messages avec Claire, une amie parisienne. Choisissez le bon mot : le message suivant arrive quand vous avez trouvé.</h3><p class="eit">Scelga la parola giusta fra le tre proposte: il messaggio successivo arriva quando ha trovato la risposta.</p></div></div></div><div class="exbody"><div class="phone"><div class="notch"></div><div class="phead"><span class="av">C</span><div><b>Claire</b><small>en ligne</small></div></div><div class="chat" id="chat"></div></div></div></section><section class="exo x5" id="ex6s"><div class="exhead"><div class="exph" style="background-image:url(img/prod.jpg)"></div><div class="ext"><span class="exn">6</span><div><p class="ety">Réflexion · production écrite</p><h3>Votre petit musée idéal</h3><p class="eit">Il suo piccolo museo ideale</p></div></div></div><div class="exbody"><div class="sujet"><p class="mini">SUJET</p><p class="big2">Votre petit musée idéal</p>
+<p>Imaginez : on vous offre une petite salle de musée, à Florence ou à Paris. Vous pouvez y exposer <b>cinq œuvres</b> (tableaux, sculptures, photos, objets…), de n'importe quelle époque. Lesquelles choisissez-vous, et pourquoi ?</p>
+<p class="it">Immagini: le offrono una piccola sala museale, a Firenze o a Parigi. Può esporvi cinque opere (quadri, sculture, fotografie, oggetti…), di qualsiasi epoca. Quali sceglie, e perché?</p>
+<p>Écrivez une douzaine de lignes (environ 120 mots).</p><p class="it">Scriva una dozzina di righe (circa 120 parole).</p></div>
+<p class="mini">MOTS UTILES</p>
+<div class="chips"><span>une œuvre · <i>un'opera</i></span><span>exposer · <i>esporre</i></span><span>une salle · <i>una sala</i></span><span>un chef-d'œuvre · <i>un capolavoro</i></span><span>émouvoir · <i>commuovere</i></span><span>la lumière · <i>la luce</i></span><span>accrocher un tableau · <i>appendere un quadro</i></span><span>le visiteur · <i>il visitatore</i></span></div>
+<p class="mini">POUR TROUVER VOS IDÉES</p>
+<div class="prompt"><ul><li>Quelle œuvre vous a ému la première fois que vous l'avez vue ? Où était-ce ? <i>Quale opera l'ha commosso la prima volta che l'ha vista?</i></li>
+<li>Voulez-vous mélanger les époques (gothique, impressionnisme, art moderne…) ? <i>Vuole mescolare le epoche?</i></li>
+<li>Quelle œuvre le visiteur voit-il en entrant ? Et en sortant ? <i>Quale opera vede il visitatore entrando? E uscendo?</i></li></ul></div>
+<p class="mini">ORGANISEZ VOTRE TEXTE</p>
+<div class="plan">
+<div><span class="pn">1</span><p><b>Introduction</b> (2 lignes) : présentez votre musée. <i>Mon musée idéal serait…</i></p></div>
+<div><span class="pn">2</span><p><b>Les œuvres</b> (8 lignes) : une ou deux phrases pour chaque œuvre. <i>D'abord… Ensuite… J'ajouterais aussi… parce que…</i></p></div>
+<div><span class="pn">3</span><p><b>Conclusion</b> (2 lignes) : ce que vous aimeriez que le visiteur ressente. <i>J'aimerais que le visiteur reparte en se disant…</i></p></div>
+</div>
+<p class="defi">✨ <b>Défi</b> : utilisez <b>deux gérondifs</b> (en entrant, en regardant…) et trois mots de la leçon (s'imaginer, néanmoins, l'engouement…).</p>
+<textarea id="prod" placeholder="Écrivez ici…"></textarea>
+<div class="prodbar"><span id="wc">0 mot</span><button id="copy" class="btn">📋 Copier pour Irène</button></div>
+<p class="copyhelp" id="copyhelp">Le texte est copié : collez-le dans un message pour Irène.</p>
+<p class="tip">Votre texte est envoyé à Irène avec vos résultats (bouton en bas de la page). Il ne compte pas dans le score : Irène le corrige à part.</p></div></section><div class="printbox"><p>🖨️ Vous voulez garder la leçon sur papier ? Imprimez seulement la partie didactique, sans les exercices. Vous pouvez aussi choisir « Enregistrer en PDF ».</p><button class="btn" type="button" onclick="window.print()">Imprimer la leçon</button></div><section class="exo x5" id="revoir"><div class="exhead"><div class="ext"><span class="exn">★</span><div><p class="ety">À revoir</p><h3>Les points à relire</h3><p class="eit">Tocchi un punto per tornare alla regola.</p></div></div></div><div class="exbody"><div id="revlist"></div>
+<div class="send" id="send"><h4>📩 Envoyer mes résultats à Irène</h4><p>Le bouton ouvre votre messagerie avec un e-mail déjà écrit pour Irène : votre score, vos erreurs (votre réponse et la bonne réponse) et votre texte. Vous n'avez plus qu'à appuyer sur « Envoyer ».</p>
+<label for="sname">Votre prénom</label><input id="sname" type="text" value="Mario" autocomplete="given-name">
+<button class="btn" id="sendbtn" type="button">Envoyer à Irène</button><p class="st" id="sendst" role="status"></p></div>
+<button class="btn ghost" id="reset">Recommencer les exercices</button></div></section></div>
+</main>
+<div class="paper" style="background:transparent;box-shadow:none;margin-top:0;margin-bottom:0"><details class="credits"><summary>Crédits photos</summary><ul><li>Gorges du Verdon panorama · Ianaré Sévi · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Gorges_du_Verdon_panorama.jpg">Wikimedia Commons</a></li><li>Galerie Lafayette Haussmann Dome · Benh LIEU SONG (Flickr) · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Galerie_Lafayette_Haussmann_Dome.jpg">Wikimedia Commons</a></li><li>La Tentation d&#x27;Eve · Alamandar · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:La_Tentation_d%27Eve.jpg">Wikimedia Commons</a></li><li>Moulin Rouge- La Goulue MET DT11780 · Henri de Toulouse-Lautrec · CC0 · <a href="https://commons.wikimedia.org/wiki/File:Moulin_Rouge-_La_Goulue_MET_DT11780.jpg">Wikimedia Commons</a></li><li>Edgar Germain Hilaire Degas 059 · Edgar Degas · Public domain · <a href="https://commons.wikimedia.org/wiki/File:Edgar_Germain_Hilaire_Degas_059.jpg">Wikimedia Commons</a></li><li>Palais Brongniart, Paris May 2012 · Guillaume Speurt from Vilnius, Lithuania · CC BY-SA 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Palais_Brongniart,_Paris_May_2012.jpg">Wikimedia Commons</a></li><li>La Bohémienne endormie · Henri Rousseau · Public domain · <a href="https://commons.wikimedia.org/wiki/File:La_Boh%C3%A9mienne_endormie.jpg">Wikimedia Commons</a></li><li>Lascaux painting · EU · Public domain · <a href="https://commons.wikimedia.org/wiki/File:Lascaux_painting.jpg">Wikimedia Commons</a></li><li>Chambord Castle Northwest facade · Benh LIEU SONG · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Chambord_Castle_Northwest_facade.jpg">Wikimedia Commons</a></li><li>Sommet de la Dune du Pilat · Jörg Braukmann · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Sommet_de_la_Dune_du_Pilat.jpg">Wikimedia Commons</a></li><li>Gustave Courbet - Bonjour Monsieur Courbet - Musée Fabre · Gustave Courbet · Public domain · <a href="https://commons.wikimedia.org/wiki/File:Gustave_Courbet_-_Bonjour_Monsieur_Courbet_-_Mus%C3%A9e_Fabre.jpg">Wikimedia Commons</a></li><li>Pont du Gard BLS · Benh LIEU SONG (Flickr) · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Pont_du_Gard_BLS.jpg">Wikimedia Commons</a></li><li>Centre Pompidou, seen from Tour Montparnasse · Alf van Beem · CC0 · <a href="https://commons.wikimedia.org/wiki/File:Centre_Pompidou,_seen_from_Tour_Montparnasse.jpg">Wikimedia Commons</a></li></ul></details></div>
+<div class="fai-sign"><img src="../marque/signature-irene.png" alt="Cours de français en ligne"></div>
+<script>const AUDIO={"Sous la coupole des Galeries Lafayette, des marchandises du monde entier attirent les visiteurs.": "50360f8984.mp3", "Sur ce relief roman d'Autun, Ève cueille le fruit défendu : c'est le péché originel.": "a476f6c00a.mp3", "Cette affiche de Toulouse-Lautrec montre l'engouement des Parisiens pour les bals du Moulin-Rouge.": "6eecd17be0.mp3", "Avant le départ de la course, chacun fait son pari sur son cheval préféré.": "0268a89be8.mp3", "Au palais Brongniart, l'appât du gain a fait la fortune, et parfois la ruine, de nombreux spéculateurs.": "8de280c2ad.mp3", "Devant ce tableau de Rousseau, on s'imagine facilement le silence du désert.": "fc61e84435.mp3", "Seuls quelques scientifiques, autorisés par le ministère de la Culture, entrent dans la vraie grotte de Lascaux.": "fd80f12aea.mp3", "Hier, vingt touristes ont visité Chambord : la moitié d'entre eux venaient d'Italie.": "174bf6de9b.mp3", "Le vent soufflait fort ; nous sommes néanmoins montés jusqu'au sommet de la dune.": "e9f6e11079.mp3", "Mario écoute la radio en conduisant.": "b8c251e06d.mp3", "C'est en visitant les musées qu'on apprend à regarder.": "a73c94c310.mp3", "En partant maintenant, vous arriverez avant la fermeture.": "e1291a1769.mp3", "Tout en étant prudent, il a fait un pari risqué.": "989e02477e.mp3", "En sortant du musée, nous avons vu la Seine.": "870cda0a79.mp3", "En lisant, on apprend.": "9ab86b4798.mp3", "Je l'ai reconnu en le regardant.": "4ebea53440.mp3", "Je suis en train de lire un roman.": "00bcea970f.mp3", "Comme il était tard, nous sommes rentrés à l'hôtel.": "b8aa8386cb.mp3", "Tout en étant fatigué, il a visité tout le musée.": "9c3a714c3e.mp3", "Seuls quelques chercheurs, autorisés par le ministère, peuvent entrer dans la grotte.": "27bc13f43b.mp3", "Ce camion transporte des marchandises vers le port de Livourne.": "05b6758db8.mp3", "Pour certains, la gourmandise est un péché ; pour moi, c'est un plaisir !": "a9ab4569bf.mp3", "L'engouement des touristes pour les marchés de Noël ne faiblit pas.": "ddda84f132.mp3", "Faisons un pari : la Fiorentina gagnera dimanche !": "2ed5fca924.mp3", "Un bon conseiller ne se laisse jamais guider par l'appât du gain.": "477fe830e2.mp3", "Il pleuvait ; nous avons néanmoins visité les jardins de Giverny.": "5fa87c5c22.mp3", "Nous avons invité vingt amis : la moitié d'entre eux sont venus.": "a1a0eb0daf.mp3", "s'imaginer": "08741ea0b0.mp3", "la marchandise": "cc21628459.mp3", "l'engouement": "d58a2f0cf7.mp3", "un pari": "cb19b9d30f.mp3", "l'appât du gain": "bd7f0adf30.mp3", "néanmoins": "7e85388260.mp3", "C'est dommage !": "b11fc6aeea.mp3", "Mario écoute la radio en conduisant vers Florence.": "bb1693fe52.mp3", "En lisant Maupassant, on apprend beaucoup de vocabulaire.": "62843904d6.mp3", "En étant patient, on obtient de meilleurs résultats.": "80ff774878.mp3", "Il a perdu beaucoup d'argent en faisant des paris risqués.": "23c0da4c39.mp3", "En choisissant bien vos placements, vous limiterez les risques.": "fc0c0c6552.mp3", "Je me suis arrêté devant une vitrine en me promenant rue de Rivoli.": "72e27fdb1d.mp3", "Je suis en train de lire un roman de Zola.": "3df55168b0.mp3", "Je l'ai reconnu en le regardant dans les yeux.": "0f43b26f93.mp3", "Tout en étant fatigué, Mario a visité tout le musée.": "86f43206a2.mp3", "En partant tout de suite, vous arriverez avant la fermeture.": "10fd58da4a.mp3", "Bonsoir Mario ! La nouvelle expo du Grand Palais a un succès fou : l'engouement du public est incroyable": "a1d84d6241.mp3", "Je m'imagine déjà la queue devant l'entrée… On y va quand même samedi ?": "f9cffb7c9b.mp3", "Oui ! Il y aura du monde ; néanmoins, avec des billets réservés, on entrera vite.": "06ae8c7b50.mp3", "Parfait. Je réserve les billets ce soir en attendant le train.": "65dab6c433.mp3", "Tu sais que les photos sans flash sont autorisées dans les salles ?": "7561bab615.mp3", "Super ! Et je te fais un pari : tu vas acheter la moitié de la boutique du musée": "26d493c03e.mp3", "C'est vrai, j'adore les cartes postales… c'est mon petit péché mignon !": "029cb5c147.mp3", "Alors rendez-vous samedi à 10 h. Nous déjeunerons ensuite en parlant de l'expo !": "0d0d10acf5.mp3"};</script>
+<script>const DATA={"ex1": [["Seuls quelques chercheurs, ___ par le ministère, peuvent entrer dans la grotte.", ["autorisés", "imaginés", "pariés"], 0, "r-autorise", "Solo pochi ricercatori, autorizzati dal ministero, possono entrare nella grotta."], ["Ce camion transporte des ___ vers le port de Livourne.", ["péchés", "marchandises", "paris"], 1, "r-marchandise", "Questo camion trasporta merci verso il porto di Livorno."], ["Pour certains, la gourmandise est un ___ ; pour moi, c'est un plaisir !", ["pari", "appât", "péché"], 2, "r-peche", "Per alcuni la golosità è un peccato; per me è un piacere!"], ["L'___ des touristes pour les marchés de Noël ne faiblit pas.", ["engouement", "appât", "péché"], 0, "r-engouement", "L'entusiasmo dei turisti per i mercatini di Natale non accenna a diminuire."], ["Faisons un ___ : la Fiorentina gagnera dimanche !", ["péché", "pari", "gain"], 1, "r-pari", "Facciamo una scommessa: domenica vincerà la Fiorentina!"], ["Un bon conseiller ne se laisse jamais guider par l'___ du gain.", ["engouement", "pari", "appât"], 2, "r-appat", "Un buon consulente non si lascia mai guidare dalla sete di guadagno."], ["Il pleuvait ; nous avons ___ visité les jardins de Giverny.", ["néanmoins", "la moitié", "autorisé"], 0, "r-neanmoins", "Pioveva; ciononostante abbiamo visitato i giardini di Giverny."], ["Nous avons invité vingt amis : la moitié d'___ sont venus.", ["eux-mêmes", "entre eux", "leur"], 1, "r-moitie", "Abbiamo invitato venti amici: la metà di loro è venuta."]], "ex2": [["s'imaginer", "immaginarsi", "r-imaginer"], ["la marchandise", "la merce", "r-marchandise"], ["l'engouement", "l'entusiasmo, la passione", "r-engouement"], ["un pari", "una scommessa", "r-pari"], ["l'appât du gain", "la sete di guadagno", "r-appat"], ["néanmoins", "tuttavia, ciononostante", "r-neanmoins"], ["C'est dommage !", "Che peccato!", "r-peche"]], "ex2o": [3, 6, 0, 5, 2, 4, 1], "ex3": [["Mario écoute la radio [[en conduisant]]{conduire} vers Florence.", "r-formation", "Mario ascolta la radio mentre guida verso Firenze."], ["[[En lisant]]{lire} Maupassant, on apprend beaucoup de vocabulaire.", "r-formation", "Leggendo Maupassant si impara molto lessico."], ["[[En étant]]{être} patient, on obtient de meilleurs résultats.", "r-irreg", "Essendo pazienti, si ottengono risultati migliori."], ["Il a perdu beaucoup d'argent [[en faisant]]{faire} des paris risqués.", "r-formation", "Ha perso molti soldi facendo scommesse rischiose."], ["[[En choisissant]]{choisir} bien vos placements, vous limiterez les risques.", "r-condition", "Scegliendo bene i suoi investimenti, limiterà i rischi."], ["Je me suis arrêté devant une vitrine [[en me promenant]]{se promener} rue de Rivoli.", "r-pron", "Mi sono fermato davanti a una vetrina mentre passeggiavo in rue de Rivoli."]], "ex4": [["« Sto leggendo un romanzo di Zola. »", ["Je suis en lisant un roman de Zola.", "Je suis en train de lire un roman de Zola.", "Je reste lisant un roman de Zola."], 1, "r-stare"], ["« L'ho riconosciuto guardandolo negli occhi. »", ["Je l'ai reconnu en regardant-le dans les yeux.", "Je l'ai reconnu le regardant en dans les yeux.", "Je l'ai reconnu en le regardant dans les yeux."], 2, "r-pronoms"], ["« Essendo tardi, siamo tornati in albergo. »", ["Comme il était tard, nous sommes rentrés à l'hôtel.", "En étant tard, nous sommes rentrés à l'hôtel.", "Étant tard, nous sommes rentrés à l'hôtel."], 0, "r-sujet"], ["« Pur essendo stanco, Mario ha visitato tutto il museo. »", ["Pur étant fatigué, Mario a visité tout le musée.", "Tout en étant fatigué, Mario a visité tout le musée.", "En tout étant fatigué, Mario a visité tout le musée."], 1, "r-pur"], ["« Partendo subito, arriverete prima della chiusura. »", ["En partir tout de suite, vous arriverez avant la fermeture.", "Partez en tout de suite, vous arriverez avant la fermeture.", "En partant tout de suite, vous arriverez avant la fermeture."], 2, "r-en"]], "sms": [["c", "Bonsoir Mario ! La nouvelle expo du Grand Palais a un succès fou : l'{{engouement|appât|pari}} du public est incroyable 😮", "r-engouement"], ["r", "Je {{m'imagine|imagine-moi|me parie}} déjà la queue devant l'entrée… On y va quand même samedi ?", "r-imaginer"], ["c", "Oui ! Il y aura du monde ; {{néanmoins|à moitié|autorisé}}, avec des billets réservés, on entrera vite.", "r-neanmoins"], ["r", "Parfait. Je réserve les billets ce soir {{en attendant|attendant en|en attendre}} le train.", "r-formation"], ["c", "Tu sais que les photos sans flash sont {{autorisées|autorisé|autoriser}} dans les salles ?", "r-autorise"], ["r", "Super ! Et je te fais un {{pari|péché|gain}} : tu vas acheter la moitié de la boutique du musée 😄", "r-pari"], ["c", "C'est vrai, j'adore les cartes postales… c'est mon petit {{péché|pêcheur|pari}} mignon !", "r-peche"], ["r", "Alors rendez-vous samedi à 10 h. Nous déjeunerons ensuite {{en parlant|en parler|parlé}} de l'expo !", "r-formation"]]};</script>
+<script>(function(){
+const KEY="mario-27-novembre-v1";
+
+let S={items:{},prod:"",tri:{},match:{},ord:{}};
+try{const raw=localStorage.getItem(KEY);if(raw)S=Object.assign(S,JSON.parse(raw));}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const REG={};
+function reg(id,rule,label,answer,ex,num){REG[id]={rule,label,answer,ex,num};}
+function it(id){return S.items[id]||(S.items[id]={});}
+function score(){let n=0;for(const id in REG){const x=S.items[id];if(x&&x.ok&&!x.wrong)n++;}return n;}
+function upd(bump){$("#sc").textContent=score();$("#tot").textContent=Object.keys(REG).length;if(bump){const b=$("#score");b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump");}renderRev();}
+function stars(el){if(!el)return;const r=el.getBoundingClientRect();const x=r.left+r.width/2,y=r.top+r.height/2;
+ for(let i=0;i<7;i++){const s=document.createElement("span");s.className="star";s.textContent=i%2?"✦":"★";
+  const a=Math.random()*Math.PI*2,d=40+Math.random()*45;s.style.left=x+"px";s.style.top=y+"px";
+  s.style.setProperty("--dx",Math.cos(a)*d+"px");s.style.setProperty("--dy",Math.sin(a)*d+"px");
+  s.style.animationDelay=(i*40)+"ms";document.body.appendChild(s);setTimeout(()=>s.remove(),1300);}}
+function good(id,el){const x=it(id);if(x.ok)return;x.ok=true;save();if(!x.wrong)stars(el);upd(!x.wrong);}
+function bad(id,el,given){const x=it(id);x.g=x.g||[];const g=(given==null?"":String(given)).trim();
+ if(g&&!x.g.includes(g)&&x.g.length<6)x.g.push(g);
+ if(!x.wrong){x.wrong=true;save();upd();}else save();
+ if(el){el.classList.remove("shake");void el.offsetWidth;el.classList.add("shake");}}
+/* voix */
+let VOICE=null;
+function pick(){if(!("speechSynthesis" in window))return;const vs=speechSynthesis.getVoices().filter(v=>/^fr/i.test(v.lang));
+ const pref=[/denise/i,/vivienne/i,/eloise/i,/google.*fran/i,/amélie|amelie/i,/audrey/i,/marie/i,/julie/i,/female|femme/i];
+ for(const p of pref){const v=vs.find(v=>p.test(v.name)&&/fr-FR/i.test(v.lang))||vs.find(v=>p.test(v.name));if(v){VOICE=v;return;}}
+ VOICE=vs.find(v=>/fr-FR/i.test(v.lang))||vs[0]||null;}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick;}
+let CUR=null;
+function akey(t){return t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu,"").replace(/\s+/g," ").trim();}
+function speak(t,btn){const f=(typeof AUDIO!=="undefined")&&AUDIO[akey(t)];
+ if(CUR){CUR.pause();}if("speechSynthesis" in window)speechSynthesis.cancel();
+ $$(".say.on").forEach(b=>b.classList.remove("on"));
+ if(f){CUR=new Audio("audio/"+f);if(btn){btn.classList.add("on");CUR.onended=CUR.onerror=()=>btn.classList.remove("on");}
+  CUR.play().catch(()=>{if(btn)btn.classList.remove("on");});return;}
+ if(!("speechSynthesis" in window))return;
+ const u=new SpeechSynthesisUtterance(akey(t).replace(/___/g,""));
+ u.lang="fr-FR";if(VOICE)u.voice=VOICE;u.rate=.9;
+ if(btn){btn.classList.add("on");u.onend=u.onerror=()=>btn.classList.remove("on");}
+ speechSynthesis.speak(u);}
+function sayBtn(t){return `<button class="say" data-say="${esc(t)}" aria-label="Écouter">🔊</button>`;}
+document.addEventListener("click",e=>{const b=e.target.closest(".say");if(b){e.stopPropagation();speak(b.dataset.say,b);return;}
+ const c=e.target.closest(".card");if(c)c.classList.toggle("flip");},true);
+document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList&&e.target.classList.contains("card")){e.preventDefault();e.target.classList.toggle("flip");}});
+const norm=s=>s.toLowerCase().replace(/[’`]/g,"'").replace(/\s+/g," ").trim().replace(/[.!?,;:]+$/,"");
+const noacc=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/-/g," ");
+
+/* QCM : list = [texte avec ___, options, index bonne, règle, (traduction)] */
+function qcm(box,list,prefix,exn,long){
+ list.forEach((q,i)=>{const [txt,opts,ans,r,itl]=q;const id=prefix+i;
+  const full=txt.includes("___")?txt.replace("___",opts[ans]):opts[ans];
+  reg(id,r,txt,opts[ans],exn,i+1);
+  const d=document.createElement("div");d.className="q";
+  d.innerHTML=`<p class="qt"><span class="qn">${i+1}</span>${esc(txt).replace("___",'<span class="gap">&nbsp;</span>')}</p>${itl?`<span class="qit">${esc(itl)}</span>`:""}<div class="opts"></div>`;
+  const o=$(".opts",d);const x=it(id);x.t=x.t||[];
+  const finish=()=>{const g=$(".gap",d);if(g)g.textContent=opts[ans];o.insertAdjacentHTML("beforeend",sayBtn(full));$$(".opt",o).forEach(b=>b.disabled=true);};
+  opts.forEach((op,k)=>{const b=document.createElement("button");b.className="opt"+(long?" long":"");b.textContent=op;
+   if(x.t.includes(k)){b.classList.add("bad");b.disabled=true;}
+   if(x.ok&&k===ans)b.classList.add("good");
+   b.onclick=()=>{if(k===ans){b.classList.add("good");finish();good(id,b);speak(full);}else{b.classList.add("bad");b.disabled=true;x.t.push(k);bad(id,b,op);}};
+   o.appendChild(b);});
+  if(x.ok)finish();
+  box.appendChild(d);});
+}
+/* associations : L=[[fr,it,regle]], order = permutation */
+function matchEx(box,L,order,prefix,exn){
+ L.forEach((p,i)=>reg(prefix+i,p[2],p[0]+" → …",p[1],exn,i+1));
+ box.innerHTML='<div class="match"><div class="mcol ml"></div><div class="mcol mr"></div></div>';
+ const ml=$(".ml",box),mr=$(".mr",box);let sel=null;S.match[prefix]=S.match[prefix]||[];
+ L.forEach((p,i)=>{const b=document.createElement("button");b.className="mi";b.dataset.i=i;b.innerHTML=`<b>${esc(p[0])}</b>`;
+  b.onclick=()=>{if(b.classList.contains("done"))return;$$(".mi",ml).forEach(x=>x.classList.remove("sel"));b.classList.add("sel");sel=i;speak(p[0]);};ml.appendChild(b);});
+ order.forEach(i=>{const b=document.createElement("button");b.className="mi";b.dataset.i=i;b.textContent=L[i][1];
+  b.onclick=()=>{if(sel===null||b.classList.contains("done"))return;const l=$(`.mi[data-i="${sel}"]`,ml);
+   if(sel===i){done(i);good(prefix+i,b);}else{bad(prefix+sel,l,L[i][1]);b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");}};
+  mr.appendChild(b);});
+ function done(i){if(S.match[prefix].indexOf(i)<0){S.match[prefix].push(i);save();}
+  [$(`.mi[data-i="${i}"]`,ml),$(`.mi[data-i="${i}"]`,mr)].forEach(b=>{b.classList.remove("sel");b.classList.add("done");if(!b.querySelector(".tag"))b.insertAdjacentHTML("afterbegin",`<span class="tag">✓</span>`);});sel=null;}
+ S.match[prefix].forEach(i=>done(i));
+}
+/* texte à trous : lignes avec [[rep|alt]]{indice} ; line=[html avant, texte, regle] */
+function blanksIn(container,txt,prefix,rule,exn,counter,labelPrefix){
+ const RX=/\[\[(.+?)\]\](?:\{(.+?)\})?/g;const bl=[];let r;while((r=RX.exec(txt))){bl.push({ans:r[1].split("|"),hint:r[2]||""});}
+ let j=0;const plain=txt.replace(RX,(m,a)=>a.split("|")[0]);
+ bl.forEach((b,k)=>{let jj=0;const lab=(labelPrefix||"")+"« "+txt.replace(RX,(m,a)=>(jj++===k?"___":a.split("|")[0]))+" »";counter.n++;reg(prefix+"_"+k,rule,lab,b.ans[0],exn,counter.n);});
+ container.innerHTML=esc(txt).replace(/\[\[(.+?)\]\](?:\{(.+?)\})?/g,()=>{const id=prefix+"_"+j,b=bl[j];j++;
+   if(it(id).ok)return `<span class="filled">${esc(b.ans[0])}</span>`;
+   return `<span class="blank" data-id="${id}" data-k="${j-1}"><input autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="réponse"><button>✓</button></span>${b.hint?` <span class="hint">(${esc(b.hint)})</span>`:""}`;})
+  +`<span class="msgfb"></span>`;
+ const after=()=>{if(!$(".blank",container)){$$(".hint",container).forEach(h=>h.remove());if(!$(".say",container))container.insertAdjacentHTML("beforeend"," "+sayBtn(plain));}};
+ $$(".blank",container).forEach(sp=>{const id=sp.dataset.id,b=bl[+sp.dataset.k],inp=$("input",sp);
+  const check=()=>{const v=norm(inp.value);if(!v)return;const fb=$(".msgfb",container);fb.textContent="";
+   if(b.ans.some(a=>norm(a)===v)){const h=sp.nextElementSibling;if(h&&h.classList.contains("hint"))h.remove();sp.outerHTML=`<span class="filled">${esc(b.ans[0])}</span>`;good(id,container);after();return;}
+   if(b.ans.some(a=>noacc(norm(a))===noacc(v))){fb.textContent="Presque ! Vérifiez les accents.";return;}
+   if(b.ans.some(a=>/^en /.test(norm(a))&&norm(a).replace(/^en /,"")===v.replace(/^en /,"")&&!/^en /.test(v))){fb.textContent="Presque ! N'oubliez pas « en ».";return;}
+   sp.classList.add("bad");bad(id,sp,inp.value);fb.innerHTML=`Essayez encore… <button class="sol">voir la réponse</button>`;
+   $(".sol",fb).onclick=()=>{inp.value=b.ans[0];check();};};
+  $("button",sp).onclick=check;inp.addEventListener("keydown",e=>{if(e.key==="Enter")check();});
+  inp.addEventListener("input",()=>sp.classList.remove("bad"));});
+ after();
+}
+/* phrases en désordre : list=[[phrase,regle,(traduction)]] */
+function orderEx(box,list,prefix,exn){
+ list.forEach((q,i)=>{const id=prefix+i;reg(id,q[1],"Phrase en désordre n° "+(i+1),q[0],exn,i+1);const x=it(id);
+  const words=q[0].split(" ");const sh=words.map((w,k)=>({w,k}));
+  for(let a=sh.length-1;a>0;a--){const b=(a*7+i*3+1)%(a+1);[sh[a],sh[b]]=[sh[b],sh[a]];}
+  if(sh.every((o,k)=>o.k===k))sh.reverse();
+  const d=document.createElement("div");d.className="ord";
+  d.innerHTML=`<p class="qt" style="margin:0 0 6px"><span class="qn">${i+1}</span>${q[2]?`<span class="hint">${esc(q[2])}</span>`:""}</p><div class="line"></div><div class="tiles"></div><button class="small">effacer</button>`;
+  const line=$(".line",d),tiles=$(".tiles",d),clr=$(".small",d);
+  if(x.ok){line.classList.add("good");line.innerHTML=words.map(w=>`<span class="tile">${esc(w)}</span>`).join("")+sayBtn(q[0]);tiles.remove();clr.remove();box.appendChild(d);return;}
+  sh.forEach(o=>{const t=document.createElement("button");t.className="tile";t.textContent=o.w;
+   t.onclick=()=>{if(t.classList.contains("used"))return;t.classList.add("used");const c=document.createElement("button");c.className="tile";c.textContent=o.w;
+    c.onclick=()=>{c.remove();t.classList.remove("used");};line.appendChild(c);
+    if($$(".tile",line).length===words.length){const s=$$(".tile",line).map(e=>e.textContent).join(" ");
+     if(s===q[0]){line.classList.add("good");$$(".tile",line).forEach(e=>e.onclick=null);tiles.remove();clr.remove();line.insertAdjacentHTML("beforeend",sayBtn(q[0]));good(id,line);speak(q[0]);}
+     else{bad(id,line,s);setTimeout(reset,900);}}};
+   tiles.appendChild(t);});
+  function reset(){line.innerHTML="";$$(".tile",tiles).forEach(t=>t.classList.remove("used"));}
+  clr.onclick=reset;box.appendChild(d);});
+}
+/* tri : bins=[[cle,titre,sous-titre,couleur]], items=[[texte,cle,regle]] */
+function triEx(box,bins,items,prefix,exn,speakItems){
+ box.innerHTML=`<div class="items"></div><div class="bins"></div><p class="tri-msg"></p>`;
+ const iz=$(".items",box),bz=$(".bins",box),msg=$(".tri-msg",box);let sel=null;S.tri[prefix]=S.tri[prefix]||{};
+ bins.forEach(b=>{const e=document.createElement("button");e.className="bin";e.style.background=b[3];e.dataset.b=b[0];
+  e.innerHTML=`<span class="lid"></span><b>${b[1]}</b><small>${b[2]}</small><span class="in"></span>`;
+  e.onclick=()=>{if(sel===null)return;const o=items[sel],id=prefix+sel;
+   if(o[1]===b[0]){S.tri[prefix][sel]=1;save();place(sel);msg.textContent=`Oui : « ${o[0]} » → ${b[1]}`;good(id,e);}
+   else{bad(id,e,b[1]);msg.textContent="Non, pas dans cette boîte… Écoute encore !";}};
+  bz.appendChild(e);});
+ items.forEach((o,i)=>{reg(prefix+i,o[2],`Classe « ${o[0]} »`,bins.find(b=>b[0]===o[1])[1],exn,i+1);
+  const e=document.createElement("button");e.className="item";e.dataset.i=i;e.textContent=o[0];
+  e.onclick=()=>{$$(".item",iz).forEach(x=>x.classList.remove("sel"));e.classList.add("sel");sel=i;if(speakItems)speak(o[0]);};iz.appendChild(e);});
+ function place(i){const el=$(`.item[data-i="${i}"]`,iz);if(el)el.classList.add("done");const inn=$(`.bin[data-b="${items[i][1]}"] .in`,bz);inn.textContent+=(inn.textContent?" · ":"")+items[i][0];sel=null;
+  if(Object.keys(S.tri[prefix]).length===items.length)msg.textContent="Bravo, tout est classé !";}
+ Object.keys(S.tri[prefix]).forEach(i=>place(+i));
+}
+/* production */
+function production(title,head){const ta=$("#prod"),wc=$("#wc");ta.value=S.prod||"";
+ const count=()=>{const n=(ta.value.trim().match(/[\wÀ-ÿ'’-]+/g)||[]).length;wc.textContent=n+(n>1?" mots":" mot");return n;};count();
+ let t;ta.addEventListener("input",()=>{count();clearTimeout(t);t=setTimeout(()=>{S.prod=ta.value;save();},150);});
+ window.addEventListener("pagehide",()=>{S.prod=ta.value;save();});document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden"){S.prod=ta.value;save();}});
+ ta.addEventListener("blur",()=>{S.prod=ta.value;save();});
+ $("#copy").onclick=()=>{S.prod=ta.value;save();
+  const txt=`${head}\n${title}\n\n${ta.value.trim()}\n\n(${count()} mots)`;
+  const ok=()=>{const h=$("#copyhelp");h.classList.add("on");setTimeout(()=>h.classList.remove("on"),5000);};
+  const fallback=()=>{const a=document.createElement("textarea");a.value=txt;a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();try{document.execCommand("copy");}catch(e){}a.remove();ok();};
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok,fallback);else fallback();};}
+/* à revoir */
+const ordered=()=>Object.keys(REG).sort((a,b)=>(REG[a].ex-REG[b].ex)||(REG[a].num-REG[b].num));
+function ruleTitle(r){const t=document.getElementById(r);if(!t)return r;const h=t.querySelector("h3")||t.querySelector(".bw")||t.querySelector("h2");return h?h.textContent.trim():r;}
+function renderRev(){const L=$("#revlist");if(!L)return;const w=ordered().filter(id=>S.items[id]&&S.items[id].wrong);
+ if(!w.length){L.innerHTML='<p class="ok">Pour l\'instant, rien à revoir. Les points difficiles apparaîtront ici.</p>';return;}
+ L.innerHTML=w.map(id=>{const r=REG[id];return `<a href="#${r.rule}" data-r="${r.rule}"><span>Exercice ${r.ex} · ${esc(r.label)}<br><b>${esc(r.answer)}</b></span><span class="ar">↑</span></a>`;}).join("");
+ $$("a",L).forEach(a=>a.onclick=e=>{e.preventDefault();let t=document.getElementById(a.dataset.r);if(!t)return;
+  const card=t.closest(".card");if(card&&!card.classList.contains("flip"))card.classList.add("flip");
+  t.scrollIntoView({behavior:"smooth",block:"center"});t.classList.remove("flash");void t.offsetWidth;t.classList.add("flash");});}
+function resetBtn(){const b=$("#reset");let armed=false;b.onclick=()=>{if(!armed){armed=true;b.textContent="Appuyez encore pour confirmer";setTimeout(()=>{armed=false;b.textContent="Recommencer les exercices";},4000);return;}
+ const p=S.prod;S={items:{},prod:p,tri:{},match:{},ord:{}};save();location.reload();};}
+function rapport(name){const ids=ordered().filter(id=>S.items[id]&&S.items[id].wrong);
+ return ids.map(id=>{const r=REG[id],x=S.items[id];const g=(x.g&&x.g.length)?x.g.join("  /  "):"(pas de réponse écrite)";
+  return "• Exercice "+r.ex+", n° "+r.num+" : "+r.label+"\n   ✗ Réponse de "+name+" : "+g+"\n   ✓ Bonne réponse : "+r.answer+(x.ok?"":"\n   (pas encore trouvée)")+"\n   → Règle : "+ruleTitle(r.rule);});}
+function sender(lesson,subjectDate,prodTitle,extra){const b=$("#sendbtn"),st=$("#sendst"),nm=$("#sname");if(!b)return;
+ if(S.sentAt){st.className="st ok";st.textContent="Résultats déjà préparés le "+S.sentAt+". Vous pouvez les renvoyer si vous avez refait des exercices.";}
+ b.onclick=()=>{const tot=Object.keys(REG).length,done=Object.keys(REG).filter(id=>S.items[id]&&(S.items[id].ok||S.items[id].wrong)).length;
+  const name=(nm.value||"").trim()||"Mario";const lines=rapport(name);
+  const prod=(($("#prod")&&$("#prod").value)||S.prod||"").trim();const nw=prod?(prod.match(/[\wÀ-ÿ'’-]+/g)||[]).length:0;
+  let body="Bonjour Irène,\n\nVoici mes résultats.\n\nÉlève : "+name+"\nLeçon : "+lesson+"\nScore (exercices seulement) : "+score()+" / "+tot+"\nQuestions faites : "+done+" / "+tot+"\n\n=== À REVOIR ===\n"+(lines.length?lines.join("\n\n"):"Rien à revoir 🎉");
+  if(extra){const x=extra();if(x)body+="\n\n"+x;}
+  body+="\n\n=== PRODUCTION ÉCRITE · "+prodTitle+" ===\n"+(prod?("("+nw+" mots)\n\n"+prod):"(pas encore écrite)")+"\n\n"+name;
+  const subject="Résultats de "+name+" · "+subjectDate;
+  const copied=()=>{st.className="st ok";st.textContent="Votre messagerie s'ouvre avec le message déjà écrit : appuyez sur « Envoyer ». Le texte est aussi copié : si la messagerie ne s'ouvre pas, collez-le dans un e-mail à irene.francais.facile@gmail.com.";};
+  const fallback=()=>{const a=document.createElement("textarea");a.value=body;a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();try{document.execCommand("copy");}catch(e){}a.remove();copied();};
+  try{if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(body).then(copied,fallback);else fallback();}catch(e){fallback();}
+  S.sentAt=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" à "+new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});save();
+  setTimeout(()=>{location.href="mailto:irene.francais.facile@gmail.com?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);},150);};}
+
+/* lettres accentuées */
+const ACC=["à","â","ç","é","è","ê","ë","î","ï","ô","ù","û","œ","É","À","Ç"];
+let LAST=null;
+document.addEventListener("focusin",e=>{const t=e.target;if(t&&(t.tagName==="TEXTAREA"||(t.tagName==="INPUT"&&t.closest(".exbody"))))LAST=t;});
+function accBar(){const d=document.createElement("div");d.className="acc";d.innerHTML='<span class="al">Accents :</span>'+ACC.map(c=>`<button type="button" class="ak" tabindex="-1">${c}</button>`).join("");
+ d.addEventListener("mousedown",e=>{if(e.target.closest(".ak"))e.preventDefault();});
+ d.addEventListener("click",e=>{const b=e.target.closest(".ak");if(!b)return;const zone=d.parentElement;
+  let f=(LAST&&zone.contains(LAST)&&document.body.contains(LAST))?LAST:zone.querySelector("input,textarea");if(!f)return;
+  const a=f.selectionStart??f.value.length,z=f.selectionEnd??f.value.length;f.value=f.value.slice(0,a)+b.textContent+f.value.slice(z);
+  f.focus();const p=a+b.textContent.length;try{f.setSelectionRange(p,p);}catch(_){}
+  f.dispatchEvent(new Event("input",{bubbles:true}));});
+ return d;}
+
+/* ex 1 QCM */
+qcm($("#ex1"),DATA.ex1,"a",1);
+$$("#ex1 .q").forEach((d,i)=>{const t=DATA.ex1[i][4];if(t)d.querySelector(".qt").insertAdjacentHTML("afterend",`<span class="qit">${esc(t)}</span>`);});
+/* ex 2 associations */
+matchEx($("#ex2"),DATA.ex2,DATA.ex2o,"m",2);
+/* ex 3 gérondif écrit */
+(function(){const box=$("#ex3");const c={n:0};
+ DATA.ex3.forEach((q,i)=>{const d=document.createElement("div");d.className="q";
+  const p=document.createElement("p");p.className="qt";d.appendChild(p);box.appendChild(d);
+  blanksIn(p,q[0],"g"+i,q[1],3,c,"");
+  p.insertAdjacentHTML("afterbegin",`<span class="qn">${i+1}</span>`);
+  d.insertAdjacentHTML("beforeend",`<span class="qtr">${esc(q[2])}</span>`);
+  if($(".blank",d))d.appendChild(accBar());
+  const obs=new MutationObserver(()=>{if(!$(".blank",d)){const a=$(".acc",d);if(a)a.remove();obs.disconnect();}});obs.observe(d,{childList:true,subtree:true});
+ });
+})();
+/* ex 4 traduction : choix */
+qcm($("#ex4"),DATA.ex4.map(q=>[q[0],q[1],q[2],q[3]]),"t",4,true);
+/* ex 5 SMS à trois options */
+(function(){const chat=$("#chat");const M=DATA.sms;const RX=/\{\{(.+?)\}\}/;
+ const P=M.map(m=>{const r=RX.exec(m[1]);const o=r[1].split("|");return {ans:o[0],opts:o,full:m[1].replace(RX,o[0])};});
+ // ordre des options mélangé, mais fixe
+ P.forEach((p,i)=>{const o=p.opts.slice();const s=i%3;p.show=o.slice(s).concat(o.slice(0,s));});
+ M.forEach((m,i)=>reg("s"+i,m[2],"SMS · "+akey(m[1].replace(RX,"___")).slice(0,80),P[i].ans,5,i+1));
+ const time=i=>`18:${String(4+i*3).padStart(2,"0")}`;
+ function bubble(i){const m=M[i],p=P[i],id="s"+i,x=it(id);x.t=x.t||[];
+  const d=document.createElement("div");d.className="bub "+m[0];
+  const parts=m[1].split(RX);
+  d.innerHTML=esc(parts[0])+`<span class="gap${x.ok?" ok":""}">${x.ok?esc(p.ans):"&nbsp;"}</span>`+esc(parts[2])+`<span class="tm">${time(i)}${x.ok?" "+sayBtn(p.full):""}</span>`;
+  if(!x.ok){const o=document.createElement("div");o.className="smsopts";
+   p.show.forEach(op=>{const b=document.createElement("button");b.className="opt";b.textContent=op;
+    if(x.t.includes(op)){b.classList.add("bad");b.disabled=true;}
+    b.onclick=()=>{if(op===p.ans){const g=$(".gap",d);g.textContent=p.ans;g.classList.add("ok");o.remove();
+      $(".tm",d).insertAdjacentHTML("beforeend"," "+sayBtn(p.full));good(id,d);speak(p.full);next(i+1,true);}
+     else{b.classList.add("bad");b.disabled=true;x.t.push(op);bad(id,b,op);}};
+    o.appendChild(b);});
+   d.appendChild(o);}
+  return d;}
+ function next(i,anim){if(i>=M.length)return;const add=()=>{const d=bubble(i);chat.appendChild(d);chat.scrollTop=chat.scrollHeight;
+   if(it("s"+i).ok)next(i+1,anim);};
+  if(anim){const t=document.createElement("div");t.className="typing";t.innerHTML="<i></i><i></i><i></i>";chat.appendChild(t);chat.scrollTop=chat.scrollHeight;
+   setTimeout(()=>{t.remove();add();},900);}else add();}
+ next(0,false);
+})();
+/* ex 6 production */
+production("Votre petit musée idéal","Mario · Réflexion · 27 novembre");
+$("#prod").insertAdjacentElement("afterend",accBar());
+resetBtn();
+sender("Mario · 27 novembre · S'imaginer, parier… et le gérondif","Leçon du 27 novembre","Votre petit musée idéal");
+upd();
+})();
+</script>
+</body></html>
